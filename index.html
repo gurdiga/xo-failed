@@ -1,1 +1,97 @@
-executori
+<!doctype html>
+<html>
+  <head>
+    <title>Consola executorului</title>
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css"/>
+    <style>
+      body {
+        font: 18px sans-serif;
+      }
+
+      input.label {
+        border-width: 0;
+        outline-width: 0;
+        padding-right: 10px;
+        background: url('http://ssl.gstatic.com/ui/v1/zippy/arrow_down.png') no-repeat right center;
+        cursor: default;
+      }
+
+      input {
+        outline-width: 0;
+        border: 1px solid #ddd;
+        padding: 3px;
+      }
+
+      input:focus {
+        border-color: #4d90fe;
+      }
+
+      input,
+      .ui-autocomplete .ui-menu-item,
+      .ui-button-text {
+        font-size: 18px;
+      }
+
+      input.label,
+      .ui-autocomplete .ui-menu-item {
+        text-align: right;
+        color: #444;
+      }
+
+      #search-label {
+        width: 175px;
+      }
+
+      button#new-folder {
+        margin-left: 300px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input id="search-label" class="label" spellcheck="false" data-for="query"/>
+    <input id="query"/>
+
+    <button id="new-folder" type="button">Crează nou</button>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
+
+    <script>
+      $(function() {
+        var search = $('.label[data-for="query"]')
+          .data('options', ['Dosar', 'Persoană fizică', 'Persoană juridică'])
+          .autocomplete({
+            autoFocus: true,
+            delay: 0,
+            minLength: 0,
+            create: function() {
+              $(this).autocomplete('option', 'source', $(this).data('options'));
+            },
+            select: function() {
+              var associatedFieldId = $(this).data('for');
+
+              $('#' + associatedFieldId).focus();
+            }
+          })
+          .on('keypress', function() {
+            return false;
+          })
+          .on('click', function() {
+            $(this).autocomplete('search', '');
+          })
+          .val(function() {
+            return $(this).data('options')[0];
+          });
+
+        $('button#new-folder').button({
+          icons: {
+            primary: 'ui-icon-circle-plus'
+          }
+        });
+      });
+
+      // http://stackoverflow.com/questions/931207/is-there-a-jquery-autogrow-plugin-for-text-fields
+    </script>
+  </body>
+</html>
