@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Test</title>
+	<script src="/js/testing_framework.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
+	<script src="/js/action.js"></script>
+	<script src="/js/tests.js"></script>
+</head>
+<body>
+	<h2>Results</h2>
+
+	<p id="output"></p>
+	<p>
+		<span id="total-tests">0</span> tests run,
+		<span id="failed-tests">0</span> failures.
+	</p>
+
+	<ul id="failures">
+	</ul>
+
+	<div>
+		<h2>Fixtures</h2>
+
+    <input id="plugin-options" data-options="a|b|c" style="display:none"/>
+    <input id="plugin-initOptionsUI" data-options="a|b|c" style="display:none"/>
+	</div>
+</body>
+</html>

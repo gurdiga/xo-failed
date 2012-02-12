@@ -1,1 +1,5 @@
-Testing SSH key on Bitbucket.
+TODO:
+-----
+
+* fix tests
+* static/with options/with suggestions
