@@ -37,7 +37,11 @@ $.initOptionsUI = {
     focus: function() {
       var associatedFieldId = $(this).data('for');
 
-      $('#' + associatedFieldId).focus();
+      if (associatedFieldId) {
+        $('#' + associatedFieldId).focus();
+      } else {
+        $(this).blur();
+      }
     },
 
     autocomplete: {
@@ -46,9 +50,7 @@ $.initOptionsUI = {
       },
 
       select: function() {
-        var associatedFieldId = $(this).data('for');
-
-        $('#' + associatedFieldId).focus();
+        $.initOptionsUI.on.focus.call(this);
       }
     }
   },
@@ -75,6 +77,7 @@ $.fn.initOptionsUI = function() {
         create: $.initOptionsUI.on.autocomplete.create,
         select: $.initOptionsUI.on.autocomplete.select
       })
+      .attr('spellcheck', 'false')
       .val(function() {
         return $(this).options(0);
       });

@@ -1,5 +1,7 @@
 body {
   font: 18px sans-serif;
+  padding: 5px 10px;
+  margin: 0;
 }
 
 input.label {
@@ -33,7 +35,7 @@ input.label,
 }
 
 #search-label {
-  width: 175px;
+  width: 200px;
 }
 
 button#new-file {
@@ -49,11 +51,12 @@ button#new-file {
 .panel {
   display: none;
   position: absolute;
-  left: 10%;
   top: 0;
+  left: 0;
   background: white;
   height: 100%;
-  width: 90%;
+  width: 100%;
+  padding: 5px 10px;
 }
 
 .panel button.close-panel {

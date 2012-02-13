@@ -52,6 +52,9 @@ $(function() {
 
     test('adds "with options" clases',
       input.hasClass('with') && input.hasClass('options'));
+    test('turns spellcheck off',
+      input.is('[spellcheck=false]'));
+
     test('binds $.initOptionsUI.on.click',
       input.hasHandler('click', $.initOptionsUI.on.click));
     test('binds $.initOptionsUI.on.focus',
@@ -90,14 +93,22 @@ $(function() {
   });
 
   describe('$.initOptionsUI.on.focus', function() {
-    stub($.fn, 'focus');
+    stub($.fn, 'focus', 'blur');
 
     var input = $('input#plugin-initOptionsUI');
 
     $.initOptionsUI.on.focus.call(input);
-    test('focuses the associated field',
+
+    test('focuses the associated field if given',
        $.fn.focus.called &&
        $.fn.focus.selector == '#' + input.data('for'));
+
+    var input = $('input#plugin-initOptionsUI-with-no-for');
+
+    $.initOptionsUI.on.focus.call(input);
+
+    test('blurs if no associated field given',
+      $.fn.blur.called);
   });
 
   describe('$.initOptionsUI.on.autocomplete.create', function() {
@@ -108,17 +119,6 @@ $(function() {
       input.autocomplete('option', 'source')[0] == 'a' &&
       input.autocomplete('option', 'source')[1] == 'b' &&
       input.autocomplete('option', 'source')[2] == 'c');
-  });
-
-  describe('$.initOptionsUI.on.autocomplete.select', function() {
-    stub($.fn, 'focus');
-
-    var input = $('input#plugin-initOptionsUI');
-
-    $.initOptionsUI.on.focus.call(input);
-    test('focuses the associated field',
-       $.fn.focus.called &&
-       $.fn.focus.selector == '#' + input.data('for'));
   });
 
 	// --------------------------------------------------
