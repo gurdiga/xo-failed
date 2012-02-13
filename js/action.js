@@ -31,7 +31,13 @@ $.initOptionsUI = {
     },
 
     click: function() {
-      $(this).autocomplete('search', '');
+      var input = $(this);
+
+      if (input.autocomplete('widget').is(':not(:visible)')) {
+        $(this).autocomplete('search', '');
+      } else {
+        $(this).autocomplete('close');
+      }
     },
 
     focus: function() {

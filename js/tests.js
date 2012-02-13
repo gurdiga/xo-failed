@@ -77,14 +77,29 @@ $(function() {
   });
 
   describe('$.initOptionsUI.on.click', function() {
-    stub($.fn, 'autocomplete');
+    var input = $('#plugin-initOptionsUI'),
+        widget = $('#plugin-initOptionsUI-widget');
 
-    $.initOptionsUI.on.click();
+    stub($.fn, {
+      name: 'autocomplete',
+      args: ['widget'],
+      returnValue: widget
+     });
 
-    test('$.initOptionsUI.on.click opens the options popup',
+    widget.hide();
+    $.initOptionsUI.on.click.call(input);
+
+    test('opens up the options widget if not opened',
       $.fn.autocomplete.called &&
       $.fn.autocomplete.args[0] == 'search' &&
       $.fn.autocomplete.args[1] == '');
+
+    widget.show();
+    $.initOptionsUI.on.click.call(input);
+
+    test('hides the options widget if opened',
+      $.fn.autocomplete.called &&
+      $.fn.autocomplete.args[0] == 'close');
   });
 
   describe('$.initOptionsUI.on.keypress', function() {
