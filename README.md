@@ -1,9 +1,9 @@
 TODO:
 -----
 
-* fix tests
 * static/with options/with suggestions
-* move testing_framework.js to a separate repo
+  * autogrow/shrink for .labels without an associated field
+* move testing_framework.js to a separate repo? copy-on-write?
 
 
 Causality

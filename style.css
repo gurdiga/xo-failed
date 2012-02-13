@@ -56,7 +56,10 @@ button#new-file {
   background: white;
   height: 100%;
   width: 100%;
-  padding: 5px 10px;
+}
+
+.panel .content {
+  margin: 5px 10px;
 }
 
 .panel button.close-panel {
