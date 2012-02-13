@@ -56,7 +56,7 @@ button#new-file {
   width: 90%;
 }
 
-button.close-panel {
+.panel button.close-panel {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -64,6 +64,7 @@ button.close-panel {
   background-color: transparent;
   padding: 5px;
   cursor: pointer;
+  color: #777;
 }
 
 fieldset {
@@ -75,6 +76,10 @@ fieldset {
 
 fieldset.collapsed {
   border-left-width: 0;
+}
+
+fieldset.collapsed .content {
+  display: none;
 }
 
 fieldset legend {

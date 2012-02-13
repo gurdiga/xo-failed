@@ -1,31 +1,18 @@
-$(function() {
+var Action = {
+  init: function() {
+    $('input.label[data-options]').initOptionsUI();
+    $('fieldset').initFieldsetsUI();
+    $('.panel').initPanelsUI();
 
-  $('fieldset').each(function() {
-    var fieldset = $(this);
-
-    fieldset.find('legend')
-      .on('click', function() {
-        fieldset
-          .toggleClass('collapsed')
-          .find('.content').toggle();
-      });
-  });
-
-  $('.label[data-options]').initOptionsUI();
-
-
-  $('button#new-file').button({
-    icons: {
-      primary: 'ui-icon-circle-plus'
-    }
-  }).click(function() {
-    $('#new-file-panel').show();
-  });
-
-  $('button.close-panel').on('click', function() {
-    $(this).closest('.panel').hide();
-  });
-});
+    $('button#new-file').button({
+      icons: {
+        primary: 'ui-icon-circle-plus'
+      }
+    }).click(function() {
+      $('#new-file-panel').show();
+    });
+  }
+};
 
 // --------------------------------------------------
 
@@ -47,6 +34,12 @@ $.initOptionsUI = {
       $(this).autocomplete('search', '');
     },
 
+    focus: function() {
+      var associatedFieldId = $(this).data('for');
+
+      $('#' + associatedFieldId).focus();
+    },
+
     autocomplete: {
       create: function() {
         $(this).autocomplete('option', 'source', $(this).options());
@@ -58,8 +51,16 @@ $.initOptionsUI = {
         $('#' + associatedFieldId).focus();
       }
     }
+  },
+
+  autocomplete: {
+    autoFocus: true,
+    delay: 0,
+    minLength: 0
   }
 };
+
+// --------------------------------------------------
 
 $.fn.initOptionsUI = function() {
   return this.filter('input[data-options]').each(function() {
@@ -68,9 +69,9 @@ $.fn.initOptionsUI = function() {
     input
       .addClass('with options')
       .autocomplete({
-        autoFocus: true,
-        delay: 0,
-        minLength: 0,
+        autoFocus: $.initOptionsUI.autocomplete.autoFocus,
+        delay: $.initOptionsUI.autocomplete.delay,
+        minLength: $.initOptionsUI.autocomplete.minLength,
         create: $.initOptionsUI.on.autocomplete.create,
         select: $.initOptionsUI.on.autocomplete.select
       })
@@ -90,4 +91,37 @@ $.fn.initOptionsUI = function() {
   });
 };
 
+// --------------------------------------------------
+
+$.initFieldsetsUI = {
+  on: {
+    legend: {
+      click: function() {
+        $(this).closest('fieldset').toggleClass('collapsed');
+      }
+    }
+  }
+};
+
+$.fn.initFieldsetsUI = function() {
+  return this.filter('fieldset')
+    .on('click', 'legend', $.initFieldsetsUI.on.legend.click);
+};
+
+// --------------------------------------------------
+
+$.initPanelsUI = {
+  closeButtonSelector: '.close-panel',
+  on: {
+    closeButton: {
+      click: function() {
+        $(this).closest('.panel').hide();
+      }
+    }
+  }
+};
+
+$.fn.initPanelsUI = function() {
+  return this.on('click', $.initPanelsUI.closeButtonSelector, $.initPanelsUI.on.closeButton.click);
+};
 // http://stackoverflow.com/questions/931207/is-there-a-jquery-autogrow-plugin-for-text-fields

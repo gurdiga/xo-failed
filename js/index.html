@@ -24,8 +24,21 @@
 	<div>
 		<h2>Fixtures</h2>
 
-    <input id="plugin-options" data-options="a|b|c" style="display:none"/>
+    <input id="plugin-hasHandler" style="display:none"/>
+    <fieldset id="plugin-hasHandler-delegated" style="display:none">
+      <legend>title</legend>
+    </fieldset>
+
+    <input id="plugin-options" data-options="a|b|c" data-for="some-field-id" style="display:none"/>
     <input id="plugin-initOptionsUI" data-options="a|b|c" style="display:none"/>
+
+    <fieldset id="plugin-initFieldsetsUI" style="display:none">
+      <legend>title</legend>
+    </fieldset>
+
+    <div id="plugin-initPanelsUI" style="display:none">
+      <button type="button" class="close-panel">close</button>
+    </div>
 	</div>
 </body>
 </html>
