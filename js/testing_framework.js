@@ -139,3 +139,20 @@ function unstub() {
     }
 	}
 }
+
+function equal(array1, array2) {
+  try {
+    for (var i = 0; i < array1.length; i++) {
+      if (toString.call(array1[i]) == '[object Array]') {
+        if (!equal(array1[i], array2[i])) return false;
+      } else {
+        if (array1[i] != array2[i]) return false;
+      }
+    }
+  } catch(e) {
+    console.log(e);
+    return false;
+  }
+
+  return true;
+}

@@ -46,6 +46,8 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.initOptionsUI', function() {
+    stub($.fn, 'autocomplete');
+
     var input = $('input#plugin-initOptionsUI');
 
     input.initOptionsUI();
@@ -62,16 +64,12 @@ $(function() {
     test('binds $.initOptionsUI.on.keypress',
       input.hasHandler('keypress', $.initOptionsUI.on.keypress));
 
-    test('inits autocomplete',
-      input.is('[aria-autocomplete="list"][aria-haspopup="true"]'));
+    test('inits autocomplete with $.initOptionsUI',
+      $.fn.autocomplete.called);
     test('binds $.initOptionsUI.on.autocomplete.create',
       input.hasHandler('create', $.initOptionsUI.on.autocomplete.create));
     test('binds $.initOptionsUI.on.autocomplete.select',
       input.hasHandler('select', $.initOptionsUI.on.autocomplete.select));
-    test('sets autocomplete autoFocus',
-      input.autocomplete('option', 'autoFocus') == $.initOptionsUI.autocomplete.autoFocus);
-    test('sets autocomplete delay',
-      input.autocomplete('option', 'delay') == $.initOptionsUI.autocomplete.delay);
     test('sets value to the fist option',
       input.val() == input.options(0));
   });
@@ -91,15 +89,14 @@ $(function() {
 
     test('opens up the options widget if not opened',
       $.fn.autocomplete.called &&
-      $.fn.autocomplete.args[0] == 'search' &&
-      $.fn.autocomplete.args[1] == '');
+      equal($.fn.autocomplete.args, ['search', '']));
 
     widget.show();
     $.initOptionsUI.on.click.call(input);
 
     test('hides the options widget if opened',
       $.fn.autocomplete.called &&
-      $.fn.autocomplete.args[0] == 'close');
+      equal($.fn.autocomplete.args, ['close']));
   });
 
   describe('$.initOptionsUI.on.keypress', function() {
@@ -127,13 +124,15 @@ $(function() {
   });
 
   describe('$.initOptionsUI.on.autocomplete.create', function() {
+    stub($.fn, 'autocomplete');
+
     var input = $('input#plugin-initOptionsUI');
 
     $.initOptionsUI.on.autocomplete.create.call(input);
     test('sets autocomplete options from the options data',
-      input.autocomplete('option', 'source')[0] == 'a' &&
-      input.autocomplete('option', 'source')[1] == 'b' &&
-      input.autocomplete('option', 'source')[2] == 'c');
+      $.fn.autocomplete.called &&
+      $.fn.autocomplete.selector == input.selector &&
+      equal($.fn.autocomplete.args, ['option', 'source', ['a', 'b', 'c']]));
   });
 
 	// --------------------------------------------------
@@ -169,6 +168,7 @@ $(function() {
   });
 });
 
+// --------------------------------------------------
 
 $.fn.hasHandler = function(event, f, selector) {
   var element = this,
