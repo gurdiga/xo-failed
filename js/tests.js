@@ -70,6 +70,8 @@ $(function() {
       input.hasHandler('create', $.initOptionsUI.on.autocomplete.create));
     test('binds $.initOptionsUI.on.autocomplete.select',
       input.hasHandler('select', $.initOptionsUI.on.autocomplete.select));
+    test('binds $.initOptionsUI.on.autocomplete.close',
+      input.hasHandler('close', $.initOptionsUI.on.autocomplete.close));
     test('sets value to the fist option',
       input.val() == input.options(0));
   });
@@ -125,6 +127,7 @@ $(function() {
 
   describe('$.initOptionsUI.on.autocomplete.create', function() {
     stub($.fn, 'autocomplete');
+    stub($.fn, 'autoSize');
 
     var input = $('input#plugin-initOptionsUI');
 
@@ -133,6 +136,26 @@ $(function() {
       $.fn.autocomplete.called &&
       $.fn.autocomplete.selector == input.selector &&
       equal($.fn.autocomplete.args, ['option', 'source', ['a', 'b', 'c']]));
+    test('doesn’t init autoSize when doesn’t have class autosize',
+      !$.fn.autoSize.called);
+
+    input.addClass('autosize');
+    $.initOptionsUI.on.autocomplete.create.call(input);
+    test('inits autoSize when has class autosize',
+      $.fn.autoSize.called,
+      $.fn.autoSize.selector == input.selector);
+  });
+
+  describe('$.initOptionsUI.on.autocomplete.close', function() {
+    var changeEventTriggered = false,
+        input = $('input#plugin-initOptionsUI');
+
+    input.on('change', function() {
+      changeEventTriggered = true;
+    });
+
+    $.initOptionsUI.on.autocomplete.close.call(input);
+    test('triggers the "change" event on input', changeEventTriggered);
   });
 
 	// --------------------------------------------------
@@ -165,6 +188,33 @@ $(function() {
     panel.initPanelsUI();
     test('delegates $.initPanelsUI.on.closeButton.click to $.initPanelsUI.closeButtonSelector',
       panel.hasHandler('click', $.initPanelsUI.on.closeButton.click, $.initPanelsUI.closeButtonSelector));
+  });
+
+	// --------------------------------------------------
+
+  describe('$.fn.autoSize()', function() {
+    var input = $('#plugin-autoSize').autoSize();
+        initialWidth = input.val('aa').trigger('change').width(),
+        resizedWidth = input.val('a').trigger('change').width();
+
+    test('"aa" > "a"', initialWidth > resizedWidth);
+  });
+
+	// --------------------------------------------------
+
+  describe('$.fn.setCssFrom(element)', function() {
+    var sourceElement = $('<span/>').css({
+      'font-family': 'serif',
+      'font-size': 'large',
+      'text-align': 'right'
+    })
+
+    var element = $('<span/>');
+
+    element.setCssFrom(sourceElement, ['font-family', 'text-align']);
+    test('inherits those properties',
+      element.css('font-family') == sourceElement.css('font-family') &&
+      element.css('text-align') == sourceElement.css('text-align'));
   });
 });
 

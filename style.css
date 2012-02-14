@@ -12,6 +12,10 @@ input.label {
   cursor: default;
 }
 
+input.label.alone {
+  text-align: left;
+}
+
 input {
   outline-width: 0;
   border: 1px solid #ddd;
@@ -30,7 +34,6 @@ input,
 
 input.label,
 .ui-autocomplete .ui-menu-item {
-  text-align: right;
   color: #444;
 }
 

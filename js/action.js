@@ -52,11 +52,19 @@ $.initOptionsUI = {
 
     autocomplete: {
       create: function() {
-        $(this).autocomplete('option', 'source', $(this).options());
+        var input = $(this);
+
+        input.autocomplete('option', 'source', input.options())
+
+        if (input.hasClass('autosize')) input.autoSize();
       },
 
       select: function() {
         $.initOptionsUI.on.focus.call(this);
+      },
+
+      close: function() {
+        $(this).trigger('change');
       }
     }
   },
@@ -81,12 +89,14 @@ $.fn.initOptionsUI = function() {
         delay: $.initOptionsUI.autocomplete.delay,
         minLength: $.initOptionsUI.autocomplete.minLength,
         create: $.initOptionsUI.on.autocomplete.create,
-        select: $.initOptionsUI.on.autocomplete.select
+        select: $.initOptionsUI.on.autocomplete.select,
+        close: $.initOptionsUI.on.autocomplete.close
       })
       .attr('spellcheck', 'false')
       .val(function() {
         return $(this).options(0);
-      });
+      })
+      .trigger('change');
 
     $.each($.initOptionsUI.on, function(event, handler) {
       if ($.isFunction(handler)) {
@@ -133,4 +143,53 @@ $.initPanelsUI = {
 $.fn.initPanelsUI = function() {
   return this.on('click', $.initPanelsUI.closeButtonSelector, $.initPanelsUI.on.closeButton.click);
 };
-// http://stackoverflow.com/questions/931207/is-there-a-jquery-autogrow-plugin-for-text-fields
+
+// --------------------------------------------------
+
+$.fn.autoSize = function(options) {
+  var defaults = {
+    padding: 0
+  };
+
+  options = $.extend(defaults, options);
+
+  return this.filter('input:text').on('keyup keydown blur update change', function() {
+    var input = $(this),
+        temp = $('#autoSize-temp');
+
+    if (temp.length == 0) {
+      temp = $('<span id="autoSize-temp"/>')
+        .css({
+          'padding-left': options.padding,
+          'position': 'absolute',
+          'visibility': 'hidden'
+        })
+        .appendTo('body');
+    }
+
+    temp
+      .text(input.val())
+      .setCssFrom(input, [
+        'font-size',
+        'font-weight',
+        'font-family',
+        'letter-spacing'
+      ]);
+
+    input.width(temp.outerWidth());
+  });
+};
+
+// --------------------------------------------------
+
+$.fn.setCssFrom = function(sourceElement, properties) {
+  return this.each(function() {
+    var element = $(this),
+        property;
+
+    for (var i = 0; i < properties.length; i++) {
+      property = properties[i];
+      element.css(property, sourceElement.css(property));
+    }
+  });
+};
