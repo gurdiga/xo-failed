@@ -2,7 +2,9 @@ TODO:
 -----
 
 * static/with options/with suggestions
-  * autogrow/shrink for .labels without an associated field
+* bind templates templates to options
+* inintExtensible templates
+* hede options on click outside
 * move testing_framework.js to a separate repo? copy-on-write?
 
 

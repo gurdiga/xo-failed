@@ -7,6 +7,11 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="/js/action.js"></script>
 	<script src="/js/tests.js"></script>
+  <style>
+    .hide {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 	<h2>Results</h2>
@@ -23,25 +28,32 @@
 	<div>
 		<h2>Fixtures</h2>
 
-    <input id="plugin-hasHandler" style="display:none"/>
-    <fieldset id="plugin-hasHandler-delegated" style="display:none">
+    <input id="hasHandler" class="hide"/>
+    <fieldset id="hasHandler-delegated" class="hide">
       <legend>title</legend>
     </fieldset>
 
-    <input id="plugin-options" data-options="a|b|c" data-for="some-field-id" style="display:none"/>
-    <input id="plugin-initOptionsUI" data-options="a|b|c" data-for="some-field-id" style="display:none"/>
-    <input id="plugin-initOptionsUI-widget"/>
-    <input id="plugin-initOptionsUI-with-no-for" data-options="a|b|c" style="display:none"/>
+    <input id="options" data-options="a|b|c" data-for="some-field-id" class="hide"/>
+    <input id="initOptionsUI" data-options="a|b|c" data-for="some-field-id" class="hide"/>
+    <input id="initOptionsUI-widget"/>
+    <input id="initOptionsUI-with-no-for" data-options="a|b|c" class="hide"/>
 
-    <fieldset id="plugin-initFieldsetsUI" style="display:none">
+    <fieldset id="initFieldsetsUI" class="hide">
       <legend>title</legend>
     </fieldset>
 
-    <div id="plugin-initPanelsUI" style="display:none">
+    <div id="initPanelsUI" class="hide">
       <button type="button" class="close-panel">close</button>
     </div>
 
-    <input id="plugin-autoSize"/>
+    <input id="autoSize"/>
+
+    <input id="bindTemplatesToOptions" class="label" data-template="entity"
+      data-options="Template A|Template B" class="hide"/>
 	</div>
+
+  <div class="entity template hide" title="Template A">
+    a buncha fields here
+  </div>
 </body>
 </html>

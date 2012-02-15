@@ -23,12 +23,52 @@
           <legend>Creditor</legend>
 
           <div class="content">
-            <input class="label autosize gen-persoana" data-options="Persoană juridică|Persoană fizică"/>
+            <input class="label autosize" name="person-type" data-template="person" data-options="Persoană juridică|Persoană fizică"/>
           </div>
         </fieldset>
       </div>
 
       <button type="button" title="Închide" class="close-panel">✕</button>
+    </div>
+
+    <div class="extensible person template" title="Persoană juridică">
+      <label for="name">Denumire</label>
+      <input id="name" name="name"/><br/>
+
+      <label for="idno">IDNO</label>
+      <input id="idno" name="idno"/><br/>
+
+      <label for="address">Sediu</label>
+      <textarea id="address" name="address"></textarea><br/>
+
+      <label for="contact">Persoană de contact</label>
+      <input id="contact" name="contact"/><br/>
+
+      <label for="notes">Note</label>
+      <textarea id="notes" name="notes"></textarea><br/>
+    </div>
+
+    <div class="extensible person template" title="Persoană fizică">
+      <label for="last-name">Nume</label>
+      <input id="last-name" name="last-name"/><br/>
+
+      <label for="first-name">Prenume</label>
+      <input id="first-name" name="first-name"/><br/>
+
+      <label for="patronymic">Patronimic</label>
+      <input id="patronymic" name="patronymic"/><br/>
+
+      <label for="idnp">IDNP</label>
+      <input id="idnp" name="idnp"/><br/>
+
+      <label for="dob">Data naşterii</label>
+      <input id="dob" name="dob" class="date"/><br/>
+
+      <label for="official-address">Domiciuliu oficial</label>
+      <input id="oficial-address" name="oficial-address" class="date"/><br/>
+
+      <label for="notes">Note</label>
+      <textarea id="notes" name="notes"></textarea><br/>
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

@@ -1,6 +1,8 @@
 var Action = {
   init: function() {
-    $('input.label[data-options]').initOptionsUI();
+    $('input.label[data-options]')
+      .bindTemplatesToOptions()
+      .initOptionsUI();
     $('fieldset').initFieldsetsUI();
     $('.panel').initPanelsUI();
 
@@ -70,7 +72,6 @@ $.initOptionsUI = {
   },
 
   autocomplete: {
-    autoFocus: true,
     delay: 0,
     minLength: 0
   }
@@ -85,7 +86,6 @@ $.fn.initOptionsUI = function() {
     input
       .addClass('with options')
       .autocomplete({
-        autoFocus: $.initOptionsUI.autocomplete.autoFocus,
         delay: $.initOptionsUI.autocomplete.delay,
         minLength: $.initOptionsUI.autocomplete.minLength,
         create: $.initOptionsUI.on.autocomplete.create,
@@ -93,9 +93,9 @@ $.fn.initOptionsUI = function() {
         close: $.initOptionsUI.on.autocomplete.close
       })
       .attr('spellcheck', 'false')
-      .val(function() {
-        return $(this).options(0);
-      })
+
+    input
+      .val(input.options(0))
       .trigger('change');
 
     $.each($.initOptionsUI.on, function(event, handler) {
@@ -191,5 +191,22 @@ $.fn.setCssFrom = function(sourceElement, properties) {
       property = properties[i];
       element.css(property, sourceElement.css(property));
     }
+  });
+};
+
+// --------------------------------------------------
+
+$.fn.bindTemplatesToOptions = function() {
+  // call before initOptionsUI
+  return this.filter('input.label[data-options]').on('change', function() {
+    var input = $(this),
+        templateName = input.data('template'),
+        template = $('.' + templateName + '.template[title="' + input.val() + '"]');
+
+    input.next('.' + templateName).remove();
+    template.clone()
+      .removeClass('template')
+      .insertAfter(input)
+      .show();
   });
 };

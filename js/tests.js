@@ -3,7 +3,7 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.hasHandler', function() {
-    var element = $('#plugin-hasHandler'),
+    var element = $('#hasHandler'),
         handler = function() {},
         anotherHandler = function() {};
 
@@ -19,7 +19,7 @@ $(function() {
   });
 
   describe('$.fn.hasHandler delegated', function() {
-    var element = $('fieldset#plugin-hasHandler-delegated'),
+    var element = $('fieldset#hasHandler-delegated'),
         handler = function() {};
 
     element.on('click', 'legend', handler);
@@ -31,7 +31,7 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.options', function() {
-    var input = $('input#plugin-options');
+    var input = $('input#options');
 
     test('returns option by index if given', input.options(1) == 'b');
 
@@ -48,7 +48,7 @@ $(function() {
   describe('$.fn.initOptionsUI', function() {
     stub($.fn, 'autocomplete');
 
-    var input = $('input#plugin-initOptionsUI');
+    var input = $('input#initOptionsUI');
 
     input.initOptionsUI();
 
@@ -77,8 +77,8 @@ $(function() {
   });
 
   describe('$.initOptionsUI.on.click', function() {
-    var input = $('#plugin-initOptionsUI'),
-        widget = $('#plugin-initOptionsUI-widget');
+    var input = $('#initOptionsUI'),
+        widget = $('#initOptionsUI-widget');
 
     stub($.fn, {
       name: 'autocomplete',
@@ -109,7 +109,7 @@ $(function() {
   describe('$.initOptionsUI.on.focus', function() {
     stub($.fn, 'focus', 'blur');
 
-    var input = $('input#plugin-initOptionsUI');
+    var input = $('input#initOptionsUI');
 
     $.initOptionsUI.on.focus.call(input);
 
@@ -117,7 +117,7 @@ $(function() {
        $.fn.focus.called &&
        $.fn.focus.selector == '#' + input.data('for'));
 
-    var input = $('input#plugin-initOptionsUI-with-no-for');
+    var input = $('input#initOptionsUI-with-no-for');
 
     $.initOptionsUI.on.focus.call(input);
 
@@ -129,7 +129,7 @@ $(function() {
     stub($.fn, 'autocomplete');
     stub($.fn, 'autoSize');
 
-    var input = $('input#plugin-initOptionsUI');
+    var input = $('input#initOptionsUI');
 
     $.initOptionsUI.on.autocomplete.create.call(input);
     test('sets autocomplete options from the options data',
@@ -148,7 +148,7 @@ $(function() {
 
   describe('$.initOptionsUI.on.autocomplete.close', function() {
     var changeEventTriggered = false,
-        input = $('input#plugin-initOptionsUI');
+        input = $('input#initOptionsUI');
 
     input.on('change', function() {
       changeEventTriggered = true;
@@ -161,7 +161,7 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.initFieldsetsUI', function() {
-    var fieldset = $('fieldset#plugin-initFieldsetsUI');
+    var fieldset = $('fieldset#initFieldsetsUI');
 
     fieldset.initFieldsetsUI();
     test('binds $.initFieldsetsUI.on.legend.click',
@@ -169,7 +169,7 @@ $(function() {
   });
 
   describe('$.initFieldsetsUI.on.legend.click', function() {
-    var fieldset = $('fieldset#plugin-initFieldsetsUI');
+    var fieldset = $('fieldset#initFieldsetsUI');
 
     $.initFieldsetsUI.on.legend.click.call(fieldset);
     test('collapses the fieldset on one click',
@@ -183,7 +183,7 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.initPanelsUI', function() {
-    var panel = $('#plugin-initPanelsUI');
+    var panel = $('#initPanelsUI');
 
     panel.initPanelsUI();
     test('delegates $.initPanelsUI.on.closeButton.click to $.initPanelsUI.closeButtonSelector',
@@ -193,7 +193,7 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.autoSize()', function() {
-    var input = $('#plugin-autoSize').autoSize();
+    var input = $('#autoSize').autoSize();
         initialWidth = input.val('aa').trigger('change').width(),
         resizedWidth = input.val('a').trigger('change').width();
 
@@ -215,6 +215,24 @@ $(function() {
     test('inherits those properties',
       element.css('font-family') == sourceElement.css('font-family') &&
       element.css('text-align') == sourceElement.css('text-align'));
+  });
+
+	// --------------------------------------------------
+
+  describe('$.fn.bindTemplatesToOptions', function() {
+    var input = $('#bindTemplatesToOptions'),
+        templateName = input.data('template');
+
+    input
+      .bindTemplatesToOptions()
+      .initOptionsUI();
+
+    var template = input.next('.' + templateName);
+
+    test('a copy of the associated template is inserted after the input',
+      template.is(':visible'));
+    test('the associated template is identified by title',
+      template.is('[title="' + input.val() + '"]'));
   });
 });
 
