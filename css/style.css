@@ -16,6 +16,10 @@ input.label.alone {
   text-align: left;
 }
 
+textarea {
+  vertical-align: top;
+}
+
 textarea,
 input {
   outline-width: 0;
@@ -120,8 +124,4 @@ input.label.with.options {
   display: inline-block;
   width: 200px;
   text-align: right;
-}
-
-.person textarea {
-  display: inline-block;
 }

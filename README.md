@@ -1,6 +1,7 @@
 TODO:
 -----
 
+* it’s not a template, it’s a subform
 * static/with options/with suggestions
 * bind templates templates to options
 * inintExtensible templates
