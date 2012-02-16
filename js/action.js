@@ -1,9 +1,8 @@
 var Action = {
   init: function() {
-    $('input.label[data-options]')
-      .bindTemplatesToOptions()
-      .initOptionsUI();
-    $('fieldset').initFieldsetsUI();
+    $('input.label[data-options]').initOptionsUI();
+    $('fieldset.collapsible').makeCollapsible();
+    $('fieldset.typed').initTypedFieldsets();
     $('.panel').initPanelsUI();
 
     $('button#new-file').button({
@@ -112,7 +111,7 @@ $.fn.initOptionsUI = function() {
 
 // --------------------------------------------------
 
-$.initFieldsetsUI = {
+$.makeCollapsible = {
   on: {
     legend: {
       click: function() {
@@ -122,9 +121,9 @@ $.initFieldsetsUI = {
   }
 };
 
-$.fn.initFieldsetsUI = function() {
-  return this.filter('fieldset')
-    .on('click', 'legend', $.initFieldsetsUI.on.legend.click);
+$.fn.makeCollapsible = function() {
+  return this.filter('fieldset.collapsible')
+    .find('>legend').on('click' , $.makeCollapsible.on.legend.click).end();
 };
 
 // --------------------------------------------------
@@ -196,17 +195,12 @@ $.fn.setCssFrom = function(sourceElement, properties) {
 
 // --------------------------------------------------
 
-$.fn.bindTemplatesToOptions = function() {
-  // call before initOptionsUI
-  return this.filter('input.label[data-options]').on('change', function() {
-    var input = $(this),
-        templateName = input.data('template'),
-        template = $('.' + templateName + '.template[title="' + input.val() + '"]');
+$.fn.initTypedFieldsets = function() {
+  return this.filter('fieldset.typed').on('click', 'legend select', function() {
+    var select = $(this),
+        fieldset = select.closest('fieldset'),
+        template = $('.' + fieldset.data('template') + '.template[title="' + select.val() + '"]');
 
-    input.next('.' + templateName).remove();
-    template.clone()
-      .removeClass('template')
-      .insertAfter(input)
-      .show();
-  });
+    fieldset.find('>.content').html(template.html());
+  }).find('legend select').click().end;
 };

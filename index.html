@@ -22,36 +22,40 @@
       <div class="content">
         <h1>Dosar nou</h1>
 
-        <fieldset>
-          <legend>Creditor</legend>
+        <fieldset data-template="person" class="typed">
+          <legend>
+            <label for="creditor">Creditor</label>
+            <select id="creditor" name="creditor">
+              <option>persoană juridică</option>
+              <option>persoană fizică</option>
+            </select>
+          </legend>
 
-          <div class="content">
-            <input class="label autosize" name="person-type" data-template="person" data-options="Persoană juridică|Persoană fizică"/>
-          </div>
+          <div class="content"></div>
         </fieldset>
       </div>
 
       <button type="button" title="Închide" class="close-panel">✕</button>
     </div>
 
-    <div class="extensible person template" title="Persoană juridică">
+    <div class="person template" title="persoană juridică">
       <label for="name">Denumire</label>
       <input id="name" name="name"/><br/>
 
       <label for="idno">IDNO</label>
       <input id="idno" name="idno"/><br/>
 
-      <label for="address">Sediu</label>
+      <label class="textarea" for="address">Sediu</label>
       <textarea id="address" name="address"></textarea><br/>
 
       <label for="contact">Persoană de contact</label>
       <input id="contact" name="contact"/><br/>
 
-      <label for="notes">Note</label>
-      <textarea id="notes" name="notes"></textarea><br/>
+      <label class="textarea" for="notes">Note</label>
+      <textarea class="textarea" id="notes" name="notes"></textarea><br/>
     </div>
 
-    <div class="extensible person template" title="Persoană fizică">
+    <div class="person template" title="persoană fizică">
       <label for="last-name">Nume</label>
       <input id="last-name" name="last-name"/><br/>
 
@@ -70,7 +74,7 @@
       <label for="official-address">Domiciuliu oficial</label>
       <input id="oficial-address" name="oficial-address" class="date"/><br/>
 
-      <label for="notes">Note</label>
+      <label class="textarea" for="notes">Note</label>
       <textarea id="notes" name="notes"></textarea><br/>
     </div>
 

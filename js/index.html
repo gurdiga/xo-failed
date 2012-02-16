@@ -38,7 +38,7 @@
     <input id="initOptionsUI-widget"/>
     <input id="initOptionsUI-with-no-for" data-options="a|b|c" class="hide"/>
 
-    <fieldset id="initFieldsetsUI" class="hide">
+    <fieldset id="makeCollapsible" class="hide">
       <legend>title</legend>
     </fieldset>
 
@@ -48,8 +48,15 @@
 
     <input id="autoSize"/>
 
-    <input id="bindTemplatesToOptions" class="label" data-template="entity"
-      data-options="Template A|Template B" class="hide"/>
+    <fieldset class="typed hide" data-template="entity" id="initTypedFieldsets">
+      <legend>
+        <select>
+          <option selected>Template A</option>
+          <option>Template B</option>
+        </select>
+      </legend>
+      <div class="content"></div>
+    </select>
 	</div>
 
   <div class="entity template hide" title="Template A">

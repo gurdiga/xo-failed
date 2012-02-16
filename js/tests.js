@@ -160,22 +160,22 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.initFieldsetsUI', function() {
-    var fieldset = $('fieldset#initFieldsetsUI');
+  describe('$.fn.makeCollapsible', function() {
+    var fieldset = $('fieldset#makeCollapsible');
 
-    fieldset.initFieldsetsUI();
-    test('binds $.initFieldsetsUI.on.legend.click',
-      fieldset.hasHandler('click', $.initFieldsetsUI.on.legend.click));
+    fieldset.makeCollapsible();
+    test('binds $.makeCollapsible.on.legend.click',
+      fieldset.hasHandler('click', $.makeCollapsible.on.legend.click));
   });
 
-  describe('$.initFieldsetsUI.on.legend.click', function() {
-    var fieldset = $('fieldset#initFieldsetsUI');
+  describe('$.makeCollapsible.on.legend.click', function() {
+    var fieldset = $('fieldset#makeCollapsible');
 
-    $.initFieldsetsUI.on.legend.click.call(fieldset);
+    $.makeCollapsible.on.legend.click.call(fieldset);
     test('collapses the fieldset on one click',
       fieldset.is('.collapsed'));
 
-    $.initFieldsetsUI.on.legend.click.call(fieldset);
+    $.makeCollapsible.on.legend.click.call(fieldset);
     test('expands the fieldset on the next cick',
       fieldset.is(':not(.collapsed)'));
   });
@@ -219,20 +219,16 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.bindTemplatesToOptions', function() {
-    var input = $('#bindTemplatesToOptions'),
-        templateName = input.data('template');
+  describe('$.fn.initTypedFieldsets', function() {
+    var fieldset = $('#initTypedFieldsets'),
+        select = fieldset.find('legend select'),
+        template = $('.template.' + fieldset.data('template') + '[title="' + select.val() + '"]');
 
-    input
-      .bindTemplatesToOptions()
-      .initOptionsUI();
+    fieldset.initTypedFieldsets();
+    select.click();
 
-    var template = input.next('.' + templateName);
-
-    test('a copy of the associated template is inserted after the input',
-      template.is(':visible'));
-    test('the associated template is identified by title',
-      template.is('[title="' + input.val() + '"]'));
+    test('a copy of the associated template content is inserted into the fieldset',
+      fieldset.find('.content').html() == template.html());
   });
 });
 
