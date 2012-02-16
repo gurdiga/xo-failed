@@ -208,6 +208,14 @@ $(function() {
     test('a copy of the associated template content is inserted into the fieldset',
       fieldset.find('.content').html() == template.html());
   });
+
+	// --------------------------------------------------
+
+  describe('$.fn.makeExtensible', function() {
+    var fieldset = $('#makeExtensible');
+
+    test('adds some widget to add a new field from a list', false);
+  });
 });
 
 // --------------------------------------------------

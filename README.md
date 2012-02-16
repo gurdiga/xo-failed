@@ -1,12 +1,8 @@
 TODO:
 -----
 
-* it’s not a template, it’s a subform
 * static/with options/with suggestions
-* bind templates templates to options
-* inintExtensible templates
-* hede options on click outside
-* move testing_framework.js to a separate repo? copy-on-write?
+* hide options on click outside
 
 
 Causality
