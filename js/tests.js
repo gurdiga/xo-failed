@@ -160,28 +160,6 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.makeCollapsible', function() {
-    var fieldset = $('fieldset#makeCollapsible');
-
-    fieldset.makeCollapsible();
-    test('binds $.makeCollapsible.on.legend.click',
-      fieldset.hasHandler('click', $.makeCollapsible.on.legend.click));
-  });
-
-  describe('$.makeCollapsible.on.legend.click', function() {
-    var fieldset = $('fieldset#makeCollapsible');
-
-    $.makeCollapsible.on.legend.click.call(fieldset);
-    test('collapses the fieldset on one click',
-      fieldset.is('.collapsed'));
-
-    $.makeCollapsible.on.legend.click.call(fieldset);
-    test('expands the fieldset on the next cick',
-      fieldset.is(':not(.collapsed)'));
-  });
-
-	// --------------------------------------------------
-
   describe('$.fn.initPanelsUI', function() {
     var panel = $('#initPanelsUI');
 

@@ -1,7 +1,6 @@
 var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
-    $('fieldset.collapsible').makeCollapsible();
     $('fieldset.typed').initTypedFieldsets();
     $('.panel').initPanelsUI();
 
@@ -107,23 +106,6 @@ $.fn.initOptionsUI = function() {
       }
     });
   });
-};
-
-// --------------------------------------------------
-
-$.makeCollapsible = {
-  on: {
-    legend: {
-      click: function() {
-        $(this).closest('fieldset').toggleClass('collapsed');
-      }
-    }
-  }
-};
-
-$.fn.makeCollapsible = function() {
-  return this.filter('fieldset.collapsible')
-    .find('>legend').on('click' , $.makeCollapsible.on.legend.click).end();
 };
 
 // --------------------------------------------------
