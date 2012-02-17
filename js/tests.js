@@ -226,9 +226,20 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.makeExtensible', function() {
-    var fieldset = $('#makeExtensible');
+    var fieldset = $('#makeExtensible'),
+        buttonCaption = 'Add field', button;
 
-    test('adds some widget to add a new field from a list', false);
+    fieldset.makeExtensible(buttonCaption);
+    button = fieldset.find('button.extend:contains("' + buttonCaption + '")');
+
+    test('adds a button to add a new field from a list',
+      button.length == 1);
+    test('binds $.makeExtensible.on.button.click to the button',
+      button.hasHandler('click', $.makeExtensible.on.button.click));
+  });
+
+  describe('$.makeExtensible.on.button.click', function() {
+    test('shows the field options above the field');
   });
 });
 

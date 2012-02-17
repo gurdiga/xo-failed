@@ -200,3 +200,24 @@ $.fn.initTypedFieldsets = function() {
     fieldset.find('>.content').html(template.html());
   }).find('legend select').click().end;
 };
+
+// --------------------------------------------------
+
+$.makeExtensible = {
+  on: {
+    button: {
+      click: function() {
+      }
+    }
+  }
+};
+
+$.fn.makeExtensible = function(caption) {
+  return this.append(
+    $('<button/>')
+      .attr('type', 'button')
+      .addClass('extend')
+      .text(caption)
+      .on('click', $.makeExtensible.on.button.click)
+  );
+}
