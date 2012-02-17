@@ -187,6 +187,16 @@ $(function() {
     test('inherits those properties',
       element.css('font-family') == sourceElement.css('font-family') &&
       element.css('text-align') == sourceElement.css('text-align'));
+
+    element.setCssFrom('body', ['font-family', 'text-align']);
+    test('inherits those properties: with selector as source',
+      element.css('font-family') == $('body').css('font-family') &&
+      element.css('text-align') == $('body').css('text-align'));
+
+    element.setCssFrom(document.body, ['font-family', 'text-align']);
+    test('inherits those properties: with DOM element as source',
+      element.css('font-family') == $(document.body).css('font-family') &&
+      element.css('text-align') == $(document.body).css('text-align'));
   });
 
 	// --------------------------------------------------

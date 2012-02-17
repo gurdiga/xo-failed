@@ -163,6 +163,8 @@ $.fn.autoSize = function(options) {
 // --------------------------------------------------
 
 $.fn.setCssFrom = function(sourceElement, properties) {
+  sourceElement = $(sourceElement);
+
   return this.each(function() {
     var element = $(this),
         property;
