@@ -127,7 +127,6 @@ $(function() {
 
   describe('$.initOptionsUI.on.autocomplete.create', function() {
     stub($.fn, 'autocomplete');
-    stub($.fn, 'autoSize');
 
     var input = $('input#initOptionsUI');
 
@@ -136,14 +135,6 @@ $(function() {
       $.fn.autocomplete.called &&
       $.fn.autocomplete.selector == input.selector &&
       equal($.fn.autocomplete.args, ['option', 'source', ['a', 'b', 'c']]));
-    test('doesn’t init autoSize when doesn’t have class autosize',
-      !$.fn.autoSize.called);
-
-    input.addClass('autosize');
-    $.initOptionsUI.on.autocomplete.create.call(input);
-    test('inits autoSize when has class autosize',
-      $.fn.autoSize.called,
-      $.fn.autoSize.selector == input.selector);
   });
 
   describe('$.initOptionsUI.on.autocomplete.close', function() {
@@ -172,10 +163,13 @@ $(function() {
 
   describe('$.fn.autoSize()', function() {
     var input = $('#autoSize').autoSize();
-        initialWidth = input.val('aa').trigger('change').width(),
-        resizedWidth = input.val('a').trigger('change').width();
 
-    test('"aa" > "a"', initialWidth > resizedWidth);
+    test('"aa" > "a"',
+      input.val('aa').trigger('change').width() >
+      input.val('a').trigger('change').width());
+    test('"ww" < "www"',
+      input.val('ww').trigger('change').width() <
+      input.val('www').trigger('change').width());
   });
 
 	// --------------------------------------------------

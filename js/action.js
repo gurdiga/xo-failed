@@ -1,6 +1,7 @@
 var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
+    $('input.autosize').autoSize().trigger('change');
     $('fieldset.typed').initTypedFieldsets();
     $('.panel').initPanelsUI();
 
@@ -55,8 +56,6 @@ $.initOptionsUI = {
         var input = $(this);
 
         input.autocomplete('option', 'source', input.options())
-
-        if (input.hasClass('autosize')) input.autoSize();
       },
 
       select: function() {
