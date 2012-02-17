@@ -55,7 +55,10 @@ $.initOptionsUI = {
       create: function() {
         var input = $(this);
 
-        input.autocomplete('option', 'source', input.options())
+        input
+          .autocomplete('option', 'source', input.options())
+          .autocomplete('widget').find('li a')
+            .setCssFrom(this, $.initOptionsUI.inheritedCss);
       },
 
       select: function() {
@@ -71,7 +74,17 @@ $.initOptionsUI = {
   autocomplete: {
     delay: 0,
     minLength: 0
-  }
+  },
+
+  inheritedCss: [
+    'color',
+    'font-family',
+    'font-size',
+    'font-weight',
+    'letter-spacing',
+    'word-spacing',
+    'line-height'
+  ]
 };
 
 // --------------------------------------------------

@@ -126,15 +126,25 @@ $(function() {
   });
 
   describe('$.initOptionsUI.on.autocomplete.create', function() {
-    stub($.fn, 'autocomplete');
+    var autocompleteWidget = $('some selector');
 
-    var input = $('input#initOptionsUI');
+    stub($.fn, {
+      name: 'autocomplete',
+      returnValue: autocompleteWidget
+    }, 'setCssFrom');
+
+    var input = $('input#initOptionsUI')[0];
 
     $.initOptionsUI.on.autocomplete.create.call(input);
+
     test('sets autocomplete options from the options data',
-      $.fn.autocomplete.called &&
-      $.fn.autocomplete.selector == input.selector &&
-      equal($.fn.autocomplete.args, ['option', 'source', ['a', 'b', 'c']]));
+      $.fn.autocomplete.calls[0].context[0] == input &&
+      equal($.fn.autocomplete.calls[0].args, ['option', 'source', ['a', 'b', 'c']]));
+
+    test('make options text look like the input’s text',
+      $.fn.setCssFrom.called &&
+      $.fn.setCssFrom.selector == autocompleteWidget.selector + ' li a' &&
+      equal($.fn.setCssFrom.args, [input, $.initOptionsUI.inheritedCss]));
   });
 
   describe('$.initOptionsUI.on.autocomplete.close', function() {
