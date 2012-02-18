@@ -2,6 +2,7 @@ var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
     $('input.autosize').autoSize().trigger('change');
+    $('.template.extensible').makeExtensible('Adaugă un cîmp');
     $('fieldset.typed').initTypedFieldsets();
     $('.panel').initPanelsUI();
 
@@ -204,20 +205,49 @@ $.fn.initTypedFieldsets = function() {
 // --------------------------------------------------
 
 $.makeExtensible = {
+  fieldTemplates: '#field-templates',
+
   on: {
     button: {
       click: function() {
+        var buttonOffset = $(this).offset(),
+            popup = $($.makeExtensible.fieldTemplates);
+
+        if (popup.is(':visible')) {
+          popup.hide();
+        } else {
+          popup
+            .css({
+              'position': 'absolute',
+              'top': buttonOffset.top - popup.outerHeight(),
+              'left': buttonOffset.left
+            })
+            .show();
+        }
+      }
+    }
+  },
+
+  button: {
+    uiOptions: {
+      text: false,
+      icons: {
+        primary: 'ui-icon-plusthick'
       }
     }
   }
 };
 
 $.fn.makeExtensible = function(caption) {
+  $('fieldset').on('click', 'button.extend', $.makeExtensible.on.button.click);
+
   return this.append(
     $('<button/>')
       .attr('type', 'button')
       .addClass('extend')
+      .css('margin-left', $(this).find('.label,label').outerWidth())
+      .attr('title', caption)
       .text(caption)
-      .on('click', $.makeExtensible.on.button.click)
+      .button($.makeExtensible.button.uiOptions)
   );
 }

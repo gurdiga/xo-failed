@@ -1,8 +1,9 @@
 TODO:
 -----
 
+* extend button
+* hide options on click outside: on open body.one('click', hide)
 * static/with options/with suggestions
-* hide options on click outside
 
 
 Causality

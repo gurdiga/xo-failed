@@ -152,3 +152,12 @@ ul {
 li {
   margin: .3em 0 0 0;
 }
+
+button.extend {
+  font-size: x-small;
+}
+
+#field-templates {
+  margin: 0;
+  padding: 3px 5px;
+}

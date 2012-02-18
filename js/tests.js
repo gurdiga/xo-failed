@@ -226,6 +226,8 @@ $(function() {
 	// --------------------------------------------------
 
   describe('$.fn.makeExtensible', function() {
+    stub($.fn, 'button');
+
     var fieldset = $('#makeExtensible'),
         buttonCaption = 'Add field', button;
 
@@ -234,12 +236,34 @@ $(function() {
 
     test('adds a button to add a new field from a list',
       button.length == 1);
-    test('binds $.makeExtensible.on.button.click to the button',
-      button.hasHandler('click', $.makeExtensible.on.button.click));
+    test('delegates $.makeExtensible.on.button.click on the button to the body',
+      $('fieldset').hasHandler('click', $.makeExtensible.on.button.click));
+    test('decorates the button',
+      $.fn.button.called &&
+      equal($.fn.button.args, [$.makeExtensible.button.uiOptions]));
+    test('aligns the button with the last field',
+      button.css('margin-left') == fieldset.find('.label,label').outerWidth() + 'px');
   });
 
   describe('$.makeExtensible.on.button.click', function() {
-    test('shows the field options above the field');
+    var button = $('button.extend'),
+        buttonOffset = button.offset(),
+        popup = $($.makeExtensible.fieldTemplates);
+
+    popup.hide();
+    button.click();
+
+    test('shows the field options popup',
+      popup.is(':visible'));
+    test('positions the field options above the button',
+      popup.css('position') == 'absolute' &&
+      popup.css('top') == buttonOffset.top - popup.outerHeight() + 'px' &&
+      popup.css('left') == buttonOffset.left + 'px');
+
+    popup.show();
+    button.click();
+    test('hides the field options popup on the next click',
+      popup.is(':not(:visible)'));
   });
 });
 

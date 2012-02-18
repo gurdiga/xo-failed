@@ -39,7 +39,7 @@
       <button type="button" title="Închide" class="close-panel">✕</button>
     </div>
 
-    <div class="person template" title="persoană juridică">
+    <div class="person template extensible" title="persoană juridică">
       <ul>
         <li>
           <label for="name">Denumire</label>
@@ -68,7 +68,7 @@
       </ul>
     </div>
 
-    <div class="person template" title="persoană fizică">
+    <div class="person template extensible" title="persoană fizică">
       <label for="last-name">Nume</label>
       <input id="last-name" name="last-name"/><br/>
 
@@ -90,6 +90,26 @@
       <label class="textarea" for="notes">Note</label>
       <textarea id="notes" name="notes"></textarea><br/>
     </div>
+
+    <ul id="field-templates" class="template">
+      <li>Cîmp dată</li>
+      <li class="template">
+        <input class="label"/>
+        <input class="date"/>
+      </li>
+
+      <li>Cîmp text</li>
+      <li class="template">
+        <input class="label"/>
+        <input/>
+      </li>
+
+      <li>Cîmp note</li>
+      <li class="template">
+        <input class="label"/>
+        <textarea></textarea>
+      </li>
+    </ul>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
