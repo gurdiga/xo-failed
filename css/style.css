@@ -5,15 +5,13 @@ body {
 }
 
 input.label {
-  border-width: 0;
+  border: 1px solid white;
   outline-width: 0;
   padding-right: 10px;
-  background: url('/images/expanded.png') no-repeat right center;
-  cursor: default;
 }
 
-input.label.alone {
-  text-align: left;
+input.label.with-options {
+  background: url('/images/expanded.png') no-repeat right center;
 }
 
 textarea {
@@ -33,6 +31,7 @@ input {
   width: 250px;
 }
 
+input.label:focus,
 textarea:focus,
 input:focus {
   border-color: #4d90fe;
@@ -41,16 +40,8 @@ input:focus {
 label,
 input,
 select,
-textarea,
-.ui-autocomplete .ui-menu-item,
-.ui-button-text {
+textarea {
   font-size: inherit;
-}
-
-label,
-input.label,
-.ui-autocomplete .ui-menu-item {
-  color: #444;
 }
 
 button#new-file {
@@ -141,6 +132,10 @@ fieldset.typed .label {
   display: inline-block;
   width: 12em;
   text-align: right;
+}
+
+fieldset.typed label {
+  padding: 0 11px 0 3px;
 }
 
 ul {
