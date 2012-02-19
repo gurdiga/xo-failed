@@ -238,6 +238,8 @@ $(function() {
   });
 
   describe('$.makeExtensible.on.button.click', function() {
+    stub($.fn, 'focus');
+
     var fieldset = $('#makeExtensible'), button;
 
     fieldset.makeExtensible();
@@ -248,6 +250,9 @@ $(function() {
 
     test('adds the field to the fieldset .content ul',
       lastField.html() == $('.field.template[title="' + button.val() + '"]').html());
+    test('focuses the aded input.label',
+      $.fn.focus.called &&
+      $.fn.focus.context[0] == lastField.find('.label')[0]);
   });
 
 	// --------------------------------------------------

@@ -216,7 +216,8 @@ $.makeExtensible = {
         newField
           .removeClass('field template')
           .removeAttr('title')
-          .appendTo(fieldList);
+          .appendTo(fieldList)
+          .find('.label').focus();
       }
     }
   }
