@@ -59,10 +59,19 @@
     a buncha fields here
   </div>
 
-  <fieldset id="makeExtensible" style="visibility:hidden">
-    <label>some lable</label>
+  <fieldset id="makeExtensible" class="hide">
+    <div class="content">
+      <ul></ul>
+    </div>
   </fieldset>
-  <button type="button" class="extend hide">add</button>
-  <ul id="field-templates" class="hide"></ul>
+  <select class="extend template hide">
+    <option>some field type</option>
+  </select>
+  <ul class="hide">
+    <li class="field template" title="some field type">
+      <label for="some-field-type">Some field type</label>
+      <input id="some-field-type"/>
+    </li>
+  </ul>
 </body>
 </html>

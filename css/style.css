@@ -53,12 +53,10 @@ input.label,
   color: #444;
 }
 
-#search-label {
-  width: 200px;
-}
-
 button#new-file {
   margin-bottom: 2em;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 /* Corner radius */
@@ -138,7 +136,8 @@ fieldset.typed legend {
   font-weight: bold;
 }
 
-fieldset.typed label {
+fieldset.typed label,
+fieldset.typed .label {
   display: inline-block;
   width: 12em;
   text-align: right;

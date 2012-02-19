@@ -2,16 +2,16 @@ var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
     $('input.autosize').autoSize().trigger('change');
-    $('.template.extensible').makeExtensible('Adaugă un cîmp');
+    $('.template.extensible').makeExtensible();
     $('fieldset.typed').initTypedFieldsets();
     $('.panel').initPanelsUI();
 
-    $('button#new-file').button({
-      icons: {
-        primary: 'ui-icon-circle-plus'
-      }
-    }).click(function() {
+    $('button#new-file').on('click', function() {
       $('#new-file-panel').show();
+    });
+
+    $('[data-for]').on('click', function() {
+      $('#' + $(this).data('for')).focus();
     });
   }
 };
@@ -205,49 +205,30 @@ $.fn.initTypedFieldsets = function() {
 // --------------------------------------------------
 
 $.makeExtensible = {
-  fieldTemplates: '#field-templates',
+  fieldTemplates: 'select.extend.template',
 
   on: {
     button: {
       click: function() {
-        var buttonOffset = $(this).offset(),
-            popup = $($.makeExtensible.fieldTemplates);
+        var newField = $('.field.template[title="' + this.value + '"]').clone(),
+            fieldList = $(this).closest('fieldset').find('ul');
 
-        if (popup.is(':visible')) {
-          popup.hide();
-        } else {
-          popup
-            .css({
-              'position': 'absolute',
-              'top': buttonOffset.top - popup.outerHeight(),
-              'left': buttonOffset.left
-            })
-            .show();
-        }
-      }
-    }
-  },
-
-  button: {
-    uiOptions: {
-      text: false,
-      icons: {
-        primary: 'ui-icon-plusthick'
+        newField
+          .removeClass('field template')
+          .removeAttr('title')
+          .appendTo(fieldList);
       }
     }
   }
 };
 
-$.fn.makeExtensible = function(caption) {
-  $('fieldset').on('click', 'button.extend', $.makeExtensible.on.button.click);
+$.fn.makeExtensible = function() {
+  $('fieldset').on('click', 'select.extend', $.makeExtensible.on.button.click);
 
   return this.append(
-    $('<button/>')
-      .attr('type', 'button')
+    $($.makeExtensible.fieldTemplates).clone()
+      .removeAttr('id')
+      .removeClass('template')
       .addClass('extend')
-      .css('margin-left', $(this).find('.label,label').outerWidth())
-      .attr('title', caption)
-      .text(caption)
-      .button($.makeExtensible.button.uiOptions)
   );
 }

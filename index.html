@@ -12,12 +12,15 @@
   <body>
     <h1>Consola executorului</h1>
 
-    <button id="new-file" type="button">Dosar nou</button><br/>
+    <button id="new-file" type="button">Crează dosar nou</button><br/>
 
-    <input id="search-label" class="label autosize" data-for="query"
-        data-options="Caută dosar|Caută persoană fizică|Caută persoană juridică"/><br/>
+    <select id="search-options" data-for="query">
+      <option>Caută dosar</option>
+      <option>Caută persoană fizică</option>
+      <option>Caută persoană juridică</option>
+    </select><br/>
+
     <input id="query"/>
-
 
     <div id="new-file-panel" class="panel">
       <div class="content">
@@ -91,25 +94,29 @@
       <textarea id="notes" name="notes"></textarea><br/>
     </div>
 
-    <ul id="field-templates" class="template">
-      <li>Cîmp dată</li>
-      <li class="template">
-        <input class="label"/>
+    <ul class="template">
+      <li class="field template" title="Cîmp dată">
+        <input class="label" value="Data"/>
         <input class="date"/>
       </li>
 
-      <li>Cîmp text</li>
-      <li class="template">
+      <li class="field template" title="Cîmp text">
         <input class="label"/>
         <input/>
       </li>
 
-      <li>Cîmp note</li>
-      <li class="template">
+      <li class="field template" title="Cîmp note">
         <input class="label"/>
         <textarea></textarea>
       </li>
     </ul>
+
+    <select class="extend template">
+      <option value="">Adaugă un cîmp</option>
+      <option>Cîmp dată</option>
+      <option>Cîmp text</option>
+      <option>Cîmp note</option>
+    </select>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
