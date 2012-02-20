@@ -4,6 +4,7 @@ var Action = {
     $('input.autosize').autoSize().trigger('change');
     $('.template.extensible').makeExtensible();
     $('fieldset.typed').initTypedFieldsets();
+    $('fieldset').initEditableLabels();
     $('.panel').initPanelsUI();
 
     $('button#new-file').on('click', function() {
@@ -232,4 +233,23 @@ $.fn.makeExtensible = function() {
       .removeClass('template')
       .addClass('extend')
   );
-}
+};
+
+// --------------------------------------------------
+
+$.initEditableLabels = {
+  'input.label': {
+    on: {
+      keypress: function(e) {
+        var label = $(this);
+
+        if (e.which == 13) $('#' + label.data('for')).focus();
+      }
+    }
+  }
+};
+
+$.fn.initEditableLabels = function() {
+  return this.filter('fieldset')
+    .on('keypress', 'input.label', $.initEditableLabels['input.label'].on.keypress);
+};

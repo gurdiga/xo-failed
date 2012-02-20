@@ -256,6 +256,28 @@ $(function() {
   });
 
 	// --------------------------------------------------
+
+  describe('$.fn.initEditableLabels', function() {
+    var fieldset = $('#initEditableLabels');
+
+    fieldset.initEditableLabels();
+
+    test('handles keypress on its input.labels',
+      fieldset.hasHandler('keypress', $.initEditableLabels['input.label'].on.keypress));
+  });
+
+  describe('$.initEditableLabels["input.label"].on.keypress', function() {
+    stub($.fn, 'focus');
+
+    var fieldset = $('#initEditableLabels'),
+        label = fieldset.find('input.label');
+
+    $.initEditableLabels['input.label'].on.keypress.call(label, {which:13});
+
+    test('on enter focuses .label’s associated field',
+      $.fn.focus.called &&
+      $.fn.focus.selector == '#' + label.data('for'));
+  });
 });
 
 // --------------------------------------------------
