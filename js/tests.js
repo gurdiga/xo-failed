@@ -237,6 +237,15 @@ $(function() {
       $('fieldset').hasHandler('click', $.makeExtensible.on.button.click));
   });
 
+  describe('$.makeExtensible.createId(label)', function() {
+    var fieldset = $('#makeExtensible'),
+        newLabel = $('<input class="label" value="New field"/>'),
+        id = $.makeExtensible.createId(newLabel, fieldset);
+
+    test('returns the slug of the label text + incremental number of taken',
+      id == 'new-field-1'); // the fixture fieldset already contains a "new-field"
+  });
+
   describe('$.makeExtensible.on.button.click', function() {
     stub($.fn, 'focus');
 
@@ -248,11 +257,16 @@ $(function() {
 
     lastField = fieldset.find('li:last');
 
-    test('adds the field to the fieldset .content ul',
-      lastField.html() == $('.field.template[title="' + button.val() + '"]').html());
     test('focuses the aded input.label',
       $.fn.focus.called &&
       $.fn.focus.context[0] == lastField.find('.label')[0]);
+
+    var newLabel = lastField.find('input.label'),
+        newInput = lastField.find('input:not(.label)'),
+        id = $.makeExtensible.createId(newLabel, fieldset);
+
+    test('sets the label date-for', newLabel.data('for') == id);
+    test('sets the input ID', newLabel.data('for') == id);
   });
 
 	// --------------------------------------------------

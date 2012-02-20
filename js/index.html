@@ -61,7 +61,12 @@
 
   <fieldset id="makeExtensible" class="hide">
     <div class="content">
-      <ul></ul>
+      <ul>
+        <li>
+          <input class="label" data-for="new-field">New field</label>
+          <input id="new-field"/>
+        </li>
+      </ul>
     </div>
   </fieldset>
   <select class="extend template hide">
@@ -75,8 +80,10 @@
   </ul>
 
   <fieldset id="initEditableLabels" class="hide">
-    <input class="label" data-for="some-field"/>
+    <input class="label" data-for="some-field" value="Some field"/>
     <input id="some-field"/>
   </fieldset>
+
+
 </body>
 </html>

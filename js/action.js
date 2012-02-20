@@ -225,8 +225,30 @@ $.makeExtensible = {
           .removeAttr('title')
           .appendTo(fieldList)
           .find('.label').focus();
+
+        var label = newField.find('input.label'),
+            input = newField.find('input:not(.label)'),
+            id = $.makeExtensible.createId(label, fieldList.closest('fieldset'));
+
+        label.attr('data-for', id);
+        input.attr('id', id);
       }
     }
+  },
+
+  createId: function(label, fieldset) {
+    var id = label.val()
+        .replace(/[^a-zăîşţâа-я0-9]/i, '-')
+        .replace(/-+/, '-')
+        .toLowerCase();
+
+    var alreadyExist = fieldset.find('[id^=' + id + ']').length;
+
+    if (alreadyExist > 0) {
+      id += '-' + alreadyExist;
+    }
+
+    return id;
   }
 };
 
