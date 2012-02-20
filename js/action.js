@@ -2,10 +2,16 @@ var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
     $('input.autosize').autoSize().trigger('change');
+
     $('.template.extensible').makeExtensible();
     $('fieldset.typed').initTypedFieldsets();
     $('fieldset').initEditableLabels();
+
     $('.panel').initPanelsUI();
+
+    $('textarea').autoResize({
+      extraSpace: 20
+    });
 
     $('button#new-file').on('click', function() {
       $('#new-file-panel').show();
