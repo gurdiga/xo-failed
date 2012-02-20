@@ -269,6 +269,21 @@ $(function() {
     test('sets the input ID', newLabel.data('for') == id);
   });
 
+  describe('$.makeExtensible.on["input.label"].click', function() {
+    var label = $('#makeExtensible').find('input.label'),
+        input = label.next('input'),
+        newLabel = 'A new label',
+        expectedNewId = 'a-new-label';
+
+    label.val(newLabel);
+    $.makeExtensible.on['input.label'].change.call(label);
+
+    test('updates the label’s data-for',
+      label.data('for') == expectedNewId);
+    test('updates the input’s ID',
+      input.attr('id') == expectedNewId);
+  });
+
 	// --------------------------------------------------
 
   describe('$.fn.initEditableLabels', function() {

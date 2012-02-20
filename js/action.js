@@ -233,19 +233,31 @@ $.makeExtensible = {
         label.attr('data-for', id);
         input.attr('id', id);
       }
+    },
+
+    'input.label': {
+      change: function() {
+        var label = $(this),
+            input = label.next('input'),
+            fieldset = label.closest('fieldset'),
+            newId = $.makeExtensible.createId(label, fieldset);
+
+        label.attr('data-for', newId);
+        input.attr('id', newId);
+      }
     }
   },
 
   createId: function(label, fieldset) {
     var id = label.val()
-        .replace(/[^a-zăîşţâа-я0-9]/i, '-')
-        .replace(/-+/, '-')
+        .replace(/[^a-zăîşţâа-я0-9]/gi, '-')
+        .replace(/-+/g, '-')
         .toLowerCase();
 
-    var alreadyExist = fieldset.find('[id^=' + id + ']').length;
+    var alreadyExisting = fieldset.find('[id^=' + id + ']').not(label).length;
 
-    if (alreadyExist > 0) {
-      id += '-' + alreadyExist;
+    if (alreadyExisting > 0) {
+      id += '-' + alreadyExisting;
     }
 
     return id;
@@ -254,6 +266,7 @@ $.makeExtensible = {
 
 $.fn.makeExtensible = function() {
   $('fieldset').on('click', 'select.extend', $.makeExtensible.on.button.click);
+  $('fieldset').on('change', 'input.label', $.makeExtensible.on['input.label'].change);
 
   return this.append(
     $($.makeExtensible.fieldTemplates).clone()
