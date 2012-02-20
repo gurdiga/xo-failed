@@ -227,7 +227,7 @@ $.makeExtensible = {
           .find('.label').focus();
 
         var label = newField.find('input.label'),
-            input = newField.find('input:not(.label)'),
+            input = label.next(),
             id = $.makeExtensible.createId(label, fieldList.closest('fieldset'));
 
         label.attr('data-for', id);
@@ -238,7 +238,7 @@ $.makeExtensible = {
     'input.label': {
       change: function() {
         var label = $(this),
-            input = label.next('input'),
+            input = label.next(),
             fieldset = label.closest('fieldset'),
             newId = $.makeExtensible.createId(label, fieldset);
 

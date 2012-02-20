@@ -271,17 +271,15 @@ $(function() {
 
   describe('$.makeExtensible.on["input.label"].click', function() {
     var label = $('#makeExtensible').find('input.label'),
-        input = label.next('input'),
+        input = label.next(),
         newLabel = 'A new label',
         expectedNewId = 'a-new-label';
 
     label.val(newLabel);
     $.makeExtensible.on['input.label'].change.call(label);
 
-    test('updates the label’s data-for',
-      label.data('for') == expectedNewId);
-    test('updates the input’s ID',
-      input.attr('id') == expectedNewId);
+    test('updates the label’s data-for', label.data('for') == expectedNewId);
+    test('updates the input’s ID', input.attr('id') == expectedNewId);
   });
 
 	// --------------------------------------------------
