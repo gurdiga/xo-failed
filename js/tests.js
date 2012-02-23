@@ -171,8 +171,8 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.autoSize()', function() {
-    var input = $('#autoSize').autoSize();
+  describe('$.fn.autosize()', function() {
+    var input = $('#autosize').autosize();
 
     test('"aa" > "a"',
       input.val('aa').trigger('change').width() >

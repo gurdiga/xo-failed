@@ -1,7 +1,7 @@
 var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
-    $('input.autosize').autoSize().trigger('change');
+    $('input.autosize').autosize().trigger('change');
 
     $('.template.extensible').makeExtensible();
     $('fieldset.typed').initTypedFieldsets();
@@ -182,7 +182,7 @@ $.fn.initPanelsUI = function() {
 
 // --------------------------------------------------
 
-$.fn.autoSize = function(options) {
+$.fn.autosize = function(options) {
   var defaults = {
     padding: 0
   };
@@ -191,10 +191,10 @@ $.fn.autoSize = function(options) {
 
   return this.filter('input:text').on('keyup keydown blur update change', function() {
     var input = $(this),
-        temp = $('#autoSize-temp');
+        temp = $('#autosize-temp');
 
     if (temp.length == 0) {
-      temp = $('<span id="autoSize-temp"/>')
+      temp = $('<span id="autosize-temp"/>')
         .css({
           'padding-left': options.padding,
           'position': 'absolute',
