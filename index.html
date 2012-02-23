@@ -56,7 +56,7 @@
 
         <li>
           <label class="textarea" for="address">Sediu</label>
-          <textarea id="address" name="address"></textarea><br/>
+          <textarea id="address" class="autosize" name="address"></textarea><br/>
         </li>
 
         <li>
@@ -66,7 +66,7 @@
 
         <li>
           <label class="textarea" for="notes">Note</label>
-          <textarea class="textarea" id="notes" name="notes"></textarea><br/>
+          <textarea class="autosize" id="notes" name="notes"></textarea>
         </li>
       </ul>
     </div>
@@ -91,7 +91,7 @@
       <input id="oficial-address" name="oficial-address" class="date"/><br/>
 
       <label class="textarea" for="notes">Note</label>
-      <textarea id="notes" name="notes"></textarea><br/>
+      <textarea id="notes" class="autosize" name="notes"></textarea><br/>
     </div>
 
     <ul class="template">
@@ -106,8 +106,8 @@
       </li>
 
       <li class="field template" title="Cîmp note">
-        <input class="label" value="Note"/>
-        <textarea></textarea>
+        <input class="label textarea" value="Note"/>
+        <textarea class="autosize"></textarea>
       </li>
     </ul>
 
@@ -120,7 +120,6 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
-    <script src="/js/lib.js"></script>
     <script src="/js/action.js"></script>
     <script>$(Action.init);</script>
   </body>

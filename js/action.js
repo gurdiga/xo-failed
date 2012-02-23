@@ -1,7 +1,6 @@
 var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
-    $('input.autosize').autosize().trigger('change');
 
     $('.template.extensible').makeExtensible();
     $('fieldset.typed').initTypedFieldsets();
@@ -9,16 +8,12 @@ var Action = {
 
     $('.panel').initPanelsUI();
 
-    $('textarea').autoResize($.autoResize.options);
-
-    $('button#new-file').on('click', function() {
-    });
-
     $('[data-for]').on('click', function() {
       $('#' + $(this).data('for')).focus();
     });
 
     HashController.init();
+    Autosize.init();
   }
 };
 
@@ -182,38 +177,63 @@ $.fn.initPanelsUI = function() {
 
 // --------------------------------------------------
 
-$.fn.autosize = function(options) {
-  var defaults = {
-    padding: 0
-  };
+var Autosize = {
+  options: {
+    padding: 0,
+    minHeight: '60px'
+  },
 
-  options = $.extend(defaults, options);
+  events: 'keydown keyup update paste change',
 
-  return this.filter('input:text').on('keyup keydown blur update change', function() {
-    var input = $(this),
-        temp = $('#autosize-temp');
+  init: function(options) {
+    Autosize.options = $.extend(Autosize.options, options);
 
-    if (temp.length == 0) {
-      temp = $('<span id="autosize-temp"/>')
-        .css({
-          'padding-left': options.padding,
-          'position': 'absolute',
-          'visibility': 'hidden'
-        })
-        .appendTo('body');
+    $('body')
+      .on(Autosize.events, 'input:text.autosize', Autosize.handlers['input:text'])
+      .on(Autosize.events, 'textarea.autosize', Autosize.handlers['textarea']);
+  },
+
+  handlers: {
+    'input:text': function(e) {
+      var input = $(this),
+          temp = $('#autosize-temp');
+
+      if (temp.length == 0) {
+        temp = $('<span id="autosize-temp"/>')
+          .css({
+            'padding-left': Autosize.options.padding,
+            'position': 'absolute',
+            'visibility': 'hidden'
+          })
+          .appendTo('body');
+      }
+
+      temp
+        .text(input.val())
+        .setCssFrom(input, [
+          'font-size',
+          'font-weight',
+          'font-family',
+          'letter-spacing'
+        ]);
+
+      input.width(temp.outerWidth());
+    },
+
+    'textarea': function(e) {
+      if ($(this).is(':not(:visible)')) return;
+
+      $(this).css({
+        overflow: 'hidden',
+        height: Autosize.options.minHeight
+      });
+
+      var paddingTop = parseInt($(this).css('padding-top'));
+      var paddingBottom = parseInt($(this).css('padding-bottom'));
+
+      $(this).height(this.scrollHeight - paddingTop - paddingBottom + 'px');
     }
-
-    temp
-      .text(input.val())
-      .setCssFrom(input, [
-        'font-size',
-        'font-weight',
-        'font-family',
-        'letter-spacing'
-      ]);
-
-    input.width(temp.outerWidth());
-  });
+  }
 };
 
 // --------------------------------------------------
@@ -269,7 +289,7 @@ $.makeExtensible = {
         input.attr('id', id);
 
         if (input.is('textarea')) {
-          input.autoResize($.autoResize.options);
+          input.autosize();
         }
       }
     },
