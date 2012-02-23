@@ -9,17 +9,52 @@ var Action = {
 
     $('.panel').initPanelsUI();
 
-    $('textarea').autoResize({
-      extraSpace: 20
-    });
+    $('textarea').autoResize($.autoResize.options);
 
     $('button#new-file').on('click', function() {
-      $('#new-file-panel').show();
     });
 
     $('[data-for]').on('click', function() {
       $('#' + $(this).data('for')).focus();
     });
+
+    HashController.init();
+  }
+};
+
+// --------------------------------------------------
+
+var HashController = {
+  init: function() {
+    $(window).on('hashchange', function() {
+      var hash = location.hash;
+
+      if (hash == '' || hash == '#') {
+        HashController.index();
+      } else {
+        HashController[hash]();
+      }
+    }).trigger('hashchange');
+
+    $('.action').on('click', function() {
+      location.hash = this.id;
+    });
+  },
+
+  index: function() {
+    $('.panel').hide();
+  },
+
+  '#new-file': function() {
+    $('#new-file-panel').show();
+  }
+};
+
+// --------------------------------------------------
+
+$.autoResize = {
+  options: {
+    extraSpace: 20
   }
 };
 
@@ -232,6 +267,10 @@ $.makeExtensible = {
 
         label.attr('data-for', id);
         input.attr('id', id);
+
+        if (input.is('textarea')) {
+          input.autoResize($.autoResize.options);
+        }
       }
     },
 
