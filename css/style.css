@@ -17,6 +17,7 @@ input.label.with-options {
 textarea {
   vertical-align: top;
   font: inherit;
+  height: 4em;
 }
 
 textarea,
