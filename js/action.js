@@ -1,19 +1,19 @@
 var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
-
     $('.template.extensible').makeExtensible();
-    $('fieldset.typed').initTypedFieldsets();
-    $('fieldset').initEditableLabels();
-
+    $('fieldset')
+      .initEditableLabels()
+      .autoSizeInputs()
+      .autoSizeTextareas()
+      .filter('.typed')
+        .initTypedFieldsets();
     $('.panel').initPanelsUI();
-
     $('[data-for]').on('click', function() {
       $('#' + $(this).data('for')).focus();
     });
 
     HashController.init();
-    Autosize.init();
   }
 };
 
@@ -177,63 +177,75 @@ $.fn.initPanelsUI = function() {
 
 // --------------------------------------------------
 
-var Autosize = {
-  options: {
-    padding: 0,
-    minHeight: '60px'
+$.autoSizeInputs = {
+  defaults: {
+    padding: 5,
+    minWidth: '50px',
+    selector: 'input:text.autosize'
   },
 
-  events: 'keydown keyup update paste change',
+  events: 'keydown keyup update paste change'
+};
 
-  init: function(options) {
-    Autosize.options = $.extend(Autosize.options, options);
+$.fn.autoSizeInputs = function(options) {
+  options = $.extend($.autoSizeInputs.defaults, options);
 
-    $('body')
-      .on(Autosize.events, 'input:text.autosize', Autosize.handlers['input:text'])
-      .on(Autosize.events, 'textarea.autosize', Autosize.handlers['textarea']);
-  },
+  return this.on($.autoSizeInputs.events, options.selector, function() {
+    var input = $(this),
+        temp = $('#autosize-temp');
 
-  handlers: {
-    'input:text': function(e) {
-      var input = $(this),
-          temp = $('#autosize-temp');
-
-      if (temp.length == 0) {
-        temp = $('<span id="autosize-temp"/>')
-          .css({
-            'padding-left': Autosize.options.padding,
-            'position': 'absolute',
-            'visibility': 'hidden'
-          })
-          .appendTo('body');
-      }
-
-      temp
-        .text(input.val())
-        .setCssFrom(input, [
-          'font-size',
-          'font-weight',
-          'font-family',
-          'letter-spacing'
-        ]);
-
-      input.width(temp.outerWidth());
-    },
-
-    'textarea': function(e) {
-      if ($(this).is(':not(:visible)')) return;
-
-      $(this).css({
-        overflow: 'hidden',
-        height: Autosize.options.minHeight
-      });
-
-      var paddingTop = parseInt($(this).css('padding-top'));
-      var paddingBottom = parseInt($(this).css('padding-bottom'));
-
-      $(this).height(this.scrollHeight - paddingTop - paddingBottom + 'px');
+    if (temp.length == 0) {
+      temp = $('<span id="autosize-temp"/>')
+        .css({
+          'padding-left': options.padding,
+          'position': 'absolute',
+          'visibility': 'hidden'
+        })
+        .appendTo('body');
     }
-  }
+
+    temp
+      .text(input.val())
+      .setCssFrom(input, [
+        'font-size',
+        'font-weight',
+        'font-family',
+        'letter-spacing'
+      ]);
+
+    input.width(temp.outerWidth());
+  });
+};
+
+// --------------------------------------------------
+
+$.autoSizeTextareas = {
+  defaults: {
+    minHeight: '60px',
+    selector: 'textarea.autosize'
+  },
+
+  events: 'keydown keyup update paste change'
+};
+
+$.fn.autoSizeTextareas = function(options) {
+  options = $.extend($.autoSizeTextareas.defaults, options);
+
+  return this.on($.autoSizeTextareas.events, options.selector, function() {
+    var textarea = $(this);
+
+    if (textarea.is(':not(:visible)')) return;
+
+    textarea.css({
+      overflow: 'hidden',
+      height: options.minHeight
+    });
+
+    var paddingTop = parseInt(textarea.css('padding-top'));
+    var paddingBottom = parseInt(textarea.css('padding-bottom'));
+
+    textarea.height(this.scrollHeight - paddingTop - paddingBottom + 'px');
+  });
 };
 
 // --------------------------------------------------

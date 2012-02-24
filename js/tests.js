@@ -171,14 +171,10 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.autosize with an input', function() {
-    var input = $('#autosize input').autosize();
+  describe('$.fn.autoSizeInputs', function() {
+    var container = $('#autosize').autoSizeInputs({selector: 'input'}),
+        input = container.find('input');
 
-    test('adds handlers for keyup keydown blur update change',
-      input.hasHandler('keypress', $.autosize.on['input:text']),
-      input.hasHandler('update', $.autosize.on['input:text']),
-      input.hasHandler('paste', $.autosize.on['input:text']),
-      input.hasHandler('change', $.autosize.on['input:text']));
     test('"aa" > "a"',
       input.val('aa').trigger('change').width() >
       input.val('a').trigger('change').width());
@@ -187,16 +183,15 @@ $(function() {
       input.val('www').trigger('change').width());
   });
 
-  describe('$.fn.autosize with a textarea', function() {
-    var textarea = $('#autosize textarea').autosize(),
+  describe('$.fn.autoSizeTextareas', function() {
+    var container = $('#autosize').autoSizeTextareas({
+          selector: 'textarea',
+          minHeight: '2px'
+        }),
+        textarea = container.find('textarea'),
         oneLineHeight = textarea.val('line1').trigger('change').height(),
         twoLineHeight = textarea.val('line1\rline2').trigger('change').height();
 
-    test('adds handlers for keypress update paste change',
-      textarea.hasHandler('keypress', $.autosize.on['textarea']),
-      textarea.hasHandler('update', $.autosize.on['textarea']),
-      textarea.hasHandler('paste', $.autosize.on['textarea']),
-      textarea.hasHandler('change', $.autosize.on['textarea']));
     test('extends when multiple lines are added',
       oneLineHeight < twoLineHeight);
 
