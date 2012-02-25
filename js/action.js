@@ -8,7 +8,6 @@ var Action = {
       .autoSizeTextareas()
       .filter('.typed')
         .initTypedFieldsets();
-    $('.panel').initPanelsUI();
     $('[data-for]').on('click', function() {
       $('#' + $(this).data('for')).focus();
     });
@@ -156,23 +155,6 @@ $.fn.initOptionsUI = function() {
       }
     });
   });
-};
-
-// --------------------------------------------------
-
-$.initPanelsUI = {
-  closeButtonSelector: '.close-panel',
-  on: {
-    closeButton: {
-      click: function() {
-        $(this).closest('.panel').hide();
-      }
-    }
-  }
-};
-
-$.fn.initPanelsUI = function() {
-  return this.on('click', $.initPanelsUI.closeButtonSelector, $.initPanelsUI.on.closeButton.click);
 };
 
 // --------------------------------------------------

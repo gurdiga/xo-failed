@@ -161,16 +161,6 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.initPanelsUI', function() {
-    var panel = $('#initPanelsUI');
-
-    panel.initPanelsUI();
-    test('delegates $.initPanelsUI.on.closeButton.click to $.initPanelsUI.closeButtonSelector',
-      panel.hasHandler('click', $.initPanelsUI.on.closeButton.click, $.initPanelsUI.closeButtonSelector));
-  });
-
-	// --------------------------------------------------
-
   describe('$.fn.autoSizeInputs', function() {
     var container = $('#autosize').autoSizeInputs({selector: 'input'}),
         input = container.find('input');

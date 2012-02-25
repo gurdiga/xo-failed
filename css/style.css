@@ -61,18 +61,6 @@ button#new-file {
   margin: 5px 10px;
 }
 
-.panel button.close-panel {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  border-width: 0;
-  background-color: transparent;
-  padding: 5px;
-  cursor: pointer;
-  color: #777;
-  font-size: 20px;
-}
-
 fieldset {
   border: 1px solid #ccc;
   border-width: 1px 0 0 1px;
