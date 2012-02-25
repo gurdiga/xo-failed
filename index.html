@@ -54,12 +54,12 @@
 
         <li>
           <label class="textarea" for="address">Sediu</label>
-          <textarea id="address" class="autosize" name="address"></textarea><br/>
+          <textarea id="address" class="autosize" name="address"></textarea>
         </li>
 
         <li>
           <label for="contact">Persoană de contact</label>
-          <input id="contact" name="contact"/><br/>
+          <input id="contact" name="contact"/>
         </li>
 
         <li>
@@ -70,26 +70,42 @@
     </div>
 
     <div class="person template extensible" title="persoană fizică">
-      <label for="last-name">Nume</label>
-      <input id="last-name" name="last-name"/><br/>
+      <ul>
+        <li>
+          <label for="last-name">Nume</label>
+          <input id="last-name" name="last-name"/>
+        </li>
 
-      <label for="first-name">Prenume</label>
-      <input id="first-name" name="first-name"/><br/>
+        <li>
+          <label for="first-name">Prenume</label>
+          <input id="first-name" name="first-name"/>
+        </li>
 
-      <label for="patronymic">Patronimic</label>
-      <input id="patronymic" name="patronymic"/><br/>
+        <li>
+          <label for="patronymic">Patronimic</label>
+          <input id="patronymic" name="patronymic"/>
+        </li>
 
-      <label for="idnp">IDNP</label>
-      <input id="idnp" name="idnp"/><br/>
+        <li>
+          <label for="idnp">IDNP</label>
+          <input id="idnp" name="idnp"/><br/>
+        </li>
 
-      <label for="dob">Data naşterii</label>
-      <input id="dob" name="dob" class="date"/><br/>
+        <li>
+          <label for="dob">Data naşterii</label>
+          <input id="dob" name="dob" class="date"/>
+        </li>
 
-      <label for="official-address">Domiciuliu oficial</label>
-      <input id="oficial-address" name="oficial-address" class="date"/><br/>
+        <li>
+          <label for="official-address">Domiciuliu oficial</label>
+          <input id="oficial-address" name="oficial-address" class="date"/>
+        </li>
 
-      <label class="textarea" for="notes">Note</label>
-      <textarea id="notes" class="autosize" name="notes"></textarea><br/>
+        <li>
+          <label class="textarea" for="notes">Note</label>
+          <textarea id="notes" class="autosize" name="notes"></textarea>
+        </li>
+      </ul>
     </div>
 
     <ul class="template">
@@ -111,7 +127,6 @@
 
     <select class="extend template">
       <option value="">Adaugă un cîmp</option>
-      <option>Cîmp dată</option>
       <option>Cîmp text</option>
       <option>Cîmp note</option>
     </select>
