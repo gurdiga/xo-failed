@@ -236,15 +236,21 @@ $.fn.autoSizeTextareas = function(options) {
 
     if (textarea.is(':not(:visible)')) return;
 
-    textarea.css({
-      overflow: 'hidden',
-      height: options.minHeight
-    });
+    var clone = textarea.css('overflow', 'hidden').clone()
+      .css({
+        visibility: 'hidden',
+        position: 'absolute',
+        height: options.minHeight
+      })
+      .val(textarea.val())
+      .insertBefore(textarea);
 
-    var paddingTop = parseInt(textarea.css('padding-top'));
-    var paddingBottom = parseInt(textarea.css('padding-bottom'));
+    var paddingTop = parseInt(clone.css('padding-top')),
+        paddingBottom = parseInt(clone.css('padding-bottom')),
+        contentHeight = clone[0].scrollHeight;
 
-    textarea.height(this.scrollHeight - paddingTop - paddingBottom + 'px');
+    clone.remove();
+    textarea.height(contentHeight - paddingTop - paddingBottom);
   });
 };
 
@@ -299,10 +305,6 @@ $.makeExtensible = {
 
         label.attr('data-for', id);
         input.attr('id', id);
-
-        if (input.is('textarea')) {
-          input.autosize();
-        }
       }
     },
 
