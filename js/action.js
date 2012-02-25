@@ -305,6 +305,8 @@ $.makeExtensible = {
 
         label.attr('data-for', id);
         input.attr('id', id);
+
+        $(this).val('');
       }
     },
 
