@@ -23,24 +23,15 @@ var HashController = {
     $(window).on('hashchange', function() {
       var hash = location.hash;
 
-      if (hash == '' || hash == '#') {
-        HashController.index();
-      } else {
-        HashController[hash]();
-      }
+      if (hash == '' || hash == '#') hash = '#index';
+
+      $('.pages:not(' + hash + ')').hide();
+      $('.pages' + hash).show();
     }).trigger('hashchange');
 
     $('.action').on('click', function() {
       location.hash = this.id;
     });
-  },
-
-  index: function() {
-    $('.panel').hide();
-  },
-
-  '#new-file': function() {
-    $('#new-file-panel').show();
   }
 };
 
