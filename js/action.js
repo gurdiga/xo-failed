@@ -263,6 +263,8 @@ $.makeExtensible = {
   on: {
     button: {
       click: function() {
+        if ($(this).val() == '') return;
+
         var newField = $('.field.template[title="' + this.value + '"]').clone(),
             fieldList = $(this).closest('fieldset').find('ul');
 
