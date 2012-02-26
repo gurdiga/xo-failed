@@ -1,7 +1,6 @@
 TODO:
 -----
 
-* extend button
 * static/with options/with suggestions
 
 
