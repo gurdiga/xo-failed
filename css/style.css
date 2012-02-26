@@ -41,13 +41,27 @@ textarea {
   font-size: inherit;
 }
 
+#index label,
+#index select,
+#index input,
 button#new-file {
-  margin-bottom: 2em;
   font-size: 1.2em;
   font-weight: bold;
 }
 
-.panel {
+#new-file {
+  float: right;
+}
+
+#index select {
+  font-weight: normal;
+}
+
+h1 {
+  border-bottom: 1px solid #ddd;
+}
+
+.pages {
   display: none;
   position: absolute;
   top: 0;
@@ -57,14 +71,17 @@ button#new-file {
   width: 100%;
 }
 
-.panel>.content {
-  margin: 5px 10px;
+.pages>.content {
+  width: 1000px;
+  margin: 5px auto;
 }
 
 fieldset {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-width: 1px 0 0 1px;
   padding: 5px 15px;
+  float: left;
+  margin-right: 40px;
 }
 
 fieldset.collapsed {
@@ -102,10 +119,6 @@ fieldset.typed {
   border-left-width: 5px;
 }
 
-fieldset.typed legend {
-  font-weight: bold;
-}
-
 fieldset.typed label,
 fieldset.typed .label {
   display: inline-block;
@@ -117,15 +130,23 @@ fieldset.typed label {
   padding: .4em 11px 0 3px;
 }
 
+fieldset.typed legend label {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: left;
+  padding-right: 0;
+  width: auto;
+}
+
 ul {
   padding: 0;
   list-style-type: none;
 }
 
 li {
-  margin: .3em 0 0 0;
+  margin: .2em 0 0 0;
 }
 
 .extend {
-  font-size: small;
+  margin-left: 2em;
 }

@@ -10,19 +10,24 @@
   </head>
 
   <body>
-    <h1>Consola executorului</h1>
+    <div id="index" class="pages">
+      <div class="content">
+        <h1>Consola executorului</h1>
 
-    <button id="new-file" class="action" type="button">Crează dosar nou</button><br/>
+        <button id="new-file" class="action" type="button">Crează dosar nou</button>
 
-    <select id="search-options" data-for="query">
-      <option>Caută dosar</option>
-      <option>Caută persoană fizică</option>
-      <option>Caută persoană juridică</option>
-    </select><br/>
+        <label for="search-options">Caută</label>
+        <select id="search-options" data-for="query">
+          <option>dosar</option>
+          <option>persoană fizică</option>
+          <option>persoană juridică</option>
+        </select>
+        <input id="query"/>
 
-    <input id="query"/>
+      </div>
+    </div>
 
-    <div id="new-file-panel" class="panel">
+    <div id="new-file" class="pages">
       <div class="content">
         <h1>Dosar nou</h1>
 
@@ -30,8 +35,20 @@
           <legend>
             <label for="creditor">Creditor</label>
             <select id="creditor" name="creditor">
-              <option>persoană juridică</option>
+              <option selected>persoană juridică</option>
               <option>persoană fizică</option>
+            </select>
+          </legend>
+
+          <div class="content"></div>
+        </fieldset>
+
+        <fieldset data-template="person" class="typed">
+          <legend>
+            <label for="creditor">Debitor</label>
+            <select id="creditor" name="creditor">
+              <option>persoană juridică</option>
+              <option selected>persoană fizică</option>
             </select>
           </legend>
 
