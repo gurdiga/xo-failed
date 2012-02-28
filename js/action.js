@@ -249,7 +249,7 @@ $.fn.initTypedFieldsets = function() {
   return this.filter('fieldset.typed').on('click', 'legend select', function() {
     var select = $(this),
         fieldset = select.closest('fieldset'),
-        template = $('.' + fieldset.data('template') + '.template[title="' + select.val() + '"]');
+        template = $('.template.' + fieldset.data('template') + '.' + select.val());
 
     fieldset.find('>.content').html(template.html());
   }).find('legend select').click().end;

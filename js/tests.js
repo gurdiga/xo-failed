@@ -222,13 +222,13 @@ $(function() {
   describe('$.fn.initTypedFieldsets', function() {
     var fieldset = $('#initTypedFieldsets'),
         select = fieldset.find('legend select'),
-        template = $('.template.' + fieldset.data('template') + '[title="' + select.val() + '"]');
+        template = $('.template.' + fieldset.data('template') + '.' + select.val());
 
     fieldset.initTypedFieldsets();
     select.click();
 
     test('a copy of the associated template content is inserted into the fieldset',
-      fieldset.find('.content').html() == template.html());
+      fieldset.find('>.content').html() == template.html());
   });
 
 	// --------------------------------------------------
