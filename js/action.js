@@ -194,7 +194,7 @@ $.fn.autoSizeInputs = function(options) {
 
 $.autoSizeTextareas = {
   defaults: {
-    minHeight: '60px',
+    minHeight: 60, //px
     selector: 'textarea.autosize'
   },
 
@@ -220,10 +220,11 @@ $.fn.autoSizeTextareas = function(options) {
 
     var paddingTop = parseInt(clone.css('padding-top')),
         paddingBottom = parseInt(clone.css('padding-bottom')),
-        contentHeight = clone[0].scrollHeight;
+        contentHeight = clone[0].scrollHeight,
+        newHeight = contentHeight - paddingTop - paddingBottom;
 
     clone.remove();
-    textarea.height(contentHeight - paddingTop - paddingBottom);
+    textarea.height(Math.max(newHeight, options.minHeight));
   });
 };
 

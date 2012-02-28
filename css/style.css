@@ -22,6 +22,7 @@ textarea {
   vertical-align: top;
   font: inherit;
   height: 60px;
+  overflow: auto;
 }
 
 textarea,

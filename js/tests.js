@@ -176,7 +176,7 @@ $(function() {
   describe('$.fn.autoSizeTextareas', function() {
     var container = $('#autosize').autoSizeTextareas({
           selector: 'textarea',
-          minHeight: '2px'
+          minHeight: 2
         }),
         textarea = container.find('textarea'),
         oneLineHeight = textarea.val('line1').trigger('change').height(),
