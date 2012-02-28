@@ -311,7 +311,7 @@ $(function() {
 
     test('on enter focuses .label’s associated field',
       $.fn.focus.called &&
-      $.fn.focus.selector == '#' + label.data('for'));
+      $.fn.focus.context[0] == label.next('input')[0]);
   });
 });
 

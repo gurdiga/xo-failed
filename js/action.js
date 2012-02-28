@@ -334,7 +334,7 @@ $.initEditableLabels = {
       keypress: function(e) {
         var label = $(this);
 
-        if (e.which == 13) $('#' + label.data('for')).focus();
+        if (e.which == 13) label.next('input,textarea').focus();
       }
     }
   }
