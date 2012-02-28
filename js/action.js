@@ -265,12 +265,11 @@ $.makeExtensible = {
       click: function() {
         if ($(this).val() == '') return;
 
-        var newField = $('.field.template[title="' + this.value + '"]').clone(),
+        var newField = $('.field.template.' + this.value).clone(),
             fieldList = $(this).closest('fieldset').find('ul');
 
         newField
           .removeClass('field template')
-          .removeAttr('title')
           .appendTo(fieldList)
           .find('.label').focus();
 
@@ -334,7 +333,7 @@ $.initEditableLabels = {
       keypress: function(e) {
         var label = $(this);
 
-        if (e.which == 13) label.next('input,textarea').focus();
+        if (e.which == 13) label.next().focus();
       }
     }
   }
