@@ -10,6 +10,10 @@ input.label {
   padding-right: 10px;
 }
 
+input.label:hover {
+  border: 1px solid #ddd;
+}
+
 input.label.with-options {
   background: url('/images/expanded.png') no-repeat right center;
 }
@@ -26,6 +30,12 @@ input {
   border: 1px solid #ddd;
   padding: 3px;
   width: 250px;
+  color: black;
+}
+
+textarea {
+  max-width: 250px;
+  min-width: 250px;
 }
 
 input.label:focus,
@@ -38,7 +48,7 @@ label,
 input,
 select,
 textarea {
-  font-size: inherit;
+  font: inherit;
 }
 
 #index label,
@@ -76,31 +86,17 @@ h1 {
   margin: 5px auto;
 }
 
+.column {
+  float: left;
+  width: 50%;
+}
+
 fieldset {
   border: 1px solid #ddd;
-  border-width: 1px 0 0 1px;
-  padding: 5px 15px;
-  float: left;
+  border-width: 2px 0 0 5px;
+  padding: 0 0 0 10px;
   margin-right: 40px;
-}
-
-fieldset.collapsed {
-  border-left-width: 0;
-}
-
-fieldset.collapsed>.content {
-  display: none;
-}
-
-fieldset.collapsible>legend {
-  cursor: pointer;
-  color: #aaa;
-  padding-left: 17px;
-  background: url('/images/expanded.png') no-repeat 5px center;
-}
-
-fieldset.collapsed>legend {
-  background-image: url('/images/collapsed.png');
+  margin-bottom: 20px;
 }
 
 input.label.with.options {
@@ -113,17 +109,17 @@ input.label.with.options {
   display: none;
 }
 
-fieldset.typed {
-  display: inline-block;
-  padding-right: 0;
-  border-left-width: 5px;
-}
-
 fieldset.typed label,
 fieldset.typed .label {
   display: inline-block;
   width: 11em;
   text-align: right;
+}
+
+fieldset.typed label,
+fieldset.typed .extend,
+fieldset.typed .label {
+  color: #999;
 }
 
 fieldset.typed label {
@@ -136,6 +132,7 @@ fieldset.typed legend label {
   text-align: left;
   padding-right: 0;
   width: auto;
+  color: black;
 }
 
 ul {
@@ -148,5 +145,19 @@ li {
 }
 
 .extend {
-  margin-left: 2em;
+  background: transparent;
+  border-width: 0;
+  font-size: small;
+  outline-width: 0;
+  cursor: pointer;
+  color: #bbb !important;
+}
+
+.extend option {
+  color: #999;
+}
+
+input.sumă {
+  width: 4em;
+  text-align: right;
 }

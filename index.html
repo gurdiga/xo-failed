@@ -31,33 +31,107 @@
       <div class="content">
         <h1>Dosar nou</h1>
 
-        <fieldset data-template="person" class="typed">
+        <fieldset data-template="dosar" class="typed">
           <legend>
-            <label for="creditor">Creditor</label>
-            <select id="creditor" name="creditor">
-              <option selected>persoană juridică</option>
-              <option>persoană fizică</option>
+            <label for="tip">General: tip</label>
+            <select id="tip" name="tip">
+              <option selected>pecuniar</option>
+              <option>nonpecuniar</option>
             </select>
           </legend>
 
           <div class="content"></div>
         </fieldset>
 
-        <fieldset data-template="person" class="typed">
-          <legend>
-            <label for="creditor">Debitor</label>
-            <select id="creditor" name="creditor">
-              <option>persoană juridică</option>
-              <option selected>persoană fizică</option>
-            </select>
-          </legend>
+        <div class="left column">
+          <fieldset data-template="persoană" class="typed">
+            <legend>
+              <label for="creditor">Creditor persoană</label>
+              <select id="creditor" name="creditor">
+                <option selected>juridică</option>
+                <option>fizică</option>
+              </select>
+            </legend>
 
-          <div class="content"></div>
-        </fieldset>
+            <div class="content"></div>
+          </fieldset>
+        </div>
+
+        <div class="right column">
+          <fieldset data-template="persoană" class="typed">
+            <legend>
+              <label for="debitor">Debitor: persoană</label>
+              <select id="debitor" name="debitor">
+                <option>juridică</option>
+                <option selected>fizică</option>
+              </select>
+            </legend>
+
+            <div class="content"></div>
+          </fieldset>
+
+          <fieldset data-template="persoană" class="typed">
+            <legend>
+              <label for="debitor">Debitor: persoană</label>
+              <select id="debitor" name="debitor">
+                <option>juridică</option>
+                <option selected>fizică</option>
+              </select>
+            </legend>
+
+            <div class="content"></div>
+          </fieldset>
+        </div>
+
       </div>
     </div>
 
-    <div class="person template extensible" title="persoană juridică">
+    <div class="dosar pecuniar template extensible">
+      <ul>
+        <li>
+          <label for="suma-de-bază">Suma de bază</label>
+          <input id="suma-de-bază" name="suma-de-bază" class="sumă"/>
+          <select name="valuta">
+            <option>MDL</option>
+            <option>USD</option>
+            <option>EUR</option>
+          </select>
+        </li>
+
+        <li>
+          <label for="taxă-de-stat">Taxă de stat</label>
+          <input id="taxă-de-stat" name="taxă-de-stat" class="sumă"/>
+          <select name="valuta">
+            <option>MDL</option>
+            <option>USD</option>
+            <option>EUR</option>
+          </select>
+        </li>
+
+        <li>
+          <label for="penalitate">Penalitate</label>
+          <input id="penalitate" name="penalitate" class="sumă"/>
+          <select name="valuta">
+            <option>MDL</option>
+            <option>USD</option>
+            <option>EUR</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dosar nonpecuniar template extensible">
+      <ul>
+        <li>
+          <label for="obiectul">Obiectul</label>
+          <select id="obiectul" name="obiectul">
+            <option>evacuarea</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+
+    <div class="persoană juridică template extensible">
       <ul>
         <li>
           <label for="name">Denumire</label>
@@ -71,7 +145,7 @@
 
         <li>
           <label class="textarea" for="address">Sediu</label>
-          <textarea id="address" class="autosize" name="address"></textarea>
+          <textarea id="address" class="autosize" name="address" spellcheck="false"></textarea>
         </li>
 
         <li>
@@ -81,12 +155,12 @@
 
         <li>
           <label class="textarea" for="notes">Note</label>
-          <textarea class="autosize" id="notes" name="notes"></textarea>
+          <textarea class="autosize" id="notes" name="notes" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
 
-    <div class="person template extensible" title="persoană fizică">
+    <div class="persoană fizică template extensible">
       <ul>
         <li>
           <label for="last-name">Nume</label>
@@ -105,47 +179,53 @@
 
         <li>
           <label for="idnp">IDNP</label>
-          <input id="idnp" name="idnp"/><br/>
+          <input id="idnp" name="idnp"/>
         </li>
 
         <li>
           <label for="dob">Data naşterii</label>
-          <input id="dob" name="dob" class="date"/>
+          <input id="dob" name="dob"/>
         </li>
 
         <li>
-          <label for="official-address">Domiciuliu oficial</label>
-          <input id="oficial-address" name="oficial-address" class="date"/>
+          <label for="official-address">Domiciliu oficial</label>
+          <textarea id="oficial-address" name="oficial-address" spellcheck="false"></textarea>
         </li>
 
         <li>
           <label class="textarea" for="notes">Note</label>
-          <textarea id="notes" class="autosize" name="notes"></textarea>
+          <textarea id="notes" class="autosize" name="notes" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
 
     <ul class="template">
-      <li class="field template" title="Cîmp dată">
-        <input class="label" value="Data"/>
-        <input class="date"/>
-      </li>
-
-      <li class="field template" title="Cîmp text">
+      <li class="field template cîmp-text">
         <input class="label" value="Info"/>
         <input/>
       </li>
 
-      <li class="field template" title="Cîmp note">
+      <li class="field template sumă">
+        <input class="label" value="Sumă"/>
+        <input class="sumă"/>
+        <select name="valuta">
+          <option>MDL</option>
+          <option>USD</option>
+          <option>EUR</option>
+        </select>
+      </li>
+
+      <li class="field template cîmp-note">
         <input class="label textarea" value="Note"/>
-        <textarea class="autosize"></textarea>
+        <textarea class="autosize" spellcheck="false"></textarea>
       </li>
     </ul>
 
     <select class="extend template">
-      <option value="">Adaugă un cîmp</option>
-      <option>Cîmp text</option>
-      <option>Cîmp note</option>
+      <option value="" style="display: none">&#9632; Adaugă un cîmp</option>
+      <option value="cîmp-text">Cîmp text</option>
+      <option value="cîmp-note">Cîmp note</option>
+      <option value="sumă">Sumă</option>
     </select>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

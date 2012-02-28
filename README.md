@@ -1,6 +1,7 @@
 TODO:
 -----
 
+* nonpecuniar: Obiectul
 * static/with options/with suggestions
 
 
