@@ -262,27 +262,25 @@ $.makeExtensible = {
   fieldTemplates: 'select.extend.template',
 
   on: {
-    button: {
-      click: function() {
-        if ($(this).val() == '') return;
+    select: function() {
+      if ($(this).val() == '') return;
 
-        var newField = $('.field.template.' + this.value).clone(),
-            fieldList = $(this).closest('fieldset').find('ul');
+      var newField = $('.field.template.' + this.value).clone(),
+          fieldList = $(this).closest('fieldset').find('ul');
 
-        newField
-          .removeClass('field template')
-          .appendTo(fieldList)
-          .find('.label').focus();
+      newField
+        .removeClass('field template')
+        .appendTo(fieldList)
+        .find('.label').focus();
 
-        var label = newField.find('input.label'),
-            input = label.next(),
-            id = $.makeExtensible.createId(label, fieldList.closest('fieldset'));
+      var label = newField.find('input.label'),
+          input = label.next(),
+          id = $.makeExtensible.createId(label, fieldList.closest('fieldset'));
 
-        label.attr('data-for', id);
-        input.attr('id', id);
+      label.attr('data-for', id);
+      input.attr('id', id);
 
-        $(this).val('');
-      }
+      $(this).val('');
     },
 
     'input.label': {
@@ -315,7 +313,7 @@ $.makeExtensible = {
 };
 
 $.fn.makeExtensible = function() {
-  $('fieldset').on('click', 'select.extend', $.makeExtensible.on.button.click);
+  $('fieldset').on('click', 'select.extend', $.makeExtensible.on.select);
   $('fieldset').on('change', 'input.label', $.makeExtensible.on['input.label'].change);
 
   return this.append(

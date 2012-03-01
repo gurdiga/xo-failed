@@ -242,7 +242,7 @@ $(function() {
     test('adds a button to add a new field from a list',
       button.length == 1);
     test('delegates $.makeExtensible.on.button.click on the button to the fieldset',
-      $('fieldset').hasHandler('click', $.makeExtensible.on.button.click));
+      $('fieldset').hasHandler('click', $.makeExtensible.on.select));
   });
 
   describe('$.makeExtensible.createId(label)', function() {
