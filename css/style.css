@@ -29,6 +29,7 @@ textarea,
 input {
   outline-width: 0;
   border: 1px solid #ddd;
+  border-top-color: #c0c0c0;
   padding: 3px;
   width: 250px;
   color: black;
@@ -93,9 +94,8 @@ h1 {
 }
 
 fieldset {
-  border: 1px solid #ddd;
-  border-width: 2px 0 0 5px;
-  padding: 0 0 0 10px;
+  border: 1px solid #dedede;
+  padding: 0 0 7px 10px;
   margin-right: 40px;
   margin-bottom: 20px;
 }
@@ -120,7 +120,7 @@ fieldset.typed .label {
 fieldset.typed label,
 fieldset.typed .extend,
 fieldset.typed .label {
-  color: #999;
+  color: #555;
 }
 
 fieldset.typed label {
@@ -133,7 +133,7 @@ fieldset.typed legend label {
   text-align: left;
   padding-right: 0;
   width: auto;
-  color: black;
+  color: #333;
 }
 
 ul {
@@ -151,11 +151,6 @@ li {
   font-size: small;
   outline-width: 0;
   cursor: pointer;
-  color: #bbb !important;
-}
-
-.extend option {
-  color: #999;
 }
 
 input.sumă {
