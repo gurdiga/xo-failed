@@ -35,8 +35,8 @@
           <legend>
             <label for="tip">General: tip</label>
             <select id="tip" name="tip">
-              <option selected>pecuniar</option>
-              <option>nonpecuniar</option>
+              <option>pecuniar</option>
+              <option selected>nonpecuniar</option>
             </select>
           </legend>
 
@@ -126,6 +126,15 @@
           <label for="obiectul">Obiectul</label>
           <select id="obiectul" name="obiectul">
             <option>evacuarea</option>
+            <option>instalarea, schimbul forţat</option>
+            <option>stabilirea domiciliului copilului</option>
+            <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
+            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
+            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
+            <option>confiscarea bunurilor</option>
+            <option>nimicirea unor bunuri</option>
+            <option>restabilirea la locul de muncă</option>
+            <option>aplicarea măsurilor de asigurare a acţiunii</option>
           </select>
         </li>
       </ul>
@@ -134,8 +143,8 @@
     <div class="persoană juridică template extensible">
       <ul>
         <li>
-          <label for="name">Denumire</label>
-          <input id="name" name="name"/>
+          <label for="denumire">Denumire</label>
+          <input id="denumire" denumire="denumire"/>
         </li>
 
         <li>
@@ -144,18 +153,18 @@
         </li>
 
         <li>
-          <label class="textarea" for="address">Sediu</label>
-          <textarea id="address" class="autosize" name="address" spellcheck="false"></textarea>
+          <label class="textarea" for="sediu">Sediu</label>
+          <textarea id="sediu" class="autosize" name="sediu" spellcheck="false"></textarea>
         </li>
 
         <li>
-          <label for="contact">Persoană de contact</label>
-          <input id="contact" name="contact"/>
+          <label for="persoană-de-contact">Persoană de contact</label>
+          <input id="persoană-de-contact" name="persoană-de-contact"/>
         </li>
 
         <li>
-          <label class="textarea" for="notes">Note</label>
-          <textarea class="autosize" id="notes" name="notes" spellcheck="false"></textarea>
+          <label class="textarea" for="note">Note</label>
+          <textarea class="autosize" id="note" name="note" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -163,18 +172,18 @@
     <div class="persoană fizică template extensible">
       <ul>
         <li>
-          <label for="last-name">Nume</label>
-          <input id="last-name" name="last-name"/>
+          <label for="nume">Nume</label>
+          <input id="nume" name="nume"/>
         </li>
 
         <li>
-          <label for="first-name">Prenume</label>
-          <input id="first-name" name="first-name"/>
+          <label for="prenume">Prenume</label>
+          <input id="prenume" name="prenume"/>
         </li>
 
         <li>
-          <label for="patronymic">Patronimic</label>
-          <input id="patronymic" name="patronymic"/>
+          <label for="patronimic">Patronimic</label>
+          <input id="patronimic" name="patronimic"/>
         </li>
 
         <li>
@@ -183,18 +192,18 @@
         </li>
 
         <li>
-          <label for="dob">Data naşterii</label>
-          <input id="dob" name="dob"/>
+          <label for="data-naşterii">Data naşterii</label>
+          <input id="data-naşterii" name="data-naşterii"/>
         </li>
 
         <li>
-          <label for="official-address">Domiciliu oficial</label>
-          <textarea id="oficial-address" name="oficial-address" class="autosize" spellcheck="false"></textarea>
+          <label for="domiciliu">Domiciliu</label>
+          <textarea id="domiciliu" name="domiciliu" class="autosize" spellcheck="false"></textarea>
         </li>
 
         <li>
-          <label class="textarea" for="notes">Note</label>
-          <textarea id="notes" class="autosize" name="notes" spellcheck="false"></textarea>
+          <label class="textarea" for="note">Note</label>
+          <textarea id="note" class="autosize" name="note" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
