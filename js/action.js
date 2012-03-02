@@ -1,17 +1,15 @@
 var Action = {
   init: function() {
+    ExtendButtons.init();
+
     $('input.label[data-options]').initOptionsUI();
-    $('.template.extensible').makeExtensible();
     $('fieldset')
-      .initEditableLabels()
       .autoSizeInputs()
       .autoSizeTextareas()
       .filter('.typed')
         .initTypedFieldsets();
-    $('[data-for]').on('click', function() {
-      $('#' + $(this).data('for')).focus();
-    });
 
+    EditableLabels.init();
     DebitorFieldset.init();
     HashController.init();
   }
@@ -294,8 +292,20 @@ $.fn.initTypedFieldsets = function() {
 
 // --------------------------------------------------
 
-$.makeExtensible = {
-  fieldTemplates: 'select.extend.template',
+var ExtendButtons = {
+  init: function() {
+    $('div#dosar-nou').on('click', 'fieldset select.extend', ExtendButtons.on.select);
+
+    ExtendButtons.add();
+  },
+
+  add: function() {
+    var button = $('select.extend.template');
+
+    $('.extensible.template').append(
+      button.clone().removeClass('template')
+    );
+  },
 
   on: {
     select: function() {
@@ -310,72 +320,23 @@ $.makeExtensible = {
         .find('.label').focus();
 
       var label = newField.find('input.label'),
-          input = label.next(),
-          id = $.makeExtensible.createId(label, fieldList.closest('fieldset'));
-
-      label.attr('data-for', id);
-      input.attr('id', id);
+          input = label.next();
 
       $(this).val('');
     },
-
-    'input.label': {
-      change: function() {
-        var label = $(this),
-            input = label.next(),
-            fieldset = label.closest('fieldset'),
-            newId = $.makeExtensible.createId(label, fieldset);
-
-        label.attr('data-for', newId);
-        input.attr('id', newId);
-      }
-    }
-  },
-
-  createId: function(label, fieldset) {
-    var id = label.val()
-        .replace(/[^a-zăîşţâа-я0-9]/gi, '-')
-        .replace(/-+/g, '-')
-        .toLowerCase();
-
-    var alreadyExisting = fieldset.find('[id^=' + id + ']').not(label).length;
-
-    if (alreadyExisting > 0) {
-      id += '-' + alreadyExisting;
-    }
-
-    return id;
   }
-};
-
-$.fn.makeExtensible = function() {
-  $('div#dosar-nou').on('click', 'fieldset select.extend', $.makeExtensible.on.select);
-  $('div#dosar-nou').on('change', 'fieldset input.label', $.makeExtensible.on['input.label'].change);
-
-  return this.append(
-    $($.makeExtensible.fieldTemplates).clone()
-      .removeAttr('id')
-      .removeClass('template')
-      .addClass('extend')
-  );
 };
 
 // --------------------------------------------------
 
-$.initEditableLabels = {
-  'input.label': {
-    on: {
-      keypress: function(e) {
-        var label = $(this);
+var EditableLabels = {
+  init: function() {
+    $('div#dosar-nou').on('keypress', 'input.label', this.keypress)
+  },
 
-        if (e.which == 13) label.next().focus();
-      }
-    }
+  keypress: function(e) {
+    var label = $(this);
+
+    if (e.which == 13) label.next().focus();
   }
-};
-
-$.fn.initEditableLabels = function() {
-  $('div#dosar-nou').on('keypress', 'input.label', $.initEditableLabels['input.label'].on.keypress)
-
-  return this;
 };

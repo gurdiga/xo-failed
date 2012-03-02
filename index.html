@@ -15,8 +15,8 @@
 
         <button id="dosar-nou" class="action" type="button">Crează dosar nou</button>
 
-        <label for="search-options">Caută</label>
-        <select id="search-options" data-for="query">
+        <label>Caută</label>
+        <select>
           <option>dosar</option>
           <option>persoană fizică</option>
           <option>persoană juridică</option>
@@ -32,8 +32,8 @@
 
         <fieldset data-template="dosar" class="typed">
           <legend>
-            <label for="tip">General: tip</label>
-            <select id="tip" name="tip">
+            <label>General: tip</label>
+            <select>
               <option>pecuniar</option>
               <option selected>nonpecuniar</option>
             </select>
@@ -45,8 +45,8 @@
         <div class="column">
           <fieldset data-template="persoană" class="typed">
             <legend>
-              <label for="creditor">Creditor: persoană</label>
-              <select id="creditor" name="creditor">
+              <label>Creditor: persoană</label>
+              <select>
                 <option selected>juridică</option>
                 <option>fizică</option>
               </select>
@@ -59,8 +59,8 @@
         <div class="column">
           <fieldset data-template="persoană" class="typed">
             <legend>
-              <label for="debitor">Debitor: persoană</label>
-              <select id="debitor" name="debitor">
+              <label>Debitor: persoană</label>
+              <select>
                 <option>juridică</option>
                 <option selected>fizică</option>
               </select>
@@ -72,7 +72,6 @@
           </fieldset>
 
           <button type="button" id="adaugă-debitor">Adaugă debitor</button>
-
         </div>
 
       </div>
@@ -91,9 +90,9 @@
         </li>
 
         <li>
-          <label for="taxă-de-stat">Taxă de stat</label>
-          <input id="taxă-de-stat" name="taxă-de-stat" class="sumă"/>
-          <select name="valuta">
+          <label>Taxă de stat</label>
+          <input class="sumă">
+          <select>
             <option>MDL</option>
             <option>USD</option>
             <option>EUR</option>
@@ -101,9 +100,9 @@
         </li>
 
         <li>
-          <label for="penalitate">Penalitate</label>
-          <input id="penalitate" name="penalitate" class="sumă"/>
-          <select name="valuta">
+          <label>Penalitate</label>
+          <input class="sumă"/>
+          <select>
             <option>MDL</option>
             <option>USD</option>
             <option>EUR</option>
@@ -115,8 +114,8 @@
     <div class="dosar nonpecuniar template extensible">
       <ul>
         <li>
-          <label for="obiectul">Obiectul</label>
-          <select id="obiectul" name="obiectul">
+          <label>Obiectul</label>
+          <select>
             <option>evacuarea</option>
             <option>instalarea, schimbul forţat</option>
             <option>stabilirea domiciliului copilului</option>
@@ -135,28 +134,28 @@
     <div class="persoană juridică template extensible">
       <ul>
         <li>
-          <label for="denumire">Denumire</label>
-          <input id="denumire" denumire="denumire"/>
+          <label>Denumire</label>
+          <input/>
         </li>
 
         <li>
-          <label for="idno">IDNO</label>
-          <input id="idno" name="idno"/>
+          <label>IDNO</label>
+          <input/>
         </li>
 
         <li>
-          <label class="textarea" for="sediu">Sediu</label>
-          <textarea id="sediu" class="autosize" name="sediu" spellcheck="false"></textarea>
+          <label class="textarea">Sediu</label>
+          <textarea class="autosize" spellcheck="false"></textarea>
         </li>
 
         <li>
-          <label for="persoană-de-contact">Persoană de contact</label>
-          <input id="persoană-de-contact" name="persoană-de-contact"/>
+          <label>Persoană de contact</label>
+          <input/>
         </li>
 
         <li>
-          <label class="textarea" for="note">Note</label>
-          <textarea class="autosize" id="note" name="note" spellcheck="false"></textarea>
+          <label class="textarea">Note</label>
+          <textarea class="autosize" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -164,38 +163,38 @@
     <div class="persoană fizică template extensible">
       <ul>
         <li>
-          <label for="nume">Nume</label>
-          <input id="nume" name="nume"/>
+          <label>Nume</label>
+          <input/>
         </li>
 
         <li>
-          <label for="prenume">Prenume</label>
-          <input id="prenume" name="prenume"/>
+          <label>Prenume</label>
+          <input/>
         </li>
 
         <li>
-          <label for="patronimic">Patronimic</label>
-          <input id="patronimic" name="patronimic"/>
+          <label>Patronimic</label>
+          <input/>
         </li>
 
         <li>
-          <label for="idnp">IDNP</label>
-          <input id="idnp" name="idnp"/>
+          <label>IDNP</label>
+          <input/>
         </li>
 
         <li>
-          <label for="data-naşterii">Data naşterii</label>
-          <input id="data-naşterii" name="data-naşterii"/>
+          <label>Data naşterii</label>
+          <input/>
         </li>
 
         <li>
-          <label for="domiciliu">Domiciliu</label>
-          <textarea id="domiciliu" name="domiciliu" class="autosize" spellcheck="false"></textarea>
+          <label>Domiciliu</label>
+          <textarea class="autosize" spellcheck="false"></textarea>
         </li>
 
         <li>
-          <label class="textarea" for="note">Note</label>
-          <textarea id="note" class="autosize" name="note" spellcheck="false"></textarea>
+          <label class="textarea">Note</label>
+          <textarea class="autosize" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -209,7 +208,7 @@
       <li class="field template sumă">
         <input class="label" value="Sumă"/>
         <input class="sumă"/>
-        <select name="valuta">
+        <select>
           <option>MDL</option>
           <option>USD</option>
           <option>EUR</option>
