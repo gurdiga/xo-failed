@@ -145,7 +145,7 @@ $.fn.initOptionsUI = function() {
         });
       }
     });
-  });
+  }).end();
 };
 
 // --------------------------------------------------
@@ -253,7 +253,9 @@ $.fn.initTypedFieldsets = function() {
         template = $('.template.' + fieldset.data('template') + '.' + select.val());
 
     fieldset.find('>.content').html(template.html());
-  }).find('legend select').click().end;
+  })
+  .find('legend select').click().end()
+  .end();
 };
 
 // --------------------------------------------------
@@ -340,5 +342,6 @@ $.initEditableLabels = {
 
 $.fn.initEditableLabels = function() {
   return this.filter('fieldset')
-    .on('keypress', 'input.label', $.initEditableLabels['input.label'].on.keypress);
+    .on('keypress', 'input.label', $.initEditableLabels['input.label'].on.keypress)
+    .end();
 };
