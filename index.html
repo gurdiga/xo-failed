@@ -13,7 +13,7 @@
       <div class="content">
         <h1>Consola executorului</h1>
 
-        <button id="new-file" class="action" type="button">Crează dosar nou</button>
+        <button id="dosar-nou" class="action" type="button">Crează dosar nou</button>
 
         <label for="search-options">Caută</label>
         <select id="search-options" data-for="query">
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div id="new-file" class="pages">
+    <div id="dosar-nou" class="pages">
       <div class="content">
         <h1>Dosar nou</h1>
 
@@ -42,7 +42,7 @@
           <div class="content"></div>
         </fieldset>
 
-        <div class="left column">
+        <div class="column">
           <fieldset data-template="persoană" class="typed">
             <legend>
               <label for="creditor">Creditor: persoană</label>
@@ -56,7 +56,7 @@
           </fieldset>
         </div>
 
-        <div class="right column">
+        <div class="column">
           <fieldset data-template="persoană" class="typed">
             <legend>
               <label for="debitor">Debitor: persoană</label>
@@ -64,22 +64,15 @@
                 <option>juridică</option>
                 <option selected>fizică</option>
               </select>
+
+              <button class="şterge-debitor">şterge debitor</button>
             </legend>
 
             <div class="content"></div>
           </fieldset>
 
-          <fieldset data-template="persoană" class="typed">
-            <legend>
-              <label for="debitor">Debitor: persoană</label>
-              <select id="debitor" name="debitor">
-                <option>juridică</option>
-                <option selected>fizică</option>
-              </select>
-            </legend>
+          <button type="button" id="adaugă-debitor">Adaugă debitor</button>
 
-            <div class="content"></div>
-          </fieldset>
         </div>
 
       </div>

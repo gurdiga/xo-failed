@@ -57,12 +57,12 @@ textarea {
 #index label,
 #index select,
 #index input,
-button#new-file {
+button#dosar-nou {
   font-size: 1.2em;
   font-weight: bold;
 }
 
-#new-file {
+#dosar-nou {
   float: right;
 }
 
@@ -82,6 +82,8 @@ h1 {
   background: white;
   height: 100%;
   width: 100%;
+  overflow: auto;
+  padding-bottom: 5em;
 }
 
 .pages>.content {
@@ -158,7 +160,16 @@ input.sumă {
   text-align: right;
 }
 
-#new-file h1,
-#new-file fieldset {
+#dosar-nou h1,
+#dosar-nou fieldset {
   margin-right: 40px;
+}
+
+button.şterge-debitor {
+  font-size: small;
+  display: none;
+}
+
+fieldset.dispensabil button.şterge-debitor {
+  display: inline;
 }

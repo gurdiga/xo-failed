@@ -12,7 +12,41 @@ var Action = {
       $('#' + $(this).data('for')).focus();
     });
 
+    DebitorFieldset.init();
     HashController.init();
+  }
+};
+
+// --------------------------------------------------
+
+var DebitorFieldset = {
+  init: function() {
+    this.initAdd();
+    this.initDelete();
+  },
+
+  initAdd: function() {
+    $('#adaugă-debitor').on('click', function() {
+      var fieldset = $(this).prev();
+
+      fieldset.clone()
+        .find('li:has(.label)').remove().end()
+        .find('input,textarea').val('').end()
+        .insertAfter(fieldset);
+
+      $(this).parent().find('fieldset').addClass('dispensabil');
+    });
+  },
+
+  initDelete: function() {
+    $('div#dosar-nou').on('click', 'button.şterge-debitor', function() {
+      var button = $(this),
+          acestDebitor = button.closest('fieldset');
+          ceilalţiDebitori = acestDebitor.siblings('fieldset');
+
+      acestDebitor.remove();
+      ceilalţiDebitori.toggleClass('dispensabil', ceilalţiDebitori.length > 1);
+    });
   }
 };
 
@@ -315,8 +349,8 @@ $.makeExtensible = {
 };
 
 $.fn.makeExtensible = function() {
-  $('fieldset').on('click', 'select.extend', $.makeExtensible.on.select);
-  $('fieldset').on('change', 'input.label', $.makeExtensible.on['input.label'].change);
+  $('div#dosar-nou').on('click', 'fieldset select.extend', $.makeExtensible.on.select);
+  $('div#dosar-nou').on('change', 'fieldset input.label', $.makeExtensible.on['input.label'].change);
 
   return this.append(
     $($.makeExtensible.fieldTemplates).clone()
@@ -341,7 +375,7 @@ $.initEditableLabels = {
 };
 
 $.fn.initEditableLabels = function() {
-  return this.filter('fieldset')
-    .on('keypress', 'input.label', $.initEditableLabels['input.label'].on.keypress)
-    .end();
+  $('div#dosar-nou').on('keypress', 'input.label', $.initEditableLabels['input.label'].on.keypress)
+
+  return this;
 };
