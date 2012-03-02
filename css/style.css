@@ -33,6 +33,7 @@ input {
   padding: 3px;
   width: 250px;
   color: black;
+  margin: 1px 0;
 }
 
 textarea {
@@ -96,7 +97,6 @@ h1 {
 fieldset {
   border: 1px solid #dedede;
   padding: 0 0 7px 10px;
-  margin-right: 40px;
   margin-bottom: 20px;
 }
 
@@ -156,4 +156,9 @@ li {
 input.sumă {
   width: 4em;
   text-align: right;
+}
+
+#new-file h1,
+#new-file fieldset {
+  margin-right: 40px;
 }
