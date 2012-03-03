@@ -9,8 +9,8 @@
   </head>
 
   <body>
-    <div id="index" class="pages">
-      <div class="content">
+    <div id="index" class="pagină">
+      <div class="conţinut">
         <h1>Consola executorului</h1>
 
         <button id="procedură-nouă" class="mare deschide pagină" type="button">Procedură nouă</button>
@@ -26,11 +26,11 @@
       </div>
     </div>
 
-    <div id="procedură-nouă" class="pages">
-      <div class="content">
+    <div id="procedură-nouă" class="pagină">
+      <div class="conţinut">
         <button type="button" id="salvează-procedură" class="mare">Salvează</button>
 
-        <h1>Procedură nouă: № 032-3330</h1>
+        <h1>Procedură nouă: № 032-0071</h1>
 
         <fieldset data-template="procedură" class="typed">
           <legend>
@@ -41,7 +41,7 @@
             </select>
           </legend>
 
-          <div class="content"></div>
+          <div class="conţinut"></div>
         </fieldset>
 
         <div class="column">
@@ -54,7 +54,7 @@
               </select>
             </legend>
 
-            <div class="content"></div>
+            <div class="conţinut"></div>
           </fieldset>
         </div>
 
@@ -70,7 +70,7 @@
               <button class="şterge-debitor">şterge debitor</button>
             </legend>
 
-            <div class="content"></div>
+            <div class="conţinut"></div>
           </fieldset>
 
           <button type="button" id="adaugă-debitor">Adaugă debitor</button>
@@ -110,6 +110,11 @@
             <option>EUR</option>
           </select>
         </li>
+
+        <li>
+          <label class="textarea">Note</label>
+          <textarea class="autosize" spellcheck="false"></textarea>
+        </li>
       </ul>
     </div>
 
@@ -129,6 +134,11 @@
             <option>restabilirea la locul de muncă</option>
             <option>aplicarea măsurilor de asigurare a acţiunii</option>
           </select>
+        </li>
+
+        <li>
+          <label class="textarea">Note</label>
+          <textarea class="autosize" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -157,7 +167,14 @@
 
         <li>
           <label class="textarea">Note</label>
-          <textarea class="autosize" spellcheck="false"></textarea>
+          <textarea class="autosize" spellcheck="false">
+Telefoane:
+- fix: 0123456
+- mobil: 0690123456
+
+Valori imobile:
+- depozit
+- garaj</textarea>
         </li>
       </ul>
     </div>

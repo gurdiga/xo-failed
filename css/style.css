@@ -50,6 +50,7 @@ input:focus {
 label,
 input,
 select,
+button,
 textarea {
   font: inherit;
 }
@@ -74,7 +75,7 @@ h1 {
   border-bottom: 1px solid #ddd;
 }
 
-.pages {
+div.pagină {
   display: none;
   position: absolute;
   top: 0;
@@ -85,7 +86,7 @@ h1 {
   overflow: auto;
 }
 
-.pages>.content {
+div.pagină>.conţinut {
   width: 1000px;
   margin: 5px auto;
 }

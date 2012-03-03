@@ -43,7 +43,7 @@ $(function() {
       oneLineHeight < twoLineHeight);
 
     oneLineHeight = textarea.val('line1').trigger('change').height();
-    test('then shrinks back to fit content',
+    test('then shrinks back to fit conţinut',
       oneLineHeight < twoLineHeight);
   });
 
@@ -84,8 +84,8 @@ $(function() {
     fieldset.initTypedFieldsets();
     select.click();
 
-    test('a copy of the associated template content is inserted into the fieldset',
-      fieldset.find('>.content').html() == template.html());
+    test('a copy of the associated template conţinut is inserted into the fieldset',
+      fieldset.find('>.conţinut').html() == template.html());
   });
 });
 

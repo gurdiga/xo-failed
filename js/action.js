@@ -2,8 +2,7 @@ var Action = {
   init: function() {
     $('fieldset')
       .autoSizeTextareas()
-      .filter('.typed')
-        .initTypedFieldsets();
+      .initTypedFieldsets();
 
     DebitorFieldset.init();
     HashController.init();
@@ -54,6 +53,7 @@ var HashController = {
 
       $('div.pagină:not(' + hash + ')').hide();
       $('div.pagină' + hash).show();
+      $('textarea').trigger('change');
     }).trigger('hashchange');
 
     $('.deschide.pagină').on('click', function() {
