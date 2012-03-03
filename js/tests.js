@@ -161,18 +161,6 @@ $(function() {
 
 	// --------------------------------------------------
 
-  describe('$.fn.autoSizeInputs', function() {
-    var container = $('#autosize').autoSizeInputs({selector: 'input'}),
-        input = container.find('input');
-
-    test('"aa" > "a"',
-      input.val('aa').trigger('change').width() >
-      input.val('a').trigger('change').width());
-    test('"ww" < "www"',
-      input.val('ww').trigger('change').width() <
-      input.val('www').trigger('change').width());
-  });
-
   describe('$.fn.autoSizeTextareas', function() {
     var container = $('#autosize').autoSizeTextareas({
           selector: 'textarea',

@@ -2,7 +2,6 @@ var Action = {
   init: function() {
     $('input.label[data-options]').initOptionsUI();
     $('fieldset')
-      .autoSizeInputs()
       .autoSizeTextareas()
       .filter('.typed')
         .initTypedFieldsets();
@@ -175,48 +174,6 @@ $.fn.initOptionsUI = function() {
       }
     });
   }).end();
-};
-
-// --------------------------------------------------
-
-$.autoSizeInputs = {
-  defaults: {
-    padding: 5,
-    minWidth: '50px',
-    selector: 'input:text.autosize'
-  },
-
-  events: 'keydown keyup update paste change'
-};
-
-$.fn.autoSizeInputs = function(options) {
-  options = $.extend($.autoSizeInputs.defaults, options);
-
-  return this.on($.autoSizeInputs.events, options.selector, function() {
-    var input = $(this),
-        temp = $('#autosize-temp');
-
-    if (temp.length == 0) {
-      temp = $('<span id="autosize-temp"/>')
-        .css({
-          'padding-left': options.padding,
-          'position': 'absolute',
-          'visibility': 'hidden'
-        })
-        .appendTo('body');
-    }
-
-    temp
-      .text(input.val())
-      .setCssFrom(input, [
-        'font-size',
-        'font-weight',
-        'font-family',
-        'letter-spacing'
-      ]);
-
-    input.width(temp.outerWidth());
-  });
 };
 
 // --------------------------------------------------
