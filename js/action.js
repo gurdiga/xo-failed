@@ -325,17 +325,3 @@ var ExtendButtons = {
     },
   }
 };
-
-// --------------------------------------------------
-
-var EditableLabels = {
-  init: function() {
-    $('div#procedură-nouă').on('keypress', 'input.label', this.keypress)
-  },
-
-  keypress: function(e) {
-    var label = $(this);
-
-    if (e.which == 13) label.next().focus();
-  }
-};
