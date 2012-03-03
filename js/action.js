@@ -1,7 +1,5 @@
 var Action = {
   init: function() {
-    ExtendButtons.init();
-
     $('input.label[data-options]').initOptionsUI();
     $('fieldset')
       .autoSizeInputs()
@@ -287,41 +285,4 @@ $.fn.initTypedFieldsets = function() {
   })
   .find('legend select').click().end()
   .end();
-};
-
-// --------------------------------------------------
-
-var ExtendButtons = {
-  init: function() {
-    $('div#procedură-nouă').on('click', 'fieldset select.extend', ExtendButtons.on.select);
-
-    ExtendButtons.add();
-  },
-
-  add: function() {
-    var button = $('select.extend.template');
-
-    $('.extensible.template').append(
-      button.clone().removeClass('template')
-    );
-  },
-
-  on: {
-    select: function() {
-      if ($(this).val() == '') return;
-
-      var newField = $('.field.template.' + this.value).clone(),
-          fieldList = $(this).closest('fieldset').find('ul');
-
-      newField
-        .removeClass('field template')
-        .appendTo(fieldList)
-        .find('.label').focus();
-
-      var label = newField.find('input.label'),
-          input = label.next();
-
-      $(this).val('');
-    },
-  }
 };

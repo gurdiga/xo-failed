@@ -119,7 +119,6 @@ fieldset.typed .label {
 }
 
 fieldset.typed label,
-fieldset.typed .extend,
 fieldset.typed .label {
   color: #555;
 }
@@ -144,14 +143,6 @@ ul {
 
 li {
   margin: .2em 0 0 0;
-}
-
-.extend {
-  background: transparent;
-  border-width: 0;
-  font-size: small;
-  outline-width: 0;
-  cursor: pointer;
 }
 
 input.sumă {
