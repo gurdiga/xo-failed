@@ -1,6 +1,7 @@
 TODO:
 -----
 
+* how to encode form data?
 * static/with options/with suggestions
 * fix tests for IE8?
 

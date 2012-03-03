@@ -57,12 +57,12 @@ textarea {
 #index label,
 #index select,
 #index input,
-button#dosar-nou {
+button#procedură-nouă {
   font-size: 1.2em;
   font-weight: bold;
 }
 
-#dosar-nou {
+#procedură-nouă {
   float: right;
 }
 
@@ -156,11 +156,10 @@ li {
 
 input.sumă {
   width: 4em;
-  text-align: right;
 }
 
-#dosar-nou h1,
-#dosar-nou fieldset {
+#procedură-nouă h1,
+#procedură-nouă fieldset {
   margin-right: 40px;
 }
 

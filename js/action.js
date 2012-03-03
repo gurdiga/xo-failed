@@ -9,7 +9,6 @@ var Action = {
       .filter('.typed')
         .initTypedFieldsets();
 
-    EditableLabels.init();
     DebitorFieldset.init();
     HashController.init();
   }
@@ -37,7 +36,7 @@ var DebitorFieldset = {
   },
 
   initDelete: function() {
-    $('div#dosar-nou').on('click', 'button.şterge-debitor', function() {
+    $('div#procedură-nouă').on('click', 'button.şterge-debitor', function() {
       var button = $(this),
           acestDebitor = button.closest('fieldset');
           ceilalţiDebitori = acestDebitor.siblings('fieldset');
@@ -294,7 +293,7 @@ $.fn.initTypedFieldsets = function() {
 
 var ExtendButtons = {
   init: function() {
-    $('div#dosar-nou').on('click', 'fieldset select.extend', ExtendButtons.on.select);
+    $('div#procedură-nouă').on('click', 'fieldset select.extend', ExtendButtons.on.select);
 
     ExtendButtons.add();
   },
@@ -331,7 +330,7 @@ var ExtendButtons = {
 
 var EditableLabels = {
   init: function() {
-    $('div#dosar-nou').on('keypress', 'input.label', this.keypress)
+    $('div#procedură-nouă').on('keypress', 'input.label', this.keypress)
   },
 
   keypress: function(e) {
