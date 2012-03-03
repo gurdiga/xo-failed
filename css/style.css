@@ -57,7 +57,7 @@ textarea {
 #index label,
 #index select,
 #index input,
-button#procedură-nouă {
+button.mare {
   font-size: 1.2em;
   font-weight: bold;
 }
@@ -150,7 +150,8 @@ input.sumă {
 }
 
 #procedură-nouă h1,
-#procedură-nouă fieldset {
+#procedură-nouă fieldset,
+#procedură-nouă button#salvează-procedură{
   margin-right: 40px;
 }
 
@@ -165,4 +166,8 @@ button.şterge-debitor {
 
 fieldset.dispensabil button.şterge-debitor {
   display: inline;
+}
+
+button#salvează-procedură {
+  float: right;
 }

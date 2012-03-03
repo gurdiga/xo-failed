@@ -57,7 +57,7 @@ var HashController = {
       $('.pages' + hash).show();
     }).trigger('hashchange');
 
-    $('.action').on('click', function() {
+    $('.deschide.pagină').on('click', function() {
       location.hash = this.id;
     });
   }
