@@ -101,7 +101,7 @@ $.fn.autoSizeTextareas = function(options) {
     var paddingTop = parseInt(clone.css('padding-top')),
         paddingBottom = parseInt(clone.css('padding-bottom')),
         conţinutHeight = clone[0].scrollHeight,
-        newHeight = conţinutHeight - paddingTop - paddingBottom;
+        newHeight = conţinutHeight + paddingTop + paddingBottom;
 
     clone.remove();
     textarea.height(Math.max(newHeight, options.minHeight));
