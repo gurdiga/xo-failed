@@ -19,7 +19,6 @@ input.label.with-options {
 }
 
 textarea {
-  vertical-align: top;
   font: inherit;
   height: 60px;
   overflow: auto;
@@ -30,10 +29,20 @@ input {
   outline-width: 0;
   border: 1px solid #ddd;
   border-top-color: #c0c0c0;
-  padding: 3px;
   width: 250px;
-  color: black;
+}
+
+textarea,
+input,
+fieldset ul select {
   margin: 1px 0;
+  vertical-align: top;
+  padding: 3px;
+  color: black;
+}
+
+fieldset ul select {
+  width: 258px;
 }
 
 textarea {
@@ -96,6 +105,10 @@ div.pagină>.conţinut {
   width: 50%;
 }
 
+.left.column {
+  clear: left;
+}
+
 fieldset {
   border: 1px solid #dedede;
   padding: 0 0 7px 10px;
@@ -112,23 +125,23 @@ input.label.with.options {
   display: none;
 }
 
-fieldset.typed label,
-fieldset.typed .label {
+fieldset label,
+fieldset .label {
   display: inline-block;
   width: 11em;
   text-align: right;
 }
 
-fieldset.typed label,
-fieldset.typed .label {
+fieldset label,
+fieldset .label {
   color: #555;
 }
 
-fieldset.typed label {
+fieldset label {
   padding: .4em 11px 0 3px;
 }
 
-fieldset.typed legend label {
+fieldset legend label {
   font-weight: bold;
   font-size: 1.2em;
   text-align: left;

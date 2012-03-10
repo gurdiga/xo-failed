@@ -32,19 +32,84 @@
 
         <h1>Procedură nouă: № 032-0071</h1>
 
-        <fieldset data-template="procedură" class="typed">
-          <legend>
-            <label>General: caracter</label>
-            <select>
-              <option>pecuniar</option>
-              <option selected>nonpecuniar</option>
-            </select>
-          </legend>
+        <fieldset>
+          <legend><label>Documentul executoriu</label></legend>
 
-          <div class="conţinut"></div>
+          <div class="conţinut">
+            <ul>
+              <li>
+                <label>Instanţa de judecată</label>
+                <select>
+                  <optgroup label="Prima verigă a sistemului judecătoresc">
+                    <option></option>
+                  </optgroup>
+
+                  <optgroup label="A doua verigă a sistemului judecătoresc">
+                    <option></option>
+                  </optgroup>
+
+                  <optgroup label="A treia verigă a sistemului judecătoresc">
+                    <option></option>
+                  </optgroup>
+
+                </select>
+              </li>
+
+              <li>
+                <label>Data hotărîrii</label>
+                <input/>
+              </li>
+
+              <li>
+                <label>Dispozitivul</label>
+                <textarea></textarea>
+              </li>
+
+              <li>
+                <label>Data rămînerii definitive</label>
+                <input/>
+              </li>
+
+              <li>
+                <label>Data eliberării titulului executoriu</label>
+                <input/>
+              </li>
+            </ul>
+          </div>
         </fieldset>
 
         <div class="column">
+          <fieldset data-template="procedură" class="typed">
+            <legend>
+              <label>General: caracter</label>
+              <select>
+                <option>pecuniar</option>
+                <option selected>nonpecuniar</option>
+              </select>
+            </legend>
+
+            <div class="conţinut"></div>
+          </fieldset>
+        </div>
+
+        <div class="column">
+          <fieldset>
+            <legend>
+              <label>Cheltuieli</label>
+            </legend>
+
+            <div class="conţinut">
+              <ul>
+                <li>
+                  <label>Onorariul</label>
+                  <input/>
+                </li>
+              </ul>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="left column">
           <fieldset data-template="persoană" class="typed">
             <legend>
               <label>Creditor: persoană</label>
