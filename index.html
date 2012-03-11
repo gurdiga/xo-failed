@@ -130,7 +130,7 @@
           <fieldset data-template="procedură" id="date-generale">
             <legend>
               <label>General: caracter</label>
-              <select>
+              <select id="caracter">
                 <option>pecuniar</option>
                 <option selected>nonpecuniar</option>
               </select>
@@ -150,7 +150,7 @@
               <ul>
                 <li>
                   <label>Onorariul</label>
-                  <input id="onorariul"/>
+                  <input id="onorariu"/>
                 </li>
               </ul>
             </div>
@@ -158,10 +158,10 @@
         </div>
 
         <div class="left column">
-          <fieldset data-template="persoană">
+          <fieldset data-template="persoană" id="creditor">
             <legend>
               <label>Creditor: persoană</label>
-              <select>
+              <select class="gen-persoană">
                 <option selected>juridică</option>
                 <option>fizică</option>
               </select>
@@ -235,9 +235,10 @@
       <ul>
         <li>
           <label>Obiectul</label>
-          <select>
+          <select id="obiect">
             <option>evacuarea</option>
-            <option>instalarea, schimbul forţat</option>
+            <option>instalarea</option>
+            <option>schimbul forţat</option>
             <option>stabilirea domiciliului copilului</option>
             <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
             <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>

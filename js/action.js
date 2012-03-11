@@ -110,10 +110,7 @@ $.fn.watchChanges = function() {
     $(this).attr('changed', '');
   }
 
-  return this.find('ul')
-    .on('keydown keyup update paste change', 'input, textarea', mark)
-    .on('change click', 'select', mark)
-    .end();
+  return this.on('keydown keyup update paste change', 'li input, li textarea, li select', mark);
 }
 
 // --------------------------------------------------
@@ -123,18 +120,10 @@ $.fn.initTypedFieldsets = function() {
 
   return this.filter('[data-template]')
     .on({
-      'mousedown': function() {
-        var select = $(this);
-
-        select.data('initial-value', select.val());
-      },
-
-      'click': function() {
+      'change': function() {
         var select = $(this),
             fieldset = select.closest('fieldset'),
             template = $('.template.' + fieldset.data('template') + '.' + select.val());
-
-        if (select.data('initial-value') == select.val()) return;
 
         if (fieldset.find('[changed]').exist()) {
           var titlu = fieldset.find('legend label').text();
@@ -154,6 +143,6 @@ $.fn.initTypedFieldsets = function() {
         fieldset.find('>.conţinut').html(template.html());
       }
     }, select)
-    .find(select).click().end()
+    .find(select).trigger('change').end()
     .end();
 };
