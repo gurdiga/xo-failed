@@ -121,7 +121,7 @@ $.fn.watchChanges = function() {
 $.fn.initTypedFieldsets = function() {
   var select = 'legend select';
 
-  return this.filter('fieldset.typed')
+  return this.filter('[data-template]')
     .on({
       'mousedown': function() {
         var select = $(this);
