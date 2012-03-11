@@ -45,6 +45,10 @@ fieldset ul select {
   width: 258px;
 }
 
+fieldset ul select.valuta {
+  width: auto;
+}
+
 textarea {
   max-width: 250px;
   min-width: 250px;
