@@ -2,7 +2,8 @@ var Action = {
   init: function() {
     $('fieldset')
       .autoSizeTextareas()
-      .initTypedFieldsets();
+      .initTypedFieldsets()
+      .watchChanges();
 
     DebitorFieldset.init();
     HashController.init();
@@ -98,14 +99,61 @@ $.fn.autoSizeTextareas = function(options) {
 
 // --------------------------------------------------
 
-$.fn.initTypedFieldsets = function() {
-  return this.filter('fieldset.typed').on('click', 'legend select', function() {
-    var select = $(this),
-        fieldset = select.closest('fieldset'),
-        template = $('.template.' + fieldset.data('template') + '.' + select.val());
+$.fn.exist = function() {
+  return this.length > 0;
+}
 
-    fieldset.find('>.conţinut').html(template.html());
-  })
-  .find('legend select').click().end()
-  .end();
+// --------------------------------------------------
+
+$.fn.watchChanges = function() {
+  function mark() {
+    $(this).attr('changed', '');
+  }
+
+  return this.find('ul')
+    .on('keydown keyup update paste change', 'input, textarea', mark)
+    .on('change click', 'select', mark)
+    .end();
+}
+
+// --------------------------------------------------
+
+$.fn.initTypedFieldsets = function() {
+  var select = 'legend select';
+
+  return this.filter('fieldset.typed')
+    .on({
+      'mousedown': function() {
+        var select = $(this);
+
+        select.data('initial-value', select.val());
+      },
+
+      'click': function() {
+        var select = $(this),
+            fieldset = select.closest('fieldset'),
+            template = $('.template.' + fieldset.data('template') + '.' + select.val());
+
+        if (select.data('initial-value') == select.val()) return;
+
+        if (fieldset.find('[changed]').exist()) {
+          var titlu = fieldset.find('legend label').text();
+
+          if (titlu.indexOf(':') > -1) titlu = titlu.split(':')[0];
+
+          var atenţionare =
+            'Această schimbare presupune pierderea datelor din secţiunea [' + titlu + '].\n\n' +
+            'Sunteţi sigur?';
+
+          if (!confirm(atenţionare)) {
+            select.val(select.data('initial-value'));
+            return false;
+          }
+        };
+
+        fieldset.find('>.conţinut').html(template.html());
+      }
+    }, select)
+    .find(select).click().end()
+    .end();
 };
