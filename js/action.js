@@ -54,6 +54,7 @@ var HashController = {
 
       $('div.pagină:not(' + hash + ')').hide();
       $('div.pagină' + hash).show();
+      document.title = $('div.pagină' + hash + ' h1').text();
     }).trigger('hashchange');
 
     $('.deschide.pagină').on('click', function() {
