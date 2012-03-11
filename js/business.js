@@ -9,6 +9,7 @@ var Business = {
 var Onorariul = {
   init: function() {
     $('#date-generale')
+      .on('keydown keyup update paste change', '#suma-de-bază', Onorariul.actualizează)
       .on('change', '#caracter', Onorariul.actualizează)
       .on('change', '#obiect', Onorariul.actualizează);
 
@@ -17,14 +18,41 @@ var Onorariul = {
 
   actualizează: function() {
     var caracter = $('#caracter').val(),
-        obiect = $('#obiect').val(),
         genPersoană = $('#creditor .gen-persoană').val();
 
     function get(hash, property) {
       return typeof property == 'function' ? hash[property]() : hash[property];
     }
 
-    $('#onorariu').val(get(Onorariul[caracter], obiect)[genPersoană]);
+    var onorariu = 0;
+
+    if (caracter == 'nonpecuniar') {
+      var obiect = $('#obiect').val();
+
+      onorariu = get(Onorariul.nonpecuniar, obiect)[genPersoană];
+    } else {
+      onorariu = Onorariul.pecuniar();
+    }
+
+    $('#onorariu').val(round(onorariu, 2));
+  },
+
+  pecuniar: function() {
+    var suma = parseFloat($('#suma-de-bază').val() || 0);
+
+    if (suma <= 100000) {
+      if ($('#încasare-periodică').is(':checked')) {
+        return 500;
+      } else if ($('#încasare-amendă').is(':checked')) {
+        return 200;
+      } else {
+        return suma * .10;
+      }
+    } else if (suma <= 300000) {
+      return 10000 + (suma - 100000) * .05;
+    } else if (suma > 300000) {
+      return 20000 + (suma - 300000) * .03;
+    }
   },
 
   nonpecuniar: {
@@ -61,6 +89,14 @@ var Onorariul = {
     }
   }
 };
+
+// --------------------------------------------------
+
+function round(number, decimalCount) {
+  var multiplier = Math.pow(10, decimalCount);
+
+  return Math.round(number * multiplier) / multiplier;
+}
 
 // --------------------------------------------------
 
