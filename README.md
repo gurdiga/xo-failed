@@ -1,7 +1,7 @@
 TODO:
 -----
 
-* de introdus lista instanţelor de judecată
+* calculul onorariului
 * how to encode form data?
 * static/with options/with suggestions
 * fix tests for IE8?
