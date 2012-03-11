@@ -53,7 +53,6 @@ var HashController = {
 
       $('div.pagină:not(' + hash + ')').hide();
       $('div.pagină' + hash).show();
-      $('textarea').trigger('change');
     }).trigger('hashchange');
 
     $('.deschide.pagină').on('click', function() {
@@ -64,21 +63,13 @@ var HashController = {
 
 // --------------------------------------------------
 
-$.autoResize = {
-  options: {
-    extraSpace: 20
-  }
-};
-
-// --------------------------------------------------
-
 $.autoSizeTextareas = {
   defaults: {
     minHeight: 60, //px
-    selector: 'textarea.autosize'
+    selector: 'textarea'
   },
 
-  events: 'keydown keyup update paste change'
+  events: 'keydown keyup update paste change focus'
 };
 
 $.fn.autoSizeTextareas = function(options) {
@@ -91,36 +82,17 @@ $.fn.autoSizeTextareas = function(options) {
 
     var clone = textarea.css('overflow', 'hidden').clone()
       .css({
-        visibility: 'hidden',
-        position: 'absolute',
-        height: options.minHeight
+        'padding': 0,
+        'border-width': 0,
+        'visibility': 'hidden',
+        'position': 'absolute',
+        'height': options.minHeight
       })
       .val(textarea.val())
       .insertBefore(textarea);
 
-    var paddingTop = parseInt(clone.css('padding-top')),
-        paddingBottom = parseInt(clone.css('padding-bottom')),
-        conţinutHeight = clone[0].scrollHeight,
-        newHeight = conţinutHeight + paddingTop + paddingBottom;
-
+    textarea.css('height', clone[0].scrollHeight);
     clone.remove();
-    textarea.height(Math.max(newHeight, options.minHeight));
-  });
-};
-
-// --------------------------------------------------
-
-$.fn.setCssFrom = function(sourceElement, properties) {
-  sourceElement = $(sourceElement);
-
-  return this.each(function() {
-    var element = $(this),
-        property;
-
-    for (var i = 0; i < properties.length; i++) {
-      property = properties[i];
-      element.css(property, sourceElement.css(property));
-    }
   });
 };
 
