@@ -7,6 +7,8 @@ var Business = {
 // --------------------------------------------------
 
 var Onorariul = {
+  // Articolul 38
+
   init: function() {
     $('#date-generale')
       .on('keydown keyup update paste change', '#suma-de-bază', Onorariul.actualizează)
@@ -46,7 +48,7 @@ var Onorariul = {
       } else if ($('#încasare-amendă').is(':checked')) {
         return 200;
       } else {
-        return suma * .10;
+        return Math.max(suma * .10, 500);
       }
     } else if (suma <= 300000) {
       return 10000 + (suma - 100000) * .05;
