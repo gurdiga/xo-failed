@@ -30,4 +30,7 @@ foreach ($simple_xml->Valute as $valuta) {
 };
 
 file_put_contents($json_file, json_encode($array));
-symlink($json_file , "$root/current.json");
+
+$current = "$root/current.json";
+unlink($current);
+symlink($json_file, $current);
