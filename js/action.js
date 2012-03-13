@@ -146,12 +146,12 @@ $.fn.watchChanges = function() {
 $.fn.initTypedFieldsets = function() {
   var select = 'legend select';
 
-  return this.filter('[data-template]')
+  return this.filter('[data-şablon]')
     .on({
       'change': function() {
         var select = $(this),
             fieldset = select.closest('fieldset'),
-            template = $('.template.' + fieldset.data('template') + '.' + select.val());
+            şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
 
         if (fieldset.find('[changed]').exist()) {
           var titlu = fieldset.find('legend label').text();
@@ -168,7 +168,7 @@ $.fn.initTypedFieldsets = function() {
           }
         };
 
-        fieldset.find('>.conţinut').html(template.html());
+        fieldset.find('>.conţinut').html(şablon.html());
       }
     }, select)
     .find(select).trigger('change').end()
