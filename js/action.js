@@ -6,8 +6,24 @@ var Action = {
       .watchChanges();
 
     DebitorFieldset.init();
+    ProcedurăNonPecuniară.init();
     Valute.init();
     HashController.init();
+  }
+};
+
+// --------------------------------------------------
+
+var ProcedurăNonPecuniară = {
+  init: function() {
+    $('#date-generale').on('change', '#obiect', ProcedurăNonPecuniară.aratăBunuri);
+  },
+
+  aratăBunuri: function() {
+    var select = $(this),
+        şablon = $('.şablon.obiect[title="' + select.val() + '"]');
+
+    select.parent().after(şablon.html());
   }
 };
 
