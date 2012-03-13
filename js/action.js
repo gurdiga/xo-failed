@@ -6,7 +6,18 @@ var Action = {
       .watchChanges();
 
     DebitorFieldset.init();
+    Valute.init();
     HashController.init();
+  }
+};
+
+// --------------------------------------------------
+
+var Valute = {
+  init: function() {
+    var template = $('.valuta.template').html();
+
+    $('ul .valuta').html(template);
   }
 };
 
