@@ -9,6 +9,10 @@ var Action = {
     ProcedurăNonPecuniară.init();
     Valute.init();
     HashController.init();
+
+    if ($.browser.msie) {
+      // TODO: fix select width
+    }
   }
 };
 
@@ -16,14 +20,56 @@ var Action = {
 
 var ProcedurăNonPecuniară = {
   init: function() {
-    $('#date-generale').on('change', '#obiect', ProcedurăNonPecuniară.aratăBunuri);
+    this.bunuri.init();
   },
 
-  aratăBunuri: function() {
-    var select = $(this),
-        şablon = $('.şablon.obiect[title="' + select.val() + '"]');
+  bunuri: {
+    obiecteAferente: {
+      'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': '',
+      'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': '',
+    },
 
-    select.parent().after(şablon.html());
+    init: function() {
+      $('#date-generale')
+        .on('change', '#obiect', this.ascundeSauAratăFormular)
+        .on('change', '#obiect', this.seteazăŞoaptă)
+        .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
+        .on('click', '#bunuri button.şterge', this.ştergeCîmp);
+    },
+
+    adaugăCîmp: function() {
+      $('.şablon.bunuri ol li:first').clone()
+        .insertBefore($(this).parent())
+        .find('textarea').focus();
+    },
+
+    ştergeCîmp: function() {
+      $(this).parent().remove();
+    },
+
+    seteazăŞoaptă: function() {
+      var select = $(this);
+
+      select.attr('title', select.val());
+    },
+
+    ascundeSauAratăFormular: function() {
+      var obiect = $(this).val();
+
+      if (obiect in ProcedurăNonPecuniară.bunuri.obiecteAferente) {
+        ProcedurăNonPecuniară.bunuri.aratăFormular();
+      } else {
+        ProcedurăNonPecuniară.bunuri.ascundeFormular();
+      }
+    },
+
+    aratăFormular: function() {
+      $('#obiect').parent().after($('.bunuri.şablon').html());
+    },
+
+    ascundeFormular: function() {
+      $('#obiect').parent().next('#bunuri').remove();
+    }
   }
 };
 
@@ -31,9 +77,9 @@ var ProcedurăNonPecuniară = {
 
 var Valute = {
   init: function() {
-    var template = $('.valuta.template').html();
+    var şablon = $('.valuta.şablon').html();
 
-    $('ul .valuta').html(template);
+    $('ul .valuta').html(şablon);
   }
 };
 

@@ -11,27 +11,22 @@ var Onorariul = {
 
   init: function() {
     $('#date-generale')
-      .on('keydown keyup update paste change', '#suma-de-bază', Onorariul.actualizează)
-      .on('change', '#caracter', Onorariul.actualizează)
-      .on('change', '#obiect', Onorariul.actualizează);
+      .on('keydown keyup update paste change', '#suma-de-bază, #bunuri .valoare', Onorariul.actualizează)
+      .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
     $('#creditor').on('change', '.gen-persoană', Onorariul.actualizează);
   },
 
   actualizează: function() {
     var caracter = $('#caracter').val(),
-        genPersoană = $('#creditor .gen-persoană').val();
-
-    function get(hash, property) {
-      return typeof property == 'function' ? hash[property]() : hash[property];
-    }
-
-    var onorariu = 0;
+        genPersoană = $('#creditor .gen-persoană').val(),
+        onorariu = 0;
 
     if (caracter == 'nonpecuniar') {
       var obiect = $('#obiect').val();
 
-      onorariu = get(Onorariul.nonpecuniar, obiect)[genPersoană];
+      valoare = Onorariul.nonpecuniar[obiect][genPersoană];
+      onorariu = typeof valoare == 'function' ? valoare() : valoare;
     } else {
       onorariu = Onorariul.pecuniar();
     }
@@ -64,8 +59,8 @@ var Onorariul = {
     'stabilirea domiciliului copilului': {fizică: 200, juridică: 200},
     'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200, juridică:200},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 + .01 * $('#bunuri .valoare').suma() },
-      juridică: function() { return 200 + .01 * $('#bunuri .valoare').suma() }
+      fizică: function() { return 100 + .01 * $('#bunuri input').suma() },
+      juridică: function() { return 200 + .01 * $('#bunuri input').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
       fizică: function() { return 100 + .01 * $('#bunuri .valoare').suma() },
@@ -106,6 +101,9 @@ $.fn.suma = function() {
   var suma = 0;
 
   this.each(function() {
+    this.value = $.trim(this.value);
+    this.value = $.isNumeric(this.value) ? parseFloat(this.value) : 0;
+
     suma += parseFloat(this.value);
   });
 

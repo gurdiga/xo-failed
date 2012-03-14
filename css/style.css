@@ -145,7 +145,7 @@ fieldset .label {
 }
 
 fieldset label {
-  padding: .4em 11px 0 3px;
+  padding: .4em .7em 0 .3em;
 }
 
 fieldset legend label {
@@ -191,4 +191,63 @@ fieldset.dispensabil button.şterge-debitor {
 
 button#salvează-procedură {
   float: right;
+}
+
+#bunuri label.heading {
+  text-align: left;
+  font-size: small;
+  font-style: italic;
+  padding: 0 4px;
+}
+
+#bunuri label.heading,
+#bunuri input,
+#bunuri textarea {
+  width: 100px;
+}
+
+#bunuri ol {
+  margin-left: 12.25em;
+  margin-bottom: 5px;
+  list-style-type: none;
+  padding: 0;
+}
+
+#bunuri textarea {
+  max-width: 100px;
+  min-width: 100px;
+  height: 2.2ex;
+  min-height: 2.2ex;
+  overflow: hidden;
+}
+
+#bunuri button {
+  font-size: small;
+}
+
+#bunuri ol label {
+  width: auto;
+  padding-left: 0;
+}
+
+#bunuri ol button.şterge {
+  border-width: 0;
+  background-color: transparent;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #555;
+}
+
+#bunuri ol button.şterge:hover {
+  color: red;
+}
+
+#bunuri ol li .şterge,
+#bunuri ol li:hover label {
+  display: none;
+}
+
+#bunuri ol li:hover .şterge,
+#bunuri ol li label {
+  display: inline-block;
 }
