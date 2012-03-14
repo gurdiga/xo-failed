@@ -94,7 +94,6 @@ var HashController = {
 
 $.autoSizeTextareas = {
   defaults: {
-    minHeight: 60, //px
     selector: 'textarea'
   },
 
@@ -115,7 +114,7 @@ $.fn.autoSizeTextareas = function(options) {
         'border-width': 0,
         'visibility': 'hidden',
         'position': 'absolute',
-        'height': options.minHeight
+        'height': textarea.css('min-height')
       })
       .val(textarea.val())
       .insertBefore(textarea);

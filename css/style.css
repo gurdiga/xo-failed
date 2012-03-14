@@ -23,6 +23,7 @@ input.label.with-options {
 textarea {
   font: inherit;
   height: 60px;
+  min-height: 60px;
   overflow: auto;
 }
 
