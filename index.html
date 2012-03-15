@@ -253,6 +253,7 @@
           </select>
           <p id="descriere-obiect"><span class="conţinut"></span></p>
         </li>
+        <li class="subformular"></li>
 
         <li>
           <label class="textarea">Note</label>
@@ -384,14 +385,47 @@ Valori imobile:
       <option>XDR</option>
     </select>
 
-    <ul class="bunuri şablon">
-      <li id="bunuri">
+    <ul class="şablon">
+      <li class="subformular şablon" title="evacuarea">
+        <label>Încăperea</label>
+        <textarea class="autosize"></textarea>
+
+        <label>Cu acordarea altui spaţiu locativ</label>
+        <select>
+          <option>nu</option>
+          <option>da</option>
+        </select>
+      </li>
+
+      <li class="subformular şablon" title="instalarea">
+        
+      </li>
+
+      <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
         <label>Bunuri</label>
 
-        <label class="heading">Descriere</label>
-        <label class="heading">Valoare</label>
+        <label class="titlu listă">Descriere</label>
+        <label class="titlu listă">Valoare</label>
 
-        <ol>
+        <ol id="bunuri">
+          <li>
+            <textarea></textarea>
+            <input class="valoare" value="0"/>
+            <label>MDL</label>
+            <button class="şterge" title="Şterge bunul">&times;</button>
+          </li>
+
+          <li><button type="button" class="adaugă">Adaugă bun</button></li>
+        </ol>
+      </li>
+
+      <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
+        <label>Bunuri</label>
+
+        <label class="titlu listă">Descriere</label>
+        <label class="titlu listă">Valoare</label>
+
+        <ol id="bunuri">
           <li>
             <textarea></textarea>
             <input class="valoare" value="0"/>

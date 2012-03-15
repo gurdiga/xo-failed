@@ -194,14 +194,14 @@ button#salvează-procedură {
   float: right;
 }
 
-#bunuri label.heading {
+.subformular label.titlu.listă {
   text-align: left;
   font-size: small;
   font-style: italic;
   padding: 0 4px;
 }
 
-#bunuri label.heading,
+.subformular label.titlu.listă,
 #bunuri input,
 #bunuri textarea {
   width: 100px;
@@ -218,17 +218,17 @@ button#salvează-procedură {
 }
 
 #descriere-obiect,
-#bunuri ol {
+ol#bunuri {
   margin-left: 12.25em;
 }
 
-#bunuri ol {
+ol#bunuri {
   margin-bottom: 5px;
   list-style-type: none;
   padding: 0;
 }
 
-#bunuri textarea {
+ol#bunuri textarea {
   max-width: 100px;
   min-width: 100px;
   height: 2.2ex;
@@ -236,16 +236,16 @@ button#salvează-procedură {
   overflow: hidden;
 }
 
-#bunuri button {
+ol#bunuri button {
   font-size: small;
 }
 
-#bunuri ol label {
+ol#bunuri label {
   width: auto;
   padding-left: 0;
 }
 
-#bunuri ol button.şterge {
+ol#bunuri button.şterge {
   border-width: 0;
   background-color: transparent;
   font-size: 1.2em;
@@ -253,16 +253,16 @@ button#salvează-procedură {
   color: #555;
 }
 
-#bunuri ol button.şterge:hover {
+ol#bunuri button.şterge:hover {
   color: red;
 }
 
-#bunuri ol li .şterge,
-#bunuri ol li:hover label {
+ol#bunuri li .şterge,
+ol#bunuri li:hover label {
   display: none;
 }
 
-#bunuri ol li:hover .şterge,
-#bunuri ol li label {
+ol#bunuri li:hover .şterge,
+ol#bunuri li label {
   display: inline-block;
 }

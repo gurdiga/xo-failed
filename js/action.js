@@ -5,7 +5,7 @@ var Action = {
     $('fieldset')
       .autoSizeTextareas()
       .initTypedFieldsets()
-      .watchChanges();
+      .urmăreşteSchimbările();
 
     DebitorFieldset.init();
     Valute.init();
@@ -18,17 +18,13 @@ var Action = {
 var ProcedurăNonPecuniară = {
   init: function() {
     this.bunuri.init();
+
+    $('#date-generale').on('change', '#obiect', this.inseareazăSauEliminăSubformular);
   },
 
   bunuri: {
-    obiecteAferente: {
-      'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': '',
-      'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': '',
-    },
-
     init: function() {
       $('#date-generale')
-        .on('change', '#obiect', this.inseareazăSauEliminăFormular)
         .on('change', '#obiect, legend select', this.seteazăŞoaptă)
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
         .on('click', '#bunuri button.şterge', this.ştergeCîmp)
@@ -36,7 +32,9 @@ var ProcedurăNonPecuniară = {
     },
 
     adaugăCîmp: function() {
-      $('.şablon.bunuri ol li:first').clone()
+      var şablon = $('.subformular.şablon #bunuri li:first');
+
+      şablon.clone()
         .insertBefore($(this).parent())
         .find('textarea').focus();
     },
@@ -53,30 +51,15 @@ var ProcedurăNonPecuniară = {
       select
         .attr('title', select.val())
         .next().find('.conţinut').text(select.val());
-    },
-
-    inseareazăSauEliminăFormular: function() {
-      var obiect = $(this).val(),
-          bunuri = ProcedurăNonPecuniară.bunuri;
-
-      if (obiect in bunuri.obiecteAferente) {
-        if ($(this).parent().next().is('#bunuri')) {
-          bunuri.eliminăFormular();
-        }
-
-        bunuri.insereazăFormular();
-      } else {
-        bunuri.eliminăFormular();
-      }
-    },
-
-    insereazăFormular: function() {
-      $('#obiect').parent().after($('.bunuri.şablon').html());
-    },
-
-    eliminăFormular: function() {
-      $('#obiect').parent().next('#bunuri').remove();
     }
+  },
+
+  inseareazăSauEliminăSubformular: function() {
+    var obiect = $(this),
+        subformular = obiect.parent().next('.subformular'),
+        şablon = $('.şablon[title="' + obiect.val() + '"]');
+
+    subformular.html(şablon.html());
   }
 };
 
@@ -179,15 +162,15 @@ $.fn.autoSizeTextareas = function(options) {
 
 // --------------------------------------------------
 
-$.fn.exist = function() {
+$.fn.există = function() {
   return this.length > 0;
 }
 
 // --------------------------------------------------
 
-$.fn.watchChanges = function() {
+$.fn.urmăreşteSchimbările = function() {
   function mark() {
-    $(this).attr('changed', '');
+    $(this).attr('schimbat', '');
   }
 
   return this.on('keydown keyup update paste change', 'li input, li textarea, li select', mark);
@@ -204,7 +187,7 @@ $.fn.initTypedFieldsets = function() {
           fieldset = select.closest('fieldset'),
           şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
 
-      if (fieldset.find('[changed]').exist()) {
+      if (fieldset.find('[schimbat]').există()) {
         var titlu = fieldset.find('legend label').text();
 
         if (titlu.indexOf(':') > -1) titlu = titlu.split(':')[0];
