@@ -10,10 +10,6 @@ var Action = {
     DebitorFieldset.init();
     Valute.init();
     HashController.init();
-
-    if ($.browser.msie) {
-      // TODO: fix select width
-    }
   }
 };
 
