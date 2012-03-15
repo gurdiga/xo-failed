@@ -28,7 +28,7 @@ var ProcedurăNonPecuniară = {
 
     init: function() {
       $('#date-generale')
-        .on('change', '#obiect', this.ascundeSauEliminăFormular)
+        .on('change', '#obiect', this.inseareazăSauEliminăFormular)
         .on('change', '#obiect, legend select', this.seteazăŞoaptă)
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
         .on('click', '#bunuri button.şterge', this.ştergeCîmp)
@@ -55,7 +55,7 @@ var ProcedurăNonPecuniară = {
         .next().find('.conţinut').text(select.val());
     },
 
-    ascundeSauEliminăFormular: function() {
+    inseareazăSauEliminăFormular: function() {
       var obiect = $(this).val(),
           bunuri = ProcedurăNonPecuniară.bunuri;
 
@@ -64,13 +64,13 @@ var ProcedurăNonPecuniară = {
           bunuri.eliminăFormular();
         }
 
-        bunuri.aratăFormular();
+        bunuri.insereazăFormular();
       } else {
         bunuri.eliminăFormular();
       }
     },
 
-    aratăFormular: function() {
+    insereazăFormular: function() {
       $('#obiect').parent().after($('.bunuri.şablon').html());
     },
 
