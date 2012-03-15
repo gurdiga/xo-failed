@@ -29,7 +29,7 @@ var ProcedurăNonPecuniară = {
     init: function() {
       $('#date-generale')
         .on('change', '#obiect', this.ascundeSauEliminăFormular)
-        .on('change', '#obiect', this.seteazăŞoaptă)
+        .on('change', '#obiect, legend select', this.seteazăŞoaptă)
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
         .on('click', '#bunuri button.şterge', this.ştergeCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change') });
@@ -48,7 +48,7 @@ var ProcedurăNonPecuniară = {
     },
 
     seteazăŞoaptă: function() {
-      var select = $(this);
+      var select = $('#obiect');
 
       select
         .attr('title', select.val())

@@ -4,9 +4,6 @@ TODO:
 * calculul onorariului
 * total sume procedură pecuniară
 * how to encode form data?
-* static/with options/with suggestions
-* fix tests for IE8?
-* style: page titles as in the planner prototype
 
 
 Causality
