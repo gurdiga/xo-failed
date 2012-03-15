@@ -35,6 +35,11 @@ input {
   width: 250px;
 }
 
+input[type=checkbox] {
+  width: auto;
+  vertical-align: -1px;
+}
+
 textarea,
 input,
 fieldset ul select {
