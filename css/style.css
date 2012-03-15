@@ -44,6 +44,7 @@ fieldset ul select {
   color: black;
 }
 
+#descriere-obiect,
 fieldset ul select {
   width: 258px;
 }
@@ -206,8 +207,22 @@ button#salvează-procedură {
   width: 100px;
 }
 
+#descriere-obiect {
+  margin: .25em 0 1em;
+  line-height: 1em;
+}
+
+#descriere-obiect .conţinut {
+  font-size: .9em;
+  font-style: italic;
+}
+
+#descriere-obiect,
 #bunuri ol {
   margin-left: 12.25em;
+}
+
+#bunuri ol {
   margin-bottom: 5px;
   list-style-type: none;
   padding: 0;

@@ -1,12 +1,13 @@
 var Action = {
   init: function() {
+    ProcedurăNonPecuniară.init();
+
     $('fieldset')
       .autoSizeTextareas()
       .initTypedFieldsets()
       .watchChanges();
 
     DebitorFieldset.init();
-    ProcedurăNonPecuniară.init();
     Valute.init();
     HashController.init();
 
@@ -34,7 +35,8 @@ var ProcedurăNonPecuniară = {
         .on('change', '#obiect', this.ascundeSauAratăFormular)
         .on('change', '#obiect', this.seteazăŞoaptă)
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
-        .on('click', '#bunuri button.şterge', this.ştergeCîmp);
+        .on('click', '#bunuri button.şterge', this.ştergeCîmp)
+        .on('iniţializat', function() { $('#obiect').trigger('change') });
     },
 
     adaugăCîmp: function() {
@@ -50,7 +52,9 @@ var ProcedurăNonPecuniară = {
     seteazăŞoaptă: function() {
       var select = $(this);
 
-      select.attr('title', select.val());
+      select
+        .attr('title', select.val())
+        .next().find('.conţinut').text(select.val());
     },
 
     ascundeSauAratăFormular: function() {
@@ -189,33 +193,32 @@ $.fn.watchChanges = function() {
 // --------------------------------------------------
 
 $.fn.initTypedFieldsets = function() {
-  var select = 'legend select';
+  var selector = 'legend select';
 
   return this.filter('[data-şablon]')
-    .on({
-      'change': function() {
-        var select = $(this),
-            fieldset = select.closest('fieldset'),
-            şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
+    .on('change', selector, function() {
+      var select = $(this),
+          fieldset = select.closest('fieldset'),
+          şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
 
-        if (fieldset.find('[changed]').exist()) {
-          var titlu = fieldset.find('legend label').text();
+      if (fieldset.find('[changed]').exist()) {
+        var titlu = fieldset.find('legend label').text();
 
-          if (titlu.indexOf(':') > -1) titlu = titlu.split(':')[0];
+        if (titlu.indexOf(':') > -1) titlu = titlu.split(':')[0];
 
-          var atenţionare =
-            'Această schimbare presupune pierderea datelor din secţiunea [' + titlu + '].\n\n' +
-            'Sunteţi sigur?';
+        var atenţionare =
+          'Această schimbare presupune pierderea datelor din secţiunea [' + titlu + '].\n\n' +
+          'Sunteţi sigur?';
 
-          if (!confirm(atenţionare)) {
-            select.val(select.data('initial-value'));
-            return false;
-          }
-        };
+        if (!confirm(atenţionare)) {
+          select.val(select.data('initial-value'));
+          return false;
+        }
+      };
 
-        fieldset.find('>.conţinut').html(şablon.html());
-      }
-    }, select)
-    .find(select).trigger('change').end()
+      fieldset.find('>.conţinut').html(şablon.html());
+    })
+    .find(selector).trigger('change').end()
+    .trigger('iniţializat')
     .end();
 };
