@@ -70,7 +70,7 @@ var Onorariul = {
       fizică: function() { return 100 + .01 * $('#bunuri .valoare').suma() },
       juridică: function() { return 100 + .01 * $('#bunuri .valoare').suma() }
     },
-    'nimicirea bunurilor': {fizică: 100, juridică: 100},
+    'nimicirea unor bunuri': {fizică: 100, juridică: 100},
     'restabilirea la locul de muncă': {fizică: 200, juridică: 200},
     'aplicarea măsurilor de asigurare a acţiunii': {
       fizică: function() {
