@@ -27,7 +27,7 @@ var ProcedurăNonPecuniară = {
       $('#date-generale')
         .on('change', '#obiect, legend select', this.seteazăŞoaptă)
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
-        .on('click', '#bunuri button.şterge', this.ştergeCîmp)
+        .on('click', '#bunuri button.elimină', this.eliminăCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change') });
     },
 
@@ -39,7 +39,7 @@ var ProcedurăNonPecuniară = {
         .find('textarea').focus();
     },
 
-    ştergeCîmp: function() {
+    eliminăCîmp: function() {
       $(this).closest('.cîmp')
         .find('.valoare').val(0).trigger('change').end()
         .remove();
@@ -95,7 +95,7 @@ var DebitorFieldset = {
   },
 
   initDelete: function() {
-    $('div#procedură-nouă').on('click', 'button.şterge-debitor', function() {
+    $('div#procedură-nouă').on('click', 'button.elimină-debitor', function() {
       var button = $(this),
           acestDebitor = button.closest('fieldset');
           ceilalţiDebitori = acestDebitor.siblings('fieldset');

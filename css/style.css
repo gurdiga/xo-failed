@@ -191,12 +191,12 @@ button#adaugă-debitor {
   margin-bottom: 5em;
 }
 
-button.şterge-debitor {
+button.elimină-debitor {
   font-size: small;
   display: none;
 }
 
-fieldset.dispensabil button.şterge-debitor {
+fieldset.dispensabil button.elimină-debitor {
   display: inline;
 }
 
@@ -255,7 +255,7 @@ button#salvează-procedură {
   padding-left: 0;
 }
 
-#bunuri button.şterge {
+#bunuri button.elimină {
   border-width: 0;
   background-color: transparent;
   font-size: 1.2em;
@@ -267,10 +267,10 @@ button#salvează-procedură {
   visibility: hidden;
 }
 
-#bunuri button.şterge:hover {
+#bunuri button.elimină:hover {
   color: black;
 }
 
-#bunuri .cîmp:hover button.şterge {
+#bunuri .cîmp:hover button.elimină {
   visibility: visible;
 }
