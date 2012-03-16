@@ -133,7 +133,7 @@ $.autoSizeTextareas = {
     selector: 'textarea'
   },
 
-  events: 'keydown keyup update paste change focus'
+  events: 'keydown keyup update paste change focus mouseup'
 };
 
 $.fn.autoSizeTextareas = function(options) {
