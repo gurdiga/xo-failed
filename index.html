@@ -254,11 +254,6 @@
           <p id="descriere-obiect"><span class="conţinut"></span></p>
         </li>
         <li class="subformular"></li>
-
-        <li>
-          <label class="textarea">Note</label>
-          <textarea class="autosize" spellcheck="false"></textarea>
-        </li>
       </ul>
     </div>
 
@@ -399,35 +394,19 @@ Valori imobile:
       </li>
 
       <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
-        <label>Bunuri</label>
-
-        <label class="titlu listă">Descriere</label>
-        <label class="titlu listă">Valoare</label>
-
-        <ol id="bunuri">
-          <li>
-            <textarea></textarea>
-            <input class="valoare" value="0"/>
-            <label>MDL</label>
-            <button class="şterge" title="Şterge bunul">&times;</button>
-          </li>
-
-          <li><button type="button" class="adaugă">Adaugă bun</button></li>
-        </ol>
       </li>
 
       <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
-        <label>Bunuri</label>
-
-        <label class="titlu listă">Descriere</label>
-        <label class="titlu listă">Valoare</label>
-
         <ol id="bunuri">
           <li>
-            <textarea></textarea>
-            <input class="valoare" value="0"/>
-            <label>MDL</label>
+            <label class="descriere">Descriere</label>
+            <label class="valoare">MDL</label>
+          </li>
+
+          <li class="cîmp">
             <button class="şterge" title="Şterge bunul">&times;</button>
+            <textarea class="descriere"></textarea>
+            <input class="valoare" value="0"/>
           </li>
 
           <li><button type="button" class="adaugă">Adaugă bun</button></li>

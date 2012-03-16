@@ -32,7 +32,7 @@ input {
   outline-width: 0;
   border: 1px solid #ddd;
   border-top-color: #c0c0c0;
-  width: 250px;
+  width: 18em;
 }
 
 input[type=checkbox] {
@@ -45,13 +45,13 @@ input,
 fieldset ul select {
   margin: 1px 0;
   vertical-align: top;
-  padding: 3px;
+  padding: .3em;
   color: black;
 }
 
 #descriere-obiect,
 fieldset ul select {
-  width: 258px;
+  width: 18.5em;
 }
 
 fieldset ul select.valuta {
@@ -59,8 +59,8 @@ fieldset ul select.valuta {
 }
 
 textarea {
-  max-width: 250px;
-  min-width: 250px;
+  max-width: 18em;
+  min-width: 18em;
 }
 
 input.label:focus,
@@ -172,6 +172,11 @@ li {
   margin: .2em 0 0 0;
 }
 
+.subformular {
+  overflow: auto;
+}
+
+#bunuri label.valoare,
 input.sumă {
   width: 4em;
 }
@@ -197,23 +202,11 @@ fieldset.dispensabil button.şterge-debitor {
 
 button#salvează-procedură {
   float: right;
-}
-
-.subformular label.titlu.listă {
-  text-align: left;
-  font-size: small;
-  font-style: italic;
-  padding: 0 4px;
-}
-
-.subformular label.titlu.listă,
-#bunuri input,
-#bunuri textarea {
-  width: 100px;
+  margin-right: 1em;
 }
 
 #descriere-obiect {
-  margin: .25em 0 1em;
+  margin: .25em 0 1em 12.25em;
   line-height: 1em;
 }
 
@@ -222,52 +215,62 @@ button#salvează-procedură {
   font-style: italic;
 }
 
-#descriere-obiect,
-ol#bunuri {
-  margin-left: 12.25em;
-}
-
-ol#bunuri {
-  margin-bottom: 5px;
+#bunuri {
   list-style-type: none;
-  padding: 0;
+  padding: 0 0 0 2.8em;
 }
 
-ol#bunuri textarea {
-  max-width: 100px;
-  min-width: 100px;
+#bunuri label {
+  text-align: left;
+  font-style: italic;
+  color: #555;
+  padding: 0 .4em;
+}
+
+#bunuri textarea {
   height: 2.2ex;
   min-height: 2.2ex;
-  overflow: hidden;
 }
 
-ol#bunuri button {
+#bunuri .descriere {
+  width: 21em;
+  min-width: 0;
+  max-width: none;
+}
+
+#bunuri .valoare {
+  width: 4em;
+}
+
+#bunuri button.adaugă {
   font-size: small;
+  margin-left: .4em;
 }
 
-ol#bunuri label {
-  width: auto;
+#bunuri li {
+  padding-left: 1.2em;
+}
+
+#bunuri .cîmp {
   padding-left: 0;
 }
 
-ol#bunuri button.şterge {
+#bunuri button.şterge {
   border-width: 0;
   background-color: transparent;
   font-size: 1.2em;
   cursor: pointer;
   color: #555;
+  padding: 0;
+  margin: .2em 0 0;
+  width: 1em;
+  visibility: hidden;
 }
 
-ol#bunuri button.şterge:hover {
-  color: red;
+#bunuri button.şterge:hover {
+  color: black;
 }
 
-ol#bunuri li .şterge,
-ol#bunuri li:hover label {
-  display: none;
-}
-
-ol#bunuri li:hover .şterge,
-ol#bunuri li label {
-  display: inline-block;
+#bunuri .cîmp:hover button.şterge {
+  visibility: visible;
 }

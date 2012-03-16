@@ -32,17 +32,17 @@ var ProcedurăNonPecuniară = {
     },
 
     adaugăCîmp: function() {
-      var şablon = $('.subformular.şablon #bunuri li:first');
+      var şablon = $('.subformular.şablon #bunuri .cîmp');
 
       şablon.clone()
-        .insertBefore($(this).parent())
+        .insertAfter($('#bunuri .cîmp:last'))
         .find('textarea').focus();
     },
 
     ştergeCîmp: function() {
-      $(this)
-        .siblings('.valoare').val(0).trigger('change').end()
-        .parent().remove();
+      $(this).closest('.cîmp')
+        .find('.valoare').val(0).trigger('change').end()
+        .remove();
     },
 
     seteazăŞoaptă: function() {

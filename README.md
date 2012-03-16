@@ -2,9 +2,9 @@ TODO:
 -----
 
 * calculul onorariului
+  * UC = 20 MDL: de corectat calculul onorariului
 * total sume procedură pecuniară
 * how to encode form data?
-* UC = 20 MDL
 
 
 Causality
