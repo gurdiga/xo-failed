@@ -1,6 +1,7 @@
 TODO:
 -----
 
+* de pus cîmpurile din subformulare în <li>-uri?
 * calculul onorariului
   * UC = 20 MDL: de corectat calculul onorariului
 * total sume procedură pecuniară
