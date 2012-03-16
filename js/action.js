@@ -59,7 +59,9 @@ var ProcedurăNonPecuniară = {
         subformular = obiect.parent().next('.subformular'),
         şablon = $('.şablon[title="' + obiect.val() + '"]');
 
-    subformular.html(şablon.html());
+    subformular
+      .html(şablon.html())
+      .find('input,textarea').first().focus();
   }
 };
 
