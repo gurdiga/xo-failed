@@ -406,8 +406,8 @@ Valori imobile:
         <label>Acte</label>
         <textarea class="autosize"></textarea>
       </li>
+
       <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
-        <!-- asta e copie de la imobile -->
         <ol id="bunuri">
           <li>
             <label class="descriere">Descriere</label>
@@ -425,7 +425,7 @@ Valori imobile:
       </li>
 
       <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
-        <!-- asta e copie de la mobile -->
+        <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
         <ol id="bunuri">
           <li>
             <label class="descriere">Descriere</label>
@@ -443,13 +443,39 @@ Valori imobile:
       </li>
 
       <li class="subformular şablon" title="confiscarea bunurilor">
-        <label>Bunurile confiscate</label>
-        <textarea class="autosize"></textarea>
+        <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
+        <ol id="bunuri">
+          <li>
+            <label class="descriere">Descriere</label>
+            <label class="valoare">MDL</label>
+          </li>
+
+          <li class="cîmp">
+            <button class="elimină" title="Elimină bunul">&times;</button>
+            <textarea class="descriere"></textarea>
+            <input class="valoare" value="0"/>
+          </li>
+
+          <li><button type="button" class="adaugă">Adaugă bun</button></li>
+        </ol>
       </li>
 
-      <li class="subformular şablon" title="nimicirea bunurilor">
-        <label>Bunurile nimicite</label>
-        <textarea class="autosize"></textarea>
+      <li class="subformular şablon" title="nimicirea unor bunuri">
+        <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
+        <ol id="bunuri">
+          <li>
+            <label class="descriere">Descriere</label>
+            <label class="valoare">MDL</label>
+          </li>
+
+          <li class="cîmp">
+            <button class="elimină" title="Elimină bunul">&times;</button>
+            <textarea class="descriere"></textarea>
+            <input class="valoare" value="0"/>
+          </li>
+
+          <li><button type="button" class="adaugă">Adaugă bun</button></li>
+        </ol>
       </li>
 
       <li class="subformular şablon" title="restabilirea la locul de muncă">
