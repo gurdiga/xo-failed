@@ -5,6 +5,7 @@ var Action = {
     $('fieldset')
       .autoSizeTextareas()
       .initTypedFieldsets()
+      .adaugăŞoapteLaListeleFoarteLate()
       .urmăreşteSchimbările();
 
     DebitorFieldset.init();
@@ -25,7 +26,6 @@ var ProcedurăNonPecuniară = {
   bunuri: {
     init: function() {
       $('#date-generale')
-        .on('change', '#obiect, legend select', this.seteazăŞoaptă)
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
         .on('click', '#bunuri button.elimină', this.eliminăCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change') });
@@ -44,14 +44,6 @@ var ProcedurăNonPecuniară = {
         .find('.valoare').val(0).trigger('change').end()
         .remove();
     },
-
-    seteazăŞoaptă: function() {
-      var select = $('#obiect');
-
-      select
-        .attr('title', select.val())
-        .next().find('.conţinut').text(select.val());
-    }
   },
 
   inseareazăSauEliminăSubformular: function() {
@@ -61,7 +53,9 @@ var ProcedurăNonPecuniară = {
     obiect.parent()
       .siblings('.subformular').remove().end()
       .after(şablon.html())
-      .find('input,textarea').first().focus();
+      .parent()
+        .find('input,textarea').first().focus().end().end()
+        .find('.subformular select.foarte.lat').trigger('iniţializează').end();
   }
 };
 
@@ -160,6 +154,29 @@ $.fn.autoSizeTextareas = function(options) {
     textarea.css('height', clone[0].scrollHeight);
     clone.remove();
   });
+};
+
+// --------------------------------------------------
+
+$.fn.adaugăŞoapteLaListeleFoarteLate = function() {
+  return this
+    .on('change', 'select.foarte.lat', function() {
+      var lista = $(this),
+          şoapta = lista.next('.şoaptă');
+
+      şoapta.text(lista.val());
+    })
+    .on('iniţializează', 'select.foarte.lat', function() {
+      var lista = $(this);
+
+      $('<p>')
+        .addClass('şoaptă')
+        .css('margin-left', lista.prev('label').outerWidth(true))
+        .insertAfter(lista);
+
+      lista.trigger('change');
+    })
+    .find('select.foarte.lat').trigger('iniţializează').end();
 };
 
 // --------------------------------------------------
