@@ -181,6 +181,10 @@ input.sumă {
   width: 4em;
 }
 
+input.invalid {
+  border-color: red;
+}
+
 #procedură-nouă h1,
 #procedură-nouă fieldset,
 #procedură-nouă button#salvează-procedură{

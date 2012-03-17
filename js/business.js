@@ -103,11 +103,13 @@ function round(number, decimalCount) {
 $.fn.suma = function() {
   var suma = 0;
 
-  this.each(function() {
-    this.value = $.trim(this.value);
-    this.value = $.isNumeric(this.value) ? parseFloat(this.value) : 0;
-
-    suma += parseFloat(this.value);
+  this.filter('input').each(function() {
+    if ($.isNumeric(this.value)) {
+      $(this).removeClass('invalid');
+      suma += parseFloat(this.value);
+    } else {
+      $(this).addClass('invalid');
+    };
   });
 
   return suma;
