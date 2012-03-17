@@ -32,7 +32,7 @@ var ProcedurăNonPecuniară = {
     },
 
     adaugăCîmp: function() {
-      var şablon = $('.subformular.şablon #bunuri .cîmp');
+      var şablon = $('.subformular.şablon #bunuri .cîmp').first();
 
       şablon.clone()
         .insertAfter($('#bunuri .cîmp:last'))
