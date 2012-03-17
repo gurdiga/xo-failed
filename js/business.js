@@ -59,18 +59,21 @@ var Onorariul = {
     'stabilirea domiciliului copilului': {fizică: 200, juridică: 200},
     'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200, juridică:200},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 + .01 * $('#bunuri input').suma() },
-      juridică: function() { return 200 + .01 * $('#bunuri input').suma() }
+      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 200 + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
-      fizică: function() { return 100 + .01 * $('#bunuri .valoare').suma() },
-      juridică: function() { return 200 + .01 * $('#bunuri .valoare').suma() }
+      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 200 + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
     'confiscarea bunurilor': {
-      fizică: function() { return 100 + .01 * $('#bunuri .valoare').suma() },
-      juridică: function() { return 100 + .01 * $('#bunuri .valoare').suma() }
+      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
-    'nimicirea unor bunuri': {fizică: 100, juridică: 100},
+    'nimicirea unor bunuri': {
+      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() }
+    },
     'restabilirea la locul de muncă': {fizică: 200, juridică: 200},
     'aplicarea măsurilor de asigurare a acţiunii': {
       fizică: function() {
