@@ -1,6 +1,7 @@
 var Business = {
   init: function() {
     Onorariul.init();
+    Defaults.init();
   }
 };
 
@@ -87,6 +88,19 @@ var Onorariul = {
         return taxaPerCaz[$('caz:checked').val()];
       }
     }
+  }
+};
+
+// --------------------------------------------------
+
+var Defaults = {
+  init: function() {
+    $('#date-generale').on('change', '#obiect', function() {
+      if ($(this).val() == 'restabilirea la locul de muncă') {
+        $('#creditor .gen-persoană').val('fizică');
+        $('#debitor .gen-persoană').val('juridică');
+      }
+    });
   }
 };
 
