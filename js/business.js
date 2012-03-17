@@ -1,3 +1,6 @@
+// valoarea unităţii convenţionale
+var UC = 20;
+
 var Business = {
   init: function() {
     Onorariul.init();
@@ -54,36 +57,36 @@ var Onorariul = {
   },
 
   nonpecuniar: {
-    'evacuarea': {fizică: 200, juridică: 300},
-    'instalarea': {fizică: 200, juridică: 200},
-    'schimbul forţat': {fizică: 200, juridică: 200},
-    'stabilirea domiciliului copilului': {fizică: 200, juridică: 200},
-    'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200, juridică:200},
+    'evacuarea': {fizică: 200 * UC, juridică: 300 * UC},
+    'instalarea': {fizică: 200 * UC, juridică: 200 * UC},
+    'schimbul forţat': {fizică: 200 * UC, juridică: 200 * UC},
+    'stabilirea domiciliului copilului': {fizică: 200 * UC, juridică: 200 * UC},
+    'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200 * UC, juridică:200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
-      juridică: function() { return 200 + .01 * $('#date-generale #bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 200 * UC + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
-      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
-      juridică: function() { return 200 + .01 * $('#date-generale #bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 200 * UC + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
     'confiscarea bunurilor': {
-      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
-      juridică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 100 * UC + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
     'nimicirea unor bunuri': {
-      fizică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() },
-      juridică: function() { return 100 + .01 * $('#date-generale #bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#date-generale #bunuri .valoare').suma() },
+      juridică: function() { return 100 * UC + .01 * $('#date-generale #bunuri .valoare').suma() }
     },
-    'restabilirea la locul de muncă': {fizică: 200, juridică: 200},
+    'restabilirea la locul de muncă': {fizică: 200 * UC, juridică: 200 * UC},
     'aplicarea măsurilor de asigurare a acţiunii': {
       fizică: function() {
-        var taxaPerCaz = {1: 100, 2: 120};
+        var taxaPerCaz = {1: 100 * UC, 2: 120 * UC};
 
         return taxaPerCaz[$('caz:checked').val()];
       },
       juridică: function() {
-        var taxaPerCaz = {1: 100, 2: 120};
+        var taxaPerCaz = {1: 100 * UC, 2: 120 * UC};
 
         return taxaPerCaz[$('caz:checked').val()];
       }
