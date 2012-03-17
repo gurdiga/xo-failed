@@ -253,7 +253,6 @@
           </select>
           <p id="descriere-obiect"><span class="conţinut"></span></p>
         </li>
-        <li class="subformular"></li>
       </ul>
     </div>
 
@@ -380,34 +379,44 @@ Valori imobile:
       <option>XDR</option>
     </select>
 
-    <ul class="şablon">
-      <li class="subformular şablon" title="evacuarea">
+    <ul class="şablon" title="evacuarea">
+      <li class="subformular">
         <label>Din încăperea</label>
         <textarea class="autosize"></textarea>
+      </li>
 
+      <li class="subformular">
         <label>Se acordă alt spaţiu</label>
         <input type="checkbox"/>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="instalarea">
+    <ul class="şablon" title="instalarea">
+      <li class="subformular">
         <label>În încăperea</label>
         <textarea class="autosize"></textarea>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="schimbul forţat">
+    <ul class="şablon" title="schimbul forţat">
+      <li class="subformular">
         <label>Încăperea pentru creditor</label>
         <textarea class="autosize"></textarea>
 
         <label>Încăperea pentru debitor</label>
         <textarea class="autosize"></textarea>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
+    <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
+      <li class="subformular">
         <label>Acte</label>
         <textarea class="autosize"></textarea>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
+    <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
+      <li class="subformular">
         <ol id="bunuri">
           <li>
             <label class="descriere">Descriere</label>
@@ -423,8 +432,10 @@ Valori imobile:
           <li><button type="button" class="adaugă">Adaugă bun</button></li>
         </ol>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
+    <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
+      <li class="subformular">
         <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
         <ol id="bunuri">
           <li>
@@ -441,8 +452,10 @@ Valori imobile:
           <li><button type="button" class="adaugă">Adaugă bun</button></li>
         </ol>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="confiscarea bunurilor">
+    <ul class="şablon" title="confiscarea bunurilor">
+      <li class="subformular">
         <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
         <ol id="bunuri">
           <li>
@@ -459,8 +472,10 @@ Valori imobile:
           <li><button type="button" class="adaugă">Adaugă bun</button></li>
         </ol>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="nimicirea unor bunuri">
+    <ul class="şablon" title="nimicirea unor bunuri">
+      <li class="subformular">
         <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
         <ol id="bunuri">
           <li>
@@ -477,16 +492,22 @@ Valori imobile:
           <li><button type="button" class="adaugă">Adaugă bun</button></li>
         </ol>
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="restabilirea la locul de muncă">
+    <ul class="şablon" title="restabilirea la locul de muncă">
+      <li class="subformular">
         <label>Funcţie</label>
         <input/>
+      </li>
 
+      <li class="subformular">
         <label>Salariu recuperat</label>
         <input class="sumă"/> MDL
       </li>
+    </ul>
 
-      <li class="subformular şablon" title="aplicarea măsurilor de asigurare a acţiunii">
+    <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
+      <li class="subformular">
         <label>Măsura de asigurare</label>
         <select class="foarte lat">
           <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale pîrîtului, inclusiv pe cele care se află la alte persoane</option>

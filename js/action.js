@@ -32,7 +32,7 @@ var ProcedurăNonPecuniară = {
     },
 
     adaugăCîmp: function() {
-      var şablon = $('.subformular.şablon #bunuri .cîmp').first();
+      var şablon = $('.şablon #bunuri .cîmp').first();
 
       şablon.clone()
         .insertAfter($('#bunuri .cîmp:last'))
@@ -56,11 +56,11 @@ var ProcedurăNonPecuniară = {
 
   inseareazăSauEliminăSubformular: function() {
     var obiect = $(this),
-        subformular = obiect.parent().next('.subformular'),
         şablon = $('.şablon[title="' + obiect.val() + '"]');
 
-    subformular
-      .html(şablon.html())
+    obiect.parent()
+      .siblings('.subformular').remove().end()
+      .after(şablon.html())
       .find('input,textarea').first().focus();
   }
 };

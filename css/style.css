@@ -172,10 +172,6 @@ li {
   margin: .2em 0 0 0;
 }
 
-.subformular {
-  overflow: auto;
-}
-
 #bunuri label.valoare,
 input.sumă {
   width: 4em;
