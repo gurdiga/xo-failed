@@ -501,13 +501,25 @@
     <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
       <li class="subformular">
         <label>Măsura de asigurare</label>
-        <select class="foarte lat">
-          <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale pîrîtului, inclusiv pe cele care se află la alte persoane</option>
-          <option>interzicerea pîrîtului de a săvîrşi anumite acte</option>
-          <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către pîrît sau îndeplinirea unor alte obligaţii faţă de el</option>
+        <select class="foarte lat" id="măsura-de-asigurare">
+          <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
+          <option>interzicerea debitorului de a săvîrşi anumite acte</option>
+          <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
           <option>suspendarea vînzării bunurilor sechestrate în cazul intentării unei acţiuni de ridicare a sechestrului de pe ele (radierea din actul  de inventar)</option>
           <option>suspendarea urmăririi, întemeiate pe un document executoriu, contestat de către debitor pe cale judiciară</option>
         </select>
+      </li>
+
+      <li class="subformular">
+        <label>Bunuri supuse înregistrării obligatorii de stat sau pe mijloacele băneşti</label>
+        <input id="bunuri-supuse-înregistrării-sau-bani" type="checkbox"/>
+      </li>
+    </ul>
+
+    <ul class="şablon" title="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
+      <li class="subformular" id="valoarea-acţiunii">
+        <label>Valoarea acţiunii</label>
+        <input class="sumă"/>
       </li>
     </ul>
 

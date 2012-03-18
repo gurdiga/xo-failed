@@ -15,7 +15,11 @@ var Onorariul = {
 
   init: function() {
     $('#date-generale')
-      .on('keydown keyup update paste change', '#suma-de-bază, #bunuri .valoare', Onorariul.actualizează)
+      .on(
+        'keydown keyup update paste change',
+        '#suma-de-bază, #bunuri .valoare, input:checkbox',
+        Onorariul.actualizează
+      )
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
     $('#debitor').on('change', '.gen-persoană', Onorariul.actualizează);
@@ -81,14 +85,14 @@ var Onorariul = {
     'restabilirea la locul de muncă': {fizică: 200 * UC, juridică: 200 * UC},
     'aplicarea măsurilor de asigurare a acţiunii': {
       fizică: function() {
-        var taxaPerCaz = {1: 100 * UC, 2: 120 * UC};
-
-        return taxaPerCaz[$('caz:checked').val()];
+        return $('#bunuri-supuse-înregistrării-sau-bani').is(':checked')
+          ? 100 * UC
+          : 120 * UC;
       },
       juridică: function() {
-        var taxaPerCaz = {1: 100 * UC, 2: 120 * UC};
-
-        return taxaPerCaz[$('caz:checked').val()];
+        return $('#bunuri-supuse-înregistrării-sau-bani').is(':checked')
+          ? 100 * UC
+          : 120 * UC;
       }
     }
   }
@@ -99,9 +103,18 @@ var Onorariul = {
 var Defaults = {
   init: function() {
     $('#date-generale').on('change', '#obiect', function() {
-      if ($(this).val() == 'restabilirea la locul de muncă') {
+      switch($(this).val()) {
+
+      case 'restabilirea la locul de muncă':
         $('#creditor .gen-persoană').val('fizică');
         $('#debitor .gen-persoană').val('juridică');
+        break;
+
+      case 'stabilirea domiciliului copilului':
+        $('#creditor .gen-persoană').val('fizică');
+        $('#debitor .gen-persoană').val('fizică');
+        break;
+
       }
     });
   }

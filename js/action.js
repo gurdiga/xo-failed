@@ -19,6 +19,7 @@ var Action = {
 var ProcedurăNonPecuniară = {
   init: function() {
     this.bunuri.init();
+    this['măsura-de-asigurare'].init();
 
     $('#date-generale').on('change', '#obiect', this.inseareazăSauEliminăSubformular);
   },
@@ -43,7 +44,23 @@ var ProcedurăNonPecuniară = {
       $(this).closest('.cîmp')
         .find('.valoare').val(0).trigger('change').end()
         .remove();
-    },
+    }
+  },
+
+  'măsura-de-asigurare': {
+    init: function() {
+      $('#date-generale').on('change', '#măsura-de-asigurare', function() {
+        var lista = $(this);
+
+        if (lista.val() == 'aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane') {
+          lista.parent()
+            .after($('.şablon[title="' + lista.val() + '"]').html())
+            .next().find('.sumă').focus();
+        } else {
+          lista.parent().next('#valoarea-acţiunii').remove();
+        }
+      });
+    }
   },
 
   inseareazăSauEliminăSubformular: function() {
