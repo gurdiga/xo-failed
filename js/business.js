@@ -18,12 +18,12 @@ var Onorariul = {
       .on('keydown keyup update paste change', '#suma-de-bază, #bunuri .valoare', Onorariul.actualizează)
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
-    $('#creditor').on('change', '.gen-persoană', Onorariul.actualizează);
+    $('#debitor').on('change', '.gen-persoană', Onorariul.actualizează);
   },
 
   actualizează: function() {
     var caracter = $('#caracter').val(),
-        genPersoană = $('#creditor .gen-persoană').val(),
+        genPersoană = $('#debitor .gen-persoană').val(),
         onorariu = 0;
 
     if (caracter == 'nonpecuniar') {
