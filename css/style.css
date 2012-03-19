@@ -51,6 +51,7 @@ fieldset ul select {
 
 fieldset ul select {
   width: 18.5em;
+  padding: .25em .3em;
 }
 
 fieldset ul select.valuta {
