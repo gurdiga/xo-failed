@@ -131,7 +131,7 @@
           <fieldset data-şablon="procedură" id="date-generale">
             <legend>
               <label>General: caracter</label>
-              <select id="caracter">
+              <select id="caracter" class="care schimbă formularul">
                 <option>pecuniar</option>
                 <option selected>nonpecuniar</option>
               </select>
@@ -162,8 +162,8 @@
           <fieldset data-şablon="persoană" id="creditor">
             <legend>
               <label>Creditor: persoană</label>
-              <select class="gen-persoană">
-                <option selected>juridică</option>
+              <select class="gen-persoană" class="care schimbă formularul">
+               <option selected>juridică</option>
                 <option>fizică</option>
               </select>
             </legend>
@@ -226,7 +226,7 @@
       <ul>
         <li>
           <label>Obiectul</label>
-          <select id="obiect" class="foarte lat">
+          <select id="obiect" class="foarte lat care schimbă formularul">
             <option>evacuarea</option>
             <option>instalarea</option>
             <option>schimbul forţat</option>
@@ -489,7 +489,7 @@
     <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
       <li class="subformular">
         <label>Măsura de asigurare</label>
-        <select class="foarte lat" id="măsura-de-asigurare">
+        <select class="foarte lat care schimbă formularul" id="măsura-de-asigurare">
           <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
           <option>interzicerea debitorului de a săvîrşi anumite acte</option>
           <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
@@ -508,6 +508,7 @@
       <li class="subformular" id="valoarea-acţiunii">
         <label>Valoarea acţiunii</label>
         <input class="sumă"/>
+        <select class="valuta"></select>
       </li>
     </ul>
 

@@ -5,9 +5,9 @@ var Action = {
     $('fieldset')
       .autoSizeTextareas()
       .initTypedFieldsets()
-      .adaugăŞoapteLaListeleFoarteLate()
       .urmăreşteSchimbările();
 
+    ListeFoarteLate.seteazăŞoapte();
     DebitorFieldset.init();
     Valute.init();
     HashController.init();
@@ -29,7 +29,7 @@ var ProcedurăNonPecuniară = {
       $('#date-generale')
         .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
         .on('click', '#bunuri button.elimină', this.eliminăCîmp)
-        .on('iniţializat', function() { $('#obiect').trigger('change') });
+        .on('iniţializat', function() { $('#obiect').trigger('change', ['automat']) });
     },
 
     adaugăCîmp: function() {
@@ -71,8 +71,7 @@ var ProcedurăNonPecuniară = {
       .siblings('.subformular').remove().end()
       .after(şablon.html())
       .parent()
-        .find('input,textarea').first().focus().end().end()
-        .find('.subformular select.foarte.lat').trigger('iniţializează').end();
+        .find('input,textarea').first().focus();
   }
 };
 
@@ -175,25 +174,28 @@ $.fn.autoSizeTextareas = function(options) {
 
 // --------------------------------------------------
 
-$.fn.adaugăŞoapteLaListeleFoarteLate = function() {
-  return this
-    .on('change', 'select.foarte.lat', function() {
-      var lista = $(this),
-          şoapta = lista.next('.şoaptă');
+var ListeFoarteLate = {
+  seteazăŞoapte: function() {
+    $('#procedură-nouă')
+      .on('change', 'select.foarte.lat', function() {
+        var lista = $(this);
 
-      şoapta.text(lista.val());
-    })
-    .on('iniţializează', 'select.foarte.lat', function() {
-      var lista = $(this);
+        lista.next('.şoaptă').remove();
 
-      $('<p>')
-        .addClass('şoaptă')
-        .css('margin-left', lista.prev('label').outerWidth(true))
-        .insertAfter(lista);
-
-      lista.trigger('change');
-    })
-    .find('select.foarte.lat').trigger('iniţializează').end();
+        $('<p>')
+          .insertAfter(lista)
+          .text(lista.val())
+          .addClass('şoaptă')
+          .css('margin-left', lista.prev('label').outerWidth(true));
+      })
+      .find('select.foarte.lat').trigger('change', ['automat']).end()
+      .on('change', 'select.care.schimbă.formularul', function(e, tip) {
+        $(this).closest('fieldset')
+          .find('select.foarte.lat')
+            .not(function() {return $(this).next().is('.şoaptă')})
+            .trigger('change', ['automat']);
+      });
+  }
 };
 
 // --------------------------------------------------
@@ -205,7 +207,9 @@ $.fn.există = function() {
 // --------------------------------------------------
 
 $.fn.urmăreşteSchimbările = function() {
-  function mark() {
+  function mark(e, tip) {
+    if (tip == 'automat') return;
+
     $(this).attr('schimbat', '');
   }
 
@@ -240,7 +244,7 @@ $.fn.initTypedFieldsets = function() {
 
       fieldset.find('>.conţinut').html(şablon.html());
     })
-    .find(selector).trigger('change').end()
+    .find(selector).trigger('change', ['automat']).end()
     .trigger('iniţializat')
     .end();
 };
