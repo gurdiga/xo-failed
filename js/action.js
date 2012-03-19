@@ -185,8 +185,7 @@ var ListeFoarteLate = {
         $('<p>')
           .insertAfter(lista)
           .text(lista.val())
-          .addClass('şoaptă')
-          .css('margin-left', lista.prev('label').outerWidth(true));
+          .addClass('şoaptă');
       })
       .find('select.foarte.lat').trigger('change', ['automat']).end()
       .on('change', 'select.care.schimbă.formularul', function(e, tip) {

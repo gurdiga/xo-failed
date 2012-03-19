@@ -23,6 +23,7 @@ var Onorariul = {
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
     $('#debitor').on('change', '.gen-persoană', Onorariul.actualizează);
+    $('#părţile-au-ajuns-la-conciliere').on('change', Onorariul.actualizează);
   },
 
   actualizează: function() {
@@ -37,6 +38,10 @@ var Onorariul = {
       onorariu = typeof valoare == 'function' ? valoare() : valoare;
     } else {
       onorariu = Onorariul.pecuniar();
+    }
+
+    if ($('#părţile-au-ajuns-la-conciliere').is(':checked')) {
+      onorariu *= .7;
     }
 
     $('#onorariu').val(round(onorariu, 2));
