@@ -177,6 +177,10 @@ input.sumă {
   width: 5em;
 }
 
+input.sumă#total {
+  font-weight: bold;
+}
+
 input.invalid {
   border-color: red;
 }

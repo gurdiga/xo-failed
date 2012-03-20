@@ -77,11 +77,24 @@ var ProcedurăNonPecuniară = {
 
 // --------------------------------------------------
 
+var RateBNM = {};
+
 var Valute = {
   init: function() {
+    this.populeazăListe();
+    this.încarcăRateBNM();
+  },
+
+  populeazăListe: function() {
     var şablon = $('.valuta.şablon').html();
 
     $('ul .valuta').html(şablon);
+  },
+
+  încarcăRateBNM: function() {
+    $.getJSON('/rate-bnm/current.json', function(data) {
+      RateBNM = data;
+    });
   }
 };
 

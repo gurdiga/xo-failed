@@ -17,7 +17,7 @@ var Onorariul = {
     $('#date-generale')
       .on(
         'keydown keyup update paste change',
-        '#suma-de-bază, #bunuri .valoare, input:checkbox',
+        '.sumă, .valuta, #bunuri .valoare, input:checkbox',
         Onorariul.actualizează
       )
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
@@ -48,7 +48,9 @@ var Onorariul = {
   },
 
   pecuniar: function() {
-    var suma = parseFloat($('#suma-de-bază').val() || 0);
+    $('#date-generale #total').val($('#date-generale .sumă:not(#total)').suma());
+
+    var suma = parseFloat($('#date-generale #total').val());
 
     if (suma <= 100000) {
       if ($('#încasare-periodică').is(':checked')) {
@@ -139,13 +141,23 @@ $.fn.suma = function() {
   var suma = 0;
 
   this.filter('input').each(function() {
-    if ($.isNumeric(this.value)) {
-      $(this).removeClass('invalid');
-      suma += parseFloat(this.value);
+    var cîmp = $(this);
+
+    if ($.isNumeric(cîmp.val()) && cîmp.val() >= 0) {
+      if (cîmp.is('.invalid')) cîmp.removeClass('invalid');
+
+      if (cîmp.next().is('.valuta') && cîmp.next('.valuta').val() != 'MDL') {
+        var valuta = cîmp.next('.valuta').val(),
+            rataBNM = RateBNM[valuta];
+
+        suma += this.value * rataBNM.value / rataBNM.nominal;
+      } else {
+        suma += parseFloat(this.value);
+      }
     } else {
       $(this).addClass('invalid');
     };
   });
 
-  return suma;
+  return round(suma, 2);
 };
