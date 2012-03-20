@@ -113,12 +113,12 @@ div.pagină>.conţinut {
   margin: 5px auto;
 }
 
-.column {
+.coloană {
   float: left;
   width: 50%;
 }
 
-.left.column {
+.coloană.stînga {
   clear: left;
 }
 
@@ -271,4 +271,22 @@ button#salvează-procedură {
 
 #bunuri .cîmp:hover button.elimină {
   visibility: visible;
+}
+
+fieldset#forme li {
+  margin-bottom: .5em;
+  overflow: auto;
+}
+
+fieldset#forme button {
+  font-weight: bold;
+  float: left;
+  clear: left;
+  cursor: pointer;
+  margin-left: .5em;
+}
+
+fieldset#forme .şoaptă {
+  margin: .7em 0 0 7em;
+  color: #555;
 }
