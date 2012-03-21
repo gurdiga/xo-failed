@@ -11,6 +11,10 @@ var Action = {
     DebitorFieldset.init();
     Valute.init();
     HashController.init();
+  },
+
+  '#index': function() {
+    $('#index input').focus();
   }
 };
 
@@ -120,7 +124,7 @@ var DebitorFieldset = {
   },
 
   initDelete: function() {
-    $('div#procedură-nouă').on('click', 'button.elimină-debitor', function() {
+    $('div#procedură').on('click', 'button.elimină-debitor', function() {
       var button = $(this),
           acestDebitor = button.closest('fieldset');
           ceilalţiDebitori = acestDebitor.siblings('fieldset');
@@ -142,11 +146,14 @@ var HashController = {
 
       $('div.pagină:not(' + hash + ')').hide();
       $('div.pagină' + hash).show();
+
+      if (Action[hash]) Action[hash]();
+
       document.title = $('div.pagină' + hash + ' h1').text();
     }).trigger('hashchange');
 
     $('.deschide.pagină').on('click', function() {
-      location.hash = this.id;
+      location.hash = $(this).data('hash');
     });
   }
 };
@@ -189,7 +196,7 @@ $.fn.autoSizeTextareas = function(options) {
 
 var ListeFoarteLate = {
   seteazăŞoapte: function() {
-    $('#procedură-nouă')
+    $('#procedură')
       .on('change', 'select.foarte.lat', function() {
         var lista = $(this);
 

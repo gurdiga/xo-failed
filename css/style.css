@@ -49,8 +49,8 @@ textarea {
   min-width: 18em;
 }
 
-textarea:focus,
-input:focus {
+fieldset textarea:focus,
+fieldset input:focus {
   border-color: #4d90fe;
 }
 
@@ -62,14 +62,17 @@ textarea {
   font: inherit;
 }
 
-#index select,
+#căutare {
+  float: left;
+}
+
 #index input,
 button.mare {
   font-size: 1.2em;
   font-weight: bold;
 }
 
-button#procedură-nouă {
+#index #crează-procedură {
   float: right;
 }
 
@@ -168,9 +171,9 @@ input.invalid {
   border-color: red;
 }
 
-#procedură-nouă h1,
-#procedură-nouă fieldset,
-#procedură-nouă button#salvează-procedură{
+#procedură h1,
+#procedură fieldset,
+#procedură button#salvează-procedură{
   margin-right: 40px;
 }
 

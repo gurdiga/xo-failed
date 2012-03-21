@@ -14,14 +14,18 @@
       <div class="conţinut">
         <h1>Consola executorului</h1>
 
-        <button id="procedură-nouă" class="mare deschide pagină" type="button">Procedură nouă</button>
+        <div id="căutare">
+          <input/>
+          <p class="şoaptă">Număr de procedură, nume sau IDNP, denumire sau IDNO.</p>
+        </div>
 
-        <input/>
-        <p class="şoaptă">Număr de procedură, nume sau IDNP, denumire sau IDNO.</p>
+        <div id="crează-procedură">
+          <button class="mare deschide pagină" data-hash="procedură" type="button">Procedură nouă</button>
+        </div>
       </div>
     </div>
 
-    <div id="procedură-nouă" class="pagină">
+    <div id="procedură" class="pagină">
       <div class="conţinut">
         <button type="button" id="salvează-procedură" class="mare">Salvează</button>
 
@@ -154,7 +158,7 @@
         </div>
 
         <div class="coloană stînga">
-          <fieldset data-şablon="procedură" id="date-generale">
+          <fieldset data-şablon="date-generale" id="date-generale">
             <legend>
               <label>General: caracter</label>
               <select id="caracter" class="care schimbă formularul">
@@ -227,7 +231,7 @@
 
     <!-- şabloane -->
 
-    <div class="procedură pecuniar şablon">
+    <div class="date-generale pecuniar şablon">
       <ul>
         <li>
           <label>Suma de bază</label>
@@ -254,7 +258,7 @@
       </ul>
     </div>
 
-    <div class="procedură nonpecuniar şablon">
+    <div class="date-generale nonpecuniar şablon">
       <ul>
         <li>
           <label>Obiectul</label>
