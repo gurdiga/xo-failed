@@ -66,6 +66,11 @@ textarea {
   float: left;
 }
 
+#index label {
+  color: #555;
+}
+
+#index label,
 #index input,
 button.mare {
   font-size: 1.2em;
@@ -81,9 +86,9 @@ button.mare {
   width: 20em;
 }
 
-#index .şoaptă {
+#index #căutare .şoaptă {
   color: #555;
-  margin: 3px 0;
+  margin: 3px 0 0 4em;
   padding: 0;
 }
 
