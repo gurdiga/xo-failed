@@ -6,20 +6,6 @@ body {
   margin: 0;
 }
 
-input.label {
-  border: 1px solid white;
-  outline-width: 0;
-  padding-right: 10px;
-}
-
-input.label:hover {
-  border: 1px solid #ddd;
-}
-
-input.label.with-options {
-  background: url('/images/expanded.png') no-repeat right center;
-}
-
 textarea {
   font: inherit;
   height: 60px;
@@ -63,7 +49,6 @@ textarea {
   min-width: 18em;
 }
 
-input.label:focus,
 textarea:focus,
 input:focus {
   border-color: #4d90fe;
@@ -77,7 +62,6 @@ textarea {
   font: inherit;
 }
 
-#index label,
 #index select,
 #index input,
 button.mare {
@@ -85,12 +69,19 @@ button.mare {
   font-weight: bold;
 }
 
-#procedură-nouă {
+button#procedură-nouă {
   float: right;
 }
 
-#index select {
-  font-weight: normal;
+#index input {
+  vertical-align: baseline;
+  width: 20em;
+}
+
+#index .şoaptă {
+  color: #555;
+  margin: 3px 0;
+  padding: 0;
 }
 
 h1 {
@@ -128,25 +119,17 @@ fieldset {
   margin-bottom: 20px;
 }
 
-input.label.with.options {
-  padding-right: 12px;
-  background: url('/images/expanded.png') no-repeat right center;
-  cursor: default;
-}
-
 .şablon {
   display: none;
 }
 
-fieldset label,
-fieldset .label {
+fieldset label {
   display: inline-block;
   width: 11em;
   text-align: right;
 }
 
-fieldset label,
-fieldset .label {
+fieldset label {
   color: #555;
 }
 
