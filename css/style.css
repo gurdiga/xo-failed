@@ -82,13 +82,12 @@ button.mare {
 }
 
 #index input {
-  vertical-align: baseline;
   width: 20em;
 }
 
 #index #căutare .şoaptă {
   color: #555;
-  margin: 3px 0 0 4em;
+  margin: 3px 0;
   padding: 0;
 }
 
