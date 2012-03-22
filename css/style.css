@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-  font: 14px sans-serif;
+  font: 14px Arial, sans-serif;
   padding: 5px 10px;
   margin: 0;
 }
@@ -77,8 +77,33 @@ button.mare {
   font-weight: bold;
 }
 
-#index #crează-procedură {
+#crează-procedură {
   float: right;
+}
+
+#crează-procedură ul {
+  margin: 0;
+  list-style-type: square;
+  list-style-position: inside;
+}
+
+#crează-procedură li {
+  margin: .3em 0;
+  padding: .3em 1em .3em .5em;
+  border: 1px solid #ddd;
+  border-top-color: #c0c0c0;
+}
+
+#crează-procedură a {
+  color: black;
+  text-decoration: none;
+}
+
+#crează-procedură a:focus,
+#crează-procedură a:hover {
+  color: blue;
+  text-decoration: underline;
+  outline-width: 0;
 }
 
 #index input {
