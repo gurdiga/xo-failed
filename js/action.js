@@ -140,21 +140,31 @@ var DebitorFieldset = {
 var HashController = {
   init: function() {
     $(window).on('hashchange', function() {
-      var hash = location.hash;
+      var id = HashController.id();
 
-      if (hash == '' || hash == '#') hash = '#index';
+      $('div.pagină:not(' + id + ')').hide();
+      $('div.pagină' + id).show();
 
-      $('div.pagină:not(' + hash + ')').hide();
-      $('div.pagină' + hash).show();
+      if (Action[id]) Action[id]();
 
-      if (Action[hash]) Action[hash]();
-
-      document.title = $('div.pagină' + hash + ' h1').text();
+      document.title = $('div.pagină' + id + ' h1').text();
     }).trigger('hashchange');
+  },
 
-    $('.deschide.pagină').on('click', function() {
-      location.hash = $(this).data('hash');
-    });
+  hash: function() {
+    var hash = location.hash;
+
+    if (hash == '' || hash == '#') hash = '#index';
+
+    return hash;
+  },
+
+  id: function() {
+    return this.hash().split('?')[0];
+  },
+
+  date: function() {
+    return this.hash().split('?')[1];
   }
 };
 
