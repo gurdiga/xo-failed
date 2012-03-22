@@ -15,6 +15,10 @@ var Action = {
 
   '#index': function() {
     $('#index input').focus();
+  },
+
+  '#procedură': function() {
+    $('#literă').text(HashController.date() || '');
   }
 };
 
@@ -148,7 +152,6 @@ var HashController = {
       if (Action[id]) Action[id]();
 
       document.title = $('div.pagină' + id + ' h1').text();
-      $('#literă').text(HashController.date() || '');
     }).trigger('hashchange');
   },
 
