@@ -8,6 +8,8 @@ var Action = {
   },
 
   '#procedură': function() {
+    $('[schimbat]').removeAttr('schimbat');
+
     ProcedurăNonPecuniară.init();
 
     $('fieldset')
