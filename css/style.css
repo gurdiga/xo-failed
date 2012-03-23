@@ -83,6 +83,7 @@ button.mare {
 
 #crează-procedură {
   float: right;
+  width: 15em;
 }
 
 #crează-procedură ul {
@@ -114,10 +115,12 @@ button.mare {
   width: 20em;
 }
 
-#index #căutare .şoaptă {
+#index #căutare .şoaptă,
+#index #crează-procedură .şoaptă {
   color: #555;
-  margin: 3px 0;
+  margin: .3em;
   padding: 0;
+  line-height: 1.2em;
 }
 
 h1 {
