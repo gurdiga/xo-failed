@@ -19,6 +19,8 @@ var Action = {
     Valute.init();
 
     $('#literă').text(HashController.date() || '');
+
+    $('fieldset:first').find('input, select, textarea').first().focus();
   }
 };
 

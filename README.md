@@ -1,7 +1,7 @@
 TODO:
 -----
 
-* persoane terţe
+* setează pj/f pentru diferitele genuri de procedură (PS-)
 * adaugă şoapte pentru valute?
 * aplică hack-ul pentru IE la select.forarte.lat
 * how to encode form data?
