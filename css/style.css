@@ -134,6 +134,8 @@ div.pagină {
 div.pagină>.conţinut {
   width: 1000px;
   margin: 5px auto;
+  overflow: auto;
+  padding-bottom: 5em;
 }
 
 .coloană {
@@ -204,10 +206,6 @@ input.invalid {
 #procedură fieldset,
 #procedură button#salvează-procedură{
   margin-right: 40px;
-}
-
-button#adaugă-debitor {
-  margin-bottom: 5em;
 }
 
 button.elimină-debitor {
