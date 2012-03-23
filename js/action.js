@@ -11,14 +11,11 @@ var Action = {
     $('[schimbat]').removeAttr('schimbat');
 
     ProcedurăNonPecuniară.init();
-
-    $('fieldset')
-      .autoSizeTextareas()
-      .initTypedFieldsets()
-      .urmăreşteSchimbările();
-
+    FormulareŞablon.init();
+    Schimbări.urmăreşte();
+    CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
-    DebitorFieldset.init();
+    AdăugarePersoane.init();
     Valute.init();
 
     $('#literă').text(HashController.date() || '');
@@ -111,33 +108,41 @@ var Valute = {
 
 // --------------------------------------------------
 
-var DebitorFieldset = {
+var AdăugarePersoane = {
   init: function() {
-    this.initAdd();
-    this.initDelete();
+    this.initAdăugare();
+    this.initŞtergere();
   },
 
-  initAdd: function() {
-    $('#adaugă-debitor').on('click', function() {
-      var fieldset = $(this).prev();
+  initAdăugare: function() {
+    $('#procedură').on('click', 'button.adaugă-persoană', function() {
+      var buton = $(this),
+          fieldset = buton.prev();
 
       fieldset.clone()
-        .find('li:has(.label)').remove().end()
-        .find('input,textarea').val('').end()
+        .removeAttr('id')
+        .find('input, textarea').val('').end()
+        .find('legend label').text(function(i, text) {
+          if (buton.find('.legend.label').există()) {
+            return buton.find('.legend.label').text();
+          } else {
+            return text;
+          }
+        }).end()
         .insertAfter(fieldset);
 
-      $(this).parent().find('fieldset').addClass('dispensabil');
+      buton.siblings('fieldset').addClass('dispensabilă');
     });
   },
 
-  initDelete: function() {
-    $('div#procedură').on('click', 'button.elimină-debitor', function() {
+  initŞtergere: function() {
+    $('#procedură').on('click', 'button.elimină-persoană', function() {
       var button = $(this),
-          acestDebitor = button.closest('fieldset');
-          ceilalţiDebitori = acestDebitor.siblings('fieldset');
+          aceastăPersoană = button.closest('fieldset');
+          celelaltePersoane = aceastăPersoană.siblings('fieldset');
 
-      acestDebitor.remove();
-      ceilalţiDebitori.toggleClass('dispensabil', ceilalţiDebitori.length > 1);
+      aceastăPersoană.remove();
+      celelaltePersoane.toggleClass('dispensabilă', celelaltePersoane.length > 1);
     });
   }
 };
@@ -177,36 +182,31 @@ var HashController = {
 
 // --------------------------------------------------
 
-$.autoSizeTextareas = {
-  defaults: {
-    selector: 'textarea'
-  },
+var CîmpuriTextarea = {
+  selector: 'textarea',
+  evenimente: 'keydown keyup update paste change focus mouseup',
 
-  events: 'keydown keyup update paste change focus mouseup'
-};
+  autodimensionează: function() {
+    $('#procedură').on(this.evenimente, this.selector, function() {
+      var textarea = $(this);
 
-$.fn.autoSizeTextareas = function(options) {
-  options = $.extend($.autoSizeTextareas.defaults, options);
+      if (textarea.is(':not(:visible)')) return;
 
-  return this.on($.autoSizeTextareas.events, options.selector, function() {
-    var textarea = $(this);
+      var clone = textarea.css('overflow', 'hidden').clone()
+        .css({
+          'padding': 0,
+          'border-width': 0,
+          'visibility': 'hidden',
+          'position': 'absolute',
+          'height': textarea.css('min-height')
+        })
+        .val(textarea.val())
+        .insertBefore(textarea);
 
-    if (textarea.is(':not(:visible)')) return;
-
-    var clone = textarea.css('overflow', 'hidden').clone()
-      .css({
-        'padding': 0,
-        'border-width': 0,
-        'visibility': 'hidden',
-        'position': 'absolute',
-        'height': textarea.css('min-height')
-      })
-      .val(textarea.val())
-      .insertBefore(textarea);
-
-    textarea.css('height', clone[0].scrollHeight);
-    clone.remove();
-  });
+      textarea.css('height', clone[0].scrollHeight);
+      clone.remove();
+    });
+  }
 };
 
 // --------------------------------------------------
@@ -242,23 +242,33 @@ $.fn.există = function() {
 
 // --------------------------------------------------
 
-$.fn.urmăreşteSchimbările = function() {
-  function mark(e, tip) {
-    if (tip == 'automat') return;
+var Schimbări = {
+  selector: [
+    'fieldset li input',
+    'fieldset li textarea',
+    'fieldset li select'
+  ].join(', '),
 
-    $(this).attr('schimbat', '');
+  evenimente: 'keydown keyup update paste change',
+
+  urmăreşte: function() {
+    $('#procedură').on(Schimbări.evenimente, Schimbări.selector, function (e, tip) {
+      if (tip == 'automat') return;
+
+      $(this).attr('schimbat', '');
+    });
   }
-
-  return this.on('keydown keyup update paste change', 'li input, li textarea, li select', mark);
-}
+};
 
 // --------------------------------------------------
 
-$.fn.initTypedFieldsets = function() {
-  var selector = 'legend select';
+var FormulareŞablon = {
+  selector: 'fieldset[data-şablon]',
 
-  return this.filter('[data-şablon]')
-    .on('change', selector, function() {
+  init: function() {
+    var selectorLista = FormulareŞablon.selector + ' legend select';
+
+    $('#procedură').on('change', selectorLista, function() {
       var select = $(this),
           fieldset = select.closest('fieldset'),
           şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
@@ -280,7 +290,9 @@ $.fn.initTypedFieldsets = function() {
 
       fieldset.find('>.conţinut').html(şablon.html());
     })
-    .find(selector).trigger('change', ['automat']).end()
-    .trigger('iniţializat')
+    .find(FormulareŞablon.selector)
+      .trigger('iniţializat')
+      .find('legend select').trigger('change', ['automat']).end()
     .end();
+  }
 };

@@ -33,8 +33,6 @@
 
     <div id="procedură" class="pagină">
       <div class="conţinut">
-        <button type="button" id="salvează-procedură" class="mare">Salvează</button>
-
         <h1>Procedură nouă: № 032<span id="literă"></span>-0071</h1>
 
         <fieldset>
@@ -176,10 +174,17 @@
                <option selected>juridică</option>
                 <option>fizică</option>
               </select>
+
+              <button class="elimină-persoană" title="Elimină persoană">×</button>
             </legend>
 
             <div class="conţinut"></div>
           </fieldset>
+
+          <button type="button" class="adaugă-persoană">
+            Adaugă
+            <span class="legend label">Persoană terţă</span>
+          </button>
         </div>
 
         <div class="coloană">
@@ -191,13 +196,13 @@
                 <option selected>fizică</option>
               </select>
 
-              <button class="elimină-debitor">Elimină debitor</button>
+              <button class="elimină-persoană" title="Elimină persoană">×</button>
             </legend>
 
             <div class="conţinut"></div>
           </fieldset>
 
-          <button type="button" id="adaugă-debitor">Adaugă debitor</button>
+          <button type="button" class="adaugă-persoană">Adaugă debitor</button>
         </div>
 
       </div>
@@ -267,7 +272,7 @@
 
         <li>
           <label class="textarea">Sediu</label>
-          <textarea class="autosize" spellcheck="false"></textarea>
+          <textarea spellcheck="false"></textarea>
         </li>
 
         <li>
@@ -277,7 +282,7 @@
 
         <li>
           <label class="textarea">Note</label>
-          <textarea class="autosize" spellcheck="false"></textarea>
+          <textarea spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -311,12 +316,12 @@
 
         <li>
           <label>Domiciliu</label>
-          <textarea class="autosize" spellcheck="false"></textarea>
+          <textarea spellcheck="false"></textarea>
         </li>
 
         <li>
           <label class="textarea">Note</label>
-          <textarea class="autosize" spellcheck="false"></textarea>
+          <textarea spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -372,7 +377,7 @@
     <ul class="şablon" title="evacuarea">
       <li class="subformular">
         <label>Din încăperea</label>
-        <textarea class="autosize"></textarea>
+        <textarea></textarea>
       </li>
 
       <li class="subformular">
@@ -384,24 +389,24 @@
     <ul class="şablon" title="instalarea">
       <li class="subformular">
         <label>În încăperea</label>
-        <textarea class="autosize"></textarea>
+        <textarea></textarea>
       </li>
     </ul>
 
     <ul class="şablon" title="schimbul forţat">
       <li class="subformular">
         <label>Încăperea pentru creditor</label>
-        <textarea class="autosize"></textarea>
+        <textarea></textarea>
 
         <label>Încăperea pentru debitor</label>
-        <textarea class="autosize"></textarea>
+        <textarea></textarea>
       </li>
     </ul>
 
     <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
       <li class="subformular">
         <label>Acte</label>
-        <textarea class="autosize"></textarea>
+        <textarea></textarea>
       </li>
     </ul>
 

@@ -28,7 +28,7 @@ input[type=checkbox] {
 
 textarea,
 input,
-fieldset ul select {
+fieldset select {
   margin: 1px 0;
   vertical-align: top;
   padding: .3em;
@@ -208,18 +208,17 @@ input.invalid {
   margin-right: 40px;
 }
 
-button.elimină-debitor {
+button.elimină-persoană {
   font-size: small;
   display: none;
 }
 
-fieldset.dispensabil button.elimină-debitor {
+fieldset.dispensabilă button.elimină-persoană {
   display: inline;
 }
 
-button#salvează-procedură {
-  float: right;
-  margin-right: 1em;
+fieldset#creditor button.elimină-persoană {
+  display: none;
 }
 
 .şoaptă {
@@ -270,6 +269,7 @@ button#salvează-procedură {
   padding-left: 0;
 }
 
+button.elimină-persoană,
 #bunuri button.elimină {
   border-width: 0;
   background-color: transparent;
@@ -282,6 +282,11 @@ button#salvează-procedură {
   visibility: hidden;
 }
 
+button.elimină-persoană {
+  visibility: visible;
+}
+
+button.elimină-persoană:hover,
 #bunuri button.elimină:hover {
   color: black;
 }
