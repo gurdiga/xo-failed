@@ -84,16 +84,17 @@ button.mare {
 #crează-procedură {
   float: right;
   width: 15em;
+  margin-right: 12em;
 }
 
 #crează-procedură ul {
-  margin: 0;
+  margin: 1px 0 0;
   list-style-type: square;
   list-style-position: inside;
 }
 
 #crează-procedură li {
-  margin: .3em 0;
+  margin: 0 0 .3em;
   padding: .3em 1em .3em .5em;
   border: 1px solid #ddd;
   border-top-color: #c0c0c0;
@@ -118,9 +119,13 @@ button.mare {
 #index #căutare .şoaptă,
 #index #crează-procedură .şoaptă {
   color: #555;
-  margin: .3em;
+  margin: .3em 0 0 .1em;
   padding: 0;
   line-height: 1.2em;
+}
+
+#index #crează-procedură .şoaptă {
+  margin: .8em 0 0 .3em;
 }
 
 h1 {
