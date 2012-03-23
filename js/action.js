@@ -1,5 +1,13 @@
 var Action = {
   init: function() {
+    HashController.init();
+  },
+
+  '#index': function() {
+    $('#index input').focus();
+  },
+
+  '#procedură': function() {
     ProcedurăNonPecuniară.init();
 
     $('fieldset')
@@ -10,14 +18,7 @@ var Action = {
     ListeFoarteLate.seteazăŞoapte();
     DebitorFieldset.init();
     Valute.init();
-    HashController.init();
-  },
 
-  '#index': function() {
-    $('#index input').focus();
-  },
-
-  '#procedură': function() {
     $('#literă').text(HashController.date() || '');
   }
 };
