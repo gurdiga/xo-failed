@@ -62,6 +62,10 @@ textarea {
   font: inherit;
 }
 
+button {
+  padding: .3em .6em;
+}
+
 #căutare {
   float: left;
 }
