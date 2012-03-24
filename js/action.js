@@ -18,9 +18,19 @@ var Action = {
     AdăugarePersoane.init();
     Valute.init();
 
+    $('fieldset:first').find('input, select, textarea').first().focus();
     $('#literă').text(HashController.date() || '');
 
-    $('fieldset:first').find('input, select, textarea').first().focus();
+    switch (HashController.date()) {
+      case 'S':
+        $('#caracter').val('pecuniar');
+        $('#creditor .gen-persoană').val('juridică');
+        break;
+      case 'P':
+        $('#caracter').val('pecuniar');
+        $('#creditor .gen-persoană').val('fizică');
+        break;
+    }
   }
 };
 
