@@ -112,6 +112,8 @@ var Valute = {
   },
 
   încarcăRateBNM: function() {
+    if (!$.isEmptyObject(RateBNM)) return;
+
     $.getJSON('/rate-bnm/current.json', function(data) {
       RateBNM = data;
     });
