@@ -147,7 +147,6 @@ div.pagină>.conţinut {
   width: 1000px;
   margin: 5px auto;
   overflow: auto;
-  padding-bottom: 5em;
 }
 
 .coloană {
@@ -214,9 +213,14 @@ input.invalid {
   border-color: red;
 }
 
+#procedură h1 {
+  margin-top: 30px;
+}
+
 #procedură h1,
 #procedură fieldset,
-#procedură button#salvează-procedură{
+#procedură #bară-de-butoane,
+#procedură button.salvează.sus {
   margin-right: 40px;
 }
 
@@ -323,4 +327,29 @@ fieldset#forme button {
 fieldset#forme .şoaptă {
   margin: .7em 0 0 7em;
   color: #555;
+}
+
+#procedură #bară-de-butoane {
+  clear: left;
+  text-align: right;
+  padding-top: 2em;
+}
+
+#procedură #bară-de-butoane hr {
+  border-width: 0;
+  border-top: 1px solid #ddd;
+}
+
+#procedură button.salvează {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+#procedură button.salvează button {
+  margin-right: 0;
+}
+
+#procedură button.salvează.sus {
+  float: right;
+  margin-top: 25px;
 }
