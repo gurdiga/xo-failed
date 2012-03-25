@@ -17,6 +17,7 @@ var Action = {
     ListeFoarteLate.seteazăŞoapte();
     AdăugarePersoane.init();
     Valute.init();
+    Salvează.init();
 
     $('fieldset:first').find('input, select, textarea').first().focus();
     $('#literă').text(HashController.date() || '');
@@ -308,5 +309,28 @@ var FormulareŞablon = {
       .trigger('iniţializat')
       .find('legend select').trigger('change', ['automat']).end()
     .end();
+  }
+};
+
+// --------------------------------------------------
+
+var Salvează = {
+  init: function() {
+    $('#procedură button.salvează').on('click', function() {
+      var date = {}, cîmpuri = [
+        'label + select',
+        'label + input',
+        'label + textarea'
+      ].join(', ');
+
+      $('#procedură').find('fieldset').each(function() {
+        var nume = $(this).find('legend label').text();
+
+        date[nume] = [];
+        // TODO
+        // toate fieldset-urile trebuie să fie în div.coloană?
+        console.log(nume);
+      });
+    });
   }
 };
