@@ -44,7 +44,7 @@ var Onorariul = {
       onorariu *= .7;
     }
 
-    $('#onorariu').val(round(onorariu, 2));
+    $('#onorariu').val(onorariu.toFixed(2));
   },
 
   pecuniar: function() {
@@ -129,14 +129,6 @@ var Defaults = {
 
 // --------------------------------------------------
 
-function round(number, decimalCount) {
-  var multiplier = Math.pow(10, decimalCount);
-
-  return Math.round(number * multiplier) / multiplier;
-}
-
-// --------------------------------------------------
-
 $.fn.suma = function() {
   var suma = 0;
 
@@ -159,5 +151,5 @@ $.fn.suma = function() {
     };
   });
 
-  return round(suma, 2);
+  return suma.toFixed(2);
 };
