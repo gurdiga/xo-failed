@@ -56,7 +56,7 @@ var ProcedurăNonPecuniară = {
       var şablon = $('.şablon #bunuri .cîmp').first();
 
       şablon.clone()
-        .insertAfter($('#bunuri .cîmp:last'))
+        .insertBefore($(this).parent())
         .find('textarea').focus();
     },
 
