@@ -18,6 +18,7 @@ var Action = {
     AdăugarePersoane.init();
     Valute.init();
     Salvează.init();
+    Cheltuieli.init();
 
     $('fieldset:first').find('input, select, textarea').first().focus();
     $('#literă').text(HashController.date() || '');
@@ -332,5 +333,15 @@ var Salvează = {
         console.log(nume);
       });
     });
+  }
+};
+
+// --------------------------------------------------
+
+var Cheltuieli = {
+  init: function() {
+    $('#taxe-şi-speze .listă').on('click', '.conţinut li', function() {
+      alert('Adaugă asta:\n\n' + $(this).text().replace(/[\s\r\n]+/g, ' '));
+    })
   }
 };

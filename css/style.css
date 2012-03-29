@@ -90,12 +90,14 @@ button.mare {
   margin-right: 12em;
 }
 
+#taxe-şi-speze,
 #crează-procedură ul {
   margin: 1px 0 0;
   list-style-type: square;
   list-style-position: inside;
 }
 
+#taxe-şi-speze .listă,
 #crează-procedură li {
   margin: 0 0 .3em;
   padding: .3em 1em .3em .5em;
@@ -359,4 +361,50 @@ fieldset#forme .şoaptă {
 
 #procedură #date-generale {
   min-height: 18.2em;
+}
+
+#taxe-şi-speze {
+  display: inline-block;
+  font-size: small;
+  margin-left: 3em;
+}
+
+#taxe-şi-speze .listă .descriere,
+#taxe-şi-speze .listă ol>li {
+  cursor: pointer;
+}
+
+#taxe-şi-speze .listă ol>li {
+  list-style-position: outside;
+  margin-bottom: .4em;
+}
+
+#taxe-şi-speze .listă ol>li p {
+  display: none;
+}
+
+#taxe-şi-speze .listă:hover .descriere,
+#taxe-şi-speze .listă ol>li:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+#taxe-şi-speze .listă .conţinut {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #dedede;
+  width: 40em;
+  padding: .5em 1em 1em;
+  margin-left: -1em;
+  margin-top: .3em;
+}
+
+#taxe-şi-speze .listă:hover .conţinut {
+  display: block;
+}
+
+#taxe-şi-speze .listă .titlu {
+  margin: .5em 0 .3em;
+  display: none;
 }
