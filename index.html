@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Consola executorului</title>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
-    <!--[if IE 8]>
+    <!--[if gte IE 8]>
     <link type="text/css" rel="stylesheet" href="/css/style-ie8.css"/>
     <![endif]-->
   </head>
@@ -28,7 +28,7 @@
             <li><a href="#procedură?P">pensie de întreţinere</a></li>
           </ul>
 
-          <p class="şoaptă">Se va reflecta în numărul de înregistrare al procedurii.</p></p>
+          <p class="şoaptă">Se va reflecta în numărul de înregistrare al procedurii.</p>
         </div>
       </div>
     </div>
@@ -149,7 +149,7 @@
           </fieldset>
         </div>
 
-        <fieldset style="clear: left">
+        <fieldset id="cheltuieli">
           <legend>
             <label>Cheltuieli</label>
           </legend>
@@ -166,146 +166,199 @@
                 <input id="părţile-au-ajuns-la-conciliere" type="checkbox"/>
                 <p class="şoaptă">se aplică coeficientul de 0.7 la onorariu</p>
               </li>
+
+              <li>
+                <label>Total taxe şi speze</label>
+                <input id="total-taxe-şi-speze" class="sumă" readonly/> MDL
+
+                <ul id="listă-taxe-şi-speze">
+                </ul>
+              </li>
             </ul>
 
-            <ul id="taxe-şi-speze">
-              <li class="listă">
+            <ul id="categorii-taxe-şi-speze">
+              <li class="categorie">
                 <span class="descriere">Adaugă taxă de gestiune a procedurilor
                 de executare şi administrare a documentelor</span>
 
-                <div class="conţinut">
+                <div class="conţinut cu umbră">
                   <h3 class="titlu">Taxe de gestiune a procedurilor de executare şi administrare a documentelor</h3>
 
                   <ol>
-                    <li>taxa de intentare şi formare a procedurii de executare</li>
-                    <li>taxa de arhivare a procedurii de executare</li>
-                    <li>
+                    <li id="taxaA1" class="item">
+                      taxa de intentare şi formare a procedurii de executare
+                      — <span class="cost">1</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaA2" class="item">
+                      taxa de arhivare a procedurii de executare
+                      — <span class="cost">3</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaA3" class="item unic" data-şablon-subformular="documente">
                       taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
                       a certificatelor, confirmărilor, a informaţiei scrise despre
                       acţiunile de executare silită întreprinse de către executorul judecătoresc
+                      — <span class="cost">1</span>&nbsp;u.c. per document
+                    </li>
 
-                      <p>Aici pentru fiecare document se percepe 1 unitate convenţională
-                      pentru un document. Va trebui de pus fereastra în care executorul
-                      va pune numărul de certificate, confirmări etc. cum ziceai, cumva
-                      să punem ce fel de documente a emis.</p>
+                    <li id="taxaA4" class="item">
+                      taxa pentru întocmirea borderoului de calcul
+                      al taxelor pentru efectuarea actelor executorului
+                      judecătoresc şi a spezelor procedurii de executare
+                      — <span class="cost">1</span>&nbsp;u.c. per document
                     </li>
-                    <li>
-                      taxa pentru întocmirea borderoului de calcul al taxelor pentru
-                      efectuarea actelor executorului judecătoresc şi a spezelor procedurii
-                      de executare
+
+                    <li id="taxaA5" class="item">
+                      taxa pentru întocmirea încheierii de distribuire a sumelor
+                      realizate în faza executării silite
+                      — <span class="cost">10</span>&nbsp;u.c.
                     </li>
-                    <li>taxa pentru întocmirea încheierii de distribuire a sumelor realizate
-                      în faza executării silite</li>
-                    <li>
+
+                    <li id="taxaA6" class="item unic" data-şablon-subformular="bifă “din arhivă”">
                       taxa pentru eliberarea copiei autentificate a procedurii de executare
-                      <p>Aici trebuie de pus bifă “din arhivă”. prin bifare se va percepe o
-                      taxă suplimentară de 1 uc.</p>
+                      — <span class="cost">1</span>&nbsp;u.c. per document
                     </li>
                   </ol>
                 </div>
               </li>
 
-              <li class="listă">
+              <li class="categorie">
                 <span class="descriere">Adaugă taxă pentru acţiunile procedurale întreprinse
                 de executorul judecătoresc</span>
 
-                <div class="conţinut">
+                <div class="conţinut cu umbră">
                   <h3 class="titlu">Taxe pentru acţiunile procedurale întreprinse de executorul judecătoresc</h3>
 
                   <ol>
-                    <li>
+                    <li id="taxaB1" class="item" data-şablon-subformular="documente adresabile">
                       taxa pentru întocmirea şi eliberarea sau expedierea pe suport de
                       hîrtie sau în versiune electronică a demersurilor, încheierilor,
                       dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
                       instituţiile financiare, angajatorul debitorului, terţele persoane,
                       sau alte organe, inclusiv în procesul vînzării bunurilor mobile
-
-                      <p>De pus fereastra în care executorul va pune numărul de documente
-                      expediate. iniţial va trebui de pus un număr prestabilit, dar pe care
-                      executorul îl va putea modifica.</p>
-                      <p>La fel, se va pune bifă “adresat instituţii financiare sau
-                      registrator independent”. se va percepe 1 uc, pentru fiecare document
-                      transmis acestor subiecti, ori 1uc pentru toate?</p>
+                      — <span class="cost">0.25</span>&nbsp;u.c.
                     </li>
-                    <li>
+
+                    <li id="taxaB2" class="item" data-şablon-subformular="ore lucrate">
                       taxa pentru întocmirea procesului-verbal de sechestru. taxa pentru
                       pregătirea şi efectuarea inventarierii patrimoniului debitorului ce
                       urmează a fi sechestrat
-
-                      <p>se va pune fereastră în care executorul va pune numărul de ore lucrate.
-                      5 uc pentru fiecare oră de lucru</p>
+                      — <span class="cost">0.5</span>&nbsp;u.c. per oră
                     </li>
-                    <li>taxa pentru desemnarea (schimbarea, în cazul existenţei temeiurilor
-                    legale) administratorului bunurilor sau a persoanei căreia i se transmit
-                    la păstrare bunurile</li>
-                    <li>taxa pentru transmiterea bunurilor spre vînzare, în baza contractului
-                    de comision, inclusiv întocmirea contractului de comision</li>
-                    <li>taxa pentru emiterea încheierii de stabilire a datei desfăşurării
-                    licitaţiei şi întocmirea textului anunţului
-                    <p>bifă “licitaţie repetată” taxa se va înmulţi la coeficientul 0,5</p></li>
-                    <li>taxa pentru desfăşurarea licitaţiei, indiferent de rezultatele licitaţiei
-                    <p>bifă “licitaţie repetată” taxa se va înmulţi la coeficientul 0,5</p></li>
-                    <li>taxa de participare la licitaţie (cu eliberarea biletului de participant)</li>
-                    <li>taxa pentru transmiterea spre vînzare a valorilor mobiliare (hîrtiilor de valoare)</li>
-                    <li>taxa pentru pregătirea demersului în instanţa de judecată privind
-                    schimbarea modului şi ordinii de executare, explicarea modului de executare,
-                    eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
-                    în căutare a debitorului, corectarea erorilor sau omisiunilor din titlul
-                    executoriu, eliberarea duplicatului documentului executoriu</li>
-                    <li>taxa pentru întocmirea procesului-verbal şi transmiterea bunului în
-                    contul stingerii datoriei</li>
-                    <li>taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
-                    de executare, indiferent de rezultatele ei</li>
-                    <li>taxa pentru ridicarea şi transmiterea la păstrare a bunurilor
-                    sechestrate şi întocmirea procesului-verbal de transmitere a bunurilor</li>
-                    <li>taxa pentru efectuarea acţiunilor în procedura de executare a
-                    documentelor executorii privind stabilirea domiciliului copilului,
-                    evacuarea, instalarea, restabilirea la locul de muncă, obligarea
-                    debitorului să întreprindă (să nu întreprindă) anumite acţiuni,
-                    aplicarea măsurilor de asigurare a acţiunii
-                    <p>se va pune fereastra în care să se indice numărul de ore lucrate,
-                    dar taxa nu trebuie să depăşească 5 uc</p></li>
+
+                    <li id="taxaB3" class="item">
+                      taxa pentru desemnarea (schimbarea, în cazul existenţei temeiurilor
+                      legale) administratorului bunurilor sau a persoanei căreia i se transmit
+                      la păstrare bunurile
+                      — <span class="cost">2</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB4" class="item">
+                      taxa pentru transmiterea bunurilor spre vînzare, în baza contractului
+                      de comision, inclusiv întocmirea contractului de comision
+                      — <span class="cost">15</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB5" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
+                      taxa pentru emiterea încheierii de stabilire a datei desfăşurării
+                      licitaţiei şi întocmirea textului anunţului
+                      — <span class="cost">1</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB6" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
+                      taxa pentru desfăşurarea licitaţiei, indiferent de rezultatele licitaţiei
+                      — <span class="cost">20</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB7" class="item">
+                      taxa de participare la licitaţie (cu eliberarea biletului de participant)
+                      — <span class="cost">3</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB8" class="item">
+                      taxa pentru transmiterea spre vînzare a valorilor mobiliare (hîrtiilor de valoare)
+                      — <span class="cost">10</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB9" class="item" data-şablon-subformular="documente">
+                      taxa pentru pregătirea demersului în instanţa de judecată privind
+                      schimbarea modului şi ordinii de executare, explicarea modului de executare,
+                      eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
+                      în căutare a debitorului, corectarea erorilor sau omisiunilor din titlul
+                      executoriu, eliberarea duplicatului documentului executoriu
+                      — <span class="cost">5</span>&nbsp;u.c. per demers
+                    </li>
+
+                    <li id="taxaB10" class="item">
+                      taxa pentru întocmirea procesului-verbal şi transmiterea bunului în
+                      contul stingerii datoriei
+                      — <span class="cost">10</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB11" class="item" data-şablon-subformular="documente">
+                      taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
+                      de executare, indiferent de rezultatele ei
+                      — <span class="cost">15</span>&nbsp;u.c. per procedură
+                    </li>
+
+                    <li id="taxaB12" class="item">
+                      taxa pentru ridicarea şi transmiterea la păstrare a bunurilor
+                      sechestrate şi întocmirea procesului-verbal de transmitere a bunurilor
+                      — <span class="cost">5</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB13" class="item" data-şablon-subformular="ore lucrate">
+                      taxa pentru efectuarea acţiunilor în procedura de executare a
+                      documentelor executorii privind stabilirea domiciliului copilului,
+                      evacuarea, instalarea, restabilirea la locul de muncă, obligarea
+                      debitorului să întreprindă (să nu întreprindă) anumite acţiuni,
+                      aplicarea măsurilor de asigurare a acţiunii
+                      — <span class="cost">5</span>&nbsp;u.c. per oră
+                    </li>
                   </ol>
                 </div>
               </li>
 
-              <li class="listă">
+              <li class="categorie">
                 <span class="descriere">Adaugă taxă pentru serviciile prestate
                 de executorii judecătoreşti</span>
 
-                <div class="conţinut">
+                <div class="conţinut cu umbră">
                   <h3 class="titlu">Taxe pentru serviciile prestate de executorii judecătoreşti</h3>
 
                   <ol>
-                    <li>taxa pentru înmînarea, comunicarea personală a actelor procedurale
-                    sau a altor documente
-                    <p>se va pune fereastră nr. de documente</p></li>
-                    <li>taxa pentru întocmirea actului de constatare a faptului, stării de
-                    fapt se achită conform contractului
-                    <p>cred că se va face o fereastră în care executorul să pună suma singur
-                    conform contractului. poate de indicat data contractului, cum ziceai
-                    la tipurile de documente: certificate etc.</p></li>
-                    <li>taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
-                    în procesul de executare, precum şi a celor gajate, conform contractului,
-                    dar nu mai mult de 75 unităţi convenţionale lunar.
-                    <p>fereastră în care se va pune suma, conform condiţiei. pe următoarea
-                    lună să se pună automat în cazul dacă executorul nu a oprit contorul.
-                    dacă se întrerupe la o anumită dată fără să se implinească luna se va
-                    calcula reieşind din numărul de zile efective.</p></li>
+                    <li id="taxaC1" class="item" data-şablon-subformular="documente">
+                      taxa pentru înmînarea, comunicarea personală a actelor
+                      procedurale sau a altor documente
+                      — <span class="cost">5</span>&nbsp;u.c. per document
+                    </li>
+
+                    <li id="taxaC2" class="item" data-şablon-subformular="contracte">
+                      taxa pentru întocmirea actului de constatare a faptului,
+                      stării de fapt se achită conform contractului
+                    </li>
+
+                    <li id="taxaC2" class="item" data-şablon-subformular="contracte">
+                      taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
+                      în procesul de executare, precum şi a celor gajate, conform contractului,
+                      dar nu mai mult de 75 u.c. lunar.
+                    </li>
                   </ol>
                 </div>
               </li>
 
-              <li class="listă">
+              <li class="categorie">
                 <span class="descriere">Adaugă speză</span>
 
-                <div class="conţinut">
+                <div class="conţinut cu umbră">
                   <h3 class="titlu">Speze</h3>
 
                   <ol>
                     <li>transportul, păstrarea şi vînzarea bunurilor debitorului
                     <p>fereastră în care se va pune suma conform contractelor. poate
                     de diferenţiat transportul de păstrare şi vînzare?</p></li>
+
                     <li>deschiderea forţată şi închiderea încăperilor, strămutarea
                     sau înlăturarea îngrădirilor
                     <p>fereastră cu suma conform contractului</p></li>
@@ -325,7 +378,7 @@
                     <li>deplasările executorului judecătoresc efectuate în cadrul procedurii
                     de executare
                     <p>va trebui de pus o bifă “în afara circumscripţiei” prin bifare se
-                    va mai adăuga 5 uc. dacă se va mai face o deplasare se mai adauga 5 uc</p></li>
+                    va mai adăuga 5&nbsp;u.c.. dacă se va mai face o deplasare se mai adauga 5&nbsp;u.c.</p></li>
                     <li>căutarea debitorului şi a bunurilor lui</li>
                     <li>transferul (expedierea) sumelor încasate
                     <p>conform Hotărîrii Guvernului nr. 950 din 11 august 2008 „Pentru
@@ -353,7 +406,7 @@
           <fieldset data-şablon="persoană" id="creditor">
             <legend>
               <label>Creditor: persoană</label>
-              <select class="gen-persoană" class="care schimbă formularul">
+              <select class="gen-persoană care schimbă formularul">
                <option selected>juridică</option>
                 <option>fizică</option>
               </select>
@@ -396,7 +449,7 @@
       </div>
     </div>
 
-    <!-- -------------------------------- şabloane -------------------------------- -->
+    <!-- ================================ şabloane ================================ -->
 
     <div class="şablon date-generale pecuniar">
       <ul>
@@ -600,7 +653,7 @@
 
     <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
       <li class="subformular">
-        <ol id="bunuri">
+        <ol class="bunuri">
           <li>
             <label class="descriere">Descriere</label>
             <label class="valoare">MDL</label>
@@ -620,7 +673,7 @@
     <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
       <li class="subformular">
         <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-        <ol id="bunuri">
+        <ol class="bunuri">
           <li>
             <label class="descriere">Descriere</label>
             <label class="valoare">MDL</label>
@@ -640,7 +693,7 @@
     <ul class="şablon" title="confiscarea bunurilor">
       <li class="subformular">
         <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-        <ol id="bunuri">
+        <ol class="bunuri">
           <li>
             <label class="descriere">Descriere</label>
             <label class="valoare">MDL</label>
@@ -660,7 +713,7 @@
     <ul class="şablon" title="nimicirea unor bunuri">
       <li class="subformular">
         <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-        <ol id="bunuri">
+        <ol class="bunuri">
           <li>
             <label class="descriere">Descriere</label>
             <label class="valoare">MDL</label>
@@ -714,6 +767,85 @@
         <select class="valuta"></select>
       </li>
     </ul>
+
+
+    <ul class="şablon subformular" title="documente">
+      <li>
+        <label class="data-eliberării">Data eliberării</label>
+        <label class="denumire">Denumire</label>
+        <label class="cantitate">Cîte</label>
+      </li>
+
+      <li class="document">
+        <button class="elimină" title="Elimină documentul">&times;</button>
+        <input class="data-eliberării"/>
+        <textarea class="denumire"></textarea>
+        <input class="cantitate" value="1"/>
+      </li>
+
+      <li><button class="adaugă">Adaugă document</button></li>
+    </ul>
+
+
+    <div class="şablon subformular" title="bifă “din arhivă”">
+      <input type="checkbox"/>
+      <label>din arhivă (+1&nbsp;u.c.)</label>
+    </div>
+
+
+    <div class="şablon subformular" title="documente adresabile">
+      <ul>
+        <li>
+          <label class="data-eliberării">Data eliberării</label>
+          <label class="denumire">Denumire</label>
+          <label class="cantitate">Cîte</label>
+        </li>
+
+        <li class="document">
+          <button class="elimină" title="Elimină documentul">&times;</button>
+          <input class="data-eliberării"/>
+          <textarea class="denumire"></textarea>
+          <input class="cantitate" value="1"/>
+          <input class="adresat" type="checkbox"/><label>adresat*</label>
+        </li>
+
+        <li><button class="adaugă">Adaugă document</button></li>
+      </ul>
+
+      <p class="şoaptă">* Adresat instituţiilor financiare sau registratorilor independenţi (+1 u.c)</p>
+    </div>
+
+
+    <div class="şablon subformular" title="ore lucrate">
+      <label class="stînga">Ore lucrate</label>
+      <input class="sumă"/>
+    </div>
+
+
+    <div class="şablon subformular" title="bifă “licitaţie repetată”">
+      <input type="checkbox"/>
+      <label>licitaţie repetată (se aplică coeficientul 0.5)</label>
+    </div>
+
+
+    <div class="şablon subformular" title="contracte">
+      <ul>
+        <li>
+          <label class="data-eliberării">Data</label>
+          <label class="denumire">Numărul de înregistrare</label>
+          <label class="suma">Suma</label>
+        </li>
+
+        <li class="document">
+          <button class="elimină" title="Elimină contractul">&times;</button>
+          <input class="data-eliberării"/>
+          <textarea class="denumire"></textarea>
+          <input class="sumă"/>
+        </li>
+
+        <li><button class="adaugă">Adaugă contract</button></li>
+      </ul>
+    </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="/js/lib.js"></script>

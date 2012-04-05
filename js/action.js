@@ -49,13 +49,13 @@ var ProcedurăNonPecuniară = {
   bunuri: {
     init: function() {
       $('#date-generale')
-        .on('click', '#bunuri button.adaugă', this.adaugăCîmp)
-        .on('click', '#bunuri button.elimină', this.eliminăCîmp)
+        .on('click', '.bunuri button.adaugă', this.adaugăCîmp)
+        .on('click', '.bunuri button.elimină', this.eliminăCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change', ['automat']) });
     },
 
     adaugăCîmp: function() {
-      var şablon = $('.şablon #bunuri .cîmp').first();
+      var şablon = $('.şablon .bunuri .cîmp').first();
 
       şablon.clone()
         .insertBefore($(this).parent())
@@ -340,8 +340,27 @@ var Salvează = {
 
 var Cheltuieli = {
   init: function() {
-    $('#taxe-şi-speze .listă').on('click', '.conţinut li', function() {
-      alert('Adaugă asta:\n\n' + $(this).text().replace(/[\s\r\n]+/g, ' '));
+    this.initTaxeŞiSpeze();
+  },
+
+  initTaxeŞiSpeze: function() {
+    var listaCategorii = $('#categorii-taxe-şi-speze'),
+        lista = $('#listă-taxe-şi-speze');
+
+    listaCategorii.on('click', '.categorie ol>li', function() {
+      var item = $(this).clone(),
+          subformular = item.data('şablon-subformular');
+
+      if (subformular) {
+        item.append(
+          $('.şablon.subformular[title="' + subformular + '"]').clone()
+            .removeClass('şablon')
+            .removeAttr('title')
+        );
+      }
+
+      lista.append(item);
+      //alert('Adaugă asta:\n\n' + $(this).text().replace(/[\s\r\n]+/g, ' '));
     })
   }
 };

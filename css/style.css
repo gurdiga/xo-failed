@@ -90,14 +90,12 @@ button.mare {
   margin-right: 12em;
 }
 
-#taxe-şi-speze,
 #crează-procedură ul {
   margin: 1px 0 0;
   list-style-type: square;
   list-style-position: inside;
 }
 
-#taxe-şi-speze .listă,
 #crează-procedură li {
   margin: 0 0 .3em;
   padding: .3em 1em .3em .5em;
@@ -151,7 +149,6 @@ div.pagină {
 div.pagină>.conţinut {
   width: 72em;
   margin: 5px auto;
-  overflow: auto;
 }
 
 .coloană {
@@ -183,6 +180,7 @@ fieldset label {
   color: #555;
 }
 
+#listă-taxe-şi-speze .subformular .stînga,
 fieldset label {
   padding: .4em .7em 0 .3em;
 }
@@ -205,7 +203,7 @@ li {
   margin: .2em 0 0 0;
 }
 
-#bunuri label.valoare,
+.bunuri label.valoare,
 input.sumă {
   width: 5em;
 }
@@ -250,55 +248,64 @@ fieldset#creditor button.elimină-persoană {
   font-style: italic;
 }
 
-#bunuri {
+#cheltuieli .subformular,
+.bunuri {
   list-style-type: none;
   padding: 0 0 0 2.8em;
 }
 
-#bunuri label {
+#cheltuieli .subformular label,
+.bunuri label {
   text-align: left;
   font-style: italic;
   color: #555;
   padding: 0 .4em;
 }
 
-#bunuri textarea {
+#cheltuieli .subformular textarea,
+.bunuri textarea {
   height: 2.2ex;
   min-height: 2.2ex;
 }
 
-#bunuri .descriere {
+#cheltuieli .subformular .denumire,
+.bunuri .descriere {
   width: 21em;
   min-width: 0;
   max-width: none;
 }
 
-#bunuri .valoare {
+#cheltuieli .subformular .valoare,
+.bunuri .valoare {
   width: 4em;
 }
 
-#bunuri button.adaugă {
+#cheltuieli .subformular button.adaugă,
+.bunuri button.adaugă {
   font-size: small;
   margin-left: .4em;
 }
 
-#bunuri li {
+#cheltuieli .subformular li,
+.bunuri li {
   padding-left: 1.2em;
 }
 
-#bunuri .cîmp {
+#cheltuieli .subformular .document,
+.bunuri .cîmp {
   padding-left: 0;
 }
 
 button.elimină-persoană,
-#bunuri button.elimină {
+#cheltuieli .subformular button.elimină,
+.bunuri button.elimină {
   border-width: 0;
   background-color: transparent;
   font-size: 1.2em;
   cursor: pointer;
   color: #555;
   padding: 0;
-  margin: .2em 0 0;
+  margin: .3em 0 0;
   width: 1em;
   visibility: hidden;
 }
@@ -308,11 +315,14 @@ button.elimină-persoană {
 }
 
 button.elimină-persoană:hover,
-#bunuri button.elimină:hover {
+.focusat button.elimină,
+#cheltuieli .subformular button.elimină:hover,
+.bunuri button.elimină:hover {
   color: black;
 }
 
-#bunuri .cîmp:hover button.elimină {
+#cheltuieli .subformular:hover button.elimină,
+.bunuri .cîmp:hover button.elimină {
   visibility: visible;
 }
 
@@ -363,33 +373,102 @@ fieldset#forme .şoaptă {
   min-height: 18.2em;
 }
 
-#taxe-şi-speze {
+#procedură #cheltuieli {
+  clear: left;
+}
+
+#cheltuieli #listă-taxe-şi-speze {
+  list-style: outside square;
+  margin-left: 12.25em;
+}
+
+#cheltuieli .item .subformular {
+  padding: .3em 0;
+}
+
+#cheltuieli .item p,
+#categorii-taxe-şi-speze .item .subformular,
+#taxe-şi-speze .item p { /* TODO: şterge după finalizare */
+  display: none;
+}
+
+#cheltuieli #listă-taxe-şi-speze>li {
+  margin-top: .4em;
+}
+
+#cheltuieli #listă-taxe-şi-speze .subformular .şoaptă {
+  display: block;
+  color: #555;
+  margin-left: 1em;
+}
+
+#cheltuieli .subformular .denumire {
+  overflow: hidden;
+}
+
+#cheltuieli .subformular .cantitate {
+  width: 2em;
+}
+
+#cheltuieli .subformular .data-eliberării {
+  width: 7em;
+}
+
+#cheltuieli .subformular .adresat {
+  width: auto;
+}
+
+#cheltuieli .subformular input[type="checkbox"]+label {
+  width: auto;
+  padding: 0;
+  margin-left: .2em;
+}
+
+#categorii-taxe-şi-speze {
   display: inline-block;
   font-size: small;
   margin-left: 3em;
+  margin-bottom: .8em;
 }
 
-#taxe-şi-speze .listă .descriere,
-#taxe-şi-speze .listă ol>li {
+#categorii-taxe-şi-speze .categorie {
+  padding-bottom: 3px;
+}
+
+#categorii-taxe-şi-speze .categorie:before {
+  content: '▾';
+  margin-left: -1em;
+  vertical-align: .1em;
+  list-style-type: none;
+  color: #aaa;
+}
+
+#categorii-taxe-şi-speze .categorie .descriere {
+  color: #555;
+}
+
+#categorii-taxe-şi-speze .categorie .descriere,
+#categorii-taxe-şi-speze .categorie ol>li {
   cursor: pointer;
 }
 
-#taxe-şi-speze .listă ol>li {
+#categorii-taxe-şi-speze .categorie ol>li {
   list-style-position: outside;
   margin-bottom: .4em;
 }
 
-#taxe-şi-speze .listă ol>li p {
-  display: none;
-}
-
-#taxe-şi-speze .listă:hover .descriere,
-#taxe-şi-speze .listă ol>li:hover {
+#categorii-taxe-şi-speze .categorie:hover:before,
+#categorii-taxe-şi-speze .categorie:hover .descriere,
+#categorii-taxe-şi-speze .categorie ol>li:hover {
   color: blue;
   text-decoration: underline;
 }
 
-#taxe-şi-speze .listă .conţinut {
+#categorii-taxe-şi-speze .categorie:hover:before {
+  text-decoration: none;
+}
+
+#categorii-taxe-şi-speze .categorie .conţinut {
   display: none;
   position: absolute;
   background-color: white;
@@ -397,14 +476,25 @@ fieldset#forme .şoaptă {
   width: 40em;
   padding: .5em 1em 1em;
   margin-left: -1em;
-  margin-top: .3em;
+  margin-top: 2px;
 }
 
-#taxe-şi-speze .listă:hover .conţinut {
+#categorii-taxe-şi-speze .categorie:hover .conţinut {
   display: block;
 }
 
-#taxe-şi-speze .listă .titlu {
+#categorii-taxe-şi-speze .categorie .titlu {
   margin: .5em 0 .3em;
   display: none;
+}
+
+.cu.umbră {
+  box-shadow: 3px 3px 14px #444;
+  -moz-box-shadow: 3px 3px 14px #444;
+  -webkit-box-shadow: 3px 3px 14px #444;
+}
+
+#listă-taxe-şi-speze .subformular .stînga {
+  width: auto;
+  padding-right: .2em;
 }
