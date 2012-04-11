@@ -202,11 +202,11 @@
                       — <span class="cost">1</span>&nbsp;u.c. per document
                     </li>
 
-                    <li id="taxaA4" class="item">
+                    <li id="taxaA4" class="item unic">
                       taxa pentru întocmirea borderoului de calcul
                       al taxelor pentru efectuarea actelor executorului
                       judecătoresc şi a spezelor procedurii de executare
-                      — <span class="cost">1</span>&nbsp;u.c. per document
+                      — <span class="cost">1</span>&nbsp;u.c.
                     </li>
 
                     <li id="taxaA5" class="item">
@@ -217,7 +217,7 @@
 
                     <li id="taxaA6" class="item unic" data-şablon-subformular="bifă “din arhivă”">
                       taxa pentru eliberarea copiei autentificate a procedurii de executare
-                      — <span class="cost">1</span>&nbsp;u.c. per document
+                      — <span class="cost">1</span>&nbsp;u.c.
                     </li>
                   </ol>
                 </div>
@@ -240,10 +240,14 @@
                       — <span class="cost">0.25</span>&nbsp;u.c.
                     </li>
 
-                    <li id="taxaB2" class="item" data-şablon-subformular="ore lucrate">
-                      taxa pentru întocmirea procesului-verbal de sechestru. taxa pentru
-                      pregătirea şi efectuarea inventarierii patrimoniului debitorului ce
-                      urmează a fi sechestrat
+                    <li id="taxaB2" class="item">
+                      taxa pentru întocmirea procesului-verbal de sechestru
+                      — <span class="cost">0.5</span>&nbsp;u.c.
+                    </li>
+
+                    <li id="taxaB2.1" class="item" data-şablon-subformular="ore lucrate">
+                      taxa pentru pregătirea şi efectuarea inventarierii patrimoniului
+                      debitorului ce urmează a fi sechestrat
                       — <span class="cost">0.5</span>&nbsp;u.c. per oră
                     </li>
 
@@ -271,9 +275,8 @@
                       — <span class="cost">20</span>&nbsp;u.c.
                     </li>
 
-                    <li id="taxaB7" class="item">
+                    <li id="taxaB7" class="item" data-şablon-subformular="participanţi la licitaţie">
                       taxa de participare la licitaţie (cu eliberarea biletului de participant)
-                      — <span class="cost">3</span>&nbsp;u.c.
                     </li>
 
                     <li id="taxaB8" class="item">
@@ -299,7 +302,7 @@
                     <li id="taxaB11" class="item" data-şablon-subformular="documente">
                       taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
                       de executare, indiferent de rezultatele ei
-                      — <span class="cost">15</span>&nbsp;u.c. per procedură
+                      — <span class="cost">15</span>&nbsp;u.c.
                     </li>
 
                     <li id="taxaB12" class="item">
@@ -355,30 +358,29 @@
                   <h3 class="titlu">Speze</h3>
 
                   <ol>
-                    <li>transportul, păstrarea şi vînzarea bunurilor debitorului
-                    <p>fereastră în care se va pune suma conform contractelor. poate
-                    de diferenţiat transportul de păstrare şi vînzare?</p></li>
+                    <li id="speza1" class="item" data-şablon-subformular="listă cheltuieli">
+                      transportul, păstrarea şi vînzarea bunurilor debitorului
+                    </li>
 
-                    <li>deschiderea forţată şi închiderea încăperilor, strămutarea
-                    sau înlăturarea îngrădirilor
-                    <p>fereastră cu suma conform contractului</p></li>
-                    <li>remunerarea specialiştilor, experţilor, martorilor asistenţi şi
-                    altor persoane antrenate în procesul de executare
-                    <p>cred că, va trebui de diferenţiat pe fiecare în parte şi în faţă
-                    cu fereastră în care se va pune suma plătită.</p>
-                    <p>Plata acestora se face conform Hotărîrii Guvernului nr. 270 din
-                    15 martie 2006 „Cu privire la aprobarea mărimilor sumelor băneşti
-                    achitate persoanelor fizice citate de către instanţa judecătorească,
-                    organele de urmărire penală, de examinare a materialelor administrative
-                    şi cele de executare a documentelor executorii”.</p>
-                    <p>însă puţin probabil că cineva se conduce de această hotărîre deoarece
-                    nu cred că sunt reale.</p></li>
-                    <li>Lucrări de evaluare şi/sau expertiză
-                    <p>costul acestora va fi determinat conform contractului.</p></li>
-                    <li>deplasările executorului judecătoresc efectuate în cadrul procedurii
-                    de executare
-                    <p>va trebui de pus o bifă “în afara circumscripţiei” prin bifare se
-                    va mai adăuga 5&nbsp;u.c.. dacă se va mai face o deplasare se mai adauga 5&nbsp;u.c.</p></li>
+                    <li id="speza2" class="item" data-şablon-subformular="listă cheltuieli">
+                      deschiderea forţată şi închiderea încăperilor, strămutarea
+                      sau înlăturarea îngrădirilor
+                    </li>
+
+                    <li id="speza3" class="item" data-şablon-subformular="listă cheltuieli">
+                      remunerarea specialiştilor, experţilor, martorilor asistenţi şi
+                      altor persoane antrenate în procesul de executare
+                    </li>
+
+                    <li id="speza4" class="item" data-şablon-subformular="listă cheltuieli">
+                      Lucrări de evaluare şi/sau expertiză
+                    </li>
+
+                    <li id="speza5" class="item" data-şablon-subformular="listă cheltuieli">
+                      deplasările executorului judecătoresc efectuate în cadrul procedurii
+                      de executare
+                    </li>
+
                     <li>căutarea debitorului şi a bunurilor lui</li>
                     <li>transferul (expedierea) sumelor încasate
                     <p>conform Hotărîrii Guvernului nr. 950 din 11 august 2008 „Pentru
@@ -771,14 +773,12 @@
 
     <ul class="şablon subformular" title="documente">
       <li>
-        <label class="data-eliberării">Data eliberării</label>
         <label class="denumire">Denumire</label>
         <label class="cantitate">Cîte</label>
       </li>
 
       <li class="document">
         <button class="elimină" title="Elimină documentul">&times;</button>
-        <input class="data-eliberării"/>
         <textarea class="denumire"></textarea>
         <input class="cantitate" value="1"/>
       </li>
@@ -796,14 +796,12 @@
     <div class="şablon subformular" title="documente adresabile">
       <ul>
         <li>
-          <label class="data-eliberării">Data eliberării</label>
           <label class="denumire">Denumire</label>
           <label class="cantitate">Cîte</label>
         </li>
 
         <li class="document">
           <button class="elimină" title="Elimină documentul">&times;</button>
-          <input class="data-eliberării"/>
           <textarea class="denumire"></textarea>
           <input class="cantitate" value="1"/>
           <input class="adresat" type="checkbox"/><label>adresat*</label>
@@ -831,14 +829,12 @@
     <div class="şablon subformular" title="contracte">
       <ul>
         <li>
-          <label class="data-eliberării">Data</label>
-          <label class="denumire">Numărul de înregistrare</label>
+          <label class="denumire">Contractul</label>
           <label class="suma">Suma</label>
         </li>
 
         <li class="document">
           <button class="elimină" title="Elimină contractul">&times;</button>
-          <input class="data-eliberării"/>
           <textarea class="denumire"></textarea>
           <input class="sumă"/>
         </li>
@@ -846,6 +842,39 @@
         <li><button class="adaugă">Adaugă contract</button></li>
       </ul>
     </div>
+
+
+    <ul class="şablon subformular" title="participanţi la licitaţie">
+      <li>
+        <label class="descriere">Nume participant</label>
+        <label class="sumă">Taxă</label>
+      </li>
+
+      <li class="document">
+        <button class="elimină" title="Elimină participant">&times;</button>
+        <textarea class="descriere"></textarea>
+        <input class="sumă"/>
+      </li>
+
+      <li><button class="adaugă">Adaugă participant</button></li>
+    </ul>
+
+
+    <ul class="şablon subformular" title="listă cheltuieli">
+      <li>
+        <label class="descriere">Descriere</label>
+        <label class="sumă">Suma</label>
+      </li>
+
+      <li class="document">
+        <button class="elimină" title="Elimină cîmp">&times;</button>
+        <textarea class="descriere"></textarea>
+        <input class="sumă"/>
+      </li>
+
+      <li><button class="adaugă">Adaugă cîmp</button></li>
+    </ul>
+
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="/js/lib.js"></script>

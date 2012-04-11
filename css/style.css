@@ -264,11 +264,12 @@ fieldset#creditor button.elimină-persoană {
 
 #cheltuieli .subformular textarea,
 .bunuri textarea {
-  height: 2.2ex;
-  min-height: 2.2ex;
+  height: 2.1ex;
+  min-height: 2.1ex;
 }
 
 #cheltuieli .subformular .denumire,
+#cheltuieli .subformular .descriere,
 .bunuri .descriere {
   width: 21em;
   min-width: 0;
@@ -321,7 +322,7 @@ button.elimină-persoană:hover,
   color: black;
 }
 
-#cheltuieli .subformular:hover button.elimină,
+#cheltuieli .subformular .document:hover button.elimină,
 .bunuri .cîmp:hover button.elimină {
   visibility: visible;
 }
@@ -402,6 +403,7 @@ fieldset#forme .şoaptă {
   margin-left: 1em;
 }
 
+#cheltuieli .subformular .descriere,
 #cheltuieli .subformular .denumire {
   overflow: hidden;
 }

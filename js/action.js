@@ -361,6 +361,29 @@ var Cheltuieli = {
 
       lista.append(item);
       //alert('Adaugă asta:\n\n' + $(this).text().replace(/[\s\r\n]+/g, ' '));
-    })
+    });
+
+    $('#cheltuieli')
+      .on('click', 'button.adaugă', function() {
+        var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
+            şablon = $('.şablon.subformular[title="' + numeŞablon + '"] .document').first();
+
+        şablon.clone()
+          .insertBefore($(this).parent())
+          .find('textarea').focus();
+      })
+      .on('click', 'button.elimină', function() {
+        var item = $(this).closest('.document');
+
+        if (item.siblings('.document').există()) {
+          item
+            .find('.valoare').val(0).trigger('change').end()
+            .remove();
+         } else {
+           item
+            .find('.valoare').val(0).trigger('change').end()
+            .find('textarea').val('');
+         }
+      });
   }
 };
