@@ -222,8 +222,7 @@ input.invalid {
 
 #procedură h1,
 #procedură fieldset,
-#procedură #bară-de-butoane,
-#procedură button.salvează.sus {
+#procedură #bară-de-butoane {
   margin-right: 40px;
 }
 
@@ -363,11 +362,6 @@ fieldset#forme .şoaptă {
 
 #procedură button.salvează button {
   margin-right: 0;
-}
-
-#procedură button.salvează.sus {
-  float: right;
-  margin-top: 1.5em;
 }
 
 #procedură #date-generale {
