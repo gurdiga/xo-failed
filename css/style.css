@@ -326,24 +326,6 @@ button.elimină-persoană:hover,
   visibility: visible;
 }
 
-fieldset#forme li {
-  margin-bottom: .5em;
-  overflow: auto;
-}
-
-fieldset#forme button {
-  font-weight: bold;
-  float: left;
-  clear: left;
-  cursor: pointer;
-  margin-left: .5em;
-}
-
-fieldset#forme .şoaptă {
-  margin: .7em 0 0 7em;
-  color: #555;
-}
-
 #procedură #bară-de-butoane {
   clear: left;
   text-align: right;
