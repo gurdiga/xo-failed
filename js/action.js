@@ -19,6 +19,7 @@ var Action = {
     Valute.init();
     Salvează.init();
     Cheltuieli.init();
+    EticheteAccesibilePentruBife.init();
 
     $('fieldset:first').find('input, select, textarea').first().focus();
     $('#literă').text(HashController.date() || '');
@@ -33,6 +34,16 @@ var Action = {
         $('#creditor .gen-persoană').val('fizică');
         break;
     }
+  }
+};
+
+// --------------------------------------------------
+
+var EticheteAccesibilePentruBife = {
+  init: function() {
+    $(document).on('click', 'input:checkbox+label', function() {
+      $(this).prev().click();
+    });
   }
 };
 
@@ -340,10 +351,12 @@ var Salvează = {
 
 var Cheltuieli = {
   init: function() {
-    this.initTaxeŞiSpeze();
+    this.initListaCategoriiTaxeŞiSpeze();
+    this.initSubformulare();
+    this.initDocumenteAdresabile();
   },
 
-  initTaxeŞiSpeze: function() {
+  initListaCategoriiTaxeŞiSpeze: function() {
     var listaCategorii = $('#categorii-taxe-şi-speze'),
         lista = $('#listă-taxe-şi-speze');
 
@@ -360,9 +373,10 @@ var Cheltuieli = {
       }
 
       lista.append(item);
-      //alert('Adaugă asta:\n\n' + $(this).text().replace(/[\s\r\n]+/g, ' '));
     });
+  },
 
+  initSubformulare: function() {
     $('#cheltuieli')
       .on('click', 'button.adaugă', function() {
         var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
@@ -385,5 +399,11 @@ var Cheltuieli = {
             .find('textarea').val('');
          }
       });
+  },
+
+  initDocumenteAdresabile: function() {
+    $('#cheltuieli').on('click', ':checkbox.pentru.expediere', function() {
+      // TODO
+    });
   }
 };

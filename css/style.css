@@ -296,13 +296,17 @@ fieldset#creditor button.elimină-persoană {
   padding-left: 0;
 }
 
+/* destinatari pentru documente adresabile */
+#cheltuieli .subformular .document ul {
+  margin-left: 2em;
+}
+
 button.elimină-persoană,
 #cheltuieli .subformular button.elimină,
 .bunuri button.elimină {
   border-width: 0;
   background-color: transparent;
   font-size: 1.2em;
-  cursor: pointer;
   color: #555;
   padding: 0;
   margin: .3em 0 0;
@@ -321,7 +325,7 @@ button.elimină-persoană:hover,
   color: black;
 }
 
-#cheltuieli .subformular .document:hover button.elimină,
+#cheltuieli .subformular .document:hover>button.elimină,
 .bunuri .cîmp:hover button.elimină {
   visibility: visible;
 }

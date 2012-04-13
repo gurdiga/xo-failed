@@ -1,7 +1,8 @@
 TODO:
 -----
 
-* speze
+* documente adresabile
+  * de verificat destinatarii
 * cheltuieli: taxe şi speze
   * de adăugat costurile şi cîmpurile auxiliare
   * de adăugat ID-uri la <li>-uri care reprezintă
@@ -12,6 +13,7 @@ TODO:
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
 * how to encode form data?
+* monitorizează click-urile pe <label/>-uri
 
 
 Causality

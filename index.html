@@ -235,7 +235,7 @@
                       dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
                       instituţiile financiare, angajatorul debitorului, terţele persoane,
                       sau alte organe, inclusiv în procesul vînzării bunurilor mobile
-                      — <span class="cost">0.25</span>&nbsp;u.c.
+                      — <span class="cost">0.25</span>&nbsp;u.c. per exemplar document
                     </li>
 
                     <li id="taxaB2" class="item">
@@ -660,7 +660,7 @@
           </li>
 
           <li class="cîmp">
-            <button class="elimină" title="Elimină bunul">&times;</button>
+            <button class="elimină" title="Elimină bun">&times;</button>
             <textarea class="descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
@@ -680,7 +680,7 @@
           </li>
 
           <li class="cîmp">
-            <button class="elimină" title="Elimină bunul">&times;</button>
+            <button class="elimină" title="Elimină bun">&times;</button>
             <textarea class="descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
@@ -700,7 +700,7 @@
           </li>
 
           <li class="cîmp">
-            <button class="elimină" title="Elimină bunul">&times;</button>
+            <button class="elimină" title="Elimină bun">&times;</button>
             <textarea class="descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
@@ -720,7 +720,7 @@
           </li>
 
           <li class="cîmp">
-            <button class="elimină" title="Elimină bunul">&times;</button>
+            <button class="elimină" title="Elimină bun">&times;</button>
             <textarea class="descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
@@ -776,7 +776,7 @@
       </li>
 
       <li class="document">
-        <button class="elimină" title="Elimină documentul">&times;</button>
+        <button class="elimină" title="Elimină document">&times;</button>
         <textarea class="denumire"></textarea>
         <input class="cantitate" value="1"/>
       </li>
@@ -786,30 +786,358 @@
 
 
     <div class="şablon subformular" title="bifă “din arhivă”">
-      <input type="checkbox"/>
-      <label>din arhivă (+1&nbsp;u.c.)</label>
+      <input type="checkbox"/><label>din arhivă (+1&nbsp;u.c.)</label>
     </div>
 
 
-    <div class="şablon subformular" title="documente adresabile">
-      <ul>
-        <li>
-          <label class="denumire">Denumire</label>
-          <label class="cantitate">Cîte</label>
-        </li>
+    <ul class="şablon subformular" title="documente adresabile">
+      <li>
+        <label class="denumire">Denumire</label>
+      </li>
 
-        <li class="document">
-          <button class="elimină" title="Elimină documentul">&times;</button>
-          <textarea class="denumire"></textarea>
-          <input class="cantitate" value="1"/>
-          <input class="adresat" type="checkbox"/><label>adresat*</label>
-        </li>
+      <li class="document">
+        <button class="elimină" title="Elimină document">&times;</button>
+        <textarea class="denumire"></textarea>
 
-        <li><button class="adaugă">Adaugă document</button></li>
-      </ul>
+        <input type="checkbox" class="pentru expediere"/><label>pentru expediere</label>
 
-      <p class="şoaptă">* Adresat instituţiilor financiare sau registratorilor independenţi (+1 u.c)</p>
-    </div>
+        <div class="destinatari">
+          <span>▾ adaugă destinatar</span>
+
+          <ul class="categorii">
+            <li class="categorie">
+              Registratori independenţi
+
+              <ul class="lista">
+                <li>
+                  “Registru-Corect” S.A.
+                  Chişinău, str. Columna 87
+                </li>
+
+                <li>
+                  “Registru” S.A.
+                  MD-2012 Chişinău, str. Şciusev 47
+                </li>
+
+                <li>
+                  “Grupa Financiară” S.A.
+                  Chişinău, str. Armenească 55, bir. 301
+                </li>
+
+                <li>
+                  “Registrul-F” S.A.
+                  Chişinău, str.Teilor 9/4
+                </li>
+
+                <li>
+                  “Registrator-Centru” S.A.
+                  Chişinău, Calea Ieşilor 10
+                </li>
+
+                <li>
+                  “Registru-Ind” S.A.
+                  Chişinău, bd. Dacia 35
+                </li>
+
+                <li>
+                  “Comitent” S.A.
+                  Chişinău, str. Negruzzi 2, of. 304
+                </li>
+
+                <li>
+                  “Real-Registr” S.A.
+                  Bălţi, str. Kiev 122
+                </li>
+
+                <li>
+                  “Soliditate” S.A.
+                  Chişinău, str. Feredeului 4
+                </li>
+
+                <li>
+                  “Intermedia-Group”  S.A.
+                  Chişinău, str. Podgorenilor 36
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              Companii de brokeraj
+
+              <ul class="lista">
+                <li>
+                  “Daac-Invest” S.A.
+                  Chişinău, str. Calea Ieşilor 10
+                </li>
+
+                <li>
+                  “Iuventus-DS” S.A.
+                  Chişinău, bd. Ştefan cel Mare 65, bir. 310
+                </li>
+
+                <li>
+                  “Oldex” S.A.
+                  Chişinău, str. Alexei Mateevici 46/1
+                </li>
+
+                <li>
+                  “Proajioc” S.A.
+                  Chişinău, bd. Dacia 53/4, of. 5
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              Companii de dealeri
+
+              <ul class="lista">
+                <li>
+                  SA”Gest-Capital”
+                  Chişinău, str. Tighina 49/3
+                </li>
+
+                <li>
+                  “VAL-Invest” S.A.
+                  Chişinău, str. M. Cibotari 55
+                </li>
+
+                <li>
+                  “Fincom” S.A.
+                  Chişinău, str. Tighina 65, of. 207, 208, 209
+                </li>
+
+                <li>
+                  “Passim” S.A.
+                  Chişinău, bd. Dacia 35
+                </li>
+
+                <li>
+                  “BrokWest” S.A.
+                  Chişinău, str. Kogălniceanu 73, of. 2, 6
+                </li>
+
+                <li>
+                  “Broker M-D” S.A.
+                  Chişinău, str. V. Alecsandri 119 A
+                </li>
+
+                <li>
+                  B.C. “Banca de Economii” S.A.
+                  Chişinău, str. Columna 115
+                </li>
+
+                <li>
+                  B.C. “Moldinconbank” S.A.
+                  Chişinău, str. Armenească, 38
+                </li>
+
+                <li>
+                  B.C. “Victoriabank” S.A.
+                  Chişinău, str. 31 august 1989, 141
+                </li>
+
+                <li>
+                  B.C. “Unibank” S.A.
+                  Chişinău, str. Bănulescu-Bodoni 45
+                </li>
+
+                <li>
+                  B.C. “Banca Socială” S.A.
+                  Chişinău, str. Bănulescu-Bodoni 61
+                </li>
+
+                <li>
+                  B.C. “Moldova-Agroindbank” S.A.
+                  Chisinau, str. Cosmonauţilor 9
+                </li>
+
+                <li>
+                  B.C. “Mobiasbancă-Groupe Societe Generale” S.A.
+                  Chisinau, bd. Stefan cel Mare 81a
+                </li>
+
+                <li>
+                  B.C. “Eximbank-Gruppo Veneto Banca” S.A.
+                  Chisinau, bd. Stefan cel Mare 171/1
+                </li>
+
+                <li>
+                  B.C. “Energbank” S.A.
+                  Chisinau, str. V. Alecsandri 78
+                </li>
+
+                <li>
+                  B.C. “Banca de Finanţe şi Comerţ” S.A.
+                  Chisinau, str. Puşkin 26
+                </li>
+
+                <li>
+                  B.C. “EuroCreditBank” S.A.
+                  Chisinau, str. Ismail 33
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              Administratori fiduciari
+
+              <ul class="lista">
+                <li>
+                  C.F. ”F.O.N.D” S.A.
+                  Chişinău, str. A. Russo 1, of. 143
+                </li>
+
+                <li>
+                  C.F. ”Codru” S.A.
+                  Orhei, str. Sadoveanu 32
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              Depozitarul Naţional de Valori Mobiliare al Moldovei
+
+              <ul class="lista">
+                <li>
+                  “Depozitarul Naţional de Valori Mobiliare al Moldovei” S.A.
+                  Chişinău, bd. Ştefan cel Mare 73
+                </li>
+
+                <li>
+                  “Depozitarul Central” S.A.
+                  Chişinău, str. Vasile Alecsandri 119a
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              SA care ţin registru deţinătorilor de valori mobiliare de sine stătător
+
+              <ul class="lista">
+                <li>
+                  “Acvila-Sport” S.A.
+                  Chişinău, str. Bucuriei 5
+                </li>
+
+                <li>
+                  “Aureola &amp; Lombard” S.A.
+                  Chişinău, bd. Ştefan cel Mare 132
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              Bănci comerciale
+
+              <ul class="lista">
+                <li>
+                  “COMERŢBANK” S.A.
+                  2043 Chişinău, str. Independenţei 1/1
+                </li>
+
+                <li>
+                  “BANCA SOCIALĂ” S.A.
+                  2005 Chişinău, str. Bănulescu-Bodoni 61
+                </li>
+
+                <li>
+                  “VICTORIABANK” S.A.
+                  2004 Chişinău, str.31 August 1989, 141
+                </li>
+
+                <li>
+                  “MOLDOVA - AGROINDBANK” S.A.
+                  2006 Chişinău, str.Cosmonauţilor 9
+                </li>
+
+                <li>
+                  “Moldindconbank” S.A.
+                  2012 Chişinău, str.Armenească, 38
+                </li>
+
+                <li>
+                  “Banca de Economii” S.A.
+                  2012 Chişinău, str. Columna 115
+                </li>
+
+                <li>
+                  “EuroCreditBank” S.A.
+                  2001 Chişinău, str. Ismail 33
+                </li>
+
+                <li>
+                  “UNIBANK” S.A.
+                  2012 Chişinău, str. Bănulescu-Bodoni 45
+                </li>
+
+                <li>
+                  “Banca de Finanţe şi Comerţ” S.A.
+                  2012 Chişinău, str. Puşkin 26
+                </li>
+
+                <li>
+                  “ENERGBANK” S.A.
+                  2012 Chişinău, str. Vasile Alecsandri 78
+                </li>
+
+                <li>
+                  “ProCredit Bank” S.A.
+                  2012 Chisinău, bd. Ştefan cel Mare 65, of. 901
+                </li>
+
+                <li>
+                  “Banca Comercială Română Chişinău” S.A.
+                  2005 Chişinău, str. Puşkin 60/2
+                </li>
+
+                <li>
+                  “EXIMBANK - Gruppo Veneto Banca” S.A.
+                  2004 Chişinău, bd. Ştefan cel Mare 171/1
+                </li>
+
+                <li>
+                  “MOBIASBANCĂ - Groupe Societe Generale” S.A.
+                  2012 Chişinău, bd. Ştefan cel Mare 81a
+                </li>
+              </ul>
+            </li>
+
+            <li class="categorie">
+              Deţinători de registre şi alţii
+
+              <ul class="lista">
+                <li>
+                  ÎS “CRIS Registru”
+                  2012 Chişinau, str. Puşkin 42
+                </li>
+
+                <li>
+                  ÎS “Cadastru”
+                  2012 Chişinău, str. Puşkin 47
+                </li>
+
+                <li>
+                  Camera Înregistrării de Stat de pe lîngă Ministerul Justiţiei al RM
+                  2001 Chişinău, bd. Ştefan Cel Mare 73
+                </li>
+
+                <li>
+                  Inspectoratul Fiscal Principal de Stat de pe lîngă Ministerul Finanţelor al RM
+                  2005 Chisinau, str. Cosmonauţilor 9
+                </li>
+
+                <li>
+                  Casa Naţională de Asigurări Sociale a RM
+                  2028 Chişinău, str. Gheorghe Tudor 3
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li><button class="adaugă">Adaugă document</button></li>
+    </ul>
 
 
     <div class="şablon subformular" title="ore lucrate">
@@ -832,7 +1160,7 @@
         </li>
 
         <li class="document">
-          <button class="elimină" title="Elimină contractul">&times;</button>
+          <button class="elimină" title="Elimină contract">&times;</button>
           <textarea class="denumire"></textarea>
           <input class="sumă"/>
         </li>
