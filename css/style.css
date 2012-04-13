@@ -494,3 +494,9 @@ fieldset#forme .şoaptă {
   width: auto;
   padding-right: .2em;
 }
+
+button,
+input[type="checkbox"],
+input[type="checkbox"]+label {
+  cursor: pointer;
+}
