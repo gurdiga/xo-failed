@@ -286,23 +286,15 @@ fieldset#creditor button.elimină-persoană {
   margin-left: .4em;
 }
 
-#cheltuieli .subformular li,
 .bunuri li {
   padding-left: 1.2em;
 }
 
-#cheltuieli .subformular .document,
 .bunuri .cîmp {
   padding-left: 0;
 }
 
-/* destinatari pentru documente adresabile */
-#cheltuieli .subformular .document ul {
-  margin-left: 2em;
-}
-
 button.elimină-persoană,
-#cheltuieli .subformular button.elimină,
 .bunuri button.elimină {
   border-width: 0;
   background-color: transparent;
@@ -322,10 +314,9 @@ button.elimină-persoană:hover,
 .focusat button.elimină,
 #cheltuieli .subformular button.elimină:hover,
 .bunuri button.elimină:hover {
-  color: black;
+  color: red;
 }
 
-#cheltuieli .subformular .document:hover>button.elimină,
 .bunuri .cîmp:hover button.elimină {
   visibility: visible;
 }
@@ -364,7 +355,7 @@ button.elimină-persoană:hover,
 }
 
 #cheltuieli .item .subformular {
-  padding: .3em 0;
+  padding: .3em 0 0 1em;
 }
 
 #cheltuieli .item p,
@@ -417,6 +408,8 @@ button.elimină-persoană:hover,
   padding-bottom: 3px;
 }
 
+#cheltuieli .document .adaugă-destinatar:before,
+#cheltuieli .document .destinatari .categorie:before,
 #categorii-taxe-şi-speze .categorie:before {
   content: '▾';
   margin-left: -1em;
@@ -425,10 +418,13 @@ button.elimină-persoană:hover,
   color: #aaa;
 }
 
+#cheltuieli .document .adaugă-destinatar,
+#cheltuieli .document .destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
   color: #555;
 }
 
+#cheltuieli .document .adaugă-destinatar,
 #categorii-taxe-şi-speze .categorie .descriere,
 #categorii-taxe-şi-speze .categorie ol>li {
   cursor: pointer;
@@ -439,6 +435,11 @@ button.elimină-persoană:hover,
   margin-bottom: .4em;
 }
 
+#cheltuieli .document .adaugă-destinatar:hover:before,
+#cheltuieli .document .adaugă-destinatar:hover>span,
+#cheltuieli .document .destinatari .categorie:hover:before,
+#cheltuieli .document .destinatari .categorie:hover .titlu,
+#cheltuieli .document .destinatari .listă>li:hover,
 #categorii-taxe-şi-speze .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover .descriere,
 #categorii-taxe-şi-speze .categorie ol>li:hover {
@@ -446,6 +447,8 @@ button.elimină-persoană:hover,
   text-decoration: underline;
 }
 
+#cheltuieli .document .adaugă-destinatar:hover:before,
+#cheltuieli .document .destinatari .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover:before {
   text-decoration: none;
 }
@@ -453,7 +456,6 @@ button.elimină-persoană:hover,
 #categorii-taxe-şi-speze .categorie .conţinut {
   display: none;
   position: absolute;
-  background-color: white;
   border: 1px solid #dedede;
   width: 40em;
   padding: .5em 1em 1em;
@@ -461,6 +463,7 @@ button.elimină-persoană:hover,
   margin-top: 2px;
 }
 
+#cheltuieli .document .destinatari .categorie:hover .listă,
 #categorii-taxe-şi-speze .categorie:hover .conţinut {
   display: block;
 }
@@ -471,6 +474,7 @@ button.elimină-persoană:hover,
 }
 
 .cu.umbră {
+  background-color: white;
   box-shadow: 3px 3px 14px #444;
   -moz-box-shadow: 3px 3px 14px #444;
   -webkit-box-shadow: 3px 3px 14px #444;
@@ -485,4 +489,60 @@ button,
 input[type="checkbox"],
 input[type="checkbox"]+label {
   cursor: pointer;
+}
+
+#cheltuieli .document .adaugă-destinatar:before {
+  padding-right: .3em;
+}
+
+#cheltuieli .document .destinatari-adăugaţi,
+#cheltuieli .document .adaugă-destinatar {
+  font-size: small;
+}
+
+#cheltuieli .document .destinatari-adăugaţi {
+  margin: 0 0 .2em 1em;
+}
+
+#cheltuieli .document .adaugă-destinatar {
+  margin-left: 3em;
+  display: none;
+}
+
+#cheltuieli .document .destinatari,
+#cheltuieli .document .destinatari .listă {
+  position: absolute;  
+  margin-left: -1.5em;
+  padding-left: 1.5em;
+}
+
+#cheltuieli .document .destinatari .listă,
+#cheltuieli .document .destinatari .categorii {
+  padding: .3em 2em .7em;
+}
+
+#cheltuieli .document .destinatari .listă>li,
+#cheltuieli .document .destinatari .categorie {
+  margin-bottom: .4em;
+}
+
+#cheltuieli .document .destinatari .listă {
+  display: none;
+}
+
+#cheltuieli .document .destinatari .listă>li,
+#cheltuieli .document .destinatari-adăugaţi>li {
+  list-style: inside circle;
+  white-space: nowrap;
+}
+
+button.elimină {
+  border-width: 0;
+  background-color: transparent;
+  font-size: 1.2em;
+  color: #555;
+  padding: 0;
+  margin-left: .5em;
+  display: inline-block;
+  line-height: .6em;
 }

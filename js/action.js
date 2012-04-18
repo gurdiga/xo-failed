@@ -20,6 +20,7 @@ var Action = {
     Salvează.init();
     Cheltuieli.init();
     EticheteAccesibilePentruBife.init();
+    Eliminabile.init();
 
     $('fieldset:first').find('input, select, textarea').first().focus();
     $('#literă').text(HashController.date() || '');
@@ -402,8 +403,69 @@ var Cheltuieli = {
   },
 
   initDocumenteAdresabile: function() {
-    $('#cheltuieli').on('click', ':checkbox.pentru.expediere', function() {
-      // TODO
-    });
+    var listaDestinatari = $('.şablon.destinatari');
+
+    $('#cheltuieli')
+      .on('click', ':checkbox.pentru.expediere', function() {
+        $(this)
+          .siblings('.adaugă-destinatar').toggle(!this.checked).end()
+          .siblings('.destinatari-adăugaţi').toggle(!this.checked).end();
+      })
+      .on('mouseenter', '.adaugă-destinatar', function() {
+        listaDestinatari.appendTo(this).show();
+      })
+      .on('mouseleave', '.adaugă-destinatar', function() {
+        listaDestinatari.hide()
+      })
+      .on('click', '.listă li', function() {
+        var destinatariAdăugaţi = $(this).closest('.document').find('.destinatari-adăugaţi');
+
+        $(this).clone()
+          .addClass('eliminabil')
+          .appendTo(destinatariAdăugaţi);
+      });
+  }
+};
+
+// --------------------------------------------------
+
+var Eliminabile = {
+  buton: null,
+
+  init: function() {
+    this.buton = $('button.şablon.elimină')
+      .removeClass('şablon')
+      .hide()
+      .on('click', this.elimină);
+
+    $('#procedură')
+      .on('mouseenter', '.eliminabil', this.afişeazăButon)
+      .on('mouseleave', '.eliminabil', this.ascundeButon);
+  },
+
+  afişeazăButon: function() {
+    // TODO: define the :block-element filter
+    // and insert the button before the first one
+    Eliminabile.buton.appendTo(this).show();
+  },
+
+  ascundeButon: function() {
+    Eliminabile.buton.hide();
+  },
+
+  elimină: function() {
+    var eliminabil = Eliminabile.buton.parent();
+
+    Eliminabile.buton
+      .hide()
+      .appendTo(document.body);
+
+    eliminabil.trigger('eliminare');
+
+    if (eliminabil.siblings('.eliminabil').există()) {
+      eliminabil.remove();
+    } else {
+      eliminabil.find('input:text, textarea').val('').trigger('change');
+    }
   }
 };

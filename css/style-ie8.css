@@ -1,5 +1,6 @@
 .cu.umbră {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#444444');
+  border: 1px solid silver;
 }
 
 #categorii-taxe-şi-speze .categorie:before {
