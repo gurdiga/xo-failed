@@ -374,7 +374,7 @@ var Cheltuieli = {
 
       lista.append(item);
       item.find('textarea').focus();
-      $(this).closest('.conţinut').hide();
+      $(this).closest('.listă').hide();
     });
   },
 
@@ -401,24 +401,17 @@ var Cheltuieli = {
       })
 
       .on('mouseenter', '.adaugă-destinatar', function() {
-        listaDestinatari.appendTo(this).delay(300).fadeIn(0);
+        listaDestinatari.appendTo(this).afişează();
       })
       .on('mouseleave', '.adaugă-destinatar', function() {
-        listaDestinatari.clearQueue().hide();
+        listaDestinatari.ascunde();
       })
 
-      .on('mouseenter', '.document .destinatari .categorie', function() {
-        $(this).find('.listă').delay(300).fadeIn(0);
+      .on('mouseenter', '.categorie', function() {
+        $(this).find('.listă').afişează();
       })
-      .on('mouseleave', '.document .destinatari .categorie', function() {
-        $(this).find('.listă').clearQueue().hide();
-      })
-
-      .on('mouseenter', '#categorii-taxe-şi-speze .categorie', function() {
-        $(this).find('.conţinut').delay(300).fadeIn(0);
-      })
-      .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
-        $(this).find('.conţinut').clearQueue().hide();
+      .on('mouseleave', '.categorie', function() {
+        $(this).find('.listă').ascunde();
       })
 
       .on('click', '.listă li', function() {
@@ -492,3 +485,15 @@ var Eliminabile = {
 $.expr[':'].block = function(el, i, matches, nodes) {
   return $.css(el, 'display') == 'block';
 }
+
+// --------------------------------------------------
+
+$.fn.ascunde = function() {
+  return this.clearQueue().hide();
+};
+
+// --------------------------------------------------
+
+$.fn.afişează = function() {
+  return this.delay(200).fadeIn(0);
+};
