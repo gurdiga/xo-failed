@@ -361,6 +361,8 @@ var Cheltuieli = {
         lista = $('#listă-taxe-şi-speze');
 
     listaCategorii.on('click', '.categorie ol>li', function() {
+      if ($(this).is('.dezactivat')) return;
+
       var item = $(this).clone(),
           subformular = item.data('şablon-subformular');
 
@@ -373,9 +375,37 @@ var Cheltuieli = {
       }
 
       lista.append(item);
-      item.find('textarea').focus();
+      item
+        .addClass('eliminabil de tot')
+        .find('textarea').focus();
+
       $(this).closest('.conţinut').hide();
     });
+
+    $('#cheltuieli')
+      .on('mouseenter', '#categorii-taxe-şi-speze .categorie', function() {
+        $(this).find('.conţinut').afişează();
+
+        var itemiUniciAdăugaţiDeja = lista.children('.item.unic'),
+            itemi = $(this).find('.conţinut ol').children();
+
+        if (itemiUniciAdăugaţiDeja.există()) {
+          var selector = itemiUniciAdăugaţiDeja.map(function() {
+            return '#' + this.id;
+          }).get().join(',');
+
+          itemi.filter(selector)
+            .addClass('dezactivat')
+            .attr('title', 'Adăugat deja');
+        } else {
+          itemi
+            .removeClass('dezactivat')
+            .removeAttr('title');
+        }
+      })
+      .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
+        $(this).find('.conţinut').ascunde();
+      })
   },
 
   initSubformulare: function() {
@@ -401,24 +431,17 @@ var Cheltuieli = {
       })
 
       .on('mouseenter', '.adaugă-destinatar', function() {
-        listaDestinatari.appendTo(this).delay(300).fadeIn(0);
+        listaDestinatari.appendTo(this).afişează();
       })
       .on('mouseleave', '.adaugă-destinatar', function() {
-        listaDestinatari.clearQueue().hide();
+        listaDestinatari.ascunde();
       })
 
       .on('mouseenter', '.document .destinatari .categorie', function() {
-        $(this).find('.listă').delay(300).fadeIn(0);
+        $(this).find('.listă').afişează();
       })
       .on('mouseleave', '.document .destinatari .categorie', function() {
-        $(this).find('.listă').clearQueue().hide();
-      })
-
-      .on('mouseenter', '#categorii-taxe-şi-speze .categorie', function() {
-        $(this).find('.conţinut').delay(300).fadeIn(0);
-      })
-      .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
-        $(this).find('.conţinut').clearQueue().hide();
+        $(this).find('.listă').ascunde();
       })
 
       .on('click', '.listă li', function() {
@@ -492,3 +515,15 @@ var Eliminabile = {
 $.expr[':'].block = function(el, i, matches, nodes) {
   return $.css(el, 'display') == 'block';
 }
+
+// --------------------------------------------------
+
+$.fn.ascunde = function() {
+  return this.clearQueue().hide();
+};
+
+// --------------------------------------------------
+
+$.fn.afişează = function() {
+  return this.delay(200).fadeIn(0);
+};

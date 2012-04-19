@@ -307,8 +307,8 @@ button.elimină-persoană {
   visibility: visible;
 }
 
-.bunuri .cîmp:hover button.elimină {
-  visibility: visible;
+.bunuri .cîmp {
+  white-space: nowrap; /* pentru butonul de eliminare */
 }
 
 #procedură #bară-de-butoane {
@@ -381,10 +381,6 @@ button.elimină-persoană {
   margin-bottom: .8em;
 }
 
-#categorii-taxe-şi-speze .categorie {
-  padding-bottom: 3px;
-}
-
 #cheltuieli .document .adaugă-destinatar:before,
 #cheltuieli .document .destinatari .categorie:before,
 #categorii-taxe-şi-speze .categorie:before {
@@ -443,6 +439,13 @@ button.elimină-persoană {
 #categorii-taxe-şi-speze .categorie .titlu {
   margin: .5em 0 .3em;
   display: none;
+}
+
+.dezactivat,
+.dezactivat:hover {
+  color: #555;
+  text-decoration: none;
+  cursor: text;
 }
 
 .cu.umbră {
@@ -511,8 +514,4 @@ input[type="checkbox"]+label {
 #cheltuieli .document .destinatari-adăugaţi>li {
   list-style: inside circle;
   white-space: nowrap;
-}
-
-.eliminabil {
-  white-space: nowrap; /* pentru butonul de eliminare */
 }
