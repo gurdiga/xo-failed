@@ -62,7 +62,6 @@ var ProcedurăNonPecuniară = {
     init: function() {
       $('#date-generale')
         .on('click', '.bunuri button.adaugă', this.adaugăCîmp)
-        .on('click', '.bunuri button.elimină', this.eliminăCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change', ['automat']) });
     },
 
@@ -374,6 +373,8 @@ var Cheltuieli = {
       }
 
       lista.append(item);
+      item.find('textarea').focus();
+      $(this).closest('.conţinut').hide();
     });
   },
 
@@ -386,19 +387,6 @@ var Cheltuieli = {
         şablon.clone()
           .insertBefore($(this).parent())
           .find('textarea').focus();
-      })
-      .on('click', 'button.elimină', function() {
-        var item = $(this).closest('.document');
-
-        if (item.siblings('.document').există()) {
-          item
-            .find('.valoare').val(0).trigger('change').end()
-            .remove();
-         } else {
-           item
-            .find('.valoare').val(0).trigger('change').end()
-            .find('textarea').val('');
-         }
       });
   },
 
@@ -411,17 +399,33 @@ var Cheltuieli = {
           .siblings('.adaugă-destinatar').toggle(!this.checked).end()
           .siblings('.destinatari-adăugaţi').toggle(!this.checked).end();
       })
+
       .on('mouseenter', '.adaugă-destinatar', function() {
-        listaDestinatari.appendTo(this).show();
+        listaDestinatari.appendTo(this).delay(300).fadeIn(0);
       })
       .on('mouseleave', '.adaugă-destinatar', function() {
-        listaDestinatari.hide()
+        listaDestinatari.clearQueue().hide();
       })
+
+      .on('mouseenter', '.document .destinatari .categorie', function() {
+        $(this).find('.listă').delay(300).fadeIn(0);
+      })
+      .on('mouseleave', '.document .destinatari .categorie', function() {
+        $(this).find('.listă').clearQueue().hide();
+      })
+
+      .on('mouseenter', '#categorii-taxe-şi-speze .categorie', function() {
+        $(this).find('.conţinut').delay(300).fadeIn(0);
+      })
+      .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
+        $(this).find('.conţinut').clearQueue().hide();
+      })
+
       .on('click', '.listă li', function() {
         var destinatariAdăugaţi = $(this).closest('.document').find('.destinatari-adăugaţi');
 
         $(this).clone()
-          .addClass('eliminabil')
+          .addClass('eliminabil de tot')
           .appendTo(destinatariAdăugaţi);
       });
   }
@@ -435,6 +439,7 @@ var Eliminabile = {
   init: function() {
     this.buton = $('button.şablon.elimină')
       .removeClass('şablon')
+      .css('display', 'inline-block')
       .hide()
       .on('click', this.elimină);
 
@@ -444,13 +449,23 @@ var Eliminabile = {
   },
 
   afişeazăButon: function() {
-    // TODO: define the :block-element filter
-    // and insert the button before the first one
-    Eliminabile.buton.appendTo(this).show();
+    var eliminabil = $(this),
+        elementeBloc = eliminabil.children(':block'),
+        buton = Eliminabile.buton;
+
+    if (elementeBloc.există()) {
+      buton.insertBefore(elementeBloc.first());
+    } else {
+      buton.appendTo(this);
+    }
+
+    buton.show();
   },
 
   ascundeButon: function() {
-    Eliminabile.buton.hide();
+    Eliminabile.buton
+      .hide()
+      .appendTo(document.body);
   },
 
   elimină: function() {
@@ -460,12 +475,20 @@ var Eliminabile = {
       .hide()
       .appendTo(document.body);
 
-    eliminabil.trigger('eliminare');
-
-    if (eliminabil.siblings('.eliminabil').există()) {
-      eliminabil.remove();
+    if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
+      eliminabil
+        .find('.valoare').val(0).trigger('change').end()
+        .remove();
     } else {
-      eliminabil.find('input:text, textarea').val('').trigger('change');
+      eliminabil
+        .find('.valoare').val(0).trigger('change').end()
+        .find('textarea').val('');
     }
   }
 };
+
+// --------------------------------------------------
+
+$.expr[':'].block = function(el, i, matches, nodes) {
+  return $.css(el, 'display') == 'block';
+}

@@ -2,7 +2,6 @@ TODO:
 -----
 
 * documente adresabile
-  * de reparat hover-ul pentru destinatari
 * cheltuieli: taxe şi speze
   * de adăugat costurile şi cîmpurile auxiliare
   * de adăugat ID-uri la <li>-uri care reprezintă

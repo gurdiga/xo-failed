@@ -22,6 +22,7 @@ input {
 }
 
 input[type=checkbox] {
+  outline-width: medium;
   width: auto;
   vertical-align: -1px;
 }
@@ -226,6 +227,22 @@ input.invalid {
   margin-right: 40px;
 }
 
+button.elimină-persoană,
+button.elimină {
+  border-width: 0;
+  background-color: transparent;
+  font-size: 1.2em;
+  color: #555;
+  padding: 0;
+  line-height: .6em;
+  vertical-align: -.2em;
+}
+
+button.elimină-persoană:hover,
+button.elimină:hover {
+  color: red;
+}
+
 button.elimină-persoană {
   font-size: small;
   display: none;
@@ -250,7 +267,7 @@ fieldset#creditor button.elimină-persoană {
 #cheltuieli .subformular,
 .bunuri {
   list-style-type: none;
-  padding: 0 0 0 2.8em;
+  padding: 0 0 0 4em;
 }
 
 #cheltuieli .subformular label,
@@ -258,7 +275,7 @@ fieldset#creditor button.elimină-persoană {
   text-align: left;
   font-style: italic;
   color: #555;
-  padding: 0 .4em;
+  padding: 0 .3em;
 }
 
 #cheltuieli .subformular textarea,
@@ -286,35 +303,8 @@ fieldset#creditor button.elimină-persoană {
   margin-left: .4em;
 }
 
-.bunuri li {
-  padding-left: 1.2em;
-}
-
-.bunuri .cîmp {
-  padding-left: 0;
-}
-
-button.elimină-persoană,
-.bunuri button.elimină {
-  border-width: 0;
-  background-color: transparent;
-  font-size: 1.2em;
-  color: #555;
-  padding: 0;
-  margin: .3em 0 0;
-  width: 1em;
-  visibility: hidden;
-}
-
 button.elimină-persoană {
   visibility: visible;
-}
-
-button.elimină-persoană:hover,
-.focusat button.elimină,
-#cheltuieli .subformular button.elimină:hover,
-.bunuri button.elimină:hover {
-  color: red;
 }
 
 .bunuri .cîmp:hover button.elimină {
@@ -374,21 +364,8 @@ button.elimină-persoană:hover,
   margin-left: 1em;
 }
 
-#cheltuieli .subformular .descriere,
-#cheltuieli .subformular .denumire {
-  overflow: hidden;
-}
-
 #cheltuieli .subformular .cantitate {
   width: 2em;
-}
-
-#cheltuieli .subformular .data-eliberării {
-  width: 7em;
-}
-
-#cheltuieli .subformular .adresat {
-  width: auto;
 }
 
 #cheltuieli .subformular input[type="checkbox"]+label {
@@ -463,11 +440,6 @@ button.elimină-persoană:hover,
   margin-top: 2px;
 }
 
-#cheltuieli .document .destinatari .categorie:hover .listă,
-#categorii-taxe-şi-speze .categorie:hover .conţinut {
-  display: block;
-}
-
 #categorii-taxe-şi-speze .categorie .titlu {
   margin: .5em 0 .3em;
   display: none;
@@ -480,9 +452,14 @@ button.elimină-persoană:hover,
   -webkit-box-shadow: 3px 3px 14px #444;
 }
 
-#listă-taxe-şi-speze .subformular .stînga {
+#listă-taxe-şi-speze .subformular label.stînga {
   width: auto;
   padding-right: .2em;
+}
+
+#listă-taxe-şi-speze .subformular .eliminabil input[type="checkbox"],
+#listă-taxe-şi-speze .subformular .eliminabil input[type="checkbox"]+label {
+  vertical-align: -.8em;
 }
 
 button,
@@ -536,13 +513,6 @@ input[type="checkbox"]+label {
   white-space: nowrap;
 }
 
-button.elimină {
-  border-width: 0;
-  background-color: transparent;
-  font-size: 1.2em;
-  color: #555;
-  padding: 0;
-  margin-left: .5em;
-  display: inline-block;
-  line-height: .6em;
+.eliminabil {
+  white-space: nowrap; /* pentru butonul de eliminare */
 }
