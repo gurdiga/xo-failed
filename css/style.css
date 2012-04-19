@@ -430,7 +430,7 @@ button.elimină-persoană {
   text-decoration: none;
 }
 
-#categorii-taxe-şi-speze .categorie .listă {
+#categorii-taxe-şi-speze .categorie .conţinut {
   display: none;
   position: absolute;
   border: 1px solid #dedede;
