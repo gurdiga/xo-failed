@@ -439,6 +439,24 @@ var Cheltuieli = {
 
       .on('mouseenter', '.document .destinatari .categorie', function() {
         $(this).find('.listă').afişează();
+
+        var destinatariAdăugaţi = $(this).closest('.document').find('.destinatari-adăugaţi li'),
+            destinatari = $(this).find('.listă').children();
+
+        if (destinatariAdăugaţi.există()) {
+          var selector = destinatariAdăugaţi.map(function() {
+            return ':contains("' + $(this).text() + '")';
+          }).get().join(',');
+
+          console.log(selector);
+          destinatari.filter(selector)
+            .addClass('dezactivat')
+            .attr('title', 'Adăugat deja');
+        } else {
+          destinatari
+            .removeClass('dezactivat')
+            .removeAttr('title');
+        }
       })
       .on('mouseleave', '.document .destinatari .categorie', function() {
         $(this).find('.listă').ascunde();
@@ -450,6 +468,8 @@ var Cheltuieli = {
         $(this).clone()
           .addClass('eliminabil de tot')
           .appendTo(destinatariAdăugaţi);
+
+        listaDestinatari.hide();
       });
   }
 };

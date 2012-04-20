@@ -2,13 +2,12 @@ TODO:
 -----
 
 * cheltuieli: taxe şi speze
-  * dezactivează adresaţii adăugaţi
-  * de adăugat ID-uri la <li>-uri care reprezintă
-    taxe şi speze individuale, şi clasa «item» şi
-    «unică» sau «multiplă»
+  * de identificat itemii unici la TS
+  * de stabilit costul TS pentru documente
+    adresabile expediate şi neexpediate
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
-* how to encode form data?
+* how to encode the data?
 
 
 Causality

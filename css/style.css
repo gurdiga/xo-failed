@@ -377,8 +377,7 @@ button.elimină-persoană {
 #categorii-taxe-şi-speze {
   display: inline-block;
   font-size: small;
-  margin-left: 3em;
-  margin-bottom: .8em;
+  margin: 0 0 .8em 14em;
 }
 
 #cheltuieli .document .adaugă-destinatar:before,
@@ -433,7 +432,6 @@ button.elimină-persoană {
   width: 40em;
   padding: .5em 1em 1em;
   margin-left: -1em;
-  margin-top: 2px;
 }
 
 #categorii-taxe-şi-speze .categorie .titlu {
@@ -441,10 +439,10 @@ button.elimină-persoană {
   display: none;
 }
 
-.dezactivat,
-.dezactivat:hover {
+#categorii-taxe-şi-speze .categorie .item.dezactivat,
+#categorii-taxe-şi-speze .categorie .item.dezactivat:hover {
   color: #555;
-  text-decoration: none;
+  text-decoration: line-through;
   cursor: text;
 }
 
@@ -504,6 +502,13 @@ input[type="checkbox"]+label {
 #cheltuieli .document .destinatari .listă>li,
 #cheltuieli .document .destinatari .categorie {
   margin-bottom: .4em;
+}
+
+#cheltuieli .document .destinatari .listă>li.dezactivat,
+#cheltuieli .document .destinatari .listă>li.dezactivat:hover {
+  text-decoration: line-through;
+  cursor: text;
+  color: #555;
 }
 
 #cheltuieli .document .destinatari .listă {
