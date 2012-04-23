@@ -3,8 +3,10 @@ TODO:
 
 * cheltuieli: taxe şi speze
   * de identificat itemii unici la TS
-  * de stabilit costul TS pentru documente
-    adresabile expediate şi neexpediate
+  * de unificat caregoriile de destinatari
+  * bifă “achitat” şi data achitării
+  * de adăugat speza automat
+  * cîmp pentru terţe persoane
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
 * how to encode the data?

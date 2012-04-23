@@ -193,14 +193,14 @@
                       — <span class="cost">3</span>&nbsp;u.c.
                     </li>
 
-                    <li id="taxaA3" class="item unic" data-şablon-subformular="documente">
+                    <li id="taxaA3" class="item" data-şablon-subformular="documente">
                       taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
                       a certificatelor, confirmărilor, a informaţiei scrise despre
                       acţiunile de executare silită întreprinse de către executorul judecătoresc
                       — <span class="cost">1</span>&nbsp;u.c. per document
                     </li>
 
-                    <li id="taxaA4" class="item unic">
+                    <li id="taxaA4" class="item">
                       taxa pentru întocmirea borderoului de calcul
                       al taxelor pentru efectuarea actelor executorului
                       judecătoresc şi a spezelor procedurii de executare
@@ -213,7 +213,7 @@
                       — <span class="cost">10</span>&nbsp;u.c.
                     </li>
 
-                    <li id="taxaA6" class="item unic" data-şablon-subformular="bifă “din arhivă”">
+                    <li id="taxaA6" class="item" data-şablon-subformular="bifă “din arhivă”">
                       taxa pentru eliberarea copiei autentificate a procedurii de executare
                       — <span class="cost">1</span>&nbsp;u.c.
                     </li>
@@ -792,7 +792,6 @@
 
       <li class="document eliminabil">
         <textarea class="denumire"></textarea>
-        <input type="checkbox" class="pentru expediere"/><label>pentru expediere</label>
 
         <ul class="destinatari-adăugaţi"></ul>
         <div class="adaugă-destinatar"><span>Adaugă destinatar</span></div>
@@ -877,6 +876,7 @@
             <li>“Real-Registr” S.A. Bălţi, str. Kiev 122</li>
             <li>“Soliditate” S.A. Chişinău, str. Feredeului 4</li>
             <li>“Intermedia-Group” S.A. Chişinău, str. Podgorenilor 36</li>
+            <li class="toate">toţi<span> registratorii independenţi</span></li>
           </ul>
         </li>
 
@@ -888,6 +888,7 @@
             <li>“Iuventus-DS” S.A. Chişinău, bd. Ştefan cel Mare 65, bir. 310</li>
             <li>“Oldex” S.A. Chişinău, str. Alexei Mateevici 46/1</li>
             <li>“Proajioc” S.A. Chişinău, bd. Dacia 53/4, of. 5</li>
+            <li class="toate">toate<span> companiile de brokeraj</span></li>
           </ul>
         </li>
 
@@ -912,6 +913,7 @@
             <li>B.C. “Energbank” S.A. Chisinau, str. V. Alecsandri 78</li>
             <li>B.C. “Banca de Finanţe şi Comerţ” S.A. Chisinau, str. Puşkin 26</li>
             <li>B.C. “EuroCreditBank” S.A. Chisinau, str. Ismail 33</li>
+            <li class="toate">toate<span> companiile de dealeri</span></li>
           </ul>
         </li>
 
@@ -921,6 +923,7 @@
           <ul class="listă cu umbră">
             <li>C.F. “F.O.N.D” S.A. Chişinău, str. A. Russo 1, of. 143</li>
             <li>C.F. “Codru” S.A. Orhei, str. Sadoveanu 32</li>
+            <li class="toate">toţi<span> administratorii feduciari</span></li>
           </ul>
         </li>
 
@@ -930,6 +933,7 @@
           <ul class="listă cu umbră">
             <li>“Depozitarul Naţional de Valori Mobiliare al Moldovei” S.A. Chişinău, bd. Ştefan cel Mare 73</li>
             <li>“Depozitarul Central” S.A. Chişinău, str. Vasile Alecsandri 119a</li>
+            <li class="toate">toate<span> subdiviziunile DNVM</span></li>
           </ul>
         </li>
 
@@ -939,6 +943,7 @@
           <ul class="listă cu umbră">
             <li>“Acvila-Sport” S.A. Chişinău, str. Bucuriei 5</li>
             <li>“Aureola &amp; Lombard” S.A. Chişinău, bd. Ştefan cel Mare 132</li>
+            <li class="toate">toate<span> S.A. care ţin registru acţionarilor de sine stătător</span></li>
           </ul>
         </li>
 
@@ -960,18 +965,19 @@
             <li>“Banca Comercială Română Chişinău” S.A. 2005 Chişinău, str. Puşkin 60/2</li>
             <li>“EXIMBANK - Gruppo Veneto Banca” S.A. 2004 Chişinău, bd. Ştefan cel Mare 171/1</li>
             <li>“MOBIASBANCĂ - Groupe Societe Generale” S.A. 2012 Chişinău, bd. Ştefan cel Mare 81a</li>
+            <li class="toate">toate<span> băncile comerciale</span></li>
           </ul>
         </li>
 
         <li class="categorie">
-          <span class="titlu">Deţinători de registre şi alţii</span>
+          <span class="titlu">Deţinători de registre şi ale parsoane terţe</span>
 
           <ul class="listă cu umbră">
-            <li>ÎS “CRIS Registru” 2012 Chişinau, str. Puşkin 42</li>
-            <li>ÎS “Cadastru” 2012 Chişinău, str. Puşkin 47</li>
-            <li>Camera Înregistrării de Stat de pe lîngă MJRM 2001 Chişinău, bd. Ştefan Cel Mare 73</li>
-            <li>Inspectoratul Fiscal Principal de Stat de pe lîngă MFRM 2005 Chisinau, str. Cosmonauţilor 9</li>
-            <li>Casa Naţională de Asigurări Sociale a RM 2028 Chişinău, str. Gheorghe Tudor 3</li>
+            <li class="suplimentar">ÎS “CRIS Registru” 2012 Chişinau, str. Puşkin 42</li>
+            <li class="suplimentar">ÎS “Cadastru” 2012 Chişinău, str. Puşkin 47</li>
+            <li class="suplimentar">Camera Înregistrării de Stat de pe lîngă MJRM 2001 Chişinău, bd. Ştefan Cel Mare 73</li>
+            <li class="suplimentar">Inspectoratul Fiscal Principal de Stat de pe lîngă MFRM 2005 Chisinau, str. Cosmonauţilor 9</li>
+            <li class="suplimentar">Casa Naţională de Asigurări Sociale a RM 2028 Chişinău, str. Gheorghe Tudor 3</li>
           </ul>
         </li>
       </ul>

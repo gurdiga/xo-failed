@@ -341,7 +341,6 @@ var Salvează = {
         date[nume] = [];
         // TODO
         // toate fieldset-urile trebuie să fie în div.coloană?
-        console.log(nume);
       });
     });
   }
@@ -440,15 +439,14 @@ var Cheltuieli = {
       .on('mouseenter', '.document .destinatari .categorie', function() {
         $(this).find('.listă').afişează();
 
-        var destinatariAdăugaţi = $(this).closest('.document').find('.destinatari-adăugaţi li'),
+        var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi li'),
             destinatari = $(this).find('.listă').children();
 
-        if (destinatariAdăugaţi.există()) {
-          var selector = destinatariAdăugaţi.map(function() {
+        if (destinatariAdăugaţiDeja.există()) {
+          var selector = destinatariAdăugaţiDeja.map(function() {
             return ':contains("' + $(this).text() + '")';
           }).get().join(',');
 
-          console.log(selector);
           destinatari.filter(selector)
             .addClass('dezactivat')
             .attr('title', 'Adăugat deja');
@@ -463,11 +461,16 @@ var Cheltuieli = {
       })
 
       .on('click', '.listă li', function() {
-        var destinatariAdăugaţi = $(this).closest('.document').find('.destinatari-adăugaţi');
+        if ($(this).is('.toate')) {
+          $(this).siblings().trigger('click');
+          return;
+        }
+
+        var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi');
 
         $(this).clone()
           .addClass('eliminabil de tot')
-          .appendTo(destinatariAdăugaţi);
+          .appendTo(destinatariAdăugaţiDeja);
 
         listaDestinatari.hide();
       });

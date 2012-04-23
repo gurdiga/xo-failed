@@ -201,7 +201,7 @@ ul {
 }
 
 li {
-  margin: .2em 0 0 0;
+  padding: .2em 0 0 0;
 }
 
 .bunuri label.valoare,
@@ -484,7 +484,6 @@ input[type="checkbox"]+label {
 
 #cheltuieli .document .adaugă-destinatar {
   margin-left: 3em;
-  display: none;
 }
 
 #cheltuieli .document .destinatari,
@@ -511,8 +510,13 @@ input[type="checkbox"]+label {
   color: #555;
 }
 
-#cheltuieli .document .destinatari .listă {
+#cheltuieli .document .destinatari .listă,
+#cheltuieli .document .destinatari .listă .toate span {
   display: none;
+}
+
+#cheltuieli .document .destinatari .listă .toate {
+  font-weight: bold;
 }
 
 #cheltuieli .document .destinatari .listă>li,
