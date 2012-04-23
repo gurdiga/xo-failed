@@ -487,13 +487,16 @@ var Eliminabile = {
       .on('click', this.elimină);
 
     $('#procedură')
-      .on('mouseenter', '.eliminabil', this.afişeazăButon)
+      .on('mousemove', '.eliminabil', this.afişeazăButon)
       .on('mouseleave', '.eliminabil', this.ascundeButon);
   },
 
-  afişeazăButon: function() {
-    var eliminabil = $(this),
-        elementeBloc = eliminabil.children(':block'),
+  afişeazăButon: function(e) {
+    e.stopPropagation();
+
+    if ($(this).is('cu buton')) return;
+
+    var elementeBloc = $(this).children(':block'),
         buton = Eliminabile.buton;
 
     if (elementeBloc.există()) {
@@ -503,9 +506,11 @@ var Eliminabile = {
     }
 
     buton.show();
+    $(this).addClass('cu buton');
   },
 
   ascundeButon: function() {
+    $(this).removeClass('cu buton');
     Eliminabile.buton
       .hide()
       .appendTo(document.body);
