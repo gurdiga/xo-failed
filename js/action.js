@@ -429,6 +429,14 @@ var Cheltuieli = {
           .siblings('.destinatari-adăugaţi').toggle(!this.checked).end();
       })
 
+      .on('click', '.destinatari-adăugaţi', function(e) {
+        var listă = $(this);
+
+        if (e.target == this) listă.toggleClass('comprimaţi')
+
+        e.stopPropagation();
+      })
+
       .on('mouseenter', '.adaugă-destinatar', function() {
         listaDestinatari.appendTo(this).afişează();
       })
@@ -460,12 +468,11 @@ var Cheltuieli = {
         $(this).find('.listă').ascunde();
       })
 
-      .on('click', '.listă li', function() {
-        if ($(this).is('.toate')) {
-          $(this).siblings().trigger('click');
-          return;
-        }
+      .on('click', '.categorie .titlu .toate', function() {
+        $(this).closest('.categorie').find('li').trigger('click');
+      })
 
+      .on('click', '.listă li', function() {
         var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi');
 
         $(this).clone()

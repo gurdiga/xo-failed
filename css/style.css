@@ -235,7 +235,7 @@ button.elimină {
   color: #555;
   padding: 0;
   line-height: .6em;
-  vertical-align: -.2em;
+  vertical-align: -.1em;
 }
 
 button.elimină-persoană:hover,
@@ -510,17 +510,79 @@ input[type="checkbox"]+label {
   color: #555;
 }
 
-#cheltuieli .document .destinatari .listă,
-#cheltuieli .document .destinatari .listă .toate span {
+#cheltuieli .document .destinatari .listă {
   display: none;
 }
 
-#cheltuieli .document .destinatari .listă .toate {
-  font-weight: bold;
+#cheltuieli .document .destinatari .categorie .toate {
+  font-style: italic;
+  display: none;
+}
+
+#cheltuieli .document .destinatari .categorie:hover .toate {
+  color: #999;
+  display: inline;
+}
+
+#cheltuieli .document .destinatari .categorie:hover .toate:hover {
+  color: black;
 }
 
 #cheltuieli .document .destinatari .listă>li,
 #cheltuieli .document .destinatari-adăugaţi>li {
   list-style: inside circle;
   white-space: nowrap;
+}
+
+#cheltuieli .document .destinatari-adăugaţi {
+  min-height: 1em;
+}
+
+#cheltuieli .document .destinatari-adăugaţi:before {
+  content: '▿';
+  position: absolute;
+  margin-left: -.9em;
+}
+
+#cheltuieli .document .destinatari-adăugaţi:hover:before {
+  content: '▾';
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi:hover {
+  text-decoration: underline;
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi:hover:after,
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi:hover:before {
+  color: blue;
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi:before {
+  content: '▹';
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi:hover:before {
+  content: '▸';
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi:after {
+  content: counter(destinatari) " destinatari";
+  font-size: 1em;
+  vertical-align: -.1em;
+}
+
+#cheltuieli .document .destinatari-adăugaţi {
+  cursor: pointer;
+}
+
+#cheltuieli .document .destinatari-adăugaţi>li {
+  counter-increment: destinatari;
+  cursor: text;
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi>li {
+  visibility: hidden;
+  width: 1px;
+  display: inline-block;
+  position: absolute;
 }
