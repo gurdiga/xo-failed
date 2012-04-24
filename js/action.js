@@ -83,9 +83,12 @@ var ProcedurăNonPecuniară = {
   'măsura-de-asigurare': {
     init: function() {
       $('#date-generale').on('change', '#măsura-de-asigurare', function() {
-        var lista = $(this);
+        var lista = $(this),
+            mesaj = 'aplicarea sechestrului pe bunurile sau pe sumele'
+              + ' de bani ale debitorului, inclusiv pe cele care'
+              + ' se află la alte persoane';
 
-        if (lista.val() == 'aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane') {
+        if (lista.val() == mesaj) {
           lista.parent()
             .after($('.şablon[title="' + lista.val() + '"]').html())
             .next().find('.sumă').focus();
@@ -455,9 +458,11 @@ var Cheltuieli = {
             return ':contains("' + $(this).text() + '")';
           }).get().join(',');
 
-          destinatari.filter(selector)
-            .addClass('dezactivat')
-            .attr('title', 'Adăugat deja');
+          destinatari
+            .removeClass('dezactivat')
+            .filter(selector)
+              .addClass('dezactivat')
+              .attr('title', 'Adăugat deja');
         } else {
           destinatari
             .removeClass('dezactivat')
