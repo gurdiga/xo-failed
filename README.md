@@ -2,9 +2,6 @@ TODO:
 -----
 
 * cheltuieli: taxe şi speze
-  * de reparat “adăugat deja”
-  * de identificat itemii unici la TS
-  * de unificat caregoriile de destinatari
   * bifă “achitat” şi data achitării
   * de adăugat speza automat
   * cîmp pentru terţe persoane
