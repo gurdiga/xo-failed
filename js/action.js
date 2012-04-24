@@ -551,6 +551,7 @@ var Eliminabile = {
         .remove();
     } else {
       eliminabil
+        .find('.eliminabil.de.tot').remove().end()
         .find('.valoare').val(0).trigger('change').end()
         .find('textarea').val('');
     }

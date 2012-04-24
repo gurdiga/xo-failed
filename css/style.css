@@ -484,6 +484,7 @@ input[type="checkbox"]+label {
 
 #cheltuieli .document .adaugă-destinatar {
   margin-left: 3em;
+  display: inline-block;
 }
 
 #cheltuieli .document .destinatari,
