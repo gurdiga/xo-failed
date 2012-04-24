@@ -474,7 +474,12 @@ var Cheltuieli = {
       })
 
       .on('click', '.categorie .titlu .toate', function() {
-        $(this).closest('.categorie').find('li').trigger('click');
+        var destinatari = $(this).closest('.categorie'),
+            adăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi li').map(function() {
+              return ':contains("' + $(this).text() + '")';
+            }).get().join(',');
+
+        destinatari.find('li').not(adăugaţiDeja).trigger('click');
       })
 
       .on('click', '.listă li', function() {
