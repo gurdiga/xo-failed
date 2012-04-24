@@ -480,6 +480,8 @@ var Cheltuieli = {
             }).get().join(',');
 
         destinatari.find('li').not(adăugaţiDeja).trigger('click');
+
+        listaDestinatari.hide();
       })
 
       .on('click', '.listă li', function() {
