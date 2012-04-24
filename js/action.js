@@ -366,7 +366,8 @@ var Cheltuieli = {
       if ($(this).is('.dezactivat')) return;
 
       var item = $(this).clone(),
-          subformular = item.data('şablon-subformular');
+          subformular = item.data('şablon-subformular'),
+          bifăAchitare = $('.şablon.achitare').clone().removeClass('şablon');
 
       if (subformular) {
         item.append(
@@ -376,6 +377,7 @@ var Cheltuieli = {
         );
       }
 
+      item.append(bifăAchitare);
       lista.append(item);
       item
         .addClass('eliminabil de tot')

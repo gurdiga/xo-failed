@@ -303,6 +303,12 @@ fieldset#creditor button.elimină-persoană {
   margin-left: .4em;
 }
 
+#cheltuieli .subformular.achitare label {
+  width: auto;
+  color: black;
+  font-style: normal;
+}
+
 button.elimină-persoană {
   visibility: visible;
 }
