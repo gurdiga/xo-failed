@@ -410,6 +410,9 @@ var Cheltuieli = {
       .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
         $(this).find('.conţinut').ascunde();
       })
+      .on('click', '.achitare input:checkbox', function() {
+        $(this).closest('.item').toggleClass('achitat', !this.checked);
+      });
   },
 
   initSubformulare: function() {

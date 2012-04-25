@@ -304,7 +304,6 @@ fieldset#creditor button.elimină-persoană {
 }
 
 #cheltuieli .subformular.achitare label {
-  width: auto;
   color: black;
   font-style: normal;
 }
@@ -346,8 +345,12 @@ button.elimină-persoană {
 }
 
 #cheltuieli #listă-taxe-şi-speze {
-  list-style: outside square;
+  list-style: outside circle;
   margin-left: 12.25em;
+}
+
+#cheltuieli .item.achitat {
+  list-style-type: disc;
 }
 
 #cheltuieli .item .subformular {

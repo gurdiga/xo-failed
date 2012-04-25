@@ -2,7 +2,6 @@ TODO:
 -----
 
 * cheltuieli: taxe şi speze
-  * bifă “achitat” şi data achitării
   * de adăugat speza automat
   * cîmp pentru terţe persoane
 * butonul de eliminare sare pe Windows
