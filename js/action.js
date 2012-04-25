@@ -411,7 +411,11 @@ var Cheltuieli = {
         $(this).find('.conţinut').ascunde();
       })
       .on('click', '.achitare input:checkbox', function() {
-        $(this).closest('.item').toggleClass('achitat', !this.checked);
+        var azi = (new Date).format('dd/mm/yyyy');
+
+        $(this)
+          .siblings('.la').find('.data').text(this.checked ? '' : azi)
+          .closest('.item').toggleClass('achitat', !this.checked);
       });
   },
 

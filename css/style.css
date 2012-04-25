@@ -353,6 +353,16 @@ button.elimină-persoană {
   list-style-type: disc;
 }
 
+#cheltuieli .item .la {
+  display: none;
+  color: #555;
+  font-style: italic;
+}
+
+#cheltuieli .item.achitat .la {
+  display: inline;
+}
+
 #cheltuieli .item .subformular {
   padding: .3em 0 0 1em;
 }
