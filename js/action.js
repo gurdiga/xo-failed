@@ -42,8 +42,8 @@ var Action = {
 
 var EticheteAccesibilePentruBife = {
   init: function() {
-    $(document).on('click', 'input:checkbox+label', function() {
-      $(this).prev().click();
+    $('#procedură').on('click', 'input:checkbox+label', function() {
+      $(this).prev('input:checkbox').trigger('click', 'programat');
     });
   }
 };
@@ -353,16 +353,16 @@ var Salvează = {
 
 var Cheltuieli = {
   init: function() {
-    this.initListaCategoriiTaxeŞiSpeze();
+    this.initListaCategorii();
     this.initSubformulare();
     this.initDocumenteAdresabile();
   },
 
-  initListaCategoriiTaxeŞiSpeze: function() {
+  initListaCategorii: function() {
     var listaCategorii = $('#categorii-taxe-şi-speze'),
         lista = $('#listă-taxe-şi-speze');
 
-    listaCategorii.on('click', '.categorie ol>li', function() {
+    listaCategorii.on('click', '.categorie .item', function() {
       if ($(this).is('.dezactivat')) return;
 
       var item = $(this).clone(),
@@ -377,9 +377,9 @@ var Cheltuieli = {
         );
       }
 
-      item.append(bifăAchitare);
       lista.append(item);
       item
+        .append(bifăAchitare)
         .addClass('eliminabil de tot')
         .find('textarea').focus();
 
@@ -410,12 +410,13 @@ var Cheltuieli = {
       .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
         $(this).find('.conţinut').ascunde();
       })
-      .on('click', '.achitare input:checkbox', function() {
-        var azi = (new Date).format('dd/mm/yyyy');
+      .on('click', '.achitare input:checkbox', function(e, programat) {
+        var azi = (new Date).format('dd/mm/yyyy'),
+            bifat = programat ? !this.checked : this.checked;
 
         $(this)
-          .siblings('.la').find('.data').text(this.checked ? '' : azi)
-          .closest('.item').toggleClass('achitat', !this.checked);
+          .siblings('.la').find('.data').text(bifat ? azi : '')
+          .closest('.item').toggleClass('achitat', bifat);
       });
   },
 
@@ -435,18 +436,8 @@ var Cheltuieli = {
     var listaDestinatari = $('.şablon.destinatari');
 
     $('#cheltuieli')
-      .on('click', ':checkbox.pentru.expediere', function() {
-        $(this)
-          .siblings('.adaugă-destinatar').toggle(!this.checked).end()
-          .siblings('.destinatari-adăugaţi').toggle(!this.checked).end();
-      })
-
       .on('click', '.destinatari-adăugaţi', function(e) {
-        var listă = $(this);
-
-        if (e.target == this) listă.toggleClass('comprimaţi')
-
-        e.stopPropagation();
+        if (e.target == this) $(this).toggleClass('comprimaţi');
       })
 
       .on('mouseenter', '.adaugă-destinatar', function() {
@@ -562,7 +553,7 @@ var Eliminabile = {
       eliminabil
         .find('.eliminabil.de.tot').remove().end()
         .find('.valoare').val(0).trigger('change').end()
-        .find('textarea').val('');
+        .find('textarea').val('').trigger('change');
     }
   }
 };

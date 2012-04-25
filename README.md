@@ -4,7 +4,7 @@ TODO:
 * cheltuieli: taxe şi speze
   * de adăugat speza automat
   * cîmp pentru terţe persoane
-* butonul de eliminare sare pe Windows
+* smoother add/remove
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
 * how to encode the data?

@@ -447,7 +447,6 @@ button.elimină-persoană {
 #categorii-taxe-şi-speze .categorie .conţinut {
   display: none;
   position: absolute;
-  border: 1px solid #dedede;
   width: 40em;
   padding: .5em 1em 1em;
   margin-left: -1em;
@@ -467,6 +466,7 @@ button.elimină-persoană {
 
 .cu.umbră {
   background-color: white;
+  border: 1px solid silver;
   box-shadow: 3px 3px 14px #444;
   -moz-box-shadow: 3px 3px 14px #444;
   -webkit-box-shadow: 3px 3px 14px #444;
