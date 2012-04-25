@@ -606,3 +606,15 @@ input[type="checkbox"]+label {
   display: inline-block;
   position: absolute;
 }
+
+#cheltuieli .document .destinatari-adăugaţi .persoană.terţă input {
+  margin: 0;
+  padding: .1em .3em;
+}
+
+#cheltuieli .document .destinatari-adăugaţi .persoană.terţă label {
+  color: black;
+  width: auto;
+  font-style: normal;
+  vertical-align: -.2em;
+}

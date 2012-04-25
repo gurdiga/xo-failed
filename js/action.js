@@ -485,11 +485,20 @@ var Cheltuieli = {
       })
 
       .on('click', '.listă li', function() {
-        var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi');
+        var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi'),
+            destinatar = $(this).clone();
 
-        $(this).clone()
+        destinatar
           .addClass('eliminabil de tot')
           .appendTo(destinatariAdăugaţiDeja);
+
+        if (destinatar.is('.persoană.terţă')) {
+          destinatariAdăugaţiDeja.removeClass('comprimaţi');
+          destinatar
+            .text('')
+            .append($('.şablon.persoană.terţă').html())
+            .find('input').focus();
+        }
 
         listaDestinatari.hide();
       });
