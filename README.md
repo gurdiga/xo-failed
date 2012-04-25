@@ -2,7 +2,6 @@ TODO:
 -----
 
 * cheltuieli: taxe şi speze
-  * cîmp pentru terţe persoane
 * smoother add/remove
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?

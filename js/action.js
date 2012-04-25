@@ -501,6 +501,14 @@ var Cheltuieli = {
         }
 
         listaDestinatari.hide();
+      })
+
+      .on('eliminare', '.destinatari-adăugaţi .eliminabil', function() {
+        var eliminabil = $(this);
+
+        if (!eliminabil.siblings().există()) {
+          eliminabil.parent().addClass('comprimaţi');
+        }
       });
   }
 };
@@ -557,12 +565,14 @@ var Eliminabile = {
     if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
       eliminabil
         .find('.valoare').val(0).trigger('change').end()
+        .trigger('eliminare')
         .remove();
     } else {
       eliminabil
         .find('.eliminabil.de.tot').remove().end()
         .find('.valoare').val(0).trigger('change').end()
-        .find('textarea').val('').trigger('change');
+        .find('textarea').val('').trigger('change').end()
+        .trigger('eliminare');
     }
   }
 };
