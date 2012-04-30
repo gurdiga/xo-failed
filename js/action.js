@@ -533,7 +533,7 @@ var Eliminabile = {
   afişeazăButon: function(e) {
     e.stopPropagation();
 
-    if ($(this).is('cu buton')) return;
+    if ($(this).is('.cu.buton')) return;
 
     var elementeBloc = $(this).children(':block'),
         buton = Eliminabile.buton;

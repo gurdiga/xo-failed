@@ -5,6 +5,7 @@ var Business = {
   init: function() {
     Onorariul.init();
     Defaults.init();
+    TotalCheltuieli.init();
   }
 };
 
@@ -152,4 +153,30 @@ $.fn.suma = function() {
   });
 
   return suma.toFixed(2);
+};
+
+// --------------------------------------------------
+
+var TotalCheltuieli = {
+  init: function() {
+    $('#cheltuieli').on('DOMSubtreeModified', '#listă-taxe-şi-speze', function(e) {
+      e.stopPropagation();
+
+      console.log(
+      $(this).find('input.cost, input.valoare, input.sumă').map(function() {
+        return this.value;
+      }).get());
+
+      // cazuri speciale:
+      // * documente adresabile
+      //   denumire + # de destinatari de anumite fel
+      //   .item .document .destinatari-adăugaţi = 1
+      //   count(.item .document .destinatari-adăugaţi.suplimentar) * .25
+      // * ore lucrate: .item .cantitate * .5
+      // * bifa din arhivă: .din.arhivă:checked +1
+      // * bifă “licitaţie repetată”: -.5
+      // * tA3: sum(.item .cantitate)
+
+    });
+  }
 };
