@@ -186,16 +186,16 @@ var TotalCheltuieli = {
         cheltuieliAdăugate = $('#listă-taxe-şi-speze');
 
     total += cheltuieliAdăugate.find('input.cost, input.valoare, input.sumă').suma();
-    total += cheltuieliAdăugate.find('[id="taxaB2.1"] .cantitate').suma() * .5;
-    total += cheltuieliAdăugate.find('#taxaA6 .din.arhivă').is(':checked') ? 1 : 0;
+    total += cheltuieliAdăugate.find('[id="taxaB2.1"] .cantitate').suma() * .5 * UC;
+    total += cheltuieliAdăugate.find('#taxaA6 .din.arhivă').is(':checked') ? 1 * UC : 0;
 
     var licitaţieRepetată = cheltuieliAdăugate.find('#taxaB6 .licitaţie.repetată');
 
     if (licitaţieRepetată.is(':checked')) {
-      total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5;
+      total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5 * UC;
     }
 
-    total += cheltuieliAdăugate.find('#taxaA3 .cantitate').suma();
+    total += cheltuieliAdăugate.find('#taxaA3 .cantitate').suma() * UC;
 
     var documenteExpediate = cheltuieliAdăugate.find('#taxaB1 .document');
 
@@ -204,12 +204,12 @@ var TotalCheltuieli = {
 
       if (destinatari.există()) {
         total +=
-          destinatari.filter('.suplimentar').length * .25 +
-          (destinatari.filter(':not(.suplimentar)').există() ? 1 : 0);
+          destinatari.filter('.suplimentar').length * .25 * UC +
+          (destinatari.filter(':not(.suplimentar)').există() ? 1 * UC : 0);
       }
     });
 
-    $('#total-taxe-şi-speze').val(total * UC);
+    $('#total-taxe-şi-speze').val(total);
 
     // cazuri speciale:
     // * documente adresabile
