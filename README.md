@@ -2,6 +2,7 @@ TODO:
 -----
 
 * cheltuieli: taxe şi speze
+  * verifică calcularea totalului
 * smoother add/remove
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?

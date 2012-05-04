@@ -163,7 +163,7 @@ div.pagină>.conţinut {
 
 fieldset {
   border: 1px solid #dedede;
-  padding: 0 0 7px 10px;
+  padding: 0 10px 7px;
   margin-bottom: 20px;
 }
 
@@ -227,19 +227,32 @@ input.invalid {
   margin-right: 40px;
 }
 
-button.elimină-persoană,
-button.elimină {
+button.elimină-persoană {
   border-width: 0;
   background-color: transparent;
   font-size: 1.2em;
   color: #555;
-  padding: 0;
+  padding: 0 1em 0 0;
+  margin-left: -1em;
   line-height: .6em;
-  vertical-align: -.1em;
+}
+
+.elimină {
+  font-size: 1.4em;
+  color: #555;
+  width: 16px;
+  position: absolute;
+  left: -16px;
+  top: 0;
+  background: white;
+}
+
+.spre-eliminare {
+  position: relative;
 }
 
 button.elimină-persoană:hover,
-button.elimină:hover {
+.elimină:hover {
   color: red;
 }
 
@@ -300,7 +313,7 @@ fieldset#creditor button.elimină-persoană {
 #cheltuieli .subformular button.adaugă,
 .bunuri button.adaugă {
   font-size: small;
-  margin-left: .4em;
+  margin-left: .2em;
 }
 
 #cheltuieli .subformular.achitare label {
@@ -483,6 +496,7 @@ button.elimină-persoană {
 }
 
 button,
+.elimină,
 input[type="checkbox"],
 input[type="checkbox"]+label {
   cursor: pointer;

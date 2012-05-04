@@ -519,9 +519,8 @@ var Eliminabile = {
   buton: null,
 
   init: function() {
-    this.buton = $('button.şablon.elimină')
+    this.buton = $('.şablon.elimină')
       .removeClass('şablon')
-      .css('display', 'inline-block')
       .hide()
       .on('click', this.elimină);
 
@@ -533,34 +532,34 @@ var Eliminabile = {
   afişeazăButon: function(e) {
     e.stopPropagation();
 
-    if ($(this).is('.cu.buton')) return;
-
-    var elementeBloc = $(this).children(':block'),
+    var eliminabil = $(this),
         buton = Eliminabile.buton;
 
-    if (elementeBloc.există()) {
-      buton.insertBefore(elementeBloc.first());
+    if (eliminabil.is('.spre-eliminare')) return;
+
+    if (eliminabil.children().există()) {
+      buton.insertBefore(eliminabil.children().first())
     } else {
-      buton.appendTo(this);
+      eliminabil.prepend(buton);
     }
 
     buton.show();
-    $(this).addClass('cu buton');
+
+    $('.spre-eliminare').removeClass('spre-eliminare');
+    eliminabil.addClass('spre-eliminare');
   },
 
   ascundeButon: function() {
-    $(this).removeClass('cu buton');
     Eliminabile.buton
       .hide()
+      .parent().removeClass('spre-eliminare').end()
       .appendTo(document.body);
   },
 
   elimină: function() {
     var eliminabil = Eliminabile.buton.parent();
 
-    Eliminabile.buton
-      .hide()
-      .appendTo(document.body);
+    Eliminabile.ascundeButon();
 
     if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
       eliminabil
