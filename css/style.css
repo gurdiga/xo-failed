@@ -96,20 +96,13 @@ button.mare {
 }
 
 #crează-procedură ul {
-  margin: 1px 0 0;
+  margin: .5em 0 0;
   list-style-type: square;
   list-style-position: inside;
 }
 
 #crează-procedură a {
   color: blue;
-}
-
-#crează-procedură a:focus,
-#crează-procedură a:hover {
-  color: blue;
-  text-decoration: underline;
-  outline-width: 0;
 }
 
 #index input {
