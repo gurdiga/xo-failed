@@ -91,7 +91,7 @@ button.mare {
 
 #crează-procedură {
   float: right;
-  width: 15em;
+  width: 18em;
   margin-right: 12em;
 }
 
@@ -101,16 +101,8 @@ button.mare {
   list-style-position: inside;
 }
 
-#crează-procedură li {
-  margin: 0 0 .3em;
-  padding: .3em 1em .3em .5em;
-  border: 1px solid #ddd;
-  border-top-color: #c0c0c0;
-}
-
 #crează-procedură a {
-  color: black;
-  text-decoration: none;
+  color: blue;
 }
 
 #crează-procedură a:focus,
