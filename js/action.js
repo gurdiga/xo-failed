@@ -222,7 +222,7 @@ var CîmpuriTextarea = {
 
       if (textarea.is(':not(:visible)')) return;
 
-      var clone = textarea.css('overflow', 'hidden').clone()
+      var clone = textarea.clone()
         .css({
           'padding': 0,
           'border-width': 0,

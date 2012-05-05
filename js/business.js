@@ -165,10 +165,10 @@ var TotalCheltuieli = {
       'input.cost',
       'input.valoare',
       'input.sumă',
-      '[id="taxaB2.1"] .cantitate',
+      'input.cantitate',
       '#taxaA6 .din.arhivă',
-      '#taxaB6 .licitaţie.repetată',
-      '#taxaA3 .cantitate'
+      '#taxaB5 .licitaţie.repetată',
+      '#taxaB6 .licitaţie.repetată'
     ].join(',');
 
     var evenimente = 'keydown keyup update paste change mouseup';
@@ -185,8 +185,10 @@ var TotalCheltuieli = {
     var total = 0,
         cheltuieliAdăugate = $('#listă-taxe-şi-speze');
 
-    total += cheltuieliAdăugate.find('input.cost, input.valoare, input.sumă').suma();
+    total += cheltuieliAdăugate.find('input.valoare, input.sumă').suma();
+    total += cheltuieliAdăugate.find('input.cost').suma() * UC;
     total += cheltuieliAdăugate.find('[id="taxaB2.1"] .cantitate').suma() * .5 * UC;
+    total += cheltuieliAdăugate.find('#taxaB9 .cantitate').suma() * 5 * UC;
     total += cheltuieliAdăugate.find('#taxaA6 .din.arhivă').is(':checked') ? 1 * UC : 0;
 
     var licitaţieRepetată = cheltuieliAdăugate.find('#taxaB6 .licitaţie.repetată');
@@ -195,7 +197,16 @@ var TotalCheltuieli = {
       total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5 * UC;
     }
 
+    var licitaţieRepetată = cheltuieliAdăugate.find('#taxaB5 .licitaţie.repetată');
+
+    if (licitaţieRepetată.is(':checked')) {
+      total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5 * UC;
+    }
+
     total += cheltuieliAdăugate.find('#taxaA3 .cantitate').suma() * UC;
+    total += cheltuieliAdăugate.find('#taxaB7 .document').length * 5 * UC;
+    total += cheltuieliAdăugate.find('#taxaB13 .cantitate').suma() * 5 * UC;
+    total += cheltuieliAdăugate.find('#taxaC1 .cantitate').suma() * 5 * UC;
 
     var documenteExpediate = cheltuieliAdăugate.find('#taxaB1 .document');
 

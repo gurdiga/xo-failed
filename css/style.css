@@ -8,23 +8,39 @@ body {
 
 textarea {
   font: inherit;
-  height: 60px;
-  min-height: 60px;
-  overflow: auto;
-}
-
-textarea,
-input {
-  outline-width: 0;
-  border: 1px solid #ddd;
-  border-top-color: #c0c0c0;
-  width: 18em;
+  line-height: 24px!important;
+  height: 64px;
+  min-height: 64px;
+  max-width: 18em;
+  min-width: 18em;
+  overflow: hidden;
+  resize: none;
 }
 
 input[type=checkbox] {
   outline-width: medium;
   width: auto;
   vertical-align: -1px;
+}
+
+label,
+input,
+select,
+button,
+textarea {
+  font: inherit;
+}
+
+textarea,
+input {
+  outline-width: 0;
+  border: none;
+  width: 18em;
+  background: transparent url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 0;
+}
+
+input {
+  background-position: 0 -4px;
 }
 
 textarea,
@@ -34,6 +50,7 @@ fieldset select {
   vertical-align: top;
   padding: .3em;
   color: black;
+  font-weight: bold;
 }
 
 fieldset ul select {
@@ -45,22 +62,9 @@ fieldset ul select.valuta {
   width: auto;
 }
 
-textarea {
-  max-width: 18em;
-  min-width: 18em;
-}
-
 fieldset textarea:focus,
 fieldset input:focus {
   border-color: #4d90fe;
-}
-
-label,
-input,
-select,
-button,
-textarea {
-  font: inherit;
 }
 
 button {
@@ -289,12 +293,15 @@ fieldset#creditor button.elimină-persoană {
   font-style: italic;
   color: #555;
   padding: 0 .3em;
+  border-bottom: 1px solid silver;
 }
 
 #cheltuieli .subformular textarea,
 .bunuri textarea {
   height: 2.1ex;
   min-height: 2.1ex;
+  padding: 0 .3em;
+  background-position: 0 -4px;
 }
 
 #cheltuieli .subformular .denumire,

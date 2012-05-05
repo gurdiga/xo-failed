@@ -215,7 +215,7 @@
 
                     <li id="taxaA6" class="item" data-şablon-subformular="bifă “din arhivă”">
                       taxa pentru eliberarea copiei autentificate a procedurii de executare
-                      — 1&nbsp;u.c.
+                      — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
                     </li>
                   </ol>
                 </div>
@@ -275,7 +275,7 @@
 
                     <li id="taxaB7" class="item" data-şablon-subformular="participanţi la licitaţie">
                       taxa de participare la licitaţie (cu eliberarea biletului de participant)
-                      — <input type="hidden" class="cost" value="3"/>3&nbsp;u.c.
+                      — <input type="hidden" class="cost" value="3"/>3&nbsp;u.c. per participant
                     </li>
 
                     <li id="taxaB8" class="item">
@@ -298,10 +298,10 @@
                       — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
                     </li>
 
-                    <li id="taxaB11" class="item unic" data-şablon-subformular="documente">
+                    <li id="taxaB11" class="item unic">
                       taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
                       de executare, indiferent de rezultatele ei
-                      — 15&nbsp;u.c.
+                      — <input type="hidden" class="cost" value="15"/>15&nbsp;u.c.
                     </li>
 
                     <li id="taxaB12" class="item">
@@ -847,12 +847,10 @@
     <ul class="şablon subformular" title="participanţi la licitaţie">
       <li>
         <label class="descriere">Nume participant</label>
-        <label class="sumă">Taxă</label>
       </li>
 
       <li class="document eliminabil">
         <textarea class="descriere"></textarea>
-        <input class="sumă"/>
       </li>
 
       <li><button class="adaugă">Adaugă participant</button></li>
