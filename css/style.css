@@ -289,6 +289,11 @@ fieldset#creditor button.elimină-persoană {
   background-position: 0 -4px;
 }
 
+.subformular textarea,
+.subformular input {
+  padding: 2px 3px;
+}
+
 #cheltuieli .subformular .denumire,
 #cheltuieli .subformular .descriere,
 .bunuri .descriere {

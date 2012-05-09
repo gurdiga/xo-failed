@@ -428,7 +428,7 @@ var Cheltuieli = {
 
         şablon.clone()
           .insertBefore($(this).parent())
-          .find('textarea').focus();
+          .find('textarea,input').first().focus();
       });
   },
 
