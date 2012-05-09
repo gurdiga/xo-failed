@@ -204,7 +204,7 @@ var TotalCheltuieli = {
     }
 
     total += cheltuieliAdăugate.find('#taxaA3 .cantitate').suma() * UC;
-    total += cheltuieliAdăugate.find('#taxaB7 .document').length * 5 * UC;
+    total += cheltuieliAdăugate.find('#taxaB7 .document').length * 3 * UC;
     total += cheltuieliAdăugate.find('#taxaB13 .cantitate').suma() * 5 * UC;
     total += cheltuieliAdăugate.find('#taxaC1 .cantitate').suma() * 5 * UC;
 
