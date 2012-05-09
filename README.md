@@ -2,6 +2,8 @@ TODO:
 -----
 
 * cheltuieli: taxe şi speze
+* la secţiunea Caracter pecuniar
+  * de permis adăugarea de cîmpuri cu etichetă personalizată
 * smoother add/remove
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?

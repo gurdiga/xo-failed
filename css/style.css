@@ -58,6 +58,11 @@ fieldset ul select {
   padding: .25em .3em;
 }
 
+fieldset ul>li>textarea {
+  padding-top: 0;
+  background-position: 0 -4px;
+}
+
 fieldset ul select.valuta {
   width: auto;
 }
@@ -289,11 +294,6 @@ fieldset#creditor button.elimină-persoană {
   background-position: 0 -4px;
 }
 
-.subformular textarea,
-.subformular input {
-  padding: 2px 3px;
-}
-
 #cheltuieli .subformular .denumire,
 #cheltuieli .subformular .descriere,
 .bunuri .descriere {
@@ -423,6 +423,7 @@ button.elimină-persoană {
 #cheltuieli .document .destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
   color: #555;
+  white-space: nowrap;
 }
 
 #cheltuieli .document .adaugă-destinatar,
@@ -509,11 +510,18 @@ input[type="checkbox"]+label {
 }
 
 #cheltuieli .document .destinatari-adăugaţi {
-  margin: 0 0 .2em 1em;
+  margin: 0 0 0 .5em;
+  padding: .2em 1.5em .8em;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  min-height: 1em;
+  min-width: 6em;
+  z-index: 1;
 }
 
 #cheltuieli .document .adaugă-destinatar {
-  margin-left: 3em;
+  margin-left: 10em;
   display: inline-block;
 }
 
@@ -565,10 +573,6 @@ input[type="checkbox"]+label {
   white-space: nowrap;
 }
 
-#cheltuieli .document .destinatari-adăugaţi {
-  min-height: 1em;
-}
-
 #cheltuieli .document .destinatari-adăugaţi:before {
   content: '▿';
   position: absolute;
@@ -602,13 +606,20 @@ input[type="checkbox"]+label {
   vertical-align: -.1em;
 }
 
-#cheltuieli .document .destinatari-adăugaţi {
-  cursor: pointer;
-}
-
 #cheltuieli .document .destinatari-adăugaţi>li {
   counter-increment: destinatari;
   cursor: text;
+}
+
+#cheltuieli .document .destinatari-adăugaţi .elimină {
+  left: -3px;
+  width: 13px;
+}
+
+#cheltuieli .document .destinatari-adăugaţi.comprimaţi {
+  padding: 0;
+  margin-left: 2em;
+  z-index: 0;
 }
 
 #cheltuieli .document .destinatari-adăugaţi.comprimaţi>li {

@@ -437,7 +437,16 @@ var Cheltuieli = {
 
     $('#cheltuieli')
       .on('click', '.destinatari-adăugaţi', function(e) {
-        if (e.target == this) $(this).toggleClass('comprimaţi');
+        if (e.target == this) {
+          $(this)
+            .toggleClass('comprimaţi')
+            .toggleClass('cu umbră');
+        }
+      })
+      .on('eliminare', '.destinatari-adăugaţi>li', function(e) {
+        var destinatar = $(this);
+
+        if (!destinatar.siblings().există()) destinatar.parent().click();
       })
 
       .on('mouseenter', '.adaugă-destinatar', function() {
