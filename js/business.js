@@ -65,6 +65,8 @@ var Onorariul = {
       return 10000 + (suma - 100000) * .05;
     } else if (suma > 300000) {
       return 20000 + (suma - 300000) * .03;
+    } else {
+      return 0;
     }
   },
 
