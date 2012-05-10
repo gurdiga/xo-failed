@@ -224,11 +224,12 @@ input.invalid {
 button.elimină-persoană {
   border-width: 0;
   background-color: transparent;
-  font-size: 1.2em;
+  font-size: 1.5em;
   color: #555;
-  padding: 0 1em 0 0;
-  margin-left: -1em;
+  padding: 0;
   line-height: .6em;
+  vertical-align: -.1em;
+  display: none;
 }
 
 .elimină {
@@ -251,8 +252,6 @@ button.elimină-persoană:hover,
 }
 
 button.elimină-persoană {
-  font-size: small;
-  display: none;
 }
 
 fieldset.dispensabilă button.elimină-persoană {
@@ -518,7 +517,7 @@ input[type="checkbox"]+label {
 
 #cheltuieli .document .destinatari-adăugaţi {
   margin: 0 0 0 .5em;
-  padding: .2em 1.5em .8em;
+  padding: .2em 2.5em .8em;
   cursor: pointer;
   display: inline-block;
   position: absolute;
@@ -583,7 +582,7 @@ input[type="checkbox"]+label {
 #cheltuieli .document .destinatari-adăugaţi:before {
   content: '▿';
   position: absolute;
-  margin-left: -.9em;
+  margin-left: -1.9em;
 }
 
 #cheltuieli .document .destinatari-adăugaţi:hover:before {
@@ -601,6 +600,7 @@ input[type="checkbox"]+label {
 
 #cheltuieli .document .destinatari-adăugaţi.comprimaţi:before {
   content: '▹';
+  margin-left: -.9em;
 }
 
 #cheltuieli .document .destinatari-adăugaţi.comprimaţi:hover:before {
