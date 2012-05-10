@@ -502,7 +502,7 @@ var Cheltuieli = {
           .appendTo(destinatariAdăugaţiDeja);
 
         if (destinatar.is('.persoană.terţă')) {
-          destinatariAdăugaţiDeja.removeClass('comprimaţi');
+          destinatariAdăugaţiDeja.click();
           destinatar
             .text('')
             .append($('.şablon.persoană.terţă').html())
@@ -510,6 +510,12 @@ var Cheltuieli = {
         }
 
         listaDestinatari.hide();
+      })
+
+      .on('keypress', '.persoană.terţă input', function(e) {
+        var destinatariAdăugaţiDeja = $(this).closest('ul.destinatari-adăugaţi');
+
+        if (e.keyCode == 13) destinatariAdăugaţiDeja.click();
       })
 
       .on('eliminare', '.destinatari-adăugaţi .eliminabil', function() {
