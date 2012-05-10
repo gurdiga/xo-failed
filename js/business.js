@@ -127,6 +127,8 @@ var Defaults = {
 
       }
     });
+
+    $('#taxaA1').click();
   }
 };
 
