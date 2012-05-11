@@ -1,8 +1,6 @@
 TODO:
 -----
 
-* cheltuieli: taxe şi speze
-  * expand/collapse
 * la secţiunea Caracter pecuniar
   * de permis adăugarea de cîmpuri cu etichetă personalizată
 * smoother add/remove

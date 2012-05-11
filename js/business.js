@@ -49,24 +49,18 @@ var Onorariul = {
   },
 
   pecuniar: function() {
-    $('#date-generale #total').val($('#date-generale .sumă:not(#total)').suma());
+    var total = $('#date-generale .sumă:not(#total)').suma();
 
-    var suma = parseFloat($('#date-generale #total').val());
+    $('#date-generale #total').val(total);
 
-    if (suma <= 100000) {
-      if ($('#încasare-periodică').is(':checked')) {
-        return 500;
-      } else if ($('#încasare-amendă').is(':checked')) {
-        return 200;
-      } else {
-        return Math.max(suma * .10, 500);
-      }
+    if (total <= 100000) {
+      var minim = $('#încasare-periodică, #încasare-amendă').is(':checked') ? 200 : 500;
+
+      return Math.max(total * .10, minim);
     } else if (suma <= 300000) {
-      return 10000 + (suma - 100000) * .05;
-    } else if (suma > 300000) {
-      return 20000 + (suma - 300000) * .03;
-    } else {
-      return 0;
+      return 10000 + (total - 100000) * .05;
+    } else if (total > 300000) {
+      return 20000 + (total - 300000) * .03;
     }
   },
 
