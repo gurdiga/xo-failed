@@ -1,14 +1,6 @@
 var Action = {
   init: function() {
     HashController.init();
-  },
-
-  '#index': function() {
-    $('#index input').focus();
-  },
-
-  '#procedură': function() {
-    $('[schimbat]').removeAttr('schimbat');
 
     ProcedurăNonPecuniară.init();
     FormulareŞablon.init();
@@ -21,6 +13,14 @@ var Action = {
     Cheltuieli.init();
     EticheteAccesibilePentruBife.init();
     Eliminabile.init();
+  },
+
+  '#index': function() {
+    $('#index input').focus();
+  },
+
+  '#procedură': function() {
+    $('[schimbat]').removeAttr('schimbat');
 
     $('fieldset:first').find('input, select, textarea').first().focus();
     $('#literă').text(HashController.date() || '');
@@ -33,6 +33,10 @@ var Action = {
       case 'P':
         $('#caracter').val('pecuniar');
         $('#creditor .gen-persoană').val('fizică');
+        break;
+      default:
+        $('#caracter').val('pecuniar');
+        $('#creditor .gen-persoană').val('juridică');
         break;
     }
   }
@@ -61,22 +65,16 @@ var ProcedurăNonPecuniară = {
   bunuri: {
     init: function() {
       $('#date-generale')
-        .on('click', '.bunuri button.adaugă', this.adaugăCîmp)
+        .on('click', 'button.adaugă', this.adaugăCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change', ['automat']) });
     },
 
     adaugăCîmp: function() {
-      var şablon = $('.şablon .bunuri .cîmp').first();
+      var şablon = $(this).parent().prev();
 
       şablon.clone()
         .insertBefore($(this).parent())
         .find('textarea').focus();
-    },
-
-    eliminăCîmp: function() {
-      $(this).closest('.cîmp')
-        .find('.valoare').val(0).trigger('change').end()
-        .remove();
     }
   },
 
@@ -421,7 +419,7 @@ var Cheltuieli = {
   },
 
   initSubformulare: function() {
-    $('#cheltuieli')
+    $('#procedură')
       .on('click', 'button.adaugă', function() {
         var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
             şablon = $('.şablon.subformular[title="' + numeŞablon + '"] .document').first();
@@ -578,13 +576,13 @@ var Eliminabile = {
 
     if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
       eliminabil
-        .find('.valoare').val(0).trigger('change').end()
+        .find('.valoare, .sumă').val(0).trigger('change').end()
         .trigger('eliminare')
         .remove();
     } else {
       eliminabil
         .find('.eliminabil.de.tot').remove().end()
-        .find('.valoare').val(0).trigger('change').end()
+        .find('.valoare, .sumă').val(0).trigger('change').end()
         .find('textarea').val('').trigger('change').end()
         .trigger('eliminare');
     }

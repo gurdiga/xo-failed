@@ -268,12 +268,14 @@ fieldset#creditor button.elimină-persoană {
 }
 
 #cheltuieli .subformular,
+.pecuniar .subformular,
 .bunuri {
   list-style-type: none;
   padding: 0 0 0 4em;
 }
 
 #cheltuieli .subformular label,
+.pecuniar .subformular label,
 .bunuri label {
   text-align: left;
   font-style: italic;
@@ -302,15 +304,17 @@ fieldset#creditor button.elimină-persoană {
 }
 
 #cheltuieli .subformular textarea,
+.pecuniar .subformular textarea,
 .bunuri textarea {
-  height: 2.1ex;
-  min-height: 2.1ex;
+  height: 2.7ex;
+  min-height: 2.7ex;
   padding: 0 .3em;
   background-position: 0 -4px;
 }
 
 #cheltuieli .subformular .denumire,
 #cheltuieli .subformular .descriere,
+.pecuniar .subformular .descriere,
 .bunuri .descriere {
   width: 21em;
   min-width: 0;
@@ -318,6 +322,7 @@ fieldset#creditor button.elimină-persoană {
 }
 
 #cheltuieli .subformular .valoare,
+.pecuniar .subformular .sumă,
 .bunuri .valoare {
   width: 4em;
 }

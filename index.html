@@ -468,7 +468,7 @@
     <!-- ================================ şabloane ================================ -->
 
     <div class="şablon date-generale pecuniar">
-      <ul>
+      <ul class="pecuniar">
         <li>
           <label>Suma de bază</label>
           <input class="sumă" value="0"/>
@@ -490,6 +490,24 @@
         <li>
           <label>Amendă sau încasare&nbsp;periodică</label>
           <input id="amendă-sau-încasare-periodică" type="checkbox"/>
+        </li>
+
+        <li><label>Altele:</label></li>
+
+        <li class="subformular">
+          <ul>
+            <li>
+              <label class="descriere">Descriere</label>
+              <label class="sumă">MDL</label>
+            </li>
+
+            <li class="item eliminabil">
+              <textarea class="descriere"></textarea>
+              <input class="sumă"/>
+            </li>
+
+            <li><button class="adaugă">Adaugă</button></li>
+          </ul>
         </li>
 
         <li>
