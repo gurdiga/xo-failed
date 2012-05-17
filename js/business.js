@@ -54,7 +54,7 @@ var Onorariul = {
     $('#date-generale #total').val(total);
 
     if (total <= 100000) {
-      var minim = $('#încasare-periodică, #încasare-amendă').is(':checked') ? 200 : 500;
+      var minim = $('#amendă-sau-încasare-periodică').is(':checked') ? 200 : 500;
 
       return Math.max(total * .10, minim);
     } else if (suma <= 300000) {
