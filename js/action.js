@@ -121,7 +121,7 @@ var AdăugarePersoane = {
   },
 
   initAdăugare: function() {
-    $('#procedură').on('click', 'button.adaugă-persoană', function() {
+    $('#procedură').on('click', 'button.adaugă.persoană', function() {
       var buton = $(this),
           fieldset = buton.prev();
 

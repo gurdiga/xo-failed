@@ -244,6 +244,7 @@ button.elimină-persoană {
 }
 
 button.elimină-persoană:hover,
+button.adaugă:hover,
 .elimină:hover {
   color: red;
 }
@@ -327,10 +328,25 @@ fieldset#creditor button.elimină-persoană {
   width: 4em;
 }
 
-#cheltuieli .subformular button.adaugă,
-.bunuri button.adaugă {
-  font-size: small;
+button.adaugă {
+  font-size: 1.5em;
+  font-weight: normal;
+  padding: 0;
   margin-left: .2em;
+  border: none;
+  line-height: .7em;
+  background: transparent;
+  margin-top: -.5em;
+}
+
+button.adaugă.persoană {
+  font-weight: bold;
+  position: relative;
+  top: -.5em;
+}
+
+button.adaugă .legend.label {
+  display: none;
 }
 
 #cheltuieli .subformular.achitare label {
