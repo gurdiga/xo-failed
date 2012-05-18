@@ -3,9 +3,18 @@ var UC = 20;
 
 var Business = {
   init: function() {
-    Onorariul.init();
-    Defaults.init();
-    TotalCheltuieli.init();
+    var pagină = HashController.id();
+
+    if (this[pagină]) this[pagină]();
+  },
+
+  '#procedură': function() {
+    $.when(Valute.încarcăRateBNM()).done(function() {
+      Valute.init();
+      Onorariul.init();
+      Defaults.init();
+      TotalCheltuieli.init();
+    });
   }
 };
 
@@ -123,6 +132,27 @@ var Defaults = {
     });
 
     $('#taxaA1').click();
+    this.initTitlu();
+  },
+
+  initTitlu: function() {
+    $('#procedură #literă').text(HashController.date() || '');
+    $('#procedură #gen').text($('a[href="' + location.hash + '"]').text());
+
+    switch (HashController.date()) {
+    case 'S':
+      $('#caracter').val('pecuniar').trigger('change');
+      $('#creditor .gen-persoană').val('juridică').trigger('change');
+      break;
+    case 'P':
+      $('#caracter').val('pecuniar').trigger('change');
+      $('#creditor .gen-persoană').val('fizică').trigger('change');
+      break;
+    default:
+      $('#caracter').val('pecuniar').trigger('change');
+      $('#creditor .gen-persoană').val('juridică').trigger('change');
+      break;
+    }
   }
 };
 

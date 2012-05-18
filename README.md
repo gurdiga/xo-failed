@@ -1,12 +1,10 @@
 TODO:
 -----
 
-* la secţiunea Caracter pecuniar
-  * de permis adăugarea de cîmpuri cu etichetă personalizată
+* save
 * smoother add/remove
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
-* how to encode the data?
 
 
 Causality

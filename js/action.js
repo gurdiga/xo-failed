@@ -8,7 +8,6 @@ var Action = {
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
     AdăugarePersoane.init();
-    Valute.init();
     Salvează.init();
     Cheltuieli.init();
     EticheteAccesibilePentruBife.init();
@@ -21,24 +20,6 @@ var Action = {
 
   '#procedură': function() {
     $('[schimbat]').removeAttr('schimbat');
-
-    $('fieldset:first').find('input, select, textarea').first().focus();
-    $('#literă').text(HashController.date() || '');
-
-    switch (HashController.date()) {
-      case 'S':
-        $('#caracter').val('pecuniar');
-        $('#creditor .gen-persoană').val('juridică');
-        break;
-      case 'P':
-        $('#caracter').val('pecuniar');
-        $('#creditor .gen-persoană').val('fizică');
-        break;
-      default:
-        $('#caracter').val('pecuniar');
-        $('#creditor .gen-persoană').val('juridică');
-        break;
-    }
   }
 };
 
@@ -116,7 +97,6 @@ var RateBNM = {};
 var Valute = {
   init: function() {
     this.populeazăListe();
-    this.încarcăRateBNM();
   },
 
   populeazăListe: function() {
@@ -126,9 +106,7 @@ var Valute = {
   },
 
   încarcăRateBNM: function() {
-    if (!$.isEmptyObject(RateBNM)) return;
-
-    $.getJSON('/rate-bnm/current.json', function(data) {
+    return $.getJSON('/rate-bnm/current.json', function(data) {
       RateBNM = data;
     });
   }
@@ -186,6 +164,8 @@ var HashController = {
       $('div.pagină' + id).show();
 
       if (Action[id]) Action[id]();
+
+      Business.init();
 
       document.title = $('div.pagină' + id + ' h1').text();
     }).trigger('hashchange');

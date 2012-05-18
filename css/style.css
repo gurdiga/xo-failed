@@ -181,7 +181,7 @@ fieldset legend label {
   font-weight: bold;
   font-size: 1.2em;
   text-align: left;
-  padding-right: 0;
+  padding: 6px 0;
   width: auto;
   color: #333;
 }
@@ -669,4 +669,8 @@ input[type="checkbox"]+label {
   width: auto;
   font-style: normal;
   vertical-align: -.2em;
+}
+
+.pecuniar .subformular {
+  margin-bottom: 1em;
 }
