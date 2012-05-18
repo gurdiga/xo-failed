@@ -358,8 +358,9 @@ button.elimină-persoană {
   visibility: visible;
 }
 
+.subformular .eliminabil,
 .bunuri .cîmp {
-  white-space: nowrap; /* pentru butonul de eliminare */
+  padding: 0;
 }
 
 #procedură #bară-de-butoane {
