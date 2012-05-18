@@ -307,8 +307,8 @@ fieldset#creditor button.elimină-persoană {
 #cheltuieli .subformular textarea,
 .pecuniar .subformular textarea,
 .bunuri textarea {
-  height: 2.7ex;
-  min-height: 2.7ex;
+  height: 3ex;
+  min-height: 3ex;
   padding: 0 .3em;
   background-position: 0 -4px;
 }
