@@ -182,13 +182,21 @@ fieldset label {
   padding: .4em .3em 0;
 }
 
+fieldset legend {
+  background: white;
+}
+
 fieldset legend label {
   font-weight: bold;
   font-size: 1.2em;
   text-align: left;
   padding: 6px 0;
   width: auto;
-  color: #333;
+}
+
+fieldset legend label,
+fieldset legend select {
+  color: #999;
 }
 
 ul {
@@ -322,7 +330,7 @@ fieldset#creditor button.elimină-persoană {
 #cheltuieli .subformular .descriere,
 .pecuniar .subformular .descriere,
 .bunuri .descriere {
-  width: 21em;
+  width: 19em;
   min-width: 0;
   max-width: none;
 }
@@ -330,7 +338,7 @@ fieldset#creditor button.elimină-persoană {
 #cheltuieli .subformular .valoare,
 .pecuniar .subformular .sumă,
 .bunuri .valoare {
-  width: 4em;
+  width: 5em;
 }
 
 button.adaugă {
@@ -541,6 +549,7 @@ button.elimină-persoană {
 #listă-taxe-şi-speze .subformular label.stînga {
   width: auto;
   padding-right: .2em;
+  border: none;
 }
 
 #listă-taxe-şi-speze .subformular .eliminabil input[type="checkbox"],
