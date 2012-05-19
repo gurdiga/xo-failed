@@ -157,6 +157,12 @@ fieldset {
   border: 1px solid #dedede;
   padding: 0 10px 1.5em;
   margin-bottom: 20px;
+  -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .şablon {
@@ -168,6 +174,7 @@ fieldset label {
   width: 11em;
   text-align: right;
   color: #555;
+  background: white;
 }
 
 #listă-taxe-şi-speze .subformular .stînga,
