@@ -11,8 +11,6 @@ textarea {
   line-height: 24px!important;
   height: 64px;
   min-height: 64px;
-  max-width: 18em;
-  min-width: 18em;
   overflow: hidden;
   resize: none;
 }
@@ -35,7 +33,7 @@ textarea,
 input {
   outline-width: 0;
   border: none;
-  width: 18em;
+  width: 17em;
   background: transparent url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 0;
 }
 
@@ -54,7 +52,7 @@ fieldset select {
 }
 
 fieldset ul select {
-  width: 18.7em;
+  width: 17.7em;
   padding: .25em .3em;
 }
 
@@ -157,7 +155,7 @@ div.pagină>.conţinut {
 
 fieldset {
   border: 1px solid #dedede;
-  padding: 0 10px 7px;
+  padding: 0 10px 1.5em;
   margin-bottom: 20px;
 }
 
@@ -261,7 +259,7 @@ fieldset#creditor button.elimină-persoană {
 }
 
 .şoaptă {
-  margin: .25em 0 .7em 13.8em;
+  margin: .25em 0 .7em 13em;
   padding: 0 1em 0 .5em;
   line-height: 1em;
   font-size: .9em;
@@ -336,13 +334,14 @@ button.adaugă {
   border: none;
   line-height: .7em;
   background: transparent;
-  margin-top: -.5em;
+  top: -.3em;
+  position: relative;
 }
 
 button.adaugă.persoană {
   font-weight: bold;
   position: relative;
-  top: -.5em;
+  top: -.8em;
 }
 
 button.adaugă .legend.label {
@@ -411,7 +410,11 @@ button.elimină-persoană {
 }
 
 #cheltuieli .item .subformular {
-  padding: .3em 0 0 1em;
+  padding: .3em 0 0;
+}
+
+#cheltuieli .item ul.subformular {
+  padding-left: 1em;
 }
 
 #cheltuieli .item p,
@@ -431,7 +434,7 @@ button.elimină-persoană {
   background-color: transparent;
 }
 
-#cheltuieli #listă-taxe-şi-speze .subformular .şoaptă {
+#listă-taxe-şi-speze .subformular .şoaptă {
   display: block;
   color: #555;
   margin-left: 1em;
@@ -686,8 +689,4 @@ input[type="checkbox"]+label {
   width: auto;
   font-style: normal;
   vertical-align: -.2em;
-}
-
-.pecuniar .subformular {
-  margin-bottom: 1em;
 }
