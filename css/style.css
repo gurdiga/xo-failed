@@ -161,9 +161,12 @@ fieldset {
   border: 1px solid #dedede;
   padding: 0 10px 1.5em;
   margin-bottom: 20px;
-  box-shadow: 0 0 6px #777;
-  -moz-box-shadow: 0 0 6px #777;
-  -webkit-box-shadow: 0 0 6px #777;
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .şablon {
@@ -185,6 +188,8 @@ fieldset label {
 
 fieldset legend {
   background: white;
+  float: left;
+  margin-top: -17px;
 }
 
 fieldset legend label {
@@ -232,9 +237,9 @@ input.invalid {
   padding: 30px 20px 20px;
   width: 970px;
   background-color: white;
-  -webkit-box-shadow: 0 10px 6px #777;
-  -moz-box-shadow: 0 10px 6px #777;
-  box-shadow: 0 10px 6px #777;
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   z-index: 1;
 }
 
@@ -543,9 +548,9 @@ button.elimină-persoană {
 .cu.umbră {
   background-color: white;
   border: 1px solid silver;
-  box-shadow: 3px 3px 14px #777;
-  -moz-box-shadow: 3px 3px 14px #777;
-  -webkit-box-shadow: 3px 3px 14px #777;
+  box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
+  -moz-box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
 }
 
 #listă-taxe-şi-speze .subformular label.stînga {
