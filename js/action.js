@@ -55,7 +55,9 @@ var ProcedurăNonPecuniară = {
 
       şablon.clone()
         .insertBefore($(this).parent())
-        .find('textarea').focus();
+        .find('textarea,input')
+          .val('')
+          .first().focus();
     }
   },
 
