@@ -4,6 +4,7 @@ TODO:
 * save
   * button
   * code
+* IE selecturi mari
 * smoother add/remove
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
