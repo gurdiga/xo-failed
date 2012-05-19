@@ -41,6 +41,10 @@ input {
   background-position: 0 -4px;
 }
 
+fieldset>.conţinut {
+  padding-top: 10px;
+}
+
 textarea,
 input,
 fieldset select {
@@ -154,13 +158,13 @@ div.pagină>.conţinut {
 }
 
 .coloană.prima-de-sus {
-  margin-top: 8em;
+  margin-top: 9em;
 }
 
 fieldset {
   border: 1px solid #dedede;
   padding: 0 10px 1.5em;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
   -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
