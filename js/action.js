@@ -8,10 +8,10 @@ var Action = {
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
     AdăugarePersoane.init();
-    Salvează.init();
     Cheltuieli.init();
     EticheteAccesibilePentruBife.init();
     Eliminabile.init();
+    Salvează.init();
   },
 
   '#index': function() {
@@ -64,17 +64,14 @@ var ProcedurăNonPecuniară = {
   'măsura-de-asigurare': {
     init: function() {
       $('#date-generale').on('change', '#măsura-de-asigurare', function() {
-        var lista = $(this),
-            mesaj = 'aplicarea sechestrului pe bunurile sau pe sumele'
-              + ' de bani ale debitorului, inclusiv pe cele care'
-              + ' se află la alte persoane';
+        var lista = $(this);
 
-        if (lista.val() == mesaj) {
+        if (lista.val() == 'sechestru') {
           lista.parent()
             .after($('.şablon[title="' + lista.val() + '"]').html())
             .next().find('.sumă').focus();
         } else {
-          lista.parent().next('#valoarea-acţiunii').remove();
+          lista.parent().next('.subformular').remove();
         }
       });
     }
@@ -132,6 +129,8 @@ var AdăugarePersoane = {
         .find('input, textarea').val('').end()
         .find('legend label').text(function(i, text) {
           if (buton.find('.legend.label').există()) {
+            $(this).closest('fieldset').addClass('persoană-terţă');
+
             return buton.find('.legend.label').text();
           } else {
             return text;
@@ -169,7 +168,7 @@ var HashController = {
 
       Business.init();
 
-      document.title = $('div.pagină' + id + ' h1').text();
+      document.title = $('div.pagină' + id + ' h1').contents(':not(button)').text();
     }).trigger('hashchange');
   },
 
@@ -231,7 +230,7 @@ var ListeFoarteLate = {
 
         $('<p>')
           .insertAfter(lista)
-          .text(lista.val())
+          .text(lista.find('option:selected').text())
           .addClass('şoaptă');
       })
       .find('select.foarte.lat').trigger('change', ['automat']).end()
@@ -311,20 +310,39 @@ var FormulareŞablon = {
 
 var Salvează = {
   init: function() {
-    $('#procedură button.salvează').on('click', function() {
-      var date = {}, cîmpuri = [
-        'label + select',
-        'label + input',
-        'label + textarea'
-      ].join(', ');
+    var procedură = {};
 
-      $('#procedură').find('fieldset').each(function() {
-        var nume = $(this).find('legend label').text();
+    function colectează(secţiune) {
+      var $secţiune = $(secţiune),
+          colecţie = {};
 
-        date[nume] = [];
-        // TODO
-        // toate fieldset-urile trebuie să fie în div.coloană?
+      $secţiune.find('label+:input, .label+:input').each(function() {
+        var $input = $(this),
+            $label = $input.prev();
+
+        if ($label.is('.label')) {
+          if (!$label.val() && !$input.val()) return;
+          if (!colecţie.subformular) colecţie.subformular = {};
+
+          colecţie.subformular[$label.val()] = $input.val();
+        } else {
+          colecţie[$input.attr('id')] = $input.is(':checkbox') ? $input.is(':checked') : $input.val();
+        }
       });
+
+      procedură[secţiune] = colecţie;
+    }
+
+
+    $('#procedură button.salvează').on('click', function() {
+      colectează('#documentul-executoriu');
+      colectează('#date-generale');
+      colectează('#cheltuieli'); // TODO
+      colectează('#creditor');
+      colectează('.personă-terţă'); // TODO
+      colectează('.debitor'); // TODO
+
+      console.log(procedură);
     });
   }
 };

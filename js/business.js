@@ -32,13 +32,13 @@ var Onorariul = {
       )
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
-    $('#debitor').on('change', '.gen-persoană', Onorariul.actualizează);
+    $('.debitor').on('change', '.gen-persoană', Onorariul.actualizează);
     $('#părţile-au-ajuns-la-conciliere').on('change', Onorariul.actualizează);
   },
 
   actualizează: function() {
     var caracter = $('#caracter').val(),
-        genPersoană = $('#debitor .gen-persoană').val(),
+        genPersoană = $('.debitor .gen-persoană').val(),
         onorariu = 0;
 
     if (caracter == 'nonpecuniar') {
@@ -120,12 +120,12 @@ var Defaults = {
 
       case 'restabilirea la locul de muncă':
         $('#creditor .gen-persoană').val('fizică');
-        $('#debitor .gen-persoană').val('juridică');
+        $('.debitor .gen-persoană').val('juridică');
         break;
 
       case 'stabilirea domiciliului copilului':
         $('#creditor .gen-persoană').val('fizică');
-        $('#debitor .gen-persoană').val('fizică');
+        $('.debitor .gen-persoană').val('fizică');
         break;
 
       }

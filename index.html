@@ -37,21 +37,20 @@
       <div class="conţinut">
         <h1>
           Procedură nouă
-          <span id="gen"></span>:
-          №032<span id="literă"></span>-0071
+          <span id="gen"></span>
 
           <button class="salvează">● Salvează</button>
         </h1>
 
         <div class="coloană prima-de-sus">
-          <fieldset>
+          <fieldset id="documentul-executoriu">
             <legend><label>Documentul executoriu</label></legend>
 
             <div class="conţinut">
               <ul>
                 <li>
-                  <label>Instanţa de judecată</label>
-                  <select>
+                  <label for="instanţa-de-judecată">Instanţa de judecată</label>
+                  <select id="instanţa-de-judecată">
                     <optgroup label="Prima verigă a sistemului judecătoresc">
                       <option>Anenii Noi</option>
                       <option>Basarabeasca</option>
@@ -116,23 +115,23 @@
                 </li>
 
                 <li>
-                  <label>Data hotărîrii</label>
-                  <input/>
+                  <label for="data-hotărîrii">Data hotărîrii</label>
+                  <input id="data-hotărîrii"/>
                 </li>
 
                 <li>
-                  <label>Dispozitivul</label>
-                  <textarea></textarea>
+                  <label for="dispozitivul">Dispozitivul</label>
+                  <textarea id="dispozitivul"></textarea>
                 </li>
 
                 <li>
-                  <label>Data rămînerii definitive</label>
-                  <input/>
+                  <label for="data-rămînerii-definitive">Data rămînerii definitive</label>
+                  <input id="data-rămînerii-definitive"/>
                 </li>
 
                 <li>
-                  <label>Data eliberării titulului executoriu</label>
-                  <input/>
+                  <label for="data-eliberării-titulului-executoriu">Data eliberării titulului executoriu</label>
+                  <input id="data-eliberării-titulului-executoriu"/>
                 </li>
               </ul>
             </div>
@@ -161,7 +160,7 @@
           <div class="conţinut">
             <ul>
               <li>
-                <label>Onorariul</label>
+                <label for="onorariu">Onorariul</label>
                 <input id="onorariu" class="sumă"/> MDL
               </li>
 
@@ -347,7 +346,7 @@
                       stării de fapt se achită conform contractului
                     </li>
 
-                    <li id="taxaC2" class="item" data-şablon-subformular="contracte">
+                    <li id="taxaC3" class="item" data-şablon-subformular="contracte">
                       taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
                       în procesul de executare, precum şi a celor gajate, conform contractului,
                       dar nu mai mult de 75 u.c. lunar.
@@ -445,7 +444,7 @@
         </div>
 
         <div class="coloană">
-          <fieldset data-şablon="persoană" id="debitor">
+          <fieldset data-şablon="persoană" class="debitor">
             <legend>
               <label>Debitor: persoană</label>
               <select class="gen-persoană">
@@ -470,25 +469,25 @@
     <div class="şablon date-generale pecuniar">
       <ul class="pecuniar">
         <li>
-          <label>Suma de bază</label>
-          <input class="sumă" value="0"/>
+          <label for="suma-de-bază">Suma de bază</label>
+          <input id="suma-de-bază" class="sumă" value="0"/>
           <select class="valuta"></select>
         </li>
 
         <li>
-          <label>Taxă de stat</label>
-          <input class="sumă" value="0"/>
+          <label for="taxă-de-stat">Taxă de stat</label>
+          <input id="taxă-de-stat" class="sumă" value="0"/>
           <select class="valuta"></select>
         </li>
 
         <li>
-          <label>Penalitate</label>
-          <input class="sumă" value="0"/>
+          <label for="penalitate">Penalitate</label>
+          <input id="penalitate" class="sumă" value="0"/>
           <select class="valuta"></select>
         </li>
 
         <li>
-          <label>Amendă sau încasare&nbsp;periodică</label>
+          <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
           <input id="amendă-sau-încasare-periodică" type="checkbox"/>
         </li>
 
@@ -502,7 +501,7 @@
             </li>
 
             <li class="item eliminabil">
-              <textarea class="descriere"></textarea>
+              <textarea class="label descriere"></textarea>
               <input class="sumă"/>
             </li>
 
@@ -520,7 +519,7 @@
     <div class="şablon date-generale nonpecuniar">
       <ul>
         <li>
-          <label>Obiectul</label>
+          <label for="obiect">Obiectul</label>
           <select id="obiect" class="foarte lat care schimbă formularul">
             <option>evacuarea</option>
             <option>instalarea</option>
@@ -541,28 +540,28 @@
     <div class="şablon persoană juridică">
       <ul>
         <li>
-          <label>Denumire</label>
-          <input/>
+          <label for="denumire">Denumire</label>
+          <input id="denumire"/>
         </li>
 
         <li>
-          <label>IDNO</label>
-          <input/>
+          <label for="idno">IDNO</label>
+          <input id="idno"/>
         </li>
 
         <li>
-          <label class="textarea">Sediu</label>
-          <textarea spellcheck="false"></textarea>
+          <label for="sediu" class="textarea">Sediu</label>
+          <textarea id="sediu" spellcheck="false"></textarea>
         </li>
 
         <li>
-          <label>Persoană de contact</label>
-          <input/>
+          <label for="persoană-de-contact">Persoană de contact</label>
+          <input id="persoană-de-contact"/>
         </li>
 
         <li>
-          <label class="textarea">Note</label>
-          <textarea spellcheck="false"></textarea>
+          <label for="note-pj" class="textarea">Note</label>
+          <textarea id="note-pj" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
@@ -570,41 +569,42 @@
     <div class="şablon persoană fizică">
       <ul>
         <li>
-          <label>Nume</label>
-          <input/>
+          <label for="nume">Nume</label>
+          <input id="nume"/>
         </li>
 
         <li>
-          <label>Prenume</label>
-          <input/>
+          <label for="prenume">Prenume</label>
+          <input id="prenume"/>
         </li>
 
         <li>
-          <label>Patronimic</label>
-          <input/>
+          <label for="patronimic">Patronimic</label>
+          <input id="patronimic"/>
         </li>
 
         <li>
-          <label>IDNP</label>
-          <input/>
+          <label for="idnp">IDNP</label>
+          <input id="idnp"/>
         </li>
 
         <li>
-          <label>Data naşterii</label>
-          <input/>
+          <label for="data-naşterii">Data naşterii</label>
+          <input id="data-naşterii"/>
         </li>
 
         <li>
-          <label>Domiciliu</label>
-          <textarea spellcheck="false"></textarea>
+          <label for="domiciliului">Domiciliu</label>
+          <textarea id="domiciliului" spellcheck="false"></textarea>
         </li>
 
         <li>
-          <label class="textarea">Note</label>
-          <textarea spellcheck="false"></textarea>
+          <label for="note-pf" class="textarea">Note</label>
+          <textarea id="note-pf" spellcheck="false"></textarea>
         </li>
       </ul>
     </div>
+
 
     <select class="şablon valuta">
       <option>MDL</option>
@@ -654,41 +654,46 @@
       <option>XDR</option>
     </select>
 
+
     <ul class="şablon" title="evacuarea">
       <li class="subformular">
-        <label>Din încăperea</label>
-        <textarea></textarea>
+        <label for="din-încăperea">Din încăperea</label>
+        <textarea id="din-încăperea"></textarea>
       </li>
 
       <li class="subformular">
-        <label>Se acordă alt spaţiu</label>
-        <input type="checkbox"/>
+        <label for="se-acordă-alt-spaţiu">Se acordă alt spaţiu</label>
+        <input id="se-acordă-alt-spaţiu" type="checkbox"/>
       </li>
     </ul>
+
 
     <ul class="şablon" title="instalarea">
       <li class="subformular">
-        <label>În încăperea</label>
-        <textarea></textarea>
+        <label for="în-încăperea">În încăperea</label>
+        <textarea id="în-încăperea"></textarea>
       </li>
     </ul>
+
 
     <ul class="şablon" title="schimbul forţat">
       <li class="subformular">
-        <label>Încăperea pentru creditor</label>
-        <textarea></textarea>
+        <label for="încăperea-pentru-creditor">Încăperea pentru creditor</label>
+        <textarea id="încăperea-pentru-creditor"></textarea>
 
-        <label>Încăperea pentru debitor</label>
-        <textarea></textarea>
+        <label for="încăperea-pentru-debitor">Încăperea pentru debitor</label>
+        <textarea id="încăperea-pentru-debitor"></textarea>
       </li>
     </ul>
+
 
     <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
       <li class="subformular">
-        <label>Acte</label>
-        <textarea></textarea>
+        <label for="acte">Acte</label>
+        <textarea id="acte"></textarea>
       </li>
     </ul>
+
 
     <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
       <li class="subformular">
@@ -699,7 +704,7 @@
           </li>
 
           <li class="cîmp eliminabil">
-            <textarea class="descriere"></textarea>
+            <textarea class="label descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
 
@@ -707,6 +712,7 @@
         </ol>
       </li>
     </ul>
+
 
     <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
       <li class="subformular">
@@ -718,7 +724,7 @@
           </li>
 
           <li class="cîmp eliminabil">
-            <textarea class="descriere"></textarea>
+            <textarea class="label descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
 
@@ -726,6 +732,7 @@
         </ol>
       </li>
     </ul>
+
 
     <ul class="şablon" title="confiscarea bunurilor">
       <li class="subformular">
@@ -737,7 +744,7 @@
           </li>
 
           <li class="cîmp eliminabil">
-            <textarea class="descriere"></textarea>
+            <textarea class="label descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
 
@@ -745,6 +752,7 @@
         </ol>
       </li>
     </ul>
+
 
     <ul class="şablon" title="nimicirea unor bunuri">
       <li class="subformular">
@@ -756,7 +764,7 @@
           </li>
 
           <li class="cîmp eliminabil">
-            <textarea class="descriere"></textarea>
+            <textarea class="label descriere"></textarea>
             <input class="valoare" value="0"/>
           </li>
 
@@ -765,23 +773,25 @@
       </li>
     </ul>
 
+
     <ul class="şablon" title="restabilirea la locul de muncă">
       <li class="subformular">
-        <label>Funcţie</label>
-        <input/>
+        <label for="funcţie">Funcţie</label>
+        <input id="funcţie"/>
       </li>
 
       <li class="subformular">
-        <label>Salariu recuperat</label>
-        <input class="sumă"/> MDL
+        <label for="salariu-recuperat">Salariu recuperat</label>
+        <input id="salariu-recuperat" class="sumă"/> MDL
       </li>
     </ul>
 
+
     <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
       <li class="subformular">
-        <label>Măsura de asigurare</label>
+        <label for="măsura-de-asigurare">Măsura de asigurare</label>
         <select class="foarte lat care schimbă formularul" id="măsura-de-asigurare">
-          <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
+          <option value="sechestru">aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
           <option>interzicerea debitorului de a săvîrşi anumite acte</option>
           <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
           <option>suspendarea vînzării bunurilor sechestrate în cazul intentării unei acţiuni de ridicare a sechestrului de pe ele (radierea din actul  de inventar)</option>
@@ -790,15 +800,16 @@
       </li>
 
       <li class="subformular">
-        <label>Bunuri supuse înregistrării obligatorii de stat sau pe mijloacele băneşti</label>
+        <label for="bunuri-supuse-înregistrării-sau-bani">Bunuri supuse înregistrării obligatorii de stat sau pe mijloacele băneşti</label>
         <input id="bunuri-supuse-înregistrării-sau-bani" type="checkbox"/>
       </li>
     </ul>
 
-    <ul class="şablon" title="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
-      <li class="subformular" id="valoarea-acţiunii">
-        <label>Valoarea acţiunii</label>
-        <input class="sumă"/>
+
+    <ul class="şablon" title="sechestru">
+      <li class="subformular">
+        <label for="valoarea-acţiunii">Valoarea acţiunii</label>
+        <input id="valoarea-acţiunii" class="sumă"/>
         <select class="valuta"></select>
       </li>
     </ul>
@@ -811,7 +822,7 @@
       </li>
 
       <li class="document eliminabil">
-        <textarea class="denumire"></textarea>
+        <textarea class="label denumire"></textarea>
         <input class="cantitate" value="1"/>
       </li>
 
@@ -820,7 +831,7 @@
 
 
     <div class="şablon subformular" title="bifă “din arhivă”">
-      <input type="checkbox" class="din arhivă"/><label>din arhivă (+1&nbsp;u.c.)</label>
+      <input type="checkbox" id="din-arhivă" class="din arhivă"/><label for="din-arhivă">din arhivă (+1&nbsp;u.c.)</label>
     </div>
 
 
@@ -839,14 +850,14 @@
 
 
     <div class="şablon subformular" title="ore lucrate">
-      <label class="stînga">Ore lucrate</label>
-      <input class="cantitate"/>
+      <label class="stînga" for="ore-lucrate">Ore lucrate</label>
+      <input class="cantitate" id="ore-lucrate"/>
     </div>
 
 
     <div class="şablon subformular" title="bifă “licitaţie repetată”">
-      <input type="checkbox" class="licitaţie repetată"/>
-      <label>licitaţie repetată (se aplică coeficientul 0.5)</label>
+      <input type="checkbox" class="licitaţie repetată" id="licitaţie-repetată"/>
+      <label for="licitaţie-repetată">licitaţie repetată (se aplică coeficientul 0.5)</label>
     </div>
 
 
@@ -858,7 +869,7 @@
         </li>
 
         <li class="document eliminabil">
-          <textarea class="denumire"></textarea>
+          <textarea class="label denumire"></textarea>
           <input class="sumă"/>
         </li>
 
@@ -887,7 +898,7 @@
       </li>
 
       <li class="document eliminabil">
-        <textarea class="descriere"></textarea>
+        <textarea class="label descriere"></textarea>
         <input class="sumă"/>
       </li>
 
@@ -975,7 +986,7 @@
 
 
     <div class="şablon subformular achitare">
-      <input type="checkbox"/><label>achitat</label>
+      <input type="checkbox" id="achitat"/><label for"achitat">achitat</label>
       <span class="la">la <span class="data"></span></span>
     </div>
 
