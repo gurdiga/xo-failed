@@ -238,7 +238,7 @@ input.invalid {
 #procedură h1 {
   position: fixed;
   margin: 0 0 0 -20px;
-  padding: 30px 20px 20px;
+  padding: 15px 20px 5px;
   width: 970px;
   background-color: white;
   -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.3);
@@ -250,8 +250,8 @@ input.invalid {
 #procedură button.salvează {
   font-size: .7em;
   position: absolute;
-  right: 30px;
-  bottom: 18px;
+  right: 5px;
+  bottom: 5px;
 }
 
 #procedură fieldset {
