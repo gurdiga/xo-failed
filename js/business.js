@@ -12,8 +12,8 @@ var Business = {
     $.when(Valute.încarcăRateBNM()).done(function() {
       Valute.init();
       Onorariul.init();
-      Defaults.init();
       TotalCheltuieli.init();
+      Defaults.init();
     });
   }
 };
