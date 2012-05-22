@@ -312,6 +312,7 @@ var Salvează = {
   init: function() {
     var procedură = {};
 
+    // -----
     function colectează(secţiune) {
       var $secţiune = $(secţiune),
           colecţie = {};
@@ -334,13 +335,82 @@ var Salvează = {
     }
 
 
+    // -----
+    function colecteazăCheltuieli() {
+      var $secţiune = $('#cheltuieli');
+
+      function valoare(selector) {
+        var $input = $secţiune.find(selector);
+
+        return $input.is(':checkbox') ? $input.is(':checked') : $input.val();
+      }
+
+      procedură.cheltuieli = {
+        'onorariu': valoare('#onorariu'),
+        'părţile-au-ajuns-la-conciliere': valoare('#părţile-au-ajuns-la-conciliere'),
+        'total-taxe-şi-speze': valoare('#total-taxe-şi-speze'),
+      };
+
+      var itemi = {};
+
+      $secţiune.find('#listă-taxe-şi-speze>.item').each(function() {
+        var $item = $(this), item;
+
+        item = {
+          achitat: $item.find('#achitat').is(':checked')
+        };
+
+        var $subformular = $item.find('.subformular:not(.achitare)');
+
+        if ($subformular.există()) {
+          var titluri = $subformular.find('li:first label').map(function() {
+            return $(this).text();
+          });
+
+          if (titluri.length > 0) { // subformular cu itemi eliminabili
+            item.subformular = $subformular.find('.eliminabil').map(function() {
+              var $item = $(this),
+                  item = {},
+                  cîmpuriCuValori = 0;
+
+              $item.find(':input').each(function(i) {
+                item[titluri[i]] = $(this).val();
+              });
+              // TODO: de colectat destinatarii
+
+              cîmpuriCuValori = $.map(item, function(v, k) {return !!v})
+                .filter(function(areValoare) {return areValoare})
+                .length;
+
+              if (cîmpuriCuValori > 0) return item;
+            }).filter(function() {return !!this}).get();
+          } else { // subformular nestructurat
+            item.subformular = {};
+
+            $subformular.find(':input').each(function() {
+              var $input = $(this);
+
+              item.subformular[this.id] = $input.is(':checkbox') ? $input.is(':checked') : $input.val();
+            });
+          }
+        }
+
+        itemi[$item.attr('id')] = item;
+      });
+
+      procedură.cheltuieli.itemi = itemi;
+      // TODO: de verificat spezele
+    }
+
+
     $('#procedură button.salvează').on('click', function() {
       colectează('#documentul-executoriu');
       colectează('#date-generale');
-      colectează('#cheltuieli'); // TODO
-      colectează('#creditor');
-      colectează('.personă-terţă'); // TODO
-      colectează('.debitor'); // TODO
+      colecteazăCheltuieli();
+
+      //colectează('#creditor');
+      //colectează('.personă-terţă'); // TODO
+      //colectează('.debitor'); // TODO
 
       console.log(procedură);
     });
