@@ -85,8 +85,10 @@ button {
   float: left;
 }
 
-#index label {
-  color: #555;
+#căutare input {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-top-color: #bbb;
 }
 
 #index label,
@@ -113,7 +115,7 @@ button.mare {
 }
 
 #index input {
-  width: 20em;
+  width: 23em;
 }
 
 #index #căutare .şoaptă,
@@ -130,6 +132,7 @@ button.mare {
 
 h1 {
   border-bottom: 1px solid #ddd;
+  color: #aaa;
 }
 
 div.pagină {
@@ -158,7 +161,7 @@ div.pagină>.conţinut {
 }
 
 .coloană.prima-de-sus {
-  margin-top: 9em;
+  margin-top: 7em;
 }
 
 fieldset {
@@ -245,6 +248,7 @@ input.invalid {
   -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   z-index: 1;
+  color: black;
 }
 
 #procedură button.salvează {
@@ -458,6 +462,11 @@ button.elimină-persoană {
   left: -35px;
   width: 35px;
   background-color: transparent;
+}
+
+.destinatari-adăugaţi .elimină {
+  height: .7em;
+  line-height: 1em;
 }
 
 #listă-taxe-şi-speze .subformular .şoaptă {

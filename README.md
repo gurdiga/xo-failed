@@ -2,8 +2,14 @@ TODO:
 -----
 
 * save
-  * button
+  * button evidenţiat de salvare
   * code
+* design
+  * scoate umbra de la header
+  * tranziţie pentru adăugare/ştergere
+  * tranziţie pentru deschiderea formularului
+  * navigare ca la Basecamp
+  * cîmpul de căutare cu border ca la GContacts
 * IE selecturi mari
 * smoother add/remove
 * dot the site specific nginx config file
