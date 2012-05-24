@@ -238,7 +238,7 @@ input.invalid {
   border-color: red;
 }
 
-#procedură h1 {
+#formular h1 {
   position: fixed;
   margin: 0 0 0 -20px;
   padding: 20px 20px 5px;
@@ -251,14 +251,14 @@ input.invalid {
   color: black;
 }
 
-#procedură button.salvează {
+#formular button.salvează {
   font-size: .7em;
   position: absolute;
   right: 5px;
   bottom: 5px;
 }
 
-#procedură fieldset {
+#formular fieldset {
   margin-right: 40px;
 }
 
@@ -412,11 +412,11 @@ button.elimină-persoană {
   padding: 0;
 }
 
-#procedură #date-generale {
+#formular #date-generale {
   min-height: 18.2em;
 }
 
-#procedură #cheltuieli {
+#formular #cheltuieli {
   clear: left;
 }
 
@@ -725,4 +725,8 @@ input[type="checkbox"]+label {
   width: auto;
   font-style: normal;
   vertical-align: -.2em;
+}
+
+#prefix {
+  text-transform: uppercase;
 }

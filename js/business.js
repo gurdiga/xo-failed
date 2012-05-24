@@ -8,7 +8,7 @@ var Business = {
     if (this[pagină]) this[pagină]();
   },
 
-  '#procedură': function() {
+  '#formular': function() {
     $.when(Valute.încarcăRateBNM()).done(function() {
       Valute.init();
       Onorariul.init();
@@ -136,15 +136,16 @@ var Defaults = {
   },
 
   initTitlu: function() {
-    $('#procedură #literă').text(HashController.date() || '');
-    $('#procedură #gen').text($('a[href="' + location.hash + '"]').text());
+    var literă = HashController.date() == '-' ? '' : HashController.date();
+
+    $('#formular #prefix').text(User.login + literă + '-');
 
     switch (HashController.date()) {
-    case 'S':
+    case 's':
       $('#caracter').val('pecuniar').trigger('change');
       $('#creditor .gen-persoană').val('juridică').trigger('change');
       break;
-    case 'P':
+    case 'p':
       $('#caracter').val('pecuniar').trigger('change');
       $('#creditor .gen-persoană').val('fizică').trigger('change');
       break;

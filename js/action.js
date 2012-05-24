@@ -1,24 +1,25 @@
 var Action = {
   init: function() {
+    User.init();
     HashController.init();
 
+    Schimbări.urmăreşte();
     ProcedurăNonPecuniară.init();
     FormulareŞablon.init();
-    Schimbări.urmăreşte();
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
     AdăugarePersoane.init();
     Cheltuieli.init();
     Eliminabile.init();
-    Salvează.init();
+    Salvare.init();
   },
 
   '#index': function() {
-    $('#index input').focus();
+    $('#căutare input').focus();
   },
 
-  '#procedură': function() {
-    $('[schimbat]').removeAttr('schimbat');
+  '#formular': function() {
+    $('#formular').find('[schimbat]').removeAttr('schimbat');
   }
 };
 
@@ -109,7 +110,7 @@ var AdăugarePersoane = {
   },
 
   initAdăugare: function() {
-    $('#procedură').on('click', 'button.adaugă.persoană', function() {
+    $('#formular').on('click', 'button.adaugă.persoană', function() {
       var buton = $(this),
           fieldset = buton.prev();
 
@@ -140,7 +141,7 @@ var AdăugarePersoane = {
   },
 
   initŞtergere: function() {
-    $('#procedură').on('click', 'button.elimină-persoană', function() {
+    $('#formular').on('click', 'button.elimină-persoană', function() {
       var button = $(this),
           aceastăPersoană = button.closest('fieldset');
           celelaltePersoane = aceastăPersoană.siblings('fieldset');
@@ -156,7 +157,7 @@ var AdăugarePersoane = {
 var HashController = {
   init: function() {
     $(window).on('hashchange', function() {
-      var id = HashController.id();
+      var id = User.login ? HashController.id() : '#login';
 
       $('div.pagină:not(' + id + ')').hide();
       $('div.pagină' + id).show();
@@ -193,7 +194,7 @@ var CîmpuriTextarea = {
   evenimente: 'keydown keyup update paste change focus mouseup',
 
   autodimensionează: function() {
-    $('#procedură').on(this.evenimente, this.selector, function() {
+    $('#formular').on(this.evenimente, this.selector, function() {
       var textarea = $(this);
 
       if (textarea.is(':not(:visible)')) return;
@@ -219,7 +220,7 @@ var CîmpuriTextarea = {
 
 var ListeFoarteLate = {
   seteazăŞoapte: function() {
-    $('#procedură')
+    $('#formular')
       .on('change', 'select.foarte.lat', function() {
         var lista = $(this);
 
@@ -258,11 +259,12 @@ var Schimbări = {
   evenimente: 'keydown keyup update paste change',
 
   urmăreşte: function() {
-    $('#procedură').on(Schimbări.evenimente, Schimbări.selector, function (e, tip) {
+    $('#formular').on(Schimbări.evenimente, Schimbări.selector, function (e, tip) {
       if (tip == 'automat') return;
 
       $(this).attr('schimbat', '');
     });
+
   }
 };
 
@@ -274,7 +276,7 @@ var FormulareŞablon = {
   init: function() {
     var selectorLista = FormulareŞablon.selector + ' legend select';
 
-    $('#procedură').on('change', selectorLista, function() {
+    $('#formular').on('change', selectorLista, function() {
       var select = $(this),
           fieldset = select.closest('fieldset'),
           şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
@@ -305,9 +307,37 @@ var FormulareŞablon = {
 
 // --------------------------------------------------
 
-var Salvează = {
+var Salvare = {
   init: function() {
-    var procedură = {};
+    $('#formular button.salvează').on('click', this.trimiteDatele);
+  },
+
+  trimiteDatele: function() {
+    var procedură = Salvare.colecteazăDatele();
+
+    procedură.tip = HashController.date();
+
+    if (!procedură.număr) {
+      $.get('/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
+        var ultimulNumăr = $(răspuns).find('a:last').text();
+
+        procedură.număr = isNaN(ultimulNumăr) ? 1 : +ultimulNumăr + 1;
+        post();
+      });
+    } else {
+      post();
+    }
+
+    // -----
+    function post() {
+      $.post('/bin/salvează.php', procedură);
+    }
+  },
+
+  colecteazăDatele: function() {
+    var procedură = {
+      număr: $('#număr').text()
+    };
 
     // -----
     function colectează(secţiune) {
@@ -424,23 +454,21 @@ var Salvează = {
     }
 
 
-    $('#procedură button.salvează').on('click', function() {
-      colectează('#documentul-executoriu');
-      colectează('#date-generale');
-      colecteazăCheltuieli();
+    colectează('#documentul-executoriu');
+    colectează('#date-generale');
+    colecteazăCheltuieli();
 
-      procedură.creditor = colecteazăPersoană($('#creditor'));
+    procedură.creditor = colecteazăPersoană($('#creditor'));
 
-      procedură['persoane-terţe'] = $('.persoană-terţă').map(function() {
-        return colecteazăPersoană(this);
-      }).get();
+    procedură['persoane-terţe'] = $('.persoană-terţă').map(function() {
+      return colecteazăPersoană(this);
+    }).get();
 
-      procedură.debitori = $('.debitor').map(function() {
-        return colecteazăPersoană(this);
-      }).get();
+    procedură.debitori = $('.debitor').map(function() {
+      return colecteazăPersoană(this);
+    }).get();
 
-      console.log(procedură);
-    });
+    return procedură;
   }
 };
 
@@ -516,7 +544,7 @@ var Cheltuieli = {
   },
 
   initSubformulare: function() {
-    $('#procedură')
+    $('#formular')
       .on('click', 'button.adaugă', function() {
         var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
             şablon = $('.şablon.subformular[title="' + numeŞablon + '"] .document').first();
@@ -644,7 +672,7 @@ var Eliminabile = {
       .hide()
       .on('click', this.elimină);
 
-    $('#procedură')
+    $('#formular')
       .on('mousemove', '.eliminabil', this.afişeazăButon)
       .on('mouseleave', '.eliminabil', this.ascundeButon);
   },
@@ -712,4 +740,14 @@ $.fn.afişează = function() {
 
 $.fn.val1 = function() {
   return this.is(':checkbox') ? this.is(':checked') : this.val();
+};
+
+// --------------------------------------------------
+
+var User = {
+  login: '',
+
+  init: function() {
+    User.login = $.cookie('login');
+  }
 };

@@ -1,10 +1,9 @@
 TODO:
 -----
 
-* save
-  * button evidenţiat de salvare
-  * code
+* deschide procedură salvată
 * design
+  * button evidenţiat de salvare
   * scoate umbra de la header
   * tranziţie pentru adăugare/ştergere
   * tranziţie pentru deschiderea formularului
@@ -19,7 +18,5 @@ TODO:
 Causality
 ---------
 
-* why no explicit label binding? this implies IDs, which
-  impose limits on acceptable caracters and need slugging
 * why <ol> for something that looke like a table? (.subformular)
-  for list numbering
+  less noisy
