@@ -9,12 +9,9 @@ var Business = {
   },
 
   '#formular': function() {
-    $.when(Valute.încarcăRateBNM()).done(function() {
-      Valute.init();
-      Onorariul.init();
-      TotalCheltuieli.init();
-      Defaults.init();
-    });
+    Onorariul.init();
+    TotalCheltuieli.init();
+    Defaults.init();
   }
 };
 

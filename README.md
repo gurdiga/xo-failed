@@ -2,6 +2,7 @@ TODO:
 -----
 
 * deschide procedură salvată
+* înregistrare utilizator
 * design
   * button evidenţiat de salvare
   * scoate umbra de la header

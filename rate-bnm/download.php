@@ -8,7 +8,7 @@ $url = "http://bnm.md/md/official_exchange_rates?get_xml=1&date=$data";
 $root = dirname(__FILE__);
 $dir = "$root/" . date('Y/m/');
 $xml_file = $dir . date('d') . '.xml';
-$json_file = $dir . date('d') . '.json';
+$json_file = $dir . date('d') . '.js';
 
 if (file_exists($xml_file)) exit;
 
@@ -29,8 +29,8 @@ foreach ($simple_xml->Valute as $valuta) {
   );
 };
 
-file_put_contents($json_file, json_encode($array));
+file_put_contents($json_file, 'var RateBNM = ' . json_encode($array));
 
-$current = "$root/current.json";
+$current = "$root/current.js";
 unlink($current);
 symlink($json_file, $current);

@@ -3,6 +3,7 @@ var Action = {
     User.init();
     HashController.init();
 
+    Valute.init();
     Schimbări.urmăreşte();
     ProcedurăNonPecuniară.init();
     FormulareŞablon.init();
@@ -81,8 +82,6 @@ var ProcedurăNonPecuniară = {
 
 // --------------------------------------------------
 
-var RateBNM = {};
-
 var Valute = {
   init: function() {
     this.populeazăListe();
@@ -92,12 +91,6 @@ var Valute = {
     var şablon = $('.valuta.şablon').html();
 
     $('ul .valuta').html(şablon);
-  },
-
-  încarcăRateBNM: function() {
-    return $.getJSON('/rate-bnm/current.json', function(data) {
-      RateBNM = data;
-    });
   }
 };
 
@@ -167,6 +160,11 @@ var HashController = {
       Business.init();
 
       document.title = $('div.pagină' + id + ' h1').contents(':not(button)').text();
+
+      if (/^[-sp]\d+$/.test(HashController.date())) {
+        console.log('load an existing file');
+      }
+
     }).trigger('hashchange');
   },
 
