@@ -21,6 +21,10 @@ var Action = {
 
   '#formular': function() {
     $('#formular').find('[schimbat]').removeAttr('schimbat');
+
+    var gen = $('#crează-procedură').find('a[href="' + location.hash + '"]').text();
+
+    $('#gen').text(gen);
   }
 };
 
@@ -161,7 +165,8 @@ var HashController = {
 
       document.title = $('div.pagină' + id + ' h1').contents(':not(button)').text();
 
-      if (/^[-sp]\d+$/.test(HashController.date())) {
+      if (id == '#formular' && /^[-sp]\d+$/.test(HashController.date())) {
+        // TODO: aici
         console.log('load an existing file');
       }
 
@@ -181,7 +186,7 @@ var HashController = {
   },
 
   date: function() {
-    return this.hash().split('?')[1];
+    return this.hash().split('?')[1] || '';
   }
 };
 
@@ -316,7 +321,7 @@ var Salvare = {
     procedură.tip = HashController.date();
 
     if (!procedură.număr) {
-      $.get('/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
+      $.get('/date/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
         var ultimulNumăr = $(răspuns).find('a:last').text();
 
         procedură.număr = isNaN(ultimulNumăr) ? 1 : +ultimulNumăr + 1;

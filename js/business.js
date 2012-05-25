@@ -133,9 +133,18 @@ var Defaults = {
   },
 
   initTitlu: function() {
-    var literă = HashController.date() == '-' ? '' : HashController.date();
+    var seCreazăProcedurăNouă = HashController.id() == '#formular' && /^[sp]?$/.test(HashController.date());
 
-    $('#formular #prefix').text(User.login + literă + '-');
+    if (seCreazăProcedurăNouă) {
+      $('#prefix, #număr').text('');
+    } else {
+      var date = HashController.date().match(/^([sp])?(\d+)$/),
+          literă = date[1] || '',
+          număr = date[2];
+
+      $('#prefix').text(User.login + literă + '-');
+      $('#număr').text(număr);
+    }
 
     switch (HashController.date()) {
     case 's':

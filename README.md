@@ -2,6 +2,8 @@ TODO:
 -----
 
 * deschide procedură salvată
+  * $.get file
+  * populează formularul
 * înregistrare utilizator
 * design
   * button evidenţiat de salvare

@@ -16,8 +16,8 @@ function verifică_login($login) {
     die();
   }
 
-  if (!is_dir("../$login")) {
-    error_log("Nu există director: [$login]");
+  if (!is_dir("../date/$login")) {
+    error_log("Nu există director pentru date: [$login]");
     die();
   }
 }
@@ -44,5 +44,5 @@ function salvează($procedură) {
   $număr = $procedură['număr'];
   $tip = $procedură['tip'];
 
-  file_put_contents("../$login/proceduri/$tip/$număr", json_encode($procedură));
+  file_put_contents("../date/$login/proceduri/$tip/$număr", json_encode($procedură));
 }
