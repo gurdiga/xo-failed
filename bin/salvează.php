@@ -10,15 +10,20 @@ salvează($procedură);
 
 // ==============================
 
+function stop($mesaj) {
+  error_log($mesaj);
+  die();
+}
+
+// ------------------------------
+
 function verifică_login($login) {
   if (!preg_match('/^\d+$/', $login)) {
-    error_log("Login invalid: [$login]");
-    die();
+    stop("Login invalid: [$login]");
   }
 
   if (!is_dir("../date/$login")) {
-    error_log("Nu există director pentru date: [$login]");
-    die();
+    stop("Nu există director pentru date: [$login]");
   }
 }
 
@@ -26,13 +31,11 @@ function verifică_login($login) {
 
 function verifică_date($procedură) {
   if (!preg_match('/^\d+$/', $procedură['număr'])) {
-    error_log("Număr de procedură invalid: [{$procedură['număr']}]");
-    die();
+    stop("Număr de procedură invalid: [{$procedură['număr']}]");
   }
 
-  if (!preg_match('/^[-sp]$/', $procedură['tip'])) {
-    error_log("Tip de procedură invalid: [{$procedură['tip']}]");
-    die();
+  if (!preg_match('/^[SP]/', $procedură['tip'])) {
+    stop("Tip de procedură invalid: [{$procedură['tip']}]");
   }
 }
 

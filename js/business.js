@@ -128,21 +128,24 @@ var Defaults = {
       }
     });
 
-    $('#taxaA1').click();
+    if (this.seCreazăProcedurăNouă()) $('#taxaA1').click();
+
     this.initTitlu();
   },
 
-  initTitlu: function() {
-    var seCreazăProcedurăNouă = HashController.id() == '#formular' && /^[sp]?$/.test(HashController.date());
+  seCreazăProcedurăNouă: function() {
+    return HashController.id() == '#formular' && /^[SP]?$/.test(HashController.date());
+  },
 
-    if (seCreazăProcedurăNouă) {
+  initTitlu: function() {
+    if (this.seCreazăProcedurăNouă()) {
       $('#prefix, #număr').text('');
     } else {
-      var date = HashController.date().match(/^([sp])?(\d+)$/),
-          literă = date[1] || '',
+      var date = HashController.date().match(/^([SP])?(\d+)$/),
+          gen = date[1] || '',
           număr = date[2];
 
-      $('#prefix').text(User.login + literă + '-');
+      $('#prefix').text(User.login + gen + '-');
       $('#număr').text(număr);
     }
 
@@ -256,16 +259,5 @@ var TotalCheltuieli = {
     });
 
     $('#total-taxe-şi-speze').val(total);
-
-    // cazuri speciale:
-    // * documente adresabile
-    //   denumire + # de destinatari de anumite fel
-    //   .item .document .destinatari-adăugaţi = 1
-    //   count(.item .document .destinatari-adăugaţi.suplimentar) * .25
-    // * ore lucrate: .item .cantitate * .5
-    // * bifa din arhivă: .din.arhivă:checked +1
-    // * bifă “licitaţie repetată”: -.5
-    // * tA3: sum(.item .cantitate)
-
   }
 };

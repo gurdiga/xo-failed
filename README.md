@@ -2,9 +2,11 @@ TODO:
 -----
 
 * deschide procedură salvată
-  * $.get file
   * populează formularul
 * înregistrare utilizator
+* authentificare nginx: areal unic
+  * use a regexp to exclude the idex and jses?
+* optimizare şabloane: de mutat toate în #şablon
 * design
   * button evidenţiat de salvare
   * scoate umbra de la header

@@ -28,8 +28,8 @@
           <label>Înregistrează procedură</label><br/>
           <ul>
             <li><a href="#formular">de ordin general</a></li>
-            <li><a href="#formular?s">în beneficiul statului</a></li>
-            <li><a href="#formular?p">pensie de întreţinere</a></li>
+            <li><a href="#formular?S">în beneficiul statului</a></li>
+            <li><a href="#formular?P">pensie de întreţinere</a></li>
           </ul>
 
           <p class="şoaptă">Se va reflecta în numărul de înregistrare al procedurii.</p>
@@ -177,7 +177,7 @@
 
               <li>
                 <label for="total-taxe-şi-speze">Total taxe şi speze</label>
-                <input id="total-taxe-şi-speze" class="sumă" readonly/> MDL
+                <input id="total-taxe-şi-speze" class="sumă calculat" readonly/> MDL
 
                 <ul id="listă-taxe-şi-speze">
                 </ul>
@@ -449,7 +449,7 @@
         </div>
 
         <div class="coloană">
-          <fieldset data-şablon="persoană" class="debitor" id="debitor0">
+          <fieldset data-şablon="persoană" class="debitor">
             <legend>
               <label>Debitor: persoană</label>
               <select class="gen-persoană">
@@ -515,8 +515,8 @@
         </li>
 
         <li>
-          <label><b>Total</b></label>
-          <input class="sumă" id="total" value="0" readonly/> MDL
+          <label for="total"><b>Total</b></label>
+          <input class="sumă calculat" id="total" value="0" readonly/> MDL
         </li>
       </ul>
     </div>

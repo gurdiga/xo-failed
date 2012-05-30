@@ -377,7 +377,6 @@ fieldset#creditor button.elimină-persoană {
 
 button.adaugă {
   font-size: 1.5em;
-  font-weight: normal;
   padding: 0;
   margin-left: .2em;
   border: none;
@@ -391,7 +390,7 @@ button.adaugă {
 button.adaugă.persoană {
   font-weight: bold;
   position: relative;
-  top: -.8em;
+  top: -1.2em;
 }
 
 button.adaugă .legend.label {
@@ -725,8 +724,4 @@ input[type="checkbox"]+label {
   width: auto;
   font-style: normal;
   vertical-align: -.2em;
-}
-
-#prefix {
-  text-transform: uppercase;
 }

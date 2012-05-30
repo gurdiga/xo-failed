@@ -12,7 +12,9 @@ var Action = {
     AdăugarePersoane.init();
     Cheltuieli.init();
     Eliminabile.init();
-    Salvare.init();
+    DateProcedură.init();
+
+    $(window).trigger('hashchange');
   },
 
   '#index': function() {
@@ -20,11 +22,9 @@ var Action = {
   },
 
   '#formular': function() {
-    $('#formular').find('[schimbat]').removeAttr('schimbat');
+    $('#gen').text($('#crează-procedură').find('a[href="' + location.hash + '"]').text());
 
-    var gen = $('#crează-procedură').find('a[href="' + location.hash + '"]').text();
-
-    $('#gen').text(gen);
+    Formular.resetează();
   }
 };
 
@@ -116,7 +116,9 @@ var AdăugarePersoane = {
         .find('input, textarea').val('').end()
         .find('legend label').text(function(i, text) {
           if (buton.find('.legend.label').există()) {
-            $(this).closest('fieldset').addClass('persoană-terţă');
+            $(this).closest('fieldset')
+              .addClass('persoană-terţă')
+              .find('[schimbat]').removeAttr('schimbat');
 
             return buton.find('.legend.label').text();
           } else {
@@ -124,14 +126,6 @@ var AdăugarePersoane = {
           }
         }).end()
         .insertAfter(fieldset);
-
-      var id;
-
-      if (fieldset.is('.debitor')) {
-        id = 'debitor-' + $('.debitor').length;
-      } else if (fieldset.is('.persoană-terţă')) {
-        id = 'persoană-terţă-' + $('.persoană-terţă').length;
-      }
 
       buton.siblings('fieldset').addClass('dispensabilă');
     });
@@ -164,13 +158,7 @@ var HashController = {
       Business.init();
 
       document.title = $('div.pagină' + id + ' h1').contents(':not(button)').text();
-
-      if (id == '#formular' && /^[-sp]\d+$/.test(HashController.date())) {
-        // TODO: aici
-        console.log('load an existing file');
-      }
-
-    }).trigger('hashchange');
+    });
   },
 
   hash: function() {
@@ -287,7 +275,9 @@ var FormulareŞablon = {
       if (fieldset.find('[schimbat]').există()) {
         var titlu = fieldset.find('legend label').text();
 
-        if (titlu.indexOf(':') > -1) titlu = titlu.split(':')[0];
+        if (titlu.indexOf(':') > -1) {
+          titlu = titlu.split(':')[0];
+        }
 
         var atenţionare =
           'Această schimbare presupune pierderea datelor din secţiunea [' + titlu + '].\n\n' +
@@ -310,56 +300,53 @@ var FormulareŞablon = {
 
 // --------------------------------------------------
 
-var Salvare = {
+var DateProcedură = {
   init: function() {
-    $('#formular button.salvează').on('click', this.trimiteDatele);
+    $('#formular button.salvează').on('click', this.trimite);
+
+    $(window).on('hashchange', function() {
+      if (HashController.id() == '#formular' && /^[SP]?\d+$/.test(HashController.date())) {
+        DateProcedură.încarcă();
+      }
+    });
   },
 
-  trimiteDatele: function() {
-    var procedură = Salvare.colecteazăDatele();
-
-    procedură.tip = HashController.date();
-
-    if (!procedură.număr) {
-      $.get('/date/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
-        var ultimulNumăr = $(răspuns).find('a:last').text();
-
-        procedură.număr = isNaN(ultimulNumăr) ? 1 : +ultimulNumăr + 1;
-        post();
-      });
-    } else {
-      post();
-    }
-
-    // -----
-    function post() {
-      $.post('/bin/salvează.php', procedură);
-    }
-  },
-
-  colecteazăDatele: function() {
+  colectează: function() {
     var procedură = {
       număr: $('#număr').text()
     };
 
-    // -----
+    procedură['documentul-executoriu'] = colectează($('#documentul-executoriu'));
+    colecteazăDateGenerale();
+    colecteazăCheltuieli();
+    procedură['creditor'] = colecteazăPersoană($('#creditor'));
+    colecteazăPersoaneTerţe();
+    colecteazăDebitori();
+
+    return procedură;
+
+
+    // ------------------------------------------
     function colectează(secţiune) {
       var $secţiune = $(secţiune),
           colecţie = {};
 
-      $secţiune.find('label+:input, .label+:input').each(function() {
+      $secţiune.find('label+:input:last-child, .label+:input').each(function() {
         var $input = $(this),
             $label = $input.prev();
 
-        if (!$input.attr('id')) return; // legend select.gen-persoană
-
+        if ($input.is('.calculat')) return;
         if ($label.is('.label')) {
           if (!$label.val() && !$input.val()) return;
           if (!colecţie.subformular) colecţie.subformular = {};
 
           colecţie.subformular[$label.val()] = $input.val();
         } else {
-          colecţie[$input.attr('id')] = $input.val1();
+          if ($input.is('.gen-persoană')) {
+            colecţie['gen-persoană'] = $input.val1();
+          } else {
+            colecţie[$input.attr('id')] = $input.val1();
+          }
         }
       });
 
@@ -370,41 +357,49 @@ var Salvare = {
       }
     }
 
-
-    // -----
+    // ------------------------------------------
     function colecteazăPersoană(secţiune) {
-      var persoană = colectează(secţiune);
+      var persoană = {
+        'gen-persoană': $(secţiune).find('.gen-persoană').val()
+      }
 
-      persoană['gen-persoană'] = $(secţiune).find('.gen-persoană').val();
+      $.extend(persoană, colectează(secţiune));
 
       return persoană;
     }
 
+    // ------------------------------------------
+    function colecteazăDateGenerale() {
+      procedură['date-generale'] = colectează($('#date-generale'));
 
-    // -----
+      var $secţiune = $('#date-generale'), sume = {};
+
+      $.each(['suma-de-bază', 'taxă-de-stat', 'penalitate'], function() {
+        var cîmp = this,
+            $cîmp = $secţiune.find('#' + cîmp);
+
+        sume[cîmp] = {
+          suma: $cîmp.val(),
+          valuta: $cîmp.next('.valuta').val()
+        };
+      });
+
+      procedură['date-generale'].sume = sume;
+    }
+
+    // ------------------------------------------
     function colecteazăCheltuieli() {
-      var $secţiune = $('#cheltuieli');
-
-      function valoare(selector) {
-        var $input = $secţiune.find(selector);
-
-        return $input.val1();
-      }
-
-      procedură.cheltuieli = {
-        'onorariu': valoare('#onorariu'),
-        'părţile-au-ajuns-la-conciliere': valoare('#părţile-au-ajuns-la-conciliere'),
-        'total-taxe-şi-speze': valoare('#total-taxe-şi-speze'),
-      };
-
-      var itemi = {};
+      var $secţiune = $('#cheltuieli'),
+          itemi = {};
 
       $secţiune.find('#listă-taxe-şi-speze>.item').each(function() {
         var $item = $(this),
             item = {};
 
-        if ($item.find('.achitare :checkbox').is(':checked')) {
-          item.achitat = $item.find('.achitare .data').text();
+        item.achitat = $item.find('.achitare :checkbox').is(':checked');
+
+        if (item.achitat) {
+          item['data-achitării'] = $item.find('.achitare .data').text();
         }
 
         var $subformular = $item.find('.subformular:not(.achitare)');
@@ -423,8 +418,11 @@ var Salvare = {
               if ($item.find('.destinatari-adăugaţi').există()) { // documente adresate
                 item = {
                   'document': $.trim($item.find('.denumire').val()),
-                  'destinatari': $item.find('.destinatari-adăugaţi li').map(function() {
+                  'destinatari': $item.find('.destinatari-adăugaţi li:not(:has(input))').map(function() {
                     return $.trim($(this).text());
+                  }).get(),
+                  'destinatari-persoane-terţe': $item.find('.destinatari-adăugaţi li:has(input)').map(function() {
+                    return $.trim($(this).find('input').val());
                   }).get()
                 }
               } else { // listă itemi
@@ -453,25 +451,168 @@ var Salvare = {
         itemi[$item.attr('id')] = item;
       });
 
-      procedură.cheltuieli.itemi = itemi;
+      procedură.cheltuieli = {
+        'onorariu': $secţiune.find('#onorariu').val1(),
+        'părţile-au-ajuns-la-conciliere': $secţiune.find('#părţile-au-ajuns-la-conciliere').val1(),
+        'itemi': itemi
+      };
     }
 
+    // ------------------------------------------
+    function colecteazăPersoaneTerţe() {
+      procedură['persoane-terţe'] = $('.persoană-terţă').map(function() {
+        return colecteazăPersoană(this);
+      }).get();
+    }
 
-    colectează('#documentul-executoriu');
-    colectează('#date-generale');
-    colecteazăCheltuieli();
+    // ------------------------------------------
+    function colecteazăDebitori() {
+      procedură['debitori'] = $('.debitor').map(function() {
+        return colecteazăPersoană(this);
+      }).get();
+    }
+  },
 
-    procedură.creditor = colecteazăPersoană($('#creditor'));
+  trimite: function() {
+    var procedură = DateProcedură.colectează();
 
-    procedură['persoane-terţe'] = $('.persoană-terţă').map(function() {
-      return colecteazăPersoană(this);
-    }).get();
+    procedură.tip = HashController.date().substr(0, 1);
 
-    procedură.debitori = $('.debitor').map(function() {
-      return colecteazăPersoană(this);
-    }).get();
+    if (!procedură.număr) {
+      $.get('/date/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
+        var ultimulNumăr = $(răspuns).find('a:last').text();
 
-    return procedură;
+        procedură.număr = isNaN(ultimulNumăr) ? 1 : +ultimulNumăr + 1;
+        post();
+      });
+    } else {
+      post();
+    }
+
+    // -----
+    function post() {
+      $.post('/bin/salvează.php', procedură);
+    }
+  },
+
+  încarcă: function() {
+    var date = HashController.date().match(/^([SP]?)(\d+)$/),
+        gen = date[1],
+        număr = date[2];
+
+    $.getJSON('/date/' + User.login + '/proceduri/' + gen + '/' + număr)
+      .success(DateProcedură.populeazăFormularul);
+  },
+
+  populeazăFormularul: function(procedură) {
+    populează('#documentul-executoriu', procedură['documentul-executoriu']);
+    populeazăDateleGenerale();
+    populeazăCheltuieli();
+    populează('#creditor', procedură['creditor']);
+    populeazăPersoaneleTerţe();
+    populeazăDebitori();
+
+
+    // ------------------------------------------
+    function populează(selector, secţiune) {
+      var $secţiune = $(selector);
+
+      for (id in secţiune) {
+        $secţiune.find('#' + id).val1(secţiune[id]);
+      }
+    }
+
+    // ------------------------------------------
+    function populeazăDateleGenerale() {
+      populează('#date-generale', procedură['date-generale']);
+
+      var $secţiune = $('#date-generale'),
+          sume = procedură['date-generale'].sume,
+          cîmp, $cîmp;
+
+      for (cîmp in sume) {
+        $cîmp = $secţiune.find('#' + cîmp);
+        $cîmp.val(sume[cîmp].suma);
+        $cîmp.next('.valuta').val(sume[cîmp].valuta);
+      }
+
+      var subformular = procedură['date-generale'].subformular,
+          $subformular = $('#date-generale').find('.subformular'),
+          $adaugă = $subformular.find('button.adaugă'),
+          descriere,
+          prima = true;
+
+      for (descriere in subformular) {
+        if (prima) {
+          prima = false;
+        } else {
+          $adaugă.click();
+        }
+
+        $subformular.find('.item:last')
+          .find('.descriere').val(descriere).end()
+          .find('.sumă').val(subformular[descriere]).end()
+      }
+    }
+
+    // ------------------------------------------
+    function populeazăCheltuieli() {
+      console.log(procedură.cheltuieli);
+
+      var $secţiune = $('#cheltuieli');
+
+      $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function() {
+        var cîmp = this.toString();
+
+        $secţiune.find('#' + cîmp).val1(procedură.cheltuieli[cîmp]);
+      });
+
+      var $lista = $('#categorii-taxe-şi-speze');
+
+      for (var item in procedură.cheltuieli.itemi) {
+        $lista.find('#' + item).click();
+      }
+      // TODO
+    }
+
+    // ------------------------------------------
+    function populeazăPersoaneleTerţe() {
+      var $adaugă = $('#creditor+button.adaugă');
+
+      if (procedură['persoane-terţe']) {
+        $.each(procedură['persoane-terţe'], function() {
+          $adaugă.click();
+
+          $secţiune = $('.persoană-terţă:last');
+          $secţiune.find('.gen-persoană')
+            .val(this['gen-persoană'])
+            .trigger('change');
+          populează($secţiune, this);
+        });
+      }
+    }
+
+    // ------------------------------------------
+    function populeazăDebitori() {
+      var $secţiune,
+          prima = true,
+          $adaugă = $('.debitor+button.adaugă');
+
+      $.each(procedură['debitori'], function() {
+        if (prima) {
+          prima = false;
+        } else {
+          $adaugă.click();
+        }
+
+        $secţiune = $('.debitor:last');
+        $secţiune.find('.gen-persoană')
+          .val(this['gen-persoană'])
+          .trigger('change');
+        populează($secţiune, this);
+      });
+    }
+
   }
 };
 
@@ -729,6 +870,30 @@ var Eliminabile = {
 
 // --------------------------------------------------
 
+var User = {
+  login: '',
+
+  init: function() {
+    User.login = $.cookie('login');
+  }
+};
+
+// --------------------------------------------------
+
+var Formular = {
+  resetează: function() {
+    $('#formular')
+      .find('[schimbat]').removeAttr('schimbat').end()
+      .find('#documentul-executoriu')
+        .find('input').val('').end()
+        .find('select').val(function() {return $(this).find('option:first').val()}).end()
+      .end()
+      .find('#cheltuieli :input:not([type="hidden"])').val('').end();
+  }
+}
+
+// --------------------------------------------------
+
 $.fn.ascunde = function() {
   return this.clearQueue().hide();
 };
@@ -741,16 +906,14 @@ $.fn.afişează = function() {
 
 // --------------------------------------------------
 
-$.fn.val1 = function() {
-  return this.is(':checkbox') ? this.is(':checked') : this.val();
-};
-
-// --------------------------------------------------
-
-var User = {
-  login: '',
-
-  init: function() {
-    User.login = $.cookie('login');
+$.fn.val1 = function(value) {
+  if (typeof value != 'undefined') {
+    if (this.is(':checkbox')) {
+      return this.attr('checked', value == 'true' || value === true);
+    } else {
+      return this.val(value);
+    }
   }
+
+  return this.is(':checkbox') ? this.is(':checked') : this.val();
 };
