@@ -430,8 +430,6 @@ button.elimină-persoană {
 
 #cheltuieli .item .la {
   display: none;
-  color: #555;
-  font-style: italic;
 }
 
 #cheltuieli .item.achitat .la {

@@ -595,22 +595,53 @@ var DateProcedură = {
         if (item.subformular) {
           var prima = true, $cîmp;
 
-          $.each(item.subformular, function() {
+          $.each(item.subformular, function(nume, valoare) {
             if (prima) {
               prima = false;
             } else {
               $adaugă.click();
             }
 
-            $cîmp = $subformular.find('li.eliminabil:last :input');
+            $itemSubformular = $subformular.find('li.eliminabil:last');
+            $cîmp = $itemSubformular.find(':input');
 
-            $.each(this, function(nume, valoare) {
-              $($cîmp.get(titluri[nume])).val(valoare);
-            });
+            if (this.document) {
+              var $destinatari = $('.şablon.destinatari');
+
+              $cîmp.val(this.document);
+
+              if (this.destinatari) {
+                $.each(this.destinatari, function() {
+                  $destinatari.find('li:not(.categorie):contains("' + this + '")')
+                    .clone()
+                    .addClass('eliminabil de tot')
+                    .appendTo($itemSubformular.find('.destinatari-adăugaţi'));
+                });
+              }
+
+              if (this['destinatari-persoane-terţe']) {
+                $.each(this['destinatari-persoane-terţe'], function() {
+                  $destinatari.find('li.persoană.terţă')
+                    .clone()
+                    .addClass('eliminabil de tot')
+                    .text('')
+                    .append($('.şablon.persoană.terţă').html())
+                    .find('input').val(this).end()
+                    .appendTo($itemSubformular.find('.destinatari-adăugaţi'));
+                });
+              }
+            } else {
+              if (this instanceof String) {
+                $subformular.find('#' + nume).val1(valoare);
+              } else {
+                $.each(this, function(nume, valoare) {
+                  $($cîmp.get(titluri[nume])).val(valoare);
+                });
+              }
+            }
           });
         }
       }
-      // TODO
     }
 
     // ------------------------------------------
