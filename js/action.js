@@ -518,7 +518,10 @@ var DateProcedură = {
       var $secţiune = $(selector);
 
       for (id in secţiune) {
-        $secţiune.find('#' + id).val1(secţiune[id]);
+        $secţiune.find('#' + id)
+          .val1(secţiune[id])
+          .trigger('change')
+          .removeAttr('schimbat');
       }
     }
 
@@ -567,10 +570,45 @@ var DateProcedură = {
         $secţiune.find('#' + cîmp).val1(procedură.cheltuieli[cîmp]);
       });
 
+      var $adăugate = $('#listă-taxe-şi-speze');
       var $lista = $('#categorii-taxe-şi-speze');
 
-      for (var item in procedură.cheltuieli.itemi) {
-        $lista.find('#' + item).click();
+      for (var id in procedură.cheltuieli.itemi) {
+        $lista.find('#' + id).click();
+
+        var item = procedură.cheltuieli.itemi[id],
+            $item = $adăugate.find('#' + id),
+            $subformular = $item.find('.subformular'),
+            $adaugă = $subformular.find('button.adaugă'),
+            titluri = {};
+
+        $subformular.find('li:first label').each(function(i) {
+          titluri[$(this).text()] = i;
+        });
+
+        if (item.achitat == 'true') {
+          $item.find('.subformular.achitare :checkbox').attr('checked', true).trigger('change');
+          $item.find('.subformular.achitare .la .data').text(item['data-achitării']);
+          $item.addClass('achitat');
+        }
+
+        if (item.subformular) {
+          var prima = true, $cîmp;
+
+          $.each(item.subformular, function() {
+            if (prima) {
+              prima = false;
+            } else {
+              $adaugă.click();
+            }
+
+            $cîmp = $subformular.find('li.eliminabil:last :input');
+
+            $.each(this, function(nume, valoare) {
+              $($cîmp.get(titluri[nume])).val(valoare);
+            });
+          });
+        }
       }
       // TODO
     }
