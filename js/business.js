@@ -131,6 +131,8 @@ var Defaults = {
     if (this.seCreazăProcedurăNouă()) $('#taxaA1').click();
 
     this.initTitlu();
+
+    TotalCheltuieli.calculează();
   },
 
   seCreazăProcedurăNouă: function() {

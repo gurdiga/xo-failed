@@ -519,6 +519,8 @@ var DateProcedură = {
     populeazăPersoaneleTerţe();
     populeazăDebitori();
 
+    $('#documentul-executoriu :input:first').focus()
+
 
     // ------------------------------------------
     function populează(selector, secţiune) {
@@ -733,6 +735,8 @@ var Cheltuieli = {
         .find('textarea').focus();
 
       $(this).closest('.conţinut').hide();
+
+      TotalCheltuieli.calculează();
     });
 
     $('#cheltuieli')
