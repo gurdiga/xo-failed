@@ -2,7 +2,8 @@ TODO:
 -----
 
 * deschide procedură salvată
-  * populează formularul
+  * afişează lista procedurilor recente
+    * refreşuieşte on hashchange
 * înregistrare utilizator
 * authentificare nginx: areal unic
   * use a regexp to exclude the idex and jses?

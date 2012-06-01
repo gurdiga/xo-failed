@@ -211,21 +211,16 @@ var TotalCheltuieli = {
 
     var evenimente = 'keydown keyup update paste change mouseup';
 
-    $('#cheltuieli').on('DOMSubtreeModified', '#listă-taxe-şi-speze', this.calculează);
     $('#listă-taxe-şi-speze').on(evenimente, cîmpuriValoare, this.calculează);
   },
 
-  calculează: function(e) {
-    e.stopPropagation();
-
-    // TODO: de evitat evenimentele de adăugare a butonului de eliminare
-
+  calculează: function() {
     var total = 0,
         cheltuieliAdăugate = $('#listă-taxe-şi-speze');
 
     total += cheltuieliAdăugate.find('input.valoare, input.sumă').suma();
     total += cheltuieliAdăugate.find('input.cost').suma() * UC;
-    total += cheltuieliAdăugate.find('[id="taxaB2.1"] .cantitate').suma() * .5 * UC;
+    total += cheltuieliAdăugate.find('#taxaB2-1 .cantitate').suma() * .5 * UC;
     total += cheltuieliAdăugate.find('#taxaB9 .cantitate').suma() * 5 * UC;
     total += cheltuieliAdăugate.find('#taxaA6 .din.arhivă').is(':checked') ? 1 * UC : 0;
 

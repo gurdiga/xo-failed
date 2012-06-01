@@ -1,5 +1,8 @@
 <?
 
+require './lib.php';
+
+
 $login = $_SERVER['PHP_AUTH_USER'];
 $procedură = $_POST;
 
@@ -9,13 +12,6 @@ salvează($procedură);
 
 
 // ==============================
-
-function stop($mesaj) {
-  error_log($mesaj);
-  die();
-}
-
-// ------------------------------
 
 function verifică_login($login) {
   if (!preg_match('/^\d+$/', $login)) {

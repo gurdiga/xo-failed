@@ -19,6 +19,8 @@ var Action = {
 
   '#index': function() {
     $('#căutare input').focus();
+
+    ProceduriRecente.încarcă();
   },
 
   '#formular': function() {
@@ -306,6 +308,7 @@ var DateProcedură = {
 
     $(window).on('hashchange', function() {
       if (HashController.id() == '#formular' && /^[SP]?\d+$/.test(HashController.date())) {
+        Formular.resetează();
         DateProcedură.încarcă();
       }
     });
@@ -502,6 +505,10 @@ var DateProcedură = {
 
     $.getJSON('/date/' + User.login + '/proceduri/' + gen + '/' + număr)
       .success(DateProcedură.populeazăFormularul);
+
+    if (!$('#proceduri-recente').find('a[href="' + location.hash + '"]').există()) {
+      ProceduriRecente.notează(gen + '/' + număr);
+    }
   },
 
   populeazăFormularul: function(procedură) {
@@ -560,8 +567,6 @@ var DateProcedură = {
 
     // ------------------------------------------
     function populeazăCheltuieli() {
-      console.log(procedură.cheltuieli);
-
       var $secţiune = $('#cheltuieli');
 
       $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function() {
@@ -721,7 +726,7 @@ var Cheltuieli = {
         .find(':checkbox').attr('id', random).end()
         .find('label').attr('for', random);
 
-      lista.append(item);
+      lista.append(item).trigger('recalculare');
       item
         .append(bifăAchitare)
         .addClass('eliminabil de tot')
@@ -757,15 +762,16 @@ var Cheltuieli = {
   },
 
   initSubformulare: function() {
-    $('#formular')
-      .on('click', 'button.adaugă', function() {
-        var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
-            şablon = $('.şablon.subformular[title="' + numeŞablon + '"] .document').first();
+    $('#formular').on('click', 'button.adaugă', function() {
+      var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
+          şablon = $('.şablon.subformular[title="' + numeŞablon + '"] .document').first();
 
-        şablon.clone()
-          .insertBefore($(this).parent())
-          .find('textarea,input').first().focus();
-      });
+      şablon.clone()
+        .insertBefore($(this).parent())
+        .find('textarea,input').first().focus();
+
+      TotalCheltuieli.calculează();
+    });
   },
 
   initDocumenteAdresabile: function() {
@@ -846,6 +852,7 @@ var Cheltuieli = {
         }
 
         listaDestinatari.hide();
+        TotalCheltuieli.calculează();
       })
 
       .on('keypress', '.persoană.terţă input', function(e) {
@@ -860,6 +867,8 @@ var Cheltuieli = {
         if (!eliminabil.siblings().există()) {
           eliminabil.parent().addClass('comprimaţi');
         }
+
+        TotalCheltuieli.calculează();
       });
   },
 
@@ -934,6 +943,8 @@ var Eliminabile = {
         .find('textarea').val('').trigger('change').end()
         .trigger('eliminare');
     }
+
+    TotalCheltuieli.calculează();
   }
 };
 
@@ -954,10 +965,40 @@ var Formular = {
     $('#formular')
       .find('[schimbat]').removeAttr('schimbat').end()
       .find('#documentul-executoriu')
-        .find('input').val('').end()
+        .find(':input').val('').end()
         .find('select').val(function() {return $(this).find('option:first').val()}).end()
       .end()
-      .find('#cheltuieli :input:not([type="hidden"])').val('').end();
+      .find('#cheltuieli')
+        .find('#listă-taxe-şi-speze').empty().end()
+        .find(':input:not([type="hidden"])').val('').end()
+        .find('#părţile-au-ajuns-la-conciliere').attr('checked', false).end()
+      .end()
+      .find('#creditor').find(':input').val('').end().end()
+      .find('.persoană-terţă').remove().end()
+      .find('.debitor')
+        .find(':input').val('').end()
+          .not(':first').remove().end()
+        .end();
+  }
+}
+
+// --------------------------------------------------
+
+var ProceduriRecente = {
+  încarcă: function() {
+    $.get('/date/' + User.login + '/proceduri/recente/', function(lista) {
+      var $proceduri = $(lista).find('a:not(:contains("../"))');
+
+      $.fn.html.apply($('#proceduri-recente'), $proceduri.map(function() {
+        return $(this)
+          .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
+          .text(function(i, text) {return User.login + text})
+      }).get());
+    });
+  },
+
+  notează: function(procedură) {
+    $.post('/bin/notează-ca-recentă.php', {procedură: procedură});
   }
 }
 
