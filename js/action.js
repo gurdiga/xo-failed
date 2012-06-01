@@ -991,13 +991,17 @@ var Formular = {
 var ProceduriRecente = {
   încarcă: function() {
     $.get('/date/' + User.login + '/proceduri/recente/', function(lista) {
-      var $proceduri = $(lista).find('a:not(:contains("../"))');
+      var $proceduriRecente = $('#proceduri-recente').empty();
 
-      $.fn.html.apply($('#proceduri-recente'), $proceduri.map(function() {
-        return $(this)
-          .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
-          .text(function(i, text) {return User.login + text})
-      }).get());
+      $(lista).find('a:not(:contains("../"))').each(function() {
+        $proceduriRecente.append(
+          $('<li>').append(
+            $(this)
+              .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
+              .text(function(i, text) {return User.login + text})
+          )
+        );
+      });
     });
   },
 

@@ -13,18 +13,6 @@ salvează($procedură);
 
 // ==============================
 
-function verifică_login($login) {
-  if (!preg_match('/^\d+$/', $login)) {
-    stop("Login invalid: [$login]");
-  }
-
-  if (!is_dir("../date/$login")) {
-    stop("Nu există director pentru date: [$login]");
-  }
-}
-
-// ------------------------------
-
 function verifică_date($procedură) {
   if (!preg_match('/^\d+$/', $procedură['număr'])) {
     stop("Număr de procedură invalid: [{$procedură['număr']}]");
