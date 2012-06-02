@@ -1,7 +1,5 @@
 var Action = {
   init: function() {
-    moment.lang('ro');
-
     Utilizator.init();
     HashController.init();
 
@@ -1033,23 +1031,36 @@ var ProceduriRecente = {
       var $proceduriRecente = $('#proceduri-recente').empty();
 
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
-        console.log($.trim(this.nextSibling.data).split(/\s{2,}/)[0]);
         return {
-          timp: new Date($.trim(this.nextSibling.data).split(/\s{2,}/)[0]),
+          timp: parse($.trim(this.nextSibling.data).split(/\s{2,}/)[0], this.innerText),
           $li: $('<li>').append(
             $(this)
               .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
               .text(function(i, text) {return Utilizator.login + text})
           )
         };
-      }).get().sort(function(a, b) { return b.timp.getTime() - a.timp.getTime() });
+      }).get().sort(function(a, b) { return b.timp - a.timp });
 
       $.each(proceduri, function() {
-        this.$li
-          .append('<span class="timp">' + moment(this.timp).fromNow() + '</span>')
-          .appendTo($proceduriRecente);
+        this.$li.appendTo($proceduriRecente);
       });
     });
+
+    // -----------------
+
+    function parse(timestamp, number) {
+      var parts = timestamp.match(/(\d{2})-(\w{3})-(\d{4}) (\d{2}):(\d{2})/),
+          monthNames = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
+          date = new Date();
+
+      date.setFullYear(parts[3]);
+      date.setMonth(monthNames.indexOf(parts[2]));
+      date.setDate(parts[1]);
+      date.setHours(parts[4]);
+      date.setMinutes(parts[5]);
+
+      return date.getTime();
+    }
   },
 
   notează: function(procedură) {

@@ -1,9 +1,7 @@
 TODO:
 -----
 
-* deschide procedură salvată
-  * afişează lista procedurilor recente
-    * refreşuieşte on hashchange
+* proceduri recente: sortare: parsează numele lunii
 * înregistrare utilizator
 * authentificare nginx: areal unic
   * use a regexp to exclude the idex and jses?
