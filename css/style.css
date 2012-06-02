@@ -160,10 +160,6 @@ div.pagină>.conţinut {
   clear: left;
 }
 
-.coloană.prima-de-sus {
-  margin-top: 7em;
-}
-
 fieldset {
   border: 1px solid #dedede;
   padding: 0 10px 1.5em;
@@ -239,23 +235,14 @@ input.invalid {
 }
 
 #formular h1 {
-  position: fixed;
-  margin: 0 0 0 -20px;
-  padding: 20px 20px 5px;
-  width: 970px;
-  background-color: white;
-  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  z-index: 1;
   color: black;
+  margin: 20px 40px 40px 0;
 }
 
 #formular button.salvează {
   font-size: .7em;
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
+  float: right;
+  margin-top: -.5em;
 }
 
 #formular fieldset {
@@ -722,4 +709,10 @@ input[type="checkbox"]+label {
   width: auto;
   font-style: normal;
   vertical-align: -.2em;
+}
+
+#proceduri-recente .timp {
+  font-size: smaller;
+  color: silver;
+  margin-left: 1em;
 }

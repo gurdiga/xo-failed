@@ -479,7 +479,7 @@ var DateProcedură = {
   trimite: function() {
     var procedură = DateProcedură.colectează();
 
-    procedură.tip = HashController.date().substr(0, 1);
+    procedură.tip = HashController.date().match(/^[SP]?/)[0];
 
     if (!procedură.număr) {
       $.get('/date/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
@@ -494,7 +494,9 @@ var DateProcedură = {
 
     // -----
     function post() {
-      $.post('/bin/salvează.php', procedură);
+      $.post('/bin/salvează.php', procedură, function() {
+        location.hash = '';
+      });
     }
   },
 
@@ -503,8 +505,12 @@ var DateProcedură = {
         gen = date[1],
         număr = date[2];
 
-    $.getJSON('/date/' + User.login + '/proceduri/' + gen + '/' + număr)
-      .success(DateProcedură.populeazăFormularul);
+    $.ajax({
+      url: '/date/' + User.login + '/proceduri/' + gen + '/' + număr,
+      success: DateProcedură.populeazăFormularul,
+      dataType: 'json',
+      cache: false
+    });
 
     if (!$('#proceduri-recente').find('a[href="' + location.hash + '"]').există()) {
       ProceduriRecente.notează(gen + '/' + număr);
@@ -981,8 +987,9 @@ var Formular = {
       .find('.persoană-terţă').remove().end()
       .find('.debitor')
         .find(':input').val('').end()
-          .not(':first').remove().end()
-        .end();
+        .not(':first').remove().end()
+        .first().removeClass('dispensabilă').end()
+      .end();
   }
 }
 
@@ -993,14 +1000,24 @@ var ProceduriRecente = {
     $.get('/date/' + User.login + '/proceduri/recente/', function(lista) {
       var $proceduriRecente = $('#proceduri-recente').empty();
 
-      $(lista).find('a:not(:contains("../"))').each(function() {
-        $proceduriRecente.append(
-          $('<li>').append(
+
+      var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
+        return {
+          timp: new Date($.trim(this.nextSibling.data).split(/\s{2,}/)[0]),
+          $li: $('<li>').append(
             $(this)
               .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
               .text(function(i, text) {return User.login + text})
           )
-        );
+        };
+      }).get();
+
+      moment.lang('ro');
+
+      $.each(proceduri.sort(function(a, b) { return a.timp < b.timp }), function() {
+        this.$li
+          .append('<span class="timp">' + moment(this.timp).fromNow() + '</span>')
+          .appendTo($proceduriRecente);
       });
     });
   },
