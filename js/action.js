@@ -1016,7 +1016,7 @@ var Formular = {
   închide: function() {
     $('#formular').hide('slide', {
       direction: 'right',
-    }, 'fast', function() {
+    }, 'slow', function() {
       location.hash = '';
     });
   }

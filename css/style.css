@@ -328,9 +328,6 @@ button.adaugă:hover,
   color: #333;
 }
 
-button.elimină-persoană {
-}
-
 fieldset.dispensabilă button.elimină-persoană {
   display: inline;
 }
@@ -421,8 +418,7 @@ button.adaugă {
 
 button.adaugă.persoană {
   font-weight: bold;
-  position: relative;
-  top: -1.2em;
+  margin-left: 1em;
 }
 
 button.adaugă .legend.label {
@@ -432,10 +428,6 @@ button.adaugă .legend.label {
 #cheltuieli .subformular.achitare label {
   color: black;
   font-style: normal;
-}
-
-button.elimină-persoană {
-  visibility: visible;
 }
 
 .subformular .eliminabil,
@@ -756,8 +748,6 @@ input[type="checkbox"]+label {
   vertical-align: -.2em;
 }
 
-#proceduri-recente .timp {
-  font-size: smaller;
-  color: silver;
-  margin-left: 1em;
+#proceduri-recente {
+  margin: 0;
 }
