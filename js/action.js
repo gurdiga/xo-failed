@@ -502,9 +502,7 @@ var DateProcedură = {
 
     // -----
     function post() {
-      $.post('/bin/salvează.php', procedură, function() {
-        location.hash = '';
-      });
+      $.post('/bin/salvează.php', procedură, Formular.închide);
     }
   },
 
@@ -987,6 +985,7 @@ var Formular = {
     $('#formular .conţinut').draggable({
       handle: 'h1',
       revert: true,
+      cancel: ':input,option,label',
       revertDuration: 1,
       distance: 30,
       stop: Formular.închide
