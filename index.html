@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <div id="login" class="pagină">
+    <div id="login" class="pagină" style="display: none;">
       Bună ziua. Trebuie să vă <a href="/bin/login.php">autentificaţi</a>.
     </div>
 
@@ -38,16 +38,19 @@
           <p class="şoaptă">Se va reflecta în numărul de înregistrare al procedurii.</p>
         </div>
       </div>
+      <div class="umbră"></div>
     </div>
 
     <div id="formular" class="pagină">
       <div class="conţinut">
+        <button class="închide" title="Închide">×</button>
+
         <h1>
           Procedură
           <span id="gen">nouă</span>
           <span id="prefix"></span><span id="număr"></span>
 
-          <button class="salvează">● Salvează</button>
+          <button class="salvează">Salvează</button>
         </h1>
 
         <div class="coloană">
@@ -148,15 +151,22 @@
 
         <div class="coloană">
           <fieldset data-şablon="date-generale" id="date-generale">
-            <legend>
-              <label>Caracter</label>
-              <select id="caracter" class="care schimbă formularul">
-                <option>pecuniar</option>
-                <option selected>nonpecuniar</option>
-              </select>
-            </legend>
+            <legend><label>Date generale</label></legend>
 
-            <div class="conţinut"></div>
+            <div class="conţinut">
+              <ul>
+                <li>
+                  <label>Caracter</label>
+                  <select id="caracter" class="care schimbă formularul">
+                    <option>pecuniar</option>
+                    <option selected>nonpecuniar</option>
+                  </select>
+                </li>
+              </ul>
+            </div>
+
+            <div class="conţinut"> 
+            </div>
           </fieldset>
         </div>
 
@@ -434,34 +444,49 @@
         <div class="coloană stînga">
           <fieldset data-şablon="persoană" id="creditor">
             <legend>
-              <label>Creditor: persoană</label>
-              <select class="gen-persoană care schimbă formularul">
-               <option selected>juridică</option>
-                <option>fizică</option>
-              </select>
-
+              <label>Creditor</label>
               <button class="elimină-persoană" title="Elimină persoană">×</button>
             </legend>
+
+            <div class="conţinut">
+              <ul>
+                <li>
+                  <label>Gen persoană</label>
+                  <select class="gen-persoană care schimbă formularul">
+                   <option selected>juridică</option>
+                    <option>fizică</option>
+                  </select>
+                </li>
+              </ul>
+            </div>
 
             <div class="conţinut"></div>
           </fieldset>
 
-          <button class="adaugă persoană" title="Adaugă persoană terţă">
-            +<span class="legend label">Persoană terţă</span>
+          <button class="adaugă persoană" title="Adaugă persoană terță">
+            +<span class="legend label">Persoană terță</span>
           </button>
         </div>
 
         <div class="coloană">
           <fieldset data-şablon="persoană" class="debitor">
             <legend>
-              <label>Debitor: persoană</label>
-              <select class="gen-persoană">
-                <option>juridică</option>
-                <option selected>fizică</option>
-              </select>
+              <label>Debitor</label>
 
               <button class="elimină-persoană" title="Elimină persoană">×</button>
             </legend>
+
+            <div class="conţinut">
+              <ul>
+                <li>
+                  <label>Gen persoană</label>
+                  <select class="gen-persoană care schimbă formularul">
+                    <option>juridică</option>
+                    <option selected>fizică</option>
+                  </select>
+                </li>
+              </ul>
+            </div>
 
             <div class="conţinut"></div>
           </fieldset>
@@ -469,6 +494,7 @@
           <button class="adaugă persoană" title="Adaugă debitor">+</button>
         </div>
 
+        <br style="clear:both; width: 100%"/>
       </div>
     </div>
 

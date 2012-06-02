@@ -116,14 +116,18 @@ var Defaults = {
       switch($(this).val()) {
 
       case 'restabilirea la locul de muncă':
-        $('#creditor .gen-persoană').val('fizică');
-        $('.debitor .gen-persoană').val('juridică');
+        $('#creditor .gen-persoană').val('fizică').trigger('change');
+        $('.debitor .gen-persoană').val('juridică').trigger('change');
         break;
 
       case 'stabilirea domiciliului copilului':
-        $('#creditor .gen-persoană').val('fizică');
-        $('.debitor .gen-persoană').val('fizică');
+        $('#creditor .gen-persoană').val('fizică').trigger('change');
+        $('.debitor .gen-persoană').val('fizică').trigger('change');
         break;
+
+      default:
+        $('#creditor .gen-persoană').trigger('change');
+        $('.debitor .gen-persoană').trigger('change');
 
       }
     });
@@ -147,7 +151,7 @@ var Defaults = {
           gen = date[1] || '',
           număr = date[2];
 
-      $('#prefix').text(User.login + gen + '-');
+      $('#prefix').text(Utilizator.login + gen + '-');
       $('#număr').text(număr);
     }
 

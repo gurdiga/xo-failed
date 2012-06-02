@@ -72,8 +72,8 @@ moment.lang('ro', {
         sameElse: 'L'
     },
     relativeTime : {
-        future : "peste %s",
-        past : "%s în urmă",
+        future : "%s",
+        past : "acum %s",
         s : "secunde",
         m : "un minut",
         mm : "%d minute",

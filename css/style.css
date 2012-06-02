@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext);
 
 body {
   font: 14px Arial, sans-serif;
@@ -33,7 +34,7 @@ textarea,
 input {
   outline-width: 0;
   border: none;
-  width: 17em;
+  width: 14em;
   background: transparent url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 0;
 }
 
@@ -42,7 +43,11 @@ input {
 }
 
 fieldset>.conţinut {
-  padding-top: 10px;
+  padding-top: 1px;
+}
+
+fieldset>.conţinut+.conţinut {
+  padding-top: 0;
 }
 
 textarea,
@@ -56,7 +61,7 @@ fieldset select {
 }
 
 fieldset ul select {
-  width: 17.7em;
+  width: 14.7em;
   padding: .25em .3em;
 }
 
@@ -131,24 +136,24 @@ button.mare {
 }
 
 h1 {
-  border-bottom: 1px solid #ddd;
-  color: #aaa;
+  font-family: 'Oswald', Arial, sans-serif;
+  font-size: 2.5em;
+  margin-top: .3em;
 }
 
 div.pagină {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
-  background: white;
   height: 100%;
   width: 100%;
   overflow: auto;
 }
 
 div.pagină>.conţinut {
-  width: 1000px;
+  width: 900px;
   margin: 0 auto;
+  position: relative;
 }
 
 .coloană {
@@ -161,15 +166,8 @@ div.pagină>.conţinut {
 }
 
 fieldset {
-  border: 1px solid #dedede;
-  padding: 0 10px 1.5em;
+  border: none;
   margin-bottom: 30px;
-  box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
 }
 
 .şablon {
@@ -179,20 +177,19 @@ fieldset {
 fieldset label {
   display: inline-block;
   width: 11em;
-  text-align: right;
   color: #555;
-  background: white;
 }
 
 #listă-taxe-şi-speze .subformular .stînga,
 fieldset label {
-  padding: .4em .3em 0;
+  padding: .4em 0 0 6px;
 }
 
 fieldset legend {
-  background: white;
-  float: left;
-  margin-top: -17px;
+  font-family: 'Oswald', Arial, sans-serif;
+  background: #333;
+  width: 100%;
+  text-indent: 2px;
 }
 
 fieldset legend label {
@@ -205,20 +202,17 @@ fieldset legend label {
 
 fieldset legend label,
 fieldset legend select {
-  color: #999;
+  color: white;
+  background: transparent;
 }
 
-fieldset legend select:focus {
-  color: #333;
+fieldset .conţinut>ul {
+  margin: .4em 0;
 }
 
 ul {
   padding: 0;
   list-style-type: none;
-}
-
-li {
-  padding: .2em 0 0 0;
 }
 
 .bunuri label.valoare,
@@ -234,29 +228,77 @@ input.invalid {
   border-color: red;
 }
 
+div.pagină#index .umbră {
+  z-index: 2;
+  display: none;
+  opacity: .7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+div.pagină#formular {
+  z-index: 3;
+}
+
+div.pagină#formular>.conţinut {
+  margin: 35px auto 100px;
+  border: 1px solid #ddd;
+  padding: 10px 30px 90px 50px;
+  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
+
 #formular h1 {
-  color: black;
-  margin: 20px 40px 40px 0;
+  padding: 40px 40px 40px 0;
+  margin: 0;
+  cursor: move;
+}
+
+#formular button.închide {
+  border-width: 0;
+  background: transparent;
+  font-size: 2em;
+  font-weight: normal;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  padding: .1em;
+  line-height: .6em;
+  color: #aaa;
+}
+
+#formular button.închide:hover {
+  color: #333;
 }
 
 #formular button.salvează {
-  font-size: .7em;
-  float: right;
-  margin-top: -.5em;
+  font-weight: normal;
+  font-size: .6em;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
 #formular fieldset {
-  margin-right: 40px;
+  margin: 0 70px 30px 0;
+  padding: 0;
 }
 
 button.elimină-persoană {
   border-width: 0;
   background-color: transparent;
-  font-size: 1.5em;
-  padding: 0;
-  line-height: .6em;
-  vertical-align: -.1em;
+  font-weight: normal;
+  font-size: 2em;
   display: none;
+  float: right;
+  padding: .2em;
+  line-height: .6em;
 }
 
 .elimină {
@@ -277,7 +319,10 @@ button.elimină-persoană,
   position: relative;
 }
 
-button.elimină-persoană:hover,
+button.elimină-persoană:hover {
+  color: white;
+}
+
 button.adaugă:hover,
 .elimină:hover {
   color: #333;
@@ -306,7 +351,7 @@ fieldset#creditor button.elimină-persoană {
 .pecuniar .subformular,
 .bunuri {
   list-style-type: none;
-  padding: 0 0 0 4em;
+  padding: 0 0 0 2em;
 }
 
 #cheltuieli .subformular label,
@@ -351,7 +396,7 @@ fieldset#creditor button.elimină-persoană {
 #cheltuieli .subformular .descriere,
 .pecuniar .subformular .descriere,
 .bunuri .descriere {
-  width: 19em;
+  width: 16em;
   min-width: 0;
   max-width: none;
 }
@@ -585,7 +630,7 @@ input[type="checkbox"]+label {
   position: absolute;
   min-height: 1em;
   min-width: 6em;
-  z-index: 1;
+  z-index: 5;
 }
 
 #cheltuieli .document .adaugă-destinatar {
@@ -689,7 +734,7 @@ input[type="checkbox"]+label {
   padding: 0;
   margin-left: 2em;
   margin-top: 0;
-  z-index: 0;
+  z-index: 4;
 }
 
 #cheltuieli .document .destinatari-adăugaţi.comprimaţi>li {

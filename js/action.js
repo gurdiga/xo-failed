@@ -1,6 +1,8 @@
 var Action = {
   init: function() {
-    User.init();
+    moment.lang('ro');
+
+    Utilizator.init();
     HashController.init();
 
     Valute.init();
@@ -13,6 +15,7 @@ var Action = {
     Cheltuieli.init();
     Eliminabile.init();
     DateProcedură.init();
+    Formular.init();
 
     $(window).trigger('hashchange');
   },
@@ -52,7 +55,7 @@ var ProcedurăNonPecuniară = {
 
       şablon.clone()
         .insertBefore($(this).parent())
-        .find('textarea,input')
+        .find(':input')
           .val('')
           .first().focus();
     }
@@ -82,7 +85,7 @@ var ProcedurăNonPecuniară = {
       .siblings('.subformular').remove().end()
       .after(şablon.html())
       .parent()
-        .find('input,textarea').first().focus();
+        .find(':input').first().focus();
   }
 };
 
@@ -150,16 +153,23 @@ var AdăugarePersoane = {
 var HashController = {
   init: function() {
     $(window).on('hashchange', function() {
-      var id = User.login ? HashController.id() : '#login';
+      if (Utilizator.autentificat) {
+        var id = HashController.id();
 
-      $('div.pagină:not(' + id + ')').hide();
-      $('div.pagină' + id).show();
+        $('div.pagină:not(' + id + ',#index)').hide();
+        $('div.pagină' + id).show();
 
-      if (Action[id]) Action[id]();
+        $('#index .umbră')[id == '#formular' ? 'show' : 'hide']();
 
-      Business.init();
+        if (Action[id]) Action[id]();
 
-      document.title = $('div.pagină' + id + ' h1').contents(':not(button)').text();
+        Business.init();
+
+        document.title = $('div.pagină' + id + ' h1').contents(':not(button)').text();
+      } else {
+        $('div.pagină').hide()
+          .filter('#login').show();
+      }
     });
   },
 
@@ -267,14 +277,14 @@ var FormulareŞablon = {
   selector: 'fieldset[data-şablon]',
 
   init: function() {
-    var selectorLista = FormulareŞablon.selector + ' legend select';
+    var selectorLista = FormulareŞablon.selector + '>.conţinut:nth-child(2) select.care.schimbă.formularul';
 
     $('#formular').on('change', selectorLista, function() {
       var select = $(this),
           fieldset = select.closest('fieldset'),
           şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
 
-      if (fieldset.find('[schimbat]').există()) {
+      if (fieldset.find('[schimbat]').not(this).există()) {
         var titlu = fieldset.find('legend label').text();
 
         if (titlu.indexOf(':') > -1) {
@@ -291,11 +301,11 @@ var FormulareŞablon = {
         }
       };
 
-      fieldset.find('>.conţinut').html(şablon.html());
+      fieldset.find('>.conţinut:last-child').html(şablon.html());
     })
     .find(FormulareŞablon.selector)
       .trigger('iniţializat')
-      .find('legend select').trigger('change', ['automat']).end()
+      .find('>.conţinut:nth-child(2) select.care.schimbă.formularul').trigger('change', ['automat']).end()
     .end();
   }
 };
@@ -482,7 +492,7 @@ var DateProcedură = {
     procedură.tip = HashController.date().match(/^[SP]?/)[0];
 
     if (!procedură.număr) {
-      $.get('/date/' + User.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
+      $.get('/date/' + Utilizator.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
         var ultimulNumăr = $(răspuns).find('a:last').text();
 
         procedură.număr = isNaN(ultimulNumăr) ? 1 : +ultimulNumăr + 1;
@@ -506,7 +516,7 @@ var DateProcedură = {
         număr = date[2];
 
     $.ajax({
-      url: '/date/' + User.login + '/proceduri/' + gen + '/' + număr,
+      url: '/date/' + Utilizator.login + '/proceduri/' + gen + '/' + număr,
       success: DateProcedură.populeazăFormularul,
       dataType: 'json',
       cache: false
@@ -525,7 +535,7 @@ var DateProcedură = {
     populeazăPersoaneleTerţe();
     populeazăDebitori();
 
-    $('#documentul-executoriu :input:first').focus()
+    $("#formular").focus().animate({ scrollTop: 0 }, 0);
 
 
     // ------------------------------------------
@@ -960,17 +970,31 @@ var Eliminabile = {
 
 // --------------------------------------------------
 
-var User = {
+var Utilizator = {
   login: '',
+  autentificat: false,
 
   init: function() {
-    User.login = $.cookie('login');
+    this.login = $.cookie('login');
+    this.autentificat = !!$.trim(this.login);
   }
 };
 
 // --------------------------------------------------
 
 var Formular = {
+  init: function() {
+    $('#formular button.închide').on('click', Formular.închide);
+
+    $('#formular .conţinut').draggable({
+      handle: 'h1',
+      revert: true,
+      revertDuration: 1,
+      distance: 30,
+      stop: Formular.închide
+    });
+  },
+
   resetează: function() {
     $('#formular')
       .find('[schimbat]').removeAttr('schimbat').end()
@@ -986,10 +1010,18 @@ var Formular = {
       .find('#creditor').find(':input').val('').end().end()
       .find('.persoană-terţă').remove().end()
       .find('.debitor')
-        .find(':input').val('').end()
+        .find('input,textarea').val('').end()
         .not(':first').remove().end()
         .first().removeClass('dispensabilă').end()
       .end();
+  },
+
+  închide: function() {
+    $('#formular').hide('slide', {
+      direction: 'right',
+    }, 'fast', function() {
+      location.hash = '';
+    });
   }
 }
 
@@ -997,24 +1029,22 @@ var Formular = {
 
 var ProceduriRecente = {
   încarcă: function() {
-    $.get('/date/' + User.login + '/proceduri/recente/', function(lista) {
+    $.get('/date/' + Utilizator.login + '/proceduri/recente/', function(lista) {
       var $proceduriRecente = $('#proceduri-recente').empty();
 
-
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
+        console.log($.trim(this.nextSibling.data).split(/\s{2,}/)[0]);
         return {
           timp: new Date($.trim(this.nextSibling.data).split(/\s{2,}/)[0]),
           $li: $('<li>').append(
             $(this)
               .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
-              .text(function(i, text) {return User.login + text})
+              .text(function(i, text) {return Utilizator.login + text})
           )
         };
-      }).get();
+      }).get().sort(function(a, b) { return b.timp.getTime() - a.timp.getTime() });
 
-      moment.lang('ro');
-
-      $.each(proceduri.sort(function(a, b) { return a.timp < b.timp }), function() {
+      $.each(proceduri, function() {
         this.$li
           .append('<span class="timp">' + moment(this.timp).fromNow() + '</span>')
           .appendTo($proceduriRecente);
