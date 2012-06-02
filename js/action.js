@@ -982,7 +982,7 @@ var Formular = {
   init: function() {
     $('#formular button.închide').on('click', Formular.închide);
 
-    $('#formular .conţinut').draggable({
+    $('#formular>.conţinut').draggable({
       handle: 'h1',
       revert: true,
       cancel: ':input,option,label',
