@@ -1056,7 +1056,7 @@ var ProceduriRecente = {
               .text(function(i, text) {return Utilizator.login + text})
           )
         };
-      }).get().sort(function(a, b) { return b.timp - a.timp + b.număr - a.număr});
+      }).get().sort(function(a, b) { return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)});
 
       $.each(proceduri, function() {
         this.$li.appendTo($proceduriRecente);
