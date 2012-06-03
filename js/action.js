@@ -1017,7 +1017,7 @@ var Formular = {
   închide: function() {
     var $formular = $('#formular');
 
-    if ($formular.find('[schimbat]').există()) return;
+    //if ($formular.find('[schimbat]').există()) return;
 
     $('#index .umbră').fadeOut();
 
