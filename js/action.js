@@ -14,6 +14,7 @@ var Action = {
     Eliminabile.init();
     DateProcedură.init();
     Formular.init();
+    ProceduriRecente.init();
 
     $(window).trigger('hashchange');
   },
@@ -1037,6 +1038,10 @@ var Formular = {
 // --------------------------------------------------
 
 var ProceduriRecente = {
+  init: function() {
+    $('#proceduri-recente').on('click', 'a', Formular.deschide);
+  },
+
   încarcă: function() {
     $.get('/date/' + Utilizator.login + '/proceduri/recente/', function(lista) {
       var $proceduriRecente = $('#proceduri-recente').empty();
