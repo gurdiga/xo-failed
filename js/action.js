@@ -484,7 +484,7 @@ var DateProcedură = {
           var number = this.firstChild.data;
 
           return isNaN(number) ? 0 : parseInt(number);
-        }).get().sort(function(a, b) {return a -b}).pop();
+        }).get().sort(function(a, b) {return a - b}).pop();
 
         procedură.număr = ultimulNumăr + 1;
         post();
@@ -1049,13 +1049,14 @@ var ProceduriRecente = {
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
           timp: parse($.trim(this.nextSibling.data).split(/\s{2,}/)[0], this.innerText),
+          număr: this.innerText,
           $li: $('<li>').append(
             $(this)
               .attr('href', function(i, href) {return '#formular?' + href.replace('-', '')})
               .text(function(i, text) {return Utilizator.login + text})
           )
         };
-      }).get().sort(function(a, b) { return b.timp - a.timp });
+      }).get().sort(function(a, b) { return b.timp - a.timp + b.număr - a.număr});
 
       $.each(proceduri, function() {
         this.$li.appendTo($proceduriRecente);
