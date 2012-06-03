@@ -26,6 +26,7 @@ var Action = {
 
   '#formular': function() {
     $('#gen').text($('#crează-procedură').find('a[href="' + location.hash + '"]').text());
+    $('#formular>.conţinut').hide().fadeIn();
 
     Formular.resetează();
   }
@@ -972,7 +973,7 @@ var Formular = {
         });
       },
       mouseleave: function() {
-        $(this).clearQueue().delay(200).animate({
+        $(this).clearQueue().animate({
           'margin-top': 0,
           'margin-left': 0
         });
