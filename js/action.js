@@ -583,6 +583,7 @@ var DateProcedură = {
       });
 
       for (var id in procedură.cheltuieli.itemi) {
+        $lista.find('#' + id).click();
 
         var item = procedură.cheltuieli.itemi[id],
             $item = $adăugate.find('#' + id),
