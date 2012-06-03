@@ -1015,12 +1015,19 @@ var Formular = {
   },
 
   închide: function() {
+    var $formular = $('#formular');
+
+    if ($formular.find('[schimbat]').există()) return;
+
     $('#index .umbră').fadeOut();
-    $('#formular').hide('slide', {
+
+    $formular.hide('slide', {
       direction: 'right',
     }, 'slow', function() {
       location.hash = '';
     });
+
+    $(document).off('keydown', Formular.esc);
   },
 
   deschide: function() {
@@ -1031,7 +1038,13 @@ var Formular = {
       location.href = $(this).find('a').attr('href');
     });
 
+    $(document).on('keydown', Formular.esc);
+
     return false;
+  },
+
+  esc: function(e) {
+    if (e.which == 27) Formular.închide();
   }
 }
 
