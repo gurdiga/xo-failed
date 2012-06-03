@@ -963,6 +963,19 @@ var Utilizator = {
 var Formular = {
   init: function() {
     $('#formular button.închide').on('click', Formular.închide);
+    $('#crează-procedură a').on('click', Formular.deschide);
+    $('#crează-procedură li:not(:last)').on({
+      mouseenter: function() {
+        $(this).clearQueue().delay(200).animate({
+          'margin-top': '-1.5em'
+        });
+      },
+      mouseleave: function() {
+        $(this).clearQueue().delay(200).animate({
+          'margin-top': 0
+        });
+      }
+    });
 
     $('#formular>.conţinut').draggable({
       handle: 'h1',
@@ -998,11 +1011,23 @@ var Formular = {
   },
 
   închide: function() {
+    $('#index .umbră').fadeOut();
     $('#formular').hide('slide', {
       direction: 'right',
     }, 'slow', function() {
       location.hash = '';
     });
+  },
+
+  deschide: function() {
+    $(this).parent().effect('transfer', {
+      to: '#formular',
+      className: 'animaţie'
+    }, function() {
+      location.href = $(this).find('a').attr('href');
+    });
+
+    return false;
   }
 }
 

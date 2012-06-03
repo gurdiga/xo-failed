@@ -19,9 +19,8 @@
         <h1>Consola executorului</h1>
 
         <div id="căutare">
-          <label>Caută procedură</label><br/>
-          <input/>
-          <p class="şoaptă">Număr de procedură, nume sau IDNP, denumire sau IDNO.</p>
+          <input placeholder="Caută procedură"/>
+          <p class="şoaptă">După număr, nume sau IDNP, denumire sau IDNO.</p>
 
           <br/>
           <br/>
@@ -30,14 +29,11 @@
         </div>
 
         <div id="crează-procedură">
-          <label>Înregistrează procedură</label><br/>
           <ul>
-            <li><a href="#formular">de ordin general</a></li>
-            <li><a href="#formular?S">în beneficiul statului</a></li>
-            <li><a href="#formular?P">pensie de întreţinere</a></li>
+            <li><a href="#formular?P">Procedură pensie de întreținere</a></li>
+            <li><a href="#formular?S" >Procedură în beneficiul statului</a></li>
+            <li><a href="#formular">Procedură de ordin general</a></li>
           </ul>
-
-          <p class="şoaptă">Se va reflecta în numărul de înregistrare al procedurii.</p>
         </div>
       </div>
       <div class="umbră"></div>
@@ -48,7 +44,6 @@
         <button class="închide" title="Închide">×</button>
 
         <h1>
-          Procedură
           <span id="gen">nouă</span>
           <span id="prefix"></span><span id="număr"></span>
 
