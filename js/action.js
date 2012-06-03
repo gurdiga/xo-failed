@@ -9,7 +9,7 @@ var Action = {
     FormulareŞablon.init();
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
-    AdăugarePersoane.init();
+    Persoane.init();
     Cheltuieli.init();
     Eliminabile.init();
     DateProcedură.init();
@@ -103,7 +103,7 @@ var Valute = {
 
 // --------------------------------------------------
 
-var AdăugarePersoane = {
+var Persoane = {
   init: function() {
     this.initAdăugare();
     this.initŞtergere();
@@ -115,20 +115,20 @@ var AdăugarePersoane = {
           fieldset = buton.prev();
 
       fieldset.clone()
-        .removeAttr('id')
-        .find('input, textarea').val('').end()
+        .removeAttr('id') // #creditor
+        .find('input,textarea').val('').end()
         .find('legend label').text(function(i, text) {
           if (buton.find('.legend.label').există()) {
-            $(this).closest('fieldset')
-              .addClass('persoană-terţă')
-              .find('[schimbat]').removeAttr('schimbat');
+            $(this).closest('fieldset').addClass('persoană-terţă');
 
             return buton.find('.legend.label').text();
           } else {
             return text;
           }
         }).end()
-        .insertAfter(fieldset);
+        .find('[schimbat]').removeAttr('schimbat').end()
+        .insertAfter(fieldset)
+        .find('#gen-persoană').trigger('change');
 
       buton.siblings('fieldset').addClass('dispensabilă');
     });
@@ -233,7 +233,7 @@ var ListeFoarteLate = {
           .addClass('şoaptă');
       })
       .find('select.foarte.lat').trigger('change', ['automat']).end()
-      .on('change', 'select.care.schimbă.formularul', function(e, tip) {
+      .on('change', 'select.care.schimbă.formularul', function(e) {
         $(this).closest('fieldset')
           .find('select.foarte.lat')
             .not(function() {return $(this).next().is('.şoaptă')})
@@ -260,8 +260,8 @@ var Schimbări = {
   evenimente: 'keydown keyup update paste change',
 
   urmăreşte: function() {
-    $('#formular').on(Schimbări.evenimente, Schimbări.selector, function (e, tip) {
-      if (tip == 'automat') return;
+    $('#formular').on(Schimbări.evenimente, Schimbări.selector, function (e, automat) {
+      if (automat) return;
 
       $(this).attr('schimbat', '');
     });
@@ -303,7 +303,7 @@ var FormulareŞablon = {
     })
     .find(FormulareŞablon.selector)
       .trigger('iniţializat')
-      .find('>.conţinut:nth-child(2) select.care.schimbă.formularul').trigger('change', ['automat']).end()
+      .find('>.conţinut:nth-child(2) select.care.schimbă.formularul').trigger('change').end()
     .end();
   }
 };
@@ -324,15 +324,14 @@ var DateProcedură = {
 
   colectează: function() {
     var procedură = {
-      număr: $('#număr').text()
+      'număr': $('#număr').text(),
+      'document-executoriu': colectează('#document-executoriu'),
+      'date-generale': colecteazăDateGenerale(),
+      'cheltuieli': colecteazăCheltuieli(),
+      'creditor': colectează('#creditor'),
+      'persoane-terţe': colecteazăPersoaneTerţe(),
+      'debitori': colecteazăDebitori()
     };
-
-    procedură['documentul-executoriu'] = colectează($('#documentul-executoriu'));
-    colecteazăDateGenerale();
-    colecteazăCheltuieli();
-    procedură['creditor'] = colecteazăPersoană($('#creditor'));
-    colecteazăPersoaneTerţe();
-    colecteazăDebitori();
 
     return procedură;
 
@@ -340,62 +339,50 @@ var DateProcedură = {
     // ------------------------------------------
     function colectează(secţiune) {
       var $secţiune = $(secţiune),
-          colecţie = {};
+          date = {},
+          cîmpuri = [
+            'label+:input:not(.calculat):last-child',
+            '.label+:input:not(.calculat)'
+          ].join(',');
 
-      $secţiune.find('label+:input:last-child, .label+:input').each(function() {
+      $secţiune.find(cîmpuri).each(function() {
         var $input = $(this),
             $label = $input.prev();
 
-        if ($input.is('.calculat')) return;
         if ($label.is('.label')) {
           if (!$label.val() && !$input.val()) return;
-          if (!colecţie.subformular) colecţie.subformular = {};
+          if (!date.subformular) date.subformular = {};
 
-          colecţie.subformular[$label.val()] = $input.val();
+          date.subformular[$label.val()] = $input.val();
         } else {
-          if ($input.is('.gen-persoană')) {
-            colecţie['gen-persoană'] = $input.val1();
-          } else {
-            colecţie[$input.attr('id')] = $input.val1();
-          }
+          date[$input.attr('id')] = $input.val1();
         }
       });
 
-      if (typeof secţiune == 'string') {
-        procedură[secţiune] = colecţie;
-      } else {
-        return colecţie;
-      }
-    }
-
-    // ------------------------------------------
-    function colecteazăPersoană(secţiune) {
-      var persoană = {
-        'gen-persoană': $(secţiune).find('.gen-persoană').val()
-      }
-
-      $.extend(persoană, colectează(secţiune));
-
-      return persoană;
+      return date;
     }
 
     // ------------------------------------------
     function colecteazăDateGenerale() {
-      procedură['date-generale'] = colectează($('#date-generale'));
+      return $.extend(colectează('#date-generale'), {
+        'sume': colecteazăSumeÎnValută(['suma-de-bază', 'taxă-de-stat', 'penalitate'])
+      });
+    }
 
-      var $secţiune = $('#date-generale'), sume = {};
+    // ------------------------------------------
+    function colecteazăSumeÎnValută(cîmpuri) {
+      var sume = {};
 
-      $.each(['suma-de-bază', 'taxă-de-stat', 'penalitate'], function() {
-        var cîmp = this,
-            $cîmp = $secţiune.find('#' + cîmp);
+      $.each(cîmpuri, function() {
+        var $cîmp = $('#' + this);
 
-        sume[cîmp] = {
+        sume[this] = {
           suma: $cîmp.val(),
           valuta: $cîmp.next('.valuta').val()
         };
       });
 
-      procedură['date-generale'].sume = sume;
+      return sume;
     }
 
     // ------------------------------------------
@@ -462,7 +449,7 @@ var DateProcedură = {
         itemi[$item.attr('id')] = item;
       });
 
-      procedură.cheltuieli = {
+      return {
         'onorariu': $secţiune.find('#onorariu').val1(),
         'părţile-au-ajuns-la-conciliere': $secţiune.find('#părţile-au-ajuns-la-conciliere').val1(),
         'itemi': itemi
@@ -471,15 +458,15 @@ var DateProcedură = {
 
     // ------------------------------------------
     function colecteazăPersoaneTerţe() {
-      procedură['persoane-terţe'] = $('.persoană-terţă').map(function() {
-        return colecteazăPersoană(this);
+      return $('.persoană-terţă').map(function() {
+        return colectează(this);
       }).get();
     }
 
     // ------------------------------------------
     function colecteazăDebitori() {
-      procedură['debitori'] = $('.debitor').map(function() {
-        return colecteazăPersoană(this);
+      return $('.debitor').map(function() {
+        return colectează(this);
       }).get();
     }
   },
@@ -491,9 +478,13 @@ var DateProcedură = {
 
     if (!procedură.număr) {
       $.get('/date/' + Utilizator.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
-        var ultimulNumăr = $(răspuns).find('a:last').text();
+        var ultimulNumăr = $(răspuns).find('a').map(function() {
+          var number = this.firstChild.data;
 
-        procedură.număr = isNaN(ultimulNumăr) ? 1 : +ultimulNumăr + 1;
+          return isNaN(number) ? 0 : parseInt(number);
+        }).get().sort(function(a, b) {return a -b}).pop();
+
+        procedură.număr = ultimulNumăr + 1;
         post();
       });
     } else {
@@ -524,7 +515,7 @@ var DateProcedură = {
   },
 
   populeazăFormularul: function(procedură) {
-    populează('#documentul-executoriu', procedură['documentul-executoriu']);
+    populează('#document-executoriu', procedură['document-executoriu']);
     populeazăDateleGenerale();
     populeazăCheltuieli();
     populează('#creditor', procedură['creditor']);
@@ -536,12 +527,12 @@ var DateProcedură = {
 
     // ------------------------------------------
     function populează(selector, secţiune) {
-      var $secţiune = $(selector);
+      var $secţiune = $(selector), id;
 
       for (id in secţiune) {
         $secţiune.find('#' + id)
           .val1(secţiune[id])
-          .trigger('change')
+          .trigger('change', ['automat'])
           .removeAttr('schimbat');
       }
     }
@@ -581,19 +572,16 @@ var DateProcedură = {
 
     // ------------------------------------------
     function populeazăCheltuieli() {
-      var $secţiune = $('#cheltuieli');
+      var $secţiune = $('#cheltuieli'),
+          $adăugate = $('#listă-taxe-şi-speze'),
+          $lista = $('#categorii-taxe-şi-speze');
 
-      $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function() {
-        var cîmp = this.toString();
-
+      $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function(i, cîmp) {
         $secţiune.find('#' + cîmp).val1(procedură.cheltuieli[cîmp]);
       });
 
-      var $adăugate = $('#listă-taxe-şi-speze');
-      var $lista = $('#categorii-taxe-şi-speze');
-
       for (var id in procedură.cheltuieli.itemi) {
-        $lista.find('#' + id).click();
+        console.log(id, $lista.find('#' + id).trigger('click'));
 
         var item = procedură.cheltuieli.itemi[id],
             $item = $adăugate.find('#' + id),
@@ -672,9 +660,6 @@ var DateProcedură = {
           $adaugă.click();
 
           $secţiune = $('.persoană-terţă:last');
-          $secţiune.find('.gen-persoană')
-            .val(this['gen-persoană'])
-            .trigger('change');
           populează($secţiune, this);
         });
       }
@@ -694,9 +679,6 @@ var DateProcedură = {
         }
 
         $secţiune = $('.debitor:last');
-        $secţiune.find('.gen-persoană')
-          .val(this['gen-persoană'])
-          .trigger('change');
         populează($secţiune, this);
       });
     }
@@ -995,7 +977,7 @@ var Formular = {
   resetează: function() {
     $('#formular')
       .find('[schimbat]').removeAttr('schimbat').end()
-      .find('#documentul-executoriu')
+      .find('#document-executoriu')
         .find(':input').val('').end()
         .find('select').val(function() {return $(this).find('option:first').val()}).end()
       .end()
@@ -1011,6 +993,8 @@ var Formular = {
         .not(':first').remove().end()
         .first().removeClass('dispensabilă').end()
       .end();
+
+    $('#categorii-taxe-şi-speze').find('.dezactivat').removeClass('dezactivat');
   },
 
   închide: function() {

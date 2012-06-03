@@ -29,13 +29,13 @@ var Onorariul = {
       )
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
-    $('.debitor').on('change', '.gen-persoană', Onorariul.actualizează);
+    $('.debitor').on('change', '#gen-persoană', Onorariul.actualizează);
     $('#părţile-au-ajuns-la-conciliere').on('change', Onorariul.actualizează);
   },
 
   actualizează: function() {
     var caracter = $('#caracter').val(),
-        genPersoană = $('.debitor .gen-persoană').val(),
+        genPersoană = $('.debitor #gen-persoană').val(),
         onorariu = 0;
 
     if (caracter == 'nonpecuniar') {
@@ -63,7 +63,7 @@ var Onorariul = {
       var minim = $('#amendă-sau-încasare-periodică').is(':checked') ? 200 : 500;
 
       return Math.max(total * .10, minim);
-    } else if (suma <= 300000) {
+    } else if (total <= 300000) {
       return 10000 + (total - 100000) * .05;
     } else if (total > 300000) {
       return 20000 + (total - 300000) * .03;
@@ -116,18 +116,18 @@ var Defaults = {
       switch($(this).val()) {
 
       case 'restabilirea la locul de muncă':
-        $('#creditor .gen-persoană').val('fizică').trigger('change');
-        $('.debitor .gen-persoană').val('juridică').trigger('change');
+        $('#creditor #gen-persoană').val('fizică').trigger('change');
+        $('.debitor #gen-persoană').val('juridică').trigger('change');
         break;
 
       case 'stabilirea domiciliului copilului':
-        $('#creditor .gen-persoană').val('fizică').trigger('change');
-        $('.debitor .gen-persoană').val('fizică').trigger('change');
+        $('#creditor #gen-persoană').val('fizică').trigger('change');
+        $('.debitor #gen-persoană').val('fizică').trigger('change');
         break;
 
       default:
-        $('#creditor .gen-persoană').trigger('change');
-        $('.debitor .gen-persoană').trigger('change');
+        $('#creditor #gen-persoană').trigger('change');
+        $('.debitor #gen-persoană').trigger('change');
 
       }
     });
@@ -158,15 +158,15 @@ var Defaults = {
     switch (HashController.date()) {
     case 's':
       $('#caracter').val('pecuniar').trigger('change');
-      $('#creditor .gen-persoană').val('juridică').trigger('change');
+      $('#creditor #gen-persoană').val('juridică').trigger('change');
       break;
     case 'p':
       $('#caracter').val('pecuniar').trigger('change');
-      $('#creditor .gen-persoană').val('fizică').trigger('change');
+      $('#creditor #gen-persoană').val('fizică').trigger('change');
       break;
     default:
       $('#caracter').val('pecuniar').trigger('change');
-      $('#creditor .gen-persoană').val('juridică').trigger('change');
+      $('#creditor #gen-persoană').val('juridică').trigger('change');
       break;
     }
   }
@@ -220,7 +220,9 @@ var TotalCheltuieli = {
     $('#listă-taxe-şi-speze').on(evenimente, cîmpuriValoare, this.calculează);
   },
 
-  calculează: function() {
+  calculează: function(e, automat) {
+    if (automat) return;
+
     var total = 0,
         cheltuieliAdăugate = $('#listă-taxe-şi-speze');
 
