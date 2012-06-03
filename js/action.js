@@ -967,12 +967,14 @@ var Formular = {
     $('#crează-procedură li:not(:last)').on({
       mouseenter: function() {
         $(this).clearQueue().delay(200).animate({
-          'margin-top': '-1.5em'
+          'margin-top': '-1.5em',
+          'margin-left': '-2em'
         });
       },
       mouseleave: function() {
         $(this).clearQueue().delay(200).animate({
-          'margin-top': 0
+          'margin-top': 0,
+          'margin-left': 0
         });
       }
     });
