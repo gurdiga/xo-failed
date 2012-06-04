@@ -1,6 +1,7 @@
 TODO:
 -----
 
+* indexare
 * înregistrare utilizator
 * authentificare nginx: areal unic
   * use a regexp to exclude the idex and jses?
