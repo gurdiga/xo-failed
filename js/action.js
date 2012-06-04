@@ -343,14 +343,16 @@ var DateProcedură = {
       var $secţiune = $(secţiune),
           date = {},
           cîmpuri = [
-            'label+:input:not(.calculat):last-child',
-            '.label+:input:not(.calculat)'
+            'label+:input:not(.calculat):not(button):last-child',
+            '.label+:input:not(.calculat):not(button)'
           ].join(',');
 
+      console.log(cîmpuri);
       $secţiune.find(cîmpuri).each(function() {
         var $input = $(this),
             $label = $input.prev();
 
+        console.log($input, $label);
         if ($label.is('.label')) {
           if (!$label.val() && !$input.val()) return;
           if (!date.subformular) date.subformular = {};
