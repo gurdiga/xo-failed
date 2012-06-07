@@ -9,7 +9,7 @@ $procedură = $_POST;
 verifică_login($login);
 verifică_date($procedură);
 salvează($procedură);
-indexează($procedură);
+#indexează($procedură);
 
 
 // ==============================
@@ -27,14 +27,9 @@ function verifică_date($procedură) {
 // ------------------------------
 
 function salvează($procedură) {
-  global $login;
+  file_put_contents(cale($procedură), json_encode($procedură));
 
-  $număr = $procedură['număr'];
-  $tip = $procedură['tip'];
-
-  file_put_contents("../date/$login/proceduri/$tip/$număr", json_encode($procedură));
-
-  $_POST['procedură'] = "$tip/$număr";
+  $_POST['procedură'] = $procedură['tip'] . '/' . $procedură['număr'];
 
   require './notează-ca-recentă.php';
 }
@@ -43,9 +38,13 @@ function salvează($procedură) {
 
 function indexează($procedură) {
   global $login;
+
   $mode = 0755;
 
+  şterge_referinţe_precedente($procedură, $login);
+
   $creditor = $procedură['creditor'];
+
   if (isset($creditor['denumire'])) indexează_după($procedură, $creditor, 'creditor', 'denumire');
   if (isset($creditor['idno'])) indexează_după($procedură, $creditor, 'creditor', 'idno');
 
@@ -70,9 +69,17 @@ function indexează($procedură) {
   function indexează_după($procedură, $date, $secţiune, $cîmp) {
     $dir = "../date/$login/proceduri/index/$cîmp/{$date[$cîmp]}";
     $link = "$dir/$secţiune:{$procedură['număr']}";
-    $target = "../../../{$procedură['tip']}/{$procedură['număr']}";
+    $target = cale($procedură);
 
     if (!is_dir($dir)) mkdir($dir, $mode, true);
     if (!file_exists($link)) symlink($target, $link);
+  }
+
+  function şterge_referinţe_precedente($procedură, $login) {
+    // TODO şterge referinţele precedente la procedură
+    // index/idno/*/*:număr
+    // index/nume/*/*:număr
+    // index/idnp/*/*:număr
+    // index/denumire/*/*:număr
   }
 }

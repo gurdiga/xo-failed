@@ -163,12 +163,12 @@ button.mare {
 }
 
 #crează-procedură li:nth-child(2) {
-  top: 1.9em;
+  top: 2.1em;
   left: 10px;
 }
 
 #crează-procedură li:nth-child(3) {
-  top: 3.75em;
+  top: 4.2em;
   left: 0;
 }
 
@@ -293,6 +293,7 @@ div.pagină#index .umbră {
 }
 
 div.pagină#formular {
+  display: none;
   z-index: 3;
 }
 

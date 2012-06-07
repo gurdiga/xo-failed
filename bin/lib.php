@@ -12,6 +12,17 @@ function verifică_login($login) {
 
 // ------------------------------
 
+function cale($procedură) {
+  global $login;
+
+  $număr = $procedură['număr'];
+  $tip = $procedură['tip'];
+
+  return realpath("../$login/proceduri/$tip/$număr");
+}
+
+// ------------------------------
+
 function stop($mesaj) {
   error_log($mesaj);
   die();
