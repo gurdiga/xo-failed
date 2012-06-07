@@ -317,7 +317,7 @@ var DateProcedură = {
     $('#formular button.salvează').on('click', this.trimite);
 
     $(window).on('hashchange', function() {
-      if (HashController.id() == '#formular' && /^[SP]?\d+$/.test(HashController.date())) {
+      if (HashController.id() == '#formular' && /^[SP]?-\d+$/.test(HashController.date())) {
         Formular.resetează();
         DateProcedură.încarcă();
       }
@@ -479,11 +479,15 @@ var DateProcedură = {
     procedură.tip = HashController.date().match(/^[SP]?/)[0];
 
     if (!procedură.număr) {
-      $.get('/date/' + Utilizator.login + '/proceduri/' + procedură.tip + '/', function(răspuns) {
+      $.get('/date/' + Utilizator.login + '/proceduri/', function(răspuns) {
         var ultimulNumăr = $(răspuns).find('a').map(function() {
-          var number = this.firstChild.data;
+          var reNumăr = /^([SP]?)-(\d+)$/;
 
-          return isNaN(number) ? 0 : parseInt(number);
+          if (reNumăr.test(this.firstChild.data)) {
+            return parseInt(this.firstChild.data.match(reNumăr)[2]);
+          } else {
+            return 0;
+          }
         }).get().sort(function(a, b) {return a - b}).pop();
 
         procedură.număr = ultimulNumăr + 1;
@@ -500,19 +504,17 @@ var DateProcedură = {
   },
 
   încarcă: function() {
-    var date = HashController.date().match(/^([SP]?)(\d+)$/),
-        gen = date[1],
-        număr = date[2];
+    var număr = HashController.date();
 
     $.ajax({
-      url: '/date/' + Utilizator.login + '/proceduri/' + gen + '/' + număr,
+      url: '/date/' + Utilizator.login + '/proceduri/' + număr,
       success: DateProcedură.populeazăFormularul,
       dataType: 'json',
       cache: false
     });
 
     if (!$('#proceduri-recente').find('a[href="' + location.hash + '"]').există()) {
-      ProceduriRecente.notează(gen + '/' + număr);
+      ProceduriRecente.notează(număr);
     }
   },
 
@@ -1093,8 +1095,8 @@ var ProceduriRecente = {
     }
   },
 
-  notează: function(procedură) {
-    $.post('/bin/notează-ca-recentă.php', {procedură: procedură});
+  notează: function(număr) {
+    $.post('/bin/notează-ca-recentă.php', {procedură: număr});
   }
 }
 

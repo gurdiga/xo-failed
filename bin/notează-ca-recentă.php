@@ -15,7 +15,7 @@ notează_ca_recentă($procedură);
 function verifică_dacă_există($procedură) {
   global $login;
 
-  if (!preg_match('|^[SP]?/\d+$|', $procedură)) {
+  if (!preg_match('|^[SP]?-\d+$|', $procedură)) {
     stop("Număr de procedură invalid: [$procedură]");
   }
 
@@ -30,7 +30,7 @@ function notează_ca_recentă($procedură) {
   global $login;
 
   $target = "../$procedură";
-  $link = "../date/$login/proceduri/recente/" . str_replace('/', '-', $procedură);
+  $link = "../date/$login/proceduri/recente/$procedură";
 
   if (file_exists($link)) unlink($link);
 

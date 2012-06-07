@@ -1,11 +1,11 @@
 TODO:
 -----
 
-* indexare
-  * şterge referinţele precedente: bin/save
-  * index static?
-* calcularea dobînzilor BNM
 * numerotare unică
+* extract reNumăr
+* indexare
+  * generează index static
+* calcularea dobînzilor BNM
 * “poliţă” temporară
 * înregistrare utilizator
 * authentificare nginx: areal unic

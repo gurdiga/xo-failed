@@ -18,7 +18,7 @@ function cale($procedură) {
   $număr = $procedură['număr'];
   $tip = $procedură['tip'];
 
-  return realpath("../$login/proceduri/$tip/$număr");
+  return realpath("../date/$login/proceduri/$tip-$număr");
 }
 
 // ------------------------------

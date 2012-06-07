@@ -147,11 +147,9 @@ var Defaults = {
     if (this.seCreazăProcedurăNouă()) {
       $('#prefix, #număr').text('');
     } else {
-      var date = HashController.date().match(/^([SP])?(\d+)$/),
-          gen = date[1] || '',
-          număr = date[2];
+      var număr = HashController.date();
 
-      $('#prefix').text(Utilizator.login + gen + '-');
+      $('#prefix').text(Utilizator.login);
       $('#număr').text(număr);
     }
 
