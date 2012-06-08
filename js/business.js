@@ -3,7 +3,7 @@ var UC = 20;
 
 var Business = {
   init: function() {
-    var pagină = HashController.id();
+    var pagină = HashController.pagină();
 
     if (this[pagină]) this[pagină]();
   },
@@ -21,15 +21,14 @@ var Onorariul = {
   // Articolul 38
 
   init: function() {
+    var schimbareDate = 'keydown keyup update paste change',
+        cîmpuriConsiderate = '.sumă, .valuta, .bunuri .valoare, input:checkbox';
+
     $('#date-generale')
-      .on(
-        'keydown keyup update paste change',
-        '.sumă, .valuta, .bunuri .valoare, input:checkbox',
-        Onorariul.actualizează
-      )
+      .on(schimbareDate, cîmpuriConsiderate, Onorariul.actualizează)
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
-    $('.debitor').on('change', '#gen-persoană', Onorariul.actualizează);
+    $('#formular').on('change', '.debitor #gen-persoană', Onorariul.actualizează);
     $('#părţile-au-ajuns-la-conciliere').on('change', Onorariul.actualizează);
   },
 
@@ -113,60 +112,55 @@ var Onorariul = {
 var Defaults = {
   init: function() {
     $('#date-generale').on('change', '#obiect', function() {
-      switch($(this).val()) {
+      var obiect = $(this).val(),
+          genCreditor = $('#creditor #gen-persoană'),
+          genDebitor = $('.debitor #gen-persoană');
 
-      case 'restabilirea la locul de muncă':
-        $('#creditor #gen-persoană').val('fizică').trigger('change');
-        $('.debitor #gen-persoană').val('juridică').trigger('change');
-        break;
+      switch(obiect) {
+        case 'restabilirea la locul de muncă':
+          genCreditor.val('fizică');
+          genDebitor.val('juridică');
+          break;
 
-      case 'stabilirea domiciliului copilului':
-        $('#creditor #gen-persoană').val('fizică').trigger('change');
-        $('.debitor #gen-persoană').val('fizică').trigger('change');
-        break;
-
-      default:
-        $('#creditor #gen-persoană').trigger('change');
-        $('.debitor #gen-persoană').trigger('change');
-
+        case 'stabilirea domiciliului copilului':
+          genCreditor.val('fizică');
+          genDebitor.val('fizică');
+          break;
       }
+
+      genCreditor.trigger('change');
+      genDebitor.trigger('change');
     });
 
-    if (this.seCreazăProcedurăNouă()) $('#taxaA1').click();
+    if (Formular.seCreazăProcedurăNouă()) {
+      $('#taxaA1').click();
 
-    this.initTitlu();
+      var caracterProcedură = $('#caracter'),
+          genCreditor = $('#creditor #gen-persoană');
 
+      switch (HashController.date()) {
+        case 's':
+          caracterProcedură.val('pecuniar');
+          genCreditor.val('juridică');
+          break;
+
+        case 'p':
+          caracterProcedură.val('pecuniar');
+          genCreditor.val('fizică');
+          break;
+
+        default:
+          caracterProcedură.val('pecuniar');
+          genCreditor.val('juridică');
+          break;
+      }
+
+      caracterProcedură.trigger('change');
+      genCreditor.trigger('change');
+    }
+
+    Formular.initTitlu();
     TotalCheltuieli.calculează();
-  },
-
-  seCreazăProcedurăNouă: function() {
-    return HashController.id() == '#formular' && /^[SP]?$/.test(HashController.date());
-  },
-
-  initTitlu: function() {
-    if (this.seCreazăProcedurăNouă()) {
-      $('#prefix, #număr').text('');
-    } else {
-      var număr = HashController.date();
-
-      $('#prefix').text(Utilizator.login);
-      $('#număr').text(număr);
-    }
-
-    switch (HashController.date()) {
-    case 's':
-      $('#caracter').val('pecuniar').trigger('change');
-      $('#creditor #gen-persoană').val('juridică').trigger('change');
-      break;
-    case 'p':
-      $('#caracter').val('pecuniar').trigger('change');
-      $('#creditor #gen-persoană').val('fizică').trigger('change');
-      break;
-    default:
-      $('#caracter').val('pecuniar').trigger('change');
-      $('#creditor #gen-persoană').val('juridică').trigger('change');
-      break;
-    }
   }
 };
 
