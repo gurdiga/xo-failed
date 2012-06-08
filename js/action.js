@@ -599,7 +599,7 @@ var Formular = {
     return HashController.pagină() == '#formular' && /^[SP]?-\d+$/.test(HashController.date());
   },
 
-  initTitlu: function() {
+  seteazăTitlu: function() {
     var literă = HashController.date().match(/^[SP]?/)[0],
         href = '#formular' + (literă ? '?' + literă : ''),
         descriereProcedură = $('#crează-procedură').find('a[href="' + href + '"]').text(),
@@ -612,7 +612,7 @@ var Formular = {
 
   colectează: function() {
     var procedură = {
-      'număr': $('#număr').text(),
+      'număr': $('#număr').text().match(/[SP]?-\d+/)[0],
       'document-executoriu': colectează('#document-executoriu'),
       'date-generale': colecteazăDateGenerale(),
       'cheltuieli': colecteazăCheltuieli(),
@@ -1003,6 +1003,8 @@ var Formular = {
   },
 
   deschide: function(link) {
+    Formular.seteazăTitlu();
+
     $('#formular, #umbră').hide().fadeIn('');
     $(document).on('keydown', Formular.esc);
   },

@@ -159,7 +159,6 @@ var Defaults = {
       genCreditor.trigger('change');
     }
 
-    Formular.initTitlu();
     TotalCheltuieli.calculează();
   }
 };
