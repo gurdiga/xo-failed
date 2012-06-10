@@ -998,14 +998,14 @@ var Formular = {
   },
 
   închide: function() {
-    $('#formular, #umbră').fadeOut(function() {location.hash = ''});
+    $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''});
     $(document).off('keydown', Formular.esc);
   },
 
   deschide: function(link) {
     Formular.seteazăTitlu();
 
-    $('#formular, #umbră').hide().fadeIn('');
+    $('#formular, #umbră').hide().fadeIn('fast');
     $(document).on('keydown', Formular.esc);
   },
 
