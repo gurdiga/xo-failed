@@ -20,16 +20,3 @@ function verifică_dacă_există($procedură) {
     stop("Nu există procedura: [$login/proceduri/$procedură]");
   }
 }
-
-// ------------------------------
-
-function notează_ca_recentă($procedură) {
-  global $login;
-
-  $target = "../$procedură";
-  $link = "../date/$login/proceduri/recente/$procedură";
-
-  if (file_exists($link)) unlink($link);
-
-  symlink($target, $link);
-}

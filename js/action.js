@@ -612,7 +612,7 @@ var Formular = {
 
   colectează: function() {
     var procedură = {
-      'număr': $('#număr').text().match(/[SP]?-\d+/)[0],
+      'număr': ($('#număr').text().match(/[SP]?-\d+/) || [null])[0],
       'document-executoriu': colectează('#document-executoriu'),
       'date-generale': colecteazăDateGenerale(),
       'cheltuieli': colecteazăCheltuieli(),
@@ -776,7 +776,9 @@ var Formular = {
           }
         }).get().sort(function(a, b) {return a - b}).pop();
 
-        procedură.număr = ultimulNumăr + 1;
+        var literă = HashController.date();
+
+        procedură.număr = literă + '-' + (ultimulNumăr + 1);
         post();
       });
     } else {
@@ -792,12 +794,10 @@ var Formular = {
   încarcă: function() {
     var număr = HashController.date();
 
-    $.ajax({
-      url: '/date/' + Utilizator.login + '/proceduri/' + număr,
-      success: Formular.populează,
-      dataType: 'json',
-      cache: false
-    });
+    $.getJSON(
+      '/date/' + Utilizator.login + '/proceduri/' + număr,
+      Formular.populează
+    );
 
     if (!$('#proceduri-recente').find('a[href="' + location.hash + '"]').există()) {
       ProceduriRecente.notează(număr);

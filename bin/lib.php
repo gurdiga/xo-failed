@@ -8,6 +8,21 @@ function verifică_număr($procedură) {
 
 // ------------------------------
 
+function notează_ca_recentă($procedură) {
+  global $login;
+
+  $target = "../$procedură";
+  $link = "../date/$login/proceduri/recente/$procedură";
+
+  if (file_exists($link)) unlink($link);
+
+  symlink($target, $link);
+
+  // TODO: elimină pe cele vechi
+}
+
+// ------------------------------
+
 function verifică_login($login) {
   if (!preg_match('/^\d+$/', $login)) {
     stop("Login invalid: [$login]");
