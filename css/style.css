@@ -1,8 +1,7 @@
 @charset "UTF-8";
-@import url(http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext);
 
 body {
-  font: 14px Arial, sans-serif;
+  font: 14px sans-serif;
   padding: 0 10px;
   margin: 0;
 }
@@ -94,13 +93,16 @@ button {
   height: 100%;
 }
 
-#index h1 {
+#index .şoaptă {
+  color: #aaa;
+  font-size: 15px;
   margin: 0;
-  padding: .3em 0 1em;
+  line-height: 2em;
 }
 
-#căutare {
-  float: left;
+#index h1 {
+  margin: 0;
+  padding: .3em 0;
 }
 
 #căutare input {
@@ -108,6 +110,18 @@ button {
   border: 1px solid #ddd;
   border-top-color: #bbb;
   width: 23em;
+}
+
+#căutare ul {
+  margin: 0;
+}
+
+#proceduri-recente {
+  margin-top: 3em;
+}
+
+#proceduri-recente ul {
+  margin: 0;
 }
 
 #index label,
@@ -122,6 +136,10 @@ button.mare {
   left: 60%;
   width: 350px;
   height: 450px;
+}
+
+#crează-procedură .şoaptă {
+  margin-left: 20px;
 }
 
 #crează-procedură ul {
@@ -141,7 +159,7 @@ button.mare {
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.6em;
 }
 
@@ -177,15 +195,8 @@ button.mare {
   text-decoration: none;
 }
 
-#index #căutare .şoaptă {
-  color: #555;
-  margin: .3em 0 0 .1em;
-  padding: 0;
-  line-height: 1.2em;
-}
-
 h1 {
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 3em;
 }
 
@@ -234,7 +245,7 @@ fieldset label {
 }
 
 fieldset legend {
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: 'Oswald', sans-serif;
   background: #333;
   width: 100%;
   text-indent: 2px;
@@ -388,7 +399,7 @@ fieldset#creditor button.elimină-persoană {
   display: none;
 }
 
-.şoaptă {
+#formular .şoaptă {
   margin: .25em 0 .7em 13em;
   padding: 0 1em 0 .5em;
   line-height: 1em;
@@ -798,8 +809,4 @@ input[type="checkbox"]+label {
   width: auto;
   font-style: normal;
   vertical-align: -.2em;
-}
-
-#proceduri-recente {
-  margin: 0;
 }

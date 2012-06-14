@@ -15,6 +15,8 @@ var Action = {
     Formular.init();
 
     $(window).trigger('hashchange');
+
+    Căutare.init();
   },
 
   '#index': function() {
@@ -799,7 +801,7 @@ var Formular = {
       Formular.populează
     );
 
-    if (!$('#proceduri-recente').find('a[href="' + location.hash + '"]').există()) {
+    if (!$('#proceduri-recente').find('ul a[href="' + location.hash + '"]:first').există()) {
       ProceduriRecente.notează(număr);
     }
   },
@@ -1019,7 +1021,7 @@ var Formular = {
 var ProceduriRecente = {
   încarcă: function() {
     $.get('/date/' + Utilizator.login + '/proceduri/recente/', function(lista) {
-      var $proceduriRecente = $('#proceduri-recente').empty();
+      var $proceduriRecente = $('#proceduri-recente').find('ul').empty();
 
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
@@ -1059,6 +1061,64 @@ var ProceduriRecente = {
     $.post('/bin/notează-ca-recentă.php', {procedură: număr});
   }
 }
+
+// --------------------------------------------------
+
+var Căutare = {
+  timer: 0,
+
+  init: function() {
+    var evenimente = 'keyup update paste change';
+
+    $('#căutare').on(evenimente, 'input', Căutare.găseşte);
+
+    Căutare.încarcăIndex();
+  },
+
+  găseşte: function(e) {
+    if (Căutare.timer) return;
+
+    var text = $.trim($(this).val());
+
+    Căutare.timer = setTimeout(function() {
+      if (!text.length) {
+        Căutare.curăţă();
+        return;
+      }
+
+      var item, poziţie,
+          reLaÎnceput = new RegExp('^' + text, 'gi'),
+          reLaMijloc = new RegExp(text, 'gi'),
+          itemiLaÎnceput = {},
+          itemiLaMijloc = {};
+
+      for (item in Căutare.index) {
+        if (reLaÎnceput.test(item)) itemiLaÎnceput[item] = true;
+        else if (reLaMijloc.test(item)) itemiLaMijloc[item] = true;
+      }
+
+      Căutare.afişeazăRezultatele();
+      Căutare.curăţă();
+    }, 200);
+  },
+
+  curăţă: function() {
+    clearTimeout(Căutare.timer);
+    Căutare.timer = 0;
+  },
+
+  afişeazăRezultatele: function() {
+    // TODO
+  },
+
+  încarcăIndex: function() {
+    setTimeout(function() {
+      $.getJSON('/date/' + Utilizator.login + '/proceduri/index', function(data) {
+        Căutare.index = data;
+      });
+    }, 500);
+  }
+};
 
 // --------------------------------------------------
 

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>Consola executorului</title>
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext"/>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
     <!--[if gte IE 8]>
     <link type="text/css" rel="stylesheet" href="/css/style-ie8.css"/>
@@ -18,22 +19,27 @@
       <div class="conţinut">
         <h1>Consola executorului</h1>
 
-        <div id="căutare">
-          <input placeholder="Caută procedură"/>
-          <p class="şoaptă">După număr, nume sau IDNP, denumire sau IDNO.</p>
-
-          <br/>
-          <br/>
-          <label>Proceduri recente</label>
-          <ul id="proceduri-recente"></ul>
-        </div>
-
         <div id="crează-procedură">
+          <p class="şoaptă">Crează procedură</p>
+
           <ul>
             <li><a href="#formular?P">Procedură pensie de întreținere</a></li>
             <li><a href="#formular?S" >Procedură în beneficiul statului</a></li>
             <li><a href="#formular">Procedură de ordin general</a></li>
           </ul>
+        </div>
+
+        <div id="căutare">
+          <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
+
+          <input/>
+          <ul></ul>
+        </div>
+
+        <div id="proceduri-recente">
+          <p class="şoaptă">Proceduri recente</p>
+
+          <ul></ul>
         </div>
       </div>
     </div>
