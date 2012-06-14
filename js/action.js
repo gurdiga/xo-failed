@@ -1023,7 +1023,7 @@ var ProceduriRecente = {
 
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
-          timp: parse($.trim(this.nextSibling.data).split(/\s{2,}/)[0], this.innerText),
+          timp: parse($.trim(this.nextSibling.data).split(/\s{2,}/)[0]),
           număr: this.innerText,
           $li: $('<li>').append(
             $(this)
@@ -1040,7 +1040,7 @@ var ProceduriRecente = {
 
     // -----------------
 
-    function parse(timestamp, number) {
+    function parse(timestamp) {
       var parts = timestamp.match(/(\d{2})-(\w{3})-(\d{4}) (\d{2}):(\d{2})/),
           monthNames = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
           date = new Date();
