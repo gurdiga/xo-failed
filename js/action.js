@@ -783,7 +783,10 @@ var Formular = {
 
     // -----
     function post() {
-      $.post('/bin/salvează.php', procedură, Formular.închide);
+      $.post('/bin/salvează.php', procedură, function() {
+        Formular.închide();
+        Căutare.încarcăIndex();
+      });
     }
   },
 
