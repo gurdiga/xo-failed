@@ -149,7 +149,7 @@ var HashController = {
       if (Utilizator.autentificat) {
         var pagina = HashController.pagină();
 
-        $('div.pagină')
+        $('div.pagină, #umbră')
           .filter(':not(#index)').hide().end()
           .filter(pagina).show();
 
@@ -233,12 +233,6 @@ var ListeFoarteLate = {
       });
   }
 };
-
-// --------------------------------------------------
-
-$.fn.există = function() {
-  return this.length > 0;
-}
 
 // --------------------------------------------------
 
@@ -1066,12 +1060,12 @@ var ProceduriRecente = {
 
 var Căutare = {
   timer: 0,
+  $el: null,
 
   init: function() {
     var evenimente = 'keyup update paste change';
 
-    $('#căutare').on(evenimente, 'input', Căutare.găseşte);
-
+    Căutare.$el = $('#căutare').on(evenimente, 'input', Căutare.găseşte);
     Căutare.încarcăIndex();
   },
 
@@ -1087,28 +1081,49 @@ var Căutare = {
       }
 
       var item, poziţie,
-          reLaÎnceput = new RegExp('^' + text, 'gi'),
-          reLaMijloc = new RegExp(text, 'gi'),
-          itemiLaÎnceput = {},
-          itemiLaMijloc = {};
+          reLaÎnceputDeRînd = new RegExp('^' + text, 'gi'),
+          reLaÎnceputDeCuvînt = new RegExp('\\b' + text, 'gi'),
+          reUndeva = new RegExp(text, 'gi'),
+          găsiriLaÎnceputDeRînd = [],
+          găsiriLaÎnceputDeCuvînt = [],
+          găsiriUndeva = [];
 
       for (item in Căutare.index) {
-        if (reLaÎnceput.test(item)) itemiLaÎnceput[item] = true;
-        else if (reLaMijloc.test(item)) itemiLaMijloc[item] = true;
+        if (reLaÎnceputDeRînd.test(item)) găsiriLaÎnceputDeRînd.push(item);
+        else if (reLaÎnceputDeCuvînt.test(item)) găsiriLaÎnceputDeCuvînt.push(item);
+        else if (reUndeva.test(item)) găsiriUndeva.push(item);
       }
 
-      Căutare.afişeazăRezultatele();
       Căutare.curăţă();
-    }, 200);
+      Căutare.afişeazăRezultatele(
+        găsiriLaÎnceputDeRînd
+          .concat(găsiriLaÎnceputDeCuvînt)
+          .concat(găsiriUndeva),
+        text
+      );
+    }, 10);
   },
 
   curăţă: function() {
     clearTimeout(Căutare.timer);
     Căutare.timer = 0;
+
+    Căutare.$el.find('ul').html('');
   },
 
-  afişeazăRezultatele: function() {
-    // TODO
+  afişeazăRezultatele: function(itemi, text) {
+    var i,
+        rezultatele = '',
+        item = '',
+        reText = new RegExp('(' + text + ')', 'gi'),
+        textFormatat = '<b>$1</b>';
+
+    for (i = 0; i < itemi.length; i++) {
+      item = itemi[i] + ': ' + Căutare.index[itemi[i]];
+      rezultatele += '<li>' + item.replace(reText, textFormatat) + '</li>';
+    }
+
+    Căutare.$el.find('ul').html(rezultatele);
   },
 
   încarcăIndex: function() {
@@ -1119,6 +1134,12 @@ var Căutare = {
     }, 500);
   }
 };
+
+// --------------------------------------------------
+
+$.fn.există = function() {
+  return this.length > 0;
+}
 
 // --------------------------------------------------
 
