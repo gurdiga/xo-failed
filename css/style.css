@@ -110,10 +110,57 @@ button {
   border: 1px solid #ddd;
   border-top-color: #bbb;
   width: 23em;
+  margin: 0;
 }
 
 #căutare ul {
   margin: 0;
+}
+
+#căutare table#rezultate {
+  border-collapse: collapse;
+  width: 28.45em;
+}
+
+#căutare #rezultate td {
+  color: #555;
+  padding: 3px 6px 0;
+  vertical-align: top;
+  border: 1px solid #ddd;
+}
+
+#căutare #rezultate tr {
+  cursor: pointer;
+}
+
+#căutare #rezultate tr.selectat td {
+  color: black;
+  background-color: #efefef;
+}
+
+#căutare #rezultate b {
+ color: black;
+}
+
+#căutare #rezultate .număr {
+  display: block;
+  font-weight: bold;
+}
+
+#căutare #rezultate .persoane {
+  margin: 0;
+}
+
+#căutare #rezultate .data-hotărîrii,
+#căutare #rezultate .persoane dd {
+  color: #999;
+  font-size: small;
+  margin: -2px 0 3px 0;
+  display: block;
+}
+
+#căutare #rezultate td.vs {
+  color: #999;
 }
 
 #proceduri-recente {

@@ -1,10 +1,9 @@
 TODO:
 -----
 
-* numerotare unică
-* extract reNumăr
-* indexare
-  * generează index static
+* indexează după numărul procedurii
+* reîncarcă index-ul după salvare
+* dacă procedura nu există, afişează mesaj de erorare
 * calcularea dobînzilor BNM
 * “poliţă” temporară
 * înregistrare utilizator
@@ -12,7 +11,7 @@ TODO:
   * use a regexp to exclude the idex and jses?
 * optimizare şabloane: de mutat toate în #şablon
 * design
-  * tranziţie pentru adăugare/ştergere
+  * tranziţie pentru adăugare/ştergere/scroll
 * dot the site specific nginx config file
 * adaugă şoapte pentru valute?
 

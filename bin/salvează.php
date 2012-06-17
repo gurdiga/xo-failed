@@ -22,32 +22,65 @@ function salvează($procedură) {
 // ------------------------------
 
 function reindexează($procedură) {
+  global $login;
+
   $dir = dirname(cale($procedură));
   $fişiere = glob("$dir/*-[0-9]*");
 
   $index = array();
   $cîmpuri = array('idno', 'denumire', 'idnp', 'nume');
 
-  $collect = function(&$cîmp, $valoare) use (&$index) {
-    if (!isset($cîmp) || !$cîmp) return;
-    if (!isset($index[$cîmp])) $index[$cîmp] = array();
+  function persoană($persoană) {
+    return $persoană['gen-persoană'] == 'fizică' ?
+      array(
+        'nume' => $persoană['nume'],
+        'idnp' => $persoană['idnp']
+      )
+      :
+      array(
+        'denumire' => $persoană['denumire'],
+        'idno' => $persoană['idno']
+      );
+  }
 
-    $index[$cîmp][] = $valoare;
+  $colectează = function(&$cîmp, $procedură) use (&$index, $login) {
+    if (!isset($cîmp) || !$cîmp) return;
+
+    $creditor = persoană($procedură['creditor']);
+    $persoane_terţe = array();
+
+    if (isset($procedură['persoane-terţe']))
+      foreach ($procedură['persoane-terţe'] as $persoană_terţă)
+        $persoane_terţe[] = persoană($persoană_terţă);
+
+    $debitori = array();
+
+    foreach ($procedură['debitori'] as $debitor)
+      $debitori[] = persoană($debitor);
+
+    $index[$cîmp][] = array(
+      'număr' => $login . $procedură['număr'],
+      'data-hotărîrii' => $procedură['document-executoriu']['data-hotărîrii'],
+      'creditor' => $creditor,
+      'persoane-terţe' => $persoane_terţe,
+      'debitori' => $debitori
+    );
   };
 
   foreach ($fişiere as $fişier) {
     $procedură = json_decode(file_get_contents($fişier), true);
-    $număr = $procedură['număr'];
+    $număr = $login . $procedură['număr'];
 
     foreach ($cîmpuri as $cîmp) {
-      $collect($procedură['creditor'][$cîmp], "C$număr");
+      $colectează($număr, $procedură);
+      $colectează($procedură['creditor'][$cîmp], $procedură);
 
       if (isset($procedură['persoane-terţe']))
         foreach ($procedură['persoane-terţe'] as $persoană_terţă)
-          $collect($persoană_terţă[$cîmp], "T$număr");
+          $colectează($persoană_terţă[$cîmp], $procedură);
 
       foreach ($procedură['debitori'] as $debitor)
-        $collect($debitor[$cîmp], "D$număr");
+        $colectează($debitor[$cîmp], $procedură);
     }
   }
 

@@ -1065,13 +1065,76 @@ var Căutare = {
   $el: null,
 
   init: function() {
-    var evenimente = 'keyup update paste change';
+    var evenimente = 'keyup update paste';
 
-    Căutare.$el = $('#căutare').on(evenimente, 'input', Căutare.găseşte);
+    Căutare.$el = $('#căutare')
+      .on(evenimente, 'input', Căutare.găseşte)
+      .on('keydown', 'input', Căutare.evidenţiazăItem);
+
+    Căutare.hoverItemRezultate();
     Căutare.încarcăIndex();
   },
 
+  hoverItemRezultate: function() {
+    $('#rezultate')
+      .on('mouseenter', 'tr', function() {this.className = 'selectat'})
+      .on('mouseleave', 'tr', function() {this.removeAttribute('class')})
+      .on('click', 'tr', Căutare.deschideProceduraSlectată);
+  },
+
+  deschideProceduraSlectată: function(e) {
+    e.preventDefault();
+
+    var $item = $('#rezultate').find('tr.selectat');
+
+    if (!$item.există()) return;
+
+    var număr = $item.find('.număr').text().replace(Utilizator.login, '');
+
+    if (număr) location.hash = 'formular?' + număr;
+  },
+
+  evidenţiazăItem: function(e) {
+    var tasta = e.which,
+        SUS = 38,
+        JOS = 40,
+        ENTER = 13;
+
+    if ($.inArray(tasta, [SUS, JOS, ENTER]) == -1) return;
+
+    e.preventDefault();
+
+    var $lista = $('#rezultate');
+
+    if (!$lista.find('tr').există()) return;
+
+    var spre = {
+      38: 'prev', // SUS
+      40: 'next' // JOS
+    }, deLa = {
+      38: 'tr:last', // SUS
+      40: 'tr:first' // JOS
+    };
+
+    if (tasta == SUS || tasta == JOS) {
+      var $item = $lista.find('tr.selectat'),
+          $spre = $item.există() ? $item[spre[tasta]]() : $lista.find(deLa[tasta]);
+
+      $item.removeClass('selectat');
+      $spre.addClass('selectat');
+    } else if (tasta == ENTER) {
+      Căutare.deschideProceduraSlectată(e);
+    }
+  },
+
   găseşte: function(e) {
+    var tasta = e.which,
+        SUS = 38,
+        JOS = 40,
+        ENTER = 13;
+
+    if ($.inArray(tasta, [SUS, JOS, ENTER]) != -1) return;
+
     if (Căutare.timer) return;
 
     var text = $.trim($(this).val());
@@ -1081,6 +1144,8 @@ var Căutare = {
         Căutare.curăţă();
         return;
       }
+
+      text = $.reEscape(text);
 
       var item, poziţie,
           reLaÎnceputDeRînd = new RegExp('^' + text, 'gi'),
@@ -1113,19 +1178,69 @@ var Căutare = {
     Căutare.$el.find('ul').html('');
   },
 
-  afişeazăRezultatele: function(itemi, text) {
-    var i,
-        rezultatele = '',
-        item = '',
-        reText = new RegExp('(' + text + ')', 'gi'),
-        textFormatat = '<b>$1</b>';
+  afişeazăRezultatele: function(itemi, fragment) {
+    var proceduri, procedură,
+        rezultate = '',
+        creditor = '',
+        persoaneTerţe = '',
+        debitori = '';
 
-    for (i = 0; i < itemi.length; i++) {
-      item = itemi[i] + ': ' + Căutare.index[itemi[i]];
-      rezultatele += '<li>' + item.replace(reText, textFormatat) + '</li>';
+    for (var i = 0; i < itemi.length; i++) {
+      proceduri = Căutare.index[itemi[i]];
+
+      for (var j = 0; j < proceduri.length; j++) {
+        procedură = evidenţiază(proceduri[j], fragment);
+
+        creditor = persoană(procedură['creditor']);
+        persoaneTerţe = $.map(procedură['persoane-terţe'], function(p) {return persoană(p)}).join('');
+        debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
+
+        rezultate +=
+          '<tr>' +
+            '<td>' +
+              '<span class="număr">' + procedură['număr'] + '</span>' +
+              '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
+            '</td>' +
+            '<td><dl class="persoane">' + creditor + persoaneTerţe + '</dl></td>' +
+            '<td class="vs">vs.</td>' +
+            '<td><dl class="persoane">' + debitori + '</dl></td>' +
+          '</tr>';
+      }
     }
 
-    Căutare.$el.find('ul').html(rezultatele);
+    Căutare.$el.find('table#rezultate').html(rezultate);
+
+
+    // ------------------------------------------
+
+    function evidenţiază(text, fragment) {
+      if (!text) return '';
+
+      if ($.isPlainObject(text)) {
+        var itemi = {};
+
+        for (var item in text)
+          itemi[item] = evidenţiază(text[item], fragment);
+
+        return itemi;
+      } else if ($.isArray(text)) {
+        return $.map(text, function(item) {return evidenţiază(item, fragment)});
+      } else {
+        var reFragment = new RegExp('(' + fragment + ')', 'gi'),
+            fragmentFormatat = '<b>$1</b>';
+
+        return text.replace(reFragment, fragmentFormatat);
+      }
+    }
+
+
+    // ------------------------------------------
+
+    function persoană(persoană) {
+      return '' +
+        '<dt>' + (persoană['denumire'] || persoană['nume'] || '') + '</dt>' +
+        '<dd>' + (persoană['idno'] || persoană['idnp'] || '') + '</dd>';
+    }
   },
 
   încarcăIndex: function() {
@@ -1168,3 +1283,9 @@ $.fn.val1 = function(value) {
 
   return this.is(':checkbox') ? this.is(':checked') : this.val();
 };
+
+// --------------------------------------------------
+
+$.reEscape = function(re) {
+  return re.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
