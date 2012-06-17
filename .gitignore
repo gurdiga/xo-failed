@@ -1,2 +1,3 @@
 rate-bnm/
+!rate-bnm/*.php
 nginx.vhost.conf
