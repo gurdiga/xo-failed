@@ -785,6 +785,7 @@ var Formular = {
       $.post('/bin/salvează.php', procedură, function() {
         Formular.închide();
         Căutare.încarcăIndex();
+        ProceduriRecente.încărcat = false;
       });
     }
   },
@@ -1015,7 +1016,11 @@ var Formular = {
 // --------------------------------------------------
 
 var ProceduriRecente = {
+  încărcat: false,
+
   încarcă: function() {
+    if (ProceduriRecente.încărcat) return;
+
     $.get('/date/' + Utilizator.login + '/proceduri/recente/', function(lista) {
       var $proceduriRecente = $('#proceduri-recente').find('ul').empty();
 
@@ -1029,11 +1034,12 @@ var ProceduriRecente = {
               .text(function(i, text) {return Utilizator.login + text})
           )
         };
-      }).get().sort(function(a, b) { return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)});
-
-      $.each(proceduri, function() {
-        this.$li.appendTo($proceduriRecente);
+      }).get().sort(function(a, b) {
+        return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)
       });
+
+      $.fn.append.apply($proceduriRecente, $.map(proceduri, function(p) {return p.$li}));
+      ProceduriRecente.încărcat = true;
     });
 
     // -----------------
@@ -1055,6 +1061,7 @@ var ProceduriRecente = {
 
   notează: function(număr) {
     $.post('/bin/notează-ca-recentă.php', {procedură: număr});
+    ProceduriRecente.încărcat = false;
   }
 }
 
