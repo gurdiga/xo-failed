@@ -1134,7 +1134,6 @@ var Căutare = {
         ENTER = 13;
 
     if ($.inArray(tasta, [SUS, JOS, ENTER]) != -1) return;
-
     if (Căutare.timer) return;
 
     var text = $.trim($(this).val());
@@ -1175,11 +1174,11 @@ var Căutare = {
     clearTimeout(Căutare.timer);
     Căutare.timer = 0;
 
-    Căutare.$el.find('ul').html('');
+    Căutare.$el.find('#rezultate').html('');
   },
 
   afişeazăRezultatele: function(itemi, fragment) {
-    var proceduri, procedură,
+    var proceduri, număr, procedură,
         rezultate = '',
         creditor = '',
         persoaneTerţe = '',
@@ -1188,9 +1187,8 @@ var Căutare = {
     for (var i = 0; i < itemi.length; i++) {
       proceduri = Căutare.index[itemi[i]];
 
-      for (var j = 0; j < proceduri.length; j++) {
-        procedură = evidenţiază(proceduri[j], fragment);
-
+      for (număr in proceduri) {
+        procedură = evidenţiază(proceduri[număr], fragment);
         creditor = persoană(procedură['creditor']);
         persoaneTerţe = $.map(procedură['persoane-terţe'], function(p) {return persoană(p)}).join('');
         debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
@@ -1198,7 +1196,7 @@ var Căutare = {
         rezultate +=
           '<tr>' +
             '<td>' +
-              '<span class="număr">' + procedură['număr'] + '</span>' +
+              '<span class="număr">' + evidenţiază(număr, fragment) + '</span>' +
               '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
             '</td>' +
             '<td><dl class="persoane">' + creditor + persoaneTerţe + '</dl></td>' +

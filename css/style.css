@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-  font: 14px sans-serif;
+  font: 14px Arial, sans-serif;
   padding: 0 10px;
   margin: 0;
 }
@@ -206,7 +206,7 @@ button.mare {
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', Arial, sans-serif;
   font-size: 1.6em;
 }
 
@@ -243,7 +243,7 @@ button.mare {
 }
 
 h1 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', Arial, sans-serif;
   font-size: 3em;
 }
 
@@ -292,7 +292,7 @@ fieldset label {
 }
 
 fieldset legend {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', Arial, sans-serif;
   background: #333;
   width: 100%;
   text-indent: 2px;

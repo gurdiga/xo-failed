@@ -1,7 +1,8 @@
 TODO:
 -----
 
-* indexează după numărul procedurii
+* nu reîncărca recentele dacă nu s-au schimbat
+* stilizează recentele
 * reîncarcă index-ul după salvare
 * dacă procedura nu există, afişează mesaj de erorare
 * calcularea dobînzilor BNM

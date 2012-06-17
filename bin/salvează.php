@@ -58,8 +58,8 @@ function reindexează($procedură) {
     foreach ($procedură['debitori'] as $debitor)
       $debitori[] = persoană($debitor);
 
-    $index[$cîmp][] = array(
-      'număr' => $login . $procedură['număr'],
+    $număr = $login . $procedură['număr'];
+    $index[$cîmp][$număr] = array(
       'data-hotărîrii' => $procedură['document-executoriu']['data-hotărîrii'],
       'creditor' => $creditor,
       'persoane-terţe' => $persoane_terţe,
