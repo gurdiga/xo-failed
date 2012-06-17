@@ -15,7 +15,7 @@ $start_dată = strpos($html, '<td class="type_date">', $sfîrşit_valoare);
 $sfîrşit_dată = strpos($html, '</td>', $start_dată);
 $data = substr($html, $start_dată + 22, $sfîrşit_dată - $start_dată - 22);
 $data = date_parse_from_format('d.m.Y', $data);
-$data = date('c', mktime(0, 0, 0, $data['month'], $data['day'], $data['year']));
+$data = date('Y-m-d', mktime(0, 0, 0, $data['month'], $data['day'], $data['year']));
 
 $root = dirname(__FILE__);
 $json = "$root/rata_de_bază.json";
