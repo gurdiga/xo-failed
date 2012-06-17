@@ -9,6 +9,8 @@ function verifică_număr($procedură) {
 // ------------------------------
 
 function notează_ca_recentă($procedură) {
+  define('MAX_RECENTE', 10);
+
   global $login;
 
   $target = "../$procedură";
@@ -18,7 +20,22 @@ function notează_ca_recentă($procedură) {
 
   symlink($target, $link);
 
-  // TODO: elimină pe cele vechi
+  // elimină pe cele vechi
+  $dir = dirname($link);
+  $recente = glob("$dir/*");
+
+  usort($recente, function ($a, $b) {
+    $data_a = filemtime($a);
+    $data_b = filemtime($b);
+
+    if ($data_a == $data_b) return 0;
+    else return ($data_a > $data_b) ? -1 : 1;
+  });
+
+  $recente_învechite = array_slice($recente, MAX_RECENTE);
+
+  foreach ($recente_învechite as $învechită)
+    unlink($învechită);
 }
 
 // ------------------------------
