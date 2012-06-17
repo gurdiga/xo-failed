@@ -1069,7 +1069,8 @@ var Căutare = {
 
     Căutare.$el = $('#căutare')
       .on(evenimente, 'input', Căutare.găseşte)
-      .on('keydown', 'input', Căutare.evidenţiazăItem);
+      .on('keydown', 'input', Căutare.evidenţiazăItem)
+      .on('keydown', 'input', Căutare.anuleazăCăutarea);
 
     Căutare.hoverItemRezultate();
     Căutare.încarcăIndex();
@@ -1080,6 +1081,10 @@ var Căutare = {
       .on('mouseenter', 'tr', function() {this.className = 'selectat'})
       .on('mouseleave', 'tr', function() {this.removeAttribute('class')})
       .on('click', 'tr', Căutare.deschideProceduraSlectată);
+  },
+
+  anuleazăCăutarea: function(e) {
+    if (e.which == 27) this.value = '';
   },
 
   deschideProceduraSlectată: function(e) {

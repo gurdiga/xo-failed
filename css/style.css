@@ -171,6 +171,26 @@ button {
   margin: 0;
 }
 
+#proceduri-recente li {
+  list-style-type: circle;
+  list-style-position: inside;
+  color: #999;
+}
+
+#proceduri-recente li:hover {
+  color: black;
+}
+
+#proceduri-recente a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #555;
+}
+
+#proceduri-recente a:hover {
+  color: black;
+}
+
 #index label,
 #index input,
 button.mare {
