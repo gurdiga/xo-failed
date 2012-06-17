@@ -1,7 +1,6 @@
 TODO:
 -----
 
-* dacă procedura nu există, afişează mesaj de erorare
 * calcularea dobînzilor BNM
 * “poliţă” temporară
 * înregistrare utilizator

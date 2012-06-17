@@ -793,10 +793,9 @@ var Formular = {
   încarcă: function() {
     var număr = HashController.date();
 
-    $.getJSON(
-      '/date/' + Utilizator.login + '/proceduri/' + număr,
-      Formular.populează
-    );
+    $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr)
+      .success(Formular.populează)
+      .error(Formular.închide);
 
     if (!$('#proceduri-recente').find('ul a[href="' + location.hash + '"]:first').există()) {
       ProceduriRecente.notează(număr);
