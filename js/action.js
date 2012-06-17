@@ -154,8 +154,6 @@ var HashController = {
           .filter(pagina).show();
 
         if (Action[pagina]) Action[pagina]();
-
-        Business.init();
       } else {
         $('div.pagină').hide()
           .filter('#login').show();
@@ -584,6 +582,7 @@ var Formular = {
       }
 
       Formular.deschide($('a[href="' + location.hash + '"]'));
+      Business.init();
     });
   },
 
