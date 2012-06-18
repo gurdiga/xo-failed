@@ -996,6 +996,10 @@ var Formular = {
     Formular.seteazăTitlu();
 
     $('#formular, #umbră').hide().fadeIn('fast');
+    $('#formular')
+      .attr('tabindex', 1)
+      .focus()
+      .removeAttr('tabindex');
     $(document).on('keydown', Formular.esc);
   },
 
