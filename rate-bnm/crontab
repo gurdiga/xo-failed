@@ -1,1 +1,2 @@
 15  2 * * * /usr/bin/env php /var/www/executori.html.md/rate-bnm/download.php
+15  2 * * * /usr/bin/env php /var/www/executori.html.md/rate-bnm/rata_de_bază.php

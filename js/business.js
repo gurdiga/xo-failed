@@ -9,9 +9,62 @@ var Business = {
   },
 
   '#formular': function() {
+    DobîndaBNM.init();
     Onorariul.init();
     TotalCheltuieli.init();
     Defaults.init();
+  }
+};
+
+// --------------------------------------------------
+
+var DobîndaBNM = {
+  rate: {},
+  iniţializat: false,
+
+  init: function() {
+    if (DobîndaBNM.iniţializat) return;
+
+    DobîndaBNM.încarcă();
+
+    $('#date-generale').on('change', '#total', DobîndaBNM.calculează);
+    $('#document-executoriu').on('keyup update paste', '#data-hotărîrii', DobîndaBNM.calculează);
+
+    DobîndaBNM.iniţializat = true;
+  },
+
+  calculează: function(e) {
+    var suma = $('#total').val(),
+        dataHotărîrii = $('#data-hotărîrii').val();
+        componenteDată = $.trim(dataHotărîrii).match(/(\d{2}).(\d{2}).(\d{4})/);
+
+    if (!componenteDată) return;
+
+    dataHotărîrii = componenteDată[3] + '-' + componenteDată[2] + '-' + componenteDată[1];
+
+    var dată, primaDatăAplicabilă;
+
+    for (dată in DobîndaBNM.rate) {
+      if (dată >= dataHotărîrii) break;
+
+      primaDatăAplicabilă = dată;
+    }
+
+    for (dată in DobîndaBNM.rate) {
+      if (dată < primaDatăAplicabilă) continue;
+      // TODO
+    }
+
+    console.log('primaDatăAplicabilă', primaDatăAplicabilă);
+    $('#dobînda-bnm').val(suma);
+  },
+
+  încarcă: function() {
+    $.getJSON('rate-bnm/rata_de_bază.json')
+      .success(function(data) {
+        DobîndaBNM.rate = data;
+        DobîndaBNM.calculează();
+      });
   }
 };
 
@@ -22,7 +75,7 @@ var Onorariul = {
 
   init: function() {
     var schimbareDate = 'keydown keyup update paste change',
-        cîmpuriConsiderate = '.sumă, .valuta, .bunuri .valoare, input:checkbox';
+        cîmpuriConsiderate = '.sumă:not(.calculat), .valuta, .bunuri .valoare, input:checkbox';
 
     $('#date-generale')
       .on(schimbareDate, cîmpuriConsiderate, Onorariul.actualizează)
@@ -54,9 +107,9 @@ var Onorariul = {
   },
 
   pecuniar: function() {
-    var total = $('#date-generale .sumă:not(#total)').suma();
+    var total = $('#date-generale .sumă:not(.calculat)').suma();
 
-    $('#date-generale #total').val(total);
+    $('#date-generale #total').val(total).trigger('change', 'automat');
 
     if (total <= 100000) {
       var minim = $('#amendă-sau-încasare-periodică').is(':checked') ? 200 : 500;

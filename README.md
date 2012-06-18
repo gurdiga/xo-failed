@@ -2,6 +2,8 @@ TODO:
 -----
 
 * calcularea dobînzilor BNM
+  * scrie JS
+  * colectează ratele de pe anii precedenţi la 2011
 * “poliţă” temporară
 * înregistrare utilizator
 * authentificare nginx: areal unic

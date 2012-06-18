@@ -1046,13 +1046,13 @@ var ProceduriRecente = {
     function parse(timestamp) {
       var parts = timestamp.match(/(\d{2})-(\w{3})-(\d{4}) (\d{2}):(\d{2})/),
           monthNames = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
-          date = new Date();
-
-      date.setFullYear(parts[3]);
-      date.setMonth(monthNames.indexOf(parts[2]));
-      date.setDate(parts[1]);
-      date.setHours(parts[4]);
-      date.setMinutes(parts[5]);
+          date = new Date(
+            parts[3],
+            monthNames.indexOf(parts[2]) - 1,
+            parts[1],
+            parts[4],
+            parts[5]
+          );
 
       return date.getTime();
     }
@@ -1071,10 +1071,8 @@ var Căutare = {
   $el: null,
 
   init: function() {
-    var evenimente = 'keyup update paste';
-
     Căutare.$el = $('#căutare')
-      .on(evenimente, 'input', Căutare.găseşte)
+      .on('keyup update paste', 'input', Căutare.găseşte)
       .on('keydown', 'input', Căutare.evidenţiazăItem)
       .on('keydown', 'input', Căutare.anuleazăCăutarea);
 
