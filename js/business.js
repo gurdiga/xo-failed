@@ -42,20 +42,25 @@ var DobîndaBNM = {
 
     dataHotărîrii = componenteDată[3] + '-' + componenteDată[2] + '-' + componenteDată[1];
 
-    var dată, primaDatăAplicabilă;
+    var dată, dataPrecedentă, primaDatăAplicabilă, rată;
 
     for (dată in DobîndaBNM.rate) {
-      if (dată >= dataHotărîrii) break;
+      console.log(dată, dataHotărîrii);
+      if (dată > dataHotărîrii) break;
 
-      primaDatăAplicabilă = dată;
+      dataPrecedentă = dată;
     }
+
+    primaDatăAplicabilă = dataPrecedentă;
 
     for (dată in DobîndaBNM.rate) {
       if (dată < primaDatăAplicabilă) continue;
+
+      rată = parseFloat(DobîndaBNM.rate[dată]);
+      console.log(dată, rată);
       // TODO
     }
 
-    console.log('primaDatăAplicabilă', primaDatăAplicabilă);
     $('#dobînda-bnm').val(suma);
   },
 
@@ -74,7 +79,7 @@ var Onorariul = {
   // Articolul 38
 
   init: function() {
-    var schimbareDate = 'keydown keyup update paste change',
+    var schimbareDate = 'keyup update paste',
         cîmpuriConsiderate = '.sumă:not(.calculat), .valuta, .bunuri .valoare, input:checkbox';
 
     $('#date-generale')
@@ -109,7 +114,7 @@ var Onorariul = {
   pecuniar: function() {
     var total = $('#date-generale .sumă:not(.calculat)').suma();
 
-    $('#date-generale #total').val(total).trigger('change', 'automat');
+    $('#date-generale #total').val(total).trigger('change');
 
     if (total <= 100000) {
       var minim = $('#amendă-sau-încasare-periodică').is(':checked') ? 200 : 500;
@@ -259,7 +264,7 @@ var TotalCheltuieli = {
       '#taxaB6 .licitaţie.repetată'
     ].join(',');
 
-    var evenimente = 'keydown keyup update paste change mouseup';
+    var evenimente = 'keyup update paste mouseup';
 
     $('#listă-taxe-şi-speze').on(evenimente, cîmpuriValoare, this.calculează);
   },
