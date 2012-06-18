@@ -235,16 +235,8 @@ var ListeFoarteLate = {
 // --------------------------------------------------
 
 var Schimbări = {
-  selector: [
-    'fieldset li input',
-    'fieldset li textarea',
-    'fieldset li select'
-  ].join(', '),
-
-  evenimente: 'keydown keyup update paste change',
-
   urmăreşte: function() {
-    $('#formular').on(Schimbări.evenimente, Schimbări.selector, function (e, automat) {
+    $('#formular').on('keyup update paste change', 'fieldset li :input:not(.calculat)', function (e, automat) {
       if (automat) return;
 
       $(this).attr('schimbat', '');
@@ -574,8 +566,6 @@ var Formular = {
 
     $(window).on('hashchange', function() {
       if (!/^#formular/.test(location.hash)) return;
-
-      Formular.resetează();
 
       if (Formular.seDeschideProcedurăSalvată()) {
         Formular.încarcă();
@@ -998,6 +988,8 @@ var Formular = {
   închide: function() {
     $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''});
     $(document).off('keydown', Formular.esc);
+
+    Formular.resetează();
   },
 
   deschide: function(link) {
