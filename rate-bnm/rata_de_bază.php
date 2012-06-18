@@ -9,7 +9,7 @@ ob_end_clean();
 
 $start_valoare = strpos($html, '<td class="type_number">', strpos($html, 'Rata de baz'));
 $sfîrşit_valoare = strpos($html, '%', $start_valoare);
-$valoarea = substr($html, $start_valoare + 24, $sfîrşit_valoare - $start_valoare - 25);
+$valoarea = floatval(substr($html, $start_valoare + 24, $sfîrşit_valoare - $start_valoare - 25));
 
 $start_dată = strpos($html, '<td class="type_date">', $sfîrşit_valoare);
 $sfîrşit_dată = strpos($html, '</td>', $start_dată);
