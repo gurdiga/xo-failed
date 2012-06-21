@@ -34,7 +34,9 @@ var DobîndaBNM = {
   },
 
   calculează: function(e) {
-    var suma = $('#total').val(),
+    if ($.isEmptyObject(DobîndaBNM.rate)) return;
+
+    var suma = parseFloat($('#total').val()),
         dataHotărîrii = $('#data-hotărîrii').val();
         componenteDată = $.trim(dataHotărîrii).match(/(\d{2}).(\d{2}).(\d{4})/);
 
@@ -42,26 +44,52 @@ var DobîndaBNM = {
 
     dataHotărîrii = componenteDată[3] + '-' + componenteDată[2] + '-' + componenteDată[1];
 
-    var dată, dataPrecedentă, primaDatăAplicabilă, rată;
+    var data, dataPrecedentă, primaDatăAplicabilă;
 
-    for (dată in DobîndaBNM.rate) {
-      console.log(dată, dataHotărîrii);
-      if (dată > dataHotărîrii) break;
+    for (data in DobîndaBNM.rate) {
+      if (data > dataHotărîrii) break;
 
-      dataPrecedentă = dată;
+      dataPrecedentă = data;
     }
 
     primaDatăAplicabilă = dataPrecedentă;
+    dataPrecedentă = null;
 
-    for (dată in DobîndaBNM.rate) {
-      if (dată < primaDatăAplicabilă) continue;
+    var durate = {},
+        dataCurentă = new Date;
 
-      rată = parseFloat(DobîndaBNM.rate[dată]);
-      console.log(dată, rată);
-      // TODO
+    for (data in DobîndaBNM.rate) {
+      if (dataPrecedentă) {
+        durate[dataPrecedentă] = zileÎntre(data, dataPrecedentă);
+      }
+
+      dataPrecedentă = data;
     }
 
-    $('#dobînda-bnm').val(suma);
+    durate[data] = zileÎntre(data, dataCurentă);
+
+    function zileÎntre(data1, data2) {
+      var p1 = data1.match(/(\d{4})-(\d{2})-(\d{2})/),
+          d1 = new Date(p1[1], +p1[2] - 1, p1[3], 0, 0, 0),
+          p2 = typeof data2 == 'string' ? data2.match(/(\d{4})-(\d{2})-(\d{2})/) : '',
+          d2 = typeof data2 == 'string' ? new Date(p2[1], +p2[2] - 1, p2[3], 0, 0, 0) : data2;
+
+      return Math.round(Math.abs((d1 - d2) / (24 * 3600 * 1000)));
+    }
+
+    var rata, dobînda = 0;
+
+    for (data in DobîndaBNM.rate) {
+      if (data < primaDatăAplicabilă) continue;
+
+      rata = DobîndaBNM.rate[data] / 100;
+      dobînda += suma * rata / 365 * durate[data];
+    }
+
+    // rotunjim pînă la bănuţi
+    dobînda = Math.round(dobînda * 100) / 100;
+
+    $('#dobînda-bnm').val(dobînda);
   },
 
   încarcă: function() {

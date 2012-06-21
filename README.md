@@ -11,9 +11,7 @@ TODO:
 * optimizare şabloane: de mutat toate în #şablon
 * design
   * tranziţie pentru adăugare/ştergere/scroll
-* dot the site specific nginx config file
-* adaugă şoapte pentru valute?
-
+* HG: 52, 54, 68? 75? 78
 
 Causality
 ---------
