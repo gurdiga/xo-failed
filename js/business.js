@@ -37,12 +37,11 @@ var DobîndaBNM = {
     if ($.isEmptyObject(DobîndaBNM.rate)) return;
 
     var suma = parseFloat($('#total').val()),
-        dataHotărîrii = $('#data-hotărîrii').val();
-        componenteDată = $.trim(dataHotărîrii).match(/(\d{2}).(\d{2}).(\d{4})/);
+        dataHotărîrii = $.trim($('#data-hotărîrii').val());
 
-    if (!componenteDată) return;
+    if (!/(\d{2}).(\d{2}).(\d{4})/.test(dataHotărîrii)) return;
 
-    dataHotărîrii = componenteDată[3] + '-' + componenteDată[2] + '-' + componenteDată[1];
+    dataHotărîrii = moment(dataHotărîrii, 'DD.MM.YYYY').format('YYYY-MM-DD');
 
     var data, dataPrecedentă, primaDatăAplicabilă;
 
@@ -55,26 +54,23 @@ var DobîndaBNM = {
     primaDatăAplicabilă = dataPrecedentă;
     dataPrecedentă = null;
 
-    var durate = {},
-        dataCurentă = new Date;
+    var durate = {};
 
     for (data in DobîndaBNM.rate) {
       if (dataPrecedentă) {
-        durate[dataPrecedentă] = zileÎntre(data, dataPrecedentă);
+        durate[dataPrecedentă] = zileÎntre(dataPrecedentă, data);
       }
 
       dataPrecedentă = data;
     }
 
-    durate[data] = zileÎntre(data, dataCurentă);
+    durate[data] = zileÎntre(data, new Date);
 
     function zileÎntre(data1, data2) {
-      var p1 = data1.match(/(\d{4})-(\d{2})-(\d{2})/),
-          d1 = new Date(p1[1], +p1[2] - 1, p1[3], 0, 0, 0),
-          p2 = typeof data2 == 'string' ? data2.match(/(\d{4})-(\d{2})-(\d{2})/) : '',
-          d2 = typeof data2 == 'string' ? new Date(p2[1], +p2[2] - 1, p2[3], 0, 0, 0) : data2;
+      if (typeof data1 == 'string') data1 = moment(data1, 'YYYY-MM-DD').toDate();
+      if (typeof data2 == 'string') data2 = moment(data2, 'YYYY-MM-DD').toDate();
 
-      return Math.round(Math.abs((d1 - d2) / (24 * 3600 * 1000)));
+      return Math.round((data2 - data1) / (24 * 3600 * 1000));
     }
 
     var rata, dobînda = 0;

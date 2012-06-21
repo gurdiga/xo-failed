@@ -470,7 +470,7 @@ var Cheltuieli = {
 
   initBifeAchitat: function() {
     $('#listă-taxe-şi-speze').on('click', '.subformular.achitare :checkbox', function() {
-      var azi = (new Date).format('dd/mm/yyyy');
+      var azi = moment().format('DD/MM/YYYY');
 
       $(this)
         .siblings('.la').find('.data').text(this.checked ? azi : '')
@@ -1021,7 +1021,7 @@ var ProceduriRecente = {
 
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
-          timp: parse($.trim(this.nextSibling.data).split(/\s{2,}/)[0]),
+          timp: moment($.trim(this.nextSibling.data).split(/\s{2,}/)[0], 'D-MMM-YYYY H:m').toDate(),
           număr: this.innerText,
           $li: $('<li>').append(
             $(this)
@@ -1036,22 +1036,6 @@ var ProceduriRecente = {
       $.fn.append.apply($proceduriRecente, $.map(proceduri, function(p) {return p.$li}));
       ProceduriRecente.încărcat = true;
     });
-
-    // -----------------
-
-    function parse(timestamp) {
-      var parts = timestamp.match(/(\d{2})-(\w{3})-(\d{4}) (\d{2}):(\d{2})/),
-          monthNames = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
-          date = new Date(
-            parts[3],
-            monthNames.indexOf(parts[2]) - 1,
-            parts[1],
-            parts[4],
-            parts[5]
-          );
-
-      return date.getTime();
-    }
   },
 
   notează: function(număr) {
