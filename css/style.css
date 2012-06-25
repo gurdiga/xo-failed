@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+#şabloane {
+  display: none;
+}
+
 textarea {
   font: inherit;
   line-height: 24px!important;
@@ -295,10 +299,6 @@ div.pagină>.conţinut {
 fieldset {
   border: none;
   margin-bottom: 30px;
-}
-
-.şablon {
-  display: none;
 }
 
 fieldset label {

@@ -504,529 +504,531 @@
 
     <!-- ================================ şabloane ================================ -->
 
-    <div class="şablon date-generale pecuniar">
-      <ul class="pecuniar">
-        <li>
-          <label for="suma-de-bază">Suma de bază</label>
-          <input id="suma-de-bază" class="sumă" value="0"/>
-          <select class="valuta"></select>
-        </li>
+    <div id="şabloane">
+      <div class="şablon date-generale pecuniar">
+        <ul class="pecuniar">
+          <li>
+            <label for="suma-de-bază">Suma de bază</label>
+            <input id="suma-de-bază" class="sumă" value="0"/>
+            <select class="valuta"></select>
+          </li>
 
-        <li>
-          <label for="taxă-de-stat">Taxă de stat</label>
-          <input id="taxă-de-stat" class="sumă" value="0"/>
-          <select class="valuta"></select>
-        </li>
+          <li>
+            <label for="taxă-de-stat">Taxă de stat</label>
+            <input id="taxă-de-stat" class="sumă" value="0"/>
+            <select class="valuta"></select>
+          </li>
 
-        <li>
-          <label for="penalitate">Penalitate</label>
-          <input id="penalitate" class="sumă" value="0"/>
-          <select class="valuta"></select>
-        </li>
+          <li>
+            <label for="penalitate">Penalitate</label>
+            <input id="penalitate" class="sumă" value="0"/>
+            <select class="valuta"></select>
+          </li>
 
-        <li>
-          <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
-          <input id="amendă-sau-încasare-periodică" type="checkbox"/>
-        </li>
+          <li>
+            <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
+            <input id="amendă-sau-încasare-periodică" type="checkbox"/>
+          </li>
 
-        <li><label>Altele:</label></li>
+          <li><label>Altele:</label></li>
+
+          <li class="subformular">
+            <ul>
+              <li>
+                <label class="descriere">Descriere</label>
+                <label class="sumă">MDL</label>
+              </li>
+
+              <li class="item eliminabil">
+                <textarea class="label descriere"></textarea>
+                <input class="sumă"/>
+              </li>
+
+              <li><button class="adaugă" title="Adaugă">+</button></li>
+            </ul>
+          </li>
+
+          <li>
+            <label for="total"><b>Total</b></label>
+            <input class="sumă calculat" id="total" value="0" readonly/> MDL
+          </li>
+
+          <li>
+            <label for="dobînda-bnm">Dobînda BNM</label>
+            <input class="sumă calculat" id="dobînda-bnm" value="0" readonly/> MDL
+          </li>
+        </ul>
+      </div>
+
+      <div class="şablon date-generale nonpecuniar">
+        <ul>
+          <li>
+            <label for="obiect">Obiectul</label>
+            <select id="obiect" class="foarte lat care schimbă formularul">
+              <option>evacuarea</option>
+              <option>instalarea</option>
+              <option>schimbul forţat</option>
+              <option>stabilirea domiciliului copilului</option>
+              <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
+              <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
+              <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
+              <option>confiscarea bunurilor</option>
+              <option>nimicirea unor bunuri</option>
+              <option>restabilirea la locul de muncă</option>
+              <option>aplicarea măsurilor de asigurare a acţiunii</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+
+      <div class="şablon persoană juridică">
+        <ul>
+          <li>
+            <label for="denumire">Denumire</label>
+            <input id="denumire"/>
+          </li>
+
+          <li>
+            <label for="idno">IDNO</label>
+            <input id="idno"/>
+          </li>
+
+          <li>
+            <label for="sediu" class="textarea">Sediu</label>
+            <textarea id="sediu" spellcheck="false"></textarea>
+          </li>
+
+          <li>
+            <label for="persoană-de-contact">Persoană de contact</label>
+            <input id="persoană-de-contact"/>
+          </li>
+
+          <li>
+            <label for="note-pj" class="textarea">Note</label>
+            <textarea id="note-pj" spellcheck="false"></textarea>
+          </li>
+        </ul>
+      </div>
+
+      <div class="şablon persoană fizică">
+        <ul>
+          <li>
+            <label for="nume">Nume</label>
+            <input id="nume"/>
+          </li>
+
+          <li>
+            <label for="idnp">IDNP</label>
+            <input id="idnp"/>
+          </li>
+
+          <li>
+            <label for="data-naşterii">Data naşterii</label>
+            <input id="data-naşterii"/>
+          </li>
+
+          <li>
+            <label for="domiciliului">Domiciliu</label>
+            <textarea id="domiciliului" spellcheck="false"></textarea>
+          </li>
+
+          <li>
+            <label for="note-pf" class="textarea">Note</label>
+            <textarea id="note-pf" spellcheck="false"></textarea>
+          </li>
+        </ul>
+      </div>
+
+
+      <select class="şablon valuta">
+        <option>MDL</option>
+        <option>USD</option>
+        <option>EUR</option>
+        <option>AED</option>
+        <option>ALL</option>
+        <option>AMD</option>
+        <option>AUD</option>
+        <option>AZN</option>
+        <option>BGN</option>
+        <option>BYR</option>
+        <option>CAD</option>
+        <option>CHF</option>
+        <option>CNY</option>
+        <option>CZK</option>
+        <option>DKK</option>
+        <option>GBP</option>
+        <option>GEL</option>
+        <option>HKD</option>
+        <option>HRK</option>
+        <option>HUF</option>
+        <option>ILS</option>
+        <option>INR</option>
+        <option>ISK</option>
+        <option>JPY</option>
+        <option>KGS</option>
+        <option>KRW</option>
+        <option>KWD</option>
+        <option>KZT</option>
+        <option>LTL</option>
+        <option>LVL</option>
+        <option>MKD</option>
+        <option>MYR</option>
+        <option>NOK</option>
+        <option>NZD</option>
+        <option>PLN</option>
+        <option>RON</option>
+        <option>RSD</option>
+        <option>RUB</option>
+        <option>SEK</option>
+        <option>TJS</option>
+        <option>TMT</option>
+        <option>TRY</option>
+        <option>UAH</option>
+        <option>UZS</option>
+        <option>XDR</option>
+      </select>
+
+
+      <ul class="şablon" title="evacuarea">
+        <li class="subformular">
+          <label for="din-încăperea">Din încăperea</label>
+          <textarea id="din-încăperea"></textarea>
+        </li>
 
         <li class="subformular">
-          <ul>
+          <label for="se-acordă-alt-spaţiu">Se acordă alt spaţiu</label>
+          <input id="se-acordă-alt-spaţiu" type="checkbox"/>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="instalarea">
+        <li class="subformular">
+          <label for="în-încăperea">În încăperea</label>
+          <textarea id="în-încăperea"></textarea>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="schimbul forţat">
+        <li class="subformular">
+          <label for="încăperea-pentru-creditor">Încăperea pentru creditor</label>
+          <textarea id="încăperea-pentru-creditor"></textarea>
+
+          <label for="încăperea-pentru-debitor">Încăperea pentru debitor</label>
+          <textarea id="încăperea-pentru-debitor"></textarea>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
+        <li class="subformular">
+          <label for="acte">Acte</label>
+          <textarea id="acte"></textarea>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
+        <li class="subformular">
+          <ol class="bunuri">
             <li>
               <label class="descriere">Descriere</label>
-              <label class="sumă">MDL</label>
+              <label class="valoare">MDL</label>
             </li>
 
-            <li class="item eliminabil">
+            <li class="cîmp eliminabil">
               <textarea class="label descriere"></textarea>
-              <input class="sumă"/>
+              <input class="valoare" value="0"/>
             </li>
 
-            <li><button class="adaugă" title="Adaugă">+</button></li>
-          </ul>
-        </li>
-
-        <li>
-          <label for="total"><b>Total</b></label>
-          <input class="sumă calculat" id="total" value="0" readonly/> MDL
-        </li>
-
-        <li>
-          <label for="dobînda-bnm">Dobînda BNM</label>
-          <input class="sumă calculat" id="dobînda-bnm" value="0" readonly/> MDL
+            <li><button class="adaugă" title="Adaugă bun">+</button></li>
+          </ol>
         </li>
       </ul>
-    </div>
 
-    <div class="şablon date-generale nonpecuniar">
-      <ul>
-        <li>
-          <label for="obiect">Obiectul</label>
-          <select id="obiect" class="foarte lat care schimbă formularul">
-            <option>evacuarea</option>
-            <option>instalarea</option>
-            <option>schimbul forţat</option>
-            <option>stabilirea domiciliului copilului</option>
-            <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
-            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
-            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
-            <option>confiscarea bunurilor</option>
-            <option>nimicirea unor bunuri</option>
-            <option>restabilirea la locul de muncă</option>
-            <option>aplicarea măsurilor de asigurare a acţiunii</option>
+
+      <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
+        <li class="subformular">
+          <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
+          <ol class="bunuri">
+            <li>
+              <label class="descriere">Descriere</label>
+              <label class="valoare">MDL</label>
+            </li>
+
+            <li class="cîmp eliminabil">
+              <textarea class="label descriere"></textarea>
+              <input class="valoare" value="0"/>
+            </li>
+
+            <li><button class="adaugă" title="Adaugă bun">+</button></li>
+          </ol>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="confiscarea bunurilor">
+        <li class="subformular">
+          <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
+          <ol class="bunuri">
+            <li>
+              <label class="descriere">Descriere</label>
+              <label class="valoare">MDL</label>
+            </li>
+
+            <li class="cîmp eliminabil">
+              <textarea class="label descriere"></textarea>
+              <input class="valoare" value="0"/>
+            </li>
+
+            <li><button class="adaugă" title="Adaugă bun">+</button></li>
+          </ol>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="nimicirea unor bunuri">
+        <li class="subformular">
+          <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
+          <ol class="bunuri">
+            <li>
+              <label class="descriere">Descriere</label>
+              <label class="valoare">MDL</label>
+            </li>
+
+            <li class="cîmp eliminabil">
+              <textarea class="label descriere"></textarea>
+              <input class="valoare" value="0"/>
+            </li>
+
+            <li><button class="adaugă" title="Adaugă bun">+</button></li>
+          </ol>
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="restabilirea la locul de muncă">
+        <li class="subformular">
+          <label for="funcţie">Funcţie</label>
+          <input id="funcţie"/>
+        </li>
+
+        <li class="subformular">
+          <label for="salariu-recuperat">Salariu recuperat</label>
+          <input id="salariu-recuperat" class="sumă"/> MDL
+        </li>
+      </ul>
+
+
+      <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
+        <li class="subformular">
+          <label for="măsura-de-asigurare">Măsura de asigurare</label>
+          <select class="foarte lat care schimbă formularul" id="măsura-de-asigurare">
+            <option value="sechestru">aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
+            <option>interzicerea debitorului de a săvîrşi anumite acte</option>
+            <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
+            <option>suspendarea vînzării bunurilor sechestrate în cazul intentării unei acţiuni de ridicare a sechestrului de pe ele (radierea din actul  de inventar)</option>
+            <option>suspendarea urmăririi, întemeiate pe un document executoriu, contestat de către debitor pe cale judiciară</option>
           </select>
         </li>
-      </ul>
-    </div>
 
-    <div class="şablon persoană juridică">
-      <ul>
-        <li>
-          <label for="denumire">Denumire</label>
-          <input id="denumire"/>
-        </li>
-
-        <li>
-          <label for="idno">IDNO</label>
-          <input id="idno"/>
-        </li>
-
-        <li>
-          <label for="sediu" class="textarea">Sediu</label>
-          <textarea id="sediu" spellcheck="false"></textarea>
-        </li>
-
-        <li>
-          <label for="persoană-de-contact">Persoană de contact</label>
-          <input id="persoană-de-contact"/>
-        </li>
-
-        <li>
-          <label for="note-pj" class="textarea">Note</label>
-          <textarea id="note-pj" spellcheck="false"></textarea>
+        <li class="subformular">
+          <label for="bunuri-supuse-înregistrării-sau-bani">Bunuri supuse înregistrării obligatorii de stat sau pe mijloacele băneşti</label>
+          <input id="bunuri-supuse-înregistrării-sau-bani" type="checkbox"/>
         </li>
       </ul>
-    </div>
 
-    <div class="şablon persoană fizică">
-      <ul>
-        <li>
-          <label for="nume">Nume</label>
-          <input id="nume"/>
-        </li>
 
-        <li>
-          <label for="idnp">IDNP</label>
-          <input id="idnp"/>
-        </li>
-
-        <li>
-          <label for="data-naşterii">Data naşterii</label>
-          <input id="data-naşterii"/>
-        </li>
-
-        <li>
-          <label for="domiciliului">Domiciliu</label>
-          <textarea id="domiciliului" spellcheck="false"></textarea>
-        </li>
-
-        <li>
-          <label for="note-pf" class="textarea">Note</label>
-          <textarea id="note-pf" spellcheck="false"></textarea>
+      <ul class="şablon" title="sechestru">
+        <li class="subformular">
+          <label for="valoarea-acţiunii">Valoarea acţiunii</label>
+          <input id="valoarea-acţiunii" class="sumă"/>
+          <select class="valuta"></select>
         </li>
       </ul>
-    </div>
 
 
-    <select class="şablon valuta">
-      <option>MDL</option>
-      <option>USD</option>
-      <option>EUR</option>
-      <option>AED</option>
-      <option>ALL</option>
-      <option>AMD</option>
-      <option>AUD</option>
-      <option>AZN</option>
-      <option>BGN</option>
-      <option>BYR</option>
-      <option>CAD</option>
-      <option>CHF</option>
-      <option>CNY</option>
-      <option>CZK</option>
-      <option>DKK</option>
-      <option>GBP</option>
-      <option>GEL</option>
-      <option>HKD</option>
-      <option>HRK</option>
-      <option>HUF</option>
-      <option>ILS</option>
-      <option>INR</option>
-      <option>ISK</option>
-      <option>JPY</option>
-      <option>KGS</option>
-      <option>KRW</option>
-      <option>KWD</option>
-      <option>KZT</option>
-      <option>LTL</option>
-      <option>LVL</option>
-      <option>MKD</option>
-      <option>MYR</option>
-      <option>NOK</option>
-      <option>NZD</option>
-      <option>PLN</option>
-      <option>RON</option>
-      <option>RSD</option>
-      <option>RUB</option>
-      <option>SEK</option>
-      <option>TJS</option>
-      <option>TMT</option>
-      <option>TRY</option>
-      <option>UAH</option>
-      <option>UZS</option>
-      <option>XDR</option>
-    </select>
-
-
-    <ul class="şablon" title="evacuarea">
-      <li class="subformular">
-        <label for="din-încăperea">Din încăperea</label>
-        <textarea id="din-încăperea"></textarea>
-      </li>
-
-      <li class="subformular">
-        <label for="se-acordă-alt-spaţiu">Se acordă alt spaţiu</label>
-        <input id="se-acordă-alt-spaţiu" type="checkbox"/>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="instalarea">
-      <li class="subformular">
-        <label for="în-încăperea">În încăperea</label>
-        <textarea id="în-încăperea"></textarea>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="schimbul forţat">
-      <li class="subformular">
-        <label for="încăperea-pentru-creditor">Încăperea pentru creditor</label>
-        <textarea id="încăperea-pentru-creditor"></textarea>
-
-        <label for="încăperea-pentru-debitor">Încăperea pentru debitor</label>
-        <textarea id="încăperea-pentru-debitor"></textarea>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
-      <li class="subformular">
-        <label for="acte">Acte</label>
-        <textarea id="acte"></textarea>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
-      <li class="subformular">
-        <ol class="bunuri">
-          <li>
-            <label class="descriere">Descriere</label>
-            <label class="valoare">MDL</label>
-          </li>
-
-          <li class="cîmp eliminabil">
-            <textarea class="label descriere"></textarea>
-            <input class="valoare" value="0"/>
-          </li>
-
-          <li><button class="adaugă" title="Adaugă bun">+</button></li>
-        </ol>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
-      <li class="subformular">
-        <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-        <ol class="bunuri">
-          <li>
-            <label class="descriere">Descriere</label>
-            <label class="valoare">MDL</label>
-          </li>
-
-          <li class="cîmp eliminabil">
-            <textarea class="label descriere"></textarea>
-            <input class="valoare" value="0"/>
-          </li>
-
-          <li><button class="adaugă" title="Adaugă bun">+</button></li>
-        </ol>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="confiscarea bunurilor">
-      <li class="subformular">
-        <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-        <ol class="bunuri">
-          <li>
-            <label class="descriere">Descriere</label>
-            <label class="valoare">MDL</label>
-          </li>
-
-          <li class="cîmp eliminabil">
-            <textarea class="label descriere"></textarea>
-            <input class="valoare" value="0"/>
-          </li>
-
-          <li><button class="adaugă" title="Adaugă bun">+</button></li>
-        </ol>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="nimicirea unor bunuri">
-      <li class="subformular">
-        <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-        <ol class="bunuri">
-          <li>
-            <label class="descriere">Descriere</label>
-            <label class="valoare">MDL</label>
-          </li>
-
-          <li class="cîmp eliminabil">
-            <textarea class="label descriere"></textarea>
-            <input class="valoare" value="0"/>
-          </li>
-
-          <li><button class="adaugă" title="Adaugă bun">+</button></li>
-        </ol>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="restabilirea la locul de muncă">
-      <li class="subformular">
-        <label for="funcţie">Funcţie</label>
-        <input id="funcţie"/>
-      </li>
-
-      <li class="subformular">
-        <label for="salariu-recuperat">Salariu recuperat</label>
-        <input id="salariu-recuperat" class="sumă"/> MDL
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
-      <li class="subformular">
-        <label for="măsura-de-asigurare">Măsura de asigurare</label>
-        <select class="foarte lat care schimbă formularul" id="măsura-de-asigurare">
-          <option value="sechestru">aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
-          <option>interzicerea debitorului de a săvîrşi anumite acte</option>
-          <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
-          <option>suspendarea vînzării bunurilor sechestrate în cazul intentării unei acţiuni de ridicare a sechestrului de pe ele (radierea din actul  de inventar)</option>
-          <option>suspendarea urmăririi, întemeiate pe un document executoriu, contestat de către debitor pe cale judiciară</option>
-        </select>
-      </li>
-
-      <li class="subformular">
-        <label for="bunuri-supuse-înregistrării-sau-bani">Bunuri supuse înregistrării obligatorii de stat sau pe mijloacele băneşti</label>
-        <input id="bunuri-supuse-înregistrării-sau-bani" type="checkbox"/>
-      </li>
-    </ul>
-
-
-    <ul class="şablon" title="sechestru">
-      <li class="subformular">
-        <label for="valoarea-acţiunii">Valoarea acţiunii</label>
-        <input id="valoarea-acţiunii" class="sumă"/>
-        <select class="valuta"></select>
-      </li>
-    </ul>
-
-
-    <ul class="şablon subformular" title="documente">
-      <li>
-        <label class="denumire">Denumire</label>
-        <label class="cantitate">Cîte</label>
-      </li>
-
-      <li class="document eliminabil">
-        <textarea class="label denumire"></textarea>
-        <input class="cantitate" value="1"/>
-      </li>
-
-      <li><button class="adaugă" title="Adaugă document">+</button></li>
-    </ul>
-
-
-    <div class="şablon subformular" title="bifă “din arhivă”">
-      <input type="checkbox" id="din-arhivă" class="din arhivă"/><label for="din-arhivă">din arhivă (+1&nbsp;u.c.)</label>
-    </div>
-
-
-    <ul class="şablon subformular" title="documente adresabile">
-      <li><label class="denumire">Denumire document</label></li>
-
-      <li class="document eliminabil">
-        <textarea class="denumire"></textarea>
-
-        <ul class="destinatari-adăugaţi comprimaţi"></ul>
-        <div class="adaugă-destinatar"><span>Adaugă destinatari</span></div>
-      </li>
-
-      <li><button class="adaugă" title="Adaugă document">+</button></li>
-    </ul>
-
-
-    <div class="şablon subformular" title="ore lucrate">
-      <label class="stînga" for="ore-lucrate">Ore lucrate</label>
-      <input class="cantitate" id="ore-lucrate"/>
-    </div>
-
-
-    <div class="şablon subformular" title="bifă “licitaţie repetată”">
-      <input type="checkbox" class="licitaţie repetată" id="licitaţie-repetată"/>
-      <label for="licitaţie-repetată">licitaţie repetată (se aplică coeficientul 0.5)</label>
-    </div>
-
-
-    <div class="şablon subformular" title="contracte">
-      <ul>
+      <ul class="şablon subformular" title="documente">
         <li>
-          <label class="denumire">Contractul</label>
-          <label class="sumă">Suma</label>
+          <label class="denumire">Denumire</label>
+          <label class="cantitate">Cîte</label>
         </li>
 
         <li class="document eliminabil">
           <textarea class="label denumire"></textarea>
+          <input class="cantitate" value="1"/>
+        </li>
+
+        <li><button class="adaugă" title="Adaugă document">+</button></li>
+      </ul>
+
+
+      <div class="şablon subformular" title="bifă “din arhivă”">
+        <input type="checkbox" id="din-arhivă" class="din arhivă"/><label for="din-arhivă">din arhivă (+1&nbsp;u.c.)</label>
+      </div>
+
+
+      <ul class="şablon subformular" title="documente adresabile">
+        <li><label class="denumire">Denumire document</label></li>
+
+        <li class="document eliminabil">
+          <textarea class="denumire"></textarea>
+
+          <ul class="destinatari-adăugaţi comprimaţi"></ul>
+          <div class="adaugă-destinatar"><span>Adaugă destinatari</span></div>
+        </li>
+
+        <li><button class="adaugă" title="Adaugă document">+</button></li>
+      </ul>
+
+
+      <div class="şablon subformular" title="ore lucrate">
+        <label class="stînga" for="ore-lucrate">Ore lucrate</label>
+        <input class="cantitate" id="ore-lucrate"/>
+      </div>
+
+
+      <div class="şablon subformular" title="bifă “licitaţie repetată”">
+        <input type="checkbox" class="licitaţie repetată" id="licitaţie-repetată"/>
+        <label for="licitaţie-repetată">licitaţie repetată (se aplică coeficientul 0.5)</label>
+      </div>
+
+
+      <div class="şablon subformular" title="contracte">
+        <ul>
+          <li>
+            <label class="denumire">Contractul</label>
+            <label class="sumă">Suma</label>
+          </li>
+
+          <li class="document eliminabil">
+            <textarea class="label denumire"></textarea>
+            <input class="sumă"/>
+          </li>
+
+          <li><button class="adaugă" title="Adaugă contract">+</button></li>
+        </ul>
+      </div>
+
+
+      <ul class="şablon subformular" title="participanţi la licitaţie">
+        <li>
+          <label class="descriere">Nume participant</label>
+        </li>
+
+        <li class="document eliminabil">
+          <input class="descriere"/>
+        </li>
+
+        <li><button class="adaugă" title="Adaugă participant">+</button></li>
+      </ul>
+
+
+      <ul class="şablon subformular" title="listă cheltuieli">
+        <li>
+          <label class="descriere">Descriere</label>
+          <label class="sumă">Suma</label>
+        </li>
+
+        <li class="document eliminabil">
+          <textarea class="label descriere"></textarea>
           <input class="sumă"/>
         </li>
 
-        <li><button class="adaugă" title="Adaugă contract">+</button></li>
+        <li><button class="adaugă" title="Adaugă cîmp">+</button></li>
       </ul>
-    </div>
 
 
-    <ul class="şablon subformular" title="participanţi la licitaţie">
-      <li>
-        <label class="descriere">Nume participant</label>
-      </li>
+      <div class="şablon destinatari cu umbră">
+        <ul class="categorii">
+          <li class="categorie">
+            <span class="titlu">
+              Registratori independenţi
+              <span class="toate">[adaugă toate]</span>
+            </span>
 
-      <li class="document eliminabil">
-        <input class="descriere"/>
-      </li>
+            <ul class="listă cu umbră">
+              <li>“Registru-Corect” S.A. Chişinău, str. Columna 87</li>
+              <li>“Registru” S.A. MD-2012 Chişinău, str. Şciusev 47</li>
+              <li>“Grupa Financiară” S.A. Chişinău, str. Armenească 55, bir. 301</li>
+              <li>“Registrul-F” S.A. Chişinău, str.Teilor 9/4</li>
+              <li>“Registrator-Centru” S.A. Chişinău, Calea Ieşilor 10</li>
+              <li>“Registru-Ind” S.A. Chişinău, bd. Dacia 35</li>
+              <li>“Comitent” S.A. Chişinău, str. Negruzzi 2, of. 304</li>
+              <li>“Real-Registr” S.A. Bălţi, str. Kiev 122</li>
+              <li>“Soliditate” S.A. Chişinău, str. Feredeului 4</li>
+              <li>“Intermedia-Group” S.A. Chişinău, str. Podgorenilor 36</li>
+              <li>“Depozitarul Central” S.A. Chişinău, str. Vasile Alecsandri 119a</li>
+            </ul>
+          </li>
 
-      <li><button class="adaugă" title="Adaugă participant">+</button></li>
-    </ul>
+          <li class="categorie">
+            <span class="titlu">
+              S.A. care ţin registru acţionarilor de sine stătător
+              <span class="toate">[adaugă toate]</span>
+            </span>
 
+            <ul class="listă cu umbră">
+              <li>“Acvila-Sport” S.A. Chişinău, str. Bucuriei 5</li>
+              <li>“Aureola &amp; Lombard” S.A. Chişinău, bd. Ştefan cel Mare 132</li>
+            </ul>
+          </li>
 
-    <ul class="şablon subformular" title="listă cheltuieli">
-      <li>
-        <label class="descriere">Descriere</label>
-        <label class="sumă">Suma</label>
-      </li>
+          <li class="categorie">
+            <span class="titlu">
+              Bănci comerciale
+              <span class="toate">[adaugă toate]</span>
+            </span>
 
-      <li class="document eliminabil">
-        <textarea class="label descriere"></textarea>
-        <input class="sumă"/>
-      </li>
+            <ul class="listă cu umbră">
+              <li>“COMERŢBANK” S.A. 2043 Chişinău, str. Independenţei 1/1</li>
+              <li>“BANCA SOCIALĂ” S.A. 2005 Chişinău, str. Bănulescu-Bodoni 61</li>
+              <li>“VICTORIABANK” S.A. 2004 Chişinău, str.31 August 1989, 141</li>
+              <li>“MOLDOVA - AGROINDBANK” S.A. 2006 Chişinău, str.Cosmonauţilor 9</li>
+              <li>“Moldindconbank” S.A. 2012 Chişinău, str.Armenească, 38</li>
+              <li>“Banca de Economii” S.A. 2012 Chişinău, str. Columna 115</li>
+              <li>“EuroCreditBank” S.A. 2001 Chişinău, str. Ismail 33</li>
+              <li>“UNIBANK” S.A. 2012 Chişinău, str. Bănulescu-Bodoni 45</li>
+              <li>“Banca de Finanţe şi Comerţ” S.A. 2012 Chişinău, str. Puşkin 26</li>
+              <li>“ENERGBANK” S.A. 2012 Chişinău, str. Vasile Alecsandri 78</li>
+              <li>“ProCredit Bank” S.A. 2012 Chisinău, bd. Ştefan cel Mare 65, of. 901</li>
+              <li>“Banca Comercială Română Chişinău” S.A. 2005 Chişinău, str. Puşkin 60/2</li>
+              <li>“EXIMBANK - Gruppo Veneto Banca” S.A. 2004 Chişinău, bd. Ştefan cel Mare 171/1</li>
+              <li>“MOBIASBANCĂ - Groupe Societe Generale” S.A. 2012 Chişinău, bd. Ştefan cel Mare 81a</li>
+            </ul>
+          </li>
 
-      <li><button class="adaugă" title="Adaugă cîmp">+</button></li>
-    </ul>
+          <li class="categorie">
+            <span class="titlu">Deţinători de registre şi alte parsoane terţe</span>
 
-
-    <div class="şablon destinatari cu umbră">
-      <ul class="categorii">
-        <li class="categorie">
-          <span class="titlu">
-            Registratori independenţi
-            <span class="toate">[adaugă toate]</span>
-          </span>
-
-          <ul class="listă cu umbră">
-            <li>“Registru-Corect” S.A. Chişinău, str. Columna 87</li>
-            <li>“Registru” S.A. MD-2012 Chişinău, str. Şciusev 47</li>
-            <li>“Grupa Financiară” S.A. Chişinău, str. Armenească 55, bir. 301</li>
-            <li>“Registrul-F” S.A. Chişinău, str.Teilor 9/4</li>
-            <li>“Registrator-Centru” S.A. Chişinău, Calea Ieşilor 10</li>
-            <li>“Registru-Ind” S.A. Chişinău, bd. Dacia 35</li>
-            <li>“Comitent” S.A. Chişinău, str. Negruzzi 2, of. 304</li>
-            <li>“Real-Registr” S.A. Bălţi, str. Kiev 122</li>
-            <li>“Soliditate” S.A. Chişinău, str. Feredeului 4</li>
-            <li>“Intermedia-Group” S.A. Chişinău, str. Podgorenilor 36</li>
-            <li>“Depozitarul Central” S.A. Chişinău, str. Vasile Alecsandri 119a</li>
-          </ul>
-        </li>
-
-        <li class="categorie">
-          <span class="titlu">
-            S.A. care ţin registru acţionarilor de sine stătător
-            <span class="toate">[adaugă toate]</span>
-          </span>
-
-          <ul class="listă cu umbră">
-            <li>“Acvila-Sport” S.A. Chişinău, str. Bucuriei 5</li>
-            <li>“Aureola &amp; Lombard” S.A. Chişinău, bd. Ştefan cel Mare 132</li>
-          </ul>
-        </li>
-
-        <li class="categorie">
-          <span class="titlu">
-            Bănci comerciale
-            <span class="toate">[adaugă toate]</span>
-          </span>
-
-          <ul class="listă cu umbră">
-            <li>“COMERŢBANK” S.A. 2043 Chişinău, str. Independenţei 1/1</li>
-            <li>“BANCA SOCIALĂ” S.A. 2005 Chişinău, str. Bănulescu-Bodoni 61</li>
-            <li>“VICTORIABANK” S.A. 2004 Chişinău, str.31 August 1989, 141</li>
-            <li>“MOLDOVA - AGROINDBANK” S.A. 2006 Chişinău, str.Cosmonauţilor 9</li>
-            <li>“Moldindconbank” S.A. 2012 Chişinău, str.Armenească, 38</li>
-            <li>“Banca de Economii” S.A. 2012 Chişinău, str. Columna 115</li>
-            <li>“EuroCreditBank” S.A. 2001 Chişinău, str. Ismail 33</li>
-            <li>“UNIBANK” S.A. 2012 Chişinău, str. Bănulescu-Bodoni 45</li>
-            <li>“Banca de Finanţe şi Comerţ” S.A. 2012 Chişinău, str. Puşkin 26</li>
-            <li>“ENERGBANK” S.A. 2012 Chişinău, str. Vasile Alecsandri 78</li>
-            <li>“ProCredit Bank” S.A. 2012 Chisinău, bd. Ştefan cel Mare 65, of. 901</li>
-            <li>“Banca Comercială Română Chişinău” S.A. 2005 Chişinău, str. Puşkin 60/2</li>
-            <li>“EXIMBANK - Gruppo Veneto Banca” S.A. 2004 Chişinău, bd. Ştefan cel Mare 171/1</li>
-            <li>“MOBIASBANCĂ - Groupe Societe Generale” S.A. 2012 Chişinău, bd. Ştefan cel Mare 81a</li>
-          </ul>
-        </li>
-
-        <li class="categorie">
-          <span class="titlu">Deţinători de registre şi alte parsoane terţe</span>
-
-          <ul class="listă cu umbră">
-            <li class="suplimentar">ÎS “CRIS Registru” 2012 Chişinau, str. Puşkin 42</li>
-            <li class="suplimentar">ÎS “Cadastru” 2012 Chişinău, str. Puşkin 47</li>
-            <li class="suplimentar">Camera Înregistrării de Stat de pe lîngă MJRM 2001 Chişinău, bd. Ştefan Cel Mare 73</li>
-            <li class="suplimentar">Inspectoratul Fiscal Principal de Stat de pe lîngă MFRM 2005 Chisinau, str. Cosmonauţilor 9</li>
-            <li class="suplimentar">Casa Naţională de Asigurări Sociale a RM 2028 Chişinău, str. Gheorghe Tudor 3</li>
-            <li class="suplimentar">“Depozitarul Naţional de Valori Mobiliare al Moldovei” S.A. Chişinău, bd. Ştefan cel Mare 73</li>
-            <li class="suplimentar persoană terţă">persoană terţă</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+            <ul class="listă cu umbră">
+              <li class="suplimentar">ÎS “CRIS Registru” 2012 Chişinau, str. Puşkin 42</li>
+              <li class="suplimentar">ÎS “Cadastru” 2012 Chişinău, str. Puşkin 47</li>
+              <li class="suplimentar">Camera Înregistrării de Stat de pe lîngă MJRM 2001 Chişinău, bd. Ştefan Cel Mare 73</li>
+              <li class="suplimentar">Inspectoratul Fiscal Principal de Stat de pe lîngă MFRM 2005 Chisinau, str. Cosmonauţilor 9</li>
+              <li class="suplimentar">Casa Naţională de Asigurări Sociale a RM 2028 Chişinău, str. Gheorghe Tudor 3</li>
+              <li class="suplimentar">“Depozitarul Naţional de Valori Mobiliare al Moldovei” S.A. Chişinău, bd. Ştefan cel Mare 73</li>
+              <li class="suplimentar persoană terţă">persoană terţă</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
 
 
-    <div class="şablon elimină" title="Elimină">&times;</div>
+      <div class="şablon elimină" title="Elimină">&times;</div>
 
 
-    <div class="şablon subformular achitare">
-      <input type="checkbox"/><label>achitat</label>
-      <span class="la">la <span class="data"></span></span>
-    </div>
+      <div class="şablon subformular achitare">
+        <input type="checkbox"/><label>achitat</label>
+        <span class="la">la <span class="data"></span></span>
+      </div>
 
 
-    <div class="şablon subformular persoană terţă">
-      <label>Persoană terţă:</label>
-      <input/>
+      <div class="şablon subformular persoană terţă">
+        <label>Persoană terţă:</label>
+        <input/>
+      </div>
     </div>
 
 

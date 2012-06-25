@@ -11,6 +11,7 @@ TODO:
 * optimizare şabloane: de mutat toate în #şablon
 * design
   * tranziţie pentru adăugare/ştergere/scroll
+  * procedurile recente ca teanc de foi (ca şi la procedurile noi)
 * HG: 52, 54, 68? 75? 78
 
 Causality
