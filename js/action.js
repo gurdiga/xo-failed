@@ -580,7 +580,7 @@ var Formular = {
         Formular.încarcă();
       }
 
-      Formular.deschide($('a[href="' + location.hash + '"]'));
+      Formular.deschide();
       Business.init();
     });
   },
@@ -809,7 +809,11 @@ var Formular = {
     populeazăPersoaneleTerţe();
     populeazăDebitori();
 
-    $("#formular").focus().animate({ scrollTop: 0 }, 0);
+    $('#formular')
+      .attr('tabindex', 1)
+      .focus()
+      .removeAttr('tabindex')
+      .animate({ scrollTop: 0 }, 0);
 
 
     // ------------------------------------------
@@ -1001,14 +1005,10 @@ var Formular = {
     Formular.resetează();
   },
 
-  deschide: function(link) {
+  deschide: function() {
     Formular.seteazăTitlu();
 
     $('#formular, #umbră').hide().fadeIn('fast');
-    $('#formular')
-      .attr('tabindex', 1)
-      .focus()
-      .removeAttr('tabindex');
     $(document).on('keydown', Formular.esc);
   },
 
@@ -1062,7 +1062,7 @@ var Căutare = {
   init: function() {
     Căutare.$el = $('#căutare')
       .on('keyup update paste', 'input', Căutare.găseşte)
-      .on('keydown', 'input', Căutare.evidenţiazăItem)
+      .on('keydown', 'input', Căutare.selecteazăItem)
       .on('keydown', 'input', Căutare.anuleazăCăutarea);
 
     Căutare.hoverItemRezultate();
@@ -1092,7 +1092,7 @@ var Căutare = {
     if (număr) location.hash = 'formular?' + număr;
   },
 
-  evidenţiazăItem: function(e) {
+  selecteazăItem: function(e) {
     var tasta = e.which,
         SUS = 38,
         JOS = 40,

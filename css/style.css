@@ -475,7 +475,7 @@ fieldset#creditor button.elimină-persoană {
 .pecuniar .subformular,
 .bunuri {
   list-style-type: none;
-  padding: 0 0 0 2em;
+  padding: .2em 0 0 2em;
 }
 
 #cheltuieli .subformular label,
