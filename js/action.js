@@ -17,7 +17,7 @@ var Action = {
 
     $(window).trigger('hashchange');
 
-    Căutare.init();
+    if (Utilizator.autentificat) Căutare.init();
   },
 
   '#index': function() {

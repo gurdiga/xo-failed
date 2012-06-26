@@ -78,7 +78,7 @@ var DobîndaBNM = {
     for (data in DobîndaBNM.rate) {
       if (data < primaDatăAplicabilă) continue;
 
-      rata = DobîndaBNM.rate[data] / 100;
+      rata = (DobîndaBNM.rate[data] + 9) / 100;
       dobînda += suma * rata / 365 * durate[data];
     }
 
