@@ -2,7 +2,7 @@ TODO:
 -----
 
 * toolbar pentru acţiuni formular
-  * de tăiat iconiţele
+  * de definit formele
 * “poliţă” temporară
 * înregistrare utilizator
 * authentificare nginx: areal unic

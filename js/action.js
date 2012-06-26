@@ -11,7 +11,7 @@ var Action = {
     ListeFoarteLate.seteazăŞoapte();
     Persoane.init();
     Cheltuieli.init();
-    Eliminabile.init();
+    ButonDeEliminare.init();
     Formular.init();
     AcţiuniFormular.init();
 
@@ -136,8 +136,10 @@ var Persoane = {
           aceastăPersoană = button.closest('fieldset');
           celelaltePersoane = aceastăPersoană.siblings('fieldset');
 
-      aceastăPersoană.remove();
-      celelaltePersoane.toggleClass('dispensabilă', celelaltePersoane.length > 1);
+      aceastăPersoană.slideUp(function() {
+        aceastăPersoană.remove()
+        celelaltePersoane.toggleClass('dispensabilă', celelaltePersoane.length > 1);
+      });
     });
   }
 };
@@ -482,25 +484,25 @@ var Cheltuieli = {
 
 // --------------------------------------------------
 
-var Eliminabile = {
-  buton: null,
+var ButonDeEliminare = {
+  $: null,
 
   init: function() {
-    this.buton = $('.şablon.elimină')
+    this.$ = $('.şablon.elimină')
       .removeClass('şablon')
       .hide()
-      .on('click', this.elimină);
+      .on('click', this.acţionează);
 
     $('#formular')
-      .on('mousemove', '.eliminabil', this.afişeazăButon)
-      .on('mouseleave', '.eliminabil', this.ascundeButon);
+      .on('mousemove', '.eliminabil', this.afişează)
+      .on('mouseleave', '.eliminabil', this.ascunde);
   },
 
-  afişeazăButon: function(e) {
+  afişează: function(e) {
     e.stopPropagation();
 
     var eliminabil = $(this),
-        buton = Eliminabile.buton;
+        buton = ButonDeEliminare.$;
 
     if (eliminabil.is('.spre-eliminare')) return;
 
@@ -516,32 +518,38 @@ var Eliminabile = {
     eliminabil.addClass('spre-eliminare');
   },
 
-  ascundeButon: function() {
-    Eliminabile.buton
+  ascunde: function() {
+    ButonDeEliminare.$
       .hide()
       .parent().removeClass('spre-eliminare').end()
       .appendTo(document.body);
   },
 
-  elimină: function() {
-    var eliminabil = Eliminabile.buton.parent();
+  acţionează: function() {
+    var eliminabil = ButonDeEliminare.$.parent();
 
-    Eliminabile.ascundeButon();
+    ButonDeEliminare.ascunde();
 
     if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
       eliminabil
         .find('.valoare, .sumă').val(0).trigger('change').end()
         .trigger('eliminare')
-        .remove();
+        .slideUp(function() {
+          eliminabil.remove();
+          TotalCheltuieli.calculează();
+        });
     } else {
       eliminabil
-        .find('.eliminabil.de.tot').remove().end()
-        .find('.valoare, .sumă').val(0).trigger('change').end()
-        .find('textarea').val('').trigger('change').end()
-        .trigger('eliminare');
-    }
+        .find('.eliminabil.de.tot').slideUp(function() {
+          eliminabil
+            .find('.valoare, .sumă').val(0).trigger('change').end()
+            .find('textarea').val('').trigger('change').end()
+            .trigger('eliminare');
 
-    TotalCheltuieli.calculează();
+          $(this).remove();
+          TotalCheltuieli.calculează();
+        });
+    }
   }
 };
 
