@@ -406,6 +406,7 @@ div.pagină#formular>.conţinut {
   top: 2px;
   padding: .1em;
   line-height: .6em;
+  color: #888;
 }
 
 .semiascuns {
@@ -533,18 +534,19 @@ fieldset#creditor button.elimină-persoană {
 button.adaugă {
   font-size: 1.5em;
   font-weight: normal;
-  padding: 0;
-  margin-left: .2em;
+  padding: 0 .5em .5em;
+  margin-left: -.2em;
   border: none;
   line-height: .7em;
   background: transparent;
-  top: -.3em;
+  top: -.2em;
   position: relative;
 }
 
 button.adaugă.persoană {
   font-weight: bold;
-  margin-left: 1em;
+  margin-left: .5em;
+  padding: .5em;
 }
 
 button.adaugă .legend.label {
