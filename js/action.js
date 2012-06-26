@@ -13,6 +13,7 @@ var Action = {
     Cheltuieli.init();
     Eliminabile.init();
     Formular.init();
+    AcţiuniFormular.init();
 
     $(window).trigger('hashchange');
 
@@ -1241,6 +1242,36 @@ var Căutare = {
 
 // --------------------------------------------------
 
+var AcţiuniFormular = {
+  init: function() {
+    $('#acţiuni-formular')
+      .on('mouseenter', '.imprimă', function() {
+        $(this).next('.opţiuni').afişează();
+      })
+      .on('mouseleave', '.imprimă', function() {
+        var opţiuni = $(this).next('.opţiuni');
+
+        setTimeout(function() {
+          if (!opţiuni.data('atins')) opţiuni.ascunde();
+        }, 500);
+      })
+      .on('mouseenter', '.imprimă+.opţiuni', function() {
+        $(this).data('atins', true);
+      })
+      .on('mouseleave', '.imprimă+.opţiuni', function() {
+        $(this)
+          .ascunde()
+          .removeData('atins');
+      })
+      .on('click', '.imprimă+.opţiuni li', function() {
+        $(this).parent().ascunde();
+        // TODO
+      });
+  }
+};
+
+// --------------------------------------------------
+
 $.fn.există = function() {
   return this.length > 0;
 }
@@ -1248,13 +1279,13 @@ $.fn.există = function() {
 // --------------------------------------------------
 
 $.fn.ascunde = function() {
-  return this.clearQueue().hide();
+  return this.stop(true, true).fadeOut();
 };
 
 // --------------------------------------------------
 
 $.fn.afişează = function() {
-  return this.delay(200).fadeIn(0);
+  return this.delay(200).fadeIn();
 };
 
 // --------------------------------------------------

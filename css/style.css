@@ -86,7 +86,6 @@ button {
   padding: .3em .6em;
   font-weight: bold;
   font-size: small;
-  color: #333;
 }
 
 #index {
@@ -407,11 +406,18 @@ div.pagină#formular>.conţinut {
   top: 2px;
   padding: .1em;
   line-height: .6em;
-  color: #aaa;
 }
 
-#formular button.închide:hover {
-  color: #333;
+.semiascuns {
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+  opacity: .5;
+}
+
+.semiascuns:hover {
+  opacity: 1;
 }
 
 #formular fieldset {
@@ -428,6 +434,7 @@ button.elimină-persoană {
   float: right;
   padding: .2em;
   line-height: .6em;
+  color: white;
 }
 
 .elimină {
@@ -439,22 +446,12 @@ button.elimină-persoană {
   background: white;
 }
 
-button.elimină-persoană,
-.elimină {
-  color: #999;
-}
-
 .spre-eliminare {
   position: relative;
 }
 
 button.elimină-persoană:hover {
   color: white;
-}
-
-button.adaugă:hover,
-.elimină:hover {
-  color: #333;
 }
 
 fieldset.dispensabilă button.elimină-persoană {
@@ -543,7 +540,6 @@ button.adaugă {
   background: transparent;
   top: -.3em;
   position: relative;
-  color: #999;
 }
 
 button.adaugă.persoană {
@@ -917,4 +913,29 @@ input[type="checkbox"]+label {
 
 #acţiuni-formular button.imprimă {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGgIpKGu719AAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACTUlEQVRo3u2ZMc/pUBjH/+emSWuqTph0U5PabGLCB5Awie8hkU462owmYdORyWiskVEiYZBgokmT8w5v2ij3pd7e95Z7z5M0os6p53fOeZ7/c04Jx3EUb2y/8ObGABgAA2AADIABMIAwjQv6gGw2C0VRvt3fNE0sFovwAEqlElqt1rf712q1cAEo/Sxmz+czjsej736iKEIQhPCXkGPH4xGqquJ0Oj1sK8syJpPJawEAwH6/99VutVqFE8TpdBrVatVzL5/Pu0tC13VYlnX3GTzPgxDijn69Xoeqqp6gNgzDt0/kmR1ZuVzGcDgEz/M/lhYNw7gZpLfSgUczyJT4n1Li8/n8GUiEgOd5jw5QSkEIuasDznIJElOBAJbLJdrtNizLQjKZxHw+9zhlWZb7eWmCILjlB6UUmqYhFouFowONRgO5XA7b7RaZTMZXn0gkgl6vB0mSMBgMXDUPBUCWZYii6EuBryFEUfz7QXw9WkE1QVGUp1NnIICvAvNewD7K+6EFsbN8fjczl5ZIJDzBLMuy+1uxWHSz2Y8DHA4HTKdTEELcNJlKpSDL8t0ZaLfbKBQKN2kUABaLhae4m81mTxJwHA1yNZtNats2Xa/XX7bp9/vUtu2ba7fb0UqlEuj/AyuxM/LPxsDhcICmaRiNRuGWEs7ap5RCkiSPWN1zXtd1dLvd19nQRKNRmKbpzoQD5pQZ1853Op3XOJVwHBYEAfF43NcpxmazeZ1jlfF47HHosv65HHnn+5/eDBH2jowBMAAGwAAYAANgAP8xwAefJRXQyOt+TwAAAABJRU5ErkJggg==');
+}
+
+#acţiuni-formular button+.opţiuni {
+  position: absolute;
+  right: 0;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 2em;
+  display: none;
+}
+
+#acţiuni-formular button+.opţiuni li {
+  -webkit-transition: opacity .75s;
+  -moz-transition: opacity .75s;
+  -o-transition: opacity .75s;
+  transition: opacity .75s;
+  color: white;
+  background-color: black;
+  opacity: .7;
+  padding: 0 1em;
+  cursor: pointer;
+}
+
+#acţiuni-formular button+.opţiuni li:hover {
+  opacity: .9;
 }
