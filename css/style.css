@@ -176,23 +176,9 @@ button {
 }
 
 #proceduri-recente li {
-  list-style-type: circle;
-  list-style-position: inside;
-  color: #999;
-}
-
-#proceduri-recente li:hover {
-  color: black;
-}
-
-#proceduri-recente a {
-  font-weight: bold;
-  text-decoration: none;
-  color: #555;
-}
-
-#proceduri-recente a:hover {
-  color: black;
+  font-family: 'Oswald', Arial, sans-serif;
+  font-size: 1.3em;
+  line-height: 1.4em;
 }
 
 #index label,
@@ -227,19 +213,28 @@ button.mare {
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
   font-family: 'Oswald', Arial, sans-serif;
-  font-size: 1.6em;
+  font-size: 1.4em;
+}
+
+#index a {
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+  opacity: .7;
+  color: #333;
+  text-decoration: none;
+}
+
+#index a:hover {
+  opacity: 1;
 }
 
 #crează-procedură li a {
   display: block;
-  padding: 25px 20px;
+  padding: 22px 20px;
   width: 100%;
   height: 100%;
-  font-size: .9em;
-}
-
-#crează-procedură li:hover a {
-  color: black;
 }
 
 #crează-procedură li:nth-child(2) {
@@ -248,11 +243,6 @@ button.mare {
 
 #crează-procedură li:nth-child(3) {
   top: 5.2em;
-}
-
-#crează-procedură a {
-  color: #555;
-  text-decoration: none;
 }
 
 h1 {
