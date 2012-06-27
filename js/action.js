@@ -13,7 +13,7 @@ var Action = {
     Cheltuieli.init();
     ButonDeEliminare.init();
     Formular.init();
-    AcţiuniFormular.init();
+    Instrumente.init();
 
     $(window).trigger('hashchange');
 
@@ -1250,28 +1250,38 @@ var Căutare = {
 
 // --------------------------------------------------
 
-var AcţiuniFormular = {
+var Instrumente = {
   init: function() {
-    $('#acţiuni-formular')
-      .on('mouseenter', '.imprimă', function() {
-        $(this).next('.opţiuni').afişează();
-      })
-      .on('mouseleave', '.imprimă', function() {
-        var opţiuni = $(this).next('.opţiuni');
+    this.initOpţiuni();
+  },
 
-        setTimeout(function() {
-          if (!opţiuni.data('atins')) opţiuni.ascunde();
-        }, 500);
+  initOpţiuni: function() {
+    $('.instrumente button+.opţiuni')
+      .each(function() {
+        var opţiuni = $(this),
+            buton = opţiuni.prev('button');
+
+        buton
+          .on('mouseenter', function() {
+            opţiuni.afişează();
+          })
+          .on('mouseleave', function() {
+            opţiuni.stop(true, true);
+
+            setTimeout(function() {
+              if (!opţiuni.data('atins')) opţiuni.ascunde();
+            }, 500);
+          })
       })
-      .on('mouseenter', '.imprimă+.opţiuni', function() {
+      .on('mouseenter', function() {
         $(this).data('atins', true);
       })
-      .on('mouseleave', '.imprimă+.opţiuni', function() {
+      .on('mouseleave', function() {
         $(this)
           .ascunde()
           .removeData('atins');
       })
-      .on('click', '.imprimă+.opţiuni li', function() {
+      .on('click', 'li', function() {
         $(this).parent().ascunde();
         // TODO
       });

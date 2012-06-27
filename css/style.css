@@ -209,10 +209,6 @@ button.mare {
   height: 450px;
 }
 
-#crează-procedură .şoaptă {
-  margin-left: 20px;
-}
-
 #crează-procedură ul {
   margin: 0;
   list-style-type: none;
@@ -246,19 +242,12 @@ button.mare {
   color: black;
 }
 
-#crează-procedură li:nth-child(1) {
-  top: 0;
-  left: 20px;
-}
-
 #crează-procedură li:nth-child(2) {
   top: 2.6em;
-  left: 10px;
 }
 
 #crează-procedură li:nth-child(3) {
   top: 5.2em;
-  left: 0;
 }
 
 #crează-procedură a {
@@ -876,68 +865,88 @@ input[type="checkbox"]+label {
   vertical-align: -.2em;
 }
 
-#acţiuni-formular {
-  position: fixed;
-  right: 30px;
-  top: 10px;
+.instrumente {
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  background-color: white;
   padding: 0;
 }
 
-#acţiuni-formular button {
+#index .instrumente {
+  position: absolute;
+  left: 60%;
+  top: 10px;
+  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
+}
+
+#formular .instrumente {
+  position: fixed;
+  right: 30px;
+  top: 10px;
+}
+
+.instrumente button {
   height: 48px;
   width: 48px;
   padding: 0;
   border: none;
-  display: block;
   background: black url('data:image/png;base64,') no-repeat 0 0;
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
   -o-transition: opacity .75s;
   opacity: .8;
   transition: opacity .75s;
+  text-indent: -100em;
 }
 
-#acţiuni-formular button:hover {
+#formular .instrumente button {
+  display: block;
+}
+
+.instrumente button:hover {
   opacity: .9;
 }
 
-#acţiuni-formular button.salvează {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGgIPJdbUKEkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAABkklEQVRo3u2Zsa6CMBSGf25I6EadcMSRideokyNxk8mO+Bhu8Ag8Bhsjj+BmN90Ik2HCSXLvjeZart7K9fwJCVDa9OvpOactlm3bHUasD4xcBEAABEAABEAABGBS9pBK0+kUANC2LRzHAQA0TYPT6XRXfcYYOOc4Ho9/bwHOOZRSUErhcDj090mS3N3GcrmEUgppmpqxgK7iOMZisQAAbDab/r2UEgC04I34QBiGEEJACAHO+ZcyKSWyLBu3E6/X68HT6WWikJQSs9mM8sB75AFdFUWBpmkA4CGx/ykAjDFMJpOrZVVVoaqq/tl13YcBWLqnEo/KoNcUBAH2+z05sdbcZoz96srz3LwPbLfbQfP6spQwDuD7PjzPG28YjaJo3HmgLMubIfSnRd5LABRFAc45uq4bpwXSNO13Zp93afdI59unAex2u0FOzBhD27bmAVarFVzX1Rr9S8eNWsDzPAghYFlW3yGdEZ3P5/0Bwduuhawhv5hujZquA3+vW9f18y1AOzICIAACIAACIAAC+EcAZ7U2g/5+wH50AAAAAElFTkSuQmCC');
+.instrumente button.salvează {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCQpHDl7uAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAEJSURBVFjD7ZetDsIwFEbPCMnmKIpJkCheYygkwYFiEh4DB4/AY8wh9wg46sARFKkCQwh/HYOuQEK/qabLTu/97u1ar3zAqkrgAA7gAA7wTGX9VAgofGDH/sF8gGDzfgQCiWSNRDJ6+EYPydQkAp0GdIAxADFo8AYetIiIEKdRzMy2ycPMRBVSRTGN/+wDnRJ2kKMDXgAEVC9GKSkAlVwAT3eqELnXCNBk9aMmJwRPnrm5B5OMbMdFmFynZrdMu7b7YHFVpLcbXwGABMHBZgRT/PO/7V6+OWCZYXKAMgf0qWjWr8wjqBHhoU4fu1eb8Nt7kae/QoVXychKhWL7egTu6OgADuAAHwQcAbNkL6DGQJSyAAAAAElFTkSuQmCC');
 }
 
-#acţiuni-formular button.editează {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGgIoMo/CH+sAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACsElEQVRo3u2Zv2vyQBjHv3k5iIJSM4iXKdkaJx3tZras3RwK6aZCS+1Q6tA/oVAdOncqxkHaMZ1M/wAHwaFOLoKro4Jw75RgqtXWmLyW9x44EnL3PPl+7kcuTyIQQhh+sf3BLzcOwAE4AAfgAByAA3CATxaPx7/dluzzxtlsFpZlIZPJeNcEQQBjbOV82TRNw3Q6BQBIkoRut4v393dcXV1FB2AYBizLQiwWAwB8fHyg3+/72oiiiPl87h0Nw8DR0ZFX74rXNA2apkEURVQqlS0EhLCg5fLyki0WC1+5u7vb6tfr9dh4PGaJRIIRQtjZ2dlKnMfHx40xAq+BZrOJh4eHlevz+Xyr72Qyga7riMfjqFarsCwL19fXvjblchnn5+fhjECn01npMbfc3Nxs9U8mkyydTrPBYMAWiwW7v79nhBB2cXHhxXl+ft4cJ0jv5/P5L+tEUdzqH4vF0O12Icsyms0marUaAKBerwMATk5OYJrmxhhCkJRyOBxCURSUSqWVun6/j9Fo9KWvu2AppdB1Haqq4uXlxZuWt7e30T1GX19ff9TeFS/LMorFIhRF8cQDAKX0cDcySZLgOA4opSgWi1BVFe1226tvt9tbp01oG9l3xWcyGRiGsdLzPxUf6Qgsi9d1HZRS39TbRXxkAJRSn3hVVfciPhIASZJg27ZPfNBpE+kacBwHqqqiUCjsXXzoI1AoFHB8fAwAME1zrXhZlr0XwIMDMAzD25XdXfazeMdxDh9g2ZanTavVgqIoge5Bwly87rvSbDbD29sbbNvG09PTTplX5AC5XA6NRgO2bcNxnNBGmYT59AlT+F4BTk9PAQCMMQiCsLbNurpUKnUYAK1W6599wQgEUCqVfEn555RyU1KznNy7XyR2MYH/I+MAHIADcAAOwAE4wH8M8BfVC39PU3vnDAAAAABJRU5ErkJggg==');
+.instrumente button.imprimă {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
 }
 
-#acţiuni-formular button.imprimă {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGgIpKGu719AAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACTUlEQVRo3u2ZMc/pUBjH/+emSWuqTph0U5PabGLCB5Awie8hkU462owmYdORyWiskVEiYZBgokmT8w5v2ij3pd7e95Z7z5M0os6p53fOeZ7/c04Jx3EUb2y/8ObGABgAA2AADIABMIAwjQv6gGw2C0VRvt3fNE0sFovwAEqlElqt1rf712q1cAEo/Sxmz+czjsej736iKEIQhPCXkGPH4xGqquJ0Oj1sK8syJpPJawEAwH6/99VutVqFE8TpdBrVatVzL5/Pu0tC13VYlnX3GTzPgxDijn69Xoeqqp6gNgzDt0/kmR1ZuVzGcDgEz/M/lhYNw7gZpLfSgUczyJT4n1Li8/n8GUiEgOd5jw5QSkEIuasDznIJElOBAJbLJdrtNizLQjKZxHw+9zhlWZb7eWmCILjlB6UUmqYhFouFowONRgO5XA7b7RaZTMZXn0gkgl6vB0mSMBgMXDUPBUCWZYii6EuBryFEUfz7QXw9WkE1QVGUp1NnIICvAvNewD7K+6EFsbN8fjczl5ZIJDzBLMuy+1uxWHSz2Y8DHA4HTKdTEELcNJlKpSDL8t0ZaLfbKBQKN2kUABaLhae4m81mTxJwHA1yNZtNats2Xa/XX7bp9/vUtu2ba7fb0UqlEuj/AyuxM/LPxsDhcICmaRiNRuGWEs7ap5RCkiSPWN1zXtd1dLvd19nQRKNRmKbpzoQD5pQZ1853Op3XOJVwHBYEAfF43NcpxmazeZ1jlfF47HHosv65HHnn+5/eDBH2jowBMAAGwAAYAANgAP8xwAefJRXQyOt+TwAAAABJRU5ErkJggg==');
+.instrumente button.calculator {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCBwFOX6roAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAD+SURBVFjD7detTgNBEMDxX0mTOxSgKApJccg6QF2rKBIHrrwBKHAEh0OjeAVeAUVxoOAUqQLJKRA9U3G5kmwhJTtiNpPZ5J+dz2yj+WWmskAEREAERECdNOsutPQqPEMPIQBt1xWey6kAfx+iseQ+J+yN0ICulwn72Xrsg19Oct87Ckmpl0IDLuY+B09ekXvEyDA8YN8AJzLc6sjD52ARA3voWrYavopguxx/7fAh2tLDgTVcScOHqG8FmRY2HYXvg3NwCDLZLKroGKd2caNjFBqQSpBKkUh/8IJG3f9gx13lyjybi2n64V6ioNTjM1F4CxOiuNEiIAIi4D8AvgGfByuncqs6zwAAAABJRU5ErkJggg==');
 }
 
-#acţiuni-formular button+.opţiuni {
+.instrumente button.profil {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCQQ063lZ9AAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAExSURBVFjD7ZaxTgJBEIa/MyRceVRAp93ZHW9giR2dlPoGUNlqYmNnY9RKOuygtKSEipZOqZTq7AyJydkRYDmYuVsKkp1tdid38+Wf2Z1dr5CwVzsCB3AABzh4QEHzccAZHgPi/ShoMeWNLl/cqCQksnGX/C2Nx0T6nyfrpqeM1zx1BjZTdG142sIMCRVMKRs+354Cf0N4qNoDBApvJsD3Rm9ss8gTwzNLwWYE9AWeXLuoxMfargn5tKkgprmyvhKGV/Sid+4X8w5d+80uJFzMT4jEAEENajS44Ng42z36DPMBfC5pGaFXT8gDL/xmA5zzREWQhB/aW2qSWoNbeqLwEPDKs1aB2f93Wdr9kKIgQmuRLkVFNcDXvSpmjJZgc4rMd15JuXqRezo6gAM4gANstX81nG1PtLb3GgAAAABJRU5ErkJggg==');
+}
+
+.instrumente button+.opţiuni {
   position: absolute;
   right: 0;
   white-space: nowrap;
   margin: 0;
   line-height: 2em;
   display: none;
+  z-index: 2;
 }
 
-#acţiuni-formular button+.opţiuni li {
+.instrumente button+.opţiuni li {
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
   -o-transition: opacity .75s;
   transition: opacity .75s;
   color: white;
   background-color: black;
-  opacity: .7;
+  opacity: .8;
   padding: 0 1em;
   cursor: pointer;
 }
 
-#acţiuni-formular button+.opţiuni li:hover {
-  opacity: .9;
+.instrumente button+.opţiuni li:hover {
+  opacity: 1;
 }
