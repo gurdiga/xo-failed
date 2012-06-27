@@ -239,10 +239,12 @@ button.mare {
 
 #crează-procedură li:nth-child(2) {
   top: 2.6em;
+  left: 5px;
 }
 
 #crează-procedură li:nth-child(3) {
   top: 5.2em;
+  left: 10px;
 }
 
 h1 {
