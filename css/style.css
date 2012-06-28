@@ -221,8 +221,8 @@ button.mare {
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .7;
-  color: #333;
+  opacity: .5;
+  color: black;
   text-decoration: none;
 }
 
