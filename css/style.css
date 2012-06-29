@@ -4,6 +4,7 @@ body {
   font: 14px Arial, sans-serif;
   padding: 0 10px;
   margin: 0;
+  background-color: #f7f7f7;
 }
 
 #şabloane {
@@ -115,6 +116,14 @@ button {
   border-top-color: #bbb;
   width: 23em;
   margin: 0;
+  -webkit-transition: background-color .5s;
+  -moz-transition: background-color .5s;
+  -o-transition: background-color .5s;
+  transition: background-color .5s;
+}
+
+#căutare input:focus {
+  background-color: white;
 }
 
 #căutare ul {
@@ -182,6 +191,10 @@ button {
   line-height: 1.4em;
 }
 
+#proceduri-recente a {
+  padding: 0 3px;
+}
+
 #index label,
 #index input,
 button.mare {
@@ -227,15 +240,15 @@ button.mare {
   text-decoration: none;
 }
 
+#index a:focus,
 #index a:hover {
   opacity: 1;
 }
 
 #crează-procedură li a {
   display: block;
-  padding: 22px 20px;
-  width: 100%;
-  height: 100%;
+  padding: 7% 20px 0;
+  height: 95%;
 }
 
 #crează-procedură li:nth-child(2) {
