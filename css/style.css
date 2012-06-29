@@ -1006,9 +1006,24 @@ input[type="checkbox"]+label {
   margin-right: .5em;
 }
 
+#calculator ul .total {
+  margin-top: .7em;
+  padding-top: .2em;
+  border-top: 1px solid #eee;
+}
+
+#calculator ul .total input,
+#calculator ul .total label {
+  font-weight: bold;
+}
+
+#calculator ul label.sumă,
 #calculator ul input[type="radio"]+label {
   width: auto;
   margin-right: .5em;
+}
+
+#calculator ul input[type="radio"]+label {
   font-size: .9em;
 }
 

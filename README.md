@@ -3,6 +3,7 @@ TODO:
 
 * caclulator
   * de ataşat date-picker-ul
+  * buton de închidere
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară
