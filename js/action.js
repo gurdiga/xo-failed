@@ -262,15 +262,10 @@ var FormulareŞablon = {
           şablon = $('.şablon.' + fieldset.data('şablon') + '.' + select.val());
 
       if (fieldset.find('[schimbat]').not(this).există()) {
-        var titlu = fieldset.find('legend label').text();
-
-        if (titlu.indexOf(':') > -1) {
-          titlu = titlu.split(':')[0];
-        }
-
-        var atenţionare =
-          'Această schimbare presupune pierderea datelor din secţiunea [' + titlu + '].\n\n' +
-          'Sunteţi sigur?';
+        var titlu = fieldset.find('legend label').text(),
+            atenţionare =
+              'Această schimbare presupune pierderea datelor din secţiunea [' + titlu + '].\n\n' +
+              'Sunteţi sigur?';
 
         if (!confirm(atenţionare)) {
           select.val(select.data('initial-value'));
@@ -493,7 +488,7 @@ var ButonDeEliminare = {
       .hide()
       .on('click', this.acţionează);
 
-    $('#formular')
+    $('#formular, #calculator')
       .on('mousemove', '.eliminabil', this.afişează)
       .on('mouseleave', '.eliminabil', this.ascunde);
   },
@@ -576,12 +571,7 @@ var Formular = {
     $(window).on('hashchange', function() {
       if (!/^#formular/.test(location.hash)) return;
 
-      if (Formular.seDeschideProcedurăSalvată()) {
-        Formular.încarcă();
-      }
-
       Formular.deschide();
-      Business.init();
     });
   },
 
@@ -810,11 +800,11 @@ var Formular = {
     populeazăDebitori();
 
     $('#formular')
+      .animate({scrollTop: 0}, 0)
+      .on('keydown', Formular.esc)
       .attr('tabindex', 1)
       .focus()
-      .removeAttr('tabindex')
-      .animate({ scrollTop: 0 }, 0);
-
+      .removeAttr('tabindex');
 
     // ------------------------------------------
     function populeazăSecţiune(selector, secţiune) {
@@ -977,7 +967,6 @@ var Formular = {
 
   resetează: function() {
     $('#formular')
-      .find('[schimbat]').removeAttr('schimbat').end()
       .find('#document-executoriu')
         .find(':input').val('').end()
         .find('select').val(function() {return $(this).find('option:first').val()}).end()
@@ -993,23 +982,34 @@ var Formular = {
         .find('input,textarea').val('').end()
         .not(':first').remove().end()
         .first().removeClass('dispensabilă').end()
-      .end();
+      .end()
+      .find('[schimbat]').removeAttr('schimbat').end();
 
     $('#categorii-taxe-şi-speze').find('.dezactivat').removeClass('dezactivat');
   },
 
   închide: function() {
     $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''});
-    $(document).off('keydown', Formular.esc);
 
     Formular.resetează();
   },
 
   deschide: function() {
-    Formular.seteazăTitlu();
+    $('#formular')
+      .animate({scrollTop: 0}, 0)
+      .on('keydown', Formular.esc)
+      .attr('tabindex', 1)
+      .focus()
+      .removeAttr('tabindex');
 
     $('#formular, #umbră').hide().fadeIn('fast');
-    $(document).on('keydown', Formular.esc);
+
+    if (Formular.seDeschideProcedurăSalvată()) {
+      Formular.încarcă();
+    }
+
+    Formular.seteazăTitlu();
+    Business.init();
   },
 
   esc: function(e) {
@@ -1251,12 +1251,20 @@ var Căutare = {
 // --------------------------------------------------
 
 var Instrumente = {
+  $: null,
+
   init: function() {
-    this.initOpţiuni();
+    Instrumente.$ = $('.instrumente');
+
+    Instrumente.initOpţiuniPentruButoane();
+
+    Instrumente.$.on('click', 'button', function() {
+      Instrumente[this.className].apply(this, arguments);
+    });
   },
 
-  initOpţiuni: function() {
-    $('.instrumente button+.opţiuni')
+  initOpţiuniPentruButoane: function() {
+    Instrumente.$.find('button+.opţiuni')
       .each(function() {
         var opţiuni = $(this),
             buton = opţiuni.prev('button');
@@ -1282,8 +1290,36 @@ var Instrumente = {
           .removeData('atins');
       })
       .on('click', 'li', function() {
-        $(this).parent().ascunde();
-        // TODO
+        var opţiune = $(this),
+            listaDeOpţiuni = opţiune.parent(),
+            buton = listaDeOpţiuni.prev('button'),
+            numeAcţiune = buton.attr('class') + '-' + opţiune.attr('class');
+
+        listaDeOpţiuni.ascunde();
+        Instrumente[numeAcţiune]();
+      });
+  },
+
+  'profil': function() {
+  },
+
+  'calculator': function() {
+    var $calculator = $('#calculator');
+
+    $calculator
+      .fadeToggle()
+      .find(':input:first').focus().end()
+      .on('keydown', function(e) {
+        if (e.which == 27) $calculator.fadeOut();
+      })
+      .on('click', 'button.adaugă', function() {
+        var buton = $(this),
+            item = buton.parent().prev('li');
+
+        item.clone()
+          .removeClass('prima')
+          .find('.sumă').val('').end()
+          .insertAfter(item);
       });
   }
 };

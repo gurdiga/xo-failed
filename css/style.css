@@ -19,7 +19,8 @@ textarea {
   resize: none;
 }
 
-input[type=checkbox] {
+fieldset input[type="radio"],
+fieldset input[type="checkbox"] {
   outline-width: medium;
   width: auto;
   vertical-align: -1px;
@@ -609,7 +610,8 @@ button.adaugă .legend.label {
   width: 2em;
 }
 
-#cheltuieli .subformular input[type="checkbox"]+label {
+fieldset input[type="radio"]+label,
+fieldset input[type="checkbox"]+label {
   width: auto;
   padding: 0;
   margin-left: .2em;
@@ -709,7 +711,9 @@ button.adaugă .legend.label {
 
 button,
 .elimină,
+input[type="radio"],
 input[type="checkbox"],
+input[type="radio"]+label,
 input[type="checkbox"]+label {
   cursor: pointer;
 }
@@ -941,4 +945,84 @@ input[type="checkbox"]+label {
 
 .instrumente button+.opţiuni li:hover {
   opacity: 1;
+}
+
+#calculator {
+  display: none;
+  position: fixed;
+  top: 5em;
+  right: 5em;
+  width: 19em;
+  background: white;
+  border: 1px solid silver;
+  padding: .5em 1.5em;
+  -webkit-box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+#calculator legend {
+  position: absolute;
+  background: transparent;
+  width: 17em;
+  text-align: center;
+}
+
+#calculator legend label {
+  color: #333;
+}
+
+#calculator>ul {
+  clear: left;
+  margin-top: 4em;
+}
+
+#calculator .rata {
+  color: #777;
+  font-size: .8em;
+}
+
+#calculator input[type="text"] {
+  width: 6em;
+}
+
+#calculator select.valuta {
+  padding: 0;
+}
+
+#calculator button.ui-icon-calendar {
+  border: none;
+  padding: 9px;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: -5px;
+  margin-left: -3px;
+}
+
+#calculator ul label {
+  width: 5em;
+  text-align: right;
+  margin-right: .5em;
+}
+
+#calculator ul input[type="radio"]+label {
+  width: auto;
+  margin-right: .5em;
+  font-size: .9em;
+}
+
+#calculator #sume,
+#calculator #rate {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: .5em;
+}
+
+#calculator #sume {
+  margin: 0;
+}
+
+#calculator #sume .prima .elimină {
+  display: none !important;
 }

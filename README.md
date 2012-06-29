@@ -1,6 +1,8 @@
 TODO:
 -----
 
+* caclulator
+  * de ataşat date-picker-ul
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară
@@ -11,7 +13,6 @@ TODO:
 * design
   * tranziţie pentru adăugare/ştergere/scroll
   * procedurile recente ca teanc de foi (ca şi la procedurile noi)
-* HG: 52, 54, 68? 75? 78
 * cu privire la conturi:
   * dezactivare după o perioadă de inactivitate
   * autentificarea mutuală

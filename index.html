@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <title>Consola executorului</title>
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext"/>
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
     <!--[if gte IE 8]>
     <link type="text/css" rel="stylesheet" href="/css/style-ie8.css"/>
@@ -20,8 +21,8 @@
         <h1>Consola executorului</h1>
 
         <div class="instrumente">
-          <button class="profil" title="Profil">Profil</button><button
-          class="calculator" title="Calculator al dobînzii BNM">Calculator al dobînzii BNM</button>
+          <button class="profil" title="Profil"></button><button
+          class="calculator" title="Calculator dobînzi de întîrziere"></button>
         </div>
 
         <div id="crează-procedură">
@@ -504,22 +505,66 @@
         <br style="clear:both; width: 100%"/>
 
         <div class="instrumente">
-          <button class="salvează" title="Salvează">Salvează</button>
-          <button class="imprimă" title="Imprimă">Imprimă</button>
+          <button class="salvează" title="Salvează"></button>
+          <button class="imprimă" title="Imprimă"></button>
           <ul class="opţiuni">
             <li>Formular cutare A</li>
             <li>Formular cutare B</li>
             <li>Formular cutare C</li>
             <li>Formular cutare D</li>
           </ul>
-          <button class="calculator" title="Calculator al dobînzii BNM">Calculator al dobînzii BNM</button>
+          <button class="calculator" title="Calculator dobînzi de întîrziere"></button>
         </div>
       </div>
     </div>
 
-    <div id="calculator-dobîndă-bnm" style="display: none">
-      a
-    </div>
+      <fieldset id="calculator">
+        <legend><label>Calculator dobînzi de întîrziere</label></legend>
+
+        <ul>
+          <li>
+            <label for="de-la">De la</label>
+            <input id="de-la" type="text"/>
+            <button class="ui-icon ui-icon-calendar semiascuns" title="Calendar"></button>
+            <span class="rata">14%</span>
+          </li>
+
+          <li>
+            <label for="pînă-la">Pînă la</label>
+            <input id="pînă-la" type="text"/>
+            <button class="ui-icon ui-icon-calendar semiascuns" title="Calendar"></button>
+            <span class="rata">9.5%</span>
+          </li>
+
+          <li>
+            <label>Rata aplicată</label>
+
+            <ul id="rate">
+              <li>
+                <input name="rata-aplicată" type="radio" id="art619-1" value="5"/>
+                <label for="art619-1">5%</label>
+              </li>
+              <li>
+                <input name="rata-aplicată" type="radio" id="art619-2" value="5" checked/>
+                <label for="art619-2">9%</label>
+              </li>
+            </ul>
+
+          </li>
+
+          <li>
+            <label>Sume</label>
+            <ul id="sume">
+              <li class="item eliminabil prima">
+                <input type="text" class="sumă"/>
+                <select class="valuta"></select>
+              </li>
+
+              <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
+            </ul>
+          </li>
+        </ul>
+      </fieldset>
 
     <!-- ================================ şabloane ================================ -->
 
@@ -528,7 +573,7 @@
         <ul class="pecuniar">
           <li>
             <label for="suma-de-bază">Suma de bază</label>
-            <input id="suma-de-bază" class="sumă" value="0"/>
+            <input id="suma-de-bază" class="sumă" value="1"/>
             <select class="valuta"></select>
           </li>
 
@@ -1051,7 +1096,8 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
     <script src="/js/lib.js"></script>
     <script src="/rate-bnm/current.js"></script>
     <script src="/js/action.js"></script>
