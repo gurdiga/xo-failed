@@ -1014,6 +1014,10 @@ input[type="checkbox"]+label {
   transition: opacity .5s;
 }
 
+#calculator button.închide {
+  font-size: 1.5em;
+}
+
 #calculator legend {
   position: absolute;
   background: transparent;
