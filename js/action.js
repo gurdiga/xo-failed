@@ -1261,6 +1261,7 @@ var Calculator = {
       .on('keydown', function(e) {
         if (e.which == 27) Calculator.închide();
       })
+      .on('click', 'button.închide', Calculator.închide)
       .on('click', 'button.adaugă', function() {
         var buton = $(this),
             item = buton.parent().prev('li');
@@ -1281,7 +1282,7 @@ var Calculator = {
     Calculator.$
       .stop(true, true)
       .fadeToggle('fast', 'easeInCirc')
-      .find(':input:first').focus().end()
+      .find('input:first').focus().end()
   },
 
   închide: function() {

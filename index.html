@@ -26,6 +26,62 @@
         </div>
 
         <h1>executori.org</h1>
+
+        <fieldset id="calculator">
+          <button class="închide semiascuns" title="Închide">×</button>
+
+          <legend><label>Calculator dobînzi de întîrziere</label></legend>
+
+          <ul>
+            <li>
+              <label for="de-la">De la</label>
+              <input id="de-la" type="text"/>
+              <button class="ui-icon ui-icon-calendar semiascuns" title="Calendar"></button>
+              <span class="rata">14%</span>
+            </li>
+
+            <li>
+              <label for="pînă-la">Pînă la</label>
+              <input id="pînă-la" type="text"/>
+              <button class="ui-icon ui-icon-calendar semiascuns" title="Calendar"></button>
+              <span class="rata">9.5%</span>
+            </li>
+
+            <li>
+              <label>Rata aplicată</label>
+
+              <ul id="rate">
+                <li>
+                  <input name="rata-aplicată" type="radio" id="art619-1" value="5"/>
+                  <label for="art619-1">5%</label>
+                </li>
+                <li>
+                  <input name="rata-aplicată" type="radio" id="art619-2" value="5" checked/>
+                  <label for="art619-2">9%</label>
+                </li>
+              </ul>
+
+            </li>
+
+            <li>
+              <label>Sume</label>
+              <ul id="sume">
+                <li class="item eliminabil prima">
+                  <input type="text" class="sumă"/>
+                  <select class="valuta"></select>
+                </li>
+
+                <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
+              </ul>
+            </li>
+
+            <li class="total">
+              <label for="dobînda">Dobînda</label>
+              <input id="dobînda" type="text"/>
+              <label class="sumă">MDL</label>
+            </li>
+          </ul>
+        </fieldset>
       </div>
     </div>
 
@@ -522,60 +578,6 @@
         </div>
       </div>
     </div>
-
-      <fieldset id="calculator">
-        <legend><label>Calculator dobînzi de întîrziere</label></legend>
-
-        <ul>
-          <li>
-            <label for="de-la">De la</label>
-            <input id="de-la" type="text"/>
-            <button class="ui-icon ui-icon-calendar semiascuns" title="Calendar"></button>
-            <span class="rata">14%</span>
-          </li>
-
-          <li>
-            <label for="pînă-la">Pînă la</label>
-            <input id="pînă-la" type="text"/>
-            <button class="ui-icon ui-icon-calendar semiascuns" title="Calendar"></button>
-            <span class="rata">9.5%</span>
-          </li>
-
-          <li>
-            <label>Rata aplicată</label>
-
-            <ul id="rate">
-              <li>
-                <input name="rata-aplicată" type="radio" id="art619-1" value="5"/>
-                <label for="art619-1">5%</label>
-              </li>
-              <li>
-                <input name="rata-aplicată" type="radio" id="art619-2" value="5" checked/>
-                <label for="art619-2">9%</label>
-              </li>
-            </ul>
-
-          </li>
-
-          <li>
-            <label>Sume</label>
-            <ul id="sume">
-              <li class="item eliminabil prima">
-                <input type="text" class="sumă"/>
-                <select class="valuta"></select>
-              </li>
-
-              <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
-            </ul>
-          </li>
-
-          <li class="total">
-            <label for="dobînda">Dobînda</label>
-            <input id="dobînda" type="text"/>
-            <label class="sumă">MDL</label>
-          </li>
-        </ul>
-      </fieldset>
 
     <!-- ================================ şabloane ================================ -->
 
