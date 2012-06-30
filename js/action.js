@@ -1255,6 +1255,8 @@ var Calculator = {
   $: null,
 
   init: function() {
+    DobîndaDeÎntîrziere.init();
+
     Calculator.$ = $('#calculator');
 
     Calculator.$
@@ -1270,7 +1272,8 @@ var Calculator = {
           .removeClass('prima')
           .find('.sumă').val('').end()
           .insertAfter(item);
-      });
+      })
+      .on('keyup update paste click change', ':input:not(#dobînda)', DobîndaDeÎntîrziere.calculează);
 
     $('#bara-de-sus .calculator').on('click', function() {
       if (Calculator.$.is(':visible')) Calculator.închide();
@@ -1292,7 +1295,9 @@ var Calculator = {
         nextText: 'Luna viitoare',
         showOn: 'none',
         onSelect: function() {
-          $(this).datepicker('hide');
+          $(this)
+            .datepicker('hide')
+            .trigger('update');
         }
       }).end()
       .on('click', '.dată+.ui-icon-calendar', function() {

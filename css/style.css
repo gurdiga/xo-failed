@@ -1042,13 +1042,13 @@ input[type="checkbox"]+label {
   padding: 0;
 }
 
-#calculator button.ui-icon-calendar {
-  border: none;
-  padding: 9px;
+#calculator .ui-icon-calendar {
+  padding: 1px;
   background-color: transparent;
   display: inline-block;
   vertical-align: -5px;
   margin-left: -3px;
+  cursor: pointer;
 }
 
 #calculator ul label {
@@ -1084,13 +1084,15 @@ input[type="checkbox"]+label {
 
 #calculator ul input[type="radio"]+label {
   font-size: .9em;
+  font-weight: bold;
+  color: black;
 }
 
 #calculator #sume,
 #calculator #rate {
   display: inline-block;
   vertical-align: top;
-  margin-top: .5em;
+  margin: .5em 0 .3em;
 }
 
 #calculator #sume {

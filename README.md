@@ -1,8 +1,6 @@
 TODO:
 -----
 
-* caclulator
-  * de ataşat codul
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară

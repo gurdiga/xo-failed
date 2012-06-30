@@ -9,7 +9,6 @@ var Business = {
   },
 
   '#formular': function() {
-    DobîndaBNM.init();
     Onorariul.init();
     TotalCheltuieli.init();
     Defaults.init();
@@ -18,35 +17,46 @@ var Business = {
 
 // --------------------------------------------------
 
-var DobîndaBNM = {
+var DobîndaDeÎntîrziere = {
   rate: {},
   iniţializat: false,
 
   init: function() {
-    if (DobîndaBNM.iniţializat) return;
+    if (DobîndaDeÎntîrziere.iniţializat) return;
 
-    DobîndaBNM.încarcă();
-
-    $('#date-generale').on('change', '#total', DobîndaBNM.calculează);
-    $('#document-executoriu').on('keyup update paste', '#data-hotărîrii', DobîndaBNM.calculează);
-
-    DobîndaBNM.iniţializat = true;
+    DobîndaDeÎntîrziere.încarcă();
+    DobîndaDeÎntîrziere.iniţializat = true;
   },
 
   calculează: function(e) {
-    if ($.isEmptyObject(DobîndaBNM.rate)) return;
+    if ($.isEmptyObject(DobîndaDeÎntîrziere.rate)) return;
 
-    var suma = parseFloat($('#total').val()),
-        dataHotărîrii = $.trim($('#data-hotărîrii').val());
+    var suma = 0;
 
-    if (!/(\d{2}).(\d{2}).(\d{4})/.test(dataHotărîrii)) return;
+    Calculator.$.find('#sume .sumă').each(function() {
+      var cîmp = $(this),
+          valuta = cîmp.next('.valuta'),
+          cursValutar = RateBNM[valuta.val()];
 
-    dataHotărîrii = moment(dataHotărîrii, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      if (valuta.val() == 'MDL') {
+        suma += cîmp.suma();
+      } else {
+        suma += cîmp.suma() / cursValutar.nominal * cursValutar.value;
+      }
+    });
 
-    var data, dataPrecedentă, primaDatăAplicabilă;
+    var deLa = $.trim(Calculator.$.find('#de-la').val());
+        pînăLa = $.trim(Calculator.$.find('#pînă-la').val());
 
-    for (data in DobîndaBNM.rate) {
-      if (data > dataHotărîrii) break;
+    if (!/(\d{2}).(\d{2}).(\d{4})/.test(deLa) || !/(\d{2}).(\d{2}).(\d{4})/.test(pînăLa)) return;
+
+    deLa = moment(deLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
+    pînăLa = moment(pînăLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
+
+    var data, dataPrecedentă, primaDatăAplicabilă, durate = {};
+
+    for (data in DobîndaDeÎntîrziere.rate) {
+      if (data > deLa) break;
 
       dataPrecedentă = data;
     }
@@ -54,17 +64,21 @@ var DobîndaBNM = {
     primaDatăAplicabilă = dataPrecedentă;
     dataPrecedentă = null;
 
-    var durate = {};
-
-    for (data in DobîndaBNM.rate) {
+    for (data in DobîndaDeÎntîrziere.rate) {
       if (dataPrecedentă) {
-        durate[dataPrecedentă] = zileÎntre(dataPrecedentă, data);
+        if (dataPrecedentă == primaDatăAplicabilă) {
+          durate[dataPrecedentă] = zileÎntre(deLa, data);
+        } else if (data > pînăLa) {
+          durate[dataPrecedentă] = zileÎntre(dataPrecedentă, pînăLa) + 1; // + 1 include ultima zi
+        } else {
+          durate[dataPrecedentă] = zileÎntre(dataPrecedentă, data);
+        }
       }
 
       dataPrecedentă = data;
     }
 
-    durate[data] = zileÎntre(data, new Date);
+    durate[data] = zileÎntre(data, pînăLa);
 
     function zileÎntre(data1, data2) {
       if (typeof data1 == 'string') data1 = moment(data1, 'YYYY-MM-DD').toDate();
@@ -73,26 +87,27 @@ var DobîndaBNM = {
       return Math.round((data2 - data1) / (24 * 3600 * 1000));
     }
 
-    var rata, dobînda = 0;
+    var rataBNM, dobînda = 0,
+        rataAplicată = parseFloat(Calculator.$.find(':radio[name="rata-aplicată"]:checked').val());
 
-    for (data in DobîndaBNM.rate) {
+    for (data in DobîndaDeÎntîrziere.rate) {
       if (data < primaDatăAplicabilă) continue;
+      if (data > pînăLa) break;
 
-      rata = (DobîndaBNM.rate[data] + 9) / 100;
-      dobînda += suma * rata / 365 * durate[data];
+      rataBNM = (DobîndaDeÎntîrziere.rate[data] + rataAplicată) / 100;
+      dobînda += Math.round(suma * rataBNM / 365 * durate[data] * 100) / 100;
     }
 
-    // rotunjim pînă la bănuţi
     dobînda = Math.round(dobînda * 100) / 100;
 
-    $('#dobînda-bnm').val(dobînda);
+    Calculator.$.find('#dobînda').val(dobînda);
   },
 
   încarcă: function() {
     $.getJSON('rate-bnm/rata_de_bază.json')
       .success(function(data) {
-        DobîndaBNM.rate = data;
-        DobîndaBNM.calculează();
+        DobîndaDeÎntîrziere.rate = data;
+        DobîndaDeÎntîrziere.calculează();
       });
   }
 };
