@@ -1277,6 +1277,10 @@ var Calculator = {
       else Calculator.deschide();
     });
 
+    Calculator.initCalendar();
+  },
+
+  initCalendar: function() {
     Calculator.$
       .find('.dată').datepicker({
         dateFormat: 'dd.mm.yy',
@@ -1305,6 +1309,16 @@ var Calculator = {
       .stop(true, true)
       .fadeToggle('fast', 'easeInCirc')
       .find('input:first').focus().end()
+
+    Calculator.resetează();
+  },
+
+  resetează: function() {
+    Calculator.$
+      .find('input:text').val('').end()
+      .find('#art619-1').removeAttr('checked').end()
+      .find('#art619-2').attr('checked', 'checked').end()
+      .find('#sume .item:not(.prima)').remove().end();
   },
 
   închide: function() {
