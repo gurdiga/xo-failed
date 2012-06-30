@@ -1035,7 +1035,7 @@ input[type="checkbox"]+label {
 }
 
 #calculator input[type="text"] {
-  width: 6em;
+  width: 5.3em;
 }
 
 #calculator select.valuta {
@@ -1058,7 +1058,6 @@ input[type="checkbox"]+label {
 }
 
 #calculator ul .total {
-  margin-top: .7em;
   padding-top: .2em;
   border-top: 1px solid #eee;
 }
@@ -1100,6 +1099,52 @@ input[type="checkbox"]+label {
 
 #calculator #sume .prima .elimină {
   display: none !important;
+}
+
+#ui-datepicker-div {
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  width: 12em;
+  padding: .5em;
+}
+
+#ui-datepicker-div,
+#ui-datepicker-div .ui-corner-all {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+#ui-datepicker-div .ui-datepicker-header,
+#ui-datepicker-div .ui-state-default {
+  background-image: none;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar {
+  margin: 0;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar th {
+  padding: 7px 0;
+}
+
+#ui-datepicker-div .ui-state-active,
+#ui-datepicker-div .ui-state-highlight {
+  font-weight: bold;
+  background-color: #e6e6e6;
+}
+
+#ui-datepicker-div .ui-state-highlight {
+  border-color: #aaa;
+  color: #555;
+}
+
+#ui-datepicker-div .ui-state-active {
+  border-color: black;
+  color: black;
 }
 
 @-moz-document url-prefix() {

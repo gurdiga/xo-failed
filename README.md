@@ -2,7 +2,6 @@ TODO:
 -----
 
 * caclulator
-  * de stilizat date-picker-ul
   * de ataşat codul
 * toolbar pentru acţiuni formular
   * de definit formele
