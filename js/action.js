@@ -1279,7 +1279,7 @@ var Calculator = {
 
     Calculator.$
       .find('.dată').datepicker({
-        dateFormat: 'mm.dd.yy',
+        dateFormat: 'dd.mm.yy',
         dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
         monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
         firstDay: 1,
@@ -1292,7 +1292,11 @@ var Calculator = {
         }
       }).end()
       .on('click', '.dată+.ui-icon-calendar', function() {
-        $(this).prev().datepicker('show');
+        var cîmp = $(this).prev(),
+            calendar = cîmp.datepicker('widget');
+
+        if (calendar.is(':visible')) cîmp.datepicker('hide');
+        else cîmp.datepicker('show');
       });
   },
 
