@@ -1276,6 +1276,24 @@ var Calculator = {
       if (Calculator.$.is(':visible')) Calculator.închide();
       else Calculator.deschide();
     });
+
+    Calculator.$
+      .find('.dată').datepicker({
+        dateFormat: 'mm.dd.yy',
+        dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
+        monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
+        firstDay: 1,
+        showAnim: 'fadeIn',
+        prevText: 'Luna precedentă',
+        nextText: 'Luna viitoare',
+        showOn: 'none',
+        onSelect: function() {
+          $(this).datepicker('hide');
+        }
+      }).end()
+      .on('click', '.dată+.ui-icon-calendar', function() {
+        $(this).prev().datepicker('show');
+      });
   },
 
   deschide: function() {
