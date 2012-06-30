@@ -1271,7 +1271,7 @@ var Calculator = {
           .insertAfter(item);
       });
 
-    $('.bara-de-sus .calculator').on('click', function() {
+    $('#bara-de-sus .calculator').on('click', function() {
       if (Calculator.$.is(':visible')) Calculator.închide();
       else Calculator.deschide();
     });

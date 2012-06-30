@@ -94,7 +94,7 @@ button {
   display: none;
 }
 
-.bara-de-sus {
+#bara-de-sus {
   position: fixed;
   left: 0;
   top: 0;
@@ -114,24 +114,24 @@ button {
   line-height: 2em;
 }
 
-.bara-de-sus h1 {
+#bara-de-sus h1 {
   margin: 0;
   padding: 0;
   color: white;
 }
 
-.bara-de-sus .instrumente {
+#bara-de-sus .instrumente {
   -webkit-box-shadow: 0 0 0;
   -moz-box-shadow: 0 0 0;
   box-shadow: 0 0 0;
 }
 
-.bara-de-sus .instrumente {
+#bara-de-sus .instrumente {
   float: right;
   margin-top: 1.3em;
 }
 
-.bara-de-sus .instrumente button {
+#bara-de-sus .instrumente button {
   font-family: 'Oswald', Arial, sans-serif;
   font-size: 20px;
   padding: 0 15px 0 45px;
@@ -144,16 +144,16 @@ button {
   opacity: .5;
 }
 
-.bara-de-sus .instrumente button:focus,
-.bara-de-sus .instrumente button:hover {
+#bara-de-sus .instrumente button:focus,
+#bara-de-sus .instrumente button:hover {
   opacity: 1;
 }
 
-.bara-de-sus .instrumente button.profil {
+#bara-de-sus .instrumente button.profil {
   padding-left: 42px;
 }
 
-.bara-de-sus .instrumente button.calculator {
+#bara-de-sus .instrumente button.calculator {
   padding-left: 36px;
 }
 
@@ -313,12 +313,6 @@ h1 {
   font-size: 3em;
 }
 
-@-moz-document url-prefix() {
-  h1 {
-    letter-spacing: -.075em;
-  }
-}
-
 div.pagină {
   position: absolute;
   top: 0;
@@ -328,7 +322,7 @@ div.pagină {
   overflow: auto;
 }
 
-.bara-de-sus>.conţinut,
+#bara-de-sus>.conţinut,
 div.pagină>.conţinut {
   width: 900px;
   margin: 0 auto;
@@ -1098,4 +1092,30 @@ input[type="checkbox"]+label {
 
 #calculator #sume .prima .elimină {
   display: none !important;
+}
+
+@-moz-document url-prefix() {
+  h1 {
+    letter-spacing: -.075em;
+  }
+
+  #bara-de-sus .instrumente button {
+    letter-spacing: -.05em;
+  }
+
+  #calculator {
+    right: 13em;
+  }
+
+  #calculator legend label {
+    letter-spacing: -.05em;
+  }
+
+  :focus {
+    outline: 1px solid #ddd;
+  }
+
+  #căutare input:focus {
+    outline: none;
+  }
 }
