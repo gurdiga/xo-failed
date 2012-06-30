@@ -94,8 +94,17 @@ button {
   display: none;
 }
 
-#index .conţinut {
-  height: 100%;
+.bara-de-sus {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  padding: .5em 0;
+  background: black;
 }
 
 #index .şoaptă {
@@ -105,9 +114,47 @@ button {
   line-height: 2em;
 }
 
-#index h1 {
+.bara-de-sus h1 {
   margin: 0;
-  padding: .3em 0;
+  padding: 0;
+  color: white;
+}
+
+.bara-de-sus .instrumente {
+  -webkit-box-shadow: 0 0 0;
+  -moz-box-shadow: 0 0 0;
+  box-shadow: 0 0 0;
+}
+
+.bara-de-sus .instrumente {
+  float: right;
+  margin-top: 1.3em;
+}
+
+.bara-de-sus .instrumente button {
+  font-family: 'Oswald', Arial, sans-serif;
+  font-size: 20px;
+  padding: 0 15px 0 45px;
+  color: white;
+  width: auto;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+  opacity: .5;
+}
+
+.bara-de-sus .instrumente button:focus,
+.bara-de-sus .instrumente button:hover {
+  opacity: 1;
+}
+
+.bara-de-sus .instrumente button.profil {
+  padding-left: 42px;
+}
+
+.bara-de-sus .instrumente button.calculator {
+  padding-left: 36px;
 }
 
 #căutare input {
@@ -281,10 +328,15 @@ div.pagină {
   overflow: auto;
 }
 
+.bara-de-sus>.conţinut,
 div.pagină>.conţinut {
   width: 900px;
   margin: 0 auto;
+}
+
+div.pagină>.conţinut {
   position: relative;
+  margin: 120px auto;
 }
 
 .coloană {
@@ -373,7 +425,6 @@ div.pagină#formular {
 }
 
 div.pagină#formular>.conţinut {
-  margin: 45px auto 100px;
   border: 1px solid #ddd;
   padding: 10px 30px 90px 50px;
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
@@ -881,19 +932,10 @@ input[type="checkbox"]+label {
   padding: 0;
 }
 
-#index .instrumente {
-  position: absolute;
-  left: 60%;
-  top: 5px;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.7);
-  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
-}
-
 #formular .instrumente {
   position: fixed;
   right: 30px;
-  top: 10px;
+  top: 120px;
 }
 
 .instrumente button {
@@ -907,7 +949,6 @@ input[type="checkbox"]+label {
   -o-transition: opacity .75s;
   opacity: .8;
   transition: opacity .75s;
-  text-indent: -100em;
 }
 
 #formular .instrumente button {
@@ -964,7 +1005,7 @@ input[type="checkbox"]+label {
   display: none;
   position: fixed;
   top: 5em;
-  right: 5em;
+  right: 11em;
   width: 19em;
   background: white;
   border: 1px solid silver;
@@ -973,6 +1014,10 @@ input[type="checkbox"]+label {
   -moz-box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
   box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
   z-index: 5;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 #calculator legend {

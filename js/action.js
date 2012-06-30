@@ -14,6 +14,7 @@ var Action = {
     ButonDeEliminare.init();
     Formular.init();
     Instrumente.init();
+    Calculator.init();
 
     $(window).trigger('hashchange');
 
@@ -1250,6 +1251,48 @@ var Căutare = {
 
 // --------------------------------------------------
 
+var Calculator = {
+  $: null,
+
+  init: function() {
+    Calculator.$ = $('#calculator');
+
+    Calculator.$
+      .on('keydown', function(e) {
+        if (e.which == 27) Calculator.închide();
+      })
+      .on('click', 'button.adaugă', function() {
+        var buton = $(this),
+            item = buton.parent().prev('li');
+
+        item.clone()
+          .removeClass('prima')
+          .find('.sumă').val('').end()
+          .insertAfter(item);
+      });
+
+    $('.bara-de-sus .calculator').on('click', function() {
+      if (Calculator.$.is(':visible')) Calculator.închide();
+      else Calculator.deschide();
+    });
+  },
+
+  deschide: function() {
+    Calculator.$
+      .stop(true, true)
+      .fadeToggle('fast', 'easeInCirc')
+      .find(':input:first').focus().end()
+  },
+
+  închide: function() {
+    Calculator.$
+      .stop(true, true)
+      .hide();
+  }
+};
+
+// --------------------------------------------------
+
 var Instrumente = {
   $: null,
 
@@ -1304,23 +1347,6 @@ var Instrumente = {
   },
 
   'calculator': function() {
-    var $calculator = $('#calculator');
-
-    $calculator
-      .fadeToggle()
-      .find(':input:first').focus().end()
-      .on('keydown', function(e) {
-        if (e.which == 27) $calculator.fadeOut();
-      })
-      .on('click', 'button.adaugă', function() {
-        var buton = $(this),
-            item = buton.parent().prev('li');
-
-        item.clone()
-          .removeClass('prima')
-          .find('.sumă').val('').end()
-          .insertAfter(item);
-      });
   }
 };
 
