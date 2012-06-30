@@ -999,8 +999,8 @@ input[type="checkbox"]+label {
   display: none;
   position: fixed;
   top: 5em;
-  right: 11em;
-  width: 19em;
+  right: 12em;
+  width: 18em;
   background: white;
   border: 1px solid silver;
   padding: .5em 1.5em;
