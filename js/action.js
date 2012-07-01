@@ -438,6 +438,8 @@ var Cheltuieli = {
           .addClass('eliminabil de tot')
           .appendTo(destinatariAdăugaţiDeja);
 
+        $(this).addClass('dezactivat');
+
         if (destinatar.is('.persoană.terţă')) {
           destinatariAdăugaţiDeja.click();
           destinatar
@@ -446,7 +448,6 @@ var Cheltuieli = {
             .find('input').focus();
         }
 
-        listaDestinatari.hide();
         TotalCheltuieli.calculează();
       })
 
