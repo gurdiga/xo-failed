@@ -469,7 +469,7 @@ var Cheltuieli = {
 
   initBifeAchitat: function() {
     $('#listă-taxe-şi-speze').on('click', '.subformular.achitare :checkbox', function() {
-      var azi = moment().format('DD/MM/YYYY');
+      var azi = moment().format('DD.MM.YYYY');
 
       $(this)
         .siblings('.la').find('.data').text(this.checked ? azi : '')
