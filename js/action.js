@@ -15,6 +15,7 @@ var Action = {
     Formular.init();
     Instrumente.init();
     Calculator.init();
+    Calendar.init();
 
     $(window).trigger('hashchange');
 
@@ -1280,34 +1281,6 @@ var Calculator = {
       if (Calculator.$.is(':visible')) Calculator.închide();
       else Calculator.deschide();
     });
-
-    Calculator.initCalendar();
-  },
-
-  initCalendar: function() {
-    Calculator.$
-      .find('.dată').datepicker({
-        dateFormat: 'dd.mm.yy',
-        dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
-        monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
-        firstDay: 1,
-        showAnim: 'fadeIn',
-        prevText: 'Luna precedentă',
-        nextText: 'Luna viitoare',
-        showOn: 'none',
-        onSelect: function() {
-          $(this)
-            .datepicker('hide')
-            .trigger('update');
-        }
-      }).end()
-      .on('click', '.dată+.ui-icon-calendar', function() {
-        var cîmp = $(this).prev(),
-            calendar = cîmp.datepicker('widget');
-
-        if (calendar.is(':visible')) cîmp.datepicker('hide');
-        else cîmp.datepicker('show');
-      });
   },
 
   deschide: function() {
@@ -1390,6 +1363,43 @@ var Instrumente = {
   },
 
   'calculator': function() {
+  }
+};
+
+// --------------------------------------------------
+
+var Calendar = {
+  init: function() {
+    $('.dată')
+      .datepicker({
+        dateFormat: 'dd.mm.yy',
+        dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
+        monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
+        firstDay: 1,
+        showAnim: 'fadeIn',
+        prevText: 'Luna precedentă',
+        nextText: 'Luna viitoare',
+        showOn: 'none',
+        onSelect: function() {
+          $(this)
+            .datepicker('hide')
+            .trigger('update');
+        }
+      })
+      .after(
+        $('<span>')
+          .addClass('ui-icon ui-icon-calendar semiascuns')
+          .attr('title', 'Calendar')
+      );
+
+    $(document)
+      .on('click', '.dată+.ui-icon-calendar', function() {
+        var cîmp = $(this).prev(),
+            calendar = cîmp.datepicker('widget');
+
+        if (calendar.is(':visible')) cîmp.datepicker('hide');
+        else cîmp.datepicker('show');
+      });
   }
 };
 
