@@ -35,12 +35,12 @@ var ProcedurăNonPecuniară = {
     this.bunuri.init();
     this['măsura-de-asigurare'].init();
 
-    $('#date-generale').on('change', '#obiect', this.inseareazăSauEliminăSubformular);
+    $('#obiectul-urmăririi').on('change', '#obiect', this.inseareazăSauEliminăSubformular);
   },
 
   bunuri: {
     init: function() {
-      $('#date-generale')
+      $('#obiectul-urmăririi')
         .on('click', 'button.adaugă', this.adaugăCîmp)
         .on('iniţializat', function() { $('#obiect').trigger('change', ['automat']) });
     },
@@ -58,7 +58,7 @@ var ProcedurăNonPecuniară = {
 
   'măsura-de-asigurare': {
     init: function() {
-      $('#date-generale').on('change', '#măsura-de-asigurare', function() {
+      $('#obiectul-urmăririi').on('change', '#măsura-de-asigurare', function() {
         var lista = $(this);
 
         if (lista.val() == 'sechestru') {
@@ -599,7 +599,7 @@ var Formular = {
     var procedură = {
       'număr': ($('#număr').text().match(/[SP]?-\d+/) || [null])[0],
       'document-executoriu': colectează('#document-executoriu'),
-      'date-generale': colecteazăDateGenerale(),
+      'obiectul-urmăririi': colecteazăDateGenerale(),
       'cheltuieli': colecteazăCheltuieli(),
       'creditor': colectează('#creditor'),
       'persoane-terţe': colecteazăPersoaneTerţe(),
@@ -637,7 +637,7 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăDateGenerale() {
-      return $.extend(colectează('#date-generale'), {
+      return $.extend(colectează('#obiectul-urmăririi'), {
         'sume': colecteazăSumeÎnValută(['suma-de-bază', 'taxă-de-stat', 'penalitate'])
       });
     }
@@ -821,10 +821,10 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăDateleGenerale() {
-      populeazăSecţiune('#date-generale', procedură['date-generale']);
+      populeazăSecţiune('#obiectul-urmăririi', procedură['obiectul-urmăririi']);
 
-      var $secţiune = $('#date-generale'),
-          sume = procedură['date-generale'].sume,
+      var $secţiune = $('#obiectul-urmăririi'),
+          sume = procedură['obiectul-urmăririi'].sume,
           cîmp, $cîmp;
 
       for (cîmp in sume) {
@@ -833,8 +833,8 @@ var Formular = {
         $cîmp.next('.valuta').val(sume[cîmp].valuta);
       }
 
-      var subformular = procedură['date-generale'].subformular,
-          $subformular = $('#date-generale').find('.subformular'),
+      var subformular = procedură['obiectul-urmăririi'].subformular,
+          $subformular = $('#obiectul-urmăririi').find('.subformular'),
           $adaugă = $subformular.find('button.adaugă'),
           descriere,
           prima = true;

@@ -121,7 +121,7 @@ var Onorariul = {
     var schimbareDate = 'keyup update paste',
         cîmpuriConsiderate = '.sumă:not(.calculat), .valuta, .bunuri .valoare, input:checkbox';
 
-    $('#date-generale')
+    $('#obiectul-urmăririi')
       .on(schimbareDate, cîmpuriConsiderate, Onorariul.actualizează)
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
@@ -151,9 +151,9 @@ var Onorariul = {
   },
 
   pecuniar: function() {
-    var total = $('#date-generale .sumă:not(.calculat)').suma();
+    var total = $('#obiectul-urmăririi .sumă:not(.calculat)').suma();
 
-    $('#date-generale #total').val(total).trigger('change');
+    $('#obiectul-urmăririi #total').val(total).trigger('change');
 
     if (total <= 100000) {
       var minim = $('#amendă-sau-încasare-periodică').is(':checked') ? 200 : 500;
@@ -173,20 +173,20 @@ var Onorariul = {
     'stabilirea domiciliului copilului': {fizică: 200 * UC, juridică: 200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200 * UC, juridică:200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 * UC + .01 * $('#date-generale .bunuri .valoare').suma() },
-      juridică: function() { return 200 * UC + .01 * $('#date-generale .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
+      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
-      fizică: function() { return 100 * UC + .01 * $('#date-generale .bunuri .valoare').suma() },
-      juridică: function() { return 200 * UC + .01 * $('#date-generale .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
+      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
     },
     'confiscarea bunurilor': {
-      fizică: function() { return 100 * UC + .01 * $('#date-generale .bunuri .valoare').suma() },
-      juridică: function() { return 100 * UC + .01 * $('#date-generale .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
+      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
     },
     'nimicirea unor bunuri': {
-      fizică: function() { return 100 * UC + .01 * $('#date-generale .bunuri .valoare').suma() },
-      juridică: function() { return 100 * UC + .01 * $('#date-generale .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
+      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
     },
     'restabilirea la locul de muncă': {fizică: 200 * UC, juridică: 200 * UC},
     'aplicarea măsurilor de asigurare a acţiunii': {
@@ -208,7 +208,7 @@ var Onorariul = {
 
 var Defaults = {
   init: function() {
-    $('#date-generale').on('change', '#obiect', function() {
+    $('#obiectul-urmăririi').on('change', '#obiect', function() {
       var obiect = $(this).val(),
           genCreditor = $('#creditor #gen-persoană'),
           genDebitor = $('.debitor #gen-persoană');
