@@ -103,7 +103,6 @@ button {
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.7);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
   z-index: 5;
-  padding: .5em 0;
   background: black;
 }
 
@@ -117,7 +116,11 @@ button {
 #bara-de-sus h1 {
   margin: 0;
   padding: 0;
+}
+
+#bara-de-sus h1 a {
   color: white;
+  text-decoration: none;
 }
 
 #bara-de-sus .instrumente {
@@ -620,12 +623,10 @@ button.adaugă .legend.label {
   list-style-type: disc;
 }
 
-#cheltuieli .item .la {
-  display: none;
-}
-
-#cheltuieli .item.achitat .la {
-  display: inline;
+#cheltuieli .item .la .dată {
+  width: 6em;
+  margin: 0;
+  vertical-align: -1px;
 }
 
 #cheltuieli .item .subformular {
@@ -634,6 +635,7 @@ button.adaugă .legend.label {
 
 #cheltuieli .item ul.subformular {
   padding-left: 1em;
+  margin-bottom: -1.2em;
 }
 
 #cheltuieli .item p,

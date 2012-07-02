@@ -474,7 +474,7 @@ var Cheltuieli = {
       var azi = moment().format('DD.MM.YYYY');
 
       $(this)
-        .siblings('.la').find('.data').text(this.checked ? azi : '')
+        .siblings('.la').find('.dată').val(this.checked ? azi : '')
         .closest('.item').toggleClass('achitat', this.checked);
     });
   }
@@ -672,7 +672,7 @@ var Formular = {
         item.achitat = $item.find('.achitare :checkbox').is(':checked');
 
         if (item.achitat) {
-          item['data-achitării'] = $item.find('.achitare .data').text();
+          item['data-achitării'] = $item.find('.achitare .dată').val();
         }
 
         var $subformular = $item.find('.subformular:not(.achitare)');
@@ -879,7 +879,7 @@ var Formular = {
 
         if (item.achitat == 'true') {
           $item.find('.subformular.achitare :checkbox').attr('checked', true).trigger('change');
-          $item.find('.subformular.achitare .la .data').text(item['data-achitării']);
+          $item.find('.subformular.achitare .la .dată').val(item['data-achitării']);
           $item.addClass('achitat');
         }
 
@@ -1016,7 +1016,7 @@ var Formular = {
   },
 
   esc: function(e) {
-    if (e.which == 27) Formular.închide();
+    if (e.keyCode == 27) Formular.închide();
   }
 }
 
@@ -1080,7 +1080,7 @@ var Căutare = {
   },
 
   anuleazăCăutarea: function(e) {
-    if (e.which == 27) this.value = '';
+    if (e.keyCode == 27) this.value = '';
   },
 
   deschideProceduraSlectată: function(e) {
@@ -1096,7 +1096,7 @@ var Căutare = {
   },
 
   selecteazăItem: function(e) {
-    var tasta = e.which,
+    var tasta = e.keyCode,
         SUS = 38,
         JOS = 40,
         ENTER = 13;
@@ -1129,7 +1129,7 @@ var Căutare = {
   },
 
   găseşte: function(e) {
-    var tasta = e.which,
+    var tasta = e.keyCode,
         SUS = 38,
         JOS = 40,
         ENTER = 13;
@@ -1263,7 +1263,7 @@ var Calculator = {
 
     Calculator.$
       .on('keydown', function(e) {
-        if (e.which == 27) Calculator.închide();
+        if (e.keyCode == 27) Calculator.închide();
       })
       .on('click', 'button.închide', Calculator.închide)
       .on('click', 'button.adaugă', function() {
@@ -1369,36 +1369,57 @@ var Instrumente = {
 // --------------------------------------------------
 
 var Calendar = {
+  opţiuni: {
+    dateFormat: 'dd.mm.yy',
+    dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
+    monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
+    firstDay: 1,
+    showAnim: 'fadeIn',
+    prevText: 'Luna precedentă',
+    nextText: 'Luna viitoare',
+    showOn: 'none',
+    onSelect: function() {Calendar.închide(this)}
+  },
+
+  închide: function(el) {
+    el = $(el);
+
+    if (el.data('id')) el.attr('id', el.data('id'));
+
+    el.datepicker('destroy');
+  },
+
   init: function() {
-    $('.dată')
-      .datepicker({
-        dateFormat: 'dd.mm.yy',
-        dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
-        monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
-        firstDay: 1,
-        showAnim: 'fadeIn',
-        prevText: 'Luna precedentă',
-        nextText: 'Luna viitoare',
-        showOn: 'none',
-        onSelect: function() {
-          $(this)
-            .datepicker('hide')
-            .trigger('update');
-        }
-      })
-      .after(
-        $('<span>')
-          .addClass('ui-icon ui-icon-calendar semiascuns')
-          .attr('title', 'Calendar')
-      );
+    $('.dată').after(
+      $('<span>')
+        .addClass('ui-icon ui-icon-calendar semiascuns')
+        .attr('title', 'Calendar')
+    );
 
     $(document)
       .on('click', '.dată+.ui-icon-calendar', function() {
         var cîmp = $(this).prev(),
             calendar = cîmp.datepicker('widget');
 
-        if (calendar.is(':visible')) cîmp.datepicker('hide');
-        else cîmp.datepicker('show');
+        if (calendar.is(':visible')) {
+          cîmp.datepicker('destroy');
+        } else {
+          if (!cîmp.data('datepicker')) {
+            if (cîmp.attr('id')) {
+              cîmp
+                .data('id', cîmp.attr('id'))
+                .removeAttr('id');
+            }
+
+            cîmp.datepicker(Calendar.opţiuni);
+          }
+
+          cîmp.datepicker('show');
+        }
+      })
+      .on('keydown', '.dată', function(e) {
+        if (e.keyCode == 40) $(this).next('.ui-icon-calendar').click();
+        if (e.keyCode == 27) Calendar.închide();
       });
   }
 };
