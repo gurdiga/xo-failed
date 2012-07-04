@@ -208,6 +208,8 @@ var Onorariul = {
 
 var Defaults = {
   init: function() {
+    $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
+
     $('#obiectul-urmăririi').on('change', '#obiect', function() {
       var obiect = $(this).val(),
           genCreditor = $('#creditor #gen-persoană'),
@@ -225,8 +227,8 @@ var Defaults = {
           break;
       }
 
-      genCreditor.trigger('change');
-      genDebitor.trigger('change');
+      genCreditor.trigger('change', ['automat']);
+      genDebitor.trigger('change', ['automat']);
     });
 
     if (Formular.seCreazăProcedurăNouă()) {

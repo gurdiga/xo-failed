@@ -67,7 +67,8 @@ fieldset select {
 
 fieldset ul select {
   width: 14.7em;
-  padding: .25em .3em;
+  padding: 0;
+  margin: .25em 0;
 }
 
 fieldset ul>li>textarea {
@@ -106,6 +107,14 @@ button {
   background: black;
 }
 
+#bara-de-sus .instrumente {
+  display: none;
+}
+
+.autentificat #bara-de-sus .instrumente {
+  display: block;
+}
+
 #index .şoaptă {
   color: #aaa;
   font-size: 15px;
@@ -127,9 +136,6 @@ button {
   -webkit-box-shadow: 0 0 0;
   -moz-box-shadow: 0 0 0;
   box-shadow: 0 0 0;
-}
-
-#bara-de-sus .instrumente {
   float: right;
   margin-top: 1.3em;
 }
@@ -502,27 +508,22 @@ fieldset.dispensabilă button.elimină-persoană {
   display: inline;
 }
 
-fieldset#creditor button.elimină-persoană {
-  display: none;
-}
-
 #formular .şoaptă {
   margin: .25em 0 .7em 13em;
   padding: 0 1em 0 .5em;
   line-height: 1em;
   font-size: .9em;
   font-style: italic;
+  color: gray;
 }
 
-#cheltuieli .subformular,
-.pecuniar .subformular,
+.subformular,
 .bunuri {
   list-style-type: none;
   padding: .2em 0 0 2em;
 }
 
-#cheltuieli .subformular label,
-.pecuniar .subformular label,
+.subformular label,
 .bunuri label {
   text-align: left;
   font-style: italic;
@@ -550,8 +551,7 @@ fieldset#creditor button.elimină-persoană {
   margin-bottom: .5em;
 }
 
-#cheltuieli .subformular textarea,
-.pecuniar .subformular textarea,
+.subformular textarea,
 .bunuri textarea {
   height: 3ex;
   min-height: 3ex;
@@ -559,9 +559,8 @@ fieldset#creditor button.elimină-persoană {
   background-position: 0 -4px;
 }
 
-#cheltuieli .subformular .denumire,
-#cheltuieli .subformular .descriere,
-.pecuniar .subformular .descriere,
+.subformular .denumire,
+.subformular .descriere,
 .bunuri .descriere {
   width: 16em;
   min-width: 0;
@@ -658,6 +657,7 @@ button.adaugă .legend.label {
 .destinatari-adăugaţi .elimină {
   height: .7em;
   line-height: 1em;
+  opacity: 1;
 }
 
 #listă-taxe-şi-speze .subformular .şoaptă {

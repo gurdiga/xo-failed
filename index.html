@@ -219,22 +219,19 @@
         </div>
 
         <div class="coloană">
-          <fieldset data-şablon="obiectul-urmăririi" id="obiectul-urmăririi">
+          <fieldset id="obiectul-urmăririi">
             <legend><label>Obiectul urmăririi</label></legend>
 
             <div class="conţinut">
               <ul>
                 <li>
-                  <label>Caracter</label>
+                  <label for="caracter">Caracter</label>
                   <select id="caracter" class="care schimbă formularul">
                     <option>pecuniar</option>
                     <option selected>nonpecuniar</option>
                   </select>
                 </li>
               </ul>
-            </div>
-
-            <div class="conţinut"> 
             </div>
           </fieldset>
         </div>
@@ -511,7 +508,7 @@
         </fieldset>
 
         <div class="coloană stînga">
-          <fieldset data-şablon="persoană" id="creditor">
+          <fieldset id="creditor">
             <legend>
               <label>Creditor</label>
               <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
@@ -522,14 +519,12 @@
                 <li>
                   <label>Gen persoană</label>
                   <select id="gen-persoană" class="care schimbă formularul">
-                   <option selected>juridică</option>
+                    <option selected>juridică</option>
                     <option>fizică</option>
                   </select>
                 </li>
               </ul>
             </div>
-
-            <div class="conţinut"></div>
           </fieldset>
 
           <button class="adaugă persoană semiascuns" title="Adaugă persoană terță">
@@ -538,7 +533,7 @@
         </div>
 
         <div class="coloană">
-          <fieldset data-şablon="persoană" class="debitor">
+          <fieldset class="debitor">
             <legend>
               <label>Debitor</label>
 
@@ -556,8 +551,6 @@
                 </li>
               </ul>
             </div>
-
-            <div class="conţinut"></div>
           </fieldset>
 
           <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
@@ -581,137 +574,132 @@
     <!-- ================================ şabloane ================================ -->
 
     <div id="şabloane">
-      <div class="şablon obiectul-urmăririi pecuniar">
-        <ul class="pecuniar">
-          <li>
-            <label for="suma-de-bază">Suma de bază</label>
-            <input id="suma-de-bază" class="sumă" value="1"/>
-            <select class="valuta"></select>
-          </li>
 
-          <li>
-            <label for="taxă-de-stat">Taxă de stat</label>
-            <input id="taxă-de-stat" class="sumă" value="0"/>
-            <select class="valuta"></select>
-          </li>
+      <ul class="conţinut caracter" title="pecuniar">
+        <li>
+          <label for="suma-de-bază">Suma de bază</label>
+          <input id="suma-de-bază" class="sumă" value="0"/>
+          <select class="valuta"></select>
+        </li>
 
-          <li>
-            <label for="penalitate">Penalitate</label>
-            <input id="penalitate" class="sumă" value="0"/>
-            <select class="valuta"></select>
-          </li>
+        <li>
+          <label for="taxă-de-stat">Taxă de stat</label>
+          <input id="taxă-de-stat" class="sumă" value="0"/>
+          <select class="valuta"></select>
+        </li>
 
-          <li>
-            <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
-            <input id="amendă-sau-încasare-periodică" type="checkbox"/>
-          </li>
+        <li>
+          <label for="penalitate">Penalitate</label>
+          <input id="penalitate" class="sumă" value="0"/>
+          <select class="valuta"></select>
+        </li>
 
-          <li><label>Altele:</label></li>
+        <li>
+          <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
+          <input id="amendă-sau-încasare-periodică" type="checkbox"/>
+        </li>
 
-          <li class="subformular">
-            <ul>
-              <li>
-                <label class="descriere">Descriere</label>
-                <label class="sumă">MDL</label>
-              </li>
+        <li><label>Altele:</label></li>
 
-              <li class="item eliminabil">
-                <textarea class="label descriere"></textarea>
-                <input class="sumă"/>
-              </li>
+        <li class="subformular">
+          <ul>
+            <li>
+              <label class="descriere">Descriere</label>
+              <label class="sumă">MDL</label>
+            </li>
 
-              <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
-            </ul>
-          </li>
+            <li class="item eliminabil">
+              <textarea class="label descriere"></textarea>
+              <input class="sumă"/>
+            </li>
 
-          <li>
-            <label for="total"><b>Total</b></label>
-            <input class="sumă calculat" id="total" value="0" readonly/> MDL
-          </li>
-        </ul>
-      </div>
+            <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
+          </ul>
+        </li>
 
-      <div class="şablon obiectul-urmăririi nonpecuniar">
-        <ul>
-          <li>
-            <label for="obiect">Obiectul</label>
-            <select id="obiect" class="foarte lat care schimbă formularul">
-              <option>evacuarea</option>
-              <option>instalarea</option>
-              <option>schimbul forţat</option>
-              <option>stabilirea domiciliului copilului</option>
-              <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
-              <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
-              <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
-              <option>confiscarea bunurilor</option>
-              <option>nimicirea unor bunuri</option>
-              <option>restabilirea la locul de muncă</option>
-              <option>aplicarea măsurilor de asigurare a acţiunii</option>
-            </select>
-          </li>
-        </ul>
-      </div>
+        <li>
+          <label for="total"><b>Total</b></label>
+          <input class="sumă calculat" id="total" value="0" readonly/> MDL
+        </li>
+      </ul>
 
-      <div class="şablon persoană juridică">
-        <ul>
-          <li>
-            <label for="denumire">Denumire</label>
-            <input id="denumire"/>
-          </li>
-
-          <li>
-            <label for="idno">IDNO</label>
-            <input id="idno"/>
-          </li>
-
-          <li>
-            <label for="sediu" class="textarea">Sediu</label>
-            <textarea id="sediu" spellcheck="false"></textarea>
-          </li>
-
-          <li>
-            <label for="persoană-de-contact">Persoană de contact</label>
-            <input id="persoană-de-contact"/>
-          </li>
-
-          <li>
-            <label for="note-pj" class="textarea">Note</label>
-            <textarea id="note-pj" spellcheck="false"></textarea>
-          </li>
-        </ul>
-      </div>
-
-      <div class="şablon persoană fizică">
-        <ul>
-          <li>
-            <label for="nume">Nume</label>
-            <input id="nume"/>
-          </li>
-
-          <li>
-            <label for="idnp">IDNP</label>
-            <input id="idnp"/>
-          </li>
-
-          <li>
-            <label for="data-naşterii">Data naşterii</label>
-            <input id="data-naşterii" class="dată"/>
-          </li>
-
-          <li>
-            <label for="domiciliului">Domiciliu</label>
-            <textarea id="domiciliului" spellcheck="false"></textarea>
-          </li>
-
-          <li>
-            <label for="note-pf" class="textarea">Note</label>
-            <textarea id="note-pf" spellcheck="false"></textarea>
-          </li>
-        </ul>
-      </div>
+      <ul class="conţinut caracter" title="nonpecuniar">
+        <li>
+          <label for="obiect">Obiectul</label>
+          <select id="obiect" class="foarte lat care schimbă formularul">
+            <option>evacuarea</option>
+            <option>instalarea</option>
+            <option>schimbul forţat</option>
+            <option>stabilirea domiciliului copilului</option>
+            <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
+            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
+            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
+            <option>confiscarea bunurilor</option>
+            <option>nimicirea unor bunuri</option>
+            <option>restabilirea la locul de muncă</option>
+            <option>aplicarea măsurilor de asigurare a acţiunii</option>
+          </select>
+        </li>
+      </ul>
 
 
-      <select class="şablon valuta">
+      <ul class="conţinut gen-persoană" title="juridică">
+        <li>
+          <label for="denumire">Denumire</label>
+          <input id="denumire"/>
+        </li>
+
+        <li>
+          <label for="idno">IDNO</label>
+          <input id="idno"/>
+        </li>
+
+        <li>
+          <label for="sediu" class="textarea">Sediu</label>
+          <textarea id="sediu" spellcheck="false"></textarea>
+        </li>
+
+        <li>
+          <label for="persoană-de-contact">Persoană de contact</label>
+          <input id="persoană-de-contact"/>
+        </li>
+
+        <li>
+          <label for="note-pj" class="textarea">Note</label>
+          <textarea id="note-pj" spellcheck="false"></textarea>
+        </li>
+      </ul>
+
+
+      <ul class="conţinut gen-persoană" title="fizică">
+        <li>
+          <label for="nume">Nume</label>
+          <input id="nume"/>
+        </li>
+
+        <li>
+          <label for="idnp">IDNP</label>
+          <input id="idnp"/>
+        </li>
+
+        <li>
+          <label for="data-naşterii">Data naşterii</label>
+          <input id="data-naşterii" class="dată"/>
+        </li>
+
+        <li>
+          <label for="domiciliului">Domiciliu</label>
+          <textarea id="domiciliului" spellcheck="false"></textarea>
+        </li>
+
+        <li>
+          <label for="note-pf" class="textarea">Note</label>
+          <textarea id="note-pf" spellcheck="false"></textarea>
+        </li>
+      </ul>
+
+
+      <select class="valute">
         <option>MDL</option>
         <option>USD</option>
         <option>EUR</option>
@@ -760,55 +748,57 @@
       </select>
 
 
-      <ul class="şablon" title="evacuarea">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="evacuarea">
+        <li>
           <label for="din-încăperea">Din încăperea</label>
           <textarea id="din-încăperea"></textarea>
         </li>
 
-        <li class="subformular">
+        <li>
           <label for="se-acordă-alt-spaţiu">Se acordă alt spaţiu</label>
           <input id="se-acordă-alt-spaţiu" type="checkbox"/>
         </li>
       </ul>
 
 
-      <ul class="şablon" title="instalarea">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="instalarea">
+        <li>
           <label for="în-încăperea">În încăperea</label>
           <textarea id="în-încăperea"></textarea>
         </li>
       </ul>
 
 
-      <ul class="şablon" title="schimbul forţat">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="schimbul forţat">
+        <li>
           <label for="încăperea-pentru-creditor">Încăperea pentru creditor</label>
           <textarea id="încăperea-pentru-creditor"></textarea>
+        </li>
 
+        <li>
           <label for="încăperea-pentru-debitor">Încăperea pentru debitor</label>
           <textarea id="încăperea-pentru-debitor"></textarea>
         </li>
       </ul>
 
 
-      <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
+        <li>
           <label for="acte">Acte</label>
           <textarea id="acte"></textarea>
         </li>
       </ul>
 
 
-      <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
+        <li>
           <ol class="bunuri">
             <li>
               <label class="descriere">Descriere</label>
               <label class="valoare">MDL</label>
             </li>
 
-            <li class="cîmp eliminabil">
+            <li class="item cîmp eliminabil">
               <textarea class="label descriere"></textarea>
               <input class="valoare" value="0"/>
             </li>
@@ -819,84 +809,39 @@
       </ul>
 
 
-      <ul class="şablon" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
-        <li class="subformular">
-          <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-          <ol class="bunuri">
-            <li>
-              <label class="descriere">Descriere</label>
-              <label class="valoare">MDL</label>
-            </li>
-
-            <li class="cîmp eliminabil">
-              <textarea class="label descriere"></textarea>
-              <input class="valoare" value="0"/>
-            </li>
-
-            <li><button class="adaugă semiascuns" title="Adaugă bun">+</button></li>
-          </ol>
-        </li>
+      <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
+        <!-- include ul.conţinut.obiect[title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile"] -->
       </ul>
 
 
-      <ul class="şablon" title="confiscarea bunurilor">
-        <li class="subformular">
-          <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-          <ol class="bunuri">
-            <li>
-              <label class="descriere">Descriere</label>
-              <label class="valoare">MDL</label>
-            </li>
-
-            <li class="cîmp eliminabil">
-              <textarea class="label descriere"></textarea>
-              <input class="valoare" value="0"/>
-            </li>
-
-            <li><button class="adaugă semiascuns" title="Adaugă bun">+</button></li>
-          </ol>
-        </li>
+      <ul class="conţinut obiect" title="confiscarea bunurilor">
+        <!-- include ul.conţinut.obiect[title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile"] -->
       </ul>
 
 
-      <ul class="şablon" title="nimicirea unor bunuri">
-        <li class="subformular">
-          <!-- asta e copie de la «efectuarea de … legate de remiterea unor bunuri imobile» -->
-          <ol class="bunuri">
-            <li>
-              <label class="descriere">Descriere</label>
-              <label class="valoare">MDL</label>
-            </li>
-
-            <li class="cîmp eliminabil">
-              <textarea class="label descriere"></textarea>
-              <input class="valoare" value="0"/>
-            </li>
-
-            <li><button class="adaugă semiascuns" title="Adaugă bun">+</button></li>
-          </ol>
-        </li>
+      <ul class="conţinut obiect" title="nimicirea unor bunuri">
+        <!-- include ul.conţinut.obiect[title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile"] -->
       </ul>
 
 
-      <ul class="şablon" title="restabilirea la locul de muncă">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="restabilirea la locul de muncă">
+        <li>
           <label for="funcţie">Funcţie</label>
           <input id="funcţie"/>
         </li>
 
-        <li class="subformular">
+        <li>
           <label for="salariu-recuperat">Salariu recuperat</label>
           <input id="salariu-recuperat" class="sumă"/> MDL
         </li>
       </ul>
 
 
-      <ul class="şablon" title="aplicarea măsurilor de asigurare a acţiunii">
-        <li class="subformular">
+      <ul class="conţinut obiect" title="aplicarea măsurilor de asigurare a acţiunii">
+        <li>
           <label for="măsura-de-asigurare">Măsura de asigurare</label>
           <select class="foarte lat care schimbă formularul" id="măsura-de-asigurare">
-            <option value="sechestru">aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
+            <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
             <option>interzicerea debitorului de a săvîrşi anumite acte</option>
             <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
             <option>suspendarea vînzării bunurilor sechestrate în cazul intentării unei acţiuni de ridicare a sechestrului de pe ele (radierea din actul  de inventar)</option>
@@ -904,15 +849,15 @@
           </select>
         </li>
 
-        <li class="subformular">
+        <li>
           <label for="bunuri-supuse-înregistrării-sau-bani">Bunuri supuse înregistrării obligatorii de stat sau pe mijloacele băneşti</label>
           <input id="bunuri-supuse-înregistrării-sau-bani" type="checkbox"/>
         </li>
       </ul>
 
 
-      <ul class="şablon" title="sechestru">
-        <li class="subformular">
+      <ul class="conţinut măsura-de-asigurare" title="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
+        <li>
           <label for="valoarea-acţiunii">Valoarea acţiunii</label>
           <input id="valoarea-acţiunii" class="sumă"/>
           <select class="valuta"></select>
@@ -920,7 +865,7 @@
       </ul>
 
 
-      <ul class="şablon subformular" title="documente">
+      <ul class="subformular" title="documente">
         <li>
           <label class="denumire">Denumire</label>
           <label class="cantitate">Cîte</label>
@@ -935,12 +880,12 @@
       </ul>
 
 
-      <div class="şablon subformular" title="bifă “din arhivă”">
+      <div class="subformular" title="bifă “din arhivă”">
         <input type="checkbox" id="din-arhivă" class="din arhivă"/><label for="din-arhivă">din arhivă (+1&nbsp;u.c.)</label>
       </div>
 
 
-      <ul class="şablon subformular" title="documente adresabile">
+      <ul class="subformular" title="documente adresabile">
         <li><label class="denumire">Denumire document</label></li>
 
         <li class="document eliminabil">
@@ -954,19 +899,19 @@
       </ul>
 
 
-      <div class="şablon subformular" title="ore lucrate">
+      <div class="subformular" title="ore lucrate">
         <label class="stînga" for="ore-lucrate">Ore lucrate</label>
         <input class="cantitate" id="ore-lucrate"/>
       </div>
 
 
-      <div class="şablon subformular" title="bifă “licitaţie repetată”">
+      <div class="subformular" title="bifă “licitaţie repetată”">
         <input type="checkbox" class="licitaţie repetată" id="licitaţie-repetată"/>
         <label for="licitaţie-repetată">licitaţie repetată (se aplică coeficientul 0.5)</label>
       </div>
 
 
-      <div class="şablon subformular" title="contracte">
+      <div class="subformular" title="contracte">
         <ul>
           <li>
             <label class="denumire">Contractul</label>
@@ -983,7 +928,7 @@
       </div>
 
 
-      <ul class="şablon subformular" title="participanţi la licitaţie">
+      <ul class="subformular" title="participanţi la licitaţie">
         <li>
           <label class="descriere">Nume participant</label>
         </li>
@@ -996,7 +941,7 @@
       </ul>
 
 
-      <ul class="şablon subformular" title="listă cheltuieli">
+      <ul class="subformular" title="listă cheltuieli">
         <li>
           <label class="descriere">Descriere</label>
           <label class="sumă">Suma</label>
@@ -1011,7 +956,7 @@
       </ul>
 
 
-      <div class="şablon destinatari cu umbră">
+      <div class="destinatari cu umbră">
         <ul class="categorii">
           <li class="categorie">
             <span class="titlu">
@@ -1087,16 +1032,16 @@
       </div>
 
 
-      <div class="şablon elimină semiascuns" title="Elimină">&times;</div>
+      <div class="elimină semiascuns" title="Elimină">&times;</div>
 
 
-      <div class="şablon subformular achitare">
+      <div class="subformular achitare">
         <input type="checkbox"/><label>achitat</label>
         <span class="la">la <input class="dată"/></span>
       </div>
 
 
-      <div class="şablon subformular persoană terţă">
+      <div class="subformular persoană terţă">
         <label>Persoană terţă:</label>
         <input/>
       </div>
