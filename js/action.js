@@ -613,6 +613,7 @@ var Formular = {
           date = {},
           cîmpuri = [
             'label+:input:not(.calculat):not(button):last-child',
+            'label+:input.dată',
             'label+:input.foarte.lat',
             '.label+:input:not(.calculat):not(button)'
           ].join(',');
@@ -774,7 +775,9 @@ var Formular = {
 
     // -----
     function post() {
-      $.post('/bin/salvează.php', procedură, function() {
+      var număr = HashController.date();
+
+      $.post('/date/' + Utilizator.login + '/proceduri/' + număr, JSON.stringify(procedură), function() {
         Formular.închide();
         Căutare.încarcăIndex();
         ProceduriRecente.încărcat = false;
@@ -785,7 +788,7 @@ var Formular = {
   încarcă: function() {
     var număr = HashController.date();
 
-    $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr + '?' + +new Date)
+    $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr)
       .success(Formular.populează)
       .error(Formular.închide);
 

@@ -4,7 +4,7 @@ require_once './lib.php';
 
 
 $login = $_SERVER['PHP_AUTH_USER'];
-$procedură = $_POST;
+$procedură = json_decode(file_get_contents("php://input"), true);
 
 verifică_login($login);
 verifică_număr($procedură);
