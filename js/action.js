@@ -883,7 +883,7 @@ var Formular = {
           titluri[$(this).text()] = i;
         });
 
-        if (item.achitat == 'true') {
+        if (item.achitat == true) {
           $item.find('.subformular.achitare :checkbox').attr('checked', true).trigger('change');
           $item.find('.subformular.achitare .la .dată').val(item['data-achitării']);
           $item.addClass('achitat');
