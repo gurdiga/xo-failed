@@ -466,11 +466,15 @@ var Cheltuieli = {
 
   initBifeAchitat: function() {
     $('#listă-taxe-şi-speze').on('click', '.subformular.achitare :checkbox', function() {
-      var azi = moment().format('DD.MM.YYYY');
+      var bifa = $(this),
+          data = bifa.siblings('.la').find('.dată'),
+          item = bifa.closest('.item');
 
-      $(this)
-        .siblings('.la').find('.dată').val(this.checked ? azi : '')
-        .closest('.item').toggleClass('achitat', this.checked);
+      if (bifa.is(':checked')) {
+        if ($.trim(data.val()) == '') data.val(moment().format('DD.MM.YYYY'));
+      }
+
+      item.toggleClass('achitat', bifa.is(':checked'));
     });
   }
 };
