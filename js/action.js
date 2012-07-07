@@ -1417,7 +1417,9 @@ var CîmpuriPersonalizate = {
 
     li
       .before(şablon)
-      .prev().find('.etichetă').focus().select();
+      .prev()
+        .find('.etichetă').focus().select().end()
+        .effect('highlight', {}, 1200);
   }
 };
 
