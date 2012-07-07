@@ -1,10 +1,7 @@
 TODO:
 -----
 
-* testează şi repară/simplifică subformularele de la «Obiectul urmăririi»
-  * de unificat adăugarea:
-    * mv bun item
-    * mv document item
+* nu închide formularul la salvare
 * de unificat listele de proceduri: recente şi găsite
 * toolbar pentru acţiuni formular
   * de definit formele

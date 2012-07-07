@@ -28,6 +28,30 @@ var Action = {
     $('#căutare input').focus();
 
     ProceduriRecente.încarcă();
+  },
+
+  '#formular': function() {
+    var genProcedură = HashController.date();
+
+    switch (genProcedură) {
+      case 'P':
+        var $formular = $('#formular')
+          .one('pregătit', function() {
+            var şablon = $şabloane.find('#sume-pensie').html(),
+                secţiune = $(this).find('#obiectul-urmăririi');
+
+            secţiune
+              .data('formular-iniţial', secţiune.html())
+              .find('.conţinut ul').html(şablon);
+          })
+          .one('închidere', function() {
+            var secţiune = $(this).find('#obiectul-urmăririi');
+
+            secţiune.html(secţiune.data('formular-iniţial'));
+          });
+
+        break;
+    }
   }
 };
 
@@ -782,7 +806,8 @@ var Formular = {
       .on('keydown', Formular.esc)
       .attr('tabindex', 1)
       .focus()
-      .removeAttr('tabindex');
+      .removeAttr('tabindex')
+      .trigger('pregătit');
 
     $.fx.off = false;
 
@@ -957,13 +982,14 @@ var Formular = {
   },
 
   închide: function() {
-    $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''});
+    $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''})
+    $('#formular').trigger('închidere');
 
     Formular.resetează();
   },
 
   deschide: function() {
-    $('#formular')
+    var $formular = $('#formular')
       .animate({scrollTop: 0}, 0)
       .on('keydown', Formular.esc)
       .attr('tabindex', 1)
@@ -980,6 +1006,10 @@ var Formular = {
 
     Formular.seteazăTitlu();
     Business.init();
+
+    if (!Formular.seDeschideProcedurăSalvată()) {
+      $formular.trigger('pregătit');
+    }
 
     $.fx.off = false;
   },
