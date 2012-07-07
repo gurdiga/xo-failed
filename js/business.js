@@ -2,6 +2,8 @@
 var UC = 20;
 
 var Business = {
+  FORMATUL_DATEI: /(\d{2}).(\d{2}).(\d{4})/,
+
   init: function() {
     var pagină = HashController.pagină();
 
@@ -48,7 +50,7 @@ var DobîndaDeÎntîrziere = {
     var deLa = $.trim(Calculator.$.find('#de-la').val());
         pînăLa = $.trim(Calculator.$.find('#pînă-la').val());
 
-    if (!/(\d{2}).(\d{2}).(\d{4})/.test(deLa) || !/(\d{2}).(\d{2}).(\d{4})/.test(pînăLa)) return;
+    if (!Business.FORMATUL_DATEI.test(deLa) || !Business.FORMATUL_DATEI.test(pînăLa)) return;
 
     deLa = moment(deLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
     pînăLa = moment(pînăLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
