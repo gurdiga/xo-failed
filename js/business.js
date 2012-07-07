@@ -120,7 +120,7 @@ var Onorariul = {
   // Articolul 38
 
   init: function() {
-    var schimbareDate = 'keyup update paste',
+    var schimbareDate = 'keyup update paste change',
         cîmpuriConsiderate = '.sumă:not(.calculat), .valuta, .bunuri .valoare, input:checkbox';
 
     $('#obiectul-urmăririi')

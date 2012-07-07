@@ -356,6 +356,8 @@ fieldset {
   margin-bottom: 30px;
 }
 
+
+input.etichetă,
 fieldset label {
   display: inline-block;
   width: 11em;
@@ -363,6 +365,7 @@ fieldset label {
 }
 
 #listă-taxe-şi-speze .subformular .stînga,
+input.etichetă,
 fieldset label {
   padding: .4em 0 0 6px;
 }
@@ -372,6 +375,27 @@ fieldset legend {
   background: #333;
   width: 100%;
   text-indent: 2px;
+}
+
+input.etichetă {
+  background-image: none;
+  font-weight: normal;
+  padding: .4em 0 .3em 6px;
+}
+
+input.etichetă:hover,
+input.etichetă:focus {
+  outline: 1px solid #ddd;
+}
+
+li.duplicabil button.duplicare {
+  background-color: transparent;
+  border: none;
+  width: 19px;
+  position: absolute;
+  margin: 4px 0 0 -12px;
+  padding: 10px 8px;
+  cursor: pointer;
 }
 
 fieldset legend label {
@@ -520,7 +544,7 @@ fieldset.dispensabilă button.elimină-persoană {
 .subformular,
 .bunuri {
   list-style-type: none;
-  padding: .2em 0 0 2em;
+  padding: .5em 0 0 2em;
 }
 
 .subformular label,
@@ -573,6 +597,7 @@ fieldset.dispensabilă button.elimină-persoană {
   width: 5em;
 }
 
+button.adaugă-cîmp-personalizat,
 button.adaugă {
   font-size: 1.5em;
   font-weight: normal;
@@ -583,6 +608,12 @@ button.adaugă {
   background: transparent;
   top: -.2em;
   position: relative;
+}
+
+button.adaugă-cîmp-personalizat {
+  top: 0;
+  left: .2em;
+  padding: 0 .5em .2em;
 }
 
 button.adaugă.persoană {
@@ -1000,8 +1031,8 @@ input[type="checkbox"]+label {
 #calculator {
   display: none;
   position: fixed;
-  top: 5em;
-  right: 12em;
+  top: 4em;
+  right: 14em;
   width: 18em;
   background: white;
   border: 1px solid silver;

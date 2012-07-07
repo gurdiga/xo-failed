@@ -571,11 +571,16 @@
       </div>
     </div>
 
-    <!-- ================================ şabloane ================================ -->
+
 
     <div id="şabloane">
 
       <ul class="conţinut caracter" title="pecuniar">
+        <li>
+          <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
+          <input id="amendă-sau-încasare-periodică" type="checkbox"/>
+        </li>
+
         <li>
           <label for="suma-de-bază">Suma de bază</label>
           <input id="suma-de-bază" class="sumă" value="0"/>
@@ -595,31 +600,13 @@
         </li>
 
         <li>
-          <label for="amendă-sau-încasare-periodică">Amendă sau încasare&nbsp;periodică</label>
-          <input id="amendă-sau-încasare-periodică" type="checkbox"/>
-        </li>
-
-        <li><label>Altele:</label></li>
-
-        <li class="subformular">
-          <ul>
-            <li>
-              <label class="descriere">Descriere</label>
-              <label class="sumă">MDL</label>
-            </li>
-
-            <li class="item eliminabil">
-              <textarea class="label descriere"></textarea>
-              <input class="sumă"/>
-            </li>
-
-            <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
-          </ul>
+          <button class="adaugă-cîmp-personalizat semiascuns"
+            title="Adaugă sumă" data-şablon="cîmp-personalizat">+</button>
         </li>
 
         <li>
           <label for="total"><b>Total</b></label>
-          <input class="sumă calculat" id="total" value="0" readonly/> MDL
+          <input class="sumă calculat" id="total" value="0" readonly/><b>MDL</b>
         </li>
       </ul>
 
@@ -1045,6 +1032,16 @@
         <label>Persoană terţă:</label>
         <input/>
       </div>
+
+
+      <ul class="cîmp-personalizat">
+        <li class="personalizat eliminabil de tot">
+          <input class="etichetă" value="Descriere sumă"/>
+          <input class="sumă" value="0"/>
+          <select class="valuta"></select>
+        </li>
+      </ul>
+
     </div>
 
 

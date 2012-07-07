@@ -17,6 +17,7 @@ var Action = {
     Instrumente.init();
     Calculator.init();
     Calendar.init();
+    CîmpuriPersonalizate.init();
 
     $(window).trigger('hashchange');
 
@@ -35,9 +36,6 @@ var Action = {
 var ProcedurăNonPecuniară = {
   init: function() {
     this.bunuri.init();
-    this['măsura-de-asigurare'].init();
-
-    $('#obiectul-urmăririi').on('change', '#obiect', this.inseareazăSauEliminăSubformular);
   },
 
   bunuri: {
@@ -58,33 +56,6 @@ var ProcedurăNonPecuniară = {
           .val('')
           .first().focus();
     }
-  },
-
-  'măsura-de-asigurare': {
-    init: function() {
-      $('#obiectul-urmăririi').on('change', '#măsura-de-asigurare', function() {
-        var lista = $(this);
-
-        if (lista.val() == 'sechestru') {
-          lista.parent()
-            .after($şabloane.find('[title="' + lista.val() + '"]').html())
-            .next().find('.sumă').focus();
-        } else {
-          lista.parent().next('.subformular').remove();
-        }
-      });
-    }
-  },
-
-  inseareazăSauEliminăSubformular: function() {
-    var obiect = $(this),
-        şablon = $şabloane.find('[title="' + obiect.val() + '"]');
-
-    obiect.parent()
-      .siblings('.subformular').remove().end()
-      .after(şablon.html())
-      .parent()
-        .find(':input').first().focus();
   }
 };
 
@@ -516,7 +487,6 @@ var ButonDeEliminare = {
 
   ascunde: function() {
     ButonDeEliminare.$
-      .hide()
       .parent().removeClass('spre-eliminare').end()
       .appendTo(document.body);
   },
@@ -642,23 +612,22 @@ var Formular = {
     // ------------------------------------------
     function colecteazăObiectulUrmăririi() {
       return $.extend(colectează('#obiectul-urmăririi'), {
-        'sume': colecteazăSumeÎnValută(['suma-de-bază', 'taxă-de-stat', 'penalitate', 'valoarea-acţiunii'])
+        'sume': colecteazăSumeÎnValută()
       });
     }
 
     // ------------------------------------------
     function colecteazăSumeÎnValută(cîmpuri) {
-      var sume = {},
-          $secţiune = $('#obiectul-urmăririi');
+      var sume = {};
 
-      $.each(cîmpuri, function() {
-        var $cîmp = $secţiune.find('#' + this);
+      $('#obiectul-urmăririi').find('.sumă+.valuta').each(function() {
+        var cîmp = $(this).prev(),
+            etichetă = cîmp.prev(),
+            denumire = etichetă[etichetă.is('label') ? 'text' : 'val']();
 
-        if (!$cîmp.există()) return;
-
-        sume[this] = {
-          suma: $cîmp.val(),
-          valuta: $cîmp.next('.valuta').val()
+        sume[denumire] = {
+          suma: cîmp.val(),
+          valuta: cîmp.next('.valuta').val()
         };
       });
 
@@ -837,27 +806,16 @@ var Formular = {
           cîmp, $cîmp;
 
       for (cîmp in sume) {
-        $cîmp = $secţiune.find('#' + cîmp);
-        $cîmp.val(sume[cîmp].suma);
-        $cîmp.next('.valuta').val(sume[cîmp].valuta);
-      }
+        $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
 
-      var subformular = procedură['obiectul-urmăririi'].subformular,
-          $subformular = $('#obiectul-urmăririi').find('.subformular'),
-          $adaugă = $subformular.find('button.adaugă'),
-          descriere,
-          prima = true;
-
-      for (descriere in subformular) {
-        if (prima) {
-          prima = false;
-        } else {
-          $adaugă.click();
+        if (!$cîmp.există()) {
+          $secţiune.find('li:has(button.adaugă-cîmp-personalizat)').before($şabloane.find('.cîmp-personalizat').html());
+          $cîmp = $secţiune.find('.etichetă+.sumă').last();
+          $cîmp.prev().val(cîmp);
         }
 
-        $subformular.find('.item:last')
-          .find('.descriere').val(descriere).end()
-          .find('.sumă, .valoare').val(subformular[descriere]).end();
+        $cîmp.val(sume[cîmp].suma);
+        $cîmp.next('.valuta').val(sume[cîmp].valuta);
       }
     }
 
@@ -1432,6 +1390,34 @@ var Calendar = {
         if (e.keyCode == 40) $(this).next('.ui-icon-calendar').click();
         if (e.keyCode == 27) Calendar.închide();
       });
+  }
+};
+
+// --------------------------------------------------
+
+var CîmpuriPersonalizate = {
+  init: function() {
+    $('#formular')
+      .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
+      .on('blur', 'input.etichetă', function(e) {
+          $(this).next().focus();
+      })
+      .on('keydown', 'input.etichetă', function(e) {
+        if (e.keyCode == 13 || e.keyCode == 27) {
+          $(this).next().focus();
+          e.stopPropagation();
+        }
+      });
+  },
+
+  adaugă: function() {
+    var buton = $(this),
+        li = buton.closest('li'),
+        şablon = $şabloane.find('.' + buton.data('şablon')).html();
+
+    li
+      .before(şablon)
+      .prev().find('.etichetă').focus().select();
   }
 };
 

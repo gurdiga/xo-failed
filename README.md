@@ -12,10 +12,9 @@ TODO:
 * înregistrare utilizator
 * authentificare nginx: areal unic
   * use a regexp to exclude the idex and jses?
-* optimizare şabloane: de mutat toate în #şablon
 * design
   * tranziţie pentru adăugare/ştergere/scroll
-  * procedurile recente ca teanc de foi (ca şi la procedurile noi)
+  * procedurile recente ca teanc de foi (ca şi la procedurile noi)?
 * cu privire la conturi:
   * dezactivare după o perioadă de inactivitate
   * autentificarea mutuală
