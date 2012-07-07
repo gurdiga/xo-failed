@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /var/www/executori.html.md
+cd /var/www/executori.org
 git pull

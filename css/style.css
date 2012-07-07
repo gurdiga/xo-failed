@@ -616,6 +616,11 @@ button.adaugă-cîmp-personalizat {
   padding: 0 .5em .2em;
 }
 
+.personalizat .elimină {
+  left: -12px;
+  top: 3px;
+}
+
 button.adaugă.persoană {
   font-weight: bold;
   margin-left: .5em;
