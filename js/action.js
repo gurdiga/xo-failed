@@ -674,11 +674,8 @@ var Formular = {
         var $item = $(this),
             item = {};
 
-        item.achitat = $item.find('.achitare :checkbox').is(':checked');
-
-        if (item.achitat) {
-          item['data-achitării'] = $item.find('.achitare .dată').val();
-        }
+        item['achitat'] = $item.find('.achitare :checkbox').is(':checked');
+        item['data-achitării'] = $item.find('.achitare .dată').val();
 
         var $subformular = $item.find('.subformular:not(.achitare)');
 
