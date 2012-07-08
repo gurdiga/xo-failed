@@ -1,7 +1,7 @@
 TODO:
 -----
 
-* nu închide formularul la salvare
+* de reparat/refactorit destinatarii
 * de unificat listele de proceduri: recente şi găsite
 * toolbar pentru acţiuni formular
   * de definit formele

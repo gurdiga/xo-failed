@@ -51,10 +51,6 @@ fieldset>.conţinut {
   padding-top: 1px;
 }
 
-fieldset>.conţinut+.conţinut {
-  padding-top: 0;
-}
-
 textarea,
 input,
 fieldset select {
@@ -189,6 +185,7 @@ button {
 #căutare table#rezultate {
   border-collapse: collapse;
   width: 28.45em;
+  background-color: white;
 }
 
 #căutare #rezultate td {
@@ -720,8 +717,14 @@ fieldset input[type="checkbox"]+label {
   margin: 0 0 .8em 14em;
 }
 
+#destinatari {
+  display: none;
+  position: absolute;
+  margin-left: -2.5em;
+}
+
 #cheltuieli .document .adaugă-destinatar:before,
-#cheltuieli .document .destinatari .categorie:before,
+#destinatari .categorie:before,
 #categorii-taxe-şi-speze .categorie:before {
   content: '▾';
   margin-left: -1em;
@@ -731,7 +734,7 @@ fieldset input[type="checkbox"]+label {
 }
 
 #cheltuieli .document .adaugă-destinatar,
-#cheltuieli .document .destinatari .categorie .titlu,
+#destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
   color: #555;
   white-space: nowrap;
@@ -750,9 +753,9 @@ fieldset input[type="checkbox"]+label {
 
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover>span,
-#cheltuieli .document .destinatari .categorie:hover:before,
-#cheltuieli .document .destinatari .categorie:hover .titlu,
-#cheltuieli .document .destinatari .listă>li:hover,
+#destinatari .categorie:hover:before,
+#destinatari .categorie:hover .titlu,
+#destinatari .listă>li:hover,
 #categorii-taxe-şi-speze .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover .descriere,
 #categorii-taxe-şi-speze .categorie ol>li:hover {
@@ -761,7 +764,7 @@ fieldset input[type="checkbox"]+label {
 }
 
 #cheltuieli .document .adaugă-destinatar:hover:before,
-#cheltuieli .document .destinatari .categorie:hover:before,
+#destinatari .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover:before {
   text-decoration: none;
 }
@@ -840,48 +843,48 @@ input[type="checkbox"]+label {
 }
 
 #cheltuieli .document .destinatari,
-#cheltuieli .document .destinatari .listă {
+#destinatari .listă {
   position: absolute;  
-  margin-left: -1.5em;
+  margin-left: -1em;
   padding-left: 1.5em;
 }
 
-#cheltuieli .document .destinatari .listă,
-#cheltuieli .document .destinatari .categorii {
-  padding: .3em 2em .7em;
+#destinatari .listă,
+#destinatari .categorii {
+  padding: .3em 2em .7em 2.5em;
 }
 
-#cheltuieli .document .destinatari .listă>li,
-#cheltuieli .document .destinatari .categorie {
+#destinatari .listă>li,
+#destinatari .categorie {
   margin-bottom: .4em;
 }
 
-#cheltuieli .document .destinatari .listă>li.dezactivat,
-#cheltuieli .document .destinatari .listă>li.dezactivat:hover {
+#destinatari .listă>li.dezactivat,
+#destinatari .listă>li.dezactivat:hover {
   text-decoration: line-through;
   cursor: text;
   color: #555;
 }
 
-#cheltuieli .document .destinatari .listă {
+#destinatari .listă {
   display: none;
 }
 
-#cheltuieli .document .destinatari .categorie .toate {
+#destinatari .categorie .toate {
   font-style: italic;
   display: none;
 }
 
-#cheltuieli .document .destinatari .categorie:hover .toate {
+#destinatari .categorie:hover .toate {
   color: #999;
   display: inline;
 }
 
-#cheltuieli .document .destinatari .categorie:hover .toate:hover {
+#destinatari .categorie:hover .toate:hover {
   color: black;
 }
 
-#cheltuieli .document .destinatari .listă>li,
+#destinatari .listă>li,
 #cheltuieli .document .destinatari-adăugaţi>li {
   list-style: inside circle;
   white-space: nowrap;

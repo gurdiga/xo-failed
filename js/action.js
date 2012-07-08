@@ -1,16 +1,18 @@
-var $şabloane = $('#şabloane');
+window.$şabloane = $('#şabloane');
+window.skipEventOnce = {};
 
 var Action = {
   init: function() {
     Utilizator.init();
     HashController.init();
 
-    Valute.init();
+    Valute.populeazăListe();
     ProcedurăNonPecuniară.init();
     FormulareŞablon.init();
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
     Persoane.init();
+    Destinatari.init();
     Cheltuieli.init();
     ButonDeEliminare.init();
     Formular.init();
@@ -31,12 +33,12 @@ var Action = {
   },
 
   '#formular': function() {
-    var genProcedură = HashController.date();
+    var genProcedură = HashController.date().substr(0, 1);
 
     switch (genProcedură) {
       case 'P':
-        var $formular = $('#formular')
-          .one('pregătit', function() {
+        $('#formular')
+          .one('înainte-de-deschidere', function() {
             var şablon = $şabloane.find('#sume-pensie').html(),
                 secţiune = $(this).find('#obiectul-urmăririi');
 
@@ -59,37 +61,27 @@ var Action = {
 
 var ProcedurăNonPecuniară = {
   init: function() {
-    this.bunuri.init();
+    $('#obiectul-urmăririi')
+      .on('click', 'button.adaugă', this.adaugăCîmp)
+      .on('iniţializat', function() { $('#obiect').trigger('change') });
   },
 
-  bunuri: {
-    init: function() {
-      $('#obiectul-urmăririi')
-        .on('click', 'button.adaugă', this.adaugăCîmp)
-        .on('iniţializat', function() { $('#obiect').trigger('change') });
-    },
+  adaugăCîmp: function() {
+    var şablon = $(this).parent().prev();
 
-    adaugăCîmp: function() {
-      var şablon = $(this).parent().prev();
-
-      şablon.clone()
-        .hide()
-        .insertBefore($(this).parent())
-        .show('blind')
-        .find(':input')
-          .val('')
-          .first().focus();
-    }
+    şablon.clone()
+      .hide()
+      .insertBefore($(this).parent())
+      .show('blind')
+      .find(':input')
+        .val('')
+        .first().focus();
   }
 };
 
 // --------------------------------------------------
 
 var Valute = {
-  init: function() {
-    this.populeazăListe();
-  },
-
   populeazăListe: function() {
     var şablon = $şabloane.find('.valute').html();
 
@@ -149,20 +141,26 @@ var Persoane = {
 
 var HashController = {
   init: function() {
-    $(window).on('hashchange', function() {
-      if (Utilizator.autentificat) {
-        var pagina = HashController.pagină();
+    $(window)
+      .on('hashchange', function(e) {
+        if (window.skipEventOnce.hashchange) {
+          e.stopImmediatePropagation();
+          delete window.skipEventOnce.hashchange;
+        }
+      })
+      .on('hashchange', function() {
+        if (Utilizator.autentificat) {
+          var pagina = HashController.pagină();
 
-        $('div.pagină, #umbră')
-          .filter(':not(#index)').hide().end()
-          .filter(pagina).show();
+          $('div.pagină, #umbră')
+            .filter(':not(#index)').hide().end()
+            .filter(pagina).show();
 
-        if (Action[pagina]) Action[pagina]();
-      } else {
-        $('div.pagină').hide()
-          .filter('#login').show();
-      }
-    });
+          if (Action[pagina]) Action[pagina]();
+        } else {
+          $('div.pagină').hide().filter('#login').show();
+        }
+      });
   },
 
   hash: function() {
@@ -258,7 +256,9 @@ var FormulareŞablon = {
         item.next().find(':input').first().focus();
       }
 
-      item.nextAll().effect('highlight', {}, 1200);
+      item.nextAll().effect('highlight', {}, 1200, function() {
+        $(this).clearQueue();
+      });
     });
   },
 
@@ -361,8 +361,6 @@ var Cheltuieli = {
   },
 
   initDocumenteAdresabile: function() {
-    var listaDestinatari = $şabloane.find('.destinatari');
-
     $('#cheltuieli')
       .on('click', '.destinatari-adăugaţi', function(e) {
         if (e.target == this) {
@@ -378,74 +376,15 @@ var Cheltuieli = {
       })
 
       .on('mouseenter', '.adaugă-destinatar', function() {
-        listaDestinatari.appendTo(this).afişează();
+        Destinatari.adăugaţiDeja = $(this).prev('.destinatari-adăugaţi');
+        Destinatari.$.appendTo(this).show();
       })
       .on('mouseleave', '.adaugă-destinatar', function() {
-        listaDestinatari.ascunde();
+        Destinatari.$.hide();
       })
 
-      .on('mouseenter', '.document .destinatari .categorie', function() {
-        $(this).find('.listă').afişează();
-
-        var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi li'),
-            destinatari = $(this).find('.listă').children();
-
-        if (destinatariAdăugaţiDeja.există()) {
-          var selector = destinatariAdăugaţiDeja.map(function() {
-            return ':contains("' + $(this).text() + '")';
-          }).get().join(',');
-
-          destinatari
-            .removeClass('dezactivat')
-            .filter(selector)
-              .addClass('dezactivat')
-              .attr('title', 'Adăugat deja');
-        } else {
-          destinatari
-            .removeClass('dezactivat')
-            .removeAttr('title');
-        }
-      })
-      .on('mouseleave', '.document .destinatari .categorie', function() {
-        $(this).find('.listă').ascunde();
-      })
-
-      .on('click', '.categorie .titlu .toate', function() {
-        var destinatari = $(this).closest('.categorie'),
-            adăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi li').map(function() {
-              return ':contains("' + $(this).text() + '")';
-            }).get().join(',');
-
-        destinatari.find('li').not(adăugaţiDeja).trigger('click');
-
-        listaDestinatari.hide();
-      })
-
-      .on('click', '.listă li', function() {
-        var destinatariAdăugaţiDeja = $(this).closest('.document').find('.destinatari-adăugaţi'),
-            destinatar = $(this).clone();
-
-        destinatar
-          .addClass('eliminabil de tot')
-          .appendTo(destinatariAdăugaţiDeja);
-
-        $(this).addClass('dezactivat');
-
-        if (destinatar.is('.persoană.terţă')) {
-          destinatariAdăugaţiDeja.click();
-          destinatar
-            .text('')
-            .append($şabloane.find('.persoană.terţă').html())
-            .find('input').focus();
-        }
-
-        TotalCheltuieli.calculează();
-      })
-
-      .on('keypress', '.persoană.terţă input', function(e) {
-        var destinatariAdăugaţiDeja = $(this).closest('ul.destinatari-adăugaţi');
-
-        if (e.keyCode == 13) destinatariAdăugaţiDeja.click();
+      .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', function(e) {
+        if (e.keyCode == 13) Destinatari.adăugaţiDeja.click();
       })
 
       .on('eliminare', '.destinatari-adăugaţi .eliminabil', function() {
@@ -471,6 +410,78 @@ var Cheltuieli = {
 
       item.toggleClass('achitat', bifa.is(':checked'));
     });
+  }
+};
+
+// --------------------------------------------------
+
+var Destinatari = {
+  $: $('#destinatari'),
+  persoanăTerţă: $şabloane.find('.persoană.terţă').html(),
+  adăugaţiDeja: $(),
+
+  init: function() {
+    Destinatari.$
+      .on('mouseenter', '.categorie', Destinatari.afişeazăCategorie)
+      .on('mouseleave', '.categorie', Destinatari.ascundeCategorie)
+      .on('click', '.categorie .titlu .toate', Destinatari.adaugăCategorie)
+      .on('click', '.listă li', Destinatari.adaugă);
+  },
+
+  afişeazăCategorie: function() {
+    var destinatari = $(this).find('.listă').children();
+
+    if (Destinatari.adăugaţiDeja.children().există()) {
+      var selector = Destinatari.adăugaţiDeja.map(function() {
+        return ':contains("' + $(this).text() + '")';
+      }).get().join(',');
+
+      destinatari
+        .removeClass('dezactivat')
+        .filter(selector)
+          .addClass('dezactivat')
+          .attr('title', 'Adăugat deja');
+    } else {
+      destinatari
+        .removeClass('dezactivat')
+        .removeAttr('title');
+    }
+
+    $(this).find('.listă').show();
+  },
+
+  ascundeCategorie: function() {
+    $(this).find('.listă').hide();
+  },
+
+  adaugăCategorie: function() {
+    var destinatari = $(this).closest('.categorie'),
+        adăugaţiDeja = Destinatari.adăugaţiDeja.children().map(function() {
+          return ':contains("' + $(this).text() + '")';
+        }).get().join(',');
+
+    destinatari.find('li').not(adăugaţiDeja).trigger('click');
+    Destinatari.$.hide();
+  },
+
+  adaugă: function() {
+    var destinatar = $(this).clone();
+
+    destinatar
+      .addClass('eliminabil de tot')
+      .appendTo(Destinatari.adăugaţiDeja);
+
+    $(this).addClass('dezactivat');
+
+    if (destinatar.is('.persoană.terţă')) {
+      Destinatari.adăugaţiDeja.click();
+      destinatar
+        .text('')
+        .append(Destinatari.persoanăTerţă)
+        .find('input').focus();
+    }
+
+    TotalCheltuieli.calculează();
   }
 };
 
@@ -560,10 +571,14 @@ var Utilizator = {
 // --------------------------------------------------
 
 var Formular = {
+  $: $('#formular'),
+
   init: function() {
-    $('#formular')
-      .find('button.închide').on('click', Formular.închide).end()
-      .find('button.salvează').on('click', Formular.trimite);
+    Formular.$
+      .on('click', 'button.închide', Formular.închide)
+      .on('click', 'button.salvează', Formular.trimite)
+      .on('keydown', function(e) {if (e.keyCode == 27) Formular.închide()})
+      .on('închidere', Formular.resetează);
 
     $(window).on('hashchange', function() {
       if (!/^#formular/.test(location.hash)) return;
@@ -586,7 +601,7 @@ var Formular = {
         descriereProcedură = $('#crează-procedură').find('a[href="' + href + '"]').text(),
         număr = Formular.seCreazăProcedurăNouă() ? '' : Utilizator.login + HashController.date();
 
-    $('#formular')
+    Formular.$
       .find('#descriere').text(descriereProcedură).end()
       .find('#număr').text(număr).end();
   },
@@ -772,7 +787,18 @@ var Formular = {
       var număr = HashController.date();
 
       $.post('/date/' + Utilizator.login + '/proceduri/' + număr, JSON.stringify(procedură), function() {
-        Formular.închide();
+        if (Formular.seCreazăProcedurăNouă()) {
+          window.skipEventOnce.hashchange = true;
+          location.hash = 'formular?' + procedură.număr;
+
+          Formular.seteazăTitlu();
+          Formular.$
+            .animate({scrollTop: 0}, 500)
+            .attr('tabindex', 1)
+            .focus()
+            .removeAttr('tabindex')
+        }
+
         Căutare.încarcăIndex();
         ProceduriRecente.încărcat = false;
       });
@@ -802,12 +828,9 @@ var Formular = {
     populeazăDebitori();
 
     $('#formular')
-      .animate({scrollTop: 0}, 0)
-      .on('keydown', Formular.esc)
       .attr('tabindex', 1)
       .focus()
-      .removeAttr('tabindex')
-      .trigger('pregătit');
+      .removeAttr('tabindex');
 
     $.fx.off = false;
 
@@ -888,7 +911,7 @@ var Formular = {
             $cîmp = $itemSubformular.find(':input');
 
             if (this.document) {
-              var $destinatari = $şabloane.find('.destinatari');
+              var $destinatari = Destinatari.$;
 
               $cîmp.val(this.document);
 
@@ -976,46 +999,39 @@ var Formular = {
         .find('input,textarea').val('').end()
         .not(':first').remove().end()
         .first().removeClass('dispensabilă').end()
-      .end();
+      .end()
 
-    $('#categorii-taxe-şi-speze').find('.dezactivat').removeClass('dezactivat');
+      .find('#categorii-taxe-şi-speze')
+        .find('.dezactivat').removeClass('dezactivat').end()
+      .end();
   },
 
   închide: function() {
     $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''})
     $('#formular').trigger('închidere');
-
-    Formular.resetează();
   },
 
   deschide: function() {
-    var $formular = $('#formular')
-      .animate({scrollTop: 0}, 0)
-      .on('keydown', Formular.esc)
-      .attr('tabindex', 1)
-      .focus()
-      .removeAttr('tabindex');
+    Formular.$.trigger('înainte-de-deschidere');
 
     $('#formular, #umbră').hide().fadeIn('fast');
 
     $.fx.off = true;
 
-    if (Formular.seDeschideProcedurăSalvată()) {
+    if (Formular.seDeschideProcedurăSalvată() && !Formular.deschis) {
       Formular.încarcă();
     }
 
     Formular.seteazăTitlu();
     Business.init();
 
-    if (!Formular.seDeschideProcedurăSalvată()) {
-      $formular.trigger('pregătit');
-    }
+    Formular.$
+      .animate({scrollTop: 0}, 0)
+      .attr('tabindex', 1)
+      .focus()
+      .removeAttr('tabindex')
 
     $.fx.off = false;
-  },
-
-  esc: function(e) {
-    if (e.keyCode == 27) Formular.închide();
   }
 }
 
@@ -1023,13 +1039,12 @@ var Formular = {
 
 var ProceduriRecente = {
   încărcat: false,
+  $: $('#proceduri-recente').find('ul'),
 
   încarcă: function() {
     if (ProceduriRecente.încărcat) return;
 
     $.get('/date/' + Utilizator.login + '/proceduri/recente/', function(lista) {
-      var $proceduriRecente = $('#proceduri-recente').find('ul').empty();
-
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
           timp: moment($.trim(this.nextSibling.data).split(/\s{2,}/)[0], 'D-MMM-YYYY H:m').toDate(),
@@ -1039,12 +1054,12 @@ var ProceduriRecente = {
               .attr('href', function(i, href) {return '#formular?' + href})
               .text(function(i, text) {return Utilizator.login + text})
           )
-        };
+        }
       }).get().sort(function(a, b) {
         return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)
       });
 
-      $.fn.append.apply($proceduriRecente, $.map(proceduri, function(p) {return p.$li}));
+      $.fn.append.apply(ProceduriRecente.$.empty(), $.map(proceduri, function(p) {return p.$li}));
       ProceduriRecente.încărcat = true;
     });
   },
@@ -1059,144 +1074,40 @@ var ProceduriRecente = {
 
 var Căutare = {
   timer: 0,
-  $el: null,
+  $: $('#căutare'),
 
   init: function() {
-    Căutare.$el = $('#căutare')
-      .on('keyup update paste', 'input', Căutare.găseşte)
-      .on('keydown', 'input', Căutare.selecteazăItem)
-      .on('keydown', 'input', Căutare.anuleazăCăutarea);
+    Căutare.$.find('input')
+      .on('input', Căutare.găseşte)
+      .bind('keydown', 'down', Căutare.rezultate.selectează)
+      .bind('keydown', 'up', Căutare.rezultate.selectează)
+      .bind('keydown', 'return', Căutare.rezultate.deschide)
+      .bind('keydown', 'esc', function() {$(this).val('').trigger('input')});
 
-    Căutare.hoverItemRezultate();
+    Căutare.rezultate.$
+      .on('mouseenter', 'tr', function() {this.className = 'selectat'})
+      .on('mouseleave', 'tr', function() {this.removeAttribute('class')})
+      .on('click', 'tr', Căutare.rezultate.deschide);
+
     Căutare.încarcăIndex();
   },
 
-  hoverItemRezultate: function() {
-    $('#rezultate')
-      .on('mouseenter', 'tr', function() {this.className = 'selectat'})
-      .on('mouseleave', 'tr', function() {this.removeAttribute('class')})
-      .on('click', 'tr', Căutare.deschideProceduraSlectată);
-  },
+  rezultate: {
+    $: $('#rezultate'),
 
-  anuleazăCăutarea: function(e) {
-    if (e.keyCode == 27) this.value = '';
-  },
+    afişează: function(proceduri, text) {
+      var rezultate = '';
 
-  deschideProceduraSlectată: function(e) {
-    e.preventDefault();
-
-    var $item = $('#rezultate').find('tr.selectat');
-
-    if (!$item.există()) return;
-
-    var număr = $item.find('.număr').text().replace(Utilizator.login, '');
-
-    if (număr) location.hash = 'formular?' + număr;
-  },
-
-  selecteazăItem: function(e) {
-    var tasta = e.keyCode,
-        SUS = 38,
-        JOS = 40,
-        ENTER = 13;
-
-    if ($.inArray(tasta, [SUS, JOS, ENTER]) == -1) return;
-
-    e.preventDefault();
-
-    var $lista = $('#rezultate');
-
-    if (!$lista.find('tr').există()) return;
-
-    var spre = {
-      38: 'prev', // SUS
-      40: 'next' // JOS
-    }, deLa = {
-      38: 'tr:last', // SUS
-      40: 'tr:first' // JOS
-    };
-
-    if (tasta == SUS || tasta == JOS) {
-      var $item = $lista.find('tr.selectat'),
-          $spre = $item.există() ? $item[spre[tasta]]() : $lista.find(deLa[tasta]);
-
-      $item.removeClass('selectat');
-      $spre.addClass('selectat');
-    } else if (tasta == ENTER) {
-      Căutare.deschideProceduraSlectată(e);
-    }
-  },
-
-  găseşte: function(e) {
-    var tasta = e.keyCode,
-        SUS = 38,
-        JOS = 40,
-        ENTER = 13;
-
-    if ($.inArray(tasta, [SUS, JOS, ENTER]) != -1) return;
-    if (Căutare.timer) return;
-
-    var text = $.trim($(this).val());
-
-    Căutare.timer = setTimeout(function() {
-      if (!text.length) {
-        Căutare.curăţă();
-        return;
-      }
-
-      text = $.reEscape(text);
-
-      var item, poziţie,
-          reLaÎnceputDeRînd = new RegExp('^' + text, 'gi'),
-          reLaÎnceputDeCuvînt = new RegExp('\\b' + text, 'gi'),
-          reUndeva = new RegExp(text, 'gi'),
-          găsiriLaÎnceputDeRînd = [],
-          găsiriLaÎnceputDeCuvînt = [],
-          găsiriUndeva = [];
-
-      for (item in Căutare.index) {
-        if (reLaÎnceputDeRînd.test(item)) găsiriLaÎnceputDeRînd.push(item);
-        else if (reLaÎnceputDeCuvînt.test(item)) găsiriLaÎnceputDeCuvînt.push(item);
-        else if (reUndeva.test(item)) găsiriUndeva.push(item);
-      }
-
-      Căutare.curăţă();
-      Căutare.afişeazăRezultatele(
-        găsiriLaÎnceputDeRînd
-          .concat(găsiriLaÎnceputDeCuvînt)
-          .concat(găsiriUndeva),
-        text
-      );
-    }, 10);
-  },
-
-  curăţă: function() {
-    clearTimeout(Căutare.timer);
-    Căutare.timer = 0;
-
-    Căutare.$el.find('#rezultate').html('');
-  },
-
-  afişeazăRezultatele: function(itemi, fragment) {
-    var proceduri, număr, procedură,
-        rezultate = '',
-        creditor = '',
-        persoaneTerţe = '',
-        debitori = '';
-
-    for (var i = 0; i < itemi.length; i++) {
-      proceduri = Căutare.index[itemi[i]];
-
-      for (număr in proceduri) {
-        procedură = evidenţiază(proceduri[număr], fragment);
-        creditor = persoană(procedură['creditor']);
-        persoaneTerţe = $.map(procedură['persoane-terţe'], function(p) {return persoană(p)}).join('');
-        debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
+      for (var număr in proceduri) {
+        var procedură = evidenţiază(proceduri[număr]),
+            creditor = persoană(procedură['creditor']),
+            persoaneTerţe = $.map(procedură['persoane-terţe'], function(p) {return persoană(p)}).join(''),
+            debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
 
         rezultate +=
           '<tr>' +
             '<td>' +
-              '<span class="număr">' + evidenţiază(număr, fragment) + '</span>' +
+              '<span class="număr">' + evidenţiază(număr) + '</span>' +
               '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
             '</td>' +
             '<td><dl class="persoane">' + creditor + persoaneTerţe + '</dl></td>' +
@@ -1204,41 +1115,117 @@ var Căutare = {
             '<td><dl class="persoane">' + debitori + '</dl></td>' +
           '</tr>';
       }
-    }
 
-    Căutare.$el.find('table#rezultate').html(rezultate);
+      Căutare.rezultate.$.html(rezultate);
 
 
-    // ------------------------------------------
+      function evidenţiază(content) {
+        if ($.isPlainObject(content)) {
+          var itemi = {};
 
-    function evidenţiază(text, fragment) {
-      if (!text) return '';
+          for (var item in content)
+            itemi[item] = evidenţiază(content[item]);
 
-      if ($.isPlainObject(text)) {
-        var itemi = {};
+          return itemi;
+        } else if ($.isArray(content)) {
+          return $.map(content, function(item) {return evidenţiază(item)});
+        } else {
+          var reFragment = new RegExp('(' + text + ')', 'gi');
 
-        for (var item in text)
-          itemi[item] = evidenţiază(text[item], fragment);
-
-        return itemi;
-      } else if ($.isArray(text)) {
-        return $.map(text, function(item) {return evidenţiază(item, fragment)});
-      } else {
-        var reFragment = new RegExp('(' + fragment + ')', 'gi'),
-            fragmentFormatat = '<b>$1</b>';
-
-        return text.replace(reFragment, fragmentFormatat);
+          return content.replace(reFragment, '<b>$1</b>');
+        }
       }
+
+      function persoană(p) {
+        return '' +
+          '<dt>' + (p.denumire || p.nume || '') + '</dt>' +
+          '<dd>' + (p.idno || p.idnp || '') + '</dd>';
+      }
+    },
+
+    selectează: function(e) {
+      e.preventDefault();
+
+      var lista = Căutare.rezultate.$;
+
+      if (!lista.find('tr').există()) return;
+
+      var direcţia = e.data,
+          spre = {up: 'prev', down: 'next'},
+          deLa = {up: 'tr:last', down: 'tr:first'};
+
+      var $item = lista.find('tr.selectat'),
+          $spre = $item.există() ? $item[spre[direcţia]]() : lista.find(deLa[direcţia]);
+
+      $item.removeClass('selectat');
+      $spre.addClass('selectat');
+    },
+
+    deschide: function(e) {
+      e.preventDefault();
+
+      var item = Căutare.rezultate.$.find('tr.selectat'),
+          număr = item.find('.număr').text().replace(Utilizator.login, '');
+
+      if (!item.există()) return;
+
+      location.hash = 'formular?' + număr;
+    }
+  },
+
+  găseşte: function(e) {
+    if (Căutare.timer) return;
+
+    var text = $.reEscape($.trim(this.value));
+
+    if (!text.length) {
+      Căutare.anulează();
+      return;
     }
 
+    Căutare.timer = setTimeout(function() {
+      var re = {
+        laÎnceputDeRînd: new RegExp('^' + text, 'gi'),
+        laÎnceputDeCuvînt: new RegExp('\\b' + text, 'gi'),
+        oriunde: new RegExp(text, 'gi')
+      };
 
-    // ------------------------------------------
+      var rezultate = {
+        laÎnceputDeRînd: [],
+        laÎnceputDeCuvînt: [],
+        oriunde: [],
+        unificate: function() {
+          var unice = {},
+              toate = this.laÎnceputDeRînd
+                .concat(this.laÎnceputDeCuvînt)
+                .concat(this.oriunde);
 
-    function persoană(persoană) {
-      return '' +
-        '<dt>' + (persoană['denumire'] || persoană['nume'] || '') + '</dt>' +
-        '<dd>' + (persoană['idno'] || persoană['idnp'] || '') + '</dd>';
-    }
+          $.each(toate, function(_, i) {
+            $.each(Căutare.index[i], function(număr, item) {
+              if (!unice[număr]) unice[număr] = Căutare.index[i][număr];
+            });
+          });
+
+          return unice;
+        }
+      };
+
+      for (var item in Căutare.index) {
+        if (re.laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(item);
+        else if (re.laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(item);
+        else if (re.oriunde.test(item)) rezultate.oriunde.push(item);
+      }
+
+      Căutare.anulează();
+      Căutare.rezultate.afişează(rezultate.unificate(), text);
+    }, 10);
+  },
+
+  anulează: function() {
+    clearTimeout(Căutare.timer);
+    delete Căutare.timer;
+
+    Căutare.rezultate.$.html('');
   },
 
   încarcăIndex: function() {
@@ -1253,30 +1240,16 @@ var Căutare = {
 // --------------------------------------------------
 
 var Calculator = {
-  $: null,
+  $: $('#calculator'),
 
   init: function() {
     DobîndaDeÎntîrziere.init();
 
-    Calculator.$ = $('#calculator');
-
     Calculator.$
-      .on('keydown', function(e) {
-        if (e.keyCode == 27) Calculator.închide();
-      })
       .on('click', 'button.închide', Calculator.închide)
-      .on('click', 'button.adaugă', function() {
-        var buton = $(this),
-            item = buton.parent().prev('li');
-
-        item.clone()
-          .removeClass('prima')
-          .find('.sumă').val('').end()
-          .hide()
-          .insertAfter(item)
-          .show('blind');
-      })
-      .on('keyup update paste click change', ':input:not(#dobînda)', DobîndaDeÎntîrziere.calculează);
+      .on('click', 'button.adaugă', Calculator.adaugăSumă)
+      .on('keyup update paste click change', ':input:not(#dobînda)', DobîndaDeÎntîrziere.calculează)
+      .find(':input').bind('keydown', 'esc', Calculator.închide);
 
     $('#bara-de-sus .calculator').on('click', function() {
       if (Calculator.$.is(':visible')) Calculator.închide();
@@ -1288,7 +1261,7 @@ var Calculator = {
     Calculator.$
       .stop(true, true)
       .fadeToggle('fast', 'easeInCirc')
-      .find('input').first().focus().end()
+      .find('input').first().focus();
 
     Calculator.resetează();
   },
@@ -1298,13 +1271,25 @@ var Calculator = {
       .find('input:text').val('').end()
       .find('#art619-1').removeAttr('checked').end()
       .find('#art619-2').attr('checked', 'checked').end()
-      .find('#sume .item:not(.prima)').remove().end();
+      .find('#sume .item:not(.prima)').remove();
   },
 
   închide: function() {
     Calculator.$
       .stop(true, true)
       .hide();
+  },
+
+  adaugăSumă: function() {
+    var buton = $(this),
+        item = buton.parent().prev('li');
+
+    item.clone()
+      .removeClass('prima')
+      .find('.sumă').val('').end()
+      .hide()
+      .insertAfter(item)
+      .show('blind');
   }
 };
 
