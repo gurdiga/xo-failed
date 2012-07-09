@@ -851,7 +851,7 @@ input[type="checkbox"]+label {
 
 #destinatari .listă,
 #destinatari .categorii {
-  padding: .3em 2em .7em 2.5em;
+  padding: .5em 2em .7em 2.5em;
 }
 
 #destinatari .listă>li,
@@ -871,12 +871,12 @@ input[type="checkbox"]+label {
 }
 
 #destinatari .categorie .toate {
-  font-style: italic;
   display: none;
+  color: #999;
+  position: absolute;
 }
 
 #destinatari .categorie:hover .toate {
-  color: #999;
   display: inline;
 }
 
@@ -984,6 +984,19 @@ input[type="checkbox"]+label {
   -o-transition: opacity .75s;
   opacity: .8;
   transition: opacity .75s;
+}
+
+.instrumente button+.mesaj {
+  display: none;
+  position: absolute;
+  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  background: white;
+  padding: .5em 1em;
+  top: -3.5em;
+  right: 0;
+  color: #333;
 }
 
 #formular .instrumente button {
