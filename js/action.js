@@ -648,7 +648,7 @@ var Formular = {
           if (!$label.val() && !$input.val()) return;
           if (!date.subformular) date.subformular = {};
 
-          date.subformular[$label.val()] = $input.val();
+          date.subformular[$label.val()] = parseFloat($input.val());
         } else {
           date[$input.attr('id')] = $input.val1();
         }
@@ -675,7 +675,7 @@ var Formular = {
 
         sume[denumire] = {
           suma: cîmp.val(),
-          valuta: cîmp.next('.valuta').val()
+          valuta: parseFloat(cîmp.next('.valuta').val())
         };
       });
 
@@ -856,6 +856,21 @@ var Formular = {
           .val1(secţiune[id])
           .trigger('change');
       }
+
+      var item, prima = true;
+
+      if (secţiune.subformular) {
+        var adaugă = $secţiune.find('.adaugă');
+
+        for (item in secţiune.subformular) {
+          if (!prima) adaugă.click();
+
+          $secţiune.find('.item').last()
+            .find('.label').val(item).end()
+            .find('input').val(secţiune.subformular[item]);
+          prima = false;
+        }
+      }
     }
 
     // ------------------------------------------
@@ -870,7 +885,9 @@ var Formular = {
         $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
 
         if (!$cîmp.există()) {
-          $secţiune.find('li:has(button.adaugă-cîmp-personalizat)').before($şabloane.find('.cîmp-personalizat').html());
+          $secţiune.find('li:has(button.adaugă-cîmp-personalizat)')
+            .before($şabloane.find('.cîmp-personalizat').html());
+
           $cîmp = $secţiune.find('.etichetă+.sumă').last();
           $cîmp.prev().val(cîmp);
         }
