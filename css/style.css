@@ -43,6 +43,11 @@ input {
   background: transparent url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 0;
 }
 
+textarea.lat {
+  width: 25em;
+  margin: .5em 0 0 .7em;
+}
+
 input {
   background-position: 0 -4px;
 }
