@@ -158,7 +158,7 @@ var Onorariul = {
     $('#obiectul-urmăririi #total').val(total).trigger('change');
 
     if (total <= 100000) {
-      var minim = $('#amendă-sau-încasare-periodică').is(':checked') ? 200 : 500;
+      var minim = $('#amendă').is(':checked') ? 200 : 500;
 
       return Math.max(total * .10, minim);
     } else if (total <= 300000) {

@@ -451,9 +451,9 @@ div.pagină#formular {
 div.pagină#formular>.conţinut {
   border: 1px solid #ddd;
   padding: 10px 30px 90px 50px;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
-  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   background-color: white;
 }
 
