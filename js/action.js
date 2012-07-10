@@ -39,12 +39,12 @@ var Action = {
       case 'P':
         $('#formular')
           .one('înainte-de-deschidere', function() {
-            var şablon = $şabloane.find('#sume-pensie').html(),
+            var şablon = $şabloane.find('#sume-pensie'),
                 secţiune = $(this).find('#obiectul-urmăririi');
 
             secţiune
               .data('formular-iniţial', secţiune.html())
-              .find('.conţinut ul').html(şablon);
+              .find('.conţinut').html(şablon);
           })
           .one('închidere', function() {
             var secţiune = $(this).find('#obiectul-urmăririi');
@@ -1087,8 +1087,10 @@ var ProceduriRecente = {
         return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)
       });
 
-      $.fn.append.apply(ProceduriRecente.$.empty(), $.map(proceduri, function(p) {return p.$li}));
-      ProceduriRecente.încărcat = true;
+      if (proceduri.length > 0) {
+        $.fn.append.apply(ProceduriRecente.$.empty(), $.map(proceduri, function(p) {return p.$li}));
+        ProceduriRecente.încărcat = true;
+      }
     });
   },
 

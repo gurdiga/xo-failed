@@ -249,6 +249,10 @@ button {
   line-height: 1.4em;
 }
 
+#proceduri-recente li.nu-sunt {
+  color: #aaa;
+}
+
 #proceduri-recente a {
   padding: 0 3px;
 }
