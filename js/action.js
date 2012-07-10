@@ -37,21 +37,7 @@ var Action = {
 
     switch (genProcedură) {
       case 'P':
-        $('#formular')
-          .one('înainte-de-deschidere', function() {
-            var şablon = $şabloane.find('#sume-pensie'),
-                secţiune = $(this).find('#obiectul-urmăririi');
-
-            secţiune
-              .data('formular-iniţial', secţiune.html())
-              .find('.conţinut').html(şablon);
-          })
-          .one('închidere', function() {
-            var secţiune = $(this).find('#obiectul-urmăririi');
-
-            secţiune.html(secţiune.data('formular-iniţial'));
-          });
-
+        FormularPensie.init();
         break;
     }
   }
@@ -1465,6 +1451,66 @@ var CîmpuriPersonalizate = {
       .prev()
         .find('.etichetă').focus().select().end()
         .effect('highlight', {}, 1200);
+  }
+};
+
+// --------------------------------------------------
+
+var FormularPensie = {
+  $: $şabloane.find('.sume-pensie#butonul'),
+
+  init: function() {
+    this.setează();
+    this.$
+      .on('mouseenter', '#adaugă', this.opţiuni.afişează)
+      .on('mouseleave', '#adaugă', this.opţiuni.ascunde)
+      .on('click', '#adaugă li', this.încasare.inserează);
+  },
+
+  opţiuni: {
+    afişează: function() {
+      // TODO
+    },
+
+    ascunde: function() {
+      // TODO
+    }
+  },
+
+  încasare: {
+    inserează: function() {
+      FormularPensie.încasare[$(this).text()]();
+    },
+
+    periodică: function() {
+      FormularPensie.$.find('#adaugă')
+        .before($şabloane.find('.sume-pensie#periodică'));
+    },
+
+    retroactivă: function() {
+      FormularPensie.$.find('#adaugă')
+        .before($şabloane.find('.sume-pensie#retroactivă'));
+    }
+  },
+
+  setează: function() {
+    Formular.$
+      .one('înainte-de-deschidere', this.inserează)
+      .one('închidere', this.elimină);
+  },
+
+  inserează: function() {
+    var secţiune = $(this).find('#obiectul-urmăririi');
+
+    secţiune
+      .data('formular-iniţial', secţiune.html())
+      .find('.conţinut').html(FormularPensie.$);
+  },
+
+  elimină: function() {
+    var secţiune = $(this).find('#obiectul-urmăririi');
+
+    secţiune.html(secţiune.data('formular-iniţial'));
   }
 };
 

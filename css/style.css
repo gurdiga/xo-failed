@@ -722,8 +722,12 @@ fieldset input[type="checkbox"]+label {
 
 #categorii-taxe-şi-speze {
   display: inline-block;
-  font-size: small;
   margin: 0 0 .8em 14em;
+}
+
+.sume-pensie #adaugă,
+#categorii-taxe-şi-speze {
+  font-size: small;
 }
 
 #destinatari {
@@ -732,6 +736,7 @@ fieldset input[type="checkbox"]+label {
   margin-left: -2.5em;
 }
 
+.sume-pensie #adaugă:before,
 #cheltuieli .document .adaugă-destinatar:before,
 #destinatari .categorie:before,
 #categorii-taxe-şi-speze .categorie:before {
@@ -742,6 +747,11 @@ fieldset input[type="checkbox"]+label {
   color: #aaa;
 }
 
+.sume-pensie #adaugă:before {
+  margin-left: 0;
+}
+
+.sume-pensie #adaugă,
 #cheltuieli .document .adaugă-destinatar,
 #destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
@@ -749,6 +759,7 @@ fieldset input[type="checkbox"]+label {
   white-space: nowrap;
 }
 
+.sume-pensie #adaugă,
 #cheltuieli .document .adaugă-destinatar,
 #categorii-taxe-şi-speze .categorie .descriere,
 #categorii-taxe-şi-speze .categorie ol>li {
@@ -760,6 +771,9 @@ fieldset input[type="checkbox"]+label {
   margin-bottom: .4em;
 }
 
+.sume-pensie #adaugă:hover:before,
+.sume-pensie #adaugă:hover span,
+.sume-pensie #adaugă li:hover,
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover>span,
 #destinatari .categorie:hover:before,
@@ -772,6 +786,7 @@ fieldset input[type="checkbox"]+label {
   text-decoration: underline;
 }
 
+.sume-pensie #adaugă:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #destinatari .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover:before {
@@ -1214,6 +1229,18 @@ input[type="checkbox"]+label {
 #ui-datepicker-div .ui-state-active {
   border-color: black;
   color: black;
+}
+
+.sume-pensie {
+  padding: .4em;
+}
+
+.sume-pensie #adaugă ul {
+  display: none;
+  position: absolute;
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: inside circle;
 }
 
 @-moz-document url-prefix() {
