@@ -702,7 +702,7 @@ var Formular = {
       var $secţiune = Cheltuieli.$,
           itemi = {};
 
-      Cheltuieli.adăugate.each(function() {
+      Cheltuieli.adăugate.find('>.item').each(function() {
         var $item = $(this),
             item = {};
 
@@ -854,6 +854,8 @@ var Formular = {
     populeazăSecţiune('#creditor', procedură['creditor']);
     populeazăPersoaneleTerţe();
     populeazăDebitori();
+
+    TotalCheltuieli.calculează();
 
     $('#formular')
       .attr('tabindex', 1)
