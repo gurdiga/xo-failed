@@ -1231,8 +1231,12 @@ input[type="checkbox"]+label {
   color: black;
 }
 
+.sume-pensie#butonul {
+  padding-bottom: 1.5em;
+}
+
 .sume-pensie #adaugă {
-  margin: .5em 0 0 .5em;
+  margin: 1em 0 0 .5em;
 }
 
 .sume-pensie #adaugă ul {
@@ -1243,8 +1247,32 @@ input[type="checkbox"]+label {
   list-style: inside circle;
 }
 
-.sume-pensie ul.secţiune {
-  border-top: 1px solid silver;
+#obiectul-urmăririi ul.încasare {
+  border: 1px solid #eee;
+  border-width: 4px 0 0 4px;
+  padding-top: .3em;
+}
+
+#obiectul-urmăririi ul.ui-state-highlight,
+#obiectul-urmăririi ul.încasare {
+  margin: 1em 0;
+}
+
+#obiectul-urmăririi ul.încasare .titlu {
+  color: silver;
+  font-weight: bold;
+  font-size: small;
+  margin: -1.1em 0 0 .5em;
+  display: inline-block;
+  background: white;
+  position: absolute;
+  padding: 0 .2em;
+  cursor: move;
+}
+
+#obiectul-urmăririi ul.încasare .elimină {
+  top: -.7em;
+  left: -.3em;
 }
 
 .dată.început,

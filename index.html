@@ -9,6 +9,20 @@
     <!--[if gte IE 8]>
     <link type="text/css" rel="stylesheet" href="/css/style-ie8.css"/>
     <![endif]-->
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-33341571-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
   </head>
 
   <body>
@@ -1052,7 +1066,9 @@
 
 
       <div class="sume-pensie" id="retroactivă">
-        <ul class="secţiune">
+        <ul class="încasare eliminabil de tot">
+          <li class="titlu">încasare retroactivă</li>
+
           <li>
             <label>Perioada</label>
             <input class="dată început"/>&ndash;<input class="dată sfîrşit"/>
@@ -1060,19 +1076,19 @@
 
           <li>
             <label>Venit calculat</label>
-            <input type="text" class="sumă"/>
+            <input type="text" class="sumă irelevant-pentru-onorariu"/>
             <select class="valuta"></select>
           </li>
 
           <li>
             <label>Pensia calculată</label>
-            <input type="text" class="sumă"/>
+            <input type="text" class="sumă calculat" disabled/>
             <b>MDL</b>
           </li>
 
           <li>
             <label>Onorariul</label>
-            <input type="text" class="sumă calculat"/>
+            <input type="text" class="sumă calculat" disabled/>
             <b>MDL</b>
           </li>
 
@@ -1081,7 +1097,33 @@
 
 
       <div class="sume-pensie" id="periodică">
-        data, venit calculat, pensia calculată, onorariul
+        <ul class="încasare eliminabil de tot">
+          <li class="titlu">încasare periodică</li>
+
+          <li>
+            <label>Data</label>
+            <input class="dată"/>
+          </li>
+
+          <li>
+            <label>Venit calculat</label>
+            <input type="text" class="sumă irelevant-pentru-onorariu"/>
+            <select class="valuta"></select>
+          </li>
+
+          <li>
+            <label>Pensia calculată</label>
+            <input type="text" class="sumă calculat" disabled/>
+            <b>MDL</b>
+          </li>
+
+          <li>
+            <label>Onorariul</label>
+            <input type="text" class="sumă calculat" disabled/>
+            <b>MDL</b>
+          </li>
+
+        </ul>
       </div>
 
     </div>

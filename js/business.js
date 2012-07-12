@@ -121,10 +121,16 @@ var Onorariul = {
 
   init: function() {
     var schimbareDate = 'keyup update paste change',
-        cîmpuriConsiderate = '.sumă:not(.calculat), .valuta, .bunuri .valoare, input:checkbox';
+        cîmpuriRelevante = [
+          '.sumă:not(.irelevant-pentru-onorariu)',
+          '.sumă:not(.calculat)',
+          '.valuta',
+          '.bunuri .valoare',
+          'input:checkbox'
+        ].join(',');
 
     $('#obiectul-urmăririi')
-      .on(schimbareDate, cîmpuriConsiderate, Onorariul.actualizează)
+      .on(schimbareDate, cîmpuriRelevante, Onorariul.actualizează)
       .on('change', '#caracter, #obiect', Onorariul.actualizează);
 
     $('#formular').on('change', '.debitor #gen-persoană', Onorariul.actualizează);

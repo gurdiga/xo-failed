@@ -1487,14 +1487,35 @@ var CîmpuriPersonalizate = {
 // --------------------------------------------------
 
 var FormularPensie = {
-  $: $şabloane.find('.sume-pensie#butonul'),
+  buton: $şabloane.find('.sume-pensie#butonul'),
+
+  încasări: $('#obiectul-urmăririi .conţinut').sortable({
+    items: '.încasare',
+    handle: '.titlu',
+    cancel: '#butonul',
+    placeholder: 'ui-state-highlight',
+    tolerance: 'pointer',
+    forcePlaceholderSize: true,
+    forceHelperSize: true,
+    axis: 'y',
+    start: function(event, ui) {
+      $(this).find('.eliminabil')
+        .removeClass('eliminabil')
+        .addClass('x-eliminabil');
+    },
+    stop: function(event, ui) {
+      $(this).find('.x-eliminabil')
+        .removeClass('x-eliminabil')
+        .addClass('eliminabil');
+    }
+  }),
 
   init: function() {
-    this.setează();
-    this.$
+    FormularPensie.setează();
+    FormularPensie.buton
       .on('mouseenter', '#adaugă', this.opţiuni.afişează)
       .on('mouseleave', '#adaugă', this.opţiuni.ascunde)
-      .on('click', '#adaugă li', this.încasare.inserează);
+      .on('click', '#adaugă li', this.adaugăÎncasare);
   },
 
   opţiuni: {
@@ -1507,22 +1528,13 @@ var FormularPensie = {
     }
   },
 
-  încasare: {
-    inserează: function() {
-      FormularPensie.încasare[$(this).text()]();
-    },
+  adaugăÎncasare: function() {
+    $şabloane.find('.sume-pensie#' + $(this).text() + '>.încasare').clone()
+      .removeAttr('id')
+      .insertBefore(FormularPensie.buton)
+      .effect('highlight', {}, 1200);
 
-    periodică: function() {
-      $şabloane.find('.sume-pensie#periodică ul')
-        .insertBefore(FormularPensie.$)
-        .effect('highlight', {}, 1200);
-    },
-
-    retroactivă: function() {
-      $şabloane.find('.sume-pensie#retroactivă ul')
-        .insertBefore(FormularPensie.$)
-        .effect('highlight', {}, 1200);
-    }
+    FormularPensie.încasări.sortable('refresh');;
   },
 
   setează: function() {
@@ -1536,7 +1548,7 @@ var FormularPensie = {
 
     secţiune
       .data('formular-iniţial', secţiune.html())
-      .find('.conţinut').html(FormularPensie.$);
+      .find('.conţinut').html(FormularPensie.buton);
   },
 
   elimină: function() {
