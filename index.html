@@ -265,8 +265,7 @@
                 <label for="total-taxe-şi-speze">Total taxe şi speze</label>
                 <input id="total-taxe-şi-speze" class="sumă calculat" readonly/> MDL
 
-                <ul id="listă-taxe-şi-speze">
-                </ul>
+                <ul class="adăugate"></ul>
               </li>
             </ul>
 
@@ -1052,12 +1051,36 @@
       </div>
 
 
-      <div class="sume-pensie" id="periodică">
-        perioadă, venit calculat, pensia calculată, onorariul
+      <div class="sume-pensie" id="retroactivă">
+        <ul class="secţiune">
+          <li>
+            <label>Perioada</label>
+            <input class="dată început"/>&ndash;<input class="dată sfîrşit"/>
+          </li>
+
+          <li>
+            <label>Venit calculat</label>
+            <input type="text" class="sumă"/>
+            <select class="valuta"></select>
+          </li>
+
+          <li>
+            <label>Pensia calculată</label>
+            <input type="text" class="sumă"/>
+            <b>MDL</b>
+          </li>
+
+          <li>
+            <label>Onorariul</label>
+            <input type="text" class="sumă calculat"/>
+            <b>MDL</b>
+          </li>
+
+        </ul>
       </div>
 
 
-      <div class="sume-pensie" id="retroactivă">
+      <div class="sume-pensie" id="periodică">
         data, venit calculat, pensia calculată, onorariul
       </div>
 

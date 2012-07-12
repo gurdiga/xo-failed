@@ -260,18 +260,52 @@ var FormulareŞablon = {
 // --------------------------------------------------
 
 var Cheltuieli = {
+  $: $('#cheltuieli'),
+  adăugate: $('#cheltuieli .adăugate'),
+
   init: function() {
-    this.initListaCategorii();
-    this.initSubformulare();
-    this.initDocumenteAdresabile();
-    this.initBifeAchitat();
+    this.categorii.init();
+    this.subformulare.init();
+    this.destinatariDocumenteAdresabile.init();
+    this.achitare.init();
   },
 
-  initListaCategorii: function() {
-    var listaCategorii = $('#categorii-taxe-şi-speze'),
-        lista = $('#listă-taxe-şi-speze');
+  categorii: {
+    $: $('#categorii-taxe-şi-speze'),
 
-    listaCategorii.on('click', '.categorie .item', function() {
+    init: function() {
+      this.$
+        .on('mouseenter', '.categorie', this.afişează)
+        .on('mouseleave', '.categorie', this.ascunde)
+        .on('click', '.categorie .item', this.adaugăItem);
+    },
+
+    afişează: function() {
+      $(this).find('.conţinut').afişează();
+
+      var itemiUniciAdăugaţiDeja = Cheltuieli.adăugate.children('.item.unic'),
+          itemi = $(this).find('.conţinut ol').children();
+
+      itemi
+        .removeClass('dezactivat')
+        .removeAttr('title');
+
+      if (itemiUniciAdăugaţiDeja.există()) {
+        var selector = itemiUniciAdăugaţiDeja.map(function() {
+          return '#' + this.id;
+        }).get().join(',');
+
+        itemi.filter(selector)
+          .addClass('dezactivat')
+          .attr('title', 'Adăugat deja');
+      }
+    },
+
+    ascunde: function() {
+      $(this).find('.conţinut').ascunde();
+    },
+
+    adaugăItem: function() {
       if ($(this).is('.dezactivat')) return;
 
       var item = $(this).clone(),
@@ -294,45 +328,24 @@ var Cheltuieli = {
         .append(bifăAchitare)
         .addClass('eliminabil de tot')
         .hide()
-        .appendTo(lista)
+        .appendTo(Cheltuieli.adăugate)
         .show('blind')
         .find('textarea').focus();
 
-      lista.trigger('recalculare');
+      Cheltuieli.adăugate.trigger('recalculare');
 
       $(this).closest('.conţinut').fadeOut();
 
       TotalCheltuieli.calculează();
-    });
-
-    $('#cheltuieli')
-      .on('mouseenter', '#categorii-taxe-şi-speze .categorie', function() {
-        $(this).find('.conţinut').afişează();
-
-        var itemiUniciAdăugaţiDeja = lista.children('.item.unic'),
-            itemi = $(this).find('.conţinut ol').children();
-
-        itemi
-          .removeClass('dezactivat')
-          .removeAttr('title');
-
-        if (itemiUniciAdăugaţiDeja.există()) {
-          var selector = itemiUniciAdăugaţiDeja.map(function() {
-            return '#' + this.id;
-          }).get().join(',');
-
-          itemi.filter(selector)
-            .addClass('dezactivat')
-            .attr('title', 'Adăugat deja');
-        }
-      })
-      .on('mouseleave', '#categorii-taxe-şi-speze .categorie', function() {
-        $(this).find('.conţinut').ascunde();
-      })
+    }
   },
 
-  initSubformulare: function() {
-    $('#formular').on('click', 'button.adaugă', function() {
+  subformulare: {
+    init: function() {
+      Cheltuieli.adăugate.on('click', 'button.adaugă', this.adaugă);
+    },
+
+    adaugă: function() {
       var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
           şablon = $şabloane.find('.subformular[title="' + numeŞablon + '"] .document').first();
 
@@ -343,51 +356,57 @@ var Cheltuieli = {
         .find('textarea,input').first().focus();
 
       TotalCheltuieli.calculează();
-    });
+    }
   },
 
-  initDocumenteAdresabile: function() {
-    $('#cheltuieli')
-      .on('click', '.destinatari-adăugaţi', function(e) {
-        if (e.target == this) {
-          $(this)
-            .toggleClass('comprimaţi')
-            .toggleClass('cu umbră');
-        }
-      })
-      .on('eliminare', '.destinatari-adăugaţi>li', function(e) {
-        var destinatar = $(this);
+  destinatariDocumenteAdresabile: {
+    init: function() {
+      Cheltuieli.adăugate
+        .on('click', '.destinatari-adăugaţi', this.ascundeSauAfişează)
+        .on('eliminare', '.destinatari-adăugaţi .eliminabil', this.ascundeListaDacăNuMaiSunt)
+        .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează)
+        .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', this.ascundeLaEnterSauEsc);
+    },
 
-        if (!destinatar.siblings().există()) destinatar.parent().click();
-      })
+    ascundeLaEnterSauEsc: function(e) {
+      if (e.keyCode == 13 || e.keyCode == 27) {
+        e.preventDefault();
+        e.stopPropagation();
+        Destinatari.adăugaţiDeja.click();
+      }
+    },
 
-      .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', function(e) {
-        if (e.keyCode == 13) Destinatari.adăugaţiDeja.click();
-      })
+    ascundeSauAfişează: function(e) {
+      if (e.target == this) {
+        $(this)
+          .toggleClass('comprimaţi')
+          .toggleClass('cu umbră');
+      }
+    },
 
-      .on('eliminare', '.destinatari-adăugaţi .eliminabil', function() {
-        var eliminabil = $(this);
+    ascundeListaDacăNuMaiSunt: function(e) {
+      var destinatar = $(this);
 
-        if (!eliminabil.siblings().există()) {
-          eliminabil.parent().addClass('comprimaţi');
-        }
-
-        TotalCheltuieli.calculează();
-      });
+      if (!destinatar.siblings().există()) destinatar.parent().click();
+    }
   },
 
-  initBifeAchitat: function() {
-    $('#listă-taxe-şi-speze').on('click', '.subformular.achitare :checkbox', function() {
+  achitare: {
+    init: function() {
+      Cheltuieli.adăugate.on('click', '.subformular.achitare :checkbox', this.setează);
+    },
+
+    setează: function() {
       var bifa = $(this),
           data = bifa.siblings('.la').find('.dată'),
           item = bifa.closest('.item');
 
-      if (bifa.is(':checked')) {
-        if ($.trim(data.val()) == '') data.val(moment().format('DD.MM.YYYY'));
+      if (bifa.is(':checked') && $.trim(data.val()) == '') {
+        data.val(moment().format('DD.MM.YYYY'));
       }
 
       item.toggleClass('achitat', bifa.is(':checked'));
-    });
+    }
   }
 };
 
@@ -399,64 +418,74 @@ var Destinatari = {
   adăugaţiDeja: $(),
 
   init: function() {
-    Destinatari.$
-      .on('mouseenter', '.categorie', Destinatari.afişeazăCategorie)
-      .on('mouseleave', '.categorie', Destinatari.ascundeCategorie)
-      .on('click', '.categorie .titlu .toate', Destinatari.adaugăCategorie)
-      .on('click', '.listă li', Destinatari.adaugă);
+    this.categorii.init();
+    this.buton.init();
+  },
 
-    Formular.$
-      .on('mouseenter', '.adaugă-destinatar', function() {
+  buton: {
+    init: function() {
+      Cheltuieli.adăugate
+        .on('mouseenter', '.adaugă-destinatar', this.categorii.afişează)
+        .on('mouseleave', '.adaugă-destinatar', this.categorii.ascunde)
+    },
+
+    categorii: {
+      afişează: function() {
         Destinatari.adăugaţiDeja = $(this).prev('.destinatari-adăugaţi');
         Destinatari.$.appendTo(this).afişează();
-      })
-      .on('mouseleave', '.adaugă-destinatar', function() {
+      },
+
+      ascunde: function() {
         Destinatari.$
           .ascunde()
           .find('.listă').hide();
-      })
-      .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', function(e) {
-        if (e.keyCode == 27 || e.keyCode == 13) {
-          e.preventDefault();
-          e.stopPropagation();
-          $(this).closest('.destinatari-adăugaţi').click();
-        }
-      });
-  },
-
-  afişeazăCategorie: function() {
-    var destinatari = $(this).find('.listă').children();
-
-    if (Destinatari.adăugaţiDeja.children().există()) {
-      var selector = Destinatari.adăugaţiDeja.children().map(function() {
-        return ':contains("' + $(this).text() + '")';
-      }).get().join(',');
-
-      destinatari
-        .removeClass('dezactivat')
-        .filter(selector)
-          .addClass('dezactivat')
-          .attr('title', 'Adăugat deja');
-    } else {
-      destinatari
-        .removeClass('dezactivat')
-        .removeAttr('title');
+      }
     }
-
-    $(this).find('.listă').afişează();
   },
 
-  ascundeCategorie: function() {
-    $(this).find('.listă').ascunde();
-  },
+  categorii: {
+    init: function() {
+      Destinatari.$
+        .on('mouseenter', '.categorie', this.afişează)
+        .on('mouseleave', '.categorie', this.ascunde)
+        .on('click', '.categorie .titlu .toate', this.adaugă)
+        .on('click', '.listă li', Destinatari.adaugă);
+    },
 
-  adaugăCategorie: function() {
-    var destinatari = $(this).closest('.categorie'),
-        adăugaţiDeja = Destinatari.adăugaţiDeja.children().map(function() {
+    afişează: function() {
+      var destinatari = $(this).find('.listă').children();
+
+      if (Destinatari.adăugaţiDeja.children().există()) {
+        var selector = Destinatari.adăugaţiDeja.children().map(function() {
           return ':contains("' + $(this).text() + '")';
         }).get().join(',');
 
-    destinatari.find('li').not(adăugaţiDeja).trigger('click');
+        destinatari
+          .removeClass('dezactivat')
+          .filter(selector)
+            .addClass('dezactivat')
+            .attr('title', 'Adăugat deja');
+      } else {
+        destinatari
+          .removeClass('dezactivat')
+          .removeAttr('title');
+      }
+
+      $(this).find('.listă').afişează();
+    },
+
+    ascunde: function() {
+      $(this).find('.listă').ascunde();
+    },
+
+    adaugă: function() {
+      var destinatari = $(this).closest('.categorie'),
+          adăugaţiDeja = Destinatari.adăugaţiDeja.children().map(function() {
+            return ':contains("' + $(this).text() + '")';
+          }).get().join(',');
+
+      destinatari.find('li').not(adăugaţiDeja).trigger('click');
+    }
   },
 
   adaugă: function() {
@@ -670,10 +699,10 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăCheltuieli() {
-      var $secţiune = $('#cheltuieli'),
+      var $secţiune = Cheltuieli.$,
           itemi = {};
 
-      $secţiune.find('#listă-taxe-şi-speze>.item').each(function() {
+      Cheltuieli.adăugate.each(function() {
         var $item = $(this),
             item = {};
 
@@ -885,8 +914,7 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăCheltuieli() {
-      var $secţiune = $('#cheltuieli'),
-          $adăugate = $('#listă-taxe-şi-speze'),
+      var $secţiune = Cheltuieli.$,
           $lista = $('#categorii-taxe-şi-speze');
 
       $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function(i, cîmp) {
@@ -897,7 +925,7 @@ var Formular = {
         $lista.find('#' + id).click();
 
         var item = procedură.cheltuieli.itemi[id],
-            $item = $adăugate.find('#' + id),
+            $item = Cheltuieli.adăugate.find('#' + id),
             $subformular = $item.find('.subformular'),
             $adaugă = $subformular.find('button.adaugă'),
             titluri = {};
@@ -1003,7 +1031,7 @@ var Formular = {
         .find('select').val(function() {return $(this).find('option:first').val()}).end()
       .end()
       .find('#cheltuieli')
-        .find('#listă-taxe-şi-speze').empty().end()
+        .find('.adăugate').empty().end()
         .find(':input:not([type="hidden"])').val('').end()
         .find('#părţile-au-ajuns-la-conciliere').attr('checked', false).end()
       .end()
@@ -1469,11 +1497,11 @@ var FormularPensie = {
 
   opţiuni: {
     afişează: function() {
-      // TODO
+      $(this).find('ul').afişează();
     },
 
     ascunde: function() {
-      // TODO
+      $(this).find('ul').ascunde();
     }
   },
 
@@ -1483,13 +1511,15 @@ var FormularPensie = {
     },
 
     periodică: function() {
-      FormularPensie.$.find('#adaugă')
-        .before($şabloane.find('.sume-pensie#periodică'));
+      $şabloane.find('.sume-pensie#periodică ul')
+        .insertBefore(FormularPensie.$)
+        .effect('highlight', {}, 1200);
     },
 
     retroactivă: function() {
-      FormularPensie.$.find('#adaugă')
-        .before($şabloane.find('.sume-pensie#retroactivă'));
+      $şabloane.find('.sume-pensie#retroactivă ul')
+        .insertBefore(FormularPensie.$)
+        .effect('highlight', {}, 1200);
     }
   },
 
