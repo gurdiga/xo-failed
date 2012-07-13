@@ -84,7 +84,7 @@ var Persoane = {
   },
 
   initAdăugare: function() {
-    $('#formular').on('click', 'button.adaugă.persoană', function() {
+    Formular.$.on('click', 'button.adaugă.persoană', function() {
       var buton = $(this),
           fieldset = buton.prev();
 
@@ -110,7 +110,7 @@ var Persoane = {
   },
 
   initŞtergere: function() {
-    $('#formular').on('click', 'button.elimină-persoană', function() {
+    Formular.$.on('click', 'button.elimină-persoană', function() {
       var button = $(this),
           aceastăPersoană = button.closest('fieldset');
           celelaltePersoane = aceastăPersoană.siblings('fieldset');
@@ -135,17 +135,11 @@ var HashController = {
         }
       })
       .on('hashchange', function() {
-        if (Utilizator.autentificat) {
-          var pagina = HashController.pagină();
+        $(document.body).toggleClass('autentificat', Utilizator.autentificat);
 
-          $('div.pagină, #umbră')
-            .filter(':not(#index)').hide().end()
-            .filter(pagina).show();
+        var pagina = HashController.pagină();
 
-          if (Action[pagina]) Action[pagina]();
-        } else {
-          $('div.pagină').hide().filter('#login').show();
-        }
+        if (Action[pagina]) Action[pagina]();
       });
   },
 
@@ -173,7 +167,7 @@ var CîmpuriTextarea = {
   evenimente: 'keydown keyup update paste change focus mouseup',
 
   autodimensionează: function() {
-    $('#formular').on(this.evenimente, this.selector, function() {
+    Formular.$.on(this.evenimente, this.selector, function() {
       var textarea = $(this);
 
       if (textarea.is(':not(:visible)')) return;
@@ -199,7 +193,7 @@ var CîmpuriTextarea = {
 
 var ListeFoarteLate = {
   seteazăŞoapte: function() {
-    $('#formular')
+    Formular.$
       .on('change', 'select.foarte.lat', function() {
         var select = $(this);
 
@@ -226,7 +220,7 @@ var FormulareŞablon = {
   selector: 'select.care.schimbă.formularul',
 
   init: function() {
-    $('#formular').on('change', FormulareŞablon.selector, function(e, automat) {
+    Formular.$.on('change', FormulareŞablon.selector, function(e, automat) {
       var $select = $(this),
           selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
           şablon = FormulareŞablon.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
@@ -512,10 +506,10 @@ var Destinatari = {
 // --------------------------------------------------
 
 var ButonDeEliminare = {
-  $: null,
+  $: $şabloane.find('.elimină'),
 
   init: function() {
-    this.$ = $şabloane.find('.elimină')
+    this.$
       .hide()
       .on('click', this.acţionează);
 
@@ -596,6 +590,8 @@ var Utilizator = {
 
 var Formular = {
   $: $('#formular'),
+
+  titlu: $('#formular h1'),
 
   init: function() {
     Formular.$
@@ -814,10 +810,11 @@ var Formular = {
           location.hash = 'formular?' + procedură.număr;
 
           Formular.seteazăTitlu();
-          Formular.$.animate({scrollTop: 0}, 500);
         }
 
-        Formular.$
+        $(document.body).animate({scrollTop: 0}, 500);
+
+        Formular.titlu
           .attr('tabindex', 1)
           .focus()
           .removeAttr('tabindex');
@@ -857,7 +854,7 @@ var Formular = {
 
     TotalCheltuieli.calculează();
 
-    $('#formular')
+    Formular.titlu
       .attr('tabindex', 1)
       .focus()
       .removeAttr('tabindex');
@@ -1027,7 +1024,7 @@ var Formular = {
   },
 
   resetează: function() {
-    $('#formular')
+    Formular.$
       .find('#document-executoriu')
         .find(':input').val('').end()
         .find('select').val(function() {return $(this).find('option:first').val()}).end()
@@ -1051,14 +1048,15 @@ var Formular = {
   },
 
   închide: function() {
-    $('#formular, #umbră').fadeOut('fast', function() {location.hash = ''})
-    $('#formular').trigger('închidere');
+    Formular.$
+      .fadeOut('fast', function() {location.hash = ''})
+      .trigger('închidere');
   },
 
   deschide: function() {
-    Formular.$.trigger('înainte-de-deschidere');
-
-    $('#formular, #umbră').hide().fadeIn('fast');
+    Formular.$
+      .trigger('înainte-de-deschidere')
+      .hide().fadeIn('fast');
 
     $.fx.off = true;
 
@@ -1067,13 +1065,15 @@ var Formular = {
     }
 
     Formular.seteazăTitlu();
-    Business.init();
+    TotalCheltuieli.init();
+    Defaults.init();
 
-    Formular.$
-      .animate({scrollTop: 0}, 0)
+    $(document.body).animate({scrollTop: 0}, 0);
+
+    Formular.titlu
       .attr('tabindex', 1)
       .focus()
-      .removeAttr('tabindex')
+      .removeAttr('tabindex');
 
     $.fx.off = false;
   }
@@ -1347,7 +1347,7 @@ var Instrumente = {
   init: function() {
     Instrumente.$ = $('.instrumente');
     Instrumente.initOpţiuniPentruButoane();
-    Instrumente.$.on('click', 'button', function() {
+    Instrumente.$.on('click', '>button', function() {
       if (Instrumente[this.className]) Instrumente[this.className].apply(this, arguments);
     });
   },
@@ -1458,7 +1458,7 @@ var Calendar = {
 
 var CîmpuriPersonalizate = {
   init: function() {
-    $('#formular')
+    Formular.$
       .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
       .on('blur', 'input.etichetă', function(e) {
           $(this).next().focus();

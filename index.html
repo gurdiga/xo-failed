@@ -26,95 +26,81 @@
   </head>
 
   <body>
-    <div id="login" class="pagină" style="display: none;">
-      <div class="conţinut">
-        Bună ziua. Trebuie să vă <a href="/bin/login.php">autentificaţi</a>.
-      </div>
-    </div>
+    <div id="conţinut">
+      <div id="bara-de-sus">
 
-    <div id="bara-de-sus">
-      <div class="conţinut">
         <div class="instrumente">
           <button class="profil">Profil</button>
+
+          <fieldset id="calculator">
+            <button class="închide semiascuns" title="Închide">×</button>
+
+            <legend><label>Calculator dobînzi de întîrziere</label></legend>
+
+            <ul>
+              <li>
+                <label for="de-la">De la</label>
+                <input id="de-la" type="text" class="dată"/>
+              </li>
+
+              <li>
+                <label for="pînă-la">Pînă la</label>
+                <input id="pînă-la" type="text" class="dată"/>
+              </li>
+
+              <li>
+                <label>Rata aplicată</label>
+
+                <ul id="rate">
+                  <li>
+                    <input name="rata-aplicată" type="radio" id="art619-1" value="5"/>
+                    <label for="art619-1">5%</label>
+                  </li>
+                  <li>
+                    <input name="rata-aplicată" type="radio" id="art619-2" value="9" checked/>
+                    <label for="art619-2">9%</label>
+                  </li>
+                </ul>
+
+              </li>
+
+              <li>
+                <label>Sume</label>
+                <ul id="sume">
+                  <li class="item eliminabil prima">
+                    <input type="text" class="sumă"/>
+                    <select class="valuta"></select>
+                  </li>
+
+                  <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
+                </ul>
+              </li>
+
+              <li class="total">
+                <label for="dobînda">Dobînda</label>
+                <input id="dobînda" type="text"/>
+                <label class="sumă">MDL</label>
+                <a href="about:blank" class="ui-icon ui-icon-print semiascuns"
+                  target="_blank" title="Detalii depre calcul"></a>
+              </li>
+            </ul>
+          </fieldset>
+
           <button class="calculator">Calculator dobînzi de întîrziere</button>
         </div>
 
         <h1><a href="#">executori.org</a></h1>
 
-        <fieldset id="calculator">
-          <button class="închide semiascuns" title="Închide">×</button>
-
-          <legend><label>Calculator dobînzi de întîrziere</label></legend>
-
-          <ul>
-            <li>
-              <label for="de-la">De la</label>
-              <input id="de-la" type="text" class="dată"/>
-            </li>
-
-            <li>
-              <label for="pînă-la">Pînă la</label>
-              <input id="pînă-la" type="text" class="dată"/>
-            </li>
-
-            <li>
-              <label>Rata aplicată</label>
-
-              <ul id="rate">
-                <li>
-                  <input name="rata-aplicată" type="radio" id="art619-1" value="5"/>
-                  <label for="art619-1">5%</label>
-                </li>
-                <li>
-                  <input name="rata-aplicată" type="radio" id="art619-2" value="9" checked/>
-                  <label for="art619-2">9%</label>
-                </li>
-              </ul>
-
-            </li>
-
-            <li>
-              <label>Sume</label>
-              <ul id="sume">
-                <li class="item eliminabil prima">
-                  <input type="text" class="sumă"/>
-                  <select class="valuta"></select>
-                </li>
-
-                <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
-              </ul>
-            </li>
-
-            <li class="total">
-              <label for="dobînda">Dobînda</label>
-              <input id="dobînda" type="text"/>
-              <label class="sumă">MDL</label>
-              <a href="about:blank" class="ui-icon ui-icon-print semiascuns"
-                target="_blank" title="Detalii depre calcul"></a>
-            </li>
-          </ul>
-        </fieldset>
+        <hr/>
       </div>
-    </div>
 
-    <div id="index" class="pagină">
-      <div class="conţinut">
-        <div id="crează-procedură">
-          <p class="şoaptă">Crează procedură</p>
+      <p id="autentificare">Bună ziua. Trebuie să vă <a href="/bin/login.php">autentificaţi</a>.</p>
 
-          <ul>
-            <li><a href="#formular?P">Procedură pensie de întreținere</a></li>
-            <li><a href="#formular?S" >Procedură în beneficiul statului</a></li>
-            <li><a href="#formular">Procedură de ordin general</a></li>
-          </ul>
-        </div>
+      <div id="căutare" class="coloană">
+        <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
 
-        <div id="căutare">
-          <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
-
-          <input/>
-          <table id="rezultate"></table>
-        </div>
+        <input/>
+        <table id="rezultate"></table>
 
         <div id="proceduri-recente">
           <p class="şoaptă">Proceduri recente</p>
@@ -124,12 +110,18 @@
           </ul>
         </div>
       </div>
-    </div>
 
-    <div id="umbră"></div>
+      <div id="crează-procedură" class="coloană">
+        <p class="şoaptă">Crează procedură</p>
 
-    <div id="formular" class="pagină">
-      <div class="conţinut">
+        <ul>
+          <li><a href="#formular?P">Procedură pensie de întreținere</a></li>
+          <li class="s"><a href="#formular?S" >Procedură în beneficiul statului</a></li>
+          <li class="g"><a href="#formular">Procedură de ordin general</a></li>
+        </ul>
+      </div>
+
+      <div id="formular">
         <button class="închide semiascuns" title="Închide">×</button>
 
         <h1>
@@ -651,8 +643,6 @@
 
           <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
         </div>
-
-        <br style="clear:both; width: 100%"/>
 
         <div class="instrumente">
           <button class="salvează" title="Salvează"></button>

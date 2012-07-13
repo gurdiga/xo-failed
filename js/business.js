@@ -1,21 +1,6 @@
 // valoarea unităţii convenţionale
 var UC = 20;
-
-var Business = {
-  FORMATUL_DATEI: /(\d{2}).(\d{2}).(\d{4})/,
-
-  init: function() {
-    var pagină = HashController.pagină();
-
-    if (this[pagină]) this[pagină]();
-  },
-
-  '#formular': function() {
-    Onorariul.init();
-    TotalCheltuieli.init();
-    Defaults.init();
-  }
-};
+var FORMATUL_DATEI = /(\d{2}).(\d{2}).(\d{4})/;
 
 // --------------------------------------------------
 
@@ -50,7 +35,7 @@ var DobîndaDeÎntîrziere = {
     var deLa = $.trim(Calculator.$.find('#de-la').val());
         pînăLa = $.trim(Calculator.$.find('#pînă-la').val());
 
-    if (!Business.FORMATUL_DATEI.test(deLa) || !Business.FORMATUL_DATEI.test(pînăLa)) return;
+    if (!FORMATUL_DATEI.test(deLa) || !FORMATUL_DATEI.test(pînăLa)) return;
 
     deLa = moment(deLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
     pînăLa = moment(pînăLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
@@ -117,8 +102,6 @@ var DobîndaDeÎntîrziere = {
 // --------------------------------------------------
 
 var Onorariul = {
-  // Articolul 38
-
   init: function() {
     var schimbareDate = 'keyup update paste change',
         cîmpuriRelevante = [
@@ -126,15 +109,16 @@ var Onorariul = {
           '.sumă:not(.calculat)',
           '.valuta',
           '.bunuri .valoare',
-          'input:checkbox'
+          'input:checkbox',
+          '#caracter',
+          '#obiect',
+          '.debitor #gen-persoană',
+          '#părţile-au-ajuns-la-conciliere'
         ].join(',');
 
-    $('#obiectul-urmăririi')
-      .on(schimbareDate, cîmpuriRelevante, Onorariul.actualizează)
-      .on('change', '#caracter, #obiect', Onorariul.actualizează);
+    console.log($(cîmpuriRelevante).css('background-color', 'red'));
 
-    $('#formular').on('change', '.debitor #gen-persoană', Onorariul.actualizează);
-    $('#părţile-au-ajuns-la-conciliere').on('change', Onorariul.actualizează);
+    Formular.$.on(schimbareDate, cîmpuriRelevante, Onorariul.actualizează);
   },
 
   actualizează: function() {

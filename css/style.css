@@ -4,7 +4,12 @@ body {
   font: 14px Arial, sans-serif;
   padding: 0 10px;
   margin: 0;
-  background-color: #f7f7f7;
+  background-image: url('/imagini/fundal.png');
+  height: 100%;
+}
+
+.autentificat #autentificare {
+  display: none;
 }
 
 #şabloane {
@@ -92,35 +97,32 @@ button {
   font-size: small;
 }
 
-#index {
-  display: none;
-}
-
-#bara-de-sus {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.7);
-  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.7);
-  z-index: 5;
-  background: black;
-}
-
-#bara-de-sus .instrumente {
-  display: none;
-}
-
-.autentificat #bara-de-sus .instrumente {
-  display: block;
-}
-
-#index .şoaptă {
+#căutare .şoaptă,
+#crează-procedură .şoaptă {
   color: #aaa;
   font-size: 15px;
   margin: 0;
   line-height: 2em;
+}
+
+#conţinut>.coloană {
+  display: none;
+}
+
+.autentificat #conţinut>.coloană,
+.autentificat #bara-de-sus .instrumente {
+  display: block;
+}
+
+#bara-de-sus {
+  margin-bottom: 2em;
+}
+
+#bara-de-sus hr {
+  margin: 0;
+  border-style: solid;
+  border-width: 1px 0;
+  border-color: #ddd #000 #fff;
 }
 
 #bara-de-sus h1 {
@@ -129,42 +131,49 @@ button {
 }
 
 #bara-de-sus h1 a {
-  color: white;
+  color: #333;
   text-decoration: none;
 }
 
 #bara-de-sus .instrumente {
-  -webkit-box-shadow: 0 0 0;
-  -moz-box-shadow: 0 0 0;
-  box-shadow: 0 0 0;
+  display: none;
   float: right;
-  margin-top: 1.3em;
+  margin-top: 11px;
 }
 
-#bara-de-sus .instrumente button {
-  font-family: 'Oswald', Arial, sans-serif;
-  font-size: 20px;
-  padding: 0 15px 0 45px;
-  color: white;
+#bara-de-sus .instrumente>button {
   width: auto;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .5;
+  opacity: .3;
+  height: auto;
+  display: inline-block;
+  border: none;
+  background: transparent;
 }
 
-#bara-de-sus .instrumente button:focus,
-#bara-de-sus .instrumente button:hover {
+#bara-de-sus .instrumente>button:before {
+  vertical-align: -3px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/images/ui-icons_222222_256x240.png');
+  content: ' ';
+}
+
+#bara-de-sus .instrumente>button.profil:before {
+  background-position: -144px -96px;
+}
+
+#bara-de-sus .instrumente>button.calculator:before {
+  background-position: -112px -112px;
+}
+
+#bara-de-sus .instrumente>button:focus,
+#bara-de-sus .instrumente>button:hover {
   opacity: 1;
-}
-
-#bara-de-sus .instrumente button.profil {
-  padding-left: 42px;
-}
-
-#bara-de-sus .instrumente button.calculator {
-  padding-left: 36px;
 }
 
 #căutare input {
@@ -173,6 +182,8 @@ button {
   border-top-color: #bbb;
   width: 23em;
   margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
   -webkit-transition: background-color .5s;
   -moz-transition: background-color .5s;
   -o-transition: background-color .5s;
@@ -181,10 +192,6 @@ button {
 
 #căutare input:focus {
   background-color: white;
-}
-
-#căutare ul {
-  margin: 0;
 }
 
 #căutare table#rezultate {
@@ -257,16 +264,8 @@ button {
   padding: 0 3px;
 }
 
-#index label,
-#index input,
-button.mare {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
 #crează-procedură {
-  position: absolute;
-  left: 60%;
+  float: right;
   width: 350px;
   height: 450px;
 }
@@ -292,7 +291,7 @@ button.mare {
   font-size: 1.4em;
 }
 
-#index a {
+li a {
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
@@ -302,8 +301,8 @@ button.mare {
   text-decoration: none;
 }
 
-#index a:focus,
-#index a:hover {
+li a:focus,
+li a:hover {
   opacity: 1;
 }
 
@@ -313,39 +312,25 @@ button.mare {
   height: 95%;
 }
 
-#crează-procedură li:nth-child(2) {
+#crează-procedură li.s {
   top: 3em;
   left: 5px;
 }
 
-#crează-procedură li:nth-child(3) {
+#crează-procedură li.g {
   top: 6em;
   left: 10px;
 }
 
 h1 {
-  font-family: 'Oswald', Arial, sans-serif;
-  font-size: 3em;
+  font: bold 2em/1.5em 'Oswald', Arial, sans-serif;
 }
 
-div.pagină {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-}
-
-#bara-de-sus>.conţinut,
-div.pagină>.conţinut {
+#conţinut,
+#formular {
   width: 900px;
   margin: 0 auto;
-}
-
-div.pagină>.conţinut {
-  position: relative;
-  margin: 120px auto;
+  min-height: 670px;
 }
 
 .coloană {
@@ -394,16 +379,6 @@ input.etichetă:focus {
   outline: 1px solid #ddd;
 }
 
-li.duplicabil button.duplicare {
-  background-color: transparent;
-  border: none;
-  width: 19px;
-  position: absolute;
-  margin: 4px 0 0 -12px;
-  padding: 10px 8px;
-  cursor: pointer;
-}
-
 fieldset legend label {
   font-weight: bold;
   font-size: 1.2em;
@@ -440,35 +415,24 @@ input.invalid {
   border-color: red;
 }
 
-#umbră {
-  z-index: 2;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: .7;
-  background-color: silver;
-}
-
-div.pagină#formular {
+#formular {
   display: none;
   z-index: 3;
-}
-
-div.pagină#formular>.conţinut {
+  position: absolute;
   border: 1px solid #ddd;
   padding: 10px 30px 90px 50px;
   -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   background-color: white;
+  margin-left: -40px;
 }
 
 #formular h1 {
   padding: 40px 40px 40px 0;
   margin: 0;
+  font-size: 3em;
+  outline: none;
 }
 
 #formular #număr {
@@ -485,7 +449,6 @@ button.închide {
   top: 2px;
   padding: .1em;
   line-height: .6em;
-  color: #888;
 }
 
 .semiascuns {
@@ -493,7 +456,7 @@ button.închide {
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .5;
+  opacity: .3;
 }
 
 .semiascuns:hover {
@@ -984,20 +947,17 @@ input[type="checkbox"]+label {
   vertical-align: -.2em;
 }
 
-.instrumente {
+#formular .instrumente {
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   padding: 0;
-}
-
-#formular .instrumente {
   position: fixed;
   right: 30px;
   top: 120px;
 }
 
-.instrumente button {
+.instrumente>button {
   height: 48px;
   width: 48px;
   padding: 0;
@@ -1075,9 +1035,7 @@ input[type="checkbox"]+label {
 
 #calculator {
   display: none;
-  position: fixed;
-  top: 4em;
-  right: 14em;
+  position: absolute;
   width: 18em;
   background: white;
   border: 1px solid silver;
@@ -1285,7 +1243,7 @@ input[type="checkbox"]+label {
     letter-spacing: -.075em;
   }
 
-  #bara-de-sus .instrumente button {
+  #bara-de-sus .instrumente>button {
     letter-spacing: -.05em;
   }
 
