@@ -1285,8 +1285,13 @@ var ListăDeProceduri = {
       if ($.isPlainObject(content)) {
         var itemi = {};
 
-        for (var item in content)
-          itemi[item] = evidenţiază(content[item]);
+        for (var item in content) {
+          if (item == 'data-hotărîrii') {
+            itemi[item] = content[item];
+          } else {
+            itemi[item] = evidenţiază(content[item]);
+          }
+        }
 
         return itemi;
       } else if ($.isArray(content)) {
