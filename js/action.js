@@ -809,7 +809,7 @@ var Formular = {
           Formular.seteazăTitlu();
         }
 
-        $('html').animate({scrollTop: 0}, 500);
+        $('html,body').animate({scrollTop: 0}, 500);
 
         Formular.titlu
           .attr('tabindex', 1)
@@ -856,7 +856,7 @@ var Formular = {
       .focus()
       .removeAttr('tabindex');
 
-    $('html').animate({scrollTop: 0}, 0);
+    $('html,body').animate({scrollTop: 0}, 0);
 
     $.fx.off = false;
 
@@ -1067,7 +1067,7 @@ var Formular = {
     TotalCheltuieli.init();
     Defaults.init();
 
-    $('html').animate({scrollTop: 0}, 0);
+    $('html,body').animate({scrollTop: 0}, 0);
 
     Formular.titlu
       .attr('tabindex', 1)
@@ -1100,7 +1100,7 @@ var ProceduriRecente = {
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
           timp: moment($.trim(this.nextSibling.data).split(/\s{2,}/)[0], 'D-MMM-YYYY H:m').toDate(),
-          număr: Utilizator.login + this.innerText
+          număr: Utilizator.login + this.firstChild.data
         }
       }).get().sort(function(a, b) {
         return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)
