@@ -6,6 +6,7 @@ body {
   margin: 0;
   background-image: url('/imagini/fundal.png');
   height: 100%;
+  overflow-y: scroll;
 }
 
 .autentificat #autentificare {
@@ -186,14 +187,10 @@ button {
   border-top-color: #bbb;
   margin: 0;
   width: 450px;
-  -webkit-transition: background-color .5s;
-  -moz-transition: background-color .5s;
-  -o-transition: background-color .5s;
-  transition: background-color .5s;
-}
-
-#căutare table {
-  width: 462px;
+  -webkit-transition: background-color 1s;
+  -moz-transition: background-color 1s;
+  -o-transition: background-color 1s;
+  transition: background-color 1s;
 }
 
 #căutare table .număr,
@@ -208,6 +205,7 @@ button {
 #căutare table {
   border-collapse: collapse;
   background-color: white;
+  width: 462px;
 }
 
 #căutare table td {

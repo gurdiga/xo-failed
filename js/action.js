@@ -1113,7 +1113,11 @@ var ProceduriRecente = {
           lista[this.număr] = Căutare.index[this.număr][this.număr];
         });
 
-        ProceduriRecente.$.html(ListăDeProceduri.formatează(lista));
+        ProceduriRecente.$
+          .html(ListăDeProceduri.formatează(lista))
+          .on('mouseenter', 'tr', function() {this.className = 'selectat'})
+          .on('mouseleave', 'tr', function() {this.removeAttribute('class')});
+
         ProceduriRecente.încărcat = true;
       }
     });
@@ -1137,7 +1141,7 @@ var Căutare = {
       .bind('keydown', 'down', Căutare.rezultate.selectează)
       .bind('keydown', 'up', Căutare.rezultate.selectează)
       .bind('keydown', 'return', Căutare.rezultate.deschide)
-      .bind('keydown', 'esc', function() {$(this).val('').trigger('input')});
+      .bind('keyup', 'esc', function() {$(this).val('').trigger('input')});
 
     Căutare.rezultate.$
       .on('mouseenter', 'tr', function() {this.className = 'selectat'})
