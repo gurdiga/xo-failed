@@ -384,7 +384,7 @@ input.etichetă:focus {
 
 fieldset legend label {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.3em;
   text-align: left;
   padding: 6px 0;
   width: auto;
@@ -1245,10 +1245,6 @@ input[type="checkbox"]+label {
     letter-spacing: -.05em;
   }
 
-  #calculator {
-    right: 13em;
-  }
-
   #calculator legend label {
     letter-spacing: -.05em;
   }
@@ -1257,7 +1253,8 @@ input[type="checkbox"]+label {
     outline: 1px solid #ddd;
   }
 
-  #căutare input:focus {
+  textarea:focus,
+  input:focus {
     outline: none;
   }
 }

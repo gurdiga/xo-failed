@@ -160,29 +160,30 @@ var HashController = {
 // --------------------------------------------------
 
 var CîmpuriTextarea = {
-  selector: 'textarea',
-  evenimente: 'keydown keyup update paste change focus mouseup',
+  evenimente: 'keydown keyup input focus mouseup',
 
   autodimensionează: function() {
-    Formular.$.on(this.evenimente, this.selector, function() {
-      var textarea = $(this);
+    Formular.$
+      .attr('spellcheck', 'false')
+      .on(this.evenimente, 'textarea', function() {
+        var textarea = $(this);
 
-      if (textarea.is(':not(:visible)')) return;
+        if (textarea.is(':not(:visible)')) return;
 
-      var clone = textarea.clone()
-        .css({
-          'padding': 0,
-          'border-width': 0,
-          'visibility': 'hidden',
-          'position': 'absolute',
-          'height': textarea.css('min-height')
-        })
-        .val(textarea.val())
-        .insertBefore(textarea);
+        var clone = textarea.clone()
+          .css({
+            'padding': 0,
+            'border-width': 0,
+            'visibility': 'hidden',
+            'position': 'absolute',
+            'height': textarea.css('min-height')
+          })
+          .val(textarea.val())
+          .insertBefore(textarea);
 
-      textarea.css('height', clone[0].scrollHeight);
-      clone.remove();
-    });
+        textarea.css('height', clone[0].scrollHeight);
+        clone.remove();
+      });
   }
 };
 
