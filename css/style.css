@@ -332,7 +332,7 @@ h1 {
 }
 
 #conţinut,
-#formular {
+#formular>.conţinut {
   width: 900px;
   margin: 0 auto;
   min-height: 670px;
@@ -422,8 +422,11 @@ input.invalid {
 
 #formular {
   display: none;
-  z-index: 3;
   position: absolute;
+  padding-bottom: 40px;
+}
+
+#formular>.conţinut {
   border: 1px solid #ddd;
   padding: 10px 30px 90px 50px;
   -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);

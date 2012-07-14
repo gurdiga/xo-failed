@@ -119,539 +119,543 @@
       </div>
 
       <div id="formular">
-        <button class="închide semiascuns" title="Închide">×</button>
-
-        <h1>
-          <span id="descriere"></span>
-          <span id="număr"></span>
-        </h1>
-
-        <div class="coloană">
-          <fieldset id="document-executoriu">
-            <legend><label>Documentul executoriu</label></legend>
-
-            <div class="conţinut">
-              <ul>
-                <li>
-                  <label for="instanţa-de-judecată">Instanţa de judecată</label>
-                  <select id="instanţa-de-judecată">
-                    <optgroup label="Prima verigă a sistemului judecătoresc">
-                      <option>Anenii Noi</option>
-                      <option>Basarabeasca</option>
-                      <option>Bender</option>
-                      <option>Botanica</option>
-                      <option>Briceni</option>
-                      <option>Buiucani</option>
-                      <option>Bălţi</option>
-                      <option>Cahul</option>
-                      <option>Cantemir</option>
-                      <option>Ceadîr-Lunga</option>
-                      <option>Centru</option>
-                      <option>Cimişlia</option>
-                      <option>Ciocana</option>
-                      <option>Comrat</option>
-                      <option>Criuleni</option>
-                      <option>Călăraşi</option>
-                      <option>Căuşeni</option>
-                      <option>Donduşeni</option>
-                      <option>Drochia</option>
-                      <option>Dubăsari</option>
-                      <option>Edineţ</option>
-                      <option>Floreşti</option>
-                      <option>Făleşti</option>
-                      <option>Glodeni</option>
-                      <option>Grigoriopol</option>
-                      <option>Hînceşti</option>
-                      <option>Ialoveni</option>
-                      <option>Leova</option>
-                      <option>Nisporeni</option>
-                      <option>Ocniţa</option>
-                      <option>Orhei</option>
-                      <option>Rezina</option>
-                      <option>Rîbniţa</option>
-                      <option>Rîşcani</option>
-                      <option>Rîşcani</option>
-                      <option>Slobozia</option>
-                      <option>Soroca</option>
-                      <option>Străşeni</option>
-                      <option>Sîngerei</option>
-                      <option>Şoldăneşti</option>
-                      <option>Ştefan Vodă</option>
-                      <option>Taraclia</option>
-                      <option>Teleneşti</option>
-                      <option>Ungheni</option>
-                      <option>Vulcăneşti</option>
-                      <option>Judecătoria Comercială de Circumscripţie</option>
-                    </optgroup>
-
-                    <optgroup label="A doua verigă a sistemului judecătoresc">
-                      <option>Curtea de Apel Chişinău</option>
-                      <option>Curtea de Apel Cahul</option>
-                      <option>Curtea de Apel Comrat</option>
-                      <option>Curtea de Apel Tighina</option>
-                      <option>Curtea de Apel Bălţi</option>
-                    </optgroup>
-
-                    <optgroup label="A treia verigă a sistemului judecătoresc">
-                      <option>Curtea Supremă de Justiţie</option>
-                    </optgroup>
-
-                  </select>
-                </li>
-
-                <li>
-                  <label for="numărul-de">Numărul documentului</label>
-                  <input id="numărul-de"/>
-                </li>
-
-                <li>
-                  <label for="data-hotărîrii">Data hotărîrii</label>
-                  <input id="data-hotărîrii" class="dată"/>
-                </li>
-
-                <li>
-                  <label for="dispozitivul">Dispozitivul</label>
-                  <textarea id="dispozitivul" class="lat"></textarea>
-                </li>
-
-                <li>
-                  <label for="data-rămînerii-definitive">Data rămînerii definitive</label>
-                  <input id="data-rămînerii-definitive" class="dată"/>
-                </li>
-
-                <li>
-                  <label for="data-eliberării">Data eliberării</label>
-                  <input id="data-eliberării" class="dată"/>
-                </li>
-              </ul>
-            </div>
-          </fieldset>
-        </div>
-
-        <div class="coloană">
-          <fieldset id="obiectul-urmăririi">
-            <legend><label>Obiectul urmăririi</label></legend>
-
-            <div class="conţinut">
-              <ul>
-                <li>
-                  <label for="caracter">Caracter</label>
-                  <select id="caracter" class="care schimbă formularul">
-                    <option>pecuniar</option>
-                    <option selected>nonpecuniar</option>
-                  </select>
-                </li>
-              </ul>
-            </div>
-          </fieldset>
-        </div>
-
-        <fieldset id="cheltuieli">
-          <legend>
-            <label>Cheltuieli</label>
-          </legend>
-
-          <div class="conţinut">
-            <ul>
-              <li>
-                <label for="onorariu">Onorariul</label>
-                <input id="onorariu" class="sumă"/> MDL
-              </li>
-
-              <li>
-                <label for="părţile-au-ajuns-la-conciliere">Părţile au încheiat o tranzacţie</label>
-                <input id="părţile-au-ajuns-la-conciliere" type="checkbox"/>
-                <p class="şoaptă">se aplică coeficientul de 0.7 la onorariu</p>
-              </li>
-
-              <li>
-                <label for="total-taxe-şi-speze">Total taxe şi speze</label>
-                <input id="total-taxe-şi-speze" class="sumă calculat" readonly/> MDL
-
-                <ul class="adăugate"></ul>
-              </li>
-            </ul>
-
-            <ul id="categorii-taxe-şi-speze">
-              <li class="categorie">
-                <span class="descriere">Adaugă taxă de gestiune a procedurilor
-                de executare şi administrare a documentelor</span>
-
-                <div class="conţinut cu umbră">
-                  <h3 class="titlu">Taxe de gestiune a procedurilor de executare şi administrare a documentelor</h3>
-
-                  <ol>
-                    <li id="taxaA1" class="item unic">
-                      taxa de intentare şi formare a procedurii de executare
-                      — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaA2" class="item unic">
-                      taxa de arhivare a procedurii de executare
-                      — <input type="hidden" class="cost" value="3"/>3&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaA3" class="item" data-şablon-subformular="documente">
-                      taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
-                      a certificatelor, confirmărilor, a informaţiei scrise despre
-                      acţiunile de executare silită întreprinse de către executorul judecătoresc
-                      — 1&nbsp;u.c. per document
-                    </li>
-
-                    <li id="taxaA4" class="item unic">
-                      taxa pentru întocmirea borderoului de calcul
-                      al taxelor pentru efectuarea actelor executorului
-                      judecătoresc şi a spezelor procedurii de executare
-                      — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaA5" class="item unic">
-                      taxa pentru întocmirea încheierii de distribuire a sumelor
-                      realizate în faza executării silite
-                      — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaA6" class="item" data-şablon-subformular="bifă “din arhivă”">
-                      taxa pentru eliberarea copiei autentificate a procedurii de executare
-                      — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
-                    </li>
-                  </ol>
-                </div>
-              </li>
-
-              <li class="categorie">
-                <span class="descriere">Adaugă taxă pentru acţiunile procedurale întreprinse
-                de executorul judecătoresc</span>
-
-                <div class="conţinut cu umbră">
-                  <h3 class="titlu">Taxe pentru acţiunile procedurale întreprinse de executorul judecătoresc</h3>
-
-                  <ol>
-                    <li id="taxaB1" class="item" data-şablon-subformular="documente adresabile">
-                      taxa pentru întocmirea şi eliberarea sau expedierea pe suport de
-                      hîrtie sau în versiune electronică a demersurilor, încheierilor,
-                      dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
-                      instituţiile financiare, angajatorul debitorului, terţele persoane,
-                      sau alte organe, inclusiv în procesul vînzării bunurilor mobile
-                      — 0.25&nbsp;u.c. per exemplar document
-                    </li>
-
-                    <li id="taxaB2" class="item">
-                      taxa pentru întocmirea procesului-verbal de sechestru
-                      — <input type="hidden" class="cost" value="0.5"/>0.5&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB2-1" class="item" data-şablon-subformular="ore lucrate">
-                      taxa pentru pregătirea şi efectuarea inventarierii patrimoniului
-                      debitorului ce urmează a fi sechestrat
-                      — 0.5&nbsp;u.c. per oră
-                    </li>
-
-                    <li id="taxaB3" class="item">
-                      taxa pentru desemnarea (schimbarea, în cazul existenţei temeiurilor
-                      legale) administratorului bunurilor sau a persoanei căreia i se transmit
-                      la păstrare bunurile
-                      — <input type="hidden" class="cost" value="2"/>2&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB4" class="item">
-                      taxa pentru transmiterea bunurilor spre vînzare, în baza contractului
-                      de comision, inclusiv întocmirea contractului de comision
-                      — <input type="hidden" class="cost" value="15"/>15&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB5" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
-                      taxa pentru emiterea încheierii de stabilire a datei desfăşurării
-                      licitaţiei şi întocmirea textului anunţului
-                      — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB6" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
-                      taxa pentru desfăşurarea licitaţiei, indiferent de rezultatele licitaţiei
-                      — <input type="hidden" class="cost" value="20"/>20&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB7" class="item" data-şablon-subformular="participanţi la licitaţie">
-                      taxa de participare la licitaţie (cu eliberarea biletului de participant)
-                      — 3&nbsp;u.c. per participant
-                    </li>
-
-                    <li id="taxaB8" class="item">
-                      taxa pentru transmiterea spre vînzare a valorilor mobiliare (hîrtiilor de valoare)
-                      — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB9" class="item" data-şablon-subformular="documente">
-                      taxa pentru pregătirea demersului în instanţa de judecată privind
-                      schimbarea modului şi ordinii de executare, explicarea modului de executare,
-                      eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
-                      în căutare a debitorului, corectarea erorilor sau omisiunilor din titlul
-                      executoriu, eliberarea duplicatului documentului executoriu
-                      — 5&nbsp;u.c. per demers
-                    </li>
-
-                    <li id="taxaB10" class="item">
-                      taxa pentru întocmirea procesului-verbal şi transmiterea bunului în
-                      contul stingerii datoriei
-                      — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB11" class="item unic">
-                      taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
-                      de executare, indiferent de rezultatele ei
-                      — <input type="hidden" class="cost" value="15"/>15&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB12" class="item">
-                      taxa pentru ridicarea şi transmiterea la păstrare a bunurilor
-                      sechestrate şi întocmirea procesului-verbal de transmitere a bunurilor
-                      — <input type="hidden" class="cost" value="5"/>5&nbsp;u.c.
-                    </li>
-
-                    <li id="taxaB13" class="item" data-şablon-subformular="ore lucrate">
-                      taxa pentru efectuarea acţiunilor în procedura de executare a
-                      documentelor executorii privind stabilirea domiciliului copilului,
-                      evacuarea, instalarea, restabilirea la locul de muncă, obligarea
-                      debitorului să întreprindă (să nu întreprindă) anumite acţiuni,
-                      aplicarea măsurilor de asigurare a acţiunii
-                      — 5&nbsp;u.c. per oră
-                    </li>
-                  </ol>
-                </div>
-              </li>
-
-              <li class="categorie">
-                <span class="descriere">Adaugă taxă pentru serviciile prestate
-                de executorii judecătoreşti</span>
-
-                <div class="conţinut cu umbră">
-                  <h3 class="titlu">Taxe pentru serviciile prestate de executorii judecătoreşti</h3>
-
-                  <ol>
-                    <li id="taxaC1" class="item" data-şablon-subformular="documente">
-                      taxa pentru înmînarea, comunicarea personală a actelor
-                      procedurale sau a altor documente
-                      — 5&nbsp;u.c. per document
-                    </li>
-
-                    <li id="taxaC2" class="item" data-şablon-subformular="contracte">
-                      taxa pentru întocmirea actului de constatare a faptului,
-                      stării de fapt se achită conform contractului
-                    </li>
-
-                    <li id="taxaC3" class="item" data-şablon-subformular="contracte">
-                      taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
-                      în procesul de executare, precum şi a celor gajate, conform contractului,
-                      dar nu mai mult de 75 u.c. lunar.
-                    </li>
-                  </ol>
-                </div>
-              </li>
-
-              <li class="categorie">
-                <span class="descriere">Adaugă speză</span>
-
-                <div class="conţinut cu umbră">
-                  <h3 class="titlu">Speze</h3>
-
-                  <ol>
-                    <li id="speza1" class="item" data-şablon-subformular="listă cheltuieli">
-                      transportul, păstrarea şi vînzarea bunurilor debitorului
-                    </li>
-
-                    <li id="speza2" class="item" data-şablon-subformular="listă cheltuieli">
-                      deschiderea forţată şi închiderea încăperilor, strămutarea
-                      sau înlăturarea îngrădirilor
-                    </li>
-
-                    <li id="speza3" class="item" data-şablon-subformular="listă cheltuieli">
-                      remunerarea specialiştilor, experţilor, martorilor asistenţi şi
-                      altor persoane antrenate în procesul de executare
-                    </li>
-
-                    <li id="speza4" class="item" data-şablon-subformular="listă cheltuieli">
-                      Lucrări de evaluare şi/sau expertiză
-                    </li>
-
-                    <li id="speza5" class="item" data-şablon-subformular="listă cheltuieli">
-                      deplasările executorului judecătoresc efectuate în cadrul procedurii
-                      de executare
-                    </li>
-
-                    <li id="speza6" class="item" data-şablon-subformular="listă cheltuieli">
-                      căutarea debitorului şi a bunurilor lui
-                    </li>
-
-                    <li id="speza7" class="item" data-şablon-subformular="listă cheltuieli">
-                      transferul (expedierea) sumelor încasate
-                    </li>
-
-                    <li id="speza8" class="item" data-şablon-subformular="listă cheltuieli">
-                      transmiterea sau înmînarea  încheierilor, înştiinţărilor, telegramelor etc.
-                    </li>
-
-                    <li id="speza9" class="item" data-şablon-subformular="listă cheltuieli">
-                      asigurarea aducerii forţate a debitorului
-                    </li>
-
-                    <li id="speza10" class="item" data-şablon-subformular="listă cheltuieli">
-                      organizarea şi desfăşurarea licitaţiei
-                    </li>
-
-                    <li id="speza11" class="item" data-şablon-subformular="listă cheltuieli">
-                      plăţile bancare pentru transferul şi convertirea mijloacelor băneşti
-                    </li>
-
-                    <li id="speza12" class="item" data-şablon-subformular="listă cheltuieli">
-                      eliberarea copiilor şi  duplicatelor de pe actele procedurale
-                    </li>
-
-                    <li id="speza13" class="item" data-şablon-subformular="listă cheltuieli">
-                      comunicarea actelor executorului judecătoresc
-                    </li>
-                  </ol>
-                </div>
-              </li>
-            </ul>
-
-            <div id="destinatari" class="cu umbră" style="display:none">
-              <ul class="categorii">
-                <li class="categorie">
-                  <span class="titlu">
-                    Registratori independenţi
-                    <span class="toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
-                  </span>
-
-                  <ul class="listă cu umbră">
-                    <li>“Registru-Corect” S.A. Chişinău, str. Columna 87</li>
-                    <li>“Registru” S.A. MD-2012 Chişinău, str. Şciusev 47</li>
-                    <li>“Grupa Financiară” S.A. Chişinău, str. Armenească 55, bir. 301</li>
-                    <li>“Registrul-F” S.A. Chişinău, str.Teilor 9/4</li>
-                    <li>“Registrator-Centru” S.A. Chişinău, Calea Ieşilor 10</li>
-                    <li>“Registru-Ind” S.A. Chişinău, bd. Dacia 35</li>
-                    <li>“Comitent” S.A. Chişinău, str. Negruzzi 2, of. 304</li>
-                    <li>“Real-Registr” S.A. Bălţi, str. Kiev 122</li>
-                    <li>“Soliditate” S.A. Chişinău, str. Feredeului 4</li>
-                    <li>“Intermedia-Group” S.A. Chişinău, str. Podgorenilor 36</li>
-                    <li>“Depozitarul Central” S.A. Chişinău, str. Vasile Alecsandri 119a</li>
-                  </ul>
-                </li>
-
-                <li class="categorie">
-                  <span class="titlu">
-                    S.A. care ţin registru acţionarilor de sine stătător
-                    <span class="toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
-                  </span>
-
-                  <ul class="listă cu umbră">
-                    <li>“Acvila-Sport” S.A. Chişinău, str. Bucuriei 5</li>
-                    <li>“Aureola &amp; Lombard” S.A. Chişinău, bd. Ştefan cel Mare 132</li>
-                  </ul>
-                </li>
-
-                <li class="categorie">
-                  <span class="titlu">
-                    Bănci comerciale
-                    <span class="toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
-                  </span>
-
-                  <ul class="listă cu umbră">
-                    <li>“COMERŢBANK” S.A. 2043 Chişinău, str. Independenţei 1/1</li>
-                    <li>“BANCA SOCIALĂ” S.A. 2005 Chişinău, str. Bănulescu-Bodoni 61</li>
-                    <li>“VICTORIABANK” S.A. 2004 Chişinău, str.31 August 1989, 141</li>
-                    <li>“MOLDOVA - AGROINDBANK” S.A. 2006 Chişinău, str.Cosmonauţilor 9</li>
-                    <li>“Moldindconbank” S.A. 2012 Chişinău, str.Armenească, 38</li>
-                    <li>“Banca de Economii” S.A. 2012 Chişinău, str. Columna 115</li>
-                    <li>“EuroCreditBank” S.A. 2001 Chişinău, str. Ismail 33</li>
-                    <li>“UNIBANK” S.A. 2012 Chişinău, str. Bănulescu-Bodoni 45</li>
-                    <li>“Banca de Finanţe şi Comerţ” S.A. 2012 Chişinău, str. Puşkin 26</li>
-                    <li>“ENERGBANK” S.A. 2012 Chişinău, str. Vasile Alecsandri 78</li>
-                    <li>“ProCredit Bank” S.A. 2012 Chisinău, bd. Ştefan cel Mare 65, of. 901</li>
-                    <li>“Banca Comercială Română Chişinău” S.A. 2005 Chişinău, str. Puşkin 60/2</li>
-                    <li>“EXIMBANK - Gruppo Veneto Banca” S.A. 2004 Chişinău, bd. Ştefan cel Mare 171/1</li>
-                    <li>“MOBIASBANCĂ - Groupe Societe Generale” S.A. 2012 Chişinău, bd. Ştefan cel Mare 81a</li>
-                  </ul>
-                </li>
-
-                <li class="categorie">
-                  <span class="titlu">Deţinători de registre şi alte parsoane terţe</span>
-
-                  <ul class="listă cu umbră">
-                    <li class="suplimentar">ÎS “CRIS Registru” 2012 Chişinau, str. Puşkin 42</li>
-                    <li class="suplimentar">ÎS “Cadastru” 2012 Chişinău, str. Puşkin 47</li>
-                    <li class="suplimentar">Camera Înregistrării de Stat de pe lîngă MJRM 2001 Chişinău, bd. Ştefan Cel Mare 73</li>
-                    <li class="suplimentar">Inspectoratul Fiscal Principal de Stat de pe lîngă MFRM 2005 Chisinau, str. Cosmonauţilor 9</li>
-                    <li class="suplimentar">Casa Naţională de Asigurări Sociale a RM 2028 Chişinău, str. Gheorghe Tudor 3</li>
-                    <li class="suplimentar">“Depozitarul Naţional de Valori Mobiliare al Moldovei” S.A. Chişinău, bd. Ştefan cel Mare 73</li>
-                    <li class="suplimentar persoană terţă">persoană terţă</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
+        <div class="conţinut">
+          <button class="închide semiascuns" title="Închide">×</button>
+
+          <h1>
+            <span id="descriere"></span>
+            <span id="număr"></span>
+          </h1>
+
+          <div class="coloană">
+            <fieldset id="document-executoriu">
+              <legend><label>Documentul executoriu</label></legend>
+
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label for="instanţa-de-judecată">Instanţa de judecată</label>
+                    <select id="instanţa-de-judecată">
+                      <optgroup label="Prima verigă a sistemului judecătoresc">
+                        <option>Anenii Noi</option>
+                        <option>Basarabeasca</option>
+                        <option>Bender</option>
+                        <option>Botanica</option>
+                        <option>Briceni</option>
+                        <option>Buiucani</option>
+                        <option>Bălţi</option>
+                        <option>Cahul</option>
+                        <option>Cantemir</option>
+                        <option>Ceadîr-Lunga</option>
+                        <option>Centru</option>
+                        <option>Cimişlia</option>
+                        <option>Ciocana</option>
+                        <option>Comrat</option>
+                        <option>Criuleni</option>
+                        <option>Călăraşi</option>
+                        <option>Căuşeni</option>
+                        <option>Donduşeni</option>
+                        <option>Drochia</option>
+                        <option>Dubăsari</option>
+                        <option>Edineţ</option>
+                        <option>Floreşti</option>
+                        <option>Făleşti</option>
+                        <option>Glodeni</option>
+                        <option>Grigoriopol</option>
+                        <option>Hînceşti</option>
+                        <option>Ialoveni</option>
+                        <option>Leova</option>
+                        <option>Nisporeni</option>
+                        <option>Ocniţa</option>
+                        <option>Orhei</option>
+                        <option>Rezina</option>
+                        <option>Rîbniţa</option>
+                        <option>Rîşcani</option>
+                        <option>Rîşcani</option>
+                        <option>Slobozia</option>
+                        <option>Soroca</option>
+                        <option>Străşeni</option>
+                        <option>Sîngerei</option>
+                        <option>Şoldăneşti</option>
+                        <option>Ştefan Vodă</option>
+                        <option>Taraclia</option>
+                        <option>Teleneşti</option>
+                        <option>Ungheni</option>
+                        <option>Vulcăneşti</option>
+                        <option>Judecătoria Comercială de Circumscripţie</option>
+                      </optgroup>
+
+                      <optgroup label="A doua verigă a sistemului judecătoresc">
+                        <option>Curtea de Apel Chişinău</option>
+                        <option>Curtea de Apel Cahul</option>
+                        <option>Curtea de Apel Comrat</option>
+                        <option>Curtea de Apel Tighina</option>
+                        <option>Curtea de Apel Bălţi</option>
+                      </optgroup>
+
+                      <optgroup label="A treia verigă a sistemului judecătoresc">
+                        <option>Curtea Supremă de Justiţie</option>
+                      </optgroup>
+
+                    </select>
+                  </li>
+
+                  <li>
+                    <label for="numărul-de">Numărul documentului</label>
+                    <input id="numărul-de"/>
+                  </li>
+
+                  <li>
+                    <label for="data-hotărîrii">Data hotărîrii</label>
+                    <input id="data-hotărîrii" class="dată"/>
+                  </li>
+
+                  <li>
+                    <label for="dispozitivul">Dispozitivul</label>
+                    <textarea id="dispozitivul" class="lat"></textarea>
+                  </li>
+
+                  <li>
+                    <label for="data-rămînerii-definitive">Data rămînerii definitive</label>
+                    <input id="data-rămînerii-definitive" class="dată"/>
+                  </li>
+
+                  <li>
+                    <label for="data-eliberării">Data eliberării</label>
+                    <input id="data-eliberării" class="dată"/>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
           </div>
-        </fieldset>
 
-        <div class="coloană stînga">
-          <fieldset id="creditor">
+          <div class="coloană">
+            <fieldset id="obiectul-urmăririi">
+              <legend><label>Obiectul urmăririi</label></legend>
+
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label for="caracter">Caracter</label>
+                    <select id="caracter" class="care schimbă formularul">
+                      <option>pecuniar</option>
+                      <option selected>nonpecuniar</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+          </div>
+
+          <fieldset id="cheltuieli">
             <legend>
-              <label>Creditor</label>
-              <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
+              <label>Cheltuieli</label>
             </legend>
 
             <div class="conţinut">
               <ul>
                 <li>
-                  <label>Gen persoană</label>
-                  <select id="gen-persoană" class="care schimbă formularul">
-                    <option selected>juridică</option>
-                    <option>fizică</option>
-                  </select>
+                  <label for="onorariu">Onorariul</label>
+                  <input id="onorariu" class="sumă"/> MDL
                 </li>
-              </ul>
-            </div>
-          </fieldset>
 
-          <button class="adaugă persoană semiascuns" title="Adaugă persoană terță">
-            +<span class="legend label">Persoană terță</span>
-          </button>
-        </div>
-
-        <div class="coloană">
-          <fieldset class="debitor">
-            <legend>
-              <label>Debitor</label>
-
-              <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
-            </legend>
-
-            <div class="conţinut">
-              <ul>
                 <li>
-                  <label>Gen persoană</label>
-                  <select id="gen-persoană" class="care schimbă formularul">
-                    <option>juridică</option>
-                    <option selected>fizică</option>
-                  </select>
+                  <label for="părţile-au-ajuns-la-conciliere">Părţile au încheiat o tranzacţie</label>
+                  <input id="părţile-au-ajuns-la-conciliere" type="checkbox"/>
+                  <p class="şoaptă">se aplică coeficientul de 0.7 la onorariu</p>
+                </li>
+
+                <li>
+                  <label for="total-taxe-şi-speze">Total taxe şi speze</label>
+                  <input id="total-taxe-şi-speze" class="sumă calculat" readonly/> MDL
+
+                  <ul class="adăugate"></ul>
                 </li>
               </ul>
+
+              <ul id="categorii-taxe-şi-speze">
+                <li class="categorie">
+                  <span class="descriere">Adaugă taxă de gestiune a procedurilor
+                  de executare şi administrare a documentelor</span>
+
+                  <div class="conţinut cu umbră">
+                    <h3 class="titlu">Taxe de gestiune a procedurilor de executare şi administrare a documentelor</h3>
+
+                    <ol>
+                      <li id="taxaA1" class="item unic">
+                        taxa de intentare şi formare a procedurii de executare
+                        — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaA2" class="item unic">
+                        taxa de arhivare a procedurii de executare
+                        — <input type="hidden" class="cost" value="3"/>3&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaA3" class="item" data-şablon-subformular="documente">
+                        taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
+                        a certificatelor, confirmărilor, a informaţiei scrise despre
+                        acţiunile de executare silită întreprinse de către executorul judecătoresc
+                        — 1&nbsp;u.c. per document
+                      </li>
+
+                      <li id="taxaA4" class="item unic">
+                        taxa pentru întocmirea borderoului de calcul
+                        al taxelor pentru efectuarea actelor executorului
+                        judecătoresc şi a spezelor procedurii de executare
+                        — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaA5" class="item unic">
+                        taxa pentru întocmirea încheierii de distribuire a sumelor
+                        realizate în faza executării silite
+                        — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaA6" class="item" data-şablon-subformular="bifă “din arhivă”">
+                        taxa pentru eliberarea copiei autentificate a procedurii de executare
+                        — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
+                      </li>
+                    </ol>
+                  </div>
+                </li>
+
+                <li class="categorie">
+                  <span class="descriere">Adaugă taxă pentru acţiunile procedurale întreprinse
+                  de executorul judecătoresc</span>
+
+                  <div class="conţinut cu umbră">
+                    <h3 class="titlu">Taxe pentru acţiunile procedurale întreprinse de executorul judecătoresc</h3>
+
+                    <ol>
+                      <li id="taxaB1" class="item" data-şablon-subformular="documente adresabile">
+                        taxa pentru întocmirea şi eliberarea sau expedierea pe suport de
+                        hîrtie sau în versiune electronică a demersurilor, încheierilor,
+                        dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
+                        instituţiile financiare, angajatorul debitorului, terţele persoane,
+                        sau alte organe, inclusiv în procesul vînzării bunurilor mobile
+                        — 0.25&nbsp;u.c. per exemplar document
+                      </li>
+
+                      <li id="taxaB2" class="item">
+                        taxa pentru întocmirea procesului-verbal de sechestru
+                        — <input type="hidden" class="cost" value="0.5"/>0.5&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB2-1" class="item" data-şablon-subformular="ore lucrate">
+                        taxa pentru pregătirea şi efectuarea inventarierii patrimoniului
+                        debitorului ce urmează a fi sechestrat
+                        — 0.5&nbsp;u.c. per oră
+                      </li>
+
+                      <li id="taxaB3" class="item">
+                        taxa pentru desemnarea (schimbarea, în cazul existenţei temeiurilor
+                        legale) administratorului bunurilor sau a persoanei căreia i se transmit
+                        la păstrare bunurile
+                        — <input type="hidden" class="cost" value="2"/>2&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB4" class="item">
+                        taxa pentru transmiterea bunurilor spre vînzare, în baza contractului
+                        de comision, inclusiv întocmirea contractului de comision
+                        — <input type="hidden" class="cost" value="15"/>15&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB5" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
+                        taxa pentru emiterea încheierii de stabilire a datei desfăşurării
+                        licitaţiei şi întocmirea textului anunţului
+                        — <input type="hidden" class="cost" value="1"/>1&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB6" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
+                        taxa pentru desfăşurarea licitaţiei, indiferent de rezultatele licitaţiei
+                        — <input type="hidden" class="cost" value="20"/>20&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB7" class="item" data-şablon-subformular="participanţi la licitaţie">
+                        taxa de participare la licitaţie (cu eliberarea biletului de participant)
+                        — 3&nbsp;u.c. per participant
+                      </li>
+
+                      <li id="taxaB8" class="item">
+                        taxa pentru transmiterea spre vînzare a valorilor mobiliare (hîrtiilor de valoare)
+                        — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB9" class="item" data-şablon-subformular="documente">
+                        taxa pentru pregătirea demersului în instanţa de judecată privind
+                        schimbarea modului şi ordinii de executare, explicarea modului de executare,
+                        eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
+                        în căutare a debitorului, corectarea erorilor sau omisiunilor din titlul
+                        executoriu, eliberarea duplicatului documentului executoriu
+                        — 5&nbsp;u.c. per demers
+                      </li>
+
+                      <li id="taxaB10" class="item">
+                        taxa pentru întocmirea procesului-verbal şi transmiterea bunului în
+                        contul stingerii datoriei
+                        — <input type="hidden" class="cost" value="10"/>10&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB11" class="item unic">
+                        taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
+                        de executare, indiferent de rezultatele ei
+                        — <input type="hidden" class="cost" value="15"/>15&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB12" class="item">
+                        taxa pentru ridicarea şi transmiterea la păstrare a bunurilor
+                        sechestrate şi întocmirea procesului-verbal de transmitere a bunurilor
+                        — <input type="hidden" class="cost" value="5"/>5&nbsp;u.c.
+                      </li>
+
+                      <li id="taxaB13" class="item" data-şablon-subformular="ore lucrate">
+                        taxa pentru efectuarea acţiunilor în procedura de executare a
+                        documentelor executorii privind stabilirea domiciliului copilului,
+                        evacuarea, instalarea, restabilirea la locul de muncă, obligarea
+                        debitorului să întreprindă (să nu întreprindă) anumite acţiuni,
+                        aplicarea măsurilor de asigurare a acţiunii
+                        — 5&nbsp;u.c. per oră
+                      </li>
+                    </ol>
+                  </div>
+                </li>
+
+                <li class="categorie">
+                  <span class="descriere">Adaugă taxă pentru serviciile prestate
+                  de executorii judecătoreşti</span>
+
+                  <div class="conţinut cu umbră">
+                    <h3 class="titlu">Taxe pentru serviciile prestate de executorii judecătoreşti</h3>
+
+                    <ol>
+                      <li id="taxaC1" class="item" data-şablon-subformular="documente">
+                        taxa pentru înmînarea, comunicarea personală a actelor
+                        procedurale sau a altor documente
+                        — 5&nbsp;u.c. per document
+                      </li>
+
+                      <li id="taxaC2" class="item" data-şablon-subformular="contracte">
+                        taxa pentru întocmirea actului de constatare a faptului,
+                        stării de fapt se achită conform contractului
+                      </li>
+
+                      <li id="taxaC3" class="item" data-şablon-subformular="contracte">
+                        taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
+                        în procesul de executare, precum şi a celor gajate, conform contractului,
+                        dar nu mai mult de 75 u.c. lunar.
+                      </li>
+                    </ol>
+                  </div>
+                </li>
+
+                <li class="categorie">
+                  <span class="descriere">Adaugă speză</span>
+
+                  <div class="conţinut cu umbră">
+                    <h3 class="titlu">Speze</h3>
+
+                    <ol>
+                      <li id="speza1" class="item" data-şablon-subformular="listă cheltuieli">
+                        transportul, păstrarea şi vînzarea bunurilor debitorului
+                      </li>
+
+                      <li id="speza2" class="item" data-şablon-subformular="listă cheltuieli">
+                        deschiderea forţată şi închiderea încăperilor, strămutarea
+                        sau înlăturarea îngrădirilor
+                      </li>
+
+                      <li id="speza3" class="item" data-şablon-subformular="listă cheltuieli">
+                        remunerarea specialiştilor, experţilor, martorilor asistenţi şi
+                        altor persoane antrenate în procesul de executare
+                      </li>
+
+                      <li id="speza4" class="item" data-şablon-subformular="listă cheltuieli">
+                        Lucrări de evaluare şi/sau expertiză
+                      </li>
+
+                      <li id="speza5" class="item" data-şablon-subformular="listă cheltuieli">
+                        deplasările executorului judecătoresc efectuate în cadrul procedurii
+                        de executare
+                      </li>
+
+                      <li id="speza6" class="item" data-şablon-subformular="listă cheltuieli">
+                        căutarea debitorului şi a bunurilor lui
+                      </li>
+
+                      <li id="speza7" class="item" data-şablon-subformular="listă cheltuieli">
+                        transferul (expedierea) sumelor încasate
+                      </li>
+
+                      <li id="speza8" class="item" data-şablon-subformular="listă cheltuieli">
+                        transmiterea sau înmînarea  încheierilor, înştiinţărilor, telegramelor etc.
+                      </li>
+
+                      <li id="speza9" class="item" data-şablon-subformular="listă cheltuieli">
+                        asigurarea aducerii forţate a debitorului
+                      </li>
+
+                      <li id="speza10" class="item" data-şablon-subformular="listă cheltuieli">
+                        organizarea şi desfăşurarea licitaţiei
+                      </li>
+
+                      <li id="speza11" class="item" data-şablon-subformular="listă cheltuieli">
+                        plăţile bancare pentru transferul şi convertirea mijloacelor băneşti
+                      </li>
+
+                      <li id="speza12" class="item" data-şablon-subformular="listă cheltuieli">
+                        eliberarea copiilor şi  duplicatelor de pe actele procedurale
+                      </li>
+
+                      <li id="speza13" class="item" data-şablon-subformular="listă cheltuieli">
+                        comunicarea actelor executorului judecătoresc
+                      </li>
+                    </ol>
+                  </div>
+                </li>
+              </ul>
+
+              <div id="destinatari" class="cu umbră" style="display:none">
+                <ul class="categorii">
+                  <li class="categorie">
+                    <span class="titlu">
+                      Registratori independenţi
+                      <span class="toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
+                    </span>
+
+                    <ul class="listă cu umbră">
+                      <li>“Registru-Corect” S.A. Chişinău, str. Columna 87</li>
+                      <li>“Registru” S.A. MD-2012 Chişinău, str. Şciusev 47</li>
+                      <li>“Grupa Financiară” S.A. Chişinău, str. Armenească 55, bir. 301</li>
+                      <li>“Registrul-F” S.A. Chişinău, str.Teilor 9/4</li>
+                      <li>“Registrator-Centru” S.A. Chişinău, Calea Ieşilor 10</li>
+                      <li>“Registru-Ind” S.A. Chişinău, bd. Dacia 35</li>
+                      <li>“Comitent” S.A. Chişinău, str. Negruzzi 2, of. 304</li>
+                      <li>“Real-Registr” S.A. Bălţi, str. Kiev 122</li>
+                      <li>“Soliditate” S.A. Chişinău, str. Feredeului 4</li>
+                      <li>“Intermedia-Group” S.A. Chişinău, str. Podgorenilor 36</li>
+                      <li>“Depozitarul Central” S.A. Chişinău, str. Vasile Alecsandri 119a</li>
+                    </ul>
+                  </li>
+
+                  <li class="categorie">
+                    <span class="titlu">
+                      S.A. care ţin registru acţionarilor de sine stătător
+                      <span class="toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
+                    </span>
+
+                    <ul class="listă cu umbră">
+                      <li>“Acvila-Sport” S.A. Chişinău, str. Bucuriei 5</li>
+                      <li>“Aureola &amp; Lombard” S.A. Chişinău, bd. Ştefan cel Mare 132</li>
+                    </ul>
+                  </li>
+
+                  <li class="categorie">
+                    <span class="titlu">
+                      Bănci comerciale
+                      <span class="toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
+                    </span>
+
+                    <ul class="listă cu umbră">
+                      <li>“COMERŢBANK” S.A. 2043 Chişinău, str. Independenţei 1/1</li>
+                      <li>“BANCA SOCIALĂ” S.A. 2005 Chişinău, str. Bănulescu-Bodoni 61</li>
+                      <li>“VICTORIABANK” S.A. 2004 Chişinău, str.31 August 1989, 141</li>
+                      <li>“MOLDOVA - AGROINDBANK” S.A. 2006 Chişinău, str.Cosmonauţilor 9</li>
+                      <li>“Moldindconbank” S.A. 2012 Chişinău, str.Armenească, 38</li>
+                      <li>“Banca de Economii” S.A. 2012 Chişinău, str. Columna 115</li>
+                      <li>“EuroCreditBank” S.A. 2001 Chişinău, str. Ismail 33</li>
+                      <li>“UNIBANK” S.A. 2012 Chişinău, str. Bănulescu-Bodoni 45</li>
+                      <li>“Banca de Finanţe şi Comerţ” S.A. 2012 Chişinău, str. Puşkin 26</li>
+                      <li>“ENERGBANK” S.A. 2012 Chişinău, str. Vasile Alecsandri 78</li>
+                      <li>“ProCredit Bank” S.A. 2012 Chisinău, bd. Ştefan cel Mare 65, of. 901</li>
+                      <li>“Banca Comercială Română Chişinău” S.A. 2005 Chişinău, str. Puşkin 60/2</li>
+                      <li>“EXIMBANK - Gruppo Veneto Banca” S.A. 2004 Chişinău, bd. Ştefan cel Mare 171/1</li>
+                      <li>“MOBIASBANCĂ - Groupe Societe Generale” S.A. 2012 Chişinău, bd. Ştefan cel Mare 81a</li>
+                    </ul>
+                  </li>
+
+                  <li class="categorie">
+                    <span class="titlu">Deţinători de registre şi alte parsoane terţe</span>
+
+                    <ul class="listă cu umbră">
+                      <li class="suplimentar">ÎS “CRIS Registru” 2012 Chişinau, str. Puşkin 42</li>
+                      <li class="suplimentar">ÎS “Cadastru” 2012 Chişinău, str. Puşkin 47</li>
+                      <li class="suplimentar">Camera Înregistrării de Stat de pe lîngă MJRM 2001 Chişinău, bd. Ştefan Cel Mare 73</li>
+                      <li class="suplimentar">Inspectoratul Fiscal Principal de Stat de pe lîngă MFRM 2005 Chisinau, str. Cosmonauţilor 9</li>
+                      <li class="suplimentar">Casa Naţională de Asigurări Sociale a RM 2028 Chişinău, str. Gheorghe Tudor 3</li>
+                      <li class="suplimentar">“Depozitarul Naţional de Valori Mobiliare al Moldovei” S.A. Chişinău, bd. Ştefan cel Mare 73</li>
+                      <li class="suplimentar persoană terţă">persoană terţă</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
             </div>
           </fieldset>
 
-          <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
-        </div>
+          <div class="coloană stînga">
+            <fieldset id="creditor">
+              <legend>
+                <label>Creditor</label>
+                <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
+              </legend>
 
-        <div class="instrumente">
-          <button class="salvează" title="Salvează"></button>
-          <p class="mesaj">Salvat</p>
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label>Gen persoană</label>
+                    <select id="gen-persoană" class="care schimbă formularul">
+                      <option selected>juridică</option>
+                      <option>fizică</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
 
-          <button class="imprimă" title="Imprimă"></button>
-          <ul class="opţiuni">
-            <li>Formular cutare A</li>
-            <li>Formular cutare B</li>
-            <li>Formular cutare C</li>
-            <li>Formular cutare D</li>
-          </ul>
+            <button class="adaugă persoană semiascuns" title="Adaugă persoană terță">
+              +<span class="legend label">Persoană terță</span>
+            </button>
+          </div>
+
+          <div class="coloană">
+            <fieldset class="debitor">
+              <legend>
+                <label>Debitor</label>
+
+                <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
+              </legend>
+
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label>Gen persoană</label>
+                    <select id="gen-persoană" class="care schimbă formularul">
+                      <option>juridică</option>
+                      <option selected>fizică</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+
+            <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
+          </div>
+
+          <div class="instrumente">
+            <button class="salvează" title="Salvează"></button>
+            <p class="mesaj">Salvat</p>
+
+            <button class="imprimă" title="Imprimă"></button>
+            <ul class="opţiuni">
+              <li>Formular cutare A</li>
+              <li>Formular cutare B</li>
+              <li>Formular cutare C</li>
+              <li>Formular cutare D</li>
+            </ul>
+          </div>
+
+          <div style="clear: both;"></div>
         </div>
       </div>
     </div>
