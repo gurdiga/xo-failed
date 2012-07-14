@@ -12,6 +12,10 @@ body {
   display: none;
 }
 
+#autentificare {
+  display: block;
+}
+
 #şabloane {
   display: none;
 }
@@ -180,27 +184,33 @@ button {
   background: transparent;
   border: 1px solid #ddd;
   border-top-color: #bbb;
-  width: 23em;
   margin: 0;
-  font-size: 1.2em;
-  font-weight: bold;
+  width: 450px;
   -webkit-transition: background-color .5s;
   -moz-transition: background-color .5s;
   -o-transition: background-color .5s;
   transition: background-color .5s;
 }
 
+#căutare table {
+  width: 462px;
+}
+
+#căutare table .număr,
+#căutare input {
+  font: 1.3em/1.4em 'Oswald', Arial, sans-serif;
+}
+
 #căutare input:focus {
-  background-color: white;
+  background: white;
 }
 
-#căutare table#rezultate {
+#căutare table {
   border-collapse: collapse;
-  width: 28.45em;
   background-color: white;
 }
 
-#căutare #rezultate td {
+#căutare table td {
   color: #555;
   padding: 3px 6px 0;
   vertical-align: top;
@@ -208,37 +218,33 @@ button {
   border-color: #ddd #eee;
 }
 
-#căutare #rezultate tr {
+#căutare table tr {
   cursor: pointer;
 }
 
-#căutare #rezultate tr.selectat td {
+#căutare table tr.selectat td {
   color: black;
   background-color: #efefef;
 }
 
-#căutare #rezultate b {
+#căutare table b {
  color: black;
+ font-weight: normal;
 }
 
-#căutare #rezultate .număr {
-  display: block;
-  font-weight: bold;
-}
-
-#căutare #rezultate .persoane {
+#căutare table .persoane {
   margin: 0;
 }
 
-#căutare #rezultate .data-hotărîrii,
-#căutare #rezultate .persoane dd {
+#căutare table .data-hotărîrii,
+#căutare table .persoane dd {
   color: #999;
   font-size: small;
   margin: -2px 0 3px 0;
   display: block;
 }
 
-#căutare #rezultate td.vs {
+#căutare table td.vs {
   color: #999;
 }
 
@@ -251,9 +257,7 @@ button {
 }
 
 #proceduri-recente li {
-  font-family: 'Oswald', Arial, sans-serif;
-  font-size: 1.3em;
-  line-height: 1.4em;
+  font: 1.3em/1.4em 'Oswald', Arial, sans-serif;
 }
 
 #proceduri-recente li.nu-sunt {
@@ -266,6 +270,7 @@ button {
 
 #crează-procedură {
   float: right;
+  margin-right: 10px;
   width: 350px;
   height: 450px;
 }
@@ -997,14 +1002,6 @@ input[type="checkbox"]+label {
 
 .instrumente button.imprimă {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
-}
-
-.instrumente button.calculator {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCBwFOX6roAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAD+SURBVFjD7detTgNBEMDxX0mTOxSgKApJccg6QF2rKBIHrrwBKHAEh0OjeAVeAUVxoOAUqQLJKRA9U3G5kmwhJTtiNpPZ5J+dz2yj+WWmskAEREAERECdNOsutPQqPEMPIQBt1xWey6kAfx+iseQ+J+yN0ICulwn72Xrsg19Oct87Ckmpl0IDLuY+B09ekXvEyDA8YN8AJzLc6sjD52ARA3voWrYavopguxx/7fAh2tLDgTVcScOHqG8FmRY2HYXvg3NwCDLZLKroGKd2caNjFBqQSpBKkUh/8IJG3f9gx13lyjybi2n64V6ioNTjM1F4CxOiuNEiIAIi4D8AvgGfByuncqs6zwAAAABJRU5ErkJggg==');
-}
-
-.instrumente button.profil {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCQQ063lZ9AAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAExSURBVFjD7ZaxTgJBEIa/MyRceVRAp93ZHW9giR2dlPoGUNlqYmNnY9RKOuygtKSEipZOqZTq7AyJydkRYDmYuVsKkp1tdid38+Wf2Z1dr5CwVzsCB3AABzh4QEHzccAZHgPi/ShoMeWNLl/cqCQksnGX/C2Nx0T6nyfrpqeM1zx1BjZTdG142sIMCRVMKRs+354Cf0N4qNoDBApvJsD3Rm9ss8gTwzNLwWYE9AWeXLuoxMfargn5tKkgprmyvhKGV/Sid+4X8w5d+80uJFzMT4jEAEENajS44Ng42z36DPMBfC5pGaFXT8gDL/xmA5zzREWQhB/aW2qSWoNbeqLwEPDKs1aB2f93Wdr9kKIgQmuRLkVFNcDXvSpmjJZgc4rMd15JuXqRezo6gAM4gANstX81nG1PtLb3GgAAAABJRU5ErkJggg==');
 }
 
 .instrumente button+.opţiuni {

@@ -2,7 +2,6 @@ TODO:
 -----
 
 * de salvat/restabilit secţiunea din sume-pensie
-* de unificat listele de proceduri: recente şi găsite
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară

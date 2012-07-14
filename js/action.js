@@ -20,26 +20,23 @@ var Action = {
     Calculator.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
+    ProceduriRecente.init();
 
     $(window).trigger('hashchange');
 
-    if (Utilizator.autentificat) Căutare.init();
+    if (Utilizator.autentificat) {
+      Căutare.init();
+    }
   },
 
   '#index': function() {
     $('#căutare input').focus();
-
-    ProceduriRecente.încarcă();
   },
 
   '#formular': function() {
     var genProcedură = HashController.date().substr(0, 1);
 
-    switch (genProcedură) {
-      case 'P':
-        FormularPensie.init();
-        break;
-    }
+    if (genProcedură == 'P') FormularPensie.init();
   }
 };
 
@@ -812,7 +809,7 @@ var Formular = {
           Formular.seteazăTitlu();
         }
 
-        $(document.body).animate({scrollTop: 0}, 500);
+        $('html').animate({scrollTop: 0}, 500);
 
         Formular.titlu
           .attr('tabindex', 1)
@@ -858,6 +855,8 @@ var Formular = {
       .attr('tabindex', 1)
       .focus()
       .removeAttr('tabindex');
+
+    $('html').animate({scrollTop: 0}, 0);
 
     $.fx.off = false;
 
@@ -1068,7 +1067,7 @@ var Formular = {
     TotalCheltuieli.init();
     Defaults.init();
 
-    $(document.body).animate({scrollTop: 0}, 0);
+    $('html').animate({scrollTop: 0}, 0);
 
     Formular.titlu
       .attr('tabindex', 1)
@@ -1083,7 +1082,16 @@ var Formular = {
 
 var ProceduriRecente = {
   încărcat: false,
-  $: $('#proceduri-recente').find('ul'),
+
+  $: $('#proceduri-recente').find('table'),
+
+  init: function() {
+    ProceduriRecente.$.on('click', 'tr', function() {
+      var număr = $(this).find('.număr').text().replace(Utilizator.login, '');
+
+      location.hash = 'formular?' + număr;
+    });
+  },
 
   încarcă: function() {
     if (ProceduriRecente.încărcat) return;
@@ -1092,19 +1100,20 @@ var ProceduriRecente = {
       var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
         return {
           timp: moment($.trim(this.nextSibling.data).split(/\s{2,}/)[0], 'D-MMM-YYYY H:m').toDate(),
-          număr: this.innerText,
-          $li: $('<li>').append(
-            $(this)
-              .attr('href', function(i, href) {return '#formular?' + href})
-              .text(function(i, text) {return Utilizator.login + text})
-          )
+          număr: Utilizator.login + this.innerText
         }
       }).get().sort(function(a, b) {
         return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)
       });
 
       if (proceduri.length > 0) {
-        $.fn.append.apply(ProceduriRecente.$.empty(), $.map(proceduri, function(p) {return p.$li}));
+        var lista = {}
+
+        $.each(proceduri, function() {
+          lista[this.număr] = Căutare.index[this.număr][this.număr];
+        });
+
+        ProceduriRecente.$.html(ListăDeProceduri.formatează(lista));
         ProceduriRecente.încărcat = true;
       }
     });
@@ -1142,51 +1151,7 @@ var Căutare = {
     $: $('#rezultate'),
 
     afişează: function(proceduri, text) {
-      var rezultate = '';
-
-      for (var număr in proceduri) {
-        var procedură = evidenţiază(proceduri[număr]),
-            creditor = persoană(procedură['creditor']),
-            persoaneTerţe = $.map(procedură['persoane-terţe'], function(p) {return persoană(p)}).join(''),
-            debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
-
-        rezultate +=
-          '<tr>' +
-            '<td>' +
-              '<span class="număr">' + evidenţiază(număr) + '</span>' +
-              '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
-            '</td>' +
-            '<td><dl class="persoane">' + creditor + persoaneTerţe + '</dl></td>' +
-            '<td class="vs">vs.</td>' +
-            '<td><dl class="persoane">' + debitori + '</dl></td>' +
-          '</tr>';
-      }
-
-      Căutare.rezultate.$.html(rezultate);
-
-
-      function evidenţiază(content) {
-        if ($.isPlainObject(content)) {
-          var itemi = {};
-
-          for (var item in content)
-            itemi[item] = evidenţiază(content[item]);
-
-          return itemi;
-        } else if ($.isArray(content)) {
-          return $.map(content, function(item) {return evidenţiază(item)});
-        } else {
-          var reFragment = new RegExp('(' + text + ')', 'gi');
-
-          return content.replace(reFragment, '<b>$1</b>');
-        }
-      }
-
-      function persoană(p) {
-        return '' +
-          '<dt>' + (p.denumire || p.nume || '') + '</dt>' +
-          '<dd>' + (p.idno || p.idnp || '') + '</dd>';
-      }
+      Căutare.rezultate.$.html(ListăDeProceduri.formatează(proceduri, text));
     },
 
     selectează: function(e) {
@@ -1278,8 +1243,61 @@ var Căutare = {
     setTimeout(function() {
       $.getJSON('/date/' + Utilizator.login + '/proceduri/index', function(data) {
         Căutare.index = data;
+        ProceduriRecente.încarcă();
       });
     }, 500);
+  }
+};
+
+// --------------------------------------------------
+
+var ListăDeProceduri = {
+  formatează: function(proceduri, text) {
+    var rezultate = '';
+
+    for (var număr in proceduri) {
+      var procedură = evidenţiază(proceduri[număr]),
+          creditor = persoană(procedură['creditor']),
+          persoaneTerţe = $.map(procedură['persoane-terţe'], function(p) {return persoană(p)}).join(''),
+          debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
+
+      rezultate +=
+        '<tr>' +
+          '<td>' +
+            '<div class="număr">' + evidenţiază(număr) + '</div>' +
+            '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
+          '</td>' +
+          '<td><dl class="persoane">' + creditor + persoaneTerţe + '</dl></td>' +
+          '<td class="vs">vs.</td>' +
+          '<td><dl class="persoane">' + debitori + '</dl></td>' +
+        '</tr>';
+    }
+
+    return rezultate;
+
+
+    function evidenţiază(content) {
+      if ($.isPlainObject(content)) {
+        var itemi = {};
+
+        for (var item in content)
+          itemi[item] = evidenţiază(content[item]);
+
+        return itemi;
+      } else if ($.isArray(content)) {
+        return $.map(content, function(item) {return evidenţiază(item)});
+      } else {
+        var reFragment = new RegExp('(' + text + ')', 'gi');
+
+        return content.replace(reFragment, '<b>$1</b>');
+      }
+    }
+
+    function persoană(p) {
+      return '' +
+        '<dt>' + (p.denumire || p.nume || '') + '</dt>' +
+        '<dd>' + (p.idno || p.idnp || '') + '</dd>';
+    }
   }
 };
 
