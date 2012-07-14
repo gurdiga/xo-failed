@@ -17,6 +17,10 @@ body {
   display: block;
 }
 
+#autentificare a {
+  color: blue;
+}
+
 #şabloane {
   display: none;
 }
