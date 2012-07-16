@@ -616,20 +616,25 @@ var Formular = {
   calculează: function() {
     Formular.deschis = true;
 
+    $.fx.off = true;
+
     TotalCheltuieli.calculează();
     Onorariul.calculează();
     Formular.seteazăTitlu();
     Defaults.init();
+
+    $.fx.off = false;
+
     Formular.focusează();
   },
 
   focusează: function() {
-    Formular.titlu
-      .attr('tabindex', 1)
-      .focus()
-      .removeAttr('tabindex');
-
-    $('html,body').animate({scrollTop: 0}, 500);
+    $('html,body').animate({scrollTop: 0}, 500, function() {
+      Formular.titlu
+        .attr('tabindex', 1)
+        .focus()
+        .removeAttr('tabindex');
+    });
   },
 
   seCreazăProcedurăNouă: function() {
@@ -1071,7 +1076,7 @@ var Formular = {
   deschide: function() {
     Formular.$
       .trigger('înainte-de-deschidere')
-      .hide().fadeIn('fast');
+      .fadeIn('fast');
 
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
