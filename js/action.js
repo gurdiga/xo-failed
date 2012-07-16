@@ -1521,27 +1521,6 @@ var CîmpuriPersonalizate = {
 var FormularPensie = {
   buton: $şabloane.find('.sume-pensie#butonul'),
 
-  încasări: $('#obiectul-urmăririi .conţinut').sortable({
-    items: '.încasare',
-    handle: '.titlu',
-    cancel: '#butonul',
-    placeholder: 'ui-state-highlight',
-    tolerance: 'pointer',
-    forcePlaceholderSize: true,
-    forceHelperSize: true,
-    axis: 'y',
-    start: function(event, ui) {
-      $(this).find('.eliminabil')
-        .removeClass('eliminabil')
-        .addClass('x-eliminabil');
-    },
-    stop: function(event, ui) {
-      $(this).find('.x-eliminabil')
-        .removeClass('x-eliminabil')
-        .addClass('eliminabil');
-    }
-  }),
-
   init: function() {
     FormularPensie.setează();
     FormularPensie.buton
@@ -1563,10 +1542,8 @@ var FormularPensie = {
   adaugăÎncasare: function() {
     $şabloane.find('.sume-pensie#' + $(this).text() + '>.încasare').clone()
       .removeAttr('id')
-      .insertBefore(FormularPensie.buton)
+      .insertBefore(FormularPensie.buton.find('#adaugă'))
       .effect('highlight', {}, 1200);
-
-    FormularPensie.încasări.sortable('refresh');;
   },
 
   setează: function() {

@@ -398,6 +398,7 @@ fieldset legend select {
   background: transparent;
 }
 
+fieldset .sume-pensie>ul,
 fieldset .conţinut>ul {
   margin: .4em 0;
 }
@@ -1225,7 +1226,6 @@ input[type="checkbox"]+label {
   background: white;
   position: absolute;
   padding: 0 .2em;
-  cursor: move;
 }
 
 #obiectul-urmăririi ul.încasare .elimină {
