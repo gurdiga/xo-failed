@@ -1366,6 +1366,8 @@ var Calculator = {
       .hide()
       .insertAfter(item)
       .show('blind');
+
+    item.next().find('.sumă').focus();
   }
 };
 
