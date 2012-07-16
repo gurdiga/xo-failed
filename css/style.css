@@ -410,6 +410,7 @@ ul {
 }
 
 .bunuri label.valoare,
+#total,
 input.sumă {
   width: 5em;
 }
