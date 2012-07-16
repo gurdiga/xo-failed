@@ -27,6 +27,7 @@ var Action = {
     ProceduriRecente.init();
     Onorariul.init();
     TotalCheltuieli.init();
+    Sume.init();
 
     $(window).trigger('hashchange');
 
@@ -1898,6 +1899,16 @@ var TotalCheltuieli = {
     });
 
     $('#total-taxe-şi-speze').val(total);
+  }
+};
+
+// --------------------------------------------------
+
+var Sume = {
+  init: function() {
+    $('body').on('input keyup', 'input.sumă', function(e) {
+      this.value = this.value.replace(/,/g, '.');
+    });
   }
 };
 

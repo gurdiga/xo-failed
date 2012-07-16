@@ -2,6 +2,7 @@ TODO:
 -----
 
 * de salvat/restabilit secţiunea din sume-pensie
+* de înlocuit virgula cu punct în numere cu zecimale
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară
