@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-  font: 14px Arial, sans-serif;
+  font: 14px Ubuntu, Arial, sans-serif;
   padding: 0 10px;
   margin: 0;
   background-image: url('/imagini/fundal.png');
@@ -199,7 +199,7 @@ button {
 
 #căutare table .număr,
 #căutare input {
-  font: 1.3em/1.4em 'Oswald', Arial, sans-serif;
+  font: bold 1.3em/1.4em Ubuntu, Arial, sans-serif;
 }
 
 #căutare input:focus {
@@ -231,7 +231,6 @@ button {
 
 #căutare table b {
  color: black;
- font-weight: normal;
 }
 
 #căutare table .persoane {
@@ -259,7 +258,7 @@ button {
 }
 
 #proceduri-recente li {
-  font: 1.3em/1.4em 'Oswald', Arial, sans-serif;
+  font: 1.3em/1.4em Ubuntu, Arial, sans-serif;
 }
 
 #proceduri-recente li.nu-sunt {
@@ -294,8 +293,7 @@ button {
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
-  font-family: 'Oswald', Arial, sans-serif;
-  font-size: 1.4em;
+  font: bold 1.4em Ubuntu, Arial, sans-serif;
 }
 
 li a {
@@ -330,7 +328,7 @@ li a:hover {
 }
 
 h1 {
-  font: bold 2em/1.5em 'Oswald', Arial, sans-serif;
+  font: bold 2em/1.5em Ubuntu, Arial, sans-serif;
 }
 
 #conţinut,
@@ -369,7 +367,7 @@ fieldset label {
 }
 
 fieldset legend {
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: Ubuntu, Arial, sans-serif;
   background: #333;
   width: 100%;
   text-indent: 2px;
@@ -1147,7 +1145,7 @@ input[type="checkbox"]+label {
 }
 
 #ui-datepicker-div {
-  font-family: Arial, sans-serif;
+  font-family: Ubuntu, Arial, sans-serif;
   font-size: 1em;
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
