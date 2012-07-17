@@ -1197,6 +1197,7 @@ input[type="checkbox"]+label {
 
 .sume-pensie #adaugă {
   margin: 1em 0 0 .5em;
+  display: inline-block;
 }
 
 .sume-pensie #adaugă ul {
@@ -1232,8 +1233,7 @@ input[type="checkbox"]+label {
   padding-bottom: 0;
 }
 
-.dată.început,
-.dată.sfîrşit {
+.încasare .dată {
   width: 6.3em;
 }
 
