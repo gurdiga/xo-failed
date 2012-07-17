@@ -1222,8 +1222,9 @@ input[type="checkbox"]+label {
 }
 
 #obiectul-urmăririi ul.încasare .elimină {
-  top: -.7em;
+  top: -.5em;
   left: -.3em;
+  line-height: .8em;
 }
 
 #obiectul-urmăririi ul.încasare li:last-child input {
@@ -1232,7 +1233,7 @@ input[type="checkbox"]+label {
 
 .dată.început,
 .dată.sfîrşit {
-  width: 6em;
+  width: 6.3em;
 }
 
 @-moz-document url-prefix() {
