@@ -1207,30 +1207,27 @@ input[type="checkbox"]+label {
 }
 
 #obiectul-urmăririi ul.încasare {
-  border: 1px solid #eee;
-  border-width: 4px 0 0 4px;
-  padding-top: .3em;
-}
-
-#obiectul-urmăririi ul.ui-state-highlight,
-#obiectul-urmăririi ul.încasare {
-  margin: 1em 0;
+  margin: .5em -4px 1em;
+  border: 1px solid #f2f2f2;
+  border-width: 1px 0 0 4px;
 }
 
 #obiectul-urmăririi ul.încasare .titlu {
   color: silver;
-  font-weight: bold;
   font-size: small;
-  margin: -1.1em 0 0 .5em;
-  display: inline-block;
+  margin: -.7em 0 -.6em .35em;
   background: white;
-  position: absolute;
+  position: relative;
   padding: 0 .2em;
 }
 
 #obiectul-urmăririi ul.încasare .elimină {
   top: -.7em;
   left: -.3em;
+}
+
+#obiectul-urmăririi ul.încasare li:last-child input {
+  padding-bottom: 0;
 }
 
 .dată.început,
