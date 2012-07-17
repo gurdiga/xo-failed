@@ -412,6 +412,7 @@ ul {
 #total,
 input.sumă {
   width: 5em;
+  text-align: right;
 }
 
 input.sumă#total {
