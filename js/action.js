@@ -28,6 +28,7 @@ var Action = {
     Onorariul.init();
     TotalCheltuieli.init();
     Sume.init();
+    FormularPensie.init();
 
     $(window).trigger('hashchange');
 
@@ -38,12 +39,6 @@ var Action = {
 
   '#index': function() {
     $('#căutare input').focus();
-  },
-
-  '#formular': function() {
-    var genProcedură = HashController.date().substr(0, 1);
-
-    if (genProcedură == 'P') FormularPensie.init();
   }
 };
 
@@ -1527,7 +1522,10 @@ var FormularPensie = {
   buton: $şabloane.find('.sume-pensie#butonul'),
 
   init: function() {
-    FormularPensie.setează();
+    Formular.$
+      .on('înainte-de-deschidere', this.inserează)
+      .on('închidere', this.elimină);
+
     FormularPensie.buton
       .on('mouseenter', '#adaugă', this.opţiuni.afişează)
       .on('mouseleave', '#adaugă', this.opţiuni.ascunde)
@@ -1548,16 +1546,13 @@ var FormularPensie = {
     $şabloane.find('.sume-pensie#' + $(this).text() + '>.încasare').clone()
       .removeAttr('id')
       .insertBefore(FormularPensie.buton.find('#adaugă'))
-      .effect('highlight', {}, 1200);
-  },
-
-  setează: function() {
-    Formular.$
-      .one('înainte-de-deschidere', this.inserează)
-      .one('închidere', this.elimină);
+      .effect('highlight', {}, 1200)
+      .find('input').first().focus();
   },
 
   inserează: function() {
+    if (HashController.date() != 'P') return;
+
     var secţiune = $(this).find('#obiectul-urmăririi');
 
     secţiune
