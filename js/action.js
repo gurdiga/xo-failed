@@ -1837,6 +1837,8 @@ var Onorariu = {
 
 var Defaults = {
   init: function() {
+    $.fx.off = true;
+
     $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
     $('#obiectul-urmăririi').on('change', '#obiect', function() {
@@ -1888,6 +1890,8 @@ var Defaults = {
     }
 
     TotalCheltuieli.calculează();
+
+    $.fx.off = false;
   }
 };
 
