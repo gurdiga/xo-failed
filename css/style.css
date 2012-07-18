@@ -207,11 +207,11 @@ button {
 
 #căutare table td {
   color: #555;
-  padding: 3px 6px;
+  padding: 5px 6px 3px;
   vertical-align: top;
   border: 1px solid #ddd;
   border-color: #ddd #eee;
-  height: 2.5em;
+  min-height: 2.5em;
 }
 
 #căutare table tr.selectat td {
@@ -224,13 +224,6 @@ button {
 
 #căutare table tr.selectat td:first-child {
   border-left-color: #888;
-}
-
-#căutare table .persoane .nume {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 #căutare table .data-hotărîrii,
@@ -312,7 +305,7 @@ h1 {
 
 #conţinut,
 #formular>.conţinut {
-  width: 900px;
+  width: 960px;
   margin: 0 auto;
   min-height: 670px;
 }
