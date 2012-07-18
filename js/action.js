@@ -615,7 +615,6 @@ var Formular = {
     TotalCheltuieli.calculează();
     Onorariu.calculează();
     Formular.seteazăTitlu();
-    Defaults.init();
 
     $.fx.off = false;
 
@@ -1101,6 +1100,7 @@ var Formular = {
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
     } else {
+      Defaults.init();
       Formular.$.trigger('iniţializat');
     }
   }
