@@ -209,6 +209,7 @@ button {
   border-collapse: collapse;
   background-color: white;
   width: 462px;
+  table-layout: fixed;
 }
 
 #căutare table td {
@@ -217,7 +218,11 @@ button {
   vertical-align: top;
   border: 1px solid #ddd;
   border-color: #ddd #eee;
-  height: 2.5em;
+  height: 2.7em;
+}
+
+#căutare table tr td:first-child {
+  width: 6em;
 }
 
 #căutare table tr {
@@ -229,7 +234,7 @@ button {
 }
 
 #căutare table tr.selectat td:first-child {
-  border-left-color: #555;
+  border-left-color: #888;
 }
 
 #căutare table b {
@@ -240,16 +245,23 @@ button {
   margin: 0;
 }
 
+#căutare table .persoane dt {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #căutare table .data-hotărîrii,
 #căutare table .persoane dd {
   color: #999;
   font-size: small;
-  margin: -2px 0 3px 0;
-  display: block;
+  margin: 0;
 }
 
 #căutare table td.vs {
   color: #999;
+  width: 2.3em;
 }
 
 #proceduri-recente {
