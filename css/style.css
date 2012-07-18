@@ -129,7 +129,7 @@ button {
 }
 
 #bara-de-sus h1 {
-  margin: 0 0 .5em;
+  margin: 0 0 .1em;
   font: bold 2em/1.5em Oswald, sans-serif;
 }
 
@@ -141,7 +141,7 @@ button {
 #bara-de-sus .instrumente {
   display: none;
   float: right;
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 #bara-de-sus .instrumente>button {
@@ -152,6 +152,7 @@ button {
   opacity: .3;
   border: none;
   background: transparent;
+  font-size: 1em;
 }
 
 #bara-de-sus .instrumente>button:before {
@@ -181,7 +182,7 @@ button {
   border: 1px solid #ddd;
   border-top-color: #bbb;
   margin: 0;
-  width: 450px;
+  width: 538px;
   -webkit-transition: background-color 1s;
   -moz-transition: background-color 1s;
   -o-transition: background-color 1s;
@@ -199,7 +200,7 @@ button {
 #căutare table {
   border-collapse: collapse;
   background-color: white;
-  width: 462px;
+  width: 550px;
   table-layout: fixed;
   cursor: pointer;
 }
@@ -240,18 +241,18 @@ button {
 
 #căutare table td.vs {
   color: #999;
-  width: 2.3em;
+  width: 2em;
 }
 
 #proceduri-recente {
-  margin-top: 3em;
+  margin-top: 2em;
 }
 
 #crează-procedură {
   float: right;
   margin-right: 10px;
-  width: 350px;
-  height: 450px;
+  width: 310px;
+  height: 390px;
 }
 
 #crează-procedură ul {
