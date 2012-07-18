@@ -218,6 +218,7 @@ button {
   vertical-align: top;
   border: 1px solid #ddd;
   border-color: #ddd #eee;
+  height: 3.2em;
 }
 
 #căutare table tr {
