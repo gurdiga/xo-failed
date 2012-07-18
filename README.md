@@ -1,9 +1,12 @@
 TODO:
 -----
 
+* overflow ellipse pentru liste de proceduri
 * de restabilit secţiunea din sume-pensie (persoanele?)
 * de reparat Sume.init(): preventDefault la , + adaugă . la poziţia cursorului
-* de înlocuit virgula cu punct în numere cu zecimale
+* calendar: focusează input-ul la selectare
+* versionează nginx.conf
+* POST index la salvare
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară

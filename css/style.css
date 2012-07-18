@@ -197,7 +197,6 @@ button {
   transition: background-color 1s;
 }
 
-#căutare table .număr,
 #căutare input {
   font: bold 1.3em/1.4em Arial, sans-serif;
 }
@@ -218,7 +217,7 @@ button {
   vertical-align: top;
   border: 1px solid #ddd;
   border-color: #ddd #eee;
-  height: 3.2em;
+  height: 2.5em;
 }
 
 #căutare table tr {
@@ -227,7 +226,10 @@ button {
 
 #căutare table tr.selectat td {
   color: black;
-  background-color: #efefef;
+}
+
+#căutare table tr.selectat td:first-child {
+  border-left-color: #555;
 }
 
 #căutare table b {
