@@ -868,6 +868,7 @@ var Formular = {
           .delay(1000)
           .fadeOut();
 
+        Căutare.anuleazăCacheIndex();
         Căutare.încarcăIndex();
         ProceduriRecente.încărcat = false;
       });
@@ -1176,6 +1177,8 @@ var Căutare = {
       .on('mouseleave', 'tr', function() {this.removeAttribute('class')})
       .on('click', 'tr', Căutare.rezultate.deschide);
 
+
+    Căutare.adresăIndex = '/date/' + Utilizator.login + '/proceduri/index';
     Căutare.încarcăIndex();
   },
 
@@ -1271,9 +1274,13 @@ var Căutare = {
     Căutare.rezultate.$.html('');
   },
 
+  anuleazăCacheIndex: function() {
+    $.post(Căutare.adresăIndex);
+  },
+
   încarcăIndex: function() {
     setTimeout(function() {
-      $.getJSON('/date/' + Utilizator.login + '/proceduri/index', function(data) {
+      $.getJSON(Căutare.adresăIndex, function(data) {
         Căutare.index = data;
         ProceduriRecente.încarcă();
       });
