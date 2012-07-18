@@ -602,9 +602,8 @@ var Formular = {
       .on('populat iniţializat', Formular.calculează);
 
     $(window).on('hashchange', function() {
-      if (!/^#formular/.test(location.hash)) return;
-
-      Formular.deschide();
+      if (!/^#formular/.test(location.hash)) Formular.închide();
+      else Formular.deschide();
     });
   },
 
