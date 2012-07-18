@@ -1,22 +1,12 @@
 TODO:
 -----
 
-* overflow ellipse pentru liste de proceduri
 * de restabilit secţiunea din sume-pensie (persoanele?)
-* de reparat Sume.init(): preventDefault la , + adaugă . la poziţia cursorului
-* calendar: focusează input-ul la selectare
-* versionează nginx.conf
-* POST index la salvare
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară
-* înregistrare utilizator
-* authentificare nginx: areal unic
-  * use a regexp to exclude the idex and jses?
-* design
-  * tranziţie pentru adăugare/ştergere/scroll
-  * procedurile recente ca teanc de foi (ca şi la procedurile noi)?
 * cu privire la conturi:
+  * înregistrare?
   * dezactivare după o perioadă de inactivitate
   * autentificarea mutuală
   * dezactivare la break-in

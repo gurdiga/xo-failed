@@ -2,7 +2,6 @@
 
 body {
   font: 14px Arial, sans-serif;
-  padding: 0 10px;
   margin: 0;
   background-image: url('/imagini/fundal.png');
   height: 100%;
@@ -95,11 +94,6 @@ fieldset ul select.valuta {
   width: auto;
 }
 
-fieldset textarea:focus,
-fieldset input:focus {
-  border-color: #4d90fe;
-}
-
 button {
   padding: .3em .6em;
   font-weight: bold;
@@ -109,9 +103,7 @@ button {
 #căutare .şoaptă,
 #crează-procedură .şoaptă {
   color: #aaa;
-  font-size: 15px;
-  margin: 0;
-  line-height: 2em;
+  margin: .5em 0;
 }
 
 #conţinut>.coloană {
@@ -136,7 +128,6 @@ button {
 
 #bara-de-sus h1 {
   margin: 0;
-  padding: 0;
 }
 
 #bara-de-sus h1 a {
@@ -151,14 +142,11 @@ button {
 }
 
 #bara-de-sus .instrumente>button {
-  width: auto;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
   opacity: .3;
-  height: auto;
-  display: inline-block;
   border: none;
   background: transparent;
 }
@@ -210,42 +198,31 @@ button {
   background-color: white;
   width: 462px;
   table-layout: fixed;
+  cursor: pointer;
 }
 
 #căutare table td {
   color: #555;
-  padding: 3px 6px 0;
+  padding: 3px 6px;
   vertical-align: top;
   border: 1px solid #ddd;
   border-color: #ddd #eee;
-  height: 2.7em;
-}
-
-#căutare table tr td:first-child {
-  width: 6em;
-}
-
-#căutare table tr {
-  cursor: pointer;
+  height: 2.5em;
 }
 
 #căutare table tr.selectat td {
   color: black;
 }
 
+#căutare table tr td:first-child {
+  width: 6em;
+}
+
 #căutare table tr.selectat td:first-child {
   border-left-color: #888;
 }
 
-#căutare table b {
- color: black;
-}
-
-#căutare table .persoane {
-  margin: 0;
-}
-
-#căutare table .persoane dt {
+#căutare table .persoane .nume {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -253,10 +230,9 @@ button {
 }
 
 #căutare table .data-hotărîrii,
-#căutare table .persoane dd {
+#căutare table .persoane .id {
   color: #999;
   font-size: small;
-  margin: 0;
 }
 
 #căutare table td.vs {
@@ -266,22 +242,6 @@ button {
 
 #proceduri-recente {
   margin-top: 3em;
-}
-
-#proceduri-recente ul {
-  margin: 0;
-}
-
-#proceduri-recente li {
-  font: bold 1.3em/1.4em Arial, sans-serif;
-}
-
-#proceduri-recente li.nu-sunt {
-  color: #aaa;
-}
-
-#proceduri-recente a {
-  padding: 0 3px;
 }
 
 #crează-procedură {
@@ -311,7 +271,7 @@ button {
   font: bold 1.4em Arial, sans-serif;
 }
 
-li a {
+#crează-procedură li a {
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
@@ -321,8 +281,8 @@ li a {
   text-decoration: none;
 }
 
-li a:focus,
-li a:hover {
+#crează-procedură li a:focus,
+#crează-procedură li a:hover {
   opacity: 1;
 }
 
@@ -367,7 +327,6 @@ fieldset {
   margin-bottom: 30px;
 }
 
-
 input.etichetă,
 fieldset label {
   display: inline-block;
@@ -381,11 +340,9 @@ fieldset label {
   padding: .4em 0 0 6px;
 }
 
-fieldset legend {
-  font-family: Arial, sans-serif;
+#formular fieldset legend {
   background: #333;
   width: 100%;
-  text-indent: 2px;
 }
 
 input.etichetă {
@@ -400,15 +357,8 @@ input.etichetă:focus {
 }
 
 fieldset legend label {
-  font-weight: bold;
-  font-size: 1.3em;
-  text-align: left;
-  padding: 6px 0;
-  width: auto;
-}
-
-fieldset legend label,
-fieldset legend select {
+  font: bold 1.3em Arial, sans-serif;
+  padding: 6px 3px;
   color: white;
   background: transparent;
 }
@@ -528,12 +478,16 @@ fieldset.dispensabilă button.elimină-persoană {
 }
 
 #formular .şoaptă {
-  margin: .25em 0 .7em 13em;
-  padding: 0 1em 0 .5em;
+  margin: 0 1em .7em 13.5em;
   line-height: 1em;
   font-size: .9em;
   font-style: italic;
   color: gray;
+}
+
+.subformular li:first-child,
+.bunuri li:first-child {
+  margin-bottom: .3em;
 }
 
 .subformular,
@@ -544,7 +498,6 @@ fieldset.dispensabilă button.elimină-persoană {
 
 .subformular label,
 .bunuri label {
-  text-align: left;
   font-style: italic;
   color: #555;
   padding: 0 .3em;
@@ -590,6 +543,7 @@ fieldset.dispensabilă button.elimină-persoană {
 .subformular .sumă,
 .bunuri .valoare {
   width: 5em;
+  text-align: right;
 }
 
 button.adaugă-cîmp-personalizat,
@@ -634,10 +588,6 @@ button.adaugă .legend.label {
 .subformular .eliminabil,
 .bunuri .cîmp {
   padding: 0;
-}
-
-#formular #obiectul-urmăririi {
-  min-height: 18.2em;
 }
 
 #formular #cheltuieli {
@@ -983,7 +933,7 @@ input[type="checkbox"]+label {
   top: 120px;
 }
 
-.instrumente>button {
+#formular .instrumente>button {
   height: 48px;
   width: 48px;
   padding: 0;
@@ -996,7 +946,7 @@ input[type="checkbox"]+label {
   transition: opacity .75s;
 }
 
-.instrumente button+.mesaj {
+#formular .instrumente button+.mesaj {
   display: none;
   position: absolute;
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
@@ -1013,19 +963,19 @@ input[type="checkbox"]+label {
   display: block;
 }
 
-.instrumente button:hover {
+#formular .instrumente button:hover {
   opacity: .9;
 }
 
-.instrumente button.salvează {
+#formular .instrumente button.salvează {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCQpHDl7uAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAEJSURBVFjD7ZetDsIwFEbPCMnmKIpJkCheYygkwYFiEh4DB4/AY8wh9wg46sARFKkCQwh/HYOuQEK/qabLTu/97u1ar3zAqkrgAA7gAA7wTGX9VAgofGDH/sF8gGDzfgQCiWSNRDJ6+EYPydQkAp0GdIAxADFo8AYetIiIEKdRzMy2ycPMRBVSRTGN/+wDnRJ2kKMDXgAEVC9GKSkAlVwAT3eqELnXCNBk9aMmJwRPnrm5B5OMbMdFmFynZrdMu7b7YHFVpLcbXwGABMHBZgRT/PO/7V6+OWCZYXKAMgf0qWjWr8wjqBHhoU4fu1eb8Nt7kae/QoVXychKhWL7egTu6OgADuAAHwQcAbNkL6DGQJSyAAAAAElFTkSuQmCC');
 }
 
-.instrumente button.imprimă {
+#formular .instrumente button.imprimă {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
 }
 
-.instrumente button+.opţiuni {
+#formular .instrumente button+.opţiuni {
   position: absolute;
   right: 0;
   white-space: nowrap;
@@ -1035,7 +985,7 @@ input[type="checkbox"]+label {
   z-index: 2;
 }
 
-.instrumente button+.opţiuni li {
+#formular .instrumente button+.opţiuni li {
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
   -o-transition: opacity .75s;
@@ -1047,7 +997,7 @@ input[type="checkbox"]+label {
   cursor: pointer;
 }
 
-.instrumente button+.opţiuni li:hover {
+#formular .instrumente button+.opţiuni li:hover {
   opacity: 1;
 }
 
@@ -1074,13 +1024,12 @@ input[type="checkbox"]+label {
 
 #calculator legend {
   position: absolute;
-  background: transparent;
-  width: 17em;
   text-align: center;
 }
 
 #calculator legend label {
   color: #333;
+  width: auto;
 }
 
 #calculator>ul {

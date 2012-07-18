@@ -1306,9 +1306,9 @@ var ListăDeProceduri = {
             '<div class="număr">' + evidenţiază(număr) + '</div>' +
             '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
           '</td>' +
-          '<td><dl class="persoane">' + creditor + persoaneTerţe + '</dl></td>' +
+          '<td class="persoane">' + creditor + persoaneTerţe + '</td>' +
           '<td class="vs">vs.</td>' +
-          '<td><dl class="persoane">' + debitori + '</dl></td>' +
+          '<td class="persoane">' + debitori + '</td>' +
         '</tr>';
     }
 
@@ -1339,8 +1339,8 @@ var ListăDeProceduri = {
 
     function persoană(p) {
       return '' +
-        '<dt>' + (p.denumire || p.nume || '') + '</dt>' +
-        '<dd>' + (p.idno || p.idnp || '') + '</dd>';
+        '<div class="nume">' + (p.denumire || p.nume || '') + '</div>' +
+        '<div class="id">' + (p.idno || p.idnp || '') + '</div>';
     }
   }
 };
