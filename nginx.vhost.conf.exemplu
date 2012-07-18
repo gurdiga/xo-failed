@@ -1,0 +1,33 @@
+server {
+  server_name dev.executori.org;
+  root /var/www/$host;
+
+  include conf.d/locations/favicon.conf;
+  include conf.d/locations/bin.conf;
+
+  gzip_static on;
+  autoindex on;
+  autoindex_localtime on;
+
+  #error_page 401 /401.html;
+
+  auth_basic "Autentificare";
+
+  location ~ ^/date/\d+/proceduri/index {
+    if ($request_method = POST) {
+      return 200;
+    }
+  }
+
+  location ~ ^/date/\d+/proceduri/[PS]?-\d+$ {
+    include conf.d/locations/auth.conf;
+    include fastcgi_params;
+    fastcgi_intercept_errors on;
+    fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează.php;
+
+    if ($request_method = POST) {
+      fastcgi_pass 127.0.0.1:9000;
+      break;
+    }
+  }
+}
