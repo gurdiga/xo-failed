@@ -1484,11 +1484,13 @@ var Calendar = {
   },
 
   init: function() {
-    $('.dată').after(
-      $('<span>')
-        .addClass('ui-icon ui-icon-calendar semiascuns')
-        .attr('title', 'Calendar')
-    );
+    $('.dată')
+      .after(
+        $('<span>')
+          .addClass('ui-icon ui-icon-calendar semiascuns')
+          .attr('title', 'Calendar')
+      )
+      .attr('title', 'Data trebuie să fie în formatul ZZ.LL.AAAA');
 
     $(document)
       .on('click', '.dată+.ui-icon-calendar', function() {
@@ -1513,6 +1515,11 @@ var Calendar = {
       })
       .on('keydown', '.dată', function(e) {
         if (e.keyCode == 27) Calendar.închide();
+      })
+      .on('blur', '.dată', function() {
+        var cîmp = $(this)
+
+        cîmp.toggleClass('invalid', !FORMATUL_DATEI.test(cîmp.val()));
       });
   }
 };
