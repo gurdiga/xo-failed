@@ -1473,7 +1473,7 @@ var Calendar = {
 
     if (el.data('id')) el.attr('id', el.data('id'));
 
-    el.datepicker('destroy');
+    el.datepicker('destroy').focus();
   },
 
   init: function() {
