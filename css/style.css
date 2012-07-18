@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,700,300&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext);
 
 body {
   font: 14px Arial, sans-serif;
@@ -129,7 +129,8 @@ button {
 }
 
 #bara-de-sus h1 {
-  margin: 0;
+  margin: 0 0 .5em;
+  font: bold 2em/1.5em Oswald, sans-serif;
 }
 
 #bara-de-sus h1 a {
@@ -140,7 +141,7 @@ button {
 #bara-de-sus .instrumente {
   display: none;
   float: right;
-  margin-top: 11px;
+  margin-top: 18px;
 }
 
 #bara-de-sus .instrumente>button {
@@ -270,7 +271,7 @@ button {
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
-  font: bold 1.4em Arial, sans-serif;
+  font: 1.4em Oswald, sans-serif;
 }
 
 #crează-procedură li a {
@@ -290,7 +291,7 @@ button {
 
 #crează-procedură li a {
   display: block;
-  padding: 7% 20px 0;
+  padding: 6% 20px 0;
   height: 95%;
 }
 
@@ -305,7 +306,7 @@ button {
 }
 
 h1 {
-  font: bold 2em/1.5em Arial, sans-serif;
+  font: bold 2em/1.5em Oswald, sans-serif;
 }
 
 #conţinut,
@@ -359,10 +360,10 @@ input.etichetă:focus {
 }
 
 fieldset legend label {
-  font: bold 1.3em Arial, sans-serif;
-  padding: 6px 3px;
+  font: bold 1.4em/1.5em Oswald, sans-serif;
+  margin: 3px;
+  padding: 0;
   color: white;
-  background: transparent;
   width: auto;
 }
 
