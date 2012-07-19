@@ -583,6 +583,13 @@ var Utilizator = {
     Utilizator.autentificat = !!$.trim(Utilizator.login);
 
     $('body').toggleClass('autentificat', Utilizator.autentificat);
+
+    $(document).ajaxError(function(e, response) {
+      if (response.status == 401) { // 401 Authorization Required
+        $.cookie('login', 'null');
+        location.reload;
+      }
+    });
   }
 };
 

@@ -2,6 +2,7 @@ TODO:
 -----
 
 * de restabilit secţiunea din sume-pensie (persoanele?)
+* de pus recentele într-un fişier?
 * toolbar pentru acţiuni formular
   * de definit formele
 * “poliţă” temporară
