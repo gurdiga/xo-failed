@@ -586,7 +586,7 @@ var Utilizator = {
 
     $(document).ajaxError(function(e, response) {
       if (response.status == 401) { // 401 Authorization Required
-        $.cookie('login', 'null');
+        $.cookie('login', null);
         location.href = $('#autentificare a').attr('href');
       }
     });
