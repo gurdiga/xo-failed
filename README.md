@@ -1,10 +1,14 @@
 TODO:
 -----
 
-* de restabilit secţiunea din sume-pensie (persoanele?)
+* refa HashController.date().substr(0, 1) == 'P'; mv Formular Procedură?
 * de pus recentele într-un fişier?
 * toolbar pentru acţiuni formular
   * de definit formele
+* notificare
+  * e bine să faceţi cutare şi cutare
+  * valoarea nu este validă
+  * ca să se poată calcula PI trebuie să introduceţi Cota
 * “poliţă” temporară
 * cu privire la conturi:
   * înregistrare?

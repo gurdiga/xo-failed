@@ -703,7 +703,7 @@ var Formular = {
       var $secţiune = $('#obiectul-urmăririi'),
           obiectulUrmăririi = colectează($secţiune);
 
-      if (HashController.date() == 'P') { // pensie
+      if (HashController.date().substr(0, 1) == 'P') { // pensie
         obiectulUrmăririi['încasări'] = $secţiune.find('.încasare').map(function() {
           var $încasare = $(this),
               încasare = {};
@@ -936,25 +936,59 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăObiectulUrmăririi() {
-      populeazăSecţiune('#obiectul-urmăririi', procedură['obiectul-urmăririi']);
-
       var $secţiune = $('#obiectul-urmăririi'),
-          sume = procedură['obiectul-urmăririi'].sume,
-          cîmp, $cîmp;
+          secţiune = procedură['obiectul-urmăririi'];
 
-      for (cîmp in sume) {
-        $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
+      populeazăSecţiune($secţiune, secţiune);
 
-        if (!$cîmp.există()) {
-          $secţiune.find('li:has(button.adaugă-cîmp-personalizat)')
-            .before($şabloane.find('.cîmp-personalizat').html());
+      if (HashController.date().substr(0, 1) == 'P') { // pensie
+        var încasări = secţiune['încasări'],
+            încasare, $încasare, i,
+            adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
+            adaugăÎncasareRetroactivă = $secţiune.find('#adaugă :contains("retroactivă")');
 
-          $cîmp = $secţiune.find('.etichetă+.sumă').last();
-          $cîmp.prev().val(cîmp);
+        for (i = 0; i < încasări.length; i++) {
+          încasare = încasări[i];
+
+          if (încasare.data) { // periodică
+            adaugăÎncasarePeriodică.click();
+
+            $secţiune.find('.încasare.periodică').last()
+              .find('.dată').val(încasare.data).end()
+              .find('.venit').val(încasare.venit.suma).end()
+              .find('.valută').val(încasare.venit.valuta).end()
+              .find('.onorariu').val(încasare.onorariu).end()
+              .find('.pensie').val(încasare.pensie).end();
+          } else { // retroactivă
+            adaugăÎncasareRetroactivă.click();
+
+            $secţiune.find('.încasare.retroactivă').last()
+              .find('.început').val(încasare.început).end()
+              .find('.sfîrşit').val(încasare.sfîrşit).end()
+              .find('.venit').val(încasare.venit.suma).end()
+              .find('.valută').val(încasare.venit.valuta).end()
+              .find('.onorariu').val(încasare.onorariu).end()
+              .find('.pensie').val(încasare.pensie);
+          }
         }
+      } else {
+        var sume = secţiune.sume,
+            cîmp, $cîmp;
 
-        $cîmp.val(sume[cîmp].suma);
-        $cîmp.next('.valuta').val(sume[cîmp].valuta);
+        for (cîmp in sume) {
+          $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
+
+          if (!$cîmp.există()) {
+            $secţiune.find('li:has(button.adaugă-cîmp-personalizat)')
+              .before($şabloane.find('.cîmp-personalizat').html());
+
+            $cîmp = $secţiune.find('.etichetă+.sumă').last();
+            $cîmp.prev().val(cîmp);
+          }
+
+          $cîmp.val(sume[cîmp].suma);
+          $cîmp.next('.valuta').val(sume[cîmp].valuta);
+        }
       }
     }
 
@@ -1633,7 +1667,7 @@ var FormularPensie = {
   },
 
   inserează: function() {
-    if (HashController.date() != 'P') return;
+    if (HashController.date().substr(0, 1) != 'P') return;
 
     var secţiune = $(this).find('#obiectul-urmăririi');
 
@@ -1643,7 +1677,7 @@ var FormularPensie = {
   },
 
   elimină: function() {
-    if (HashController.date() != 'P') return;
+    if (HashController.date().substr(0, 1) != 'P') return;
 
     var secţiune = $(this).find('#obiectul-urmăririi');
 
@@ -1782,7 +1816,7 @@ var Onorariu = {
     } else {
       var $secţiune = $('#obiectul-urmăririi');
 
-      if (HashController.date() == 'P') {
+      if (HashController.date().substr(0, 1) == 'P') {
         onorariu = $secţiune.find('.încasare .onorariu').suma();
       } else {
         var total = $secţiune.find('.sumă:not(.calculat)').suma();
