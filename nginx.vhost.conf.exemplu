@@ -14,23 +14,24 @@ server {
   location ~ ^/date/ {
     auth_basic "Autentificare";
     auth_basic_user_file /var/www/$host/.htusers;
-  }
 
-  location ~ ^/date/\d+/proceduri/index {
-    if ($request_method = POST) {
-      return 200;
+    location ~ /date/\d+/proceduri/index {
+      if ($request_method = POST) {
+        return 200;
+      }
+    }
+
+    location ~ /date/\d+/proceduri/[PS]?-\d+$ {
+      include conf.d/locations/auth.conf;
+      include fastcgi_params;
+      fastcgi_intercept_errors on;
+      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează.php;
+
+      if ($request_method = POST) {
+        fastcgi_pass 127.0.0.1:9000;
+        break;
+      }
     }
   }
 
-  location ~ ^/date/\d+/proceduri/[PS]?-\d+$ {
-    include conf.d/locations/auth.conf;
-    include fastcgi_params;
-    fastcgi_intercept_errors on;
-    fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează.php;
-
-    if ($request_method = POST) {
-      fastcgi_pass 127.0.0.1:9000;
-      break;
-    }
-  }
 }
