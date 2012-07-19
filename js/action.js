@@ -1,6 +1,6 @@
 // valoarea unităţii convenţionale
 var UC = 20;
-var FORMATUL_DATEI = /(\d{2}).(\d{2}).(\d{4})/;
+var FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/;
 
 window.$şabloane = $('#şabloane');
 window.skipEventOnce = {};
@@ -1522,11 +1522,6 @@ var Calendar = {
       })
       .on('keydown', '.dată', function(e) {
         if (e.keyCode == 27) Calendar.închide();
-      })
-      .on('blur', '.dată', function() {
-        var cîmp = $(this)
-
-        cîmp.toggleClass('invalid', !FORMATUL_DATEI.test(cîmp.val()));
       });
   }
 };
