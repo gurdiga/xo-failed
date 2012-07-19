@@ -11,7 +11,10 @@ server {
 
   #error_page 401 /401.html;
 
-  auth_basic "Autentificare";
+  location ~ ^/date/ {
+    auth_basic "Autentificare";
+    auth_basic_user_file /var/www/$host/.htusers;
+  }
 
   location ~ ^/date/\d+/proceduri/index {
     if ($request_method = POST) {
