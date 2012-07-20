@@ -637,6 +637,10 @@ var Formular = {
     });
   },
 
+  pensieDeÎntreţinere: function() {
+    return HashController.date().substr(0, 1) == 'P';
+  },
+
   seCreazăProcedurăNouă: function() {
     return HashController.pagină() == '#formular' && /^[SP]?$/.test(HashController.date());
   },
@@ -703,7 +707,7 @@ var Formular = {
       var $secţiune = $('#obiectul-urmăririi'),
           obiectulUrmăririi = colectează($secţiune);
 
-      if (HashController.date().substr(0, 1) == 'P') { // pensie
+      if (Formular.pensieDeÎntreţinere()) { // pensie
         obiectulUrmăririi['încasări'] = $secţiune.find('.încasare').map(function() {
           var $încasare = $(this),
               încasare = {};
@@ -941,7 +945,7 @@ var Formular = {
 
       populeazăSecţiune($secţiune, secţiune);
 
-      if (HashController.date().substr(0, 1) == 'P') { // pensie
+      if (Formular.pensieDeÎntreţinere()) { // pensie
         var încasări = secţiune['încasări'],
             încasare, $încasare, i,
             adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
@@ -1662,7 +1666,7 @@ var FormularPensie = {
   },
 
   inserează: function() {
-    if (HashController.date().substr(0, 1) != 'P') return;
+    if (!Formular.pensieDeÎntreţinere()) return;
 
     var $secţiune = $(this).find('#obiectul-urmăririi').find('.conţinut');
 
@@ -1680,14 +1684,12 @@ var FormularPensie = {
   },
 
   elimină: function() {
-    if (HashController.date().substr(0, 1) != 'P') return;
+    if (!Formular.pensieDeÎntreţinere()) return;
 
     var secţiune = $(this).find('#obiectul-urmăririi');
 
-    secţiune
-      .html(secţiune.data('conţinut-iniţial'))
-      .removeData('conţinut-iniţial');
-
+    secţiune.html(secţiune.data('conţinut-iniţial'));
+    secţiune.removeData('conţinut-iniţial');
   }
 };
 
@@ -1822,7 +1824,7 @@ var Onorariu = {
     } else {
       var $secţiune = $('#obiectul-urmăririi');
 
-      if (HashController.date().substr(0, 1) == 'P') {
+      if (Formular.pensieDeÎntreţinere()) {
         onorariu = $secţiune.find('.încasare .onorariu').suma();
       } else {
         var total = $secţiune.find('.sumă:not(.calculat)').suma();
