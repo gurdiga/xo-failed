@@ -216,6 +216,7 @@ button {
 
 #căutare table tr.selectat td {
   color: black;
+  background-color: #fafafa;
 }
 
 #căutare table tr td:first-child {
