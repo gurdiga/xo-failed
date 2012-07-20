@@ -1686,7 +1686,7 @@ var FormularPensie = {
   elimină: function() {
     if (!Formular.pensieDeÎntreţinere()) return;
 
-    var secţiune = $(this).find('#obiectul-urmăririi');
+    var secţiune = $(this).find('#obiectul-urmăririi').find('.conţinut');
 
     secţiune.html(secţiune.data('conţinut-iniţial'));
     secţiune.removeData('conţinut-iniţial');
