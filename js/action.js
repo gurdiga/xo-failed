@@ -879,7 +879,6 @@ var Formular = {
           .delay(1000)
           .fadeOut();
 
-        Căutare.anuleazăCacheIndex();
         Căutare.încarcăIndex();
         ProceduriRecente.încărcat = false;
       });
@@ -890,12 +889,12 @@ var Formular = {
     var număr = HashController.date();
 
     $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr)
-      .success(Formular.populează)
+      .success(function(procedură) {
+        ProceduriRecente.notează(număr);
+        Formular.populează(procedură);
+      })
       .error(Formular.închide);
 
-    if (!$('#proceduri-recente').find('.număr').filter(function(){return $(this).text() == Utilizator.login + număr}).există()) {
-      ProceduriRecente.notează(număr);
-    }
   },
 
   populează: function(procedură) {
@@ -1169,38 +1168,36 @@ var ProceduriRecente = {
     });
   },
 
-  încarcă: function() {
-    if (ProceduriRecente.încărcat) return;
+  url: function() {
+    return '/date/' + Utilizator.login + '/proceduri/recente';
+  },
 
-    $.get('/date/' + Utilizator.login + '/proceduri/recente/', function(lista) {
-      var proceduri = $(lista).find('a:not(:contains("../"))').map(function() {
-        return {
-          timp: moment($.trim(this.nextSibling.data).split(/\s{2,}/)[0], 'D-MMM-YYYY H:m').toDate(),
-          număr: Utilizator.login + this.firstChild.data
-        }
-      }).get().sort(function(a, b) {
-        return (b.timp - a.timp) || (a.număr > b.număr ? -1 : +1)
+  încarcă: function() {
+    if (ProceduriRecente.încărcat || !Căutare.index) return;
+
+    $.getJSON(ProceduriRecente.url(), function(proceduri) {
+      if (proceduri.length == 0) return;
+
+      var lista = {};
+
+      $.each(proceduri, function() {
+        var număr = Utilizator.login + this.toString();
+
+        lista[număr] = Căutare.index[număr][număr];
       });
 
-      if (proceduri.length > 0) {
-        var lista = {}
+      ProceduriRecente.$
+        .html(ListăDeProceduri.formatează(lista))
+        .on('mouseenter', 'tr', function() {this.className = 'selectat'})
+        .on('mouseleave', 'tr', function() {this.removeAttribute('class')});
 
-        $.each(proceduri, function() {
-          lista[this.număr] = Căutare.index[this.număr][this.număr];
-        });
-
-        ProceduriRecente.$
-          .html(ListăDeProceduri.formatează(lista))
-          .on('mouseenter', 'tr', function() {this.className = 'selectat'})
-          .on('mouseleave', 'tr', function() {this.removeAttribute('class')});
-
-        ProceduriRecente.încărcat = true;
-      }
+      ProceduriRecente.încărcat = true;
     });
   },
 
   notează: function(număr) {
-    $.post('/bin/notează-ca-recentă.php', {procedură: număr});
+    $.post(ProceduriRecente.url(), număr, ProceduriRecente.încarcă);
+
     ProceduriRecente.încărcat = false;
   }
 }
@@ -1326,6 +1323,8 @@ var Căutare = {
   },
 
   încarcăIndex: function() {
+    Căutare.anuleazăCacheIndex();
+
     setTimeout(function() {
       $.getJSON(Căutare.adresăIndex, function(data) {
         Căutare.index = data;

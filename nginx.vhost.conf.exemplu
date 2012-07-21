@@ -15,9 +15,22 @@ server {
     auth_basic "Autentificare";
     auth_basic_user_file /var/www/$host/.htusers;
 
+    # this is for clearing browser cache
     location ~ /date/\d+/proceduri/index {
       if ($request_method = POST) {
         return 200;
+      }
+    }
+
+    location ~ /date/\d+/proceduri/recente$ {
+      include conf.d/locations/auth.conf;
+      include fastcgi_params;
+      fastcgi_intercept_errors on;
+      fastcgi_param SCRIPT_FILENAME $document_root/bin/notează-ca-recentă.php;
+
+      if ($request_method = POST) {
+        fastcgi_pass 127.0.0.1:9000;
+        break;
       }
     }
 

@@ -4,10 +4,10 @@ require_once './lib.php';
 
 
 $login = $_SERVER['PHP_AUTH_USER'];
-$procedură = json_decode(file_get_contents("php://input"), true);
+$procedură = json_decode(file_get_contents('php://input'), true);
 
 verifică_login($login);
-verifică_număr($procedură);
+verifică_număr($procedură['număr']);
 salvează($procedură);
 notează_ca_recentă($procedură['număr']);
 reindexează($procedură);

@@ -244,7 +244,7 @@ button {
 
 #crează-procedură {
   float: right;
-  margin-right: 10px;
+  margin-right: 20px;
   width: 310px;
   height: 390px;
 }
@@ -304,8 +304,7 @@ h1 {
   font: bold 2em/1.5em Oswald, sans-serif;
 }
 
-#conţinut,
-#formular>.conţinut {
+#conţinut {
   width: 960px;
   margin: 0 auto;
   min-height: 610px;
@@ -393,13 +392,13 @@ input.invalid {
 }
 
 #formular>.conţinut {
+  width: 900px;
   border: 1px solid #ddd;
-  padding: 10px 30px 90px 50px;
+  padding: 10px 10px 90px 50px;
   -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   background-color: white;
-  margin-left: -40px;
 }
 
 #formular h1 {

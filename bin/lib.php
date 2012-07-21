@@ -1,41 +1,33 @@
 <?
 
-function verifică_număr($procedură) {
-  if (!preg_match('/^[SP]?-\d+$/', $procedură['număr'])) {
-    stop("Număr de procedură invalid: [{$procedură['număr']}]");
+function verifică_număr($număr) {
+  if (!preg_match('/^[SP]?-\d+$/', $număr)) {
+    stop("Număr de procedură invalid: [$număr]");
   }
 }
 
 // ------------------------------
 
-function notează_ca_recentă($procedură) {
+function notează_ca_recentă($număr) {
   define('MAX_RECENTE', 10);
 
   global $login;
 
-  $target = "../$procedură";
-  $link = "../date/$login/proceduri/recente/$procedură";
+  $fişier = "../date/$login/proceduri/recente";
 
-  if (file_exists($link)) unlink($link);
+  if (file_exists($fişier)) {
+    $lista = json_decode(file_get_contents($fişier), true);
+    $lista = array_filter($lista, function($item) use ($număr) {
+      return $item != $număr;
+    });
+  } else {
+    $lista = array();
+  }
 
-  symlink($target, $link);
+  array_unshift($lista, $număr);
+  array_splice($lista, MAX_RECENTE);
 
-  // elimină pe cele vechi
-  $dir = dirname($link);
-  $recente = glob("$dir/*");
-
-  usort($recente, function ($a, $b) {
-    $data_a = filemtime($a);
-    $data_b = filemtime($b);
-
-    if ($data_a == $data_b) return 0;
-    else return ($data_a > $data_b) ? -1 : 1;
-  });
-
-  $recente_învechite = array_slice($recente, MAX_RECENTE);
-
-  foreach ($recente_învechite as $învechită)
-    unlink($învechită);
+  file_put_contents($fişier, json_encode($lista));
 }
 
 // ------------------------------
