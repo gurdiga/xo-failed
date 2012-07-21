@@ -11,11 +11,11 @@ body {
 }
 
 .autentificat #autentificare {
-  display: none;
+  display: none!important;
 }
 
 #autentificare {
-  display: block;
+  display: block!important;
 }
 
 #autentificare a {
