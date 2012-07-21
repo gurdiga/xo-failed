@@ -153,6 +153,8 @@ button {
   border: none;
   background: transparent;
   font-size: 1em;
+  font-weight: normal;
+  padding: .3em .3em .3em 0;
 }
 
 #bara-de-sus .instrumente>button:before {
@@ -168,6 +170,7 @@ button {
   background-position: -144px -96px;
 }
 
+#bara-de-sus .instrumente>button.convertor:before,
 #bara-de-sus .instrumente>button.calculator:before {
   background-position: -112px -112px;
 }
