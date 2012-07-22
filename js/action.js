@@ -234,7 +234,7 @@ var FormulareŞablon = {
 
       $subformular.find(FormulareŞablon.selector).trigger('change', ['automat']);
 
-      if (!Formular.sePopulează) {
+      if (!Formular.sePopulează && !Formular.seIniţializează) {
         $subformular
           .find(':input:not(.care.schimbă.formularul)').first().focus().end().end()
           .find('.adaugă-cîmp-personalizat.implicit').click();
@@ -502,7 +502,7 @@ var Destinatari = {
         .text('')
         .append(Destinatari.persoanăTerţă);
 
-      if (!Formular.sePopulează) destinatar.find('input').focus();
+      if (!Formular.sePopulează && !Formular.seIniţializează) destinatar.find('input').focus();
     }
 
     TotalCheltuieli.calculează();
@@ -1152,9 +1152,69 @@ var Formular = {
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
     } else {
-      Defaults.init();
+      Formular.iniţializează();
       Formular.$.trigger('iniţializat');
     }
+  },
+
+  iniţializează: function() {
+    $.fx.off = true;
+    Formular.seIniţializează = true;
+
+    $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
+
+    $('#obiectul-urmăririi').on('change', '#obiect', function() {
+      var obiect = $(this).val(),
+          genCreditor = $('#creditor #gen-persoană'),
+          genDebitor = $('.debitor #gen-persoană');
+
+      switch(obiect) {
+        case 'restabilirea la locul de muncă':
+          genCreditor.val('fizică');
+          genDebitor.val('juridică');
+          break;
+
+        case 'stabilirea domiciliului copilului':
+          genCreditor.val('fizică');
+          genDebitor.val('fizică');
+          break;
+      }
+
+      genCreditor.trigger('change', ['automat']);
+      genDebitor.trigger('change', ['automat']);
+    });
+
+    if (Formular.seCreazăProcedurăNouă()) {
+      $('#taxaA1').click();
+
+      var caracterProcedură = $('#caracter'),
+          genCreditor = $('#creditor #gen-persoană');
+
+      switch (HashController.date()) {
+        case 's':
+          caracterProcedură.val('pecuniar');
+          genCreditor.val('juridică');
+          break;
+
+        case 'p':
+          caracterProcedură.val('pecuniar');
+          genCreditor.val('fizică');
+          break;
+
+        default:
+          caracterProcedură.val('pecuniar');
+          genCreditor.val('juridică');
+          break;
+      }
+
+      caracterProcedură.trigger('change');
+      genCreditor.trigger('change');
+    }
+
+    TotalCheltuieli.calculează();
+
+    $.fx.off = false;
+    Formular.seIniţializează = false;
   }
 }
 
@@ -1899,63 +1959,6 @@ var Onorariu = {
 // --------------------------------------------------
 
 var Defaults = {
-  init: function() {
-    $.fx.off = true;
-
-    $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
-
-    $('#obiectul-urmăririi').on('change', '#obiect', function() {
-      var obiect = $(this).val(),
-          genCreditor = $('#creditor #gen-persoană'),
-          genDebitor = $('.debitor #gen-persoană');
-
-      switch(obiect) {
-        case 'restabilirea la locul de muncă':
-          genCreditor.val('fizică');
-          genDebitor.val('juridică');
-          break;
-
-        case 'stabilirea domiciliului copilului':
-          genCreditor.val('fizică');
-          genDebitor.val('fizică');
-          break;
-      }
-
-      genCreditor.trigger('change', ['automat']);
-      genDebitor.trigger('change', ['automat']);
-    });
-
-    if (Formular.seCreazăProcedurăNouă()) {
-      $('#taxaA1').click();
-
-      var caracterProcedură = $('#caracter'),
-          genCreditor = $('#creditor #gen-persoană');
-
-      switch (HashController.date()) {
-        case 's':
-          caracterProcedură.val('pecuniar');
-          genCreditor.val('juridică');
-          break;
-
-        case 'p':
-          caracterProcedură.val('pecuniar');
-          genCreditor.val('fizică');
-          break;
-
-        default:
-          caracterProcedură.val('pecuniar');
-          genCreditor.val('juridică');
-          break;
-      }
-
-      caracterProcedură.trigger('change');
-      genCreditor.trigger('change');
-    }
-
-    TotalCheltuieli.calculează();
-
-    $.fx.off = false;
-  }
 };
 
 // --------------------------------------------------
