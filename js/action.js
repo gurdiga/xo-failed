@@ -1957,50 +1957,51 @@ var Defaults = {
 
 var TotalCheltuieli = {
   init: function() {
-    var cîmpuriValoare = [
+    var cîmpuriRelevante = [
       'input.cost',
       'input.valoare',
       'input.sumă',
       'input.cantitate',
-      '#taxaA6 .din.arhivă',
+      'input.din.arhivă',
       '#taxaB5 .licitaţie.repetată',
       '#taxaB6 .licitaţie.repetată'
     ].join(',');
 
-    var evenimente = 'keyup update paste mouseup';
+    var evenimente = 'keyup update paste mouseup click';
 
-    Cheltuieli.adăugate.on(evenimente, cîmpuriValoare, this.calculează);
+    Cheltuieli.adăugate.on(evenimente, cîmpuriRelevante, this.calculează);
   },
 
   calculează: function(e, automat) {
     if (automat) return;
 
-    var total = 0;
+    var total = 0,
+        lista = Cheltuieli.adăugate;
 
-    total += Cheltuieli.adăugate.find('input.valoare, input.sumă').suma();
-    total += Cheltuieli.adăugate.find('input.cost').suma() * UC;
-    total += Cheltuieli.adăugate.find('#taxaB2-1 .cantitate').suma() * .5 * UC;
-    total += Cheltuieli.adăugate.find('#taxaB9 .cantitate').suma() * 5 * UC;
-    total += Cheltuieli.adăugate.find('#taxaA6 .din.arhivă').is(':checked') ? 1 * UC : 0;
+    total += lista.find('input.valoare, input.sumă').suma();
+    total += lista.find('input.cost').suma() * UC;
+    total += lista.find('#taxaB2-1 .cantitate').suma() * .5 * UC;
+    total += lista.find('#taxaB9 .cantitate').suma() * 5 * UC;
+    total += lista.find('#taxaA6 .din.arhivă').is(':checked') ? 1 * UC : 0;
 
-    var licitaţieRepetată = Cheltuieli.adăugate.find('#taxaB6 .licitaţie.repetată');
-
-    if (licitaţieRepetată.is(':checked')) {
-      total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5 * UC;
-    }
-
-    var licitaţieRepetată = Cheltuieli.adăugate.find('#taxaB5 .licitaţie.repetată');
+    var licitaţieRepetată = lista.find('#taxaB6 .licitaţie.repetată');
 
     if (licitaţieRepetată.is(':checked')) {
       total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5 * UC;
     }
 
-    total += Cheltuieli.adăugate.find('#taxaA3 .cantitate').suma() * UC;
-    total += Cheltuieli.adăugate.find('#taxaB7 .document').length * 3 * UC;
-    total += Cheltuieli.adăugate.find('#taxaB13 .cantitate').suma() * 5 * UC;
-    total += Cheltuieli.adăugate.find('#taxaC1 .cantitate').suma() * 5 * UC;
+    var licitaţieRepetată = lista.find('#taxaB5 .licitaţie.repetată');
 
-    var documenteExpediate = Cheltuieli.adăugate.find('#taxaB1 .document');
+    if (licitaţieRepetată.is(':checked')) {
+      total -= licitaţieRepetată.closest('.item').find('.cost').suma() * .5 * UC;
+    }
+
+    total += lista.find('#taxaA3 .cantitate').suma() * UC;
+    total += lista.find('#taxaB7 .document').length * 3 * UC;
+    total += lista.find('#taxaB13 .cantitate').suma() * 5 * UC;
+    total += lista.find('#taxaC1 .cantitate').suma() * 5 * UC;
+
+    var documenteExpediate = lista.find('#taxaB1 .document');
 
     documenteExpediate.each(function() {
       var destinatari = $(this).children('.destinatari-adăugaţi').children();
