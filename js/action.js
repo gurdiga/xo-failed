@@ -862,9 +862,7 @@ var Formular = {
 
     // -----
     function post() {
-      var număr = HashController.date();
-
-      $.post('/date/' + Utilizator.login + '/proceduri/' + număr, JSON.stringify(procedură), function() {
+      $.post('/date/' + Utilizator.login + '/proceduri/' + procedură.număr, JSON.stringify(procedură), function() {
         if (Formular.seCreazăProcedurăNouă()) {
           window.skipEventOnce.hashchange = true;
           location.hash = 'formular?' + procedură.număr;
