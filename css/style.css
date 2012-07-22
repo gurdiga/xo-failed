@@ -215,6 +215,10 @@ button {
   border: 1px solid #ddd;
   border-color: #ddd #eee;
   min-height: 2.5em;
+  -webkit-transition: background-color .5s, border-color .5s;
+  -moz-transition: background-color .5s, border-color .5s;
+  -o-transition: background-color .5s, border-color .5s;
+  transition: background-color .5s, border-color .5s;
 }
 
 #căutare table tr.selectat td {

@@ -1,7 +1,7 @@
 TODO:
 -----
 
-* dobînzi de întrziere
+* dobînzi de întrziere pentru procedurile pecuniare
 * toolbar pentru acţiuni formular
   * de definit formele
 * browse
