@@ -1,8 +1,10 @@
 TODO:
 -----
 
+* dobînzi de întrziere
 * toolbar pentru acţiuni formular
   * de definit formele
+* browse
 * notificare
   * e bine să faceţi cutare şi cutare
   * valoarea nu este validă

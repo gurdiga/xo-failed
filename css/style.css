@@ -327,7 +327,7 @@ fieldset {
   margin-bottom: 30px;
 }
 
-input.etichetă,
+.etichetă,
 fieldset label {
   display: inline-block;
   width: 11em;
@@ -335,7 +335,7 @@ fieldset label {
 }
 
 #cheltuieli .adăugate .subformular .stînga,
-input.etichetă,
+.etichetă,
 fieldset label {
   padding: .4em 0 0 6px;
 }
@@ -345,14 +345,16 @@ fieldset label {
   width: 100%;
 }
 
-input.etichetă {
+.etichetă {
   background-image: none;
   font-weight: normal;
   padding: .4em 0 .3em 6px;
+  min-height: 1em;
+  line-height: normal!important;
 }
 
-input.etichetă:hover,
-input.etichetă:focus {
+.etichetă:hover,
+.etichetă:focus {
   outline: 1px solid #ddd;
 }
 
@@ -382,6 +384,12 @@ input.sumă {
 
 input.sumă#total {
   font-weight: bold;
+}
+
+label[for="total"],
+input#total,
+input#total+b {
+  color: #aaa;
 }
 
 input.invalid {
@@ -519,10 +527,6 @@ fieldset.dispensabilă button.elimină-persoană {
   padding: 1px 0 0;
 }
 
-.subformular li>label {
-  margin-bottom: .5em;
-}
-
 .subformular textarea,
 .bunuri textarea {
   height: 3ex;
@@ -547,10 +551,9 @@ fieldset.dispensabilă button.elimină-persoană {
 
 button.adaugă-cîmp-personalizat,
 button.adaugă {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: normal;
   padding: 0 .5em .5em;
-  margin-left: -.2em;
   border: none;
   line-height: .7em;
   background: transparent;
@@ -559,9 +562,9 @@ button.adaugă {
 }
 
 button.adaugă-cîmp-personalizat {
-  top: 0;
-  left: .2em;
-  padding: 0 .5em .2em;
+  padding: 0 .4em .2em;
+  top: -.3em;
+  margin: 0;
 }
 
 .personalizat .elimină {

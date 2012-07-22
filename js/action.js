@@ -1571,10 +1571,7 @@ var CîmpuriPersonalizate = {
   init: function() {
     Formular.$
       .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
-      .on('blur', 'input.etichetă', function(e) {
-          $(this).next().focus();
-      })
-      .on('keydown', 'input.etichetă', function(e) {
+      .on('keydown', '.etichetă', function(e) {
         if (e.keyCode == 13 || e.keyCode == 27) {
           $(this).next().focus();
           e.stopPropagation();
