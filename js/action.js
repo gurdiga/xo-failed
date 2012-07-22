@@ -240,7 +240,7 @@ var FormulareŞablon = {
           .find('.adaugă-cîmp-personalizat.implicit').click();
       }
 
-      item.nextAll().effect('highlight', {}, 1200, function() {$(this).clearQueue()});
+      $subformular.effect('highlight', {}, 1200, function() {$(this).clearQueue()});
     });
   },
 
@@ -325,8 +325,9 @@ var Cheltuieli = {
         .addClass('eliminabil de tot')
         .hide()
         .appendTo(Cheltuieli.adăugate)
-        .show('blind')
-        .find('textarea').focus();
+        .show('blind');
+
+      if (!Formular.sePopulează) item.find('textarea').focus();
 
       Cheltuieli.adăugate.trigger('recalculare');
 
@@ -343,13 +344,15 @@ var Cheltuieli = {
 
     adaugă: function() {
       var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
-          şablon = $şabloane.find('.subformular[title="' + numeŞablon + '"] .document').first();
+          şablon = $şabloane.find('.subformular[title="' + numeŞablon + '"] .document').first(),
+          $subformular = şablon.clone();
 
-      şablon.clone()
+      $subformular
         .hide()
         .insertBefore($(this).parent())
-        .show('blind')
-        .find('textarea,input').first().focus();
+        .show('blind');
+
+      if (!Formular.sePopulează) $subformular.find('textarea,input').first().focus();
 
       TotalCheltuieli.calculează();
     }
@@ -497,8 +500,9 @@ var Destinatari = {
       Destinatari.adăugaţiDeja.click();
       destinatar
         .text('')
-        .append(Destinatari.persoanăTerţă)
-        .find('input').focus();
+        .append(Destinatari.persoanăTerţă);
+
+      if (!Formular.sePopulează) destinatar.find('input').focus();
     }
 
     TotalCheltuieli.calculează();
@@ -1659,11 +1663,12 @@ var FormularPensie = {
   },
 
   adaugăÎncasare: function() {
-    $şabloane.find('.sume-pensie#' + $(this).text() + '>.încasare').clone()
+    var $încasare = $şabloane.find('.sume-pensie#' + $(this).text() + '>.încasare').clone()
       .removeAttr('id')
       .insertBefore($(this).closest('#adaugă'))
-      .effect('highlight', {}, 1200)
-      .find('input').first().focus();
+      .effect('highlight', {}, 1200);
+
+    if (!Formular.sePopulează) $încasare.find('input').first().focus();
   },
 
   inserează: function() {
