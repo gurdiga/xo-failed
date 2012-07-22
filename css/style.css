@@ -376,7 +376,6 @@ ul {
   list-style-type: none;
 }
 
-.bunuri label.valoare,
 #total,
 input.sumă {
   width: 5em;
@@ -493,19 +492,16 @@ fieldset.dispensabilă button.elimină-persoană {
   color: gray;
 }
 
-.subformular li:first-child,
-.bunuri li:first-child {
+.subformular li:first-child {
   margin-bottom: .3em;
 }
 
-.subformular,
-.bunuri {
+.subformular {
   list-style-type: none;
   padding: .5em 0 0 2em;
 }
 
-.subformular label,
-.bunuri label {
+.subformular label {
   font-style: italic;
   color: #555;
   padding: 0 .3em;
@@ -527,8 +523,7 @@ fieldset.dispensabilă button.elimină-persoană {
   padding: 1px 0 0;
 }
 
-.subformular textarea,
-.bunuri textarea {
+.subformular textarea {
   height: 3ex;
   min-height: 3ex;
   padding: 0 .3em;
@@ -536,16 +531,14 @@ fieldset.dispensabilă button.elimină-persoană {
 }
 
 .subformular .denumire,
-.subformular .descriere,
-.bunuri .descriere {
+.subformular .descriere {
   width: 16em;
   min-width: 0;
   max-width: none;
 }
 
 #cheltuieli .subformular .valoare,
-.subformular .sumă,
-.bunuri .valoare {
+.subformular .sumă {
   width: 5em;
 }
 
@@ -562,7 +555,7 @@ button.adaugă {
 }
 
 button.adaugă-cîmp-personalizat {
-  padding: 0 .4em .2em;
+  padding: 0 .2em .2em;
   top: -.3em;
   margin: 0;
 }
@@ -589,8 +582,7 @@ button.adaugă .legend.label {
   font-style: normal;
 }
 
-.subformular .eliminabil,
-.bunuri .cîmp {
+.subformular .eliminabil {
   padding: 0;
 }
 

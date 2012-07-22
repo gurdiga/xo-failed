@@ -48,7 +48,7 @@ var ProcedurăNonPecuniară = {
   init: function() {
     $('#obiectul-urmăririi')
       .on('click', 'button.adaugă', this.adaugăCîmp)
-      .on('iniţializat', function() { $('#obiect').trigger('change') });
+      .on('iniţializat', function() {$('#obiect').trigger('change')});
   },
 
   adaugăCîmp: function() {
@@ -224,21 +224,23 @@ var FormulareŞablon = {
       var $select = $(this),
           selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
           şablon = FormulareŞablon.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
-          item = $select.closest('li');
+          item = $select.closest('li'),
+          $subformular;
 
-      item
+      $subformular = item
         .nextAll().remove().end()
         .after(şablon)
-        .nextAll()
-          .find(FormulareŞablon.selector).trigger('change', ['automat']);
+        .nextAll();
 
-      if (!$.fx.off && !automat) {
-        item.next().find(':input').first().focus();
+      $subformular.find(FormulareŞablon.selector).trigger('change', ['automat']);
+
+      if (!Formular.sePopulează) {
+        $subformular
+          .find(':input:not(.care.schimbă.formularul)').first().focus().end().end()
+          .find('.adaugă-cîmp-personalizat.implicit').click();
       }
 
-      item.nextAll().effect('highlight', {}, 1200, function() {
-        $(this).clearQueue();
-      });
+      item.nextAll().effect('highlight', {}, 1200, function() {$(this).clearQueue()});
     });
   },
 
@@ -897,6 +899,7 @@ var Formular = {
 
   populează: function(procedură) {
     $.fx.off = true;
+    Formular.sePopulează = true;
 
     populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);
     populeazăObiectulUrmăririi();
@@ -906,7 +909,7 @@ var Formular = {
     populeazăDebitori();
 
     $.fx.off = false;
-
+    Formular.sePopulează = false;
     Formular.$.trigger('populat');
 
     // ------------------------------------------
@@ -1585,7 +1588,11 @@ var CîmpuriPersonalizate = {
     li
       .before(şablon)
       .prev()
-        .find('.etichetă').focus().select().end()
+        .find('.etichetă')
+          .val(buton.data('etichetă'))
+          .focus()
+          .select()
+        .end()
         .effect('highlight', {}, 1200);
   }
 };
@@ -1793,7 +1800,6 @@ var Onorariu = {
           '.sumă:not(.irelevant-pentru-onorariu)',
           '.sumă:not(.calculat)',
           '.valuta',
-          '.bunuri .valoare',
           'input:checkbox',
           '#caracter',
           '#obiect'
@@ -1854,20 +1860,20 @@ var Onorariu = {
     'stabilirea domiciliului copilului': {fizică: 200 * UC, juridică: 200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200 * UC, juridică:200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
-      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
+      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
-      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
+      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
     },
     'confiscarea bunurilor': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
-      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
+      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
     },
     'nimicirea unor bunuri': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() },
-      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .bunuri .valoare').suma() }
+      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
+      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
     },
     'restabilirea la locul de muncă': {fizică: 200 * UC, juridică: 200 * UC},
     'aplicarea măsurilor de asigurare a acţiunii': {
