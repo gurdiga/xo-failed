@@ -455,10 +455,10 @@ button.elimină-persoană {
   border-width: 0;
   background-color: transparent;
   font-weight: normal;
-  font-size: 2em;
+  font-size: 1.5em;
   display: none;
   float: right;
-  padding: .2em;
+  padding: .5em;
   line-height: .6em;
   color: white;
 }
@@ -1186,8 +1186,10 @@ input[type="checkbox"]+label {
 
 #obiectul-urmăririi ul.încasare .elimină {
   top: -.5em;
-  left: -.3em;
+  left: -.9em;
+  padding-right: .5em;
   line-height: .8em;
+  background: transparent;
 }
 
 #obiectul-urmăririi ul.încasare li:last-child input {
