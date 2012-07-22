@@ -986,7 +986,7 @@ var Formular = {
               .before($şabloane.find('.cîmp-personalizat').html());
 
             $cîmp = $secţiune.find('.etichetă+.sumă').last();
-            $cîmp.prev().val(cîmp);
+            $cîmp.prev().val(cîmp).trigger('focus');
           }
 
           $cîmp.val(sume[cîmp].suma);
