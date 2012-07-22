@@ -27,7 +27,11 @@ function notează_ca_recentă($număr) {
   array_unshift($lista, $număr);
   array_splice($lista, MAX_RECENTE);
 
-  file_put_contents($fişier, json_encode($lista));
+  $json = json_encode($lista);
+  file_put_contents($fişier, $json);
+
+  header('Content-Type: application/json');
+  echo $json;
 }
 
 // ------------------------------

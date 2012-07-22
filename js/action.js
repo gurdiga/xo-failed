@@ -1240,30 +1240,30 @@ var ProceduriRecente = {
   încarcă: function() {
     if (ProceduriRecente.încărcat || !Căutare.index) return;
 
-    $.getJSON(ProceduriRecente.url(), function(proceduri) {
-      if (proceduri.length == 0) return;
+    $.getJSON(ProceduriRecente.url(), ProceduriRecente.afişează);
+  },
 
-      var lista = {};
+  afişează: function(proceduri) {
+    if (proceduri.length == 0) return;
 
-      $.each(proceduri, function() {
-        var număr = Utilizator.login + this.toString();
+    var lista = {};
 
-        lista[număr] = Căutare.index[număr][număr];
-      });
+    $.each(proceduri, function() {
+      var număr = Utilizator.login + this.toString();
 
-      ProceduriRecente.$
-        .html(ListăDeProceduri.formatează(lista))
-        .on('mouseenter', 'tr', function() {this.className = 'selectat'})
-        .on('mouseleave', 'tr', function() {this.removeAttribute('class')});
-
-      ProceduriRecente.încărcat = true;
+      lista[număr] = Căutare.index[număr][număr];
     });
+
+    ProceduriRecente.$
+      .html(ListăDeProceduri.formatează(lista))
+      .on('mouseenter', 'tr', function() {this.className = 'selectat'})
+      .on('mouseleave', 'tr', function() {this.removeAttribute('class')});
+
+    ProceduriRecente.încărcat = true;
   },
 
   notează: function(număr) {
-    $.post(ProceduriRecente.url(), număr, ProceduriRecente.încarcă);
-
-    ProceduriRecente.încărcat = false;
+    $.post(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
   }
 }
 
