@@ -1667,19 +1667,20 @@ var CîmpuriPersonalizate = {
 // --------------------------------------------------
 
 var FormularPensie = {
+  $cota: $(),
+
   init: function() {
     Formular.$
       .on('înainte-de-deschidere', this.inserează)
       .on('închidere', this.elimină);
 
     $('#obiectul-urmăririi')
-      .on('input change', '.sumă.venit, .valuta', this.caluleazăOnorariulŞiPensia)
+      .on('input change', '.sumă.venit, .sumă.pensie, .valuta', this.caluleazăOnorariulŞiPensia)
       .on('input', '#cota', this.recalulează);
   },
 
-  cota: function($încasare) {
-    var cota = $încasare.parent().find('#cota')
-      .val().replace(/[^\/\d\.\,%]/g, ''); // igiena
+  cota: function() {
+    var cota = FormularPensie.$cota.val().replace(/[^\/\d\.\,%]/g, ''); // igiena
 
     if (/%$/.test(cota)) cota = cota.replace('%', '/100');
 
@@ -1692,24 +1693,36 @@ var FormularPensie = {
     return eval(cota);
   },
 
-  caluleazăOnorariulŞiPensia: function() {
+  caluleazăOnorariulŞiPensia: function(e) {
     var $încasare = $(this).closest('.încasare'),
         venit = $încasare.find('.sumă.venit').suma(),
-        cota = FormularPensie.cota($încasare);
+        cota = FormularPensie.cota(),
+        $pensie = $încasare.find('.sumă.pensie'),
+        pensie;
 
-    if (!cota) return;
+    if (cota) {
+      pensie = venit * cota;
+      $pensie.val(pensie.toFixed(2));
+    } else {
+      if (e == 'modificare-cotă') $pensie.val('');
+      pensie = $pensie.suma();
+    }
 
-    var pensie = venit * cota;
-
-    $încasare.find('.sumă.pensie').val(pensie.toFixed(2));
     $încasare.find('.sumă.onorariu').val(Onorariu.pecuniar(pensie).toFixed(2));
 
     Onorariu.calculează();
   },
 
-  recalulează: function() {
-    $(this).closest('.sume-pensie').find('.încasare .venit').each(function() {
-      FormularPensie.caluleazăOnorariulŞiPensia.apply(this);
+  recalulează: function(e) {
+    var cota = $(this),
+        introdusCota = $.trim(cota.val()) !== '';
+
+    cota.closest('.sume-pensie').find('.pensie')
+      .attr('disabled', introdusCota)
+      .prev('label').text(introdusCota ? 'Pensia calculată' : 'Pensia stabilită');
+
+    cota.closest('.sume-pensie').find('.încasare .venit').each(function() {
+      FormularPensie.caluleazăOnorariulŞiPensia.apply(this, ['modificare-cotă']);
     });
 
     Onorariu.calculează();
@@ -1748,6 +1761,8 @@ var FormularPensie = {
       .on('mouseenter', '#adaugă', FormularPensie.opţiuni.afişează)
       .on('mouseleave', '#adaugă', FormularPensie.opţiuni.ascunde)
       .on('click', '#adaugă li', FormularPensie.adaugăÎncasare);
+
+    FormularPensie.$cota = $(this).find('#cota');
 
     Formular.focusează();
   },
