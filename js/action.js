@@ -974,6 +974,8 @@ var Formular = {
             .find('.pensie').val(încasare.pensie);
         }
       }
+
+      $secţiune.find('#cota').trigger('change');
     }
 
     // ------------------------------------------
@@ -1717,7 +1719,7 @@ var FormularPensie = {
     Onorariu.calculează();
   },
 
-  recalulează: function(e) {
+  recalulează: function() {
     var cota = $(this),
         introdusCota = $.trim(cota.val()) !== '';
 
