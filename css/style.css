@@ -1131,6 +1131,15 @@ input[type="checkbox"]+label {
   background-image: none;
 }
 
+#ui-datepicker-div .ui-datepicker-title {
+  margin: 0 1em;
+}
+
+#ui-datepicker-div .ui-datepicker-title select {
+  font-weight: normal;
+  width: auto;
+}
+
 #ui-datepicker-div .ui-datepicker-calendar {
   margin: 0;
 }

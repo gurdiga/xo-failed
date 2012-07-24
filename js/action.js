@@ -1578,11 +1578,14 @@ var Calendar = {
     dateFormat: 'dd.mm.yy',
     dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
     monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
+    monthNamesShort: 'Ian Feb Mar Apr Mai Iun Iul Aug Sep Oct Noi Dec'.split(' '),
     firstDay: 1,
     showAnim: 'fadeIn',
     prevText: 'Luna precedentă',
     nextText: 'Luna viitoare',
     showOn: 'none',
+    changeMonth: true,
+    changeYear: true,
     onSelect: function() {Calendar.închide(this)}
   },
 
