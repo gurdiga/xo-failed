@@ -946,36 +946,34 @@ var Formular = {
     function populeazăPensieÎntreţinere($secţiune, încasări) {
       if (!încasări) return;
 
-      var încasare, i,
+      var încasare, $încasare, i, periodică,
           adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
           adaugăÎncasareRestanţă = $secţiune.find('#adaugă :contains("restanţă")');
 
       for (i = 0; i < încasări.length; i++) {
         încasare = încasări[i];
+        periodică = typeof încasare.început == 'undefined';
 
-        if (încasare.data) { // periodică
+        if (periodică) {
           adaugăÎncasarePeriodică.click();
-
-          $secţiune.find('.încasare.periodică').last()
-            .find('.dată').val(încasare.data).end()
-            .find('.venit').val(încasare.venit.suma).end()
-            .find('.valută').val(încasare.venit.valuta).end()
-            .find('.onorariu').val(încasare.onorariu).end()
-            .find('.pensie').val(încasare.pensie).end();
-        } else { // restanţă
+          $încasare = $secţiune.find('.încasare.periodică').last();
+          $încasare.find('.dată').val(încasare.data);
+        } else {
           adaugăÎncasareRestanţă.click();
-
-          $secţiune.find('.încasare.restanţă').last()
+          $încasare = $secţiune.find('.încasare.restanţă').last();
+          $încasare
             .find('.început').val(încasare.început).end()
-            .find('.sfîrşit').val(încasare.sfîrşit).end()
-            .find('.venit').val(încasare.venit.suma).end()
-            .find('.valută').val(încasare.venit.valuta).end()
-            .find('.onorariu').val(încasare.onorariu).end()
-            .find('.pensie').val(încasare.pensie);
+            .find('.sfîrşit').val(încasare.sfîrşit).end();
         }
-      }
 
-      $secţiune.find('#cota').trigger('change');
+        $încasare
+          .find('.venit').val(încasare.venit.suma).end()
+          .find('.valută').val(încasare.venit.valuta).end()
+          .find('.onorariu').val(încasare.onorariu).end()
+          .find('.pensie').val(încasare.pensie).end();
+
+        FormularPensie.actualizeazăCîmpPensie();
+      }
     }
 
     // ------------------------------------------
@@ -1673,6 +1671,7 @@ var CîmpuriPersonalizate = {
 // --------------------------------------------------
 
 var FormularPensie = {
+  $: $(),
   $cota: $(),
 
   init: function() {
@@ -1720,18 +1719,21 @@ var FormularPensie = {
   },
 
   recalulează: function() {
-    var cota = $(this),
-        introdusCota = $.trim(cota.val()) !== '';
+    FormularPensie.actualizeazăCîmpPensie();
 
-    cota.closest('.sume-pensie').find('.pensie')
-      .attr('disabled', introdusCota)
-      .prev('label').text(introdusCota ? 'Pensia calculată' : 'Pensia fixă');
-
-    cota.closest('.sume-pensie').find('.încasare .venit').each(function() {
+    FormularPensie.$.find('.încasare .venit').each(function() {
       FormularPensie.caluleazăOnorariulŞiPensia.apply(this, ['modificare-cotă']);
     });
 
     Onorariu.calculează();
+  },
+
+  actualizeazăCîmpPensie: function() {
+    var introdusCota = $.trim(FormularPensie.$cota.val()) !== '';
+
+    FormularPensie.$.find('.pensie')
+      .attr('disabled', introdusCota)
+      .prev('label').text(introdusCota ? 'Pensia calculată' : 'Pensia fixă');
   },
 
   opţiuni: {
@@ -1745,7 +1747,7 @@ var FormularPensie = {
   },
 
   adaugăÎncasare: function() {
-    var $încasare = $şabloane.find('.sume-pensie#' + $(this).text() + '>.încasare').clone()
+    var $încasare = $şabloane.find('.încasări-pensie#' + $(this).text() + '>.încasare').clone()
       .removeAttr('id')
       .insertBefore($(this).closest('#adaugă'))
       .effect('highlight', {}, 1200);
@@ -1762,13 +1764,14 @@ var FormularPensie = {
       .data('conţinut-iniţial', $secţiune.html())
       .empty();
 
-    $şabloane.find('.sume-pensie#butonul').clone()
+    $şabloane.find('.încasări-pensie#butonul').clone()
       .appendTo($secţiune)
       .on('mouseenter', '#adaugă', FormularPensie.opţiuni.afişează)
       .on('mouseleave', '#adaugă', FormularPensie.opţiuni.ascunde)
       .on('click', '#adaugă li', FormularPensie.adaugăÎncasare);
 
-    FormularPensie.$cota = $(this).find('#cota');
+    FormularPensie.$ = $secţiune;
+    FormularPensie.$cota = $secţiune.find('#cota');
 
     Formular.focusează();
   },

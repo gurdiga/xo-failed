@@ -370,7 +370,7 @@ fieldset legend label {
   width: auto;
 }
 
-fieldset .sume-pensie>ul,
+fieldset .încasări-pensie>ul,
 fieldset .conţinut>ul {
   margin: .4em 0;
 }
@@ -663,7 +663,7 @@ fieldset input[type="checkbox"]+label {
   margin: 0 0 0 14em;
 }
 
-.sume-pensie #adaugă,
+.încasări-pensie #adaugă,
 #categorii-taxe-şi-speze {
   font-size: small;
 }
@@ -674,7 +674,7 @@ fieldset input[type="checkbox"]+label {
   margin-left: -2.5em;
 }
 
-.sume-pensie #adaugă:before,
+.încasări-pensie #adaugă:before,
 #cheltuieli .document .adaugă-destinatar:before,
 #destinatari .categorie:before,
 #categorii-taxe-şi-speze .categorie:before {
@@ -685,11 +685,11 @@ fieldset input[type="checkbox"]+label {
   color: #aaa;
 }
 
-.sume-pensie #adaugă:before {
+.încasări-pensie #adaugă:before {
   margin-left: 0;
 }
 
-.sume-pensie #adaugă,
+.încasări-pensie #adaugă,
 #cheltuieli .document .adaugă-destinatar,
 #destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
@@ -697,7 +697,7 @@ fieldset input[type="checkbox"]+label {
   white-space: nowrap;
 }
 
-.sume-pensie #adaugă,
+.încasări-pensie #adaugă,
 #cheltuieli .document .adaugă-destinatar,
 #categorii-taxe-şi-speze .categorie .descriere,
 #categorii-taxe-şi-speze .categorie ol>li {
@@ -709,9 +709,9 @@ fieldset input[type="checkbox"]+label {
   margin-bottom: .4em;
 }
 
-.sume-pensie #adaugă:hover:before,
-.sume-pensie #adaugă:hover span,
-.sume-pensie #adaugă li:hover,
+.încasări-pensie #adaugă:hover:before,
+.încasări-pensie #adaugă:hover span,
+.încasări-pensie #adaugă li:hover,
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover>span,
 #destinatari .categorie:hover:before,
@@ -724,7 +724,7 @@ fieldset input[type="checkbox"]+label {
   text-decoration: underline;
 }
 
-.sume-pensie #adaugă:hover:before,
+.încasări-pensie #adaugă:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #destinatari .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover:before {
@@ -1163,16 +1163,16 @@ input[type="checkbox"]+label {
   color: black;
 }
 
-.sume-pensie#butonul {
+.încasări-pensie#butonul {
   padding-bottom: 1.5em;
 }
 
-.sume-pensie #adaugă {
+.încasări-pensie #adaugă {
   margin-left: .5em;
   display: inline-block;
 }
 
-.sume-pensie #adaugă ul {
+.încasări-pensie #adaugă ul {
   display: none;
   position: absolute;
   margin: 0;
