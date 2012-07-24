@@ -416,8 +416,7 @@ input.invalid {
 }
 
 #formular h1 {
-  padding: 40px 40px 40px 0;
-  margin: 0;
+  margin: 40px 0 20px 0;
   font-size: 3em;
   outline: none;
 }
@@ -561,7 +560,7 @@ button.adaugă {
 button.adaugă-cîmp-personalizat {
   padding: 0 .2em .2em;
   top: -.3em;
-  margin: 0;
+  margin: 0 0 0 .2em;
 }
 
 .personalizat .elimină {

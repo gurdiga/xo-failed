@@ -953,7 +953,7 @@ var Formular = {
         var încasări = secţiune['încasări'],
             încasare, $încasare, i,
             adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
-            adaugăÎncasareRetroactivă = $secţiune.find('#adaugă :contains("retroactivă")');
+            adaugăÎncasareRestanţă = $secţiune.find('#adaugă :contains("restanţă")');
 
         if (!încasări) return;
 
@@ -969,10 +969,10 @@ var Formular = {
               .find('.valută').val(încasare.venit.valuta).end()
               .find('.onorariu').val(încasare.onorariu).end()
               .find('.pensie').val(încasare.pensie).end();
-          } else { // retroactivă
-            adaugăÎncasareRetroactivă.click();
+          } else { // restanţă
+            adaugăÎncasareRestanţă.click();
 
-            $secţiune.find('.încasare.retroactivă').last()
+            $secţiune.find('.încasare.restanţă').last()
               .find('.început').val(încasare.început).end()
               .find('.sfîrşit').val(încasare.sfîrşit).end()
               .find('.venit').val(încasare.venit.suma).end()
@@ -1191,13 +1191,12 @@ var Formular = {
           genCreditor = $('#creditor #gen-persoană');
 
       switch (HashController.date()) {
-        case 's':
+        case 'S':
           caracterProcedură.val('pecuniar');
           genCreditor.val('juridică');
           break;
 
-        case 'p':
-          caracterProcedură.val('pecuniar');
+        case 'P':
           genCreditor.val('fizică');
           break;
 
@@ -1244,7 +1243,7 @@ var ProceduriRecente = {
   },
 
   afişează: function(proceduri) {
-    if (proceduri.length == 0) return;
+    if (proceduri.length == 0 || !Căutare.index) return;
 
     var lista = {};
 
