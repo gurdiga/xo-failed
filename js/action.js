@@ -1719,7 +1719,7 @@ var FormularPensie = {
 
     cota.closest('.sume-pensie').find('.pensie')
       .attr('disabled', introdusCota)
-      .prev('label').text(introdusCota ? 'Pensia calculată' : 'Pensia stabilită');
+      .prev('label').text(introdusCota ? 'Pensia calculată' : 'Pensia fixă');
 
     cota.closest('.sume-pensie').find('.încasare .venit').each(function() {
       FormularPensie.caluleazăOnorariulŞiPensia.apply(this, ['modificare-cotă']);
