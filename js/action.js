@@ -943,44 +943,48 @@ var Formular = {
     }
 
     // ------------------------------------------
+    function populeazăPensieÎntreţinere($secţiune, încasări) {
+      if (!încasări) return;
+
+      var încasare, i,
+          adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
+          adaugăÎncasareRestanţă = $secţiune.find('#adaugă :contains("restanţă")');
+
+      for (i = 0; i < încasări.length; i++) {
+        încasare = încasări[i];
+
+        if (încasare.data) { // periodică
+          adaugăÎncasarePeriodică.click();
+
+          $secţiune.find('.încasare.periodică').last()
+            .find('.dată').val(încasare.data).end()
+            .find('.venit').val(încasare.venit.suma).end()
+            .find('.valută').val(încasare.venit.valuta).end()
+            .find('.onorariu').val(încasare.onorariu).end()
+            .find('.pensie').val(încasare.pensie).end();
+        } else { // restanţă
+          adaugăÎncasareRestanţă.click();
+
+          $secţiune.find('.încasare.restanţă').last()
+            .find('.început').val(încasare.început).end()
+            .find('.sfîrşit').val(încasare.sfîrşit).end()
+            .find('.venit').val(încasare.venit.suma).end()
+            .find('.valută').val(încasare.venit.valuta).end()
+            .find('.onorariu').val(încasare.onorariu).end()
+            .find('.pensie').val(încasare.pensie);
+        }
+      }
+    }
+
+    // ------------------------------------------
     function populeazăObiectulUrmăririi() {
       var $secţiune = $('#obiectul-urmăririi'),
           secţiune = procedură['obiectul-urmăririi'];
 
       populeazăSecţiune($secţiune, secţiune);
 
-      if (Formular.pensieDeÎntreţinere()) { // pensie
-        var încasări = secţiune['încasări'],
-            încasare, $încasare, i,
-            adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
-            adaugăÎncasareRestanţă = $secţiune.find('#adaugă :contains("restanţă")');
-
-        if (!încasări) return;
-
-        for (i = 0; i < încasări.length; i++) {
-          încasare = încasări[i];
-
-          if (încasare.data) { // periodică
-            adaugăÎncasarePeriodică.click();
-
-            $secţiune.find('.încasare.periodică').last()
-              .find('.dată').val(încasare.data).end()
-              .find('.venit').val(încasare.venit.suma).end()
-              .find('.valută').val(încasare.venit.valuta).end()
-              .find('.onorariu').val(încasare.onorariu).end()
-              .find('.pensie').val(încasare.pensie).end();
-          } else { // restanţă
-            adaugăÎncasareRestanţă.click();
-
-            $secţiune.find('.încasare.restanţă').last()
-              .find('.început').val(încasare.început).end()
-              .find('.sfîrşit').val(încasare.sfîrşit).end()
-              .find('.venit').val(încasare.venit.suma).end()
-              .find('.valută').val(încasare.venit.valuta).end()
-              .find('.onorariu').val(încasare.onorariu).end()
-              .find('.pensie').val(încasare.pensie);
-          }
-        }
+      if (Formular.pensieDeÎntreţinere()) {
+        populeazăPensieÎntreţinere($secţiune, secţiune['încasări']);
       } else {
         var sume = secţiune.sume,
             cîmp, $cîmp;
