@@ -1391,7 +1391,7 @@ var Căutare = {
   },
 
   încarcăIndex: function() {
-    Căutare.anuleazăCacheIndex();
+    if (Căutare.index) Căutare.anuleazăCacheIndex();
 
     setTimeout(function() {
       $.getJSON(Căutare.adresăIndex, function(data) {
