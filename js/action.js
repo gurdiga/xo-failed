@@ -1586,6 +1586,7 @@ var Calendar = {
     showOn: 'none',
     changeMonth: true,
     changeYear: true,
+    yearRange: 'c-60:c+10',
     onSelect: function() {Calendar.închide(this)}
   },
 
