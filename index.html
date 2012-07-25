@@ -257,7 +257,9 @@
               <ul>
                 <li>
                   <label for="onorariu">Onorariul</label>
-                  <input id="onorariu" class="sumă"/><b>MDL</b>
+                  <input id="onorariu" class="sumă" readonly/>
+                  <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+                  <b>MDL</b>
                 </li>
 
                 <li>
@@ -268,7 +270,9 @@
 
                 <li>
                   <label for="total-taxe-şi-speze">Total taxe şi speze</label>
-                  <input id="total-taxe-şi-speze" class="sumă calculat" readonly/><b>MDL</b>
+                  <input id="total-taxe-şi-speze" class="sumă calculat" readonly/>
+                  <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+                  <b>MDL</b>
 
                   <ul class="adăugate"></ul>
                 </li>
@@ -679,7 +683,9 @@
 
         <li>
           <label for="total"><b>Total</b></label>
-          <input id="total" readonly/><b>MDL</b>
+          <input id="total" readonly/>
+          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+          <b>MDL</b>
         </li>
 
         <li>
@@ -887,7 +893,8 @@
 
         <li>
           <label for="salariu-recuperat">Salariu recuperat</label>
-          <input id="salariu-recuperat" class="sumă"/><b>MDL</b>
+          <input id="salariu-recuperat" class="sumă"/>
+          <b>MDL</b>
         </li>
       </ul>
 
@@ -1071,12 +1078,14 @@
           <li>
             <label>Pensia fixă</label>
             <input type="text" class="sumă pensie"/>
+            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
           </li>
 
           <li>
             <label>Onorariul</label>
             <input type="text" class="sumă onorariu calculat" readonly/>
+            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
           </li>
 
@@ -1108,6 +1117,7 @@
           <li>
             <label>Onorariul</label>
             <input type="text" class="sumă onorariu calculat" readonly/>
+            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
           </li>
 

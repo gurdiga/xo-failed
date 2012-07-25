@@ -1207,6 +1207,17 @@ input[type="checkbox"]+label {
   width: 6.3em;
 }
 
+input+span.ui-icon-locked {
+  display: none;
+}
+
+input[readonly]+span.ui-icon-locked {
+  display: inline;
+  position: absolute;
+  margin: .3em 0 0 -1.2em;
+  opacity: .3;
+}
+
 @-moz-document url-prefix() {
   h1 {
     letter-spacing: -.075em;
