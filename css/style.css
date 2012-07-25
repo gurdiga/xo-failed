@@ -1073,16 +1073,11 @@ input[type="checkbox"]+label {
   font-weight: bold;
 }
 
-#calculator ul .total label.sumă {
-  margin: 0;
-}
-
 #calculator ul .total a {
   display: inline-block;
   vertical-align: -3px;
 }
 
-#calculator ul label.sumă,
 #calculator ul input[type="radio"]+label {
   width: auto;
   margin-right: .5em;

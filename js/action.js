@@ -1732,7 +1732,7 @@ var FormularPensie = {
     var introdusCota = $.trim(FormularPensie.$cota.val()) !== '';
 
     FormularPensie.$.find('.pensie')
-      .attr('disabled', introdusCota)
+      .attr('readonly', introdusCota)
       .prev('label').text(introdusCota ? 'Pensia calculată' : 'Pensia fixă');
   },
 
