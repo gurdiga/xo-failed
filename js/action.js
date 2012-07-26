@@ -11,7 +11,6 @@ var Action = {
     HashController.init();
 
     Valute.populeazăListe();
-    ProcedurăNonPecuniară.init();
     FormulareŞablon.init();
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
@@ -39,28 +38,6 @@ var Action = {
 
   '#index': function() {
     $('#căutare input').focus();
-  }
-};
-
-// --------------------------------------------------
-
-var ProcedurăNonPecuniară = {
-  init: function() {
-    $('#obiectul-urmăririi')
-      .on('click', 'button.adaugă', this.adaugăCîmp)
-      .on('iniţializat', function() {$('#obiect').trigger('change')});
-  },
-
-  adaugăCîmp: function() {
-    var şablon = $(this).parent().prev();
-
-    şablon.clone()
-      .hide()
-      .insertBefore($(this).parent())
-      .show('blind')
-      .find(':input')
-        .val('')
-        .first().focus();
   }
 };
 

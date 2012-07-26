@@ -2,7 +2,6 @@ TODO:
 -----
 
 * dobînzi de întrziere pentru procedurile pecuniare
-* ilustrează cîmpurile dezactivate .ui-icon-locked
 * toolbar pentru acţiuni formular
   * de definit formele
 * browse
