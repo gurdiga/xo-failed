@@ -55,46 +55,43 @@ var Valute = {
 
 var Persoane = {
   init: function() {
-    this.initAdăugare();
-    this.initŞtergere();
+    Formular.$
+      .on('click', 'button.adaugă.persoană', this.adaugă)
+      .on('click', 'button.elimină-persoană', this.elimină);
   },
 
-  initAdăugare: function() {
-    Formular.$.on('click', 'button.adaugă.persoană', function() {
-      var buton = $(this),
-          fieldset = buton.prev();
+  adaugă: function() {
+    var buton = $(this),
+        fieldset = buton.prev();
 
-      fieldset.clone()
-        .removeAttr('id') // #creditor
-        .find('input,textarea').val('').end()
-        .find('legend label').text(function(i, text) {
-          if (buton.find('.legend.label').există()) {
-            $(this).closest('fieldset').addClass('persoană-terţă');
+    fieldset.clone()
+      .removeAttr('id') // #creditor
+      .find('input,textarea').val('').end()
+      .find('legend label').text(function(i, text) {
+        if (buton.find('.legend.label').există()) {
+          $(this).closest('fieldset').addClass('persoană-terţă');
 
-            return buton.find('.legend.label').text();
-          } else {
-            return text;
-          }
-        }).end()
-        .hide()
-        .insertAfter(fieldset)
-        .show('blind', function() {
-          buton.siblings('fieldset:not(#creditor)').addClass('dispensabilă');
-        })
-        .find('#gen-persoană').trigger('change');
-    });
+          return buton.find('.legend.label').text();
+        } else {
+          return text;
+        }
+      }).end()
+      .hide()
+      .insertAfter(fieldset)
+      .show('blind', function() {
+        buton.siblings('fieldset:not(#creditor)').addClass('dispensabilă');
+      })
+      .find('#gen-persoană').trigger('change');
   },
 
-  initŞtergere: function() {
-    Formular.$.on('click', 'button.elimină-persoană', function() {
-      var button = $(this),
-          aceastăPersoană = button.closest('fieldset');
-          celelaltePersoane = aceastăPersoană.siblings('fieldset');
+  elimină: function() {
+    var button = $(this),
+        aceastăPersoană = button.closest('fieldset');
+        celelaltePersoane = aceastăPersoană.siblings('fieldset');
 
-      aceastăPersoană.slideUp(function() {
-        aceastăPersoană.remove()
-        celelaltePersoane.toggleClass('dispensabilă', celelaltePersoane.length > 1);
-      });
+    aceastăPersoană.slideUp(function() {
+      aceastăPersoană.remove()
+      celelaltePersoane.toggleClass('dispensabilă', celelaltePersoane.length > 1);
     });
   }
 };
