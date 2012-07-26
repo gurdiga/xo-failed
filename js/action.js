@@ -562,6 +562,7 @@ var Utilizator = {
     Utilizator.login = $.cookie('login');
     Utilizator.autentificat = !!$.trim(Utilizator.login);
 
+    $('#autentificare').toggle(!Utilizator.autentificat);
     $('body').toggleClass('autentificat', Utilizator.autentificat);
 
     $(document).ajaxError(function(e, response) {

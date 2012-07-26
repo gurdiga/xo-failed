@@ -10,14 +10,6 @@ body {
   overflow-y: scroll;
 }
 
-.autentificat #autentificare {
-  display: none!important;
-}
-
-#autentificare {
-  display: block!important;
-}
-
 #autentificare a {
   color: blue;
 }
