@@ -17,7 +17,7 @@ var Action = {
     Persoane.init();
     Cheltuieli.init();
     ButonDeEliminare.init();
-    DobînziDeÎntîrziere.init();
+    Întîrzieri.init();
     Formular.init();
     Instrumente.init();
     Calculator.init();
@@ -341,10 +341,10 @@ var Cheltuieli = {
         .on('click', '.destinatari-adăugaţi', this.ascundeSauAfişează)
         .on('eliminare', '.destinatari-adăugaţi .eliminabil', this.ascundeListaDacăNuMaiSunt)
         .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează)
-        .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', this.ascundeLaEnterSauEsc);
+        .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', this.ascunînceputPerioadăEnterSauEsc);
     },
 
-    ascundeLaEnterSauEsc: function(e) {
+    ascunînceputPerioadăEnterSauEsc: function(e) {
       if (e.keyCode == 13 || e.keyCode == 27) {
         e.preventDefault();
         e.stopPropagation();
@@ -1288,10 +1288,10 @@ var Căutare = {
 
       var direcţia = e.data,
           spre = {up: 'prev', down: 'next'},
-          deLa = {up: 'tr:last', down: 'tr:first'};
+          începutPerioadă = {up: 'tr:last', down: 'tr:first'};
 
       var $item = lista.find('tr.selectat'),
-          $spre = $item.există() ? $item[spre[direcţia]]() : lista.find(deLa[direcţia]);
+          $spre = $item.există() ? $item[spre[direcţia]]() : lista.find(începutPerioadă[direcţia]);
 
       $item.removeClass('selectat');
       $spre.addClass('selectat');
@@ -1443,13 +1443,11 @@ var Calculator = {
   $: $('#calculator'),
 
   init: function() {
-    DobîndaDeÎntîrziere.init();
-
     Calculator.$
-      .on('click', 'button.închide', Calculator.închide)
-      .on('click', 'button.adaugă', Calculator.adaugăSumă)
-      .on('keyup update paste click change', ':input:not(#dobînda)', DobîndaDeÎntîrziere.calculează)
-      .find(':input').bind('keydown', 'esc', Calculator.închide);
+      .on('click', 'button.închide', this.închide)
+      .on('click', 'button.adaugă', this.adaugăSumă)
+      .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda)
+      .find(':input').bind('keydown', 'esc', this.închide);
 
     $('#bara-de-sus .calculator').on('click', function() {
       if (Calculator.$.is(':visible')) Calculator.închide();
@@ -1492,6 +1490,16 @@ var Calculator = {
       .show('blind');
 
     item.next().find('.sumă').focus();
+  },
+
+  calculeazăDobînda: function() {
+    var începutPerioadă = Calculator.find('#de-la').val(),
+        sfîrşitPerioadă = Calculator.find('#pînă-la').val(),
+        rata = Calculator.$.find(':checkbox:checked').val(),
+        suma = Calculator.$.find('.sumă').val();
+
+    Calculator.$.find('#dobînda')
+      .val(DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma));
   }
 };
 
@@ -1766,45 +1774,16 @@ var FormularPensie = {
 // --------------------------------------------------
 
 var DobîndaDeÎntîrziere = {
-  rate: {},
-  iniţializat: false,
+  calculează: function(începutPerioadă, sfîrşitPerioadă, rata, suma) {
+    if (!FORMATUL_DATEI.test(începutPerioadă) || !FORMATUL_DATEI.test(sfîrşitPerioadă)) return;
 
-  init: function() {
-    if (DobîndaDeÎntîrziere.iniţializat) return;
-
-    DobîndaDeÎntîrziere.încarcă();
-    DobîndaDeÎntîrziere.iniţializat = true;
-  },
-
-  calculează: function(e) {
-    if ($.isEmptyObject(DobîndaDeÎntîrziere.rate)) return;
-
-    var suma = 0;
-
-    Calculator.$.find('#sume .sumă').each(function() {
-      var cîmp = $(this),
-          valuta = cîmp.next('.valuta'),
-          cursValutar = RateBNM[valuta.val()];
-
-      if (valuta.val() == 'MDL') {
-        suma += cîmp.suma();
-      } else {
-        suma += cîmp.suma() / cursValutar.nominal * cursValutar.value;
-      }
-    });
-
-    var deLa = $.trim(Calculator.$.find('#de-la').val());
-        pînăLa = $.trim(Calculator.$.find('#pînă-la').val());
-
-    if (!FORMATUL_DATEI.test(deLa) || !FORMATUL_DATEI.test(pînăLa)) return;
-
-    deLa = moment(deLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
-    pînăLa = moment(pînăLa, 'DD.MM.YYYY').format('YYYY-MM-DD');
+    începutPerioadă = moment(începutPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
+    sfîrşitPerioadă = moment(sfîrşitPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
 
     var data, dataPrecedentă, primaDatăAplicabilă, durate = {};
 
-    for (data in DobîndaDeÎntîrziere.rate) {
-      if (data > deLa) break;
+    for (data in RateDeBază) {
+      if (data > începutPerioadă) break;
 
       dataPrecedentă = data;
     }
@@ -1812,12 +1791,12 @@ var DobîndaDeÎntîrziere = {
     primaDatăAplicabilă = dataPrecedentă;
     dataPrecedentă = null;
 
-    for (data in DobîndaDeÎntîrziere.rate) {
+    for (data in RateDeBază) {
       if (dataPrecedentă) {
         if (dataPrecedentă == primaDatăAplicabilă) {
-          durate[dataPrecedentă] = zileÎntre(deLa, data);
-        } else if (data > pînăLa) {
-          durate[dataPrecedentă] = zileÎntre(dataPrecedentă, pînăLa) + 1; // + 1 include ultima zi
+          durate[dataPrecedentă] = zileÎntre(începutPerioadă, data);
+        } else if (data > sfîrşitPerioadă) {
+          durate[dataPrecedentă] = zileÎntre(dataPrecedentă, sfîrşitPerioadă) + 1; // + 1 include ultima zi
         } else {
           durate[dataPrecedentă] = zileÎntre(dataPrecedentă, data);
         }
@@ -1826,7 +1805,7 @@ var DobîndaDeÎntîrziere = {
       dataPrecedentă = data;
     }
 
-    durate[data] = zileÎntre(data, pînăLa);
+    durate[data] = zileÎntre(data, sfîrşitPerioadă);
 
     function zileÎntre(data1, data2) {
       if (typeof data1 == 'string') data1 = moment(data1, 'YYYY-MM-DD').toDate();
@@ -1835,28 +1814,17 @@ var DobîndaDeÎntîrziere = {
       return Math.round((data2 - data1) / (24 * 3600 * 1000));
     }
 
-    var rataBNM, dobînda = 0,
-        rataAplicată = parseFloat(Calculator.$.find(':radio[name="rata-aplicată"]:checked').val());
+    var rataFinală, dobînda = 0;
 
-    for (data in DobîndaDeÎntîrziere.rate) {
+    for (data in RateDeBază) {
       if (data < primaDatăAplicabilă) continue;
-      if (data > pînăLa) break;
+      if (data > sfîrşitPerioadă) break;
 
-      rataBNM = (DobîndaDeÎntîrziere.rate[data] + rataAplicată) / 100;
-      dobînda += Math.round(suma * rataBNM / 365 * durate[data] * 100) / 100;
+      rataFinală = (RateDeBază[data] + rata) / 100;
+      dobînda += Math.round(suma * rataFinală / 365 * durate[data] * 100) / 100;
     }
 
-    dobînda = Math.round(dobînda * 100) / 100;
-
-    Calculator.$.find('#dobînda').val(dobînda);
-  },
-
-  încarcă: function() {
-    $.getJSON('rate-bnm/rata_de_bază.json')
-      .success(function(data) {
-        DobîndaDeÎntîrziere.rate = data;
-        DobîndaDeÎntîrziere.calculează();
-      });
+    return Math.round(dobînda * 100) / 100;
   }
 };
 
@@ -2047,11 +2015,13 @@ var Sume = {
 
 // --------------------------------------------------
 
-var DobînziDeÎntîrziere = {
+var Întîrzieri = {
   init: function() {
     Formular.$
       .on('change', '#caracter', this.adaugăButon)
-      .on('închidere', this.elimină);
+      .on('închidere', this.elimină)
+      .on('input', '.întîrziere [name="rata-aplicată"]', this.calculeazăDobînda)
+      .on('input', '.întîrziere .perioadă, .întîrziere.sumă', this.calculeazăDobînda);
   },
 
   adaugăButon: function() {
@@ -2060,7 +2030,7 @@ var DobînziDeÎntîrziere = {
     if (caracter.val() == 'pecuniar') {
       $şabloane.find('#adaugă-întîrziere').clone()
         .appendTo(caracter.closest('.conţinut'))
-        .on('click', DobînziDeÎntîrziere.adaugă);
+        .on('click', Întîrzieri.adaugă);
     } else {
       Formular.$.find('#adaugă-întîrziere').remove();
     }
@@ -2073,6 +2043,17 @@ var DobînziDeÎntîrziere = {
 
   elimină: function() {
     Formular.$.find('#adaugă-întîrziere, .întîrziere').remove();
+  },
+
+  calculeazăDobînda: function() {
+    var $întîrziere = $(this).closest('.întîrziere'),
+        începutPerioadă = $întîrziere.find('.început.perioadă').val(),
+        sfîrşitPerioadă = $întîrziere.find('.sfîrşit.perioadă').val(),
+        rata = $întîrziere.find(':radio:checked').val(),
+        suma = $întîrziere.find('.sumă:first').val();
+
+    $întîrziere.find('.sumă:last')
+      .val(DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma));
   }
 };
 

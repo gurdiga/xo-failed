@@ -1142,7 +1142,14 @@
 
         <li>
           <label>Suma întîrziată</label>
-          <input type="text" class="sumă pensie"/>
+          <input type="text" class="sumă"/>
+          <b>MDL</b>
+        </li>
+
+        <li>
+          <label>Dobînda calculată</label>
+          <input type="text" class="sumă" readonly/>
+          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
       </ul>
@@ -1154,6 +1161,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
     <script src="/js/lib.js"></script>
     <script src="/rate-bnm/current.js"></script>
+    <script src="/rate-bnm/rata_de_bază.js"></script>
     <script src="/js/action.js"></script>
     <script>$(Action.init)</script>
   </body>

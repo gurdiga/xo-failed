@@ -2,6 +2,7 @@ TODO:
 -----
 
 * dobînzi de întrziere pentru procedurile pecuniare
+  * JS
   * reorganizare calculator dobînzi
 * la init verifică timpul de la închidere (notat la onbeforeunload în cookie)
 * toolbar pentru acţiuni formular
