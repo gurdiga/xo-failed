@@ -18,9 +18,9 @@ $data = date_parse_from_format('d.m.Y', $data);
 $data = date('Y-m-d', mktime(0, 0, 0, $data['month'], $data['day'], $data['year']));
 
 $root = dirname(__FILE__);
-$json = "$root/rata_de_bază.json";
+$fişier = "$root/rata_de_bază.js";
 
 $rate = json_decode(file_get_contents($json), true);
 $rate[$data] = $valoarea;
 
-file_put_contents($json, json_encode($rate));
+file_put_contents($fişier, 'var RateDeBază = ' . json_encode($rate) . ';');
