@@ -265,7 +265,7 @@
                 <li>
                   <label for="părţile-au-ajuns-la-conciliere">Părţile au încheiat o tranzacţie</label>
                   <input id="părţile-au-ajuns-la-conciliere" type="checkbox"/>
-                  <p class="şoaptă">se aplică coeficientul de 0.7 la onorariu</p>
+                  <span class="şoaptă">se aplică coeficientul de 0.7 la onorariu</span>
                 </li>
 
                 <li>
@@ -671,30 +671,27 @@
 
       <ul class="conţinut caracter" title="pecuniar">
         <li>
+          <label for="amendă">Amendă</label>
+          <input id="amendă" type="checkbox"/>
+        </li>
+
+        <li>
           <label for="suma-de-bază">Suma de bază</label>
           <input id="suma-de-bază" class="sumă"/>
           <select class="valuta"></select>
         </li>
 
-        <li>
+        <li class="container-buton">
           <button class="adaugă-cîmp-personalizat semiascuns" title="Adaugă sumă"
           data-şablon="cîmp-personalizat" data-etichetă="Descriere sumă">+</button>
         </li>
 
         <li>
-          <label for="total"><b>Total</b></label>
+          <label for="total">Total</label>
           <input id="total" readonly/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
-
-        <li>
-          <label for="amendă">Amendă</label>
-          <input id="amendă" type="checkbox"/>
-        </li>
-
-        <li id="adaugă-dobîndă-întîrziere">+ Adaugă dobîndă întîrziere</li>
-
       </ul>
 
       <ul class="conţinut caracter" title="nonpecuniar">
@@ -1063,12 +1060,12 @@
 
 
       <div class="încasări-pensie" id="restanţă">
-        <ul class="încasare restanţă eliminabil de tot">
+        <ul class="încasare restanţă fieldset eliminabil de tot">
           <li class="titlu">încasare restanţă</li>
 
           <li>
             <label>Perioada</label>
-            <input class="dată început"/>&ndash;<input class="dată sfîrşit"/>
+            <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
           </li>
 
           <li>
@@ -1096,7 +1093,7 @@
 
 
       <div class="încasări-pensie" id="periodică">
-        <ul class="încasare periodică eliminabil de tot">
+        <ul class="încasare periodică fieldset eliminabil de tot">
           <li class="titlu">încasare periodică</li>
 
           <li>
@@ -1126,39 +1123,27 @@
         </ul>
       </div>
 
+      <div id="adaugă-întîrziere">+ Adaugă întîrziere</div>
 
-      <ul class="dobîndă-întîrziere eliminabil de tot">
+      <ul class="întîrziere fieldset eliminabil de tot">
         <li class="titlu">întîrziere</li>
 
         <li>
-          <label>Perioada</label>
+          <label>Perioada de întîrziere</label>
           <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
         </li>
 
         <li>
           <label>Rata aplicată</label>
 
-          <ul id="rate">
-            <li>
-              <label><input name="rata-aplicată" type="radio" value="5"/>5%</label>
-            </li>
-            <li>
-              <label><input name="rata-aplicată" type="radio" value="9" checked/>9%</label>
-            </li>
-          </ul>
-
+          <label class="checkbox"><input name="rata-aplicată" type="radio" value="5"/>5%</label>
+          <label class="checkbox"><input name="rata-aplicată" type="radio" value="9" checked/>9%</label>
         </li>
 
         <li>
-          <label>Sume</label>
-          <ul id="sume">
-            <li class="item eliminabil prima">
-              <input type="text" class="sumă"/>
-              <select class="valuta"></select>
-            </li>
-
-            <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
-          </ul>
+          <label>Suma întîrziată</label>
+          <input type="text" class="sumă pensie"/>
+          <b>MDL</b>
         </li>
       </ul>
 

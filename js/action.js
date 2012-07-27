@@ -15,20 +15,17 @@ var Action = {
     CîmpuriTextarea.autodimensionează();
     ListeFoarteLate.seteazăŞoapte();
     Persoane.init();
-    Destinatari.init();
     Cheltuieli.init();
     ButonDeEliminare.init();
+    DobînziDeÎntîrziere.init();
     Formular.init();
     Instrumente.init();
     Calculator.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
     ProceduriRecente.init();
-    Onorariu.init();
-    TotalCheltuieli.init();
     Sume.init();
     FormularPensie.init();
-    DobînziDeÎnregistrare.init();
 
     $(window).trigger('hashchange');
 
@@ -195,28 +192,29 @@ var FormulareŞablon = {
   selector: 'select.care.schimbă.formularul',
 
   init: function() {
-    Formular.$.on('change', FormulareŞablon.selector, function(e, automat) {
-      var $select = $(this),
-          selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
-          şablon = FormulareŞablon.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
-          item = $select.closest('li'),
-          $subformular;
+    Formular.$.on('change', FormulareŞablon.selector, this.inserează);
+  },
 
-      $subformular = item
-        .nextAll().remove().end()
-        .after(şablon)
-        .nextAll();
+  inserează: function(e, automat) {
+    var $select = $(this),
+        selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
+        şablon = FormulareŞablon.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
+        item = $select.closest('li'),
+        $subformular;
 
-      $subformular.find(FormulareŞablon.selector).trigger('change', ['automat']);
+    item.nextAll().remove();
+    item.after(şablon);
 
-      if (!Formular.sePopulează && !Formular.seIniţializează) {
-        $subformular
-          .find(':input:not(.care.schimbă.formularul)').first().focus().end().end()
-          .find('.adaugă-cîmp-personalizat.implicit').click();
-      }
+    $subformular = item.nextAll();
+    $subformular.find(FormulareŞablon.selector).trigger('change', ['automat']);
 
-      $subformular.effect('highlight', {}, 1200, function() {$(this).clearQueue()});
-    });
+    if (!Formular.sePopulează && !Formular.seIniţializează) {
+      $subformular
+        .find(':input:not(' + FormulareŞablon.selector + ')').first().focus().end().end()
+        .find('.adaugă-cîmp-personalizat.implicit').click();
+    }
+
+    $subformular.effect('highlight', {}, 1200, function() {$(this).clearQueue()});
   },
 
   parseazăIncluderile: function(html) {
@@ -239,6 +237,10 @@ var Cheltuieli = {
     this.subformulare.init();
     this.destinatariDocumenteAdresabile.init();
     this.achitare.init();
+
+    Destinatari.init();
+    Onorariu.init();
+    TotalCheltuieli.init();
   },
 
   categorii: {
@@ -1496,10 +1498,9 @@ var Calculator = {
 // --------------------------------------------------
 
 var Instrumente = {
-  $: null,
+  $: $('.instrumente'),
 
   init: function() {
-    Instrumente.$ = $('.instrumente');
     Instrumente.initOpţiuniPentruButoane();
     Instrumente.$.on('click', '>button', function() {
       if (Instrumente[this.className]) Instrumente[this.className].apply(this, arguments);
@@ -2046,17 +2047,32 @@ var Sume = {
 
 // --------------------------------------------------
 
-var DobînziDeÎnregistrare = {
+var DobînziDeÎntîrziere = {
   init: function() {
-    $('#obiectul-urmăririi').on('click', '#adaugă-dobîndă-întîrziere', this.adaugă);
+    Formular.$
+      .on('change', '#caracter', this.adaugăButon)
+      .on('închidere', this.elimină);
+  },
+
+  adaugăButon: function() {
+    var caracter = $(this);
+
+    if (caracter.val() == 'pecuniar') {
+      $şabloane.find('#adaugă-întîrziere').clone()
+        .appendTo(caracter.closest('.conţinut'))
+        .on('click', DobînziDeÎntîrziere.adaugă);
+    } else {
+      Formular.$.find('#adaugă-întîrziere').remove();
+    }
   },
 
   adaugă: function() {
-    $(this).before(
-      $şabloane.find('.dobîndă-întîrziere').clone()
-    );
-      // aici
-      //.insertBefore(this.parentNode);
+    $şabloane.find('.întîrziere').clone()
+      .insertBefore(this);
+  },
+
+  elimină: function() {
+    Formular.$.find('#adaugă-întîrziere, .întîrziere').remove();
   }
 };
 

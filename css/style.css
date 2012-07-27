@@ -362,9 +362,8 @@ fieldset legend label {
   width: auto;
 }
 
-fieldset .încasări-pensie>ul,
 fieldset .conţinut>ul {
-  margin: .4em 0;
+  margin: .4em 0 1em;
 }
 
 ul {
@@ -375,16 +374,6 @@ ul {
 #total,
 input.sumă {
   width: 5em;
-}
-
-input.sumă#total {
-  font-weight: bold;
-}
-
-label[for="total"],
-input#total,
-input#total+b {
-  color: #aaa;
 }
 
 input.invalid {
@@ -487,6 +476,10 @@ fieldset.dispensabilă button.elimină-persoană {
   color: gray;
 }
 
+#formular span.şoaptă {
+  margin: 0;
+}
+
 .subformular li:first-child {
   margin-bottom: .3em;
 }
@@ -537,6 +530,15 @@ fieldset.dispensabilă button.elimină-persoană {
   width: 5em;
 }
 
+.container-buton {
+  height: 0;
+  overflow: show;
+}
+
+label+input[type="checkbox"] {
+  margin: 5px 0;
+}
+
 button.adaugă-cîmp-personalizat,
 button.adaugă {
   font-size: 1.3em;
@@ -551,8 +553,7 @@ button.adaugă {
 
 button.adaugă-cîmp-personalizat {
   padding: 0 .2em .2em;
-  top: -.3em;
-  margin: 0 0 0 .2em;
+  top: -.5em;
 }
 
 .personalizat .elimină {
@@ -642,8 +643,9 @@ button.adaugă .legend.label {
   width: 2em;
 }
 
-fieldset input[type="radio"]+label,
-fieldset input[type="checkbox"]+label {
+label.checkbox,
+input[type="radio"]+label,
+input[type="checkbox"]+label {
   width: auto;
   padding: 0;
   margin-left: .2em;
@@ -655,7 +657,7 @@ fieldset input[type="checkbox"]+label {
   margin: 0 0 0 14em;
 }
 
-#adaugă-dobîndă-întîrziere,
+#adaugă-întîrziere,
 .încasări-pensie #adaugă,
 #categorii-taxe-şi-speze {
   font-size: small;
@@ -682,7 +684,7 @@ fieldset input[type="checkbox"]+label {
   margin-left: 0;
 }
 
-#adaugă-dobîndă-întîrziere,
+#adaugă-întîrziere,
 .încasări-pensie #adaugă,
 #cheltuieli .document .adaugă-destinatar,
 #destinatari .categorie .titlu,
@@ -703,7 +705,7 @@ fieldset input[type="checkbox"]+label {
   margin-bottom: .4em;
 }
 
-#adaugă-dobîndă-întîrziere:hover,
+#adaugă-întîrziere:hover,
 .încasări-pensie #adaugă:hover:before,
 .încasări-pensie #adaugă:hover span,
 .încasări-pensie #adaugă li:hover,
@@ -1171,13 +1173,13 @@ input[type="checkbox"]+label {
   width: 8em;
 }
 
-#obiectul-urmăririi ul.încasare {
-  margin: .5em -4px 1em;
+ul.fieldset {
+  margin: 0 -4px 1em;
   border: 1px solid #f2f2f2;
   border-width: 1px 0 0 4px;
 }
 
-#obiectul-urmăririi ul.încasare .titlu {
+ul.fieldset .titlu {
   color: silver;
   font-size: small;
   margin: -.7em 0 -.6em .35em;
@@ -1186,7 +1188,7 @@ input[type="checkbox"]+label {
   padding: 0 .2em;
 }
 
-#obiectul-urmăririi ul.încasare .elimină {
+ul.fieldset .elimină {
   top: -.5em;
   left: -.9em;
   padding-right: .5em;
@@ -1194,12 +1196,12 @@ input[type="checkbox"]+label {
   background: transparent;
 }
 
-#obiectul-urmăririi ul.încasare li:last-child input {
+ul.fieldset li:last-child input {
   padding-bottom: 0;
 }
 
-.încasare .dată {
-  width: 6.3em;
+.dată.perioadă {
+  width: 5.8em;
 }
 
 input+span.ui-icon-locked {
@@ -1213,9 +1215,21 @@ input[readonly]+span.ui-icon-locked {
   opacity: .3;
 }
 
-#adaugă-dobîndă-întîrziere {
-  margin: 1em;
+#adaugă-întîrziere {
+  margin: .8em;
   cursor: pointer;
+  display: inline-block;
+}
+
+.întîrziere label.checkbox {
+  color: black;
+  margin: 3px .3em;
+  font-weight: bold;
+  display: inline;
+}
+
+.întîrziere label.checkbox input {
+  margin: 5px 0;
 }
 
 @-moz-document url-prefix() {
