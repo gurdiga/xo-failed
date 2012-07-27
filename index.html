@@ -693,6 +693,8 @@
           <input id="amendă" type="checkbox"/>
         </li>
 
+        <li id="adaugă-dobîndă-întîrziere">+ Adaugă dobîndă întîrziere</li>
+
       </ul>
 
       <ul class="conţinut caracter" title="nonpecuniar">
@@ -1123,6 +1125,42 @@
 
         </ul>
       </div>
+
+
+      <ul class="dobîndă-întîrziere eliminabil de tot">
+        <li class="titlu">întîrziere</li>
+
+        <li>
+          <label>Perioada</label>
+          <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
+        </li>
+
+        <li>
+          <label>Rata aplicată</label>
+
+          <ul id="rate">
+            <li>
+              <label><input name="rata-aplicată" type="radio" value="5"/>5%</label>
+            </li>
+            <li>
+              <label><input name="rata-aplicată" type="radio" value="9" checked/>9%</label>
+            </li>
+          </ul>
+
+        </li>
+
+        <li>
+          <label>Sume</label>
+          <ul id="sume">
+            <li class="item eliminabil prima">
+              <input type="text" class="sumă"/>
+              <select class="valuta"></select>
+            </li>
+
+            <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
+          </ul>
+        </li>
+      </ul>
 
     </div>
 

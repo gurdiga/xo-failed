@@ -28,6 +28,7 @@ var Action = {
     TotalCheltuieli.init();
     Sume.init();
     FormularPensie.init();
+    DobînziDeÎnregistrare.init();
 
     $(window).trigger('hashchange');
 
@@ -2040,6 +2041,22 @@ var Sume = {
       this.selectionStart = poziţieCursor;
       this.selectionEnd = poziţieCursor;
     });
+  }
+};
+
+// --------------------------------------------------
+
+var DobînziDeÎnregistrare = {
+  init: function() {
+    $('#obiectul-urmăririi').on('click', '#adaugă-dobîndă-întîrziere', this.adaugă);
+  },
+
+  adaugă: function() {
+    $(this).before(
+      $şabloane.find('.dobîndă-întîrziere').clone()
+    );
+      // aici
+      //.insertBefore(this.parentNode);
   }
 };
 

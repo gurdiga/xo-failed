@@ -207,10 +207,10 @@ button {
   border: 1px solid #ddd;
   border-color: #ddd #eee;
   min-height: 2.5em;
-  -webkit-transition: background-color .5s, border-color .5s;
-  -moz-transition: background-color .5s, border-color .5s;
-  -o-transition: background-color .5s, border-color .5s;
-  transition: background-color .5s, border-color .5s;
+  -webkit-transition: background-color .5s, border-color .5s, color .5s;
+  -moz-transition: background-color .5s, border-color .5s, color .5s;
+  -o-transition: background-color .5s, border-color .5s, color .5s;
+  transition: background-color .5s, border-color .5s, color .5s;
 }
 
 #căutare table tr.selectat td {
@@ -655,6 +655,7 @@ fieldset input[type="checkbox"]+label {
   margin: 0 0 0 14em;
 }
 
+#adaugă-dobîndă-întîrziere,
 .încasări-pensie #adaugă,
 #categorii-taxe-şi-speze {
   font-size: small;
@@ -681,6 +682,7 @@ fieldset input[type="checkbox"]+label {
   margin-left: 0;
 }
 
+#adaugă-dobîndă-întîrziere,
 .încasări-pensie #adaugă,
 #cheltuieli .document .adaugă-destinatar,
 #destinatari .categorie .titlu,
@@ -701,6 +703,7 @@ fieldset input[type="checkbox"]+label {
   margin-bottom: .4em;
 }
 
+#adaugă-dobîndă-întîrziere:hover,
 .încasări-pensie #adaugă:hover:before,
 .încasări-pensie #adaugă:hover span,
 .încasări-pensie #adaugă li:hover,
@@ -1208,6 +1211,11 @@ input[readonly]+span.ui-icon-locked {
   position: absolute;
   margin: .3em 0 0 -1.2em;
   opacity: .3;
+}
+
+#adaugă-dobîndă-întîrziere {
+  margin: 1em;
+  cursor: pointer;
 }
 
 @-moz-document url-prefix() {
