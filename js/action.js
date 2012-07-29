@@ -490,6 +490,7 @@ var Destinatari = {
 
 var ButonDeEliminare = {
   $: $şabloane.find('.elimină'),
+  itemPrecedent: $(),
 
   init: function() {
     this.$
@@ -517,8 +518,8 @@ var ButonDeEliminare = {
 
     buton.show();
 
-    $('.spre-eliminare').removeClass('spre-eliminare');
-    eliminabil.addClass('spre-eliminare');
+    ButonDeEliminare.itemPrecedent.removeClass('spre-eliminare');
+    ButonDeEliminare.itemPrecedent = eliminabil.addClass('spre-eliminare');
   },
 
   ascunde: function() {
@@ -1777,7 +1778,7 @@ var FormularPensie = {
 var DobîndaDeÎntîrziere = {
   // test: '04.09.2009', '14.06.2012', 9, 363761.50 == 162227.68
   calculează: function(începutPerioadă, sfîrşitPerioadă, rata, suma) {
-    if (!FORMATUL_DATEI.test(începutPerioadă) || !FORMATUL_DATEI.test(sfîrşitPerioadă)) return;
+    if (!FORMATUL_DATEI.test(începutPerioadă) || !FORMATUL_DATEI.test(sfîrşitPerioadă)) return -1;
 
     începutPerioadă = moment(începutPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
     sfîrşitPerioadă = moment(sfîrşitPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
@@ -2023,8 +2024,7 @@ var Întîrzieri = {
     Formular.$
       .on('change', '#caracter', this.adaugăButon)
       .on('închidere', this.elimină)
-      .on('input', '.întîrziere [name="rata-aplicată"]', this.calculeazăDobînda)
-      .on('input', '.întîrziere .perioadă, .întîrziere.sumă', this.calculeazăDobînda);
+      .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda);
   },
 
   adaugăButon: function() {

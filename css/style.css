@@ -373,11 +373,7 @@ ul {
 
 #total,
 input.sumă {
-  width: 5em;
-}
-
-input.invalid {
-  outline: 1px solid red;
+  width: 6em;
 }
 
 #formular {
@@ -1041,10 +1037,6 @@ input[type="checkbox"]+label {
   padding: 0;
 }
 
-#calculator .sumă {
-  width: 6em;
-}
-
 .ui-icon-calendar {
   margin: 4px 0 0 -1em;
   display: inline-block;
@@ -1061,11 +1053,6 @@ input[type="checkbox"]+label {
 #calculator ul .total input,
 #calculator ul .total label {
   font-weight: bold;
-}
-
-#calculator ul .total a {
-  display: inline-block;
-  vertical-align: -3px;
 }
 
 #ui-datepicker-div {
@@ -1197,6 +1184,11 @@ input[readonly]+span.ui-icon-locked {
 
 .întîrziere label.checkbox input {
   margin: 5px 0;
+}
+
+.întîrziere .ui-icon-print {
+  display: inline-block;
+  vertical-align: -3px;
 }
 
 @-moz-document url-prefix() {
