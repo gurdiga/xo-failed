@@ -1000,7 +1000,7 @@ input[type="checkbox"]+label {
 #calculator {
   display: none;
   position: absolute;
-  width: 18em;
+  width: 26em;
   background: white;
   border: 1px solid silver;
   padding: .5em 1.5em;
@@ -1041,6 +1041,10 @@ input[type="checkbox"]+label {
   padding: 0;
 }
 
+#calculator .sumă {
+  width: 6em;
+}
+
 .ui-icon-calendar {
   margin: 4px 0 0 -1em;
   display: inline-block;
@@ -1050,19 +1054,8 @@ input[type="checkbox"]+label {
   cursor: pointer;
 }
 
-#calculator .ui-icon-calendar {
-  margin-left: -3px;
-}
-
-#calculator ul label {
-  width: 5em;
-  text-align: right;
-  margin-right: .5em;
-}
-
 #calculator ul .total {
-  padding-top: .2em;
-  border-top: 1px solid #eee;
+  padding-top: 1em;
 }
 
 #calculator ul .total input,
@@ -1073,32 +1066,6 @@ input[type="checkbox"]+label {
 #calculator ul .total a {
   display: inline-block;
   vertical-align: -3px;
-}
-
-#calculator ul input[type="radio"]+label {
-  width: auto;
-  margin-right: .5em;
-}
-
-#calculator ul input[type="radio"]+label {
-  font-size: .9em;
-  font-weight: bold;
-  color: black;
-}
-
-#calculator #sume,
-#calculator #rate {
-  display: inline-block;
-  vertical-align: top;
-  margin: .5em 0 .3em;
-}
-
-#calculator #sume {
-  margin: 0;
-}
-
-#calculator #sume .prima .elimină {
-  display: none !important;
 }
 
 #ui-datepicker-div {
@@ -1175,7 +1142,7 @@ input[type="checkbox"]+label {
 
 ul.fieldset {
   margin: 0 -4px 1em;
-  border: 1px solid #f2f2f2;
+  border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
 }
 
@@ -1223,7 +1190,7 @@ input[readonly]+span.ui-icon-locked {
 
 .întîrziere label.checkbox {
   color: black;
-  margin: 3px .3em;
+  margin: 3px .3em 0 -2px;
   font-weight: bold;
   display: inline;
 }

@@ -1493,13 +1493,14 @@ var Calculator = {
   },
 
   calculeazăDobînda: function() {
-    var începutPerioadă = Calculator.find('#de-la').val(),
-        sfîrşitPerioadă = Calculator.find('#pînă-la').val(),
-        rata = Calculator.$.find(':checkbox:checked').val(),
-        suma = Calculator.$.find('.sumă').val();
+    var secţiune = Calculator.$,
+        începutPerioadă = secţiune.find('.început.perioadă').val(),
+        sfîrşitPerioadă = secţiune.find('.sfîrşit.perioadă').val(),
+        rata = secţiune.find(':radio:checked').val(),
+        suma = secţiune.find('.sumă').val(),
+        dobînda = DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma);
 
-    Calculator.$.find('#dobînda')
-      .val(DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma));
+    secţiune.find('#dobînda').val(dobînda);
   }
 };
 
@@ -1774,11 +1775,13 @@ var FormularPensie = {
 // --------------------------------------------------
 
 var DobîndaDeÎntîrziere = {
+  // test: '04.09.2009', '14.06.2012', 9, 363761.50 == 162227.68
   calculează: function(începutPerioadă, sfîrşitPerioadă, rata, suma) {
     if (!FORMATUL_DATEI.test(începutPerioadă) || !FORMATUL_DATEI.test(sfîrşitPerioadă)) return;
 
     începutPerioadă = moment(începutPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
     sfîrşitPerioadă = moment(sfîrşitPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
+    rata = parseInt(rata);
 
     var data, dataPrecedentă, primaDatăAplicabilă, durate = {};
 
@@ -2050,10 +2053,10 @@ var Întîrzieri = {
         începutPerioadă = $întîrziere.find('.început.perioadă').val(),
         sfîrşitPerioadă = $întîrziere.find('.sfîrşit.perioadă').val(),
         rata = $întîrziere.find(':radio:checked').val(),
-        suma = $întîrziere.find('.sumă:first').val();
+        suma = $întîrziere.find('.sumă:first').val(),
+        dobînda = DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma);
 
-    $întîrziere.find('.sumă:last')
-      .val(DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma));
+    $întîrziere.find('.sumă:last').val(dobînda);
   }
 };
 

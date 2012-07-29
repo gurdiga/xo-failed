@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8"/>
     <title>Consola executorului</title>
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext"/>
     <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
     <!--[if gte IE 8]>
@@ -33,52 +32,33 @@
           <button class="profil">Profil</button>
 
           <fieldset id="calculator">
-            <button class="închide semiascuns" title="Închide">×</button>
-
             <legend><label>Calculator dobînzi întîrziere</label></legend>
 
-            <ul>
-              <li>
-                <label for="de-la">De la</label>
-                <input id="de-la" type="text" class="dată"/>
-              </li>
+            <button class="închide semiascuns" title="Închide">×</button>
 
+            <ul class="întîrziere">
               <li>
-                <label for="pînă-la">Pînă la</label>
-                <input id="pînă-la" type="text" class="dată"/>
+                <label>Perioada de întîrziere</label>
+                <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
               </li>
 
               <li>
                 <label>Rata aplicată</label>
 
-                <ul id="rate">
-                  <li>
-                    <input name="rata-aplicată" type="radio" id="art619-1" value="5"/>
-                    <label for="art619-1">5%</label>
-                  </li>
-                  <li>
-                    <input name="rata-aplicată" type="radio" id="art619-2" value="9" checked/>
-                    <label for="art619-2">9%</label>
-                  </li>
-                </ul>
-
+                <label class="checkbox"><input name="rată-calculator" type="radio" value="5"/>5%</label>
+                <label class="checkbox"><input name="rată-calculator" type="radio" value="9" checked/>9%</label>
               </li>
 
               <li>
-                <label>Sume</label>
-                <ul id="sume">
-                  <li class="item eliminabil prima">
-                    <input type="text" class="sumă"/>
-                    <select class="valuta"></select>
-                  </li>
-
-                  <li><button class="adaugă semiascuns" title="Adaugă">+</button></li>
-                </ul>
+                <label>Suma întîrziată</label>
+                <input class="sumă"/>
+                <b>MDL</b>
               </li>
 
               <li class="total">
-                <label for="dobînda">Dobînda</label>
-                <input id="dobînda" type="text"/>
+                <label for="dobînda">Dobînda calculată</label>
+                <input id="dobînda" class="sumă" readonly/>
+                <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                 <b>MDL</b>
                 <a href="about:blank" class="ui-icon ui-icon-print semiascuns"
                   target="_blank" title="Detalii depre calcul"></a>
@@ -1034,7 +1014,7 @@
 
       <ul class="cîmp-personalizat">
         <li class="personalizat eliminabil de tot">
-          <textarea class="etichetă"/></textarea>
+          <textarea class="etichetă"></textarea>
           <input class="sumă"/>
           <select class="valuta"></select>
         </li>
@@ -1070,20 +1050,20 @@
 
           <li>
             <label>Venit calculat</label>
-            <input type="text" class="sumă venit irelevant-pentru-onorariu"/>
+            <input class="sumă venit irelevant-pentru-onorariu"/>
             <select class="valuta"></select>
           </li>
 
           <li>
             <label>Pensia fixă</label>
-            <input type="text" class="sumă pensie"/>
+            <input class="sumă pensie"/>
             <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
           </li>
 
           <li>
             <label>Onorariul</label>
-            <input type="text" class="sumă onorariu calculat" readonly/>
+            <input class="sumă onorariu calculat" readonly/>
             <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
           </li>
@@ -1103,19 +1083,19 @@
 
           <li>
             <label>Venit calculat</label>
-            <input type="text" class="sumă venit irelevant-pentru-onorariu"/>
+            <input class="sumă venit irelevant-pentru-onorariu"/>
             <select class="valuta"></select>
           </li>
 
           <li>
             <label>Pensia fixă</label>
-            <input type="text" class="sumă pensie"/>
+            <input class="sumă pensie"/>
             <b>MDL</b>
           </li>
 
           <li>
             <label>Onorariul</label>
-            <input type="text" class="sumă onorariu calculat" readonly/>
+            <input class="sumă onorariu calculat" readonly/>
             <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
           </li>
@@ -1123,7 +1103,9 @@
         </ul>
       </div>
 
+
       <div id="adaugă-întîrziere">+ Adaugă întîrziere</div>
+
 
       <ul class="întîrziere fieldset eliminabil de tot">
         <li class="titlu">întîrziere</li>
@@ -1136,19 +1118,19 @@
         <li>
           <label>Rata aplicată</label>
 
-          <label class="checkbox"><input name="rata-aplicată" type="radio" value="5"/>5%</label>
-          <label class="checkbox"><input name="rata-aplicată" type="radio" value="9" checked/>9%</label>
+          <label class="checkbox"><input type="radio" value="5"/>5%</label>
+          <label class="checkbox"><input type="radio" value="9" checked/>9%</label>
         </li>
 
         <li>
           <label>Suma întîrziată</label>
-          <input type="text" class="sumă"/>
+          <input class="sumă"/>
           <b>MDL</b>
         </li>
 
         <li>
           <label>Dobînda calculată</label>
-          <input type="text" class="sumă" readonly/>
+          <input class="sumă" readonly/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
