@@ -516,7 +516,7 @@ var ButonDeEliminare = {
       eliminabil.prepend(buton);
     }
 
-    buton.show();
+    buton.hide().fadeIn();
 
     ButonDeEliminare.itemPrecedent.removeClass('spre-eliminare');
     ButonDeEliminare.itemPrecedent = eliminabil.addClass('spre-eliminare');
