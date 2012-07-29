@@ -20,7 +20,7 @@ $data = date('Y-m-d', mktime(0, 0, 0, $data['month'], $data['day'], $data['year'
 $root = dirname(__FILE__);
 
 $json = "$root/rata_de_bază.json";
-$rate = json_decode(file_get_contents($js), true);
+$rate = json_decode(file_get_contents($json), true);
 $rate[$data] = $valoarea;
 file_put_contents($json, json_encode($rate));
 
