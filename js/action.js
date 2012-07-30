@@ -692,39 +692,61 @@ var Formular = {
       var $secţiune = $('#obiectul-urmăririi'),
           obiectulUrmăririi = colectează($secţiune);
 
-      if (Formular.pensieDeÎntreţinere()) { // pensie
-        obiectulUrmăririi['încasări'] = $secţiune.find('.încasare').map(function() {
-          var $încasare = $(this),
-              încasare = {};
+      if (Formular.pensieDeÎntreţinere()) {
+        obiectulUrmăririi['încasări'] = colecteazăÎncasări($secţiune);
+      }
 
-          if ($încasare.is('.periodică')) {
-            încasare.data = $încasare.find('.dată').val();
-          } else {
-            încasare.început = $încasare.find('.dată.început').val();
-            încasare.sfîrşit = $încasare.find('.dată.sfîrşit').val();
-          }
-
-          încasare.venit = {
-            suma: $încasare.find('.sumă.venit').val(),
-            valută: $încasare.find('.valuta').val()
-          };
-          încasare.pensie = $încasare.find('.sumă.pensie').val();
-          încasare.onorariu = $încasare.find('.sumă.onorariu').val();
-
-          return încasare;
-        }).get();
-      } else {
-        obiectulUrmăririi['sume'] = colecteazăSumeÎnValută();
+      if (obiectulUrmăririi.caracter == 'pecuniar') {
+        obiectulUrmăririi['sume'] = colecteazăSumeÎnValută($secţiune);
+        obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
       }
 
       return obiectulUrmăririi;
     }
 
     // ------------------------------------------
-    function colecteazăSumeÎnValută(cîmpuri) {
+    function colecteazăÎntîrzieri($secţiune) {
+      return $secţiune.find('.întîrziere').map(function() {
+        var $întîrziere = $(this);
+
+        return {
+          începutPerioadă: $întîrziere.find('.început.perioadă').val(),
+          sfîrşitPerioadă: $întîrziere.find('.sfîrşit.perioadă').val(),
+          rata: $întîrziere.find(':radio:checked').val(),
+          suma: $întîrziere.find('.sumă.întîrziată').val(),
+          dobînda: $întîrziere.find('.sumă.dobîndă').val()
+        };
+      }).get();
+    }
+    // ------------------------------------------
+    function colecteazăÎncasări($secţiune) {
+      return $secţiune.find('.încasare').map(function() {
+        var $încasare = $(this),
+            încasare = {};
+
+        if ($încasare.is('.periodică')) {
+          încasare.data = $încasare.find('.dată').val();
+        } else {
+          încasare.început = $încasare.find('.dată.început').val();
+          încasare.sfîrşit = $încasare.find('.dată.sfîrşit').val();
+        }
+
+        încasare.venit = {
+          suma: $încasare.find('.sumă.venit').val(),
+          valută: $încasare.find('.valuta').val()
+        };
+        încasare.pensie = $încasare.find('.sumă.pensie').val();
+        încasare.onorariu = $încasare.find('.sumă.onorariu').val();
+
+        return încasare;
+      }).get();
+    }
+
+    // ------------------------------------------
+    function colecteazăSumeÎnValută($secţiune) {
       var sume = {};
 
-      $('#obiectul-urmăririi').find('.sumă+.valuta').each(function() {
+      $secţiune.find('.sumă+.valuta').each(function() {
         var cîmp = $(this).prev(),
             etichetă = cîmp.prev(),
             denumire = etichetă[etichetă.is('label') ? 'text' : 'val']();
@@ -964,24 +986,51 @@ var Formular = {
 
       if (Formular.pensieDeÎntreţinere()) {
         populeazăPensieÎntreţinere($secţiune, secţiune['încasări']);
-      } else {
-        var sume = secţiune.sume,
-            cîmp, $cîmp;
+      }
 
-        for (cîmp in sume) {
-          $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
+      if (secţiune['caracter'] == 'pecuniar') {
+        populeazăSume($secţiune, secţiune['sume']);
+        populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
+      }
+    }
 
-          if (!$cîmp.există()) {
-            $secţiune.find('li:has(button.adaugă-cîmp-personalizat)')
-              .before($şabloane.find('.cîmp-personalizat').html());
+    // ------------------------------------------
+    function populeazăÎntîrzieri($secţiune, întîrzieri) {
+      if (!întîrzieri) return;
 
-            $cîmp = $secţiune.find('.etichetă+.sumă').last();
-            $cîmp.prev().val(cîmp).trigger('focus');
-          }
+      var întîrziere, $întîrziere,
+          buton = $secţiune.find('#adaugă-întîrziere');
 
-          $cîmp.val(sume[cîmp].suma);
-          $cîmp.next('.valuta').val(sume[cîmp].valuta);
+      for (var i = 0; i < întîrzieri.length; i++) {
+        întîrziere = întîrzieri[i];
+
+        buton.click();
+        $întîrziere = $secţiune.find('.întîrziere:last');
+        $întîrziere.find('.început.perioadă').val(întîrziere['începutPerioadă']);
+        $întîrziere.find('.sfîrşit.perioadă').val(întîrziere['sfîrşitPerioadă']);
+        $întîrziere.find(':radio[value="' + întîrziere['rata'] + '"]').attr('checked', true);
+        $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
+        $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
+      }
+    }
+
+    // ------------------------------------------
+    function populeazăSume($secţiune, sume) {
+      var cîmp, $cîmp;
+
+      for (cîmp in sume) {
+        $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
+
+        if (!$cîmp.există()) {
+          $secţiune.find('li:has(button.adaugă-cîmp-personalizat)')
+            .before($şabloane.find('.cîmp-personalizat').html());
+
+          $cîmp = $secţiune.find('.etichetă+.sumă').last();
+          $cîmp.prev().val(cîmp).trigger('focus');
         }
+
+        $cîmp.val(sume[cîmp].suma);
+        $cîmp.next('.valuta').val(sume[cîmp].valuta);
       }
     }
 
@@ -1851,7 +1900,8 @@ var Onorariu = {
   calculează: function() {
     if (!Formular.deschis) return;
 
-    var caracter = $('#caracter').val(),
+    var $secţiune = $('#obiectul-urmăririi'),
+        caracter = $secţiune.find('#caracter').val(),
         genPersoană = $('.debitor #gen-persoană').val(),
         onorariu = 0;
 
@@ -1861,12 +1911,10 @@ var Onorariu = {
       valoare = Onorariu.nonpecuniar[obiect][genPersoană];
       onorariu = typeof valoare == 'function' ? valoare() : valoare;
     } else {
-      var $secţiune = $('#obiectul-urmăririi');
-
       if (Formular.pensieDeÎntreţinere()) {
         onorariu = $secţiune.find('.încasare .onorariu').suma();
       } else {
-        var total = $secţiune.find('.sumă:not(.calculat)').suma();
+        var total = $secţiune.find('ul:first .sumă:not(.calculat), .întîrziere .dobîndă').suma();
 
         $secţiune.find('#total').val(total).trigger('change');
         onorariu = Onorariu.pecuniar(total);
@@ -2033,12 +2081,17 @@ var Întîrzieri = {
         .appendTo(caracter.closest('.conţinut'))
         .on('click', Întîrzieri.adaugă);
     } else {
-      Formular.$.find('#adaugă-întîrziere').remove();
+      Formular.$.find('#adaugă-întîrziere, .întîrziere').remove();
     }
   },
 
   adaugă: function() {
+    var $secţiune = $(this).parent();
+
     $şabloane.find('.întîrziere').clone()
+      .find(':radio').attr('name', function(i, name) {
+        return name + $secţiune.find('.întîrziere').length;
+      }).end()
       .insertBefore(this);
   },
 
@@ -2051,10 +2104,10 @@ var Întîrzieri = {
         începutPerioadă = $întîrziere.find('.început.perioadă').val(),
         sfîrşitPerioadă = $întîrziere.find('.sfîrşit.perioadă').val(),
         rata = $întîrziere.find(':radio:checked').val(),
-        suma = $întîrziere.find('.sumă:first').val(),
+        suma = $întîrziere.find('.sumă.întîrziată').val(),
         dobînda = DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma);
 
-    $întîrziere.find('.sumă:last').val(dobînda);
+    $întîrziere.find('.sumă.dobîndă').val(dobînda);
   }
 };
 

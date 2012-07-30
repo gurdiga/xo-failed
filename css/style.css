@@ -528,7 +528,6 @@ fieldset.dispensabilă button.elimină-persoană {
 
 .container-buton {
   height: 0;
-  overflow: show;
 }
 
 label+input[type="checkbox"] {

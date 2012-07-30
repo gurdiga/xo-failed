@@ -1,13 +1,11 @@
 TODO:
 -----
 
-* dobînzi de întrziere pentru procedurile pecuniare
-  * JS
-  * reorganizare calculator dobînzi
-* la init verifică timpul de la închidere (notat la onbeforeunload în cookie)
+* la init verifică timpul de la închidere (notat la onbeforeunload în cookie)?
+* afişează data modificării procedurii sub titlu
 * toolbar pentru acţiuni formular
   * de definit formele
-* browse
+* listarea tuturor procedurilor
 * notificare
   * e bine să faceţi cutare şi cutare
   * valoarea nu este validă
