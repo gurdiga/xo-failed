@@ -17,8 +17,15 @@ server {
 
     # this is for clearing browser cache
     location ~ /date/\d+/proceduri/index {
+      include fastcgi_params;
+      fastcgi_intercept_errors on;
+      fastcgi_param SCRIPT_FILENAME $document_root$uri;
+
       if ($request_method = POST) {
-        return 200;
+        fastcgi_pass 127.0.0.1:9000;
+        more_clear_headers 'Content-Type';
+        add_header Content-Type application/json;
+        break;
       }
     }
 

@@ -862,7 +862,7 @@ var Formular = {
           .delay(1000)
           .fadeOut();
 
-        Căutare.încarcăIndex();
+        Căutare.încarcăIndexFărăCache();
         ProceduriRecente.încărcat = false;
       });
     }
@@ -1365,19 +1365,17 @@ var Căutare = {
     Căutare.rezultate.$.html('');
   },
 
-  anuleazăCacheIndex: function() {
-    $.post(Căutare.adresăIndex);
+  încarcăIndexFărăCache: function() {
+    $.post(Căutare.adresăIndex, Căutare.seteazăIndex);
   },
 
   încarcăIndex: function() {
-    if (Căutare.index) Căutare.anuleazăCacheIndex();
+    $.getJSON(Căutare.adresăIndex, Căutare.seteazăIndex);
+  },
 
-    setTimeout(function() {
-      $.getJSON(Căutare.adresăIndex, function(data) {
-        Căutare.index = data;
-        ProceduriRecente.încarcă();
-      });
-    }, 500);
+  seteazăIndex: function(data) {
+    Căutare.index = data;
+    ProceduriRecente.încarcă();
   }
 };
 
