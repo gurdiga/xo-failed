@@ -20,12 +20,13 @@ var Action = {
     Întîrzieri.init();
     Formular.init();
     Instrumente.init();
-    Calculator.init();
+    CalculatorDobîndaÎntîrziere.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
     ProceduriRecente.init();
     Sume.init();
     FormularPensie.init();
+    Rapoarte.init();
 
     $(window).trigger('hashchange');
 
@@ -1487,33 +1488,33 @@ var ListăDeProceduri = {
 
 // --------------------------------------------------
 
-var Calculator = {
+var CalculatorDobîndaÎntîrziere = {
   $: $('#calculator'),
 
   init: function() {
-    Calculator.$
+    CalculatorDobîndaÎntîrziere.$
       .on('click', 'button.închide', this.închide)
       .on('click', 'button.adaugă', this.adaugăSumă)
       .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda)
       .find(':input').bind('keydown', 'esc', this.închide);
 
     $('#bara-de-sus .calculator').on('click', function() {
-      if (Calculator.$.is(':visible')) Calculator.închide();
-      else Calculator.deschide();
+      if (CalculatorDobîndaÎntîrziere.$.is(':visible')) CalculatorDobîndaÎntîrziere.închide();
+      else CalculatorDobîndaÎntîrziere.deschide();
     });
   },
 
   deschide: function() {
-    Calculator.$
+    CalculatorDobîndaÎntîrziere.$
       .stop(true, true)
       .fadeToggle('fast', 'easeInCirc')
       .find('input').first().focus();
 
-    Calculator.resetează();
+    CalculatorDobîndaÎntîrziere.resetează();
   },
 
   resetează: function() {
-    Calculator.$
+    CalculatorDobîndaÎntîrziere.$
       .find('input:text').val('').end()
       .find('#art619-1').removeAttr('checked').end()
       .find('#art619-2').attr('checked', 'checked').end()
@@ -1521,7 +1522,7 @@ var Calculator = {
   },
 
   închide: function() {
-    Calculator.$
+    CalculatorDobîndaÎntîrziere.$
       .stop(true, true)
       .hide();
   },
@@ -1541,12 +1542,9 @@ var Calculator = {
   },
 
   calculeazăDobînda: function() {
-    var secţiune = Calculator.$,
-        începutPerioadă = secţiune.find('.început.perioadă').val(),
-        sfîrşitPerioadă = secţiune.find('.sfîrşit.perioadă').val(),
-        rata = secţiune.find(':radio:checked').val(),
-        suma = secţiune.find('.sumă').val(),
-        dobînda = DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma);
+    var secţiune = CalculatorDobîndaÎntîrziere.$,
+        întîrziere = Întîrzieri.colectează(secţiune),
+        dobînda = DobîndaDeÎntîrziere.calculează.apply(this, întîrziere);
 
     secţiune.find('#dobînda').val(dobînda);
   }
@@ -1831,7 +1829,17 @@ var DobîndaDeÎntîrziere = {
     sfîrşitPerioadă = moment(sfîrşitPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
     rata = parseInt(rata);
 
-    var data, dataPrecedentă, primaDatăAplicabilă, durate = {};
+    DobîndaDeÎntîrziere.raport = {
+      începutPerioadă: începutPerioadă,
+      sfîrşitPerioadă: sfîrşitPerioadă,
+      rata: rata,
+      suma: suma,
+      rînduri: {}
+    };
+
+    var data, dataPrecedentă, primaDatăAplicabilă,
+        durate = {},
+        rînd = {};
 
     for (data in RateDeBază) {
       if (data > începutPerioadă) break;
@@ -1851,6 +1859,7 @@ var DobîndaDeÎntîrziere = {
         } else {
           durate[dataPrecedentă] = zileÎntre(dataPrecedentă, data);
         }
+
       }
 
       dataPrecedentă = data;
@@ -1865,18 +1874,28 @@ var DobîndaDeÎntîrziere = {
       return Math.round((data2 - data1) / (24 * 3600 * 1000));
     }
 
-    var rataFinală, dobînda = 0;
+    var rataFinală, dobînda = 0, dobîndaPerRînd;
 
     for (data in RateDeBază) {
       if (data < primaDatăAplicabilă) continue;
       if (data > sfîrşitPerioadă) break;
 
       rataFinală = (RateDeBază[data] + rata) / 100;
-      dobînda += Math.round(suma * rataFinală / 365 * durate[data] * 100) / 100;
+      dobîndaPerRînd = parseFloat((suma * rataFinală / 365 * durate[data]).toFixed(2));
+      dobînda += dobîndaPerRînd;
+
+      DobîndaDeÎntîrziere.raport.rînduri[data] = {
+        data: data,
+        durata: durate[data],
+        rata: RateDeBază[data],
+        dobînda: dobîndaPerRînd
+      };
     }
 
-    return Math.round(dobînda * 100) / 100;
-  }
+    return parseFloat(dobînda.toFixed(2));
+  },
+
+  raport: {}
 };
 
 // --------------------------------------------------
@@ -2101,13 +2120,40 @@ var Întîrzieri = {
 
   calculeazăDobînda: function() {
     var $întîrziere = $(this).closest('.întîrziere'),
-        începutPerioadă = $întîrziere.find('.început.perioadă').val(),
-        sfîrşitPerioadă = $întîrziere.find('.sfîrşit.perioadă').val(),
-        rata = $întîrziere.find(':radio:checked').val(),
-        suma = $întîrziere.find('.sumă.întîrziată').val(),
-        dobînda = DobîndaDeÎntîrziere.calculează(începutPerioadă, sfîrşitPerioadă, rata, suma);
+        întîrziere = Întîrzieri.colectează($întîrziere),
+        dobînda = DobîndaDeÎntîrziere.calculează.apply(this, întîrziere);
 
     $întîrziere.find('.sumă.dobîndă').val(dobînda);
+  },
+
+  colectează: function($întîrziere) {
+    return [
+      $întîrziere.find('.început.perioadă').val(),
+      $întîrziere.find('.sfîrşit.perioadă').val(),
+      $întîrziere.find(':radio:checked').val(),
+      $întîrziere.find('.sumă.întîrziată').val()
+    ];
+  }
+};
+
+// --------------------------------------------------
+
+var Rapoarte = {
+  'întîrziere': {
+    pagina: '/rapoarte/întîrziere.html',
+    tab: null,
+    buton: null
+  },
+
+  init: function() {
+    $(document).on('click', '.întîrziere .ui-icon-print', this.deschide);
+  },
+
+  deschide: function() {
+    var raport = $(this).data('raport');
+
+    Rapoarte[raport].buton = this;
+    Rapoarte[raport].tab = window.open(Rapoarte[raport].pagina, raport, '', true);
   }
 };
 

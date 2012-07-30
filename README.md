@@ -1,7 +1,6 @@
 TODO:
 -----
 
-* la init verifică timpul de la închidere (notat la onbeforeunload în cookie)?
 * afişează data modificării procedurii sub titlu
 * toolbar pentru acţiuni formular
   * de definit formele

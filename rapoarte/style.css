@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@import url(http://fonts.googleapis.com/css?family=Alegreya:400,700&subset=latin,latin-ext);
+
+@page {
+  size: A4;
+  margin: .5cm 1.5cm;
+}
+
+body {
+  width: 18cm;
+  padding: .5cm 1.5cm;
+  font: 1em/1.5em Alegreya, Georgia, Palatino, serif;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+tbody tr:last-child td {
+  border-bottom: 1px solid black;
+}
+
+th, td {
+  padding: 0 .6em;
+  text-align: right;
+}
+
+td {
+  border-bottom: 1px solid silver;
+}
+
+tfoot td {
+  font-weight: bold;
+  border: none;
+}
+
+p {
+  width: 45em;
+}

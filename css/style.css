@@ -1133,12 +1133,16 @@ ul.fieldset {
 }
 
 ul.fieldset .titlu {
-  color: silver;
+  color: #bbb;
   font-size: small;
   margin: -.7em 0 -.6em .35em;
   background: white;
   position: relative;
   padding: 0 .2em;
+}
+
+ul.fieldset .titlu + li {
+  margin-top: .1em;
 }
 
 ul.fieldset .elimină {
@@ -1162,9 +1166,17 @@ input+span.ui-icon-locked {
 }
 
 input[readonly]+span.ui-icon-locked {
-  display: inline;
   position: absolute;
   margin: .3em 0 0 -1.2em;
+  display: inline-block;
+  opacity: 0;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+}
+
+input[readonly]:hover+span.ui-icon-locked {
   opacity: .3;
 }
 
@@ -1185,9 +1197,11 @@ input[readonly]+span.ui-icon-locked {
   margin: 5px 0;
 }
 
-.întîrziere .ui-icon-print {
+.ui-icon-print {
   display: inline-block;
   vertical-align: -3px;
+  border: none;
+  background-color: transparent;
 }
 
 @-moz-document url-prefix() {
@@ -1210,5 +1224,9 @@ input[readonly]+span.ui-icon-locked {
   textarea:focus,
   input:focus {
     outline: none;
+  }
+
+  .ui-icon-print {
+    vertical-align: 4px;
   }
 }
