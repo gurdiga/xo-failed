@@ -9,7 +9,7 @@ $procedură = file_get_contents('php://input');
 verifică_login($login);
 verifică_număr($procedură);
 verifică_dacă_există($procedură);
-notează_ca_recentă($procedură);
+notează_ca_recentă($procedură, true);
 
 // ==============================
 

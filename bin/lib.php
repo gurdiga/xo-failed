@@ -8,7 +8,7 @@ function verifică_număr($număr) {
 
 // ------------------------------
 
-function notează_ca_recentă($număr) {
+function notează_ca_recentă($număr, $afişează = false) {
   define('MAX_RECENTE', 10);
 
   global $login;
@@ -30,8 +30,10 @@ function notează_ca_recentă($număr) {
   $json = json_encode($lista);
   file_put_contents($fişier, $json);
 
-  header('Content-Type: application/json');
-  echo $json;
+  if ($afişează) {
+    header('Content-Type: application/json');
+    echo $json;
+  }
 }
 
 // ------------------------------
