@@ -3,7 +3,7 @@
 @import url(http://fonts.googleapis.com/css?family=Alegreya:400,700&subset=latin,latin-ext);
 
 @page {
-  size: A4;
+  /*size: A4;*/
   margin: .5cm 1.5cm;
 }
 

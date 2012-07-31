@@ -1879,7 +1879,7 @@ var DobîndaDeÎntîrziere = {
       return Math.round((data2 - data1) / (24 * 3600 * 1000));
     }
 
-    var rataFinală, dobînda = 0, dobîndaPerRînd;
+    var rataFinală, dobînda = 0, dobîndaPerRînd, primulRînd = true;
 
     for (data in RateDeBază) {
       if (data < primaDatăAplicabilă) continue;
@@ -1890,11 +1890,13 @@ var DobîndaDeÎntîrziere = {
       dobînda += dobîndaPerRînd;
 
       DobîndaDeÎntîrziere.raport.rînduri[data] = {
-        data: moment(data, 'YYYY-MM-DD').format('DD.MM.YYYY'),
+        data: moment(primulRînd ? începutPerioadă : data, 'YYYY-MM-DD').format('DD.MM.YYYY'),
         durata: durate[data],
         rata: RateDeBază[data],
         dobînda: dobîndaPerRînd
       };
+
+      primulRînd = false;
     }
 
     return parseFloat(dobînda.toFixed(2));
