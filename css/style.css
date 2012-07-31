@@ -1176,6 +1176,7 @@ input[readonly]+span.ui-icon-locked {
   transition: opacity .5s;
 }
 
+input[readonly]+span.ui-icon-locked:hover,
 input[readonly]:hover+span.ui-icon-locked {
   opacity: .3;
 }
