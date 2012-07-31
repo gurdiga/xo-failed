@@ -2,72 +2,49 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <link type="text/css" rel="stylesheet" href="style.css"/>
     <title>Penalitate de întîrziere</title>
+    <link type="text/css" rel="stylesheet" href="/css/raport.css"/>
+    <script src="/js/raport.js"></script>
   </head>
 
   <body>
-    <h1>Penalitate de întîrziere</h1>
+    <script type="text/micro-template">
+      <h1>Penalitate de întîrziere</h1>
 
-    <p>
-      Calculul penalităţii de întîrziere cu dobînda de <span id="rata"></span>% peste
-      rata BNM pentru suma de <span id="suma"></span>&nbsp;de&nbsp;lei pe perioada
-      <span id="începutPerioadă"></span>&ndash;<span id="sfîrşitPerioadă"></span>:
-    </p>
+      <p>
+        Calculul penalităţii de întîrziere cu dobînda de <%= raport.rata %>% peste
+        rata BNM pentru suma de <%= raport.suma %>&nbsp;de&nbsp;lei pe perioada
+        <%= raport.începutPerioadă %>&ndash;<%= raport.sfîrşitPerioadă %>:
+      </p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Nr.</th>
-          <th>Începînd cu</th>
-          <th>Durata</th>
-          <th>Rata, %</th>
-          <th>Suma, lei</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-      <tfoot>
-        <tr>
-          <td colspan="5"></td>
-        </tr>
-      </tfoot>
-    </table>
-
-    <script>
-      var _ = top.opener,
-          raport = _.Rapoarte['întîrziere'],
-          $ = _.$,
-          $întîrziere = $(raport.buton).closest('.întîrziere'),
-          i = 0,
-          întîrziere = _.Întîrzieri.colectează($întîrziere),
-          totalDobîndă = _.DobîndaDeÎntîrziere.calculează.apply(this, întîrziere);
-          raport = _.DobîndaDeÎntîrziere.raport,
-          $raport = $(document.body);
-
-
-      $raport.find('#rata').text(raport.rata);
-      $raport.find('#suma').text(raport.suma);
-      $raport.find('#începutPerioadă').text(
-        _.moment(raport.începutPerioadă, 'YYYY-MM-DD').format('DD.MM.YYYY')
-      );
-      $raport.find('#sfîrşitPerioadă').text(
-        _.moment(raport.sfîrşitPerioadă, 'YYYY-MM-DD').format('DD.MM.YYYY')
-      );
-
-      var rînduri = '';
-
-      for (rînd in raport.rînduri) {
-        rînd = raport.rînduri[rînd];
-        rînduri += '<tr>' +
-          '<td>' + ++i +
-          '<td>' + _.moment(rînd.data, 'YYYY-MM-DD').format('DD.MM.YYYY') +
-          '<td>' + rînd.durata + ' zile' +
-          '<td>' + rînd.rata + '+' + raport.rata + '=' + (rînd.rata + raport.rata).toFixed(1) +
-          '<td>' + rînd.dobînda.toFixed(2);
-      }
-
-      $raport.find('tbody').html(rînduri);
-      $raport.find('tfoot td').html(totalDobîndă);
+      <table>
+        <thead>
+          <tr>
+            <th>Nr.</th>
+            <th>Începînd cu</th>
+            <th>Durata</th>
+            <th>Rata, %</th>
+            <th>Suma, lei</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var i = 0; %>
+          <% for (var rînd in raport.rînduri) { rînd = raport.rînduri[rînd]; %>
+          <tr>
+            <td><%= ++i %></td>
+            <td><%= rînd.data %></td>
+            <td><%= rînd.durata %> zile</td>
+            <td><%= rînd.rata %>+<%= raport.rata %>=<%= (rînd.rata + raport.rata).toFixed(1) %></td>
+            <td><%= rînd.dobînda.toFixed(2) %></td>
+          </tr>
+          <% } %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5"><%= total %></td>
+          </tr>
+        </tfoot>
+      </table>
     </script>
   </body>
 </head>

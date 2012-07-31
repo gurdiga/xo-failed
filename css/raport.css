@@ -10,12 +10,12 @@
 body {
   width: 18cm;
   padding: .5cm 1.5cm;
-  font: 1em/1.5em Alegreya, Georgia, Palatino, serif;
+  font: 1em/1.5em Alegreya, Palatino, serif;
 }
 
 @-moz-document url-prefix() {
   body {
-    font-family: Georgia, Palatino, serif;
+    font-family: Palatino, serif;
   }
 }
 

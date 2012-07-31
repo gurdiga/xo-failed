@@ -1544,7 +1544,7 @@ var CalculatorDobîndaÎntîrziere = {
   calculeazăDobînda: function() {
     var secţiune = CalculatorDobîndaÎntîrziere.$,
         întîrziere = Întîrzieri.colectează(secţiune),
-        dobînda = DobîndaDeÎntîrziere.calculează.apply(this, întîrziere);
+        dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
 
     secţiune.find('#dobînda').val(dobînda);
   }
@@ -1822,7 +1822,12 @@ var FormularPensie = {
 
 var DobîndaDeÎntîrziere = {
   // test: '04.09.2009', '14.06.2012', 9, 363761.50 == 162227.68
-  calculează: function(începutPerioadă, sfîrşitPerioadă, rata, suma) {
+  calculează: function(întîrziere) {
+    var începutPerioadă = întîrziere.începutPerioadă,
+        sfîrşitPerioadă = întîrziere.sfîrşitPerioadă,
+        rata = întîrziere.rata,
+        suma = întîrziere.suma;
+
     if (!FORMATUL_DATEI.test(începutPerioadă) || !FORMATUL_DATEI.test(sfîrşitPerioadă)) return -1;
 
     începutPerioadă = moment(începutPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
@@ -1830,8 +1835,8 @@ var DobîndaDeÎntîrziere = {
     rata = parseInt(rata);
 
     DobîndaDeÎntîrziere.raport = {
-      începutPerioadă: începutPerioadă,
-      sfîrşitPerioadă: sfîrşitPerioadă,
+      începutPerioadă: moment(începutPerioadă, 'YYYY-MM-DD').format('DD.MM.YYYY'),
+      sfîrşitPerioadă: moment(sfîrşitPerioadă, 'YYYY-MM-DD').format('DD.MM.YYYY'),
       rata: rata,
       suma: suma,
       rînduri: {}
@@ -1885,7 +1890,7 @@ var DobîndaDeÎntîrziere = {
       dobînda += dobîndaPerRînd;
 
       DobîndaDeÎntîrziere.raport.rînduri[data] = {
-        data: data,
+        data: moment(data, 'YYYY-MM-DD').format('DD.MM.YYYY'),
         durata: durate[data],
         rata: RateDeBază[data],
         dobînda: dobîndaPerRînd
@@ -2121,18 +2126,18 @@ var Întîrzieri = {
   calculeazăDobînda: function() {
     var $întîrziere = $(this).closest('.întîrziere'),
         întîrziere = Întîrzieri.colectează($întîrziere),
-        dobînda = DobîndaDeÎntîrziere.calculează.apply(this, întîrziere);
+        dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
 
     $întîrziere.find('.sumă.dobîndă').val(dobînda);
   },
 
   colectează: function($întîrziere) {
-    return [
-      $întîrziere.find('.început.perioadă').val(),
-      $întîrziere.find('.sfîrşit.perioadă').val(),
-      $întîrziere.find(':radio:checked').val(),
-      $întîrziere.find('.sumă.întîrziată').val()
-    ];
+    return {
+      începutPerioadă: $întîrziere.find('.început.perioadă').val(),
+      sfîrşitPerioadă: $întîrziere.find('.sfîrşit.perioadă').val(),
+      rata: $întîrziere.find(':radio:checked').val(),
+      suma: $întîrziere.find('.sumă.întîrziată').val()
+    };
   }
 };
 
@@ -2142,17 +2147,25 @@ var Rapoarte = {
   'întîrziere': {
     pagina: '/rapoarte/întîrziere.html',
     tab: null,
-    buton: null
+    date: function() {
+      var întîrziere = Întîrzieri.colectează(this.$el.closest('.întîrziere'));
+
+      return {
+        total: DobîndaDeÎntîrziere.calculează(întîrziere),
+        raport: DobîndaDeÎntîrziere.raport
+      };
+    }
   },
 
   init: function() {
-    $(document).on('click', '.întîrziere .ui-icon-print', this.deschide);
+    $(document)
+      .on('click', '.întîrziere .ui-icon-print', this.deschide);
   },
 
   deschide: function() {
     var raport = $(this).data('raport');
 
-    Rapoarte[raport].buton = this;
+    Rapoarte[raport].$el = $(this);
     Rapoarte[raport].tab = window.open(Rapoarte[raport].pagina, raport, '', true);
   }
 };
