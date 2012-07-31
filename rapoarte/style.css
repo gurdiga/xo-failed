@@ -13,6 +13,12 @@ body {
   font: 1em/1.5em Alegreya, Georgia, Palatino, serif;
 }
 
+@-moz-document url-prefix() {
+  body {
+    font-family: Georgia, Palatino, serif;
+  }
+}
+
 table {
   border-collapse: collapse;
 }
