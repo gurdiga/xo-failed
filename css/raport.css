@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-@import url(http://fonts.googleapis.com/css?family=Alegreya:400,700&subset=latin,latin-ext);
-
 @page {
   /*size: A4;*/
   margin: .5cm 1.5cm;
@@ -10,13 +8,6 @@
 body {
   width: 18cm;
   padding: .5cm 1.5cm;
-  font: 1em/1.5em Alegreya, Palatino, serif;
-}
-
-@-moz-document url-prefix() {
-  body {
-    font-family: Palatino, serif;
-  }
 }
 
 table {
