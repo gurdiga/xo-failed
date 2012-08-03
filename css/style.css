@@ -1125,9 +1125,8 @@ fieldset .conţinut>ul.încasări-pensie {
   display: none;
   position: absolute;
   margin: 0;
-  padding: .5em 1em 1em;
+  padding: .2em 1em .5em;
   list-style: inside circle;
-  width: 8em;
 }
 
 fieldset .conţinut > ul.fieldset {
