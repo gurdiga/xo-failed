@@ -643,7 +643,7 @@ input[type="radio"]+label,
 input[type="checkbox"]+label {
   width: auto;
   padding: 0;
-  margin-left: .2em;
+  margin-right: .2em;
   border-bottom: none;
 }
 
@@ -653,7 +653,7 @@ input[type="checkbox"]+label {
 }
 
 #adaugă-întîrziere,
-.încasări-pensie #adaugă,
+#adaugă-încasare-pensie,
 #categorii-taxe-şi-speze {
   font-size: small;
 }
@@ -664,7 +664,7 @@ input[type="checkbox"]+label {
   margin-left: -2.5em;
 }
 
-.încasări-pensie #adaugă:before,
+#adaugă-încasare-pensie:before,
 #cheltuieli .document .adaugă-destinatar:before,
 #destinatari .categorie:before,
 #categorii-taxe-şi-speze .categorie:before {
@@ -675,12 +675,12 @@ input[type="checkbox"]+label {
   color: #aaa;
 }
 
-.încasări-pensie #adaugă:before {
+#adaugă-încasare-pensie:before {
   margin-left: 0;
 }
 
 #adaugă-întîrziere,
-.încasări-pensie #adaugă,
+#adaugă-încasare-pensie,
 #cheltuieli .document .adaugă-destinatar,
 #destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
@@ -688,7 +688,7 @@ input[type="checkbox"]+label {
   white-space: nowrap;
 }
 
-.încasări-pensie #adaugă,
+#adaugă-încasare-pensie,
 #cheltuieli .document .adaugă-destinatar,
 #categorii-taxe-şi-speze .categorie .descriere,
 #categorii-taxe-şi-speze .categorie ol>li {
@@ -701,9 +701,9 @@ input[type="checkbox"]+label {
 }
 
 #adaugă-întîrziere:hover,
-.încasări-pensie #adaugă:hover:before,
-.încasări-pensie #adaugă:hover span,
-.încasări-pensie #adaugă li:hover,
+#adaugă-încasare-pensie:hover:before,
+#adaugă-încasare-pensie:hover span,
+#adaugă-încasare-pensie li:hover,
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover>span,
 #destinatari .categorie:hover:before,
@@ -716,7 +716,7 @@ input[type="checkbox"]+label {
   text-decoration: underline;
 }
 
-.încasări-pensie #adaugă:hover:before,
+#adaugă-încasare-pensie:hover:before,
 #cheltuieli .document .adaugă-destinatar:hover:before,
 #destinatari .categorie:hover:before,
 #categorii-taxe-şi-speze .categorie:hover:before {
@@ -1108,16 +1108,20 @@ input[type="checkbox"]+label {
   color: black;
 }
 
-.încasări-pensie#butonul {
-  padding-bottom: 1.5em;
+fieldset .conţinut>ul.încasări-pensie {
+  margin-bottom: .3em;
 }
 
-.încasări-pensie #adaugă {
-  margin-left: .5em;
+#adaugă-încasare-pensie {
+  margin: 1em 0 0 1em;
   display: inline-block;
 }
 
-.încasări-pensie #adaugă ul {
+.fieldset+#adaugă-încasare-pensie {
+  margin-top: 0;
+}
+
+#adaugă-încasare-pensie ul {
   display: none;
   position: absolute;
   margin: 0;
@@ -1126,8 +1130,8 @@ input[type="checkbox"]+label {
   width: 8em;
 }
 
-ul.fieldset {
-  margin: 0 -4px 1em;
+fieldset .conţinut > ul.fieldset {
+  margin: 1em -4px;
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
 }
@@ -1187,14 +1191,14 @@ input[readonly]:hover+span.ui-icon-locked {
   display: inline-block;
 }
 
-.întîrziere label.checkbox {
+label.checkbox {
   color: black;
   margin: 3px .3em 0 -2px;
   font-weight: bold;
   display: inline;
 }
 
-.întîrziere label.checkbox input {
+label.checkbox input {
   margin: 5px 0;
 }
 

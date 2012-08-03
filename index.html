@@ -1018,27 +1018,62 @@
       </ul>
 
 
-      <div class="încasări-pensie" id="butonul">
-        <ul>
-          <li>
-            <label for="cota">Cota</label>
-            <input id="cota"/>
-          </li>
-        </ul>
+      <div id="adaugă-încasare-pensie">
+        <span>Adaugă încasare</span>
 
-        <div id="adaugă">
-          <span>Adaugă încasare</span>
-          <ul class="cu umbră">
-            <li>periodică</li>
-            <li>restanţă</li>
-          </ul>
-        </div>
+        <ul class="cu umbră">
+          <li>periodică</li>
+          <li>restanţă</li>
+        </ul>
       </div>
 
+
+      <ul class="încasări-pensie" id="cîmp-cotă">
+        <li class="cîmp">
+          <label for="cota">Cota</label>
+          <input id="cota"/>
+        </li>
+      </ul>
+
+
+      <ul class="încasări-pensie" id="cîmp-sumă-fixă">
+        <li class="cîmp">
+          <label for="sumă-fixă">Sumă fixă</label>
+          <input id="sumă-fixă" class="sumă"/>
+          <b>MDL</b>
+        </li>
+      </ul>
+
+
+      <ul class="încasări-pensie" id="cîmp-mixtă">
+        <!-- include #cîmp-sumă-fixă -->
+        <!-- include #cîmp-cotă -->
+      </ul>
+
+
+      <ul id="modul-de-încasare">
+        <li class="mod-de-încasare">
+          <label>Modul de încasare</label>
+
+          <label class="checkbox">
+            <input type="radio" name="modul-de-încasare" value="cotă" checked/>cotă
+          </label>
+
+          <label class="checkbox">
+            <input type="radio" name="modul-de-încasare" value="sumă-fixă"/>sumă fixă
+          </label>
+
+          <label class="checkbox">
+            <input type="radio" name="modul-de-încasare" value="mixtă"/>mixtă
+          </label>
+        </li>
+      </ul>
 
       <div class="încasări-pensie" id="restanţă">
         <ul class="încasare restanţă fieldset eliminabil de tot">
           <li class="titlu">încasare restanţă</li>
+
+          <!-- include #modul-de-încasare -->
 
           <li>
             <label>Perioada</label>
@@ -1073,8 +1108,10 @@
         <ul class="încasare periodică fieldset eliminabil de tot">
           <li class="titlu">încasare periodică</li>
 
+          <!-- include #modul-de-încasare -->
+
           <li>
-            <label>Data</label>
+            <label>Data încasării</label>
             <input class="dată"/>
           </li>
 

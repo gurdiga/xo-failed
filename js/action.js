@@ -584,7 +584,8 @@ var Utilizator = {
 var Formular = {
   $: $('#formular'),
 
-  titlu: $('#formular h1'),
+  $titlu: $('#formular h1'),
+  $obiectulUrmăririi: $('#formular #obiectul-urmăririi'),
 
   init: function() {
     Formular.$
@@ -616,7 +617,7 @@ var Formular = {
 
   focusează: function() {
     $('html,body').animate({scrollTop: 0}, 500, function() {
-      Formular.titlu
+      Formular.$titlu
         .attr('tabindex', 1)
         .focus()
         .removeAttr('tabindex');
@@ -690,7 +691,7 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăObiectulUrmăririi() {
-      var $secţiune = $('#obiectul-urmăririi'),
+      var $secţiune = Formular.$obiectulUrmăririi,
           obiectulUrmăririi = colectează($secţiune);
 
       if (Formular.pensieDeÎntreţinere()) {
@@ -949,8 +950,8 @@ var Formular = {
       if (!încasări) return;
 
       var încasare, $încasare, i, periodică,
-          adaugăÎncasarePeriodică = $secţiune.find('#adaugă :contains("periodică")'),
-          adaugăÎncasareRestanţă = $secţiune.find('#adaugă :contains("restanţă")');
+          adaugăÎncasarePeriodică = $secţiune.find('#adaugă-încasare-pensie :contains("periodică")'),
+          adaugăÎncasareRestanţă = $secţiune.find('#adaugă-încasare-pensie :contains("restanţă")');
 
       for (i = 0; i < încasări.length; i++) {
         încasare = încasări[i];
@@ -980,7 +981,7 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăObiectulUrmăririi() {
-      var $secţiune = $('#obiectul-urmăririi'),
+      var $secţiune = Formular.$obiectulUrmăririi,
           secţiune = procedură['obiectul-urmăririi'];
 
       populeazăSecţiune($secţiune, secţiune);
@@ -1196,7 +1197,7 @@ var Formular = {
 
     $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
-    $('#obiectul-urmăririi').on('change', '#obiect', function() {
+    Formular.$obiectulUrmăririi.on('change', '#obiect', function() {
       var obiect = $(this).val(),
           genCreditor = $('#creditor #gen-persoană'),
           genDebitor = $('.debitor #gen-persoană');
@@ -1711,33 +1712,40 @@ var FormularPensie = {
       .on('înainte-de-deschidere', this.inserează)
       .on('închidere', this.elimină);
 
-    $('#obiectul-urmăririi')
+    Formular.$obiectulUrmăririi
       .on('input change', '.sumă.venit, .sumă.pensie, .valuta', this.caluleazăOnorariulŞiPensia)
-      .on('input', '#cota', this.recalulează);
+      .on('input', '#cota', this.recalculează)
+      .on('mouseenter', '#adaugă-încasare-pensie', this.opţiuni.afişează)
+      .on('mouseleave', '#adaugă-încasare-pensie', this.opţiuni.ascunde)
+      .on('click', '#adaugă-încasare-pensie li', this.adaugăÎncasare)
+      .on('change', '.mod-de-încasare :radio', this.afişeazăCîmpulRespectiv)
+      .on('change', '.mod-de-încasare :radio', this.recalculează);
   },
 
-  cota: function() {
-    var cota = FormularPensie.$cota.val().replace(/[^\/\d\.\,%]/g, ''); // igiena
+  cota: function($încasare) {
+    var cota = $încasare.find('#cota').val().replace(/[^\/\d\.\,%]/g, '');
 
     if (/%$/.test(cota)) cota = cota.replace('%', '/100');
 
     try {
       cota = eval(cota);
     } catch(e) {
-      cota = 0;
     }
 
-    return eval(cota);
+    if (!cota) cota = 0;
+
+    return cota;
   },
 
   caluleazăOnorariulŞiPensia: function(e) {
     var $încasare = $(this).closest('.încasare'),
         venit = $încasare.find('.sumă.venit').suma(),
-        cota = FormularPensie.cota(),
+        modulDeÎncasare = Formular.$obiectulUrmăririi.find('.mod-de-încasare :radio:checked').val(),
         $pensie = $încasare.find('.sumă.pensie'),
-        pensie;
+        cota, pensie;
 
-    if (cota) {
+    if (modulDeÎncasare == 'cotă' || modulDeÎncasare == 'mixtă') {
+      cota = FormularPensie.cota($încasare);
       pensie = venit * cota;
       $pensie.val(pensie.toFixed(2));
     } else {
@@ -1750,7 +1758,7 @@ var FormularPensie = {
     Onorariu.calculează();
   },
 
-  recalulează: function() {
+  recalculează: function() {
     FormularPensie.actualizeazăCîmpPensie();
 
     FormularPensie.$.find('.încasare .venit').each(function() {
@@ -1761,7 +1769,7 @@ var FormularPensie = {
   },
 
   actualizeazăCîmpPensie: function() {
-    var introdusCota = $.trim(FormularPensie.$cota.val()) !== '';
+    var introdusCota = $.trim(FormularPensie.$.find('#cota').val()) !== '';
 
     FormularPensie.$.find('.pensie')
       .attr('readonly', introdusCota)
@@ -1769,19 +1777,22 @@ var FormularPensie = {
   },
 
   opţiuni: {
-    afişează: function() {
-      $(this).find('ul').afişează();
-    },
-
-    ascunde: function() {
-      $(this).find('ul').ascunde();
-    }
+    afişează: function() {$(this).find('ul').afişează()},
+    ascunde: function() {$(this).find('ul').ascunde()}
   },
 
   adaugăÎncasare: function() {
-    var $încasare = $şabloane.find('.încasări-pensie#' + $(this).text() + '>.încasare').clone()
-      .removeAttr('id')
-      .insertBefore($(this).closest('#adaugă'))
+    var încasare = $şabloane.find('#' + $(this).text()).html(),
+        încasăriAdăugateDeja = Formular.$obiectulUrmăririi.find('.încasare').length;
+
+    încasare = FormulareŞablon.parseazăIncluderile(încasare);
+    încasare = încasare.replace(/modul-de-încasare/g, 'modul-de-încasare' + încasăriAdăugateDeja);
+
+    var $încasare = $(încasare);
+
+    $încasare
+      .insertBefore($(this).closest('#adaugă-încasare-pensie'))
+      .find('.mod-de-încasare :radio:checked').trigger('change').end()
       .effect('highlight', {}, 1200);
 
     if (!Formular.sePopulează) $încasare.find('input').first().focus();
@@ -1790,31 +1801,34 @@ var FormularPensie = {
   inserează: function() {
     if (!Formular.pensieDeÎntreţinere()) return;
 
-    var $secţiune = $(this).find('#obiectul-urmăririi').find('.conţinut');
+    var $secţiune = Formular.$obiectulUrmăririi.find('.conţinut');
 
     $secţiune
       .data('conţinut-iniţial', $secţiune.html())
-      .empty();
-
-    $şabloane.find('.încasări-pensie#butonul').clone()
-      .appendTo($secţiune)
-      .on('mouseenter', '#adaugă', FormularPensie.opţiuni.afişează)
-      .on('mouseleave', '#adaugă', FormularPensie.opţiuni.ascunde)
-      .on('click', '#adaugă li', FormularPensie.adaugăÎncasare);
+      .html($şabloane.find('#adaugă-încasare-pensie').clone());
 
     FormularPensie.$ = $secţiune;
-    FormularPensie.$cota = $secţiune.find('#cota');
-
     Formular.focusează();
   },
 
   elimină: function() {
     if (!Formular.pensieDeÎntreţinere()) return;
 
-    var secţiune = $(this).find('#obiectul-urmăririi').find('.conţinut');
+    var secţiune = Formular.$obiectulUrmăririi.find('.conţinut');
 
     secţiune.html(secţiune.data('conţinut-iniţial'));
     secţiune.removeData('conţinut-iniţial');
+  },
+
+  afişeazăCîmpulRespectiv: function() {
+    var $li = $(this).closest('li'),
+        şablon = $şabloane.find('#cîmp-' + this.value).html();
+
+    $li
+      .nextAll('.cîmp').remove().end()
+      .after(FormulareŞablon.parseazăIncluderile(şablon))
+      .nextAll('.cîmp')
+        .effect('highlight', {}, 1200);
   }
 };
 
@@ -1919,14 +1933,14 @@ var Onorariu = {
           '#obiect'
         ].join(',');
 
-    $('#obiectul-urmăririi').on(schimbareDate, cîmpuriRelevante, Onorariu.calculează);
+    Formular.$obiectulUrmăririi.on(schimbareDate, cîmpuriRelevante, Onorariu.calculează);
     Formular.$.on(schimbareDate, '.debitor #gen-persoană, #părţile-au-ajuns-la-conciliere', Onorariu.calculează);
   },
 
   calculează: function() {
     if (!Formular.deschis) return;
 
-    var $secţiune = $('#obiectul-urmăririi'),
+    var $secţiune = Formular.$obiectulUrmăririi,
         caracter = $secţiune.find('#caracter').val(),
         genPersoană = $('.debitor #gen-persoană').val(),
         onorariu = 0;
@@ -1973,20 +1987,20 @@ var Onorariu = {
     'stabilirea domiciliului copilului': {fizică: 200 * UC, juridică: 200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200 * UC, juridică:200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
-      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 200 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
-      juridică: function() { return 200 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 200 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'confiscarea bunurilor': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
-      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'nimicirea unor bunuri': {
-      fizică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() },
-      juridică: function() { return 100 * UC + .01 * $('#obiectul-urmăririi .sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'restabilirea la locul de muncă': {fizică: 200 * UC, juridică: 200 * UC},
     'aplicarea măsurilor de asigurare a acţiunii': {

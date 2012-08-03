@@ -1,6 +1,8 @@
 TODO:
 -----
 
+* foloseşte tranziţii CSS pentru afişarea formularului?
+* ascude header de la raport setînd margin-top la @page
 * afişează data modificării procedurii sub titlu
 * toolbar pentru acţiuni formular
   * de definit formele
