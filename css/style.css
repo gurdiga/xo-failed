@@ -372,6 +372,7 @@ ul {
 }
 
 #total,
+input.cotă,
 input.sumă {
   width: 6em;
 }
@@ -645,6 +646,7 @@ input[type="checkbox"]+label {
   padding: 0;
   margin-right: .2em;
   border-bottom: none;
+  cursor: pointer;
 }
 
 #categorii-taxe-şi-speze {
@@ -1138,7 +1140,7 @@ fieldset .conţinut > ul.fieldset {
 ul.fieldset .titlu {
   color: #bbb;
   font-size: small;
-  margin: -.7em 0 -.6em .35em;
+  margin: -.7em 0 -.3em .35em;
   background: white;
   position: relative;
   padding: 0 .2em;
@@ -1149,7 +1151,7 @@ ul.fieldset .titlu + li {
 }
 
 ul.fieldset .elimină {
-  top: -.5em;
+  top: -.4em;
   left: -.9em;
   padding-right: .5em;
   line-height: .8em;

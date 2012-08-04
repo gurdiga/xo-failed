@@ -1018,124 +1018,128 @@
       </ul>
 
 
-      <div id="adaugă-încasare-pensie">
-        <span>Adaugă încasare</span>
+      <div id="pensie-de-întreținere">
+        <!-- include #formular-încasare -->
 
-        <ul class="cu umbră">
-          <li>periodică</li>
-          <li>restanţă</li>
+        <button class="adaugă semiascuns">+</button>
+      </div>
+
+
+      <div id="formular-încasare">
+        <ul class="încasare fieldset eliminabil de tot">
+          <li class="titlu">încasare</li>
+
+          <li>
+            <label>Genul încasării</label>
+            <select id="genul-încasării" class="care schimbă formularul">
+              <option>periodică</option>
+              <option>restantă</option>
+            </select>
+          </li>
         </ul>
       </div>
 
 
-      <ul class="încasări-pensie" id="cîmp-cotă">
-        <li class="cîmp">
-          <label for="cota">Cota</label>
-          <input id="cota"/>
+      <ul class="conţinut genul-încasării" title="periodică">
+        <li>
+          <label>Data încasării</label>
+          <input class="dată"/>
+        </li>
+
+        <!-- include #cîmp-modul-de-cuantificare -->
+      </ul>
+
+
+      <ul class="conţinut genul-încasării" title="restantă">
+        <li>
+          <label>Perioada</label>
+          <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
+        </li>
+
+        <!-- include #cîmp-modul-de-cuantificare -->
+      </ul>
+
+
+      <ul id="cîmp-modul-de-cuantificare">
+        <li>
+          <label>Modul de cuantificare</label>
+          <select id="modul-de-cuantificare" class="care schimbă formularul">
+            <option>cotă</option>
+            <option>sumă fixă</option>
+            <option>mixtă</option>
+          </select>
         </li>
       </ul>
 
 
-      <ul class="încasări-pensie" id="cîmp-sumă-fixă">
+      <ul class="conţinut modul-de-cuantificare" title="cotă">
+        <!-- include #cîmp-cotă -->
+        <!-- include #cîmp-venitul -->
+        <!-- include #cîmp-pensia-cotă-calculată -->
+        <!-- include #cîmp-onorariul-calculat -->
+      </ul>
+
+
+      <ul class="conţinut modul-de-cuantificare" title="sumă fixă">
+        <!-- include #cîmp-pensia-sumă-fixă -->
+        <!-- include #cîmp-onorariul-calculat -->
+      </ul>
+
+
+      <ul class="conţinut modul-de-cuantificare" title="mixtă">
+        <!-- include #cîmp-cotă -->
+        <!-- include #cîmp-venitul -->
+        <!-- include #cîmp-pensia-cotă-calculată -->
+        <!-- include #cîmp-pensia-sumă-fixă -->
+        <!-- include #cîmp-onorariul-calculat -->
+      </ul>
+
+
+      <ul id="cîmp-cotă">
         <li class="cîmp">
-          <label for="sumă-fixă">Sumă fixă</label>
-          <input id="sumă-fixă" class="sumă"/>
+          <label>Cota din venit</label>
+          <input id="cota-din-venit" class="cotă"/>
+          <span class="şoaptă">Exemple: 1/3, 25%</span>
+        </li>
+      </ul>
+
+
+      <ul id="cîmp-pensia-sumă-fixă">
+        <li class="cîmp">
+          <label>Pensia sumă fixă</label>
+          <input id="pensia-suma-fixă" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
 
 
-      <ul class="încasări-pensie" id="cîmp-mixtă">
-        <!-- include #cîmp-sumă-fixă -->
-        <!-- include #cîmp-cotă -->
-      </ul>
-
-
-      <ul id="modul-de-încasare">
-        <li class="mod-de-încasare">
-          <label>Modul de încasare</label>
-
-          <label class="checkbox">
-            <input type="radio" name="modul-de-încasare" value="cotă" checked/>cotă
-          </label>
-
-          <label class="checkbox">
-            <input type="radio" name="modul-de-încasare" value="sumă-fixă"/>sumă fixă
-          </label>
-
-          <label class="checkbox">
-            <input type="radio" name="modul-de-încasare" value="mixtă"/>mixtă
-          </label>
+      <ul id="cîmp-onorariul-calculat">
+        <li>
+          <label>Onorariul calculat</label>
+          <input id="onorariul-calculat"class="sumă" readonly/>
+          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+          <b>MDL</b>
         </li>
       </ul>
 
-      <div class="încasări-pensie" id="restanţă">
-        <ul class="încasare restanţă fieldset eliminabil de tot">
-          <li class="titlu">încasare restanţă</li>
 
-          <!-- include #modul-de-încasare -->
-
-          <li>
-            <label>Perioada</label>
-            <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
-          </li>
-
-          <li>
-            <label>Venit calculat</label>
-            <input class="sumă venit irelevant-pentru-onorariu"/>
-            <select class="valuta"></select>
-          </li>
-
-          <li>
-            <label>Pensia fixă</label>
-            <input class="sumă pensie"/>
-            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-            <b>MDL</b>
-          </li>
-
-          <li>
-            <label>Onorariul</label>
-            <input class="sumă onorariu calculat" readonly/>
-            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-            <b>MDL</b>
-          </li>
-
-        </ul>
-      </div>
+      <ul id="cîmp-pensia-cotă-calculată">
+        <li>
+          <label>Pensia cotă calculată</label>
+          <input id="pensia-cotă-calculată" class="sumă" readonly/>
+          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+          <b>MDL</b>
+        </li>
+      </ul>
 
 
-      <div class="încasări-pensie" id="periodică">
-        <ul class="încasare periodică fieldset eliminabil de tot">
-          <li class="titlu">încasare periodică</li>
-
-          <!-- include #modul-de-încasare -->
-
-          <li>
-            <label>Data încasării</label>
-            <input class="dată"/>
-          </li>
-
-          <li>
-            <label>Venit calculat</label>
-            <input class="sumă venit irelevant-pentru-onorariu"/>
-            <select class="valuta"></select>
-          </li>
-
-          <li>
-            <label>Pensia fixă</label>
-            <input class="sumă pensie"/>
-            <b>MDL</b>
-          </li>
-
-          <li>
-            <label>Onorariul</label>
-            <input class="sumă onorariu calculat" readonly/>
-            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-            <b>MDL</b>
-          </li>
-
-        </ul>
-      </div>
+      <ul id="cîmp-venitul">
+        <li>
+          <label>Venitul</label>
+          <input id="venitul" class="sumă irelevant-pentru-onorariu"/>
+          <b>MDL</b>
+        </li>
+      </ul>
 
 
       <div id="adaugă-întîrziere">+ Adaugă întîrziere</div>
