@@ -1162,7 +1162,7 @@ button.adaugă.încasare {
 }
 
 .fieldset + button.adaugă.încasare {
-  margin-top: .4em;
+  margin-top: 0;
 }
 
 #adaugă-întîrziere {
