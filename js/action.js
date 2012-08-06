@@ -1177,9 +1177,11 @@ var Formular = {
   },
 
   deschide: function() {
-    Formular.$
-      .trigger('înainte-de-deschidere')
-      .fadeIn('fast');
+    $.fx.off = true;
+    Formular.$.trigger('înainte-de-deschidere');
+    $.fx.off = false;
+
+    Formular.$.fadeIn('fast');
 
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
