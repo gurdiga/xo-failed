@@ -1157,6 +1157,14 @@ input[readonly]:hover+span.ui-icon-locked {
   opacity: .3;
 }
 
+button.adaugă.încasare {
+  margin-top: .7em;
+}
+
+.fieldset + button.adaugă.încasare {
+  margin-top: .4em;
+}
+
 #adaugă-întîrziere {
   margin-left: 1em;
   cursor: pointer;
