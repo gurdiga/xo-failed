@@ -16,9 +16,3 @@ TODO:
   * menţine istoria parolelor pentru a preveni repetarea
   * blocare după 3 încercări greşite
   * istoria înregistrărilor
-
-Causality
----------
-
-* why <ol> for something that looke like a table? (.subformular)
-  less noisy
