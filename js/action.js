@@ -1625,7 +1625,7 @@ var Calendar = {
 
     if (el.data('id')) el.attr('id', el.data('id'));
 
-    el.datepicker('destroy').focus();
+    el.datepicker('destroy').focus().trigger('input');
   },
 
   init: function() {
@@ -1724,57 +1724,123 @@ var FormularPensie = {
       .on('click', 'button.adaugă', this.adaugăÎncasare);
   },
 
-  cota: function($încasare) {
-    var cota = $încasare.find('#cota-din-venit').val().replace(/[^\/\d\.\,%]/g, '');
+  evalueazăCota: function(cota) {
+    cota = $.trim(cota).replace(/[^\/\d\.\,%]/g, '');
 
     if (/%$/.test(cota)) cota = cota.replace('%', '/100');
 
     try {
       cota = eval(cota);
     } catch(e) {
+      cota = 0;
     }
-
-    if (!cota) cota = 0;
 
     return cota;
   },
 
   caluleazăOnorariulŞiPensia: function(e) {
     var $încasare = $(this).closest('.încasare'),
-        modulDeCuantificare = $încasare.find('#modul-de-cuantificare').val(),
+        genulÎncasării = $încasare.find('#genul-încasării').val(),
+        modulDeCuantificare = $încasare.find('#modul-de-cuantificare-' + genulÎncasării).val(),
         cota, pensia;
 
-    if (modulDeCuantificare == 'cotă' || modulDeCuantificare == 'mixtă') {
-      if (isNaN(FormularPensie.cota($încasare))) return;
+    FormularPensie.calculare[genulÎncasării + ' ' + modulDeCuantificare]($încasare);
+  },
+
+  calculare: {
+    'periodică cotă': function($încasare) {
+      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+          venitul = $încasare.find('#venitul').suma(),
+          pensia = venitul * cota;
+
+      if (isNaN(pensia)) return;
+
+      $încasare.find('#pensie-cotă').val(pensia.toFixed(2));
+      $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(pensia).toFixed(2));
+    },
+
+    'periodică sumă fixă': function($încasare) {
+      var pensia = $încasare.find('#pensia-lunară-suma-fixă').suma();
+
+      if (isNaN(pensia)) return;
+
+      $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(pensia).toFixed(2));
+    },
+
+    'periodică mixtă': function($încasare) {
+      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+          venitul = $încasare.find('#venitul').suma(),
+          pensiaCotă = venitul * cota;
+
+      if (isNaN(pensiaCotă)) return;
+
+      $încasare.find('#pensie-cotă').val(pensiaCotă.toFixed(2));
+
+      var pensiaSumăFixă = $încasare.find('#pensia-lunară-suma-fixă').suma(),
+          totalPensie = pensiaCotă + pensiaSumăFixă;
+
+      if (isNaN(totalPensie)) return;
+
+      $încasare.find('#total-pensie-general').val(totalPensie.toFixed(2));
+      $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(totalPensie).toFixed(2));
+    },
+
+    'restantă cotă': function($încasare) {
+      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+          totalVenit = $încasare.find('#total-venit-pe-perioadă').suma(),
+          totalPensieCotă = cota * totalVenit;
+
+      if (isNaN(totalPensieCotă)) return;
+
+      $încasare.find('#total-pensie-cotă').val(totalPensieCotă.toFixed(2));
+      $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(totalPensieCotă).toFixed(2));
+    },
+
+    'restantă sumă fixă': function($încasare) {
+      var numărulDeLuni = FormularPensie.numărulDeLuni($încasare),
+          pensiaLunară = $încasare.find('#pensia-lunară-suma-fixă').suma(),
+          totalPensie = pensiaLunară * numărulDeLuni;
+
+      if (isNaN(totalPensie)) return;
+
+      $încasare.find('#total-pensie-sumă-fixă').val(totalPensie.toFixed(2));
+      $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(totalPensie).toFixed(2));
+    },
+
+    'restantă mixtă': function($încasare) {
+      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+          totalVenit = $încasare.find('#total-venit-pe-perioadă').suma(),
+          totalPensieCotă = cota * totalVenit;
+
+      if (isNaN(totalPensieCotă)) return;
+
+      $încasare.find('#total-pensie-cotă').val(totalPensieCotă.toFixed(2));
+
+      var numărulDeLuni = FormularPensie.numărulDeLuni($încasare),
+          pensiaLunarăSumăFixă = $încasare.find('#pensia-lunară-suma-fixă').suma(),
+          totalPensieSumăFixă = numărulDeLuni * pensiaLunarăSumăFixă;
+
+      if (isNaN(totalPensieSumăFixă)) return;
+
+      $încasare.find('#total-pensie-sumă-fixă').val(totalPensieSumăFixă.toFixed(2));
+
+      var totalPensie = totalPensieCotă + totalPensieSumăFixă;
+
+      $încasare.find('#total-pensie-general').val(totalPensie.toFixed(2));
+      $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(totalPensie).toFixed(2));
     }
+  },
 
-    switch (modulDeCuantificare) {
-    case 'cotă':
-      pensia = calculeazăPensiaCotă($încasare);
-      break;
+  numărulDeLuni: function($încasare) {
+    var începutPerioadă = $încasare.find('#început-perioadă').val(),
+        sfîrşitPerioadă = $încasare.find('#sfîrşit-perioadă').val();
 
-    case 'sumă fixă':
-      pensia = $încasare.find('#pensia-suma-fixă').suma();
-      break;
+    if (!RE_FORMATUL_DATEI.test(începutPerioadă) || !RE_FORMATUL_DATEI.test(sfîrşitPerioadă)) return 0;
 
-    case 'mixtă':
-      pensia = calculeazăPensiaCotă($încasare) + $încasare.find('#pensia-suma-fixă').suma();
-      $încasare.find('#total-pensie').val(pensia.toFixed(2));
-      break;
-    }
+    începutPerioadă = moment(începutPerioadă, FORMATUL_DATEI);
+    sfîrşitPerioadă = moment(sfîrşitPerioadă, FORMATUL_DATEI);
 
-    $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(pensia).toFixed(2));
-
-    Onorariu.calculează();
-
-
-    function calculeazăPensiaCotă($încasare) {
-      var pensia = $încasare.find('#venitul').suma() * FormularPensie.cota($încasare);
-
-      $încasare.find('#pensia-cotă-calculată').val(pensia.toFixed(2));
-
-      return pensia;
-    }
+    return sfîrşitPerioadă.diff(începutPerioadă, 'months', true);
   },
 
   adaugăÎncasare: function() {
@@ -1908,7 +1974,7 @@ var DobîndaDeÎntîrziere = {
 
 var Onorariu = {
   init: function() {
-    var schimbareDate = 'keyup update paste change',
+    var schimbareDate = 'keyup update paste change input',
         cîmpuriRelevante = [
           '.sumă:not(.irelevant-pentru-onorariu)',
           '.sumă:not(.calculat)',
