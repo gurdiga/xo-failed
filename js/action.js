@@ -673,8 +673,11 @@ var Formular = {
           date = {},
           cîmpuri = [
             'label+:input:not(.calculat):not(button):last-child',
-            'label+:input.dată',
-            'label+:input.foarte.lat',
+            'label+input.dată:not(.perioadă)',
+            '.dată.perioadă',
+            'label+input.sumă',
+            'label+input.cotă',
+            'label+select.foarte.lat',
             '.label+:input:not(.calculat):not(button)'
           ].join(',');
 
@@ -701,7 +704,7 @@ var Formular = {
           obiectulUrmăririi = colectează($secţiune);
 
       if (Formular.pensieDeÎntreţinere()) {
-        obiectulUrmăririi['încasări'] = colecteazăÎncasări($secţiune);
+        obiectulUrmăririi = {'încasări': colecteazăÎncasări($secţiune)};
       }
 
       if (obiectulUrmăririi.caracter == 'pecuniar') {
@@ -726,27 +729,11 @@ var Formular = {
         };
       }).get();
     }
+
     // ------------------------------------------
     function colecteazăÎncasări($secţiune) {
-      return $secţiune.find('.încasare').map(function() {
-        var $încasare = $(this),
-            încasare = {};
-
-        if ($încasare.is('.periodică')) {
-          încasare.data = $încasare.find('.dată').val();
-        } else {
-          încasare.început = $încasare.find('.dată.început').val();
-          încasare.sfîrşit = $încasare.find('.dată.sfîrşit').val();
-        }
-
-        încasare.venit = {
-          suma: $încasare.find('.sumă.venit').val(),
-          valută: $încasare.find('.valuta').val()
-        };
-        încasare.pensie = $încasare.find('.sumă.pensie').val();
-        încasare.onorariu = $încasare.find('.sumă.onorariu').val();
-
-        return încasare;
+      return $secţiune.find('.fieldset.încasare').map(function() {
+        return colectează(this);
       }).get();
     }
 
@@ -959,31 +946,18 @@ var Formular = {
     function populeazăPensieÎntreţinere($secţiune, încasări) {
       if (!încasări) return;
 
-      var încasare, $încasare, i, periodică,
-          adaugăÎncasarePeriodică = $secţiune.find('#adaugă-încasare-pensie :contains("periodică")'),
-          adaugăÎncasareRestanţă = $secţiune.find('#adaugă-încasare-pensie :contains("restanţă")');
+
+      var $încasare, i, prima = true,
+          buton = $secţiune.find('.adaugă.încasare');
 
       for (i = 0; i < încasări.length; i++) {
-        încasare = încasări[i];
-        periodică = typeof încasare.început == 'undefined';
+        if (!prima) buton.click();
 
-        if (periodică) {
-          adaugăÎncasarePeriodică.click();
-          $încasare = $secţiune.find('.încasare.periodică').last();
-          $încasare.find('.dată').val(încasare.data);
-        } else {
-          adaugăÎncasareRestanţă.click();
-          $încasare = $secţiune.find('.încasare.restanţă').last();
-          $încasare
-            .find('.început').val(încasare.început).end()
-            .find('.sfîrşit').val(încasare.sfîrşit).end();
-        }
+        $încasare = $secţiune.find('.fieldset.încasare:last');
+        populeazăSecţiune($încasare, încasări[i]);
+        console.log($încasare, încasări[i]);
 
-        $încasare
-          .find('.venit').val(încasare.venit.suma).end()
-          .find('.valută').val(încasare.venit.valuta).end()
-          .find('.onorariu').val(încasare.onorariu).end()
-          .find('.pensie').val(încasare.pensie).end();
+        prima = false;
       }
     }
 
