@@ -1705,9 +1705,10 @@ var CîmpuriPersonalizate = {
         .find('.etichetă')
           .val(buton.data('etichetă'))
           .focus()
-          .select()
         .end()
-        .effect('highlight', {}, 1200);
+        .show('blind', function() {
+          $(this).find('.etichetă').select();
+        });
   }
 };
 

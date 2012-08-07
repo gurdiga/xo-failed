@@ -1,10 +1,7 @@
 TODO:
 -----
 
-* mv .first() :first ?
-* ascude header de la raport setînd margin-top la @page
 * afişează data modificării procedurii sub titlu
-* fade/slide in custom field?
 * toolbar pentru acţiuni formular
   * de definit formele
 * listarea tuturor procedurilor
