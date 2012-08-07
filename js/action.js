@@ -1739,7 +1739,7 @@ var FormularPensie = {
   },
 
   cota: function($încasare) {
-    var cota = $încasare.find('#cota').val().replace(/[^\/\d\.\,%]/g, '');
+    var cota = $încasare.find('#cota-din-venit').val().replace(/[^\/\d\.\,%]/g, '');
 
     if (/%$/.test(cota)) cota = cota.replace('%', '/100');
 
@@ -1755,31 +1755,53 @@ var FormularPensie = {
 
   caluleazăOnorariulŞiPensia: function(e) {
     var $încasare = $(this).closest('.încasare'),
-        venit = $încasare.find('.sumă.venit').suma(),
-        modulDeÎncasare = $încasare.find('.mod-de-încasare :radio:checked').val(),
-        $pensie = $încasare.find('.sumă.pensie'),
-        cota, pensie;
+        modulDeCuantificare = $încasare.find('#modul-de-cuantificare').val(),
+        cota, pensia;
 
-    if (modulDeÎncasare == 'cotă' || modulDeÎncasare == 'mixt') {
-      cota = FormularPensie.cota($încasare);
-      pensie = venit * cota;
-      $pensie.val(pensie.toFixed(2));
-    } else {
-      if (e == 'modificare-cotă') $pensie.val('');
-      pensie = $pensie.suma();
+    if (modulDeCuantificare == 'cotă' || modulDeCuantificare == 'mixtă') {
+      if (isNaN(FormularPensie.cota($încasare))) return;
     }
 
-    $încasare.find('.sumă.onorariu').val(Onorariu.pecuniar(pensie).toFixed(2));
+    switch (modulDeCuantificare) {
+    case 'cotă':
+      pensia = calculeazăPensiaCotă($încasare);
+      break;
+
+    case 'sumă fixă':
+      pensia = $încasare.find('#pensia-suma-fixă').suma();
+      break;
+
+    case 'mixtă':
+      pensia = calculeazăPensiaCotă($încasare) + $încasare.find('#pensia-suma-fixă').suma();
+      $încasare.find('#total-pensie').val(pensia.toFixed(2));
+      break;
+    }
+
+    $încasare.find('#onorariul-calculat').val(Onorariu.pecuniar(pensia).toFixed(2));
 
     Onorariu.calculează();
+
+
+    function calculeazăPensiaCotă($încasare) {
+      var pensia = $încasare.find('#venitul').suma() * FormularPensie.cota($încasare);
+
+      $încasare.find('#pensia-cotă-calculată').val(pensia.toFixed(2));
+
+      return pensia;
+    }
   },
 
   adaugăÎncasare: function() {
     var $încasare = $($şabloane.find('#formular-încasare').html());
 
     $încasare
+      .hide()
       .insertBefore(this)
-      .find('#genul-încasării').trigger('change');
+      .show('blind');
+
+    $.fx.off = true;
+    $încasare.find('#genul-încasării').trigger('change');
+    $.fx.off = false;
 
     if (!Formular.sePopulează) $încasare.find('input').first().focus();
   },
@@ -1929,7 +1951,7 @@ var Onorariu = {
       onorariu = typeof valoare == 'function' ? valoare() : valoare;
     } else {
       if (Formular.pensieDeÎntreţinere()) {
-        onorariu = $secţiune.find('.încasare .onorariu').suma();
+        onorariu = $secţiune.find('.încasare #onorariul-calculat').suma();
       } else {
         var total = $secţiune.find('ul:first .sumă:not(.calculat), .întîrziere .dobîndă').suma();
 

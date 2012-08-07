@@ -1105,11 +1105,7 @@ input[type="checkbox"]+label {
   color: black;
 }
 
-fieldset .conţinut>ul.încasări-pensie {
-  margin-bottom: .3em;
-}
-
-fieldset .conţinut > ul.fieldset {
+fieldset .conţinut ul.fieldset {
   margin: 1em -4px;
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
