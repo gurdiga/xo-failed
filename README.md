@@ -1,7 +1,6 @@
 TODO:
 -----
 
-* foloseşte tranziţii CSS pentru afişarea formularului?
 * mv .first() :first ?
 * ascude header de la raport setînd margin-top la @page
 * afişează data modificării procedurii sub titlu

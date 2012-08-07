@@ -1172,7 +1172,12 @@ var Formular = {
 
   închide: function() {
     Formular.$
-      .fadeOut('fast', function() {location.hash = ''})
+      .stop(true, true)
+      .find('.instrumente').fadeOut().end()
+      .animate({'top': $(window).height()}, function() {
+        $(this).hide();
+        location.hash = '';
+      })
       .trigger('închidere');
   },
 
@@ -1181,7 +1186,12 @@ var Formular = {
     Formular.$.trigger('înainte-de-deschidere');
     $.fx.off = false;
 
-    Formular.$.fadeIn('fast');
+    Formular.$
+      .stop(true, true)
+      .find('.instrumente').fadeIn().end()
+      .css('top', $(window).height())
+      .show()
+      .animate({'top': '75px'});
 
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
