@@ -955,7 +955,6 @@ var Formular = {
 
         $încasare = $secţiune.find('.fieldset.încasare:last');
         populeazăSecţiune($încasare, încasări[i]);
-        console.log($încasare, încasări[i]);
 
         prima = false;
       }
