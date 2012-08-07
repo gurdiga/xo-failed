@@ -1,6 +1,7 @@
 // valoarea unităţii convenţionale
 var UC = 20;
-var FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/;
+var RE_FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/,
+    FORMATUL_DATEI = 'DD.MM.YYYY';
 
 window.$şabloane = $('#şabloane');
 window.skipEventOnce = {};
@@ -379,7 +380,7 @@ var Cheltuieli = {
           item = bifa.closest('.item');
 
       if (bifa.is(':checked') && $.trim(data.val()) == '') {
-        data.val(moment().format('DD.MM.YYYY'));
+        data.val(moment().format(FORMATUL_DATEI));
       }
 
       item.toggleClass('achitat', bifa.is(':checked'));
@@ -1679,6 +1680,18 @@ var Calendar = {
             }
 
             cîmp.datepicker(Calendar.opţiuni);
+
+            if (cîmp.is('.dată.sfîrşit.perioadă')) {
+              var începutPerioadă = cîmp.siblings('.început.perioadă');
+
+              începutPerioadă = $.trim(începutPerioadă.val());
+
+              if (RE_FORMATUL_DATEI.test(începutPerioadă)) {
+                var minDate = moment(începutPerioadă, FORMATUL_DATEI).add('days', 1).toDate();
+
+                cîmp.datepicker('option', 'minDate', minDate);
+              }
+            }
           }
 
           cîmp.datepicker('show');
@@ -1841,15 +1854,15 @@ var DobîndaDeÎntîrziere = {
         rata = întîrziere.rata,
         suma = întîrziere.suma;
 
-    if (!FORMATUL_DATEI.test(începutPerioadă) || !FORMATUL_DATEI.test(sfîrşitPerioadă)) return -1;
+    if (!RE_FORMATUL_DATEI.test(începutPerioadă) || !RE_FORMATUL_DATEI.test(sfîrşitPerioadă)) return -1;
 
-    începutPerioadă = moment(începutPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
-    sfîrşitPerioadă = moment(sfîrşitPerioadă, 'DD.MM.YYYY').format('YYYY-MM-DD');
+    începutPerioadă = moment(începutPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
+    sfîrşitPerioadă = moment(sfîrşitPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
     rata = parseInt(rata);
 
     DobîndaDeÎntîrziere.raport = {
-      începutPerioadă: moment(începutPerioadă, 'YYYY-MM-DD').format('DD.MM.YYYY'),
-      sfîrşitPerioadă: moment(sfîrşitPerioadă, 'YYYY-MM-DD').format('DD.MM.YYYY'),
+      începutPerioadă: moment(începutPerioadă, 'YYYY-MM-DD').format(FORMATUL_DATEI),
+      sfîrşitPerioadă: moment(sfîrşitPerioadă, 'YYYY-MM-DD').format(FORMATUL_DATEI),
       rata: rata,
       suma: suma,
       rînduri: {}
@@ -1903,7 +1916,7 @@ var DobîndaDeÎntîrziere = {
       dobînda += dobîndaPerRînd;
 
       DobîndaDeÎntîrziere.raport.rînduri[data] = {
-        data: moment(primulRînd ? începutPerioadă : data, 'YYYY-MM-DD').format('DD.MM.YYYY'),
+        data: moment(primulRînd ? începutPerioadă : data, 'YYYY-MM-DD').format(FORMATUL_DATEI),
         durata: durate[data],
         rata: RateDeBază[data],
         dobînda: dobîndaPerRînd
