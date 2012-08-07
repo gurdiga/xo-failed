@@ -399,6 +399,13 @@ input.sumă {
   outline: none;
 }
 
+#formular #data-ultimei-modificări {
+  color: gray;
+  font-size: small;
+  position: absolute;
+  margin: 4em 0 0 .5em;
+}
+
 #formular #număr {
   margin-left: .3em;
 }

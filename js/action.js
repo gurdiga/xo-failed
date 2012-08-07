@@ -593,12 +593,17 @@ var Formular = {
       .on('click', 'button.salvează', Formular.trimite)
       .on('keydown', function(e) {if (e.keyCode == 27) Formular.închide()})
       .on('închidere', Formular.resetează)
-      .on('populat iniţializat', Formular.calculează);
+      .on('populat iniţializat', Formular.calculează)
+      .on('salvat', Formular.actualizeazăDataUltimeiModificări);
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
       else Formular.închide();
     });
+  },
+
+  actualizeazăDataUltimeiModificări: function(e, procedură) {
+    Formular.$.find('#data-ultimei-modificări span').text(procedură.dataUltimeiModificări);
   },
 
   calculează: function() {
@@ -871,6 +876,8 @@ var Formular = {
 
     // -----
     function post() {
+      procedură.dataUltimeiModificări = moment().format('DD.MM.YYYY HH:mm');
+
       $.post('/date/' + Utilizator.login + '/proceduri/' + procedură.număr, JSON.stringify(procedură), function() {
         if (Formular.seCreazăProcedurăNouă()) {
           window.skipEventOnce.hashchange = true;
@@ -879,9 +886,9 @@ var Formular = {
           Formular.seteazăTitlu();
         }
 
+        Formular.$.trigger('salvat', [procedură]);
         Formular.focusează();
-
-        $('.instrumente .salvează+.mesaj')
+        Formular.$.find('.instrumente .salvează+.mesaj')
           .fadeIn()
           .delay(1000)
           .fadeOut();
@@ -907,6 +914,8 @@ var Formular = {
   populează: function(procedură) {
     $.fx.off = true;
     Formular.sePopulează = true;
+
+    Formular.$.find('#data-ultimei-modificări span').text(procedură.dataUltimeiModificări);
 
     populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);
     populeazăObiectulUrmăririi();
@@ -1205,6 +1214,7 @@ var Formular = {
     $.fx.off = true;
     Formular.seIniţializează = true;
 
+    Formular.$.find('#data-ultimei-modificări span').text('încă nu e salvată');
     $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
     Formular.$obiectulUrmăririi.on('change', '#obiect', function() {
