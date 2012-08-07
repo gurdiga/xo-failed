@@ -1718,8 +1718,6 @@ var FormularPensie = {
   $cota: $(),
 
   init: function() {
-    if (!Formular.pensieDeÎntreţinere()) return;
-
     Formular.$
       .on('înainte-de-deschidere', this.inserează)
       .on('închidere', this.elimină);
@@ -1776,6 +1774,8 @@ var FormularPensie = {
   },
 
   inserează: function() {
+    if (!Formular.pensieDeÎntreţinere()) return;
+
     var $secţiune = Formular.$obiectulUrmăririi.find('.conţinut'),
         şablon = FormulareŞablon.parseazăIncluderile($şabloane.find('#pensie-de-întreținere').html());
 
