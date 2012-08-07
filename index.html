@@ -1088,7 +1088,7 @@
       <ul class="conţinut modul-de-cuantificare-restantă" title="cotă">
         <!-- include #cîmpul-cotă -->
         <!-- include #cîmpul-total-venit-pe-perioadă -->
-        <!-- include #cîmpul-pensie-cotă -->
+        <!-- include #cîmpul-total-pensie-cotă -->
         <!-- include #cîmpul-onorariul-calculat -->
       </ul>
 
@@ -1119,7 +1119,7 @@
       <ul class="conţinut modul-de-cuantificare-restantă" title="mixtă">
         <!-- include #cîmpul-cotă -->
         <!-- include #cîmpul-total-venit-pe-perioadă -->
-        <!-- include #cîmpul-pensie-cotă -->
+        <!-- include #cîmpul-total-pensie-cotă -->
         <!-- include #cîmpul-pensia-sumă-fixă -->
         <!-- include #cîmpul-total-pensie-sumă-fixă -->
         <!-- include #cîmpul-total-pensie-general -->
@@ -1159,6 +1159,16 @@
         <li>
           <label>Pensie cotă</label>
           <input id="pensie-cotă" class="sumă" readonly/>
+          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+          <b>MDL</b>
+        </li>
+      </ul>
+
+
+      <ul id="cîmpul-total-pensie-cotă">
+        <li>
+          <label>Total pensie cotă</label>
+          <input id="total-pensie-cotă" class="sumă" readonly/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
