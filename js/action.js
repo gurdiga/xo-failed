@@ -1215,7 +1215,7 @@ var Formular = {
     Formular.seIniţializează = true;
 
     Formular.$.find('#data-ultimei-modificări span').text('încă nu e salvată');
-    $('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
+    Formular.$.find('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
     Formular.$obiectulUrmăririi.on('change', '#obiect', function() {
       var obiect = $(this).val(),
