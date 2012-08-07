@@ -1,17 +1,11 @@
 TODO:
 -----
 
-* afişează data modificării procedurii sub titlu
 * toolbar pentru acţiuni formular
   * de definit formele
 * listarea tuturor procedurilor
-* notificare
-  * e bine să faceţi cutare şi cutare
-  * valoarea nu este validă
-  * ca să se poată calcula PI trebuie să introduceţi Cota
-* de pus recentele într-un fişier?
 * “poliţă” temporară
-* cu privire la conturi:
+* cu privire la conturile de utilizator:
   * înregistrare?
   * dezactivare după o perioadă de inactivitate
   * autentificarea mutuală
