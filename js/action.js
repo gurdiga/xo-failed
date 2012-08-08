@@ -527,6 +527,7 @@ var ButonDeEliminare = {
   ascunde: function() {
     ButonDeEliminare.$
       .parent().removeClass('spre-eliminare').end()
+      .stop(true, true)
       .appendTo(document.body);
   },
 
