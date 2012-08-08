@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import url(http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext);
+@import url(//fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext);
 
 body {
   font: 14px Arial, sans-serif;
@@ -154,7 +154,7 @@ button {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/images/ui-icons_222222_256x240.png');
+  background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/images/ui-icons_222222_256x240.png');
   content: ' ';
 }
 
@@ -360,6 +360,15 @@ fieldset legend label {
   padding: 0;
   color: white;
   width: auto;
+}
+
+fieldset legend .butoane-per-secţiune {
+  float: right;
+  margin: .7em .7em 0 0;
+}
+
+fieldset legend .butoane-per-secţiune .ui-icon {
+  background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/images/ui-icons_cccccc_256x240.png');
 }
 
 fieldset .conţinut>ul {

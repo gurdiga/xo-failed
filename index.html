@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>Consola executorului</title>
-    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css"/>
+    <link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
 
     <script type="text/javascript">
@@ -209,7 +209,19 @@
 
           <div class="coloană">
             <fieldset id="obiectul-urmăririi">
-              <legend><label>Obiectul urmăririi</label></legend>
+              <legend>
+                <label>Obiectul urmăririi</label>
+
+                <div class="butoane-per-secţiune">
+                  <button class="ui-icon ui-icon-print semiascuns" title="Imprimare"></button>
+                  <ul class="opţiuni" style="display: none">
+                    <li>Formular cutare A</li>
+                    <li>Formular cutare B</li>
+                    <li>Formular cutare C</li>
+                    <li>Formular cutare D</li>
+                  </ul>
+                </div>
+              </legend>
 
               <div class="conţinut">
                 <ul>
@@ -1250,8 +1262,8 @@
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
     <script src="/js/lib.js"></script>
     <script src="/rate-bnm/current.js"></script>
     <script src="/rate-bnm/rata_de_bază.js"></script>
