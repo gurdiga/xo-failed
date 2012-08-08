@@ -1539,7 +1539,7 @@ var CalculatorDobîndaÎntîrziere = {
   calculeazăDobînda: function() {
     var secţiune = CalculatorDobîndaÎntîrziere.$,
         întîrziere = Întîrzieri.colectează(secţiune),
-        dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
+        dobînda = (întîrziere);
 
     secţiune.find('#dobînda').val(dobînda);
   }
@@ -1893,7 +1893,7 @@ var DobîndaDeÎntîrziere = {
         rata = întîrziere.rata,
         suma = întîrziere.suma;
 
-    if (!RE_FORMATUL_DATEI.test(începutPerioadă) || !RE_FORMATUL_DATEI.test(sfîrşitPerioadă)) return -1;
+    if (!RE_FORMATUL_DATEI.test(începutPerioadă) || !RE_FORMATUL_DATEI.test(sfîrşitPerioadă)) return;
 
     începutPerioadă = moment(începutPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
     sfîrşitPerioadă = moment(sfîrşitPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
@@ -2161,7 +2161,8 @@ var Întîrzieri = {
     Formular.$
       .on('change', '#caracter', this.adaugăButon)
       .on('închidere', this.elimină)
-      .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda);
+      .on('input click change', ':input:not(#dobînda)', this.calculeazăDobînda)
+      .on('click', '#adaugă-întîrziere', this.adaugă);
   },
 
   adaugăButon: function() {
@@ -2169,8 +2170,7 @@ var Întîrzieri = {
 
     if (caracter.val() == 'pecuniar') {
       $şabloane.find('#adaugă-întîrziere').clone()
-        .appendTo(caracter.closest('.conţinut'))
-        .on('click', Întîrzieri.adaugă);
+        .appendTo(caracter.closest('.conţinut'));
     } else {
       Formular.$.find('#adaugă-întîrziere, .întîrziere').remove();
     }
@@ -2183,7 +2183,9 @@ var Întîrzieri = {
       .find(':radio').attr('name', function(i, name) {
         return name + $secţiune.find('.întîrziere').length;
       }).end()
-      .insertBefore(this);
+      .hide()
+      .insertBefore(this)
+      .show('blind');
   },
 
   elimină: function() {
