@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Penalitate de întîrziere</title>
+    <link type="text/css" rel="stylesheet" href="/css/raport.css"/>
+    <script src="/js/raport.js"></script>
+  </head>
+
+  <body>
+    <script type="text/micro-template">
+      <h1>Penalităţi de întîrziere</h1>
+
+      <% for (var j = 0; j < întîrzieri.length; j++) { întîrziere = întîrzieri[j]; %>
+        <p>
+          Calculul penalităţii de întîrziere a sumei de
+          <b><%= întîrziere.raport.suma %>&nbsp;de&nbsp;lei</b> pentru perioada
+          <b><%= întîrziere.raport.începutPerioadă %>&ndash;<%= întîrziere.raport.sfîrşitPerioadă %></b>
+          cu rata aplicată de&nbsp;<b><%= întîrziere.raport.rata %>%</b>:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Începînd cu</th>
+              <th>Durata</th>
+              <th>Rata, %</th>
+              <th>Suma, lei</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% var i = 0; %>
+            <% for (var rînd in întîrziere.raport.rînduri) { rînd = întîrziere.raport.rînduri[rînd]; %>
+            <tr>
+              <td><%= ++i %></td>
+              <td><%= rînd.data %></td>
+              <td><%= rînd.durata %> zile</td>
+              <td><%= rînd.rata %>+<%= întîrziere.raport.rata %>=<%= (rînd.rata + întîrziere.raport.rata).toFixed(1) %></td>
+              <td><%= rînd.dobînda.toFixed(2) %></td>
+            </tr>
+            <% } %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5"><%= întîrziere.total %></td>
+            </tr>
+          </tfoot>
+        </table>
+      <% } %>
+    </script>
+  </body>
+</head>

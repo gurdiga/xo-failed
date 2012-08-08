@@ -2169,9 +2169,20 @@ var Întîrzieri = {
 // --------------------------------------------------
 
 var Rapoarte = {
+  init: function() {
+    $(document)
+      .on('click', '[data-raport]', this.deschide);
+  },
+
+  deschide: function() {
+    var raport = $(this).data('raport');
+
+    Rapoarte[raport].$el = $(this);
+    Rapoarte[raport].tab = window.open(Rapoarte[raport].pagina, raport, '', true);
+  },
+
   'întîrziere': {
     pagina: '/rapoarte/întîrziere.html',
-    tab: null,
     date: function() {
       var întîrziere = Întîrzieri.colectează(this.$el.closest('.întîrziere'));
 
@@ -2182,16 +2193,20 @@ var Rapoarte = {
     }
   },
 
-  init: function() {
-    $(document)
-      .on('click', '.întîrziere .ui-icon-print', this.deschide);
-  },
+  'întîrzieri': {
+    pagina: '/rapoarte/întîrzieri.html',
+    date: function() {
+      return {
+        întîrzieri: this.$el.closest('fieldset').find('.întîrziere').map(function() {
+          var întîrziere = Întîrzieri.colectează($(this));
 
-  deschide: function() {
-    var raport = $(this).data('raport');
-
-    Rapoarte[raport].$el = $(this);
-    Rapoarte[raport].tab = window.open(Rapoarte[raport].pagina, raport, '', true);
+          return {
+            total: DobîndaDeÎntîrziere.calculează(întîrziere),
+            raport: DobîndaDeÎntîrziere.raport
+          };
+        })
+      };
+    }
   }
 };
 
