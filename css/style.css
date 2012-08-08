@@ -362,12 +362,14 @@ fieldset legend label {
   width: auto;
 }
 
-fieldset legend .butoane-per-secţiune {
+
+.butoane-per-secţiune {
+  position: relative;
   float: right;
   margin: .7em .7em 0 0;
 }
 
-fieldset legend .butoane-per-secţiune .ui-icon {
+.butoane-per-secţiune .ui-icon {
   background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/images/ui-icons_cccccc_256x240.png');
 }
 
@@ -972,6 +974,7 @@ input[type="checkbox"]+label {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
 }
 
+.butoane-per-secţiune button+.opţiuni,
 #formular .instrumente button+.opţiuni {
   position: absolute;
   right: 0;
@@ -982,6 +985,25 @@ input[type="checkbox"]+label {
   z-index: 2;
 }
 
+.butoane-per-secţiune button+.opţiuni {
+  display: block;
+  opacity: 0;
+  -webkit-transition: opacity .75s;
+  -moz-transition: opacity .75s;
+  -o-transition: opacity .75s;
+  transition: opacity .75s;
+  height: 0;
+  overflow: hidden;
+  right: -.7em;
+}
+
+.butoane-per-secţiune button+.opţiuni:hover,
+.butoane-per-secţiune button:hover+.opţiuni {
+  height: auto;
+  opacity: 1;
+}
+
+.butoane-per-secţiune button+.opţiuni li,
 #formular .instrumente button+.opţiuni li {
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
@@ -994,6 +1016,7 @@ input[type="checkbox"]+label {
   cursor: pointer;
 }
 
+.butoane-per-secţiune button+.opţiuni li:hover,
 #formular .instrumente button+.opţiuni li:hover {
   opacity: 1;
 }
