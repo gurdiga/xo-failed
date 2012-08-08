@@ -1720,8 +1720,8 @@ var FormularPensie = {
       .on('închidere', this.elimină);
 
     Formular.$obiectulUrmăririi
-      .on('input', 'input', this.caluleazăOnorariulŞiPensia)
-      .on('click', 'button.adaugă', this.adaugăÎncasare);
+      .on('input', '.încasare input', this.caluleazăOnorariulŞiPensia)
+      .on('click', '.încasare button.adaugă', this.adaugăÎncasare);
   },
 
   evalueazăCota: function(cota) {
