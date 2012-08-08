@@ -1165,6 +1165,7 @@ var Formular = {
   },
 
   închide: function() {
+    Formular.focusează();
     Formular.$
       .stop(true, true)
       .find('.instrumente').fadeOut().end()
