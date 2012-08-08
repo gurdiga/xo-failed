@@ -595,12 +595,19 @@ var Formular = {
       .on('keydown', function(e) {if (e.keyCode == 27) Formular.închide()})
       .on('închidere', Formular.resetează)
       .on('populat iniţializat', Formular.calculează)
+      .on('populat iniţializat', Formular.eliminăAmendaDupăCaz)
       .on('salvat', Formular.actualizeazăDataUltimeiModificări);
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
       else Formular.închide();
     });
+  },
+
+  eliminăAmendaDupăCaz: function() {
+    if (Formular.deOrdingGeneral()) {
+      Formular.$obiectulUrmăririi.find('li:has(#amendă)').remove();
+    }
   },
 
   actualizeazăDataUltimeiModificări: function(e, procedură) {
@@ -628,6 +635,10 @@ var Formular = {
         .focus()
         .removeAttr('tabindex');
     });
+  },
+
+  deOrdingGeneral: function() {
+    return /^(\d+)?$/.test(HashController.date());
   },
 
   pensieDeÎntreţinere: function() {
