@@ -20,7 +20,6 @@ var Action = {
     ButonDeEliminare.init();
     Întîrzieri.init();
     Formular.init();
-    Instrumente.init();
     CalculatorDobîndaÎntîrziere.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
@@ -1555,62 +1554,6 @@ var CalculatorDobîndaÎntîrziere = {
         dobînda = (întîrziere);
 
     secţiune.find('#dobînda').val(dobînda);
-  }
-};
-
-// --------------------------------------------------
-
-var Instrumente = {
-  $: $('.instrumente'),
-
-  init: function() {
-    Instrumente.initOpţiuniPentruButoane();
-    Instrumente.$.on('click', '>button', function() {
-      if (Instrumente[this.className]) Instrumente[this.className].apply(this, arguments);
-    });
-  },
-
-  initOpţiuniPentruButoane: function() {
-    Instrumente.$.find('button+.opţiuni')
-      .each(function() {
-        var opţiuni = $(this),
-            buton = opţiuni.prev('button');
-
-        buton
-          .on('mouseenter', function() {
-            opţiuni.afişează();
-          })
-          .on('mouseleave', function() {
-            opţiuni.stop(true, true);
-
-            setTimeout(function() {
-              if (!opţiuni.data('atins')) opţiuni.ascunde();
-            }, 500);
-          })
-      })
-      .on('mouseenter', function() {
-        $(this).data('atins', true);
-      })
-      .on('mouseleave', function() {
-        $(this)
-          .ascunde()
-          .removeData('atins');
-      })
-      .on('click', 'li', function() {
-        var opţiune = $(this),
-            listaDeOpţiuni = opţiune.parent(),
-            buton = listaDeOpţiuni.prev('button'),
-            numeAcţiune = buton.attr('class') + '-' + opţiune.attr('class');
-
-        listaDeOpţiuni.ascunde();
-        Instrumente[numeAcţiune]();
-      });
-  },
-
-  'profil': function() {
-  },
-
-  'calculator': function() {
   }
 };
 

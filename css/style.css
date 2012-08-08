@@ -977,15 +977,10 @@ input[type="checkbox"]+label {
 .butoane-per-secţiune button+.opţiuni,
 #formular .instrumente button+.opţiuni {
   position: absolute;
-  right: 0;
   white-space: nowrap;
+  right: 0;
   margin: 0;
   line-height: 2em;
-  display: none;
-  z-index: 2;
-}
-
-.butoane-per-secţiune button+.opţiuni {
   display: block;
   opacity: 0;
   -webkit-transition: opacity .75s;
@@ -994,11 +989,12 @@ input[type="checkbox"]+label {
   transition: opacity .75s;
   height: 0;
   overflow: hidden;
-  right: -.7em;
 }
 
 .butoane-per-secţiune button+.opţiuni:hover,
-.butoane-per-secţiune button:hover+.opţiuni {
+.butoane-per-secţiune button:hover+.opţiuni,
+#formular .instrumente button+.opţiuni:hover,
+#formular .instrumente button:hover+.opţiuni {
   height: auto;
   opacity: 1;
 }
