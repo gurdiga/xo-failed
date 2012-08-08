@@ -1147,7 +1147,7 @@ ul.fieldset .titlu {
   padding: 0 .2em;
 }
 
-ul.fieldset .titlu + li {
+ul.fieldset .titlu+li {
   margin-top: .1em;
 }
 
@@ -1191,7 +1191,7 @@ button.adaugă.încasare {
   margin-top: .7em;
 }
 
-.fieldset + button.adaugă.încasare {
+.fieldset+button.adaugă.încasare {
   margin-top: 0;
 }
 
