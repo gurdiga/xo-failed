@@ -584,12 +584,12 @@ var Utilizator = {
 
 var Formular = {
   $: $('#formular'),
-
   $titlu: $('#formular h1'),
   $obiectulUrmăririi: $('#formular #obiectul-urmăririi'),
 
   init: function() {
     this.$
+      .on('keydown', function(e) {if (e.keyCode == 27) Formular.închide()})
       .on('click', 'button.închide', this.închide)
       .on('click', 'button.salvează', this.trimite)
       .on('închidere', this.resetează)
@@ -597,7 +597,6 @@ var Formular = {
       .on('populat iniţializat', this.eliminăAmendaDupăCaz)
       .on('salvat', this.actualizeazăDataUltimeiModificări);
 
-    this.$.bind('keydown', 'esc', this.închide);
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
