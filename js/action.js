@@ -1,5 +1,4 @@
-// valoarea unităţii convenţionale
-var UC = 20;
+var UC = 20; // valoarea unităţii convenţionale în MDL
 var RE_FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/,
     FORMATUL_DATEI = 'DD.MM.YYYY';
 
@@ -1534,20 +1533,6 @@ var CalculatorDobîndaÎntîrziere = {
       .hide();
   },
 
-  adaugăSumă: function() {
-    var buton = $(this),
-        item = buton.parent().prev('li');
-
-    item.clone()
-      .removeClass('prima')
-      .find('.sumă').val('').end()
-      .hide()
-      .insertAfter(item)
-      .show('blind');
-
-    item.next().find('.sumă').focus();
-  },
-
   calculeazăDobînda: function() {
     var secţiune = CalculatorDobîndaÎntîrziere.$,
         întîrziere = Întîrzieri.colectează(secţiune),
@@ -2023,11 +2008,6 @@ var Onorariu = {
       }
     }
   }
-};
-
-// --------------------------------------------------
-
-var Defaults = {
 };
 
 // --------------------------------------------------
