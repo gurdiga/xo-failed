@@ -363,7 +363,7 @@ fieldset legend label {
 }
 
 fieldset .conţinut>ul {
-  margin: .4em 0 1em;
+  margin: .4em 0;
 }
 
 ul {
@@ -1136,7 +1136,7 @@ button+.opţiuni li:hover {
 
 fieldset .conţinut .ui-effects-wrapper ul.fieldset,
 fieldset .conţinut ul.fieldset {
-  margin: 1em -4px;
+  margin: .5em -4px;
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
 }
