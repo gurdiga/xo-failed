@@ -1179,7 +1179,7 @@ var Formular = {
       .find('.instrumente').fadeIn().end()
       .css('top', $(window).height())
       .show()
-      .animate({'top': '75px'});
+      .animate({'top': '80px'});
 
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
