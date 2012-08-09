@@ -399,10 +399,12 @@ input.sumă {
 }
 
 #formular #data-ultimei-modificări {
-  color: gray;
+  color: silver;
   font-size: small;
   position: absolute;
   margin: 4em 0 0 .5em;
+  border-top: 1px solid #EEE;
+  width: 850px;
 }
 
 #formular #număr {
