@@ -667,7 +667,7 @@ var Formular = {
 
   colectează: function() {
     var procedură = {
-      'număr': ($('#număr').text().match(/[SP]?-\d+/) || [null])[0],
+      'număr': (Formular.$.find('#număr').text().match(/[SP]?-\d+/) || [null])[0],
       'document-executoriu': colectează('#document-executoriu'),
       'obiectul-urmăririi': colecteazăObiectulUrmăririi(),
       'cheltuieli': colecteazăCheltuieli(),
@@ -837,14 +837,14 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăPersoaneTerţe() {
-      return $('.persoană-terţă').map(function() {
+      return Formular.$.find('.persoană-terţă').map(function() {
         return colectează(this);
       }).get();
     }
 
     // ------------------------------------------
     function colecteazăDebitori() {
-      return $('.debitor').map(function() {
+      return Formular.$.find('.debitor').map(function() {
         return colectează(this);
       }).get();
     }
@@ -1032,7 +1032,7 @@ var Formular = {
     // ------------------------------------------
     function populeazăCheltuieli() {
       var $secţiune = Cheltuieli.$,
-          $lista = $('#categorii-taxe-şi-speze');
+          $lista = Cheltuieli.$.find('#categorii-taxe-şi-speze');
 
       $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function(i, cîmp) {
         $secţiune.find('#' + cîmp).val1(procedură.cheltuieli[cîmp]);
@@ -1110,13 +1110,13 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăPersoaneleTerţe() {
-      var $adaugă = $('#creditor+button.adaugă');
+      var $adaugă = Formular.$.find('#creditor+button.adaugă');
 
       if (procedură['persoane-terţe']) {
         $.each(procedură['persoane-terţe'], function() {
           $adaugă.click();
 
-          $secţiune = $('.persoană-terţă:last');
+          $secţiune = Formular.$.find('.persoană-terţă:last');
           populeazăSecţiune($secţiune, this);
         });
       }
@@ -1126,7 +1126,7 @@ var Formular = {
     function populeazăDebitori() {
       var $secţiune,
           prima = true,
-          $adaugă = $('.debitor+button.adaugă');
+          $adaugă = Formular.$.find('.debitor+button.adaugă');
 
       $.each(procedură['debitori'], function() {
         if (prima) {
@@ -1135,7 +1135,7 @@ var Formular = {
           $adaugă.click();
         }
 
-        $secţiune = $('.debitor:last');
+        $secţiune = Formular.$.find('.debitor:last');
         populeazăSecţiune($secţiune, this);
       });
     }
@@ -1206,8 +1206,8 @@ var Formular = {
 
     Formular.$obiectulUrmăririi.on('change', '#obiect', function() {
       var obiect = $(this).val(),
-          genCreditor = $('#creditor #gen-persoană'),
-          genDebitor = $('.debitor #gen-persoană');
+          genCreditor = Formular.$.find('#creditor #gen-persoană'),
+          genDebitor = Formular.$.find('.debitor #gen-persoană');
 
       switch(obiect) {
         case 'restabilirea la locul de muncă':
@@ -1226,10 +1226,10 @@ var Formular = {
     });
 
     if (Formular.seCreazăProcedurăNouă()) {
-      $('#taxaA1').click();
+      Cheltuieli.$.find('#taxaA1').click();
 
-      var caracterProcedură = $('#caracter'),
-          genCreditor = $('#creditor #gen-persoană');
+      var caracterProcedură = Formular.$obiectulUrmăririi.find('#caracter'),
+          genCreditor = Formular.$.find('#creditor #gen-persoană');
 
       switch (HashController.date()) {
         case 'S':
@@ -1916,6 +1916,8 @@ var DobîndaDeÎntîrziere = {
 // --------------------------------------------------
 
 var Onorariu = {
+  $: $('#onorariu'),
+
   init: function() {
     var schimbareDate = 'keyup update paste change input',
         cîmpuriRelevante = [
@@ -1955,16 +1957,16 @@ var Onorariu = {
       }
     }
 
-    if ($('#părţile-au-ajuns-la-conciliere').is(':checked')) {
+    if (Cheltuieli.$.find('#părţile-au-ajuns-la-conciliere').is(':checked')) {
       onorariu *= .7;
     }
 
-    $('#onorariu').val(onorariu.toFixed(2));
+    Onorariu.$.val(onorariu.toFixed(2));
   },
 
   pecuniar: function(suma) {
     if (suma <= 100000) {
-      var minim = $('#amendă').is(':checked') ? 200 : 500;
+      var minim = Formular.$obiectulUrmăririi.find('#amendă').is(':checked') ? 200 : 500;
 
       return Math.max(suma * .10, minim);
     } else if (suma <= 300000) {
@@ -2072,7 +2074,7 @@ var TotalCheltuieli = {
       }
     });
 
-    $('#total-taxe-şi-speze').val(total);
+    Cheltuieli.$.find('#total-taxe-şi-speze').val(total);
   }
 };
 
