@@ -1501,7 +1501,7 @@ var CalculatorDobîndaÎntîrziere = {
   init: function() {
     this.$
       .on('click', 'button.închide', this.închide)
-      .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda)
+      .on('input change', ':input:not(.dobîndă)', this.calculeazăDobînda)
       .find(':input').bind('keydown', 'esc', this.închide);
 
     $('#bara-de-sus .calculator').on('click', function() {
@@ -1536,9 +1536,9 @@ var CalculatorDobîndaÎntîrziere = {
   calculeazăDobînda: function() {
     var secţiune = CalculatorDobîndaÎntîrziere.$,
         întîrziere = Întîrzieri.colectează(secţiune),
-        dobînda = (întîrziere);
+        dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
 
-    secţiune.find('#dobînda').val(dobînda);
+    secţiune.find('.dobîndă').val(dobînda);
   }
 };
 
@@ -1917,7 +1917,7 @@ var Onorariu = {
   $: $('#onorariu'),
 
   init: function() {
-    var schimbareDate = 'keyup update paste change input',
+    var schimbareDate = 'change input',
         cîmpuriRelevante = [
           '.sumă:not(.irelevant-pentru-onorariu)',
           '.sumă:not(.calculat)',
@@ -2097,7 +2097,7 @@ var Întîrzieri = {
     Formular.$
       .on('change', '#caracter', this.adaugăButon)
       .on('închidere', this.elimină)
-      .on('input click change', ':input:not(#dobînda)', this.calculeazăDobînda)
+      .on('input change', '.fieldset.întîrziere :input:not(.dobîndă)', this.calculeazăDobînda)
       .on('click', '#adaugă-întîrziere', this.adaugă);
   },
 
