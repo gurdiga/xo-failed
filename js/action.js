@@ -954,9 +954,19 @@ var Formular = {
     }
 
     // ------------------------------------------
+    function populeazăObiectulUrmăririi() {
+      var $secţiune = Formular.$obiectulUrmăririi,
+          secţiune = procedură['obiectul-urmăririi'];
+
+      populeazăSecţiune($secţiune, secţiune);
+      populeazăPensieÎntreţinere($secţiune, secţiune['încasări']);
+      populeazăSume($secţiune, secţiune['sume']);
+      populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
+    }
+
+    // ------------------------------------------
     function populeazăPensieÎntreţinere($secţiune, încasări) {
       if (!încasări) return;
-
 
       var $încasare, i, prima = true,
           buton = $secţiune.find('.adaugă.încasare');
@@ -968,23 +978,6 @@ var Formular = {
         populeazăSecţiune($încasare, încasări[i]);
 
         prima = false;
-      }
-    }
-
-    // ------------------------------------------
-    function populeazăObiectulUrmăririi() {
-      var $secţiune = Formular.$obiectulUrmăririi,
-          secţiune = procedură['obiectul-urmăririi'];
-
-      populeazăSecţiune($secţiune, secţiune);
-
-      if (Formular.pensieDeÎntreţinere()) {
-        populeazăPensieÎntreţinere($secţiune, secţiune['încasări']);
-      }
-
-      if (secţiune['caracter'] == 'pecuniar') {
-        populeazăSume($secţiune, secţiune['sume']);
-        populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
       }
     }
 
@@ -1010,15 +1003,15 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăSume($secţiune, sume) {
+      if (!sume) return;
+
       var cîmp, $cîmp;
 
       for (cîmp in sume) {
         $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
 
         if (!$cîmp.există()) {
-          $secţiune.find('li:has(button.adaugă-cîmp-personalizat)')
-            .before($şabloane.find('.cîmp-personalizat').html());
-
+          $secţiune.find('.adaugă-cîmp-personalizat').click();
           $cîmp = $secţiune.find('.etichetă+.sumă').last();
           $cîmp.prev().val(cîmp).trigger('focus');
         }
