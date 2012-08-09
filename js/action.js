@@ -196,7 +196,7 @@ var FormulareŞablon = {
       .on('change', this.selector, this.inserează);
   },
 
-  inserează: function(e, automat) {
+  inserează: function(e) {
     var $select = $(this),
         selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
         şablon = FormulareŞablon.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
@@ -207,7 +207,7 @@ var FormulareŞablon = {
     item.after(şablon);
 
     $subformular = item.nextAll();
-    $subformular.find(FormulareŞablon.selector).trigger('change', ['automat']);
+    $subformular.find(FormulareŞablon.selector).trigger('change');
 
     if (!Formular.sePopulează && !Formular.seIniţializează) {
       $subformular
@@ -1221,8 +1221,8 @@ var Formular = {
           break;
       }
 
-      genCreditor.trigger('change', ['automat']);
-      genDebitor.trigger('change', ['automat']);
+      genCreditor.trigger('change');
+      genDebitor.trigger('change');
     });
 
     if (Formular.seCreazăProcedurăNouă()) {
@@ -2033,9 +2033,7 @@ var TotalCheltuieli = {
     Cheltuieli.adăugate.on(evenimente, cîmpuriRelevante, this.calculează);
   },
 
-  calculează: function(e, automat) {
-    if (automat) return;
-
+  calculează: function(e) {
     var total = 0,
         lista = Cheltuieli.adăugate;
 
