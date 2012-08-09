@@ -498,7 +498,7 @@ var ButonDeEliminare = {
       .hide()
       .on('click', this.acţionează);
 
-    $('#formular, #calculator')
+    $('#formular')
       .on('mousemove', '.eliminabil', this.afişează)
       .on('mouseleave', '.eliminabil', this.ascunde);
   },
@@ -1501,7 +1501,6 @@ var CalculatorDobîndaÎntîrziere = {
   init: function() {
     this.$
       .on('click', 'button.închide', this.închide)
-      .on('click', 'button.adaugă', this.adaugăSumă)
       .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda)
       .find(':input').bind('keydown', 'esc', this.închide);
 
