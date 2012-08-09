@@ -192,7 +192,8 @@ var FormulareŞablon = {
   selector: 'select.care.schimbă.formularul',
 
   init: function() {
-    Formular.$.on('change', FormulareŞablon.selector, this.inserează);
+    Formular.$
+      .on('change', this.selector, this.inserează);
   },
 
   inserează: function(e, automat) {
@@ -588,14 +589,15 @@ var Formular = {
   $obiectulUrmăririi: $('#formular #obiectul-urmăririi'),
 
   init: function() {
-    Formular.$
-      .on('click', 'button.închide', Formular.închide)
-      .on('click', 'button.salvează', Formular.trimite)
-      .on('keydown', function(e) {if (e.keyCode == 27) Formular.închide()})
-      .on('închidere', Formular.resetează)
-      .on('populat iniţializat', Formular.calculează)
-      .on('populat iniţializat', Formular.eliminăAmendaDupăCaz)
-      .on('salvat', Formular.actualizeazăDataUltimeiModificări);
+    this.$
+      .on('click', 'button.închide', this.închide)
+      .on('click', 'button.salvează', this.trimite)
+      .on('închidere', this.resetează)
+      .on('populat iniţializat', this.calculează)
+      .on('populat iniţializat', this.eliminăAmendaDupăCaz)
+      .on('salvat', this.actualizeazăDataUltimeiModificări);
+
+    this.$.bind('keydown', 'esc', this.închide);
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
@@ -1498,7 +1500,7 @@ var CalculatorDobîndaÎntîrziere = {
   $: $('#calculator'),
 
   init: function() {
-    CalculatorDobîndaÎntîrziere.$
+    this.$
       .on('click', 'button.închide', this.închide)
       .on('click', 'button.adaugă', this.adaugăSumă)
       .on('keyup update paste click change', ':input:not(#dobînda)', this.calculeazăDobînda)
@@ -1925,8 +1927,8 @@ var Onorariu = {
           '#obiect'
         ].join(',');
 
-    Formular.$obiectulUrmăririi.on(schimbareDate, cîmpuriRelevante, Onorariu.calculează);
-    Formular.$.on(schimbareDate, '.debitor #gen-persoană, #părţile-au-ajuns-la-conciliere', Onorariu.calculează);
+    Formular.$obiectulUrmăririi.on(schimbareDate, cîmpuriRelevante, this.calculează);
+    Formular.$.on(schimbareDate, '.debitor #gen-persoană, #părţile-au-ajuns-la-conciliere', this.calculează);
   },
 
   calculează: function() {
