@@ -2,18 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Penalitate de întîrziere</title>
+    <title>Dobînzi de întîrziere</title>
     <link type="text/css" rel="stylesheet" href="/css/raport.css"/>
     <script src="/js/raport.js"></script>
   </head>
 
   <body>
     <script type="text/micro-template">
-      <h1>Penalităţi de întîrziere</h1>
+      <h1>Dobînzi de întîrziere</h1>
 
       <% for (var j = 0; j < întîrzieri.length; j++) { întîrziere = întîrzieri[j]; %>
         <p>
-          Calculul penalităţii de întîrziere a sumei de
+          Calculul dobînzii de întîrziere a sumei de
           <b><%= întîrziere.raport.suma %>&nbsp;de&nbsp;lei</b> pentru perioada
           <b><%= întîrziere.raport.începutPerioadă %>&ndash;<%= întîrziere.raport.sfîrşitPerioadă %></b>
           cu rata aplicată de&nbsp;<b><%= întîrziere.raport.rata %>%</b>:
