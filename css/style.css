@@ -1067,7 +1067,7 @@ button+.opţiuni li:hover {
   display: inline-block;
   padding: 1px;
   background-color: transparent;
-  vertical-align: top;
+  vertical-align: -4px;
   cursor: pointer;
 }
 
