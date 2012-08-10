@@ -811,7 +811,6 @@ input[type="checkbox"]+label {
   position: absolute;
   min-height: 1em;
   min-width: 6em;
-  z-index: 5;
 }
 
 #cheltuieli .document .adaugă-destinatar {
@@ -916,7 +915,6 @@ input[type="checkbox"]+label {
   padding: 0;
   margin-left: 2em;
   margin-top: 0;
-  z-index: 4;
 }
 
 .destinatari-adăugaţi.comprimaţi>li {
@@ -1057,7 +1055,7 @@ button+.opţiuni li:hover {
   -webkit-box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
   box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
-  z-index: 5;
+  z-index: 1;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
