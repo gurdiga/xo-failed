@@ -332,10 +332,10 @@ var Cheltuieli = {
         .on('click', '.destinatari-adăugaţi', this.ascundeSauAfişează)
         .on('eliminare', '.destinatari-adăugaţi .eliminabil', this.ascundeListaDacăNuMaiSunt)
         .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează)
-        .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', this.ascunînceputPerioadăEnterSauEsc);
+        .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', this.ascundeLaEnterSauEsc);
     },
 
-    ascunînceputPerioadăEnterSauEsc: function(e) {
+    ascundeLaEnterSauEsc: function(e) {
       if (e.keyCode == 13 || e.keyCode == 27) {
         e.preventDefault();
         e.stopPropagation();
