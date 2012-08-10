@@ -344,7 +344,7 @@ var Cheltuieli = {
     },
 
     ascundeSauAfişează: function(e) {
-      if (e.target == this) {
+      if (e.target == this && $(this).children().există()) {
         $(this)
           .toggleClass('comprimaţi')
           .toggleClass('cu umbră');
