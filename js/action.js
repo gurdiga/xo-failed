@@ -2255,3 +2255,7 @@ $.fn.suma = function() {
 
   return parseFloat(suma.toFixed(2));
 };
+
+// --------------------------------------------------
+
+Action.init();
