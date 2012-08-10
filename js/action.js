@@ -1142,6 +1142,8 @@ var Formular = {
         .first().removeClass('dispensabilă').end()
       .end()
 
+      .find('fieldset .conţinut').removeAttr('style').end()
+
       .find('#categorii-taxe-şi-speze')
         .find('.dezactivat').removeClass('dezactivat').end()
       .end();
