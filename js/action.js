@@ -587,11 +587,23 @@ var Formular = {
       .on('populat iniţializat', this.eliminăAmendaDupăCaz)
       .on('salvat', this.actualizeazăDataUltimeiModificări);
 
+    this.instrumente.init();
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
       else Formular.închide();
     });
+  },
+
+  instrumente: {
+    init: function() {
+      Formular.$.find('.instrumente').draggable({
+        containment: 'document',
+        start: function() {
+          $(this).css('right', 'auto');
+        }
+      });
+    }
   },
 
   eliminăAmendaDupăCaz: function() {
@@ -1168,7 +1180,7 @@ var Formular = {
 
     Formular.$
       .stop(true, true)
-      .find('.instrumente').fadeIn().end()
+      .find('.instrumente').fadeIn('slow').end()
       .css('top', $(window).height())
       .show()
       .animate({'top': '80px'});

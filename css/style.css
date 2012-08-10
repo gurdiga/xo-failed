@@ -368,6 +368,7 @@ fieldset legend label {
   margin: .7em .7em 0 0;
 }
 
+#formular .instrumente span,
 .butoane-per-secţiune button.ui-icon {
   border: none;
   background-color: transparent;
@@ -940,11 +941,30 @@ input[type="checkbox"]+label {
 #formular .instrumente {
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  -o-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   padding: 0;
   position: fixed;
   right: 30px;
   top: 120px;
+  -webkit-transition: opacity .75s;
+  -moz-transition: opacity .75s;
+  -o-transition: opacity .75s;
+  transition: opacity .75s;
+  opacity: .25;
+}
+
+#formular .instrumente:hover {
+  opacity: 1;
+}
+
+#formular .instrumente div {
+  cursor: move;
+  background-color: black;
+}
+
+#formular .instrumente span {
+  margin: auto;
 }
 
 #formular .instrumente>button {
