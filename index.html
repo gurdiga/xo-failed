@@ -105,6 +105,55 @@
             <span id="număr"></span>
           </h1>
 
+          <div class="coloană stînga">
+            <fieldset id="creditor">
+              <legend>
+                <label>Creditor</label>
+                <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
+              </legend>
+
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label>Gen persoană</label>
+                    <select id="gen-persoană" class="care schimbă formularul">
+                      <option selected>juridică</option>
+                      <option>fizică</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+
+            <button class="adaugă persoană semiascuns" title="Adaugă persoană terță">
+              +<span class="legend label">Persoană terță</span>
+            </button>
+          </div>
+
+          <div class="coloană">
+            <fieldset class="debitor">
+              <legend>
+                <label>Debitor</label>
+
+                <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
+              </legend>
+
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label>Gen persoană</label>
+                    <select id="gen-persoană" class="care schimbă formularul">
+                      <option>juridică</option>
+                      <option selected>fizică</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+
+            <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
+          </div>
+
           <div class="coloană">
             <fieldset id="document-executoriu">
               <legend><label>Documentul executoriu</label></legend>
@@ -575,61 +624,10 @@
             </div>
           </fieldset>
 
-          <div class="coloană stînga">
-            <fieldset id="creditor">
-              <legend>
-                <label>Creditor</label>
-                <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
-              </legend>
-
-              <div class="conţinut">
-                <ul>
-                  <li>
-                    <label>Gen persoană</label>
-                    <select id="gen-persoană" class="care schimbă formularul">
-                      <option selected>juridică</option>
-                      <option>fizică</option>
-                    </select>
-                  </li>
-                </ul>
-              </div>
-            </fieldset>
-
-            <button class="adaugă persoană semiascuns" title="Adaugă persoană terță">
-              +<span class="legend label">Persoană terță</span>
-            </button>
-          </div>
-
-          <div class="coloană">
-            <fieldset class="debitor">
-              <legend>
-                <label>Debitor</label>
-
-                <button class="elimină-persoană semiascuns" title="Elimină persoană">×</button>
-              </legend>
-
-              <div class="conţinut">
-                <ul>
-                  <li>
-                    <label>Gen persoană</label>
-                    <select id="gen-persoană" class="care schimbă formularul">
-                      <option>juridică</option>
-                      <option selected>fizică</option>
-                    </select>
-                  </li>
-                </ul>
-              </div>
-            </fieldset>
-
-            <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
-          </div>
-
           <div class="instrumente">
             <button class="salvează" title="Salvează"></button>
             <p class="mesaj">Salvat</p>
           </div>
-
-          <div style="clear: both;"></div>
 
           <p id="data-ultimei-modificări">Data şi ora ultimei modificări: <span></span></p>
         </div>
