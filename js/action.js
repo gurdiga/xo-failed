@@ -2187,7 +2187,13 @@ var Secţiuni = {
   },
 
   desfăşoară: function() {
-    $(this).closest('fieldset').find('.conţinut').toggle('blind');
+    $(this).closest('fieldset')
+      .find('.conţinut').toggle('blind', function() {
+        var conţinut = $(this),
+            titlu = $(this).is(':visible') ? 'Colapsează' : 'Desfăşoară'
+
+        $(this).closest('fieldset').find('button.desfăşoară').attr('title', titlu);
+      });
   }
 };
 
