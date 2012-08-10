@@ -575,10 +575,10 @@ button.adaugă-cîmp-personalizat {
 
 button.adaugă.persoană {
   font-weight: bold;
-  padding: .5em;
+  padding: .2em .5em .5em;
   position: relative;
   left: .5em;
-  top: -35px;
+  top: -1.6em;
 }
 
 button.adaugă .legend.label {
