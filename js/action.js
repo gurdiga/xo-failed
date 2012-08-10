@@ -1185,29 +1185,9 @@ var Formular = {
     $.fx.off = true;
     Formular.seIniţializează = true;
 
-    Formular.$.find('#data-ultimei-modificări span').text('încă nu e salvată');
-    Formular.$.find('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
-
-    Formular.$obiectulUrmăririi.on('change', '#obiect', function() {
-      var obiect = $(this).val(),
-          genCreditor = Formular.$.find('#creditor #gen-persoană'),
-          genDebitor = Formular.$.find('.debitor #gen-persoană');
-
-      switch(obiect) {
-        case 'restabilirea la locul de muncă':
-          genCreditor.val('fizică');
-          genDebitor.val('juridică');
-          break;
-
-        case 'stabilirea domiciliului copilului':
-          genCreditor.val('fizică');
-          genDebitor.val('fizică');
-          break;
-      }
-
-      genCreditor.trigger('change');
-      genDebitor.trigger('change');
-    });
+    Formular.$
+      .find('#data-ultimei-modificări span').text('încă nu e salvată').end()
+      .find('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
     if (Formular.seCreazăProcedurăNouă()) {
       Cheltuieli.$.find('#taxaA1').click();
