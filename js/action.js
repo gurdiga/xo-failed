@@ -26,6 +26,7 @@ var Action = {
     Sume.init();
     FormularPensie.init();
     Rapoarte.init();
+    Secţiuni.init();
 
     $(window).trigger('hashchange');
 
@@ -53,9 +54,7 @@ var Valute = {
 
 var Persoane = {
   init: function() {
-    Formular.$
-      .on('click', 'button.adaugă.persoană', this.adaugă)
-      .on('click', 'button.elimină-persoană', this.elimină);
+    Formular.$.on('click', 'button.adaugă.persoană', this.adaugă);
   },
 
   adaugă: function() {
@@ -63,7 +62,9 @@ var Persoane = {
         fieldset = buton.prev();
 
     fieldset.clone()
+      .addClass('eliminabil de tot')
       .removeAttr('id') // #creditor
+      .find('.conţinut').removeAttr('style').end()
       .find('input,textarea').val('').end()
       .find('legend label').text(function(i, text) {
         if (buton.find('.legend.label').există()) {
@@ -80,17 +81,6 @@ var Persoane = {
         buton.siblings('fieldset:not(#creditor)').addClass('dispensabilă');
       })
       .find('#gen-persoană').trigger('change');
-  },
-
-  elimină: function() {
-    var button = $(this),
-        aceastăPersoană = button.closest('fieldset');
-        celelaltePersoane = aceastăPersoană.siblings('fieldset');
-
-    aceastăPersoană.slideUp(function() {
-      aceastăPersoană.remove()
-      celelaltePersoane.toggleClass('dispensabilă', celelaltePersoane.length > 1);
-    });
   }
 };
 
@@ -2184,6 +2174,18 @@ var Rapoarte = {
         })
       };
     }
+  }
+};
+
+// --------------------------------------------------
+
+var Secţiuni = {
+  init: function() {
+    Formular.$.on('click', 'fieldset button.desfăşoară', this.desfăşoară);
+  },
+
+  desfăşoară: function() {
+    $(this).closest('fieldset').find('.conţinut').toggle('blind');
   }
 };
 
