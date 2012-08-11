@@ -9,43 +9,58 @@
 
   <body>
     <script type="text/micro-template">
-      <h1>Dobîndă de întîrziere</h1>
+      <% if (raport.suma && raport.începutPerioadă && raport.sfîrşitPerioadă) { %>
+        <h1>Dobîndă de întîrziere</h1>
 
-      <p>
-        Calculul dobînzii de întîrziere a sumei de
-        <b><%= raport.suma %>&nbsp;de&nbsp;lei</b> pentru perioada
-        <b><%= raport.începutPerioadă %>&ndash;<%= raport.sfîrşitPerioadă %></b>
-        cu rata aplicată de&nbsp;<b><%= raport.rata %>%</b>:
-      </p>
+        <p>
+          Calculul dobînzii de întîrziere a sumei de
+          <b><%= raport.suma %>&nbsp;de&nbsp;lei</b> pentru perioada
+          <b><%= raport.începutPerioadă %>&ndash;<%= raport.sfîrşitPerioadă %></b>
+          cu rata aplicată de&nbsp;<b><%= raport.rata %>%</b>:
+        </p>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Nr.</th>
-            <th>Începînd cu</th>
-            <th>Durata</th>
-            <th>Rata, %</th>
-            <th>Suma, lei</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% var i = 0; %>
-          <% for (var rînd in raport.rînduri) { rînd = raport.rînduri[rînd]; %>
-          <tr>
-            <td><%= ++i %></td>
-            <td><%= rînd.data %></td>
-            <td><%= rînd.durata %> zile</td>
-            <td><%= rînd.rata %>+<%= raport.rata %>=<%= (rînd.rata + raport.rata).toFixed(1) %></td>
-            <td><%= rînd.dobînda.toFixed(2) %></td>
-          </tr>
-          <% } %>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5"><%= total %></td>
-          </tr>
-        </tfoot>
-      </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Începînd cu</th>
+              <th>Durata</th>
+              <th>Rata, %</th>
+              <th>Suma, lei</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% var i = 0; %>
+            <% for (var rînd in raport.rînduri) { rînd = raport.rînduri[rînd]; %>
+            <tr>
+              <td><%= ++i %></td>
+              <td><%= rînd.data %></td>
+              <td><%= rînd.durata %> zile</td>
+              <td><%= rînd.rata %>+<%= raport.rata %>=<%= (rînd.rata + raport.rata).toFixed(1) %></td>
+              <td><%= rînd.dobînda.toFixed(2) %></td>
+            </tr>
+            <% } %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5"><%= total %></td>
+            </tr>
+          </tfoot>
+        </table>
+      <% } else { %>
+        <% if (!raport.începutPerioadă) { %>
+          <p>Trebuie să introduceţi <b>începutul perioadei</b>.</p>
+        <% } %>
+
+        <% if (!raport.sfîrşitPerioadă) { %>
+          <p>Trebuie să introduceţi <b>sfîrşitul perioadei</b>.</p>
+        <% } %>
+
+        <% if (!raport.suma) { %>
+          <p>Trebuie să introduceţi <b>suma</b>.</p>
+        <% } %>
+
+      <% } %>
     </script>
   </body>
 </head>
