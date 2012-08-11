@@ -1239,11 +1239,11 @@ var Formular = {
 var ProceduriRecente = {
   încărcat: false,
 
-  $: $('#proceduri-recente').find('table'),
+  $: $('#proceduri-recente').find('.listă-proceduri'),
 
   init: function() {
-    ProceduriRecente.$.on('click', 'tr', function() {
-      var număr = $(this).find('.număr').text().replace(Utilizator.login, '');
+    ProceduriRecente.$.on('click', '.item', function() {
+      var număr = $(this).find('.număr').contents()[0].data.replace(Utilizator.login, '');
 
       location.hash = 'formular?' + număr;
     });
@@ -1272,8 +1272,8 @@ var ProceduriRecente = {
 
     ProceduriRecente.$
       .html(ListăDeProceduri.formatează(lista))
-      .on('mouseenter', 'tr', function() {this.className = 'selectat'})
-      .on('mouseleave', 'tr', function() {this.removeAttribute('class')});
+      .on('mouseenter', '.item', function() {$(this).addClass('selectat')})
+      .on('mouseleave', '.item', function() {$(this).removeClass('selectat')});
 
     ProceduriRecente.încărcat = true;
   },
@@ -1298,9 +1298,8 @@ var Căutare = {
       .bind('keyup', 'esc', function() {$(this).val('').trigger('input')});
 
     Căutare.rezultate.$
-      .on('mouseenter', 'tr', function() {this.className = 'selectat'})
-      .on('mouseleave', 'tr', function() {this.removeAttribute('class')})
-      .on('click', 'tr', Căutare.rezultate.deschide);
+      .on('mouseenter', '.item', function() {$(this).addClass('selectat')})
+      .on('mouseleave', '.item', function() {$(this).removeClass('selectat')});
 
 
     Căutare.adresăIndex = '/date/' + Utilizator.login + '/proceduri/index';
@@ -1312,6 +1311,7 @@ var Căutare = {
 
     afişează: function(proceduri, text) {
       Căutare.rezultate.$.html(ListăDeProceduri.formatează(proceduri, text));
+      ProceduriRecente.$.parent().hide();
     },
 
     selectează: function(e) {
@@ -1319,13 +1319,13 @@ var Căutare = {
 
       var lista = Căutare.rezultate.$;
 
-      if (!lista.find('tr').există()) return;
+      if (!lista.find('.item').există()) return;
 
       var direcţia = e.data,
           spre = {up: 'prev', down: 'next'},
-          începutPerioadă = {up: 'tr:last', down: 'tr:first'};
+          începutPerioadă = {up: '.item:last', down: '.item:first'};
 
-      var $item = lista.find('tr.selectat'),
+      var $item = lista.find('.selectat'),
           $spre = $item.există() ? $item[spre[direcţia]]() : lista.find(începutPerioadă[direcţia]);
 
       $item.removeClass('selectat');
@@ -1335,8 +1335,8 @@ var Căutare = {
     deschide: function(e) {
       e.preventDefault();
 
-      var item = Căutare.rezultate.$.find('tr.selectat'),
-          număr = item.find('.număr').text().replace(Utilizator.login, '');
+      var item = Căutare.rezultate.$.find('.selectat'),
+          număr = item.find('.număr').contents()[0].data.replace(Utilizator.login, '');
 
       if (!item.există()) return;
 
@@ -1397,6 +1397,7 @@ var Căutare = {
     delete Căutare.timer;
 
     Căutare.rezultate.$.html('');
+    ProceduriRecente.$.parent().show();
   },
 
   încarcăIndexFărăCache: function() {
@@ -1426,15 +1427,14 @@ var ListăDeProceduri = {
           debitori = $.map(procedură['debitori'], function(p) {return persoană(p)}).join('');
 
       rezultate +=
-        '<tr>' +
-          '<td>' +
-            '<div class="număr">' + evidenţiază(număr) + '</div>' +
-            '<span class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</span>' +
-          '</td>' +
-          '<td class="persoane">' + creditor + persoaneTerţe + '</td>' +
-          '<td class="vs">vs.</td>' +
-          '<td class="persoane">' + debitori + '</td>' +
-        '</tr>';
+        '<li class="item">' +
+          '<div class="număr">' +
+            evidenţiază(număr) +
+            '<div class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</div>' +
+          '</div>' +
+          '<div class="persoane">' + creditor + persoaneTerţe + '</div>' +
+          '<div class="persoane">' + debitori + '</div>' +
+        '</li>\n\n';
     }
 
     return rezultate;

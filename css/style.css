@@ -192,49 +192,106 @@ button {
   background: white;
 }
 
-#căutare table {
-  border-collapse: collapse;
-  background-color: white;
-  width: 550px;
-  table-layout: fixed;
-  cursor: pointer;
+.listă-proceduri {
+  width: 350px;
+  margin-left: 30px;
 }
 
-#căutare table td {
+.listă-proceduri .item {
+  cursor: pointer;
   color: #555;
   padding: 5px 6px 3px;
   vertical-align: top;
   border: 1px solid #ddd;
-  border-color: #ddd #eee;
-  min-height: 2.5em;
-  -webkit-transition: background-color .5s, border-color .5s, color .5s;
-  -moz-transition: background-color .5s, border-color .5s, color .5s;
-  -o-transition: background-color .5s, border-color .5s, color .5s;
-  transition: background-color .5s, border-color .5s, color .5s;
+  background-color: white;
+  -webkit-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
+  -moz-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
+  -o-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
+  transition: background-color .5s, border-color .5s, color .5s, margin .5s;
+  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  -o-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  margin-top: -355px;
+  height: 400px;
 }
 
-#căutare table tr.selectat td {
+.listă-proceduri .item:nth-child(4n+1) {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  transform: rotate(3deg);
+}
+
+.listă-proceduri .item:nth-child(4n+2) {
+  -webkit-transform: rotate(1deg);
+  -moz-transform: rotate(1deg);
+  -o-transform: rotate(1deg);
+  transform: rotate(1deg);
+}
+
+.listă-proceduri .item:nth-child(4n+3) {
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  transform: rotate(2deg);
+}
+
+.listă-proceduri .item:nth-child(4n+4) {
+  -webkit-transform: rotate(-1deg);
+  -moz-transform: rotate(-1deg);
+  -o-transform: rotate(-1deg);
+  transform: rotate(-1deg);
+}
+
+.listă-proceduri .item:first-child {
+  margin-top: 5px;
+}
+
+.listă-proceduri .item.selectat {
   color: black;
-  background-color: #fafafa;
+  margin: -375px -30px 20px 30px;
+  -webkit-box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+  -o-box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  transform: rotate(3deg);
 }
 
-#căutare table tr td:first-child {
-  width: 6em;
+.listă-proceduri .item.selectat:first-child {
+  margin-top: -20px;
 }
 
-#căutare table tr.selectat td:first-child {
-  border-left-color: #888;
+.listă-proceduri .număr {
+  width: 20%;
 }
 
-#căutare table .data-hotărîrii,
-#căutare table .persoane .id {
+.listă-proceduri .persoane {
+  width: 40%;
+}
+
+.listă-proceduri .data-hotărîrii,
+.listă-proceduri .persoane .id {
   color: #999;
   font-size: small;
 }
 
-#căutare table td.vs {
-  color: #999;
-  width: 2em;
+.listă-proceduri .selectat .data-hotărîrii,
+.listă-proceduri .selectat .persoane .id {
+  -webkit-transition: color .5s;
+  -moz-transition: color .5s;
+  -o-transition: color .5s;
+  transition: color .5s;
+  color: #555;
+}
+
+.listă-proceduri .număr,
+.listă-proceduri .persoane {
+  display: inline-block;
+  vertical-align: top;
 }
 
 #proceduri-recente {
@@ -263,6 +320,7 @@ button {
   border: 1px solid #ddd;
   -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  -o-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
   font: 1.4em Oswald, sans-serif;
