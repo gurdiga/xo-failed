@@ -208,24 +208,23 @@ button {
   -moz-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
   -o-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
   transition: background-color .5s, border-color .5s, color .5s, margin .5s;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
-  -o-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   margin-top: -355px;
   height: 400px;
 }
 
 .listă-proceduri .item:nth-child(4n+1) {
-  -webkit-transform: rotate(3deg);
-  -moz-transform: rotate(3deg);
-  -o-transform: rotate(3deg);
-  transform: rotate(3deg);
+  -webkit-transform: rotate(-2deg);
+  -moz-transform: rotate(-2deg);
+  -ms-transform: rotate(-2deg);
+  -o-transform: rotate(-2deg);
+  transform: rotate(-2deg);
 }
 
 .listă-proceduri .item:nth-child(4n+2) {
   -webkit-transform: rotate(1deg);
   -moz-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
   -o-transform: rotate(1deg);
   transform: rotate(1deg);
 }
@@ -233,6 +232,7 @@ button {
 .listă-proceduri .item:nth-child(4n+3) {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
   -o-transform: rotate(2deg);
   transform: rotate(2deg);
 }
@@ -240,6 +240,7 @@ button {
 .listă-proceduri .item:nth-child(4n+4) {
   -webkit-transform: rotate(-1deg);
   -moz-transform: rotate(-1deg);
+  -ms-transform: rotate(-1deg);
   -o-transform: rotate(-1deg);
   transform: rotate(-1deg);
 }
@@ -251,14 +252,12 @@ button {
 .listă-proceduri .item.selectat {
   color: black;
   margin: -375px -30px 20px 30px;
-  -webkit-box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
-  -o-box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-  -webkit-transform: rotate(3deg);
-  -moz-transform: rotate(3deg);
-  -o-transform: rotate(3deg);
-  transform: rotate(3deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .listă-proceduri .item.selectat:first-child {
@@ -318,9 +317,6 @@ button {
   height: 100%;
   position: absolute;
   border: 1px solid #ddd;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
-  -o-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
   font: 1.4em Oswald, sans-serif;
@@ -457,8 +453,6 @@ input.sumă {
   width: 900px;
   border: 1px solid #ddd;
   padding: 10px 10px 90px 50px;
-  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   background-color: white;
 }
@@ -828,8 +822,6 @@ input[type="checkbox"]+label {
   background-color: white;
   border: 1px solid silver;
   box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
-  -moz-box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
 }
 
 #cheltuieli .adăugate .subformular label.stînga {
@@ -995,9 +987,6 @@ input[type="checkbox"]+label {
 }
 
 #formular .instrumente {
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
-  -o-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   padding: 0;
   position: fixed;
@@ -1039,8 +1028,6 @@ input[type="checkbox"]+label {
 #formular .instrumente button+.mesaj {
   display: none;
   position: absolute;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background: white;
   padding: .5em 1em;
@@ -1110,8 +1097,6 @@ button+.opţiuni li:hover {
   background: white;
   border: 1px solid silver;
   padding: .5em 1.5em;
-  -webkit-box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
   box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
   z-index: 1;
   -webkit-transition: opacity .5s;
@@ -1167,8 +1152,6 @@ button+.opţiuni li:hover {
 
 #ui-datepicker-div {
   font: 1em Arial, sans-serif;
-  -webkit-box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 9px rgba(0,0,0,0.3);
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   width: 12em;
   padding: .5em;
@@ -1176,8 +1159,6 @@ button+.opţiuni li:hover {
 
 #ui-datepicker-div,
 #ui-datepicker-div .ui-corner-all {
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
   border-radius: 0;
 }
 
