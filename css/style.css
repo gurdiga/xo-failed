@@ -269,6 +269,7 @@ button {
 .listă-proceduri .item.selectat {
   color: black;
   box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
+  border-color: #aaa;
 }
 
 .listă-proceduri .număr {

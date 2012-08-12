@@ -1339,8 +1339,9 @@ var Căutare = {
         Căutare.rezultate.$.html(rezultate);
       } else {
         Căutare.rezultate.$nimic.fadeIn();
-        ProceduriRecente.$.parent().hide();
       }
+
+      ProceduriRecente.$.parent().hide();
     },
 
     selectează: function(e) {
