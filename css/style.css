@@ -18,6 +18,13 @@ body {
   display: none;
 }
 
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+button:focus {
+  outline: 1px solid #ddd;
+  opacity: 1;
+}
+
 textarea {
   font: inherit;
   line-height: 24px!important;
@@ -699,7 +706,7 @@ button.adaugă .legend.label {
 
 #cheltuieli .adăugate .subformular .adaugă {
   position: relative;
-  top: -.5em;
+  top: -.4em;
   left: -.2em;
   padding: 0 .3em;
 }
@@ -1034,7 +1041,7 @@ input[type="checkbox"]+label {
 }
 
 .meniu>button.ui-icon.colorat-invers {
-  height: auto;
+  height: 20px;
   margin: 0;
   border: solid black;
   border-width: 0 17px;
@@ -1295,6 +1302,7 @@ label.checkbox input {
   }
 
   textarea:focus,
+  select:focus,
   input:focus {
     outline: none;
   }
