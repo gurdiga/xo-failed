@@ -587,7 +587,7 @@ var Formular = {
       .on('populat iniţializat', this.eliminăAmendaDupăCaz)
       .on('salvat', this.actualizeazăDataUltimeiModificări);
 
-    this.instrumente.init();
+    this.meniu.init();
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
@@ -595,14 +595,34 @@ var Formular = {
     });
   },
 
-  instrumente: {
+  meniu: {
     init: function() {
-      Formular.$.find('.instrumente').draggable({
-        containment: 'document',
-        start: function() {
-          $(this).css('right', 'auto');
-        }
-      });
+      Formular.$.find('.meniu')
+        .draggable({
+          cancel: '', // permite handle-ul să fie şi un buton
+          handle: '.deplasator',
+          containment: 'document',
+          start: function() {
+            $(this).css('right', 'auto');
+          }
+        })
+        .on('click', '.spre-secţiuni+.opţiuni li', function() {
+          var secţiune = $(this).text().substr(2),
+              $titluSecţiune = Formular.$.find('legend label:contains("' + secţiune + '")'),
+              $opţiuni = $(this).closest('.opţiuni'),
+              top = $titluSecţiune.offset().top;
+
+          if ($(document).scrollTop() == top) {
+            $('html,body')
+              .animate({scrollTop: $(document).scrollTop() + 25}, 50)
+              .animate({scrollTop: $(document).scrollTop() - 25}, 50);
+          }
+
+          $('html,body').animate({scrollTop: top}, 750);
+          $opţiuni.css('height', 0);
+          setTimeout(function() {$opţiuni.removeAttr('style')}, 800);
+          $titluSecţiune.closest('fieldset').find('.conţinut :input:not([readonly]):first').focus();
+        });
     }
   },
 
