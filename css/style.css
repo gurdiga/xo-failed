@@ -1054,7 +1054,6 @@ button+.opţiuni {
   right: 0;
   margin: 0;
   line-height: 2em;
-  display: block;
   opacity: 0;
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
@@ -1085,6 +1084,10 @@ button+.opţiuni li {
 
 button+.opţiuni li:hover {
   opacity: 1;
+}
+
+input~button+.opţiuni {
+  margin-top: -3px;
 }
 
 #calculator {
