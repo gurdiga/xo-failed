@@ -193,7 +193,7 @@ button {
 }
 
 .listă-proceduri {
-  width: 350px;
+  width: 370px;
   margin-left: 30px;
 }
 
@@ -204,10 +204,10 @@ button {
   vertical-align: top;
   border: 1px solid #ddd;
   background-color: white;
-  -webkit-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
-  -moz-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
-  -o-transition: background-color .5s, border-color .5s, color .5s, margin .5s;
-  transition: background-color .5s, border-color .5s, color .5s, margin .5s;
+  -webkit-transition: background-color .5s, border-color .5s, color .5s;
+  -moz-transition: background-color .5s, border-color .5s, color .5s;
+  -o-transition: background-color .5s, border-color .5s, color .5s;
+  transition: background-color .5s, border-color .5s, color .5s;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   margin-top: -355px;
   height: 400px;
@@ -251,40 +251,25 @@ button {
 
 .listă-proceduri .item.selectat {
   color: black;
-  margin: -375px -30px 20px 30px;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
-.listă-proceduri .item.selectat:first-child {
-  margin-top: -20px;
+  box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
 }
 
 .listă-proceduri .număr {
-  width: 20%;
+  width: 24%;
 }
 
 .listă-proceduri .persoane {
-  width: 40%;
+  width: 36%;
+}
+
+.listă-proceduri .persoane:last-child {
+  margin-left: 4%;
 }
 
 .listă-proceduri .data-hotărîrii,
 .listă-proceduri .persoane .id {
   color: #999;
   font-size: small;
-}
-
-.listă-proceduri .selectat .data-hotărîrii,
-.listă-proceduri .selectat .persoane .id {
-  -webkit-transition: color .5s;
-  -moz-transition: color .5s;
-  -o-transition: color .5s;
-  transition: color .5s;
-  color: #555;
 }
 
 .listă-proceduri .număr,
