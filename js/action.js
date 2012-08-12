@@ -1309,7 +1309,6 @@ var ProceduriRecente = {
 // --------------------------------------------------
 
 var Căutare = {
-  timer: 0,
   $: $('#căutare'),
 
   init: function() {
@@ -1324,17 +1323,24 @@ var Căutare = {
       .on('mouseenter', '.item', function() {$(this).addClass('selectat')})
       .on('mouseleave', '.item', function() {$(this).removeClass('selectat')});
 
-
     Căutare.adresăIndex = '/date/' + Utilizator.login + '/proceduri/index';
     Căutare.încarcăIndex();
   },
 
   rezultate: {
     $: $('#rezultate'),
+    $nimic: $('#nimic'),
 
     afişează: function(proceduri, text) {
-      Căutare.rezultate.$.html(ListăDeProceduri.formatează(proceduri, text));
-      ProceduriRecente.$.parent().hide();
+      var rezultate = ListăDeProceduri.formatează(proceduri, text);
+
+      if (rezultate) {
+        Căutare.rezultate.$nimic.hide();
+        Căutare.rezultate.$.html(rezultate);
+      } else {
+        Căutare.rezultate.$nimic.fadeIn();
+        ProceduriRecente.$.parent().hide();
+      }
     },
 
     selectează: function(e) {
@@ -1358,18 +1364,17 @@ var Căutare = {
     deschide: function(e) {
       e.preventDefault();
 
-      var item = Căutare.rezultate.$.find('.selectat'),
-          număr = item.find('.număr').contents()[0].data.replace(Utilizator.login, '');
+      var item = Căutare.rezultate.$.find('.selectat');
 
       if (!item.există()) return;
+
+      var număr = item.find('.număr').contents()[0].data.replace(Utilizator.login, '');
 
       location.hash = 'formular?' + număr;
     }
   },
 
   găseşte: function(e) {
-    if (Căutare.timer) return;
-
     var text = $.reEscape($.trim(this.value));
 
     if (!text.length) {
@@ -1377,49 +1382,45 @@ var Căutare = {
       return;
     }
 
-    Căutare.timer = setTimeout(function() {
-      var re = {
-        laÎnceputDeRînd: new RegExp('^' + text, 'gi'),
-        laÎnceputDeCuvînt: new RegExp('\\b' + text, 'gi'),
-        oriunde: new RegExp(text, 'gi')
-      };
+    var re = {
+      laÎnceputDeRînd: new RegExp('^' + text, 'gi'),
+      laÎnceputDeCuvînt: new RegExp('\\b' + text, 'gi'),
+      oriunde: new RegExp(text, 'gi')
+    };
 
-      var rezultate = {
-        laÎnceputDeRînd: [],
-        laÎnceputDeCuvînt: [],
-        oriunde: [],
-        unificate: function() {
-          var unice = {},
-              toate = this.laÎnceputDeRînd
-                .concat(this.laÎnceputDeCuvînt)
-                .concat(this.oriunde);
+    var rezultate = {
+      laÎnceputDeRînd: [],
+      laÎnceputDeCuvînt: [],
+      oriunde: [],
+      unificate: function() {
+        var unice = {},
+            toate = this.laÎnceputDeRînd
+              .concat(this.laÎnceputDeCuvînt)
+              .concat(this.oriunde);
 
-          $.each(toate, function(_, i) {
-            $.each(Căutare.index[i], function(_, număr) {
-              if (!unice[număr]) unice[număr] = Căutare.index[''][număr];
-            });
+        $.each(toate, function(_, i) {
+          $.each(Căutare.index[i], function(_, număr) {
+            if (!unice[număr]) unice[număr] = Căutare.index[''][număr];
           });
+        });
 
-          return unice;
-        }
-      };
-
-      for (var item in Căutare.index) {
-        if (re.laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(item);
-        else if (re.laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(item);
-        else if (re.oriunde.test(item)) rezultate.oriunde.push(item);
+        return unice;
       }
+    };
 
-      Căutare.anulează();
-      Căutare.rezultate.afişează(rezultate.unificate(), text);
-    }, 10);
+    for (var item in Căutare.index) {
+      if (re.laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(item);
+      else if (re.laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(item);
+      else if (re.oriunde.test(item)) rezultate.oriunde.push(item);
+    }
+
+    Căutare.anulează();
+    Căutare.rezultate.afişează(rezultate.unificate(), text);
   },
 
   anulează: function() {
-    clearTimeout(Căutare.timer);
-    delete Căutare.timer;
-
     Căutare.rezultate.$.html('');
+    Căutare.rezultate.$nimic.hide();
     ProceduriRecente.$.parent().show();
   },
 

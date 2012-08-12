@@ -205,6 +205,10 @@ button {
   background: white;
 }
 
+#căutare .şoaptă#nimic {
+  display: none;
+}
+
 .listă-proceduri {
   width: 370px;
   margin-left: 30px;
