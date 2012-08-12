@@ -9,6 +9,11 @@ files="
   js/raport.js
 "
 
+echo "Pregzipping..."
+
 for file in $files; do
+  echo "- $file"
   cat $file | gzip > $file.gz
 done
+
+echo 'OK'
