@@ -889,7 +889,7 @@ var Formular = {
 
         Formular.$.trigger('salvat', [procedură]);
         Formular.focusează();
-        Formular.$.find('.instrumente .salvează+.mesaj')
+        Formular.$.find('.meniu .salvează+.mesaj')
           .fadeIn()
           .delay(1000)
           .fadeOut();
@@ -1165,7 +1165,7 @@ var Formular = {
     Formular.focusează();
     Formular.$
       .stop(true, true)
-      .find('.instrumente').fadeOut().end()
+      .find('.meniu').fadeOut().end()
       .animate({'top': $(window).height()}, function() {
         $(this).hide();
         location.hash = '';
@@ -1180,7 +1180,7 @@ var Formular = {
 
     Formular.$
       .stop(true, true)
-      .find('.instrumente').fadeIn('slow').end()
+      .find('.meniu').fadeIn('slow').end()
       .css('top', $(window).height())
       .show()
       .animate({'top': '80px'});

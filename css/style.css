@@ -94,6 +94,12 @@ button {
   font-size: small;
 }
 
+.ui-icon.colorat-invers {
+  border: none;
+  background-color: transparent;
+  background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/images/ui-icons_cccccc_256x240.png');
+}
+
 #căutare .şoaptă,
 #crează-procedură .şoaptă {
   color: #aaa;
@@ -405,13 +411,6 @@ fieldset legend label {
   position: relative;
   float: right;
   margin: .7em .7em 0 0;
-}
-
-#formular .instrumente span,
-.butoane-per-secţiune button.ui-icon {
-  border: none;
-  background-color: transparent;
-  background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/images/ui-icons_cccccc_256x240.png');
 }
 
 fieldset .conţinut>ul {
@@ -971,7 +970,7 @@ input[type="checkbox"]+label {
   vertical-align: -.2em;
 }
 
-#formular .instrumente {
+.meniu {
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   padding: 0;
   position: fixed;
@@ -984,33 +983,38 @@ input[type="checkbox"]+label {
   opacity: .25;
 }
 
-#formular .instrumente:hover {
+.meniu:hover {
   opacity: 1;
 }
 
-#formular .instrumente div {
+.meniu .deplasator {
   cursor: move;
-  background-color: black;
+  opacity: 1;
 }
 
-#formular .instrumente span {
-  margin: auto;
+.meniu .spre-secţiuni {
+  cursor: pointer;
 }
 
-#formular .instrumente>button {
+.meniu>button {
   height: 48px;
   width: 48px;
   padding: 0;
   border: none;
-  background: black url('data:image/png;base64,') no-repeat 0 0;
+  background-color: black;
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
   -o-transition: opacity .75s;
   transition: opacity .75s;
   opacity: .8;
+  display: block;
 }
 
-#formular .instrumente button+.mesaj {
+.meniu>button:hover {
+  opacity: .9;
+}
+
+.meniu>button+.mesaj {
   display: none;
   position: absolute;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
@@ -1021,20 +1025,20 @@ input[type="checkbox"]+label {
   color: #333;
 }
 
-#formular .instrumente button {
-  display: block;
-}
-
-#formular .instrumente button:hover {
-  opacity: .9;
-}
-
-#formular .instrumente button.salvează {
+.meniu>button.salvează {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCQpHDl7uAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAEJSURBVFjD7ZetDsIwFEbPCMnmKIpJkCheYygkwYFiEh4DB4/AY8wh9wg46sARFKkCQwh/HYOuQEK/qabLTu/97u1ar3zAqkrgAA7gAA7wTGX9VAgofGDH/sF8gGDzfgQCiWSNRDJ6+EYPydQkAp0GdIAxADFo8AYetIiIEKdRzMy2ycPMRBVSRTGN/+wDnRJ2kKMDXgAEVC9GKSkAlVwAT3eqELnXCNBk9aMmJwRPnrm5B5OMbMdFmFynZrdMu7b7YHFVpLcbXwGABMHBZgRT/PO/7V6+OWCZYXKAMgf0qWjWr8wjqBHhoU4fu1eb8Nt7kae/QoVXychKhWL7egTu6OgADuAAHwQcAbNkL6DGQJSyAAAAAElFTkSuQmCC');
 }
 
-#formular .instrumente button.imprimă {
+.meniu>button.imprimă {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
+}
+
+.meniu>button.ui-icon.colorat-invers {
+  height: auto;
+  margin: 0;
+  border: solid black;
+  border-width: 0 17px;
+  background-color: black;
 }
 
 button+.opţiuni {
@@ -1051,6 +1055,7 @@ button+.opţiuni {
   transition: opacity .75s;
   height: 0;
   overflow: hidden;
+  z-index: 1;
 }
 
 button+.opţiuni:hover,
