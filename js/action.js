@@ -606,24 +606,27 @@ var Formular = {
             $(this).css('right', 'auto');
           }
         })
-        .on('click', '.spre-secţiuni+.opţiuni li', function() {
-          var secţiune = $(this).text().substr(2),
-              $titluSecţiune = Formular.$.find('legend label:contains("' + secţiune + '")'),
-              $opţiuni = $(this).closest('.opţiuni'),
-              top = $titluSecţiune.offset().top;
-
-          if ($(document).scrollTop() == top) {
-            $('html,body')
-              .animate({scrollTop: $(document).scrollTop() + 25}, 50)
-              .animate({scrollTop: $(document).scrollTop() - 25}, 50);
-          }
-
-          $('html,body').animate({scrollTop: top}, 750);
-          $opţiuni.css('height', 0);
-          setTimeout(function() {$opţiuni.removeAttr('style')}, 800);
-          $titluSecţiune.closest('fieldset').find('.conţinut :input:not([readonly]):first').focus();
-        });
+        .on('click', '.spre-secţiuni', Formular.focusează)
+        .on('click', '.spre-secţiuni+.opţiuni li', Formular.focuseazăSecţiunea);
     }
+  },
+
+  focuseazăSecţiunea: function() {
+    var secţiune = $(this).text().substr(2),
+        $titluSecţiune = Formular.$.find('legend label:contains("' + secţiune + '")'),
+        $opţiuni = $(this).closest('.opţiuni'),
+        top = $titluSecţiune.offset().top;
+
+    if ($(document).scrollTop() == top) {
+      $('html,body')
+        .animate({scrollTop: $(document).scrollTop() + 25}, 50)
+        .animate({scrollTop: $(document).scrollTop() - 25}, 50);
+    }
+
+    $('html,body').animate({scrollTop: top}, 750);
+    $opţiuni.css('height', 0);
+    setTimeout(function() {$opţiuni.removeAttr('style')}, 800);
+    $titluSecţiune.closest('fieldset').find('.conţinut :input:not([readonly]):first').focus();
   },
 
   eliminăAmendaDupăCaz: function() {

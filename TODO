@@ -2,8 +2,8 @@
 * la Obiectul urmăririi de adăugat bunuri sechestrate
   * de generalizat codul de la categori de cheltuieli
 
-* de afişat rapoartele într-un iframe
 * întîrzieri: imprimare încheiere şi anexă
+* de adăugat buton de imprimare pentru raport
 
 * profil
 * de încercat nişte transform-ări CSS3 pentru lista de proceduri recente
