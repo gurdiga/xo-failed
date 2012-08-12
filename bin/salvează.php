@@ -27,7 +27,7 @@ function reindexează($procedură) {
   $dir = dirname(cale($procedură));
   $fişiere = glob("$dir/*-[0-9]*");
 
-  $index = array();
+  $index = array('' => array());
   $cîmpuri = array('idno', 'denumire', 'idnp', 'nume');
 
   function persoană($persoană) {
@@ -46,7 +46,13 @@ function reindexează($procedură) {
   $colectează = function(&$cîmp, $procedură) use (&$index, $login) {
     if (!isset($cîmp) || !$cîmp) return;
 
-    $creditor = persoană($procedură['creditor']);
+    $număr = $login . $procedură['număr'];
+
+    if (!isset($index[$cîmp])) $index[$cîmp] = array();
+    if (!in_array($număr, $index[$cîmp])) $index[$cîmp][] = $număr;
+  };
+
+  function date_relevante($procedură) {
     $persoane_terţe = array();
 
     if (isset($procedură['persoane-terţe']))
@@ -58,18 +64,20 @@ function reindexează($procedură) {
     foreach ($procedură['debitori'] as $debitor)
       $debitori[] = persoană($debitor);
 
-    $număr = $login . $procedură['număr'];
-    $index[$cîmp][$număr] = array(
+    $date = array(
       'data-hotărîrii' => $procedură['document-executoriu']['data-hotărîrii'],
-      'creditor' => $creditor,
+      'creditor' => persoană($procedură['creditor']),
       'persoane-terţe' => $persoane_terţe,
       'debitori' => $debitori
     );
-  };
+
+    return $date;
+  }
 
   foreach ($fişiere as $fişier) {
     $procedură = json_decode(file_get_contents($fişier), true);
     $număr = $login . $procedură['număr'];
+    $index[''][$număr] = date_relevante($procedură);
 
     foreach ($cîmpuri as $cîmp) {
       $colectează($număr, $procedură);

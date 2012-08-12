@@ -1287,7 +1287,7 @@ var ProceduriRecente = {
     $.each(proceduri, function() {
       var număr = Utilizator.login + this.toString();
 
-      lista[număr] = Căutare.index[număr][număr];
+      lista[număr] = Căutare.index[''][număr];
     });
 
     ProceduriRecente.$
@@ -1392,8 +1392,8 @@ var Căutare = {
                 .concat(this.oriunde);
 
           $.each(toate, function(_, i) {
-            $.each(Căutare.index[i], function(număr, item) {
-              if (!unice[număr]) unice[număr] = Căutare.index[i][număr];
+            $.each(Căutare.index[i], function(_, număr) {
+              if (!unice[număr]) unice[număr] = Căutare.index[''][număr];
             });
           });
 
