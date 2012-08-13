@@ -2097,9 +2097,9 @@ var Sume = {
 
 var Întîrzieri = {
   init: function() {
-    Formular.$
+    Formular.$.on('închidere', this.elimină);
+    Formular.$obiectulUrmăririi
       .on('change', '#caracter', this.adaugăButon)
-      .on('închidere', this.elimină)
       .on('input change', '.fieldset.întîrziere :input:not(.dobîndă)', this.calculeazăDobînda)
       .on('click', '#adaugă-întîrziere', this.adaugă);
   },

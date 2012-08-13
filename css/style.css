@@ -162,7 +162,7 @@ button {
   padding: .2em .3em .2em 0;
 }
 
-#bara-de-sus .instrumente>button:before {
+#bara-de-sus .instrumente>button::before {
   vertical-align: -3px;
   display: inline-block;
   width: 16px;
@@ -171,12 +171,12 @@ button {
   content: ' ';
 }
 
-#bara-de-sus .instrumente>button.profil:before {
+#bara-de-sus .instrumente>button.profil::before {
   background-position: -144px -96px;
 }
 
-#bara-de-sus .instrumente>button.convertor:before,
-#bara-de-sus .instrumente>button.calculator:before {
+#bara-de-sus .instrumente>button.convertor::before,
+#bara-de-sus .instrumente>button.calculator::before {
   background-position: -112px -112px;
 }
 
@@ -739,7 +739,7 @@ input[type="checkbox"]+label {
   margin: 0 0 0 14em;
 }
 
-#adaugă-întîrziere,
+.listă,
 #categorii-taxe-şi-speze {
   font-size: small;
 }
@@ -750,9 +750,9 @@ input[type="checkbox"]+label {
   margin-left: -2.5em;
 }
 
-#cheltuieli .document .adaugă-destinatar:before,
-#destinatari .categorie:before,
-#categorii-taxe-şi-speze .categorie:before {
+#cheltuieli .document .adaugă-destinatar::before,
+#destinatari .categorie::before,
+#categorii-taxe-şi-speze .categorie::before {
   content: '▾';
   margin-left: -1em;
   vertical-align: .1em;
@@ -760,7 +760,6 @@ input[type="checkbox"]+label {
   color: #aaa;
 }
 
-#adaugă-întîrziere,
 #cheltuieli .document .adaugă-destinatar,
 #destinatari .categorie .titlu,
 #categorii-taxe-şi-speze .categorie .descriere {
@@ -779,22 +778,21 @@ input[type="checkbox"]+label {
   margin-bottom: .4em;
 }
 
-#adaugă-întîrziere:hover,
-#cheltuieli .document .adaugă-destinatar:hover:before,
+#cheltuieli .document .adaugă-destinatar:hover::before,
 #cheltuieli .document .adaugă-destinatar:hover>span,
-#destinatari .categorie:hover:before,
+#destinatari .categorie:hover::before,
 #destinatari .categorie:hover .titlu,
 #destinatari .listă>li:hover,
-#categorii-taxe-şi-speze .categorie:hover:before,
+#categorii-taxe-şi-speze .categorie:hover::before,
 #categorii-taxe-şi-speze .categorie:hover .descriere,
 #categorii-taxe-şi-speze .categorie ol>li:hover {
   color: blue;
   text-decoration: underline;
 }
 
-#cheltuieli .document .adaugă-destinatar:hover:before,
-#destinatari .categorie:hover:before,
-#categorii-taxe-şi-speze .categorie:hover:before {
+#cheltuieli .document .adaugă-destinatar:hover::before,
+#destinatari .categorie:hover::before,
+#categorii-taxe-şi-speze .categorie:hover::before {
   text-decoration: none;
 }
 
@@ -844,7 +842,7 @@ input[type="checkbox"]+label {
   cursor: pointer;
 }
 
-#cheltuieli .document .adaugă-destinatar:before {
+#cheltuieli .document .adaugă-destinatar::before {
   padding-right: .3em;
 }
 
@@ -916,13 +914,13 @@ input[type="checkbox"]+label {
   white-space: nowrap;
 }
 
-.destinatari-adăugaţi:before {
+.destinatari-adăugaţi::before {
   content: '▿';
   position: absolute;
   margin-left: -1.9em;
 }
 
-.destinatari-adăugaţi:hover:before {
+.destinatari-adăugaţi:hover::before {
   content: '▾';
 }
 
@@ -931,21 +929,21 @@ input[type="checkbox"]+label {
   color: blue;
 }
 
-.destinatari-adăugaţi.comprimaţi:hover:after,
-.destinatari-adăugaţi.comprimaţi:hover:before {
+.destinatari-adăugaţi.comprimaţi:hover::after,
+.destinatari-adăugaţi.comprimaţi:hover::before {
   color: blue;
 }
 
-.destinatari-adăugaţi.comprimaţi:before {
+.destinatari-adăugaţi.comprimaţi::before {
   content: '▹';
   margin-left: -.9em;
 }
 
-.destinatari-adăugaţi.comprimaţi:hover:before {
+.destinatari-adăugaţi.comprimaţi:hover::before {
   content: '▸';
 }
 
-.destinatari-adăugaţi.comprimaţi:after {
+.destinatari-adăugaţi.comprimaţi::after {
   content: counter(destinatari) " destinatari";
   font-size: 1em;
   vertical-align: -.1em;
@@ -1278,8 +1276,6 @@ button.adaugă.încasare {
 
 #adaugă-întîrziere {
   margin-left: 1em;
-  cursor: pointer;
-  display: inline-block;
 }
 
 label.checkbox {
@@ -1298,6 +1294,53 @@ label.checkbox input {
   vertical-align: -3px;
   border: none;
   background-color: transparent;
+}
+
+.listă .titlu {
+  cursor: pointer;
+  margin-left: 1em;
+  color: #555;
+}
+
+.listă .titlu:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.listă .titlu::before {
+  content: '▾ ';
+  margin-left: -1em;
+  vertical-align: .1em;
+  list-style-type: none;
+  color: #aaa;
+}
+
+.listă .titlu:hover::before {
+  color: blue;
+  text-decoration: none;
+}
+
+.listă .itemi {
+  position: absolute;
+  margin: 0;
+  height: 0;
+  list-style: disc inside;
+  opacity: 0;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+}
+
+.listă .titlu:hover+.itemi,
+.listă .titlu+.itemi:hover {
+  height: auto;
+  opacity: 1;
+}
+
+.listă .titlu+.itemi li:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 @-moz-document url-prefix() {

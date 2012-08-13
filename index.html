@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
+    <meta name="description" content="Aplicaţie on-line pentru organizarea şi facilitarea lucrului executorilor judecătoreşti"/>
     <title>Consola executorului</title>
     <link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
@@ -72,7 +73,12 @@
         <hr/>
       </div>
 
-      <p id="autentificare" style="display:none">Bună ziua. Trebuie să vă <a href="/bin/login.php">autentificaţi</a>.</p>
+      <div id="autentificare" style="display:none">
+        <p>Bună ziua.</p>
+        <p><b>Executori.org</b> este o aplicaţie on-line pentru organizarea
+        şi facilitarea lucrului executorilor judecătoreşti.</p>
+        <p>Trebuie să vă <a href="/bin/login.php">autentificaţi</a>.</p>
+      </div>
 
       <div id="căutare" class="coloană">
         <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
@@ -1262,7 +1268,14 @@
       </ul>
 
 
-      <div id="adaugă-întîrziere">+ Adaugă întîrziere</div>
+      <div id="adaugă-întîrziere" class="listă">
+        <span class="titlu">Adaugă</span>
+
+        <ul class="itemi cu umbră">
+          <li>întîrziere</li>
+          <li>bunuri sechestrate</li>
+        </ul>
+      </div>
 
 
       <ul class="întîrziere fieldset eliminabil de tot">
