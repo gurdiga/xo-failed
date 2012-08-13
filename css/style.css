@@ -1296,51 +1296,48 @@ label.checkbox input {
   background-color: transparent;
 }
 
+.listă {
+  display: inline-block;
+}
+
 .listă .titlu {
-  cursor: pointer;
   margin-left: 1em;
+}
+
+.listă .titlu,
+.listă .itemi {
+  cursor: pointer;
   color: #555;
 }
 
-.listă .titlu:hover {
-  color: blue;
+.listă:hover .titlu {
   text-decoration: underline;
 }
 
 .listă .titlu::before {
-  content: '▾ ';
+  content: '▾';
   margin-left: -1em;
-  vertical-align: .1em;
-  list-style-type: none;
   color: #aaa;
-}
-
-.listă .titlu:hover::before {
-  color: blue;
-  text-decoration: none;
+  padding-right: .3em;
+  display: inline-block;
 }
 
 .listă .itemi {
   position: absolute;
   margin: 0;
-  height: 0;
   list-style: disc inside;
-  opacity: 0;
-  -webkit-transition: opacity .5s;
-  -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
-  transition: opacity .5s;
+  padding: .1em 1em .3em .5em;
 }
 
-.listă .titlu:hover+.itemi,
-.listă .titlu+.itemi:hover {
-  height: auto;
-  opacity: 1;
-}
-
+.listă:hover .titlu,
+.listă:hover .titlu::before,
 .listă .titlu+.itemi li:hover {
   text-decoration: underline;
-  cursor: pointer;
+  color: blue;
+}
+
+.listă:hover .titlu::before {
+  text-decoration: none;
 }
 
 @-moz-document url-prefix() {
