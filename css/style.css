@@ -716,6 +716,10 @@ button.adaugă .legend.label {
   padding: 0 .3em;
 }
 
+li[data-şablon-subformular="documente adresabile"] .document .denumire {
+  width: 23em;
+}
+
 #cheltuieli .subformular .cantitate {
   width: 2em;
 }
