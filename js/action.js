@@ -2204,13 +2204,21 @@ var Secţiuni = {
   },
 
   desfăşoară: function() {
-    $(this).closest('fieldset')
-      .find('.conţinut').toggle('blind', function() {
-        var conţinut = $(this),
-            titlu = $(this).is(':visible') ? 'Colapsează' : 'Desfăşoară'
+    var fieldset = $(this).closest('fieldset'),
+        set;
 
-        $(this).closest('fieldset').find('button.desfăşoară').attr('title', titlu);
-      });
+    if (fieldset.is('#creditor') || fieldset.is('.debitor') || fieldset.is('.persoană-terţă')) {
+      set = Formular.$.find('#creditor, .debitor, .persoană-terţă');
+    } else if (fieldset.is('#document-executoriu') || fieldset.is('#obiectul-urmăririi')) {
+      set = Formular.$.find('#document-executoriu, #obiectul-urmăririi');
+    }
+
+    set.find('.conţinut').toggle('blind', function() {
+      var conţinut = $(this),
+          titlu = $(this).is(':visible') ? 'Colapsează' : 'Desfăşoară'
+
+      $(this).closest('fieldset').find('button.desfăşoară').attr('title', titlu);
+    });
   }
 };
 
