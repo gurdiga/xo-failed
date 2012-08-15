@@ -430,7 +430,9 @@ var Destinatari = {
       }
     },
 
-    adaugăToate: function() {
+    adaugăToate: function(e) {
+      e.stopPropagation();
+
       var destinatari = $(this).parent().next('.itemi'),
           adăugaţiDeja = Destinatari.adăugaţiDeja.children().map(function() {
             return ':contains("' + $(this).text() + '")';
