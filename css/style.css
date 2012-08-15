@@ -1328,6 +1328,7 @@ label.checkbox input {
   margin: 0;
   list-style: disc inside;
   padding: .1em 1em .3em .5em;
+  display: none;
 }
 
 .listă:hover .titlu,

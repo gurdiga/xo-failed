@@ -27,6 +27,7 @@ var Action = {
     FormularPensie.init();
     Rapoarte.init();
     Secţiuni.init();
+    ListeMeniu.init();
 
     $(window).trigger('hashchange');
 
@@ -2219,6 +2220,24 @@ var Secţiuni = {
 
       $(this).closest('fieldset').find('button.desfăşoară').attr('title', titlu);
     });
+  }
+};
+
+// --------------------------------------------------
+
+var ListeMeniu = {
+  init: function() {
+    Formular.$
+      .on('mouseenter', '.listă', this.afişează)
+      .on('mouseleave', '.listă', this.ascunde);
+  },
+
+  afişează: function() {
+    $(this).find('.itemi').afişează();
+  },
+
+  ascunde: function() {
+    $(this).find('.itemi').ascunde();
   }
 };
 
