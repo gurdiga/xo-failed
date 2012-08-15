@@ -240,16 +240,13 @@ var Cheltuieli = {
 
     init: function() {
       this.$
-        .on('mouseenter', '.categorie', this.afişează)
-        .on('mouseleave', '.categorie', this.ascunde)
-        .on('click', '.categorie .item', this.adaugăItem);
+        .on('mouseenter', '.listă', this.marcheazăItemiAdăugaţiDeja)
+        .on('click', '.listă .item', this.adaugăItem);
     },
 
-    afişează: function() {
-      $(this).find('.conţinut').afişează();
-
+    marcheazăItemiAdăugaţiDeja: function() {
       var itemiUniciAdăugaţiDeja = Cheltuieli.adăugate.children('.item.unic'),
-          itemi = $(this).find('.conţinut ol').children();
+          itemi = $(this).find('.listă ol').children();
 
       itemi
         .removeClass('dezactivat')
@@ -264,10 +261,6 @@ var Cheltuieli = {
           .addClass('dezactivat')
           .attr('title', 'Adăugat deja');
       }
-    },
-
-    ascunde: function() {
-      $(this).find('.conţinut').ascunde();
     },
 
     adaugăItem: function() {
@@ -300,7 +293,7 @@ var Cheltuieli = {
 
       Cheltuieli.adăugate.trigger('recalculare');
 
-      $(this).closest('.conţinut').fadeOut();
+      $(this).closest('.itemi').fadeOut();
 
       TotalCheltuieli.calculează();
     }
@@ -333,11 +326,11 @@ var Cheltuieli = {
         .on('click', '.destinatari-adăugaţi', this.ascundeSauAfişează)
         .on('eliminare', '.destinatari-adăugaţi .eliminabil', this.ascundeListaDacăNuMaiSunt)
         .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează)
-        .on('keydown', '.destinatari-adăugaţi .persoană.terţă input', this.ascundeLaEnterSauEsc);
+        .on('keydown focusout', '.destinatari-adăugaţi .persoană.terţă input', this.ascundeLaEnterSauEsc);
     },
 
     ascundeLaEnterSauEsc: function(e) {
-      if (e.keyCode == 13 || e.keyCode == 27) {
+      if (e.keyCode == 13 || e.keyCode == 27 || e.type == 'focusout') {
         e.preventDefault();
         e.stopPropagation();
         Destinatari.adăugaţiDeja.click();
@@ -345,8 +338,15 @@ var Cheltuieli = {
     },
 
     ascundeSauAfişează: function(e) {
-      if (e.target == this && $(this).children().există()) {
-        $(this)
+      var destinatari = $(this),
+          subformular = destinatari.closest('.subformular');
+
+      subformular.find('.destinatari-adăugaţi').not(this)
+        .addClass('comprimaţi')
+        .removeClass('cu umbră');
+
+      if (e.target == this && destinatari.children().există()) {
+        destinatari
           .toggleClass('comprimaţi')
           .toggleClass('cu umbră');
       }
@@ -381,50 +381,40 @@ var Cheltuieli = {
 // --------------------------------------------------
 
 var Destinatari = {
-  $: $('#destinatari'),
-  persoanăTerţă: $şabloane.find('.persoană.terţă').html(),
+  $: $şabloane.find('#destinatari'),
   adăugaţiDeja: $(),
 
   init: function() {
     this.categorii.init();
-    this.buton.init();
+    this.butonDeAdăugare.init();
   },
 
-  buton: {
+  butonDeAdăugare: {
     init: function() {
       Cheltuieli.adăugate
-        .on('mouseenter', '.adaugă-destinatar', this.categorii.afişează)
-        .on('mouseleave', '.adaugă-destinatar', this.categorii.ascunde)
+        .on('mouseenter', '.adaugă-destinatar', this.afişeazăCategoriile);
     },
 
-    categorii: {
-      afişează: function() {
-        Destinatari.adăugaţiDeja = $(this).prev('.destinatari-adăugaţi');
-        Destinatari.$.appendTo(this).afişează();
-      },
-
-      ascunde: function() {
-        Destinatari.$
-          .ascunde()
-          .find('.listă').hide();
-      }
+    afişeazăCategoriile: function() {
+      Destinatari.adăugaţiDeja = $(this).prev('.destinatari-adăugaţi');
+      Destinatari.$.appendTo(this).afişează();
     }
   },
 
   categorii: {
     init: function() {
       Destinatari.$
-        .on('mouseenter', '.categorie', this.afişează)
-        .on('mouseleave', '.categorie', this.ascunde)
-        .on('click', '.categorie .titlu .toate', this.adaugă)
-        .on('click', '.listă li', Destinatari.adaugă);
+        .on('click', '.listă .titlu .adaugă-toate', this.adaugăToate)
+        .on('click', '.listă>.itemi>li', Destinatari.adaugă)
+        .on('mouseenter', '.listă', this.marcheazăItemiAdăugaţiDeja);
     },
 
-    afişează: function() {
-      var destinatari = $(this).find('.listă').children();
+    marcheazăItemiAdăugaţiDeja: function() {
+      var destinatari = $(this).find('.itemi').children(),
+          destinatariAdăugaţiDeja = Destinatari.adăugaţiDeja.children(':not(.persoană.terţă)');
 
-      if (Destinatari.adăugaţiDeja.children().există()) {
-        var selector = Destinatari.adăugaţiDeja.children().map(function() {
+      if (destinatariAdăugaţiDeja.există()) {
+        var selector = destinatariAdăugaţiDeja.map(function() {
           return ':contains("' + $(this).text() + '")';
         }).get().join(',');
 
@@ -438,25 +428,21 @@ var Destinatari = {
           .removeClass('dezactivat')
           .removeAttr('title');
       }
-
-      $(this).find('.listă').afişează();
     },
 
-    ascunde: function() {
-      $(this).find('.listă').ascunde();
-    },
-
-    adaugă: function() {
-      var destinatari = $(this).closest('.categorie'),
+    adaugăToate: function() {
+      var destinatari = $(this).parent().next('.itemi'),
           adăugaţiDeja = Destinatari.adăugaţiDeja.children().map(function() {
             return ':contains("' + $(this).text() + '")';
           }).get().join(',');
 
-      destinatari.find('li').not(adăugaţiDeja).trigger('click');
+      destinatari.children('li').not(adăugaţiDeja).trigger('click');
     }
   },
 
-  adaugă: function() {
+  adaugă: function(e) {
+    e.stopPropagation();
+
     var destinatar = $(this).clone();
 
     destinatar
@@ -467,11 +453,12 @@ var Destinatari = {
 
     if (destinatar.is('.persoană.terţă')) {
       Destinatari.adăugaţiDeja.click();
-      destinatar
-        .text('')
-        .append(Destinatari.persoanăTerţă);
+      destinatar.append('<input/>');
 
-      if (!Formular.sePopulează && !Formular.seIniţializează) destinatar.find('input').focus();
+      if (!Formular.sePopulează && !Formular.seIniţializează) {
+        destinatar.find('input').focus();
+        Destinatari.$.hide();
+      }
     }
 
     TotalCheltuieli.calculează();
@@ -1091,25 +1078,21 @@ var Formular = {
 
             if (this.document) {
               $cîmp.val(this.document);
+              Destinatari.adăugaţiDeja = $cîmp.next('.destinatari-adăugaţi');
 
               if (this.destinatari) {
                 $.each(this.destinatari, function() {
-                  Destinatari.$.find('li:not(.categorie):contains("' + this + '")')
-                    .clone()
-                    .addClass('eliminabil de tot')
-                    .appendTo($itemSubformular.find('.destinatari-adăugaţi'));
+                  Destinatari.$.find('li:not(.listă):contains("' + this + '")').click();
                 });
               }
 
               if (this['destinatari-persoane-terţe']) {
                 $.each(this['destinatari-persoane-terţe'], function() {
-                  Destinatari.$.find('li.persoană.terţă')
-                    .clone()
+                  Destinatari.$.find('li.persoană.terţă').clone()
                     .addClass('eliminabil de tot')
-                    .text('')
-                    .append($şabloane.find('.persoană.terţă').html())
+                    .append('<input/>')
                     .find('input').val(this).end()
-                    .appendTo($itemSubformular.find('.destinatari-adăugaţi'));
+                    .appendTo(Destinatari.adăugaţiDeja);
                 });
               }
             } else {
@@ -2233,11 +2216,11 @@ var ListeMeniu = {
   },
 
   afişează: function() {
-    $(this).find('.itemi').afişează();
+    $(this).children('.itemi').afişează();
   },
 
   ascunde: function() {
-    $(this).find('.itemi').ascunde();
+    $(this).children('.itemi').ascunde();
   }
 };
 

@@ -543,7 +543,7 @@ button.elimină-persoană {
   margin: 0;
 }
 
-.subformular li:first-child {
+.subformular>li:first-child {
   margin-bottom: .3em;
 }
 
@@ -559,19 +559,10 @@ button.elimină-persoană {
   border-bottom: 1px solid silver;
 }
 
-#cheltuieli .destinatari-adăugaţi .persoană.terţă {
-  padding: 0;
-}
-
-#cheltuieli .destinatari-adăugaţi .persoană.terţă label {
-  border-width: 0;
-  margin: 0;
-  padding: 0;
-}
-
 #cheltuieli .destinatari-adăugaţi .persoană.terţă input {
-  background-position: 0 -7px;
-  padding: 1px 0 0;
+  background-position: 0 -8px;
+  padding: 0;
+  margin-left: .3em;
 }
 
 .subformular textarea {
@@ -675,11 +666,6 @@ button.adaugă .legend.label {
   margin-bottom: -1.2em;
 }
 
-#cheltuieli .item p,
-#categorii-taxe-şi-speze .item .subformular {
-  display: none;
-}
-
 #cheltuieli .adăugate>.ui-effects-wrapper>li,
 #cheltuieli .adăugate>li {
   margin-top: .4em;
@@ -717,10 +703,6 @@ button.adaugă .legend.label {
   padding: 0 .3em;
 }
 
-li[data-şablon-subformular="documente adresabile"] .document .denumire {
-  width: 23em;
-}
-
 #cheltuieli .subformular .cantitate {
   width: 2em;
 }
@@ -736,82 +718,27 @@ input[type="checkbox"]+label {
 }
 
 #categorii-taxe-şi-speze {
-  display: inline-block;
-  margin: 0 0 0 14em;
+  margin: 0 0 0 12em;
 }
 
-.listă,
-#categorii-taxe-şi-speze {
-  font-size: small;
-}
-
-#destinatari {
-  display: none;
-  position: absolute;
-  margin-left: -2.5em;
-}
-
-#cheltuieli .document .adaugă-destinatar::before,
-#destinatari .categorie::before,
-#categorii-taxe-şi-speze .categorie::before {
-  content: '▾';
-  margin-left: -1em;
-  vertical-align: .1em;
-  list-style-type: none;
-  color: #aaa;
-}
-
-#cheltuieli .document .adaugă-destinatar,
-#destinatari .categorie .titlu,
-#categorii-taxe-şi-speze .categorie .descriere {
-  color: #555;
-  white-space: nowrap;
-}
-
-#cheltuieli .document .adaugă-destinatar,
-#categorii-taxe-şi-speze .categorie .descriere,
-#categorii-taxe-şi-speze .categorie ol>li {
-  cursor: pointer;
-}
-
-#categorii-taxe-şi-speze .categorie ol>li {
-  list-style-position: outside;
-  margin-bottom: .4em;
-}
-
-#cheltuieli .document .adaugă-destinatar:hover::before,
-#cheltuieli .document .adaugă-destinatar:hover>span,
-#destinatari .categorie:hover::before,
-#destinatari .categorie:hover .titlu,
-#destinatari .listă>li:hover,
-#categorii-taxe-şi-speze .categorie:hover::before,
-#categorii-taxe-şi-speze .categorie:hover .descriere,
-#categorii-taxe-şi-speze .categorie ol>li:hover {
-  color: blue;
-  text-decoration: underline;
-}
-
-#cheltuieli .document .adaugă-destinatar:hover::before,
-#destinatari .categorie:hover::before,
-#categorii-taxe-şi-speze .categorie:hover::before {
-  text-decoration: none;
-}
-
-#categorii-taxe-şi-speze .categorie .conţinut {
-  display: none;
-  position: absolute;
+#categorii-taxe-şi-speze .listă .itemi {
   width: 40em;
-  padding: .5em 1em 1em;
-  margin-left: -1em;
+  padding: .5em 1em 1em 2em;
 }
 
-#categorii-taxe-şi-speze .categorie .titlu {
-  margin: .5em 0 .3em;
+#categorii-taxe-şi-speze .listă .itemi>li {
+  margin-bottom: .4em;
+  list-style-type: decimal;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+#categorii-taxe-şi-speze .item .subformular {
   display: none;
 }
 
-#categorii-taxe-şi-speze .categorie .item.dezactivat,
-#categorii-taxe-şi-speze .categorie .item.dezactivat:hover {
+#categorii-taxe-şi-speze .listă .item.dezactivat,
+#categorii-taxe-şi-speze .listă .item.dezactivat:hover {
   color: #555;
   text-decoration: line-through;
   cursor: text;
@@ -843,12 +770,7 @@ input[type="checkbox"]+label {
   cursor: pointer;
 }
 
-#cheltuieli .document .adaugă-destinatar::before {
-  padding-right: .3em;
-}
-
-.destinatari-adăugaţi,
-#cheltuieli .document .adaugă-destinatar {
+.destinatari-adăugaţi {
   font-size: small;
 }
 
@@ -863,56 +785,52 @@ input[type="checkbox"]+label {
 }
 
 #cheltuieli .document .adaugă-destinatar {
-  margin-left: 10em;
+  margin-left: 9em;
   display: inline-block;
 }
 
-#cheltuieli .document .destinatari,
-#destinatari .listă {
+#cheltuieli .document .destinatari {
   position: absolute;  
   margin-left: -1em;
   padding-left: 1.5em;
 }
 
-#destinatari .listă,
-#destinatari .categorii {
-  padding: .5em 2em .7em 2.5em;
+#destinatari {
+  position: absolute;
+  margin-left: -1.5em;
+  list-style-type: none;
+  padding: .1em 2em .5em 1.5em;
+  z-index: 1;
 }
 
-#destinatari .listă>li,
-#destinatari .categorie {
-  margin-bottom: .4em;
+#destinatari .listă .titlu {
+  white-space: nowrap;
 }
 
-#destinatari .listă>li.dezactivat,
-#destinatari .listă>li.dezactivat:hover {
+#destinatari .listă .itemi {
+  padding: .2em 1em .5em 1.5em;
+  line-height: 1.4em;
+}
+
+#destinatari .listă .itemi li {
+  white-space: nowrap;
+}
+
+#destinatari .listă .itemi li.dezactivat,
+#destinatari .listă .itemi li.dezactivat:hover {
   text-decoration: line-through;
   cursor: text;
   color: #555;
 }
 
-#destinatari .listă {
-  display: none;
-}
-
-#destinatari .categorie .toate {
+#destinatari .listă .adaugă-toate {
   display: none;
   color: #999;
   position: absolute;
 }
 
-#destinatari .categorie:hover .toate {
+#destinatari .listă:hover .adaugă-toate {
   display: inline;
-}
-
-#destinatari .categorie:hover .toate:hover {
-  color: black;
-}
-
-#destinatari .listă>li,
-.destinatari-adăugaţi>li {
-  list-style: inside circle;
-  white-space: nowrap;
 }
 
 .destinatari-adăugaţi::before {
@@ -950,7 +868,13 @@ input[type="checkbox"]+label {
   vertical-align: -.1em;
 }
 
+.destinatari-adăugaţi {
+  z-index: 1;
+}
+
 .destinatari-adăugaţi>li {
+  list-style: inside circle;
+  white-space: nowrap;
   counter-increment: destinatari;
   cursor: text;
 }
@@ -964,6 +888,7 @@ input[type="checkbox"]+label {
   padding: 0;
   margin-left: 2em;
   margin-top: 0;
+  z-index: 0;
 }
 
 .destinatari-adăugaţi.comprimaţi>li {
@@ -976,13 +901,6 @@ input[type="checkbox"]+label {
 .destinatari-adăugaţi .persoană.terţă input {
   margin: 0;
   padding: .1em .3em;
-}
-
-.destinatari-adăugaţi .persoană.terţă label {
-  color: black;
-  width: auto;
-  font-style: normal;
-  vertical-align: -.2em;
 }
 
 .meniu {
@@ -1297,33 +1215,30 @@ label.checkbox input {
   background-color: transparent;
 }
 
+#destinatari .listă .itemi li,
 .listă {
-  display: inline-block;
-}
-
-.listă .titlu {
-  margin-left: 1em;
-}
-
-.listă .titlu,
-.listă .itemi {
+  font-size: small;
   cursor: pointer;
   color: #555;
 }
 
-.listă:hover .titlu {
+.listă>.titlu {
+  margin-left: 1em;
+}
+
+.listă:hover>.titlu {
   text-decoration: underline;
 }
 
-.listă .titlu::before {
+.listă>.titlu::before {
   content: '▾';
   margin-left: -1em;
   color: #aaa;
-  padding-right: .3em;
+  padding-right: .1em;
   display: inline-block;
 }
 
-.listă .itemi {
+.listă>.itemi {
   position: absolute;
   margin: 0;
   list-style: disc inside;
@@ -1331,14 +1246,15 @@ label.checkbox input {
   display: none;
 }
 
-.listă:hover .titlu,
-.listă:hover .titlu::before,
-.listă .titlu+.itemi li:hover {
+.listă:hover>.titlu,
+.listă:hover>.titlu::before,
+.listă>.titlu+.itemi>li:hover,
+#destinatari .listă .itemi li:hover {
   text-decoration: underline;
   color: blue;
 }
 
-.listă:hover .titlu::before {
+.listă:hover>.titlu::before {
   text-decoration: none;
 }
 
