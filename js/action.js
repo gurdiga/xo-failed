@@ -13,7 +13,7 @@ var Action = {
     Valute.populeazăListe();
     FormulareŞablon.init();
     CîmpuriTextarea.autodimensionează();
-    ListeFoarteLate.seteazăŞoapte();
+    SelecturiFoarteLate.seteazăŞoapte();
     Persoane.init();
     Cheltuieli.init();
     ButonDeEliminare.init();
@@ -153,7 +153,7 @@ var CîmpuriTextarea = {
 
 // --------------------------------------------------
 
-var ListeFoarteLate = {
+var SelecturiFoarteLate = {
   seteazăŞoapte: function() {
     Formular.$
       .on('change', 'select.foarte.lat', function() {
