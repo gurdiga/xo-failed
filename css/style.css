@@ -1260,7 +1260,7 @@ label.checkbox input {
 
 @-moz-document url-prefix() {
   h1 {
-    letter-spacing: -.075em;
+    letter-spacing: -.05em;
   }
 
   #calculator legend label {
