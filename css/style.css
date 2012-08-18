@@ -1132,7 +1132,6 @@ fieldset .conţinut ul.fieldset {
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
   border-top-color: #eee;
-  display: inline-block !important;
 }
 
 ul.fieldset .titlu {
