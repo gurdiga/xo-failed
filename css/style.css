@@ -1013,7 +1013,45 @@ button+.opţiuni li:hover {
 }
 
 input~button+.opţiuni {
-  margin-top: -3px;
+  right: auto;
+  display: inline-block;
+  margin: 20px 0 0 -20px;
+  list-style: inside disc;
+  padding: 0;
+}
+
+input~button:hover+.opţiuni,
+input~button+.opţiuni:hover {
+  padding: .2em .5em .5em 0;
+}
+
+input~button+.opţiuni li {
+  color: #333;
+  background-color: white;
+  font-size: small;
+  line-height: normal;
+}
+
+input~button+.opţiuni li:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+button.cu.opţiuni {
+  text-indent: 0;
+  overflow: visible;
+  width: 20px;
+}
+
+button.cu.opţiuni:after {
+  content: '▿';
+  position: absolute;
+  font-size: smaller;
+  margin: -6px 0 0 8px;
+}
+
+button.cu.opţiuni:hover:after {
+  content: '▾';
 }
 
 #calculator {
@@ -1128,7 +1166,7 @@ input~button+.opţiuni {
 
 fieldset .conţinut .ui-effects-wrapper ul.fieldset,
 fieldset .conţinut ul.fieldset {
-  margin: .5em -4px;
+  margin: .5em -4px 1em;
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
   border-top-color: #eee;
