@@ -19,34 +19,27 @@
           cu rata aplicată de&nbsp;<b><%= raport.rata %>%</b>:
         </p>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Nr.</th>
-              <th>Începînd cu</th>
-              <th>Durata</th>
-              <th>Rata, %</th>
-              <th>Suma, lei</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% var i = 0; %>
-            <% for (var rînd in raport.rînduri) { rînd = raport.rînduri[rînd]; %>
-            <tr>
-              <td><%= ++i %></td>
-              <td><%= rînd.data %></td>
-              <td><%= rînd.durata %> zile</td>
-              <td><%= rînd.rata %>+<%= raport.rata %>=<%= (rînd.rata + raport.rata).toFixed(1) %></td>
-              <td><%= rînd.dobînda.toFixed(2) %></td>
-            </tr>
-            <% } %>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5"><%= total %></td>
-            </tr>
-          </tfoot>
-        </table>
+        <ul>
+          <li class="antet">
+            <span>Nr.</span>
+            <span>Începînd cu</span>
+            <span>Durata</span>
+            <span>Rata, %</span>
+            <span>Suma, lei</span>
+          </li>
+
+          <% var i = 0; %>
+          <% for (var rînd in raport.rînduri) { rînd = raport.rînduri[rînd]; %>
+          <li>
+            <span><%= ++i %></span>
+            <span><%= rînd.data %></span>
+            <span><%= rînd.durata %> zile</span>
+            <span><%= rînd.rata %>+<%= raport.rata %>=<%= (rînd.rata + raport.rata).toFixed(1) %></span>
+            <span><%= rînd.dobînda.toFixed(2) %></span>
+          </li>
+          <% } %>
+          <li class="total"><%= total %></li>
+        </ul>
       <% } else { %>
         <% if (!raport.începutPerioadă) { %>
           <p>Trebuie să introduceţi <b>începutul perioadei</b>.</p>
