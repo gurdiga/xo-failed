@@ -1962,7 +1962,6 @@ var Onorariu = {
     if (Onorariu.timerCalculare) return;
 
     Onorariu.timerCalculare = setTimeout(function() {
-      console.log('calculează Onorariu');
       var $secţiune = Formular.$obiectulUrmăririi,
           caracter = $secţiune.find('#caracter').val(),
           onorariu = 0;
