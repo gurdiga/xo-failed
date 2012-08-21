@@ -2127,7 +2127,7 @@ var Sume = {
 var SubsecţiuniProcedurăPecuniară = {
   init: function() {
     Formular.$.on('închidere', this.eliminăButonDeAdăugare);
-    Formular.$obiectulUrmăririi.on('change', '#caracter', this.insereazăButonDeAdăugare);
+    Formular.$obiectulUrmăririi.on('change', '#caracter', this.insereazăSauEliminăButonDeAdăugareSubsecţiune);
     Formular.$.on('mouseenter', '.listă', this.includeSauExcludeOpţiuneaBunuriSechestrate)
 
     this.întîrzieri.init();
@@ -2140,7 +2140,7 @@ var SubsecţiuniProcedurăPecuniară = {
     );
   },
 
-  insereazăButonDeAdăugare: function() {
+  insereazăSauEliminăButonDeAdăugareSubsecţiune: function() {
     var caracter = $(this);
 
     if (caracter.val() == 'pecuniar') {
