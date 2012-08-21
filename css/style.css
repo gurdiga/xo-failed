@@ -588,6 +588,10 @@ button.elimină-persoană {
   height: 0;
 }
 
+.personalizat:hover+.container-buton {
+  display: none;
+}
+
 label+input[type="checkbox"] {
   margin: 5px 0;
 }
