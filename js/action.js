@@ -206,7 +206,9 @@ var FormulareŞablon = {
         .find('.adaugă-cîmp-personalizat.implicit').click();
     }
 
-    $subformular.effect('highlight', {}, 1200, function() {$(this).clearQueue()});
+    try {
+      $subformular.effect('highlight', {}, 1200, function() {$(this).clearQueue()});
+    } catch(e) {} // "Uncaught TypeError: Cannot read property '0' of undefined" jquery-ui.min.js:5
   },
 
   parseazăIncluderile: function(html) {
