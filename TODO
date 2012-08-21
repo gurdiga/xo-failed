@@ -1,5 +1,6 @@
 * Introducere
   - la Obiectul urmăririi de adăugat bunuri sechestrate
+    - adaugă clasa în-subsecţiune la input-urile din subsecţiune
   - La procedurile nonpecuniare trebui de scos „adaugă întîrzieri”
     pentru că nu se urmăresc bani. Va rămîne doar „adaugă bunuri sechestrate”.
     „adaugă întîrzieri” va rămîne doar la cele pecuniare, cu excepţia
@@ -11,6 +12,8 @@
 - Imprimare
   - butoane imprimare încheiere şi anexă pentru întîrzieri
   - de adăugat buton de imprimare în tab-ul raportului
+  - history.replaceState(null, null, '/număr-procedură/tutlu-raport')
+  - de încercat listă în loc de tabel ca să nu se rupă rîndul între pagini
 
 - Listare
 - Profil

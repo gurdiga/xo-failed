@@ -84,7 +84,6 @@ fieldset select {
 fieldset ul select {
   width: 14.7em;
   padding: 0;
-  margin: .25em 0;
 }
 
 fieldset ul>li>textarea {
@@ -405,6 +404,7 @@ fieldset label {
   padding: .4em 0 .3em 6px;
   min-height: 1em;
   line-height: normal!important;
+  margin: 0;
 }
 
 .etichetă:hover,
@@ -1169,15 +1169,16 @@ button.cu.opţiuni:hover:after {
   color: black;
 }
 
-fieldset .conţinut .ui-effects-wrapper ul.fieldset,
-fieldset .conţinut ul.fieldset {
+fieldset .conţinut .ui-effects-wrapper ul.subsecţiune,
+fieldset .conţinut ul.subsecţiune {
   margin: .5em -4px 1em;
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
   border-top-color: #eee;
+  position: relative;
 }
 
-ul.fieldset .titlu {
+ul.subsecţiune .titlu {
   color: #bbb;
   font-size: small;
   margin: -.7em 0 -.3em .35em;
@@ -1187,19 +1188,27 @@ ul.fieldset .titlu {
   position: absolute;
 }
 
-ul.fieldset .titlu+li {
+ul.subsecţiune .titlu+li {
   margin-top: .1em;
 }
 
-ul.fieldset .elimină {
-  top: -.4em;
+ul.subsecţiune .elimină {
   left: -.9em;
+  top: -.4em;
   padding-right: .5em;
   line-height: .8em;
   background: transparent;
 }
 
-ul.fieldset li:last-child input {
+ul.subsecţiune .personalizat .elimină {
+  left: -12px;
+  top: 6px;
+  padding-right: .5em;
+  line-height: .8em;
+  background: transparent;
+}
+
+ul.subsecţiune li:last-child input {
   padding-bottom: 0;
 }
 
@@ -1231,11 +1240,11 @@ button.adaugă.încasare {
   margin-top: .7em;
 }
 
-.fieldset+button.adaugă.încasare {
+.subsecţiune+button.adaugă.încasare {
   margin-top: 0;
 }
 
-#adaugă-întîrziere {
+#adaugă-subsecţiune {
   margin-left: 1em;
 }
 
@@ -1284,7 +1293,7 @@ label.checkbox input {
   position: absolute;
   margin: 0;
   list-style: disc inside;
-  padding: .1em 1em .3em .5em;
+  padding: .1em 1em .3em;
   display: none;
 }
 
