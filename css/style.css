@@ -410,6 +410,7 @@ fieldset label {
 .etichetă:hover,
 .etichetă:focus {
   outline: 1px solid #ddd;
+  background: white;
 }
 
 fieldset legend label {
