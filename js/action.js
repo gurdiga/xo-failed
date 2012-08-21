@@ -490,6 +490,7 @@ var ButonDeEliminare = {
         buton = ButonDeEliminare.$;
 
     if (eliminabil.is('.spre-eliminare')) return;
+    if (eliminabil.is(':not(.de.tot)') && !eliminabil.siblings('.eliminabil').există()) return;
 
     if (eliminabil.children().există()) {
       buton.insertBefore(eliminabil.children().first())
