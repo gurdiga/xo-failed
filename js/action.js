@@ -1959,34 +1959,39 @@ var Onorariu = {
 
   calculează: function() {
     if (Formular.seIniţializează || Formular.sePopulează) return;
+    if (Onorariu.timerCalculare) return;
 
-    var $secţiune = Formular.$obiectulUrmăririi,
-        caracter = $secţiune.find('#caracter').val(),
-        onorariu = 0;
+    Onorariu.timerCalculare = setTimeout(function() {
+      console.log('calculează Onorariu');
+      var $secţiune = Formular.$obiectulUrmăririi,
+          caracter = $secţiune.find('#caracter').val(),
+          onorariu = 0;
 
-    if (caracter == 'nonpecuniar') {
-      var obiect = Formular.$obiectulUrmăririi.find('#obiect').val(),
-          genPersoană = Formular.$.find('.debitor #gen-persoană').val();
+      if (caracter == 'nonpecuniar') {
+        var obiect = Formular.$obiectulUrmăririi.find('#obiect').val(),
+            genPersoană = Formular.$.find('.debitor #gen-persoană').val();
 
-      valoare = Onorariu.nonpecuniar[obiect][genPersoană];
-      onorariu = typeof valoare == 'function' ? valoare() : valoare;
-    } else {
-      var total = $secţiune.find('.conţinut ul:first .sumă:not(.calculat), .întîrziere .dobîndă').suma();
-
-      $secţiune.find('#total').val(total).trigger('change');
-
-      if (Formular.pensieDeÎntreţinere()) {
-        onorariu = $secţiune.find('.încasare #onorariul-calculat').suma();
+        valoare = Onorariu.nonpecuniar[obiect][genPersoană];
+        onorariu = typeof valoare == 'function' ? valoare() : valoare;
       } else {
-        onorariu = Onorariu.pecuniar(total);
+        var total = $secţiune.find('.conţinut ul:first .sumă:not(.calculat), .întîrziere .dobîndă').suma();
+
+        $secţiune.find('#total').val(total).trigger('change');
+
+        if (Formular.pensieDeÎntreţinere()) {
+          onorariu = $secţiune.find('.încasare #onorariul-calculat').suma();
+        } else {
+          onorariu = Onorariu.pecuniar(total);
+        }
       }
-    }
 
-    if (Cheltuieli.$.find('#părţile-au-ajuns-la-conciliere').is(':checked')) {
-      onorariu *= .7;
-    }
+      if (Cheltuieli.$.find('#părţile-au-ajuns-la-conciliere').is(':checked')) {
+        onorariu *= .7;
+      }
 
-    Onorariu.$.val(onorariu.toFixed(2));
+      Onorariu.$.val(onorariu.toFixed(2));
+      Onorariu.timerCalculare = false;
+    }, 500);
   },
 
   pecuniar: function(suma) {
