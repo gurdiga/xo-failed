@@ -60,7 +60,7 @@ input {
 
 textarea.lat {
   width: 25em;
-  margin: .5em 0 0 .7em;
+  margin: 0 0 0 .7em;
 }
 
 input {
@@ -74,7 +74,7 @@ fieldset>.conţinut {
 textarea,
 input,
 fieldset select {
-  margin: 1px 0;
+  margin: 0;
   vertical-align: top;
   padding: .3em;
   color: black;
@@ -593,10 +593,6 @@ button.elimină-persoană {
   display: none;
 }
 
-label+input[type="checkbox"] {
-  margin: 5px 0;
-}
-
 button.adaugă-cîmp-personalizat,
 button.adaugă {
   font-size: 1.3em;
@@ -1110,12 +1106,12 @@ button.cu.opţiuni:hover:after {
   cursor: pointer;
 }
 
-#calculator ul .total {
+#calculator ul li.total {
   padding-top: 1em;
 }
 
-#calculator ul .total input,
-#calculator ul .total label {
+#calculator ul li.total input,
+#calculator ul li.total label {
   font-weight: bold;
 }
 

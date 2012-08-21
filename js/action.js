@@ -518,7 +518,6 @@ var ButonDeEliminare = {
 
     if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
       eliminabil
-        .find('.valoare, .sumă').val(0).trigger('change').end()
         .trigger('eliminare')
         .slideUp(function() {
           eliminabil.remove();
@@ -700,6 +699,9 @@ var Formular = {
           date = {},
           cîmpuri = [
             'ul:not(.subsecţiune) label+:input:not(.calculat):last-child',
+            'ul:not(.subsecţiune) label+select.foarte.lat',
+            'ul:not(.subsecţiune) label+input#salariu-recuperat',
+            'ul:not(.subsecţiune) label+input#valoarea-acţiunii',
             'ul:not(.subsecţiune) .etichetă+:input'
           ].join(',');
 
@@ -965,18 +967,16 @@ var Formular = {
           .trigger('change');
       }
 
-      var item, prima = true;
+      var item;
 
       if (secţiune.subformular) {
-        var adaugă = $secţiune.find('.adaugă');
+        var adaugă = $secţiune.find('.adaugă-cîmp-personalizat');
 
         for (item in secţiune.subformular) {
-          if (!prima) adaugă.click();
-
-          $secţiune.find('.item').last()
+          adaugă.click();
+          $secţiune.find('.personalizat').last()
             .find('.etichetă').val(item).end()
             .find('input').val(secţiune.subformular[item]);
-          prima = false;
         }
       }
     }
@@ -1048,7 +1048,7 @@ var Formular = {
         $bun = $subsecţiune.find('.personalizat:last');
         $bun.find('.etichetă').val(etichetă);
         $bun.find('.sumă').val(bun.sumă);
-        $bun.find('.valuta').val(bun.valuta);
+        $bun.find('.valuta').val(bun.valuta).trigger('input');
 
         primul = false;
       }
@@ -2195,7 +2195,9 @@ var SubsecţiuniProcedurăPecuniară = {
     init: function() {
       Formular.$obiectulUrmăririi
         .on('click', '#adaugă-subsecţiune li:contains("bunuri sechestrate")', this.adaugăSubsecţiune)
-        .on('click', '.subsecţiune.bunuri-sechestrate .adaugă-cîmp-personalizat', this.scoateClasaDeTot);
+        .on('click', '.subsecţiune.bunuri-sechestrate .adaugă-cîmp-personalizat', this.scoateClasaDeTot)
+        .on('eliminare', '.personalizat', this.calculeazăTotal)
+        .on('input', ':input', this.calculeazăTotal);
     },
 
     adaugăSubsecţiune: function() {
@@ -2216,6 +2218,13 @@ var SubsecţiuniProcedurăPecuniară = {
       setTimeout(function() {
         subsecţiune.find('.personalizat.eliminabil.de.tot').removeClass('de tot');
       }, 100);
+    },
+
+    calculeazăTotal: function() {
+      var subsecţiune = $(this).closest('.subsecţiune'),
+          total = subsecţiune.find('.total');
+
+      total.val(subsecţiune.find('.sumă').not(total).suma());
     }
   }
 };
