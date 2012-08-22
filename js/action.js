@@ -1023,7 +1023,7 @@ var Formular = {
         întîrziere = întîrzieri[i];
 
         buton.click();
-        $întîrziere = $secţiune.find('.întîrziere:last');
+        $întîrziere = $secţiune.find('.subsecţiune.întîrziere:last');
         $întîrziere.find('.început.perioadă').val(întîrziere['începutPerioadă']);
         $întîrziere.find('.sfîrşit.perioadă').val(întîrziere['sfîrşitPerioadă']);
         $întîrziere.find(':radio[value="' + întîrziere['rata'] + '"]').attr('checked', true);
