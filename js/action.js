@@ -2226,7 +2226,7 @@ var Subsecţiuni = {
         .on('click', '#adaugă-subsecţiune .bunuri-sechestrate', this.adaugăSubsecţiune)
         .on('click', '.subsecţiune.bunuri-sechestrate .adaugă-cîmp-personalizat', this.scoateClasaDeTot)
         .on('eliminare', '.personalizat', this.calculeazăTotal)
-        .on('input', ':input', this.calculeazăTotal);
+        .on('input change', ':input', this.calculeazăTotal);
     },
 
     adaugăSubsecţiune: function() {
