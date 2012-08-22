@@ -1185,7 +1185,7 @@ ul.subsecţiune .titlu {
 }
 
 ul.subsecţiune .titlu+li {
-  margin-top: .1em;
+  margin-top: .2em;
 }
 
 ul.subsecţiune .elimină {
@@ -1230,14 +1230,6 @@ input[readonly]+span.ui-icon-locked {
 input[readonly]+span.ui-icon-locked:hover,
 input[readonly]:hover+span.ui-icon-locked {
   opacity: .3;
-}
-
-button.adaugă.încasare {
-  margin-top: .7em;
-}
-
-.subsecţiune+button.adaugă.încasare {
-  margin-top: 0;
 }
 
 #adaugă-subsecţiune {

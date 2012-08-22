@@ -17,14 +17,14 @@ var Action = {
     Persoane.init();
     Cheltuieli.init();
     ButonDeEliminare.init();
-    SubsecţiuniProcedurăPecuniară.init();
+    Subsecţiuni.init();
     Formular.init();
     CalculatorDobîndaÎntîrziere.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
     ProceduriRecente.init();
     Sume.init();
-    FormularPensie.init();
+    ÎncasarePensie.init();
     Rapoarte.init();
     Secţiuni.init();
     ListeMeniu.init();
@@ -761,7 +761,7 @@ var Formular = {
     function colecteazăBunuriSechestrate($secţiune) {
       var bunuri = {};
 
-      $secţiune.find('.bunuri-sechestrate .personalizat').each(function() {
+      $secţiune.find('.subsecţiune.bunuri-sechestrate .personalizat').each(function() {
         var $bun = $(this);
 
         bunuri[$bun.find('.etichetă').val()] = {
@@ -1000,7 +1000,7 @@ var Formular = {
       if (!încasări) return;
 
       var $încasare, i, prima = true,
-          buton = $secţiune.find('.adaugă.încasare');
+          buton = $secţiune.find('#adaugă-subsecţiune .încasare');
 
       for (i = 0; i < încasări.length; i++) {
         if (!prima) buton.click();
@@ -1017,7 +1017,7 @@ var Formular = {
       if (!întîrzieri) return;
 
       var întîrziere, $întîrziere,
-          buton = $secţiune.find('#adaugă-subsecţiune li:contains("întîrziere")');
+          buton = $secţiune.find('#adaugă-subsecţiune .întîrziere');
 
       for (var i = 0; i < întîrzieri.length; i++) {
         întîrziere = întîrzieri[i];
@@ -1036,7 +1036,7 @@ var Formular = {
     function populeazăBunuriSechestrate($secţiune, bunuri) {
       if (!bunuri) return;
 
-      $secţiune.find('#adaugă-subsecţiune li:contains("bunuri sechestrate")').click();
+      $secţiune.find('#adaugă-subsecţiune .bunuri-sechestrate').click();
 
       var bun, $bun, primul = true,
           $subsecţiune = $secţiune.find('.subsecţiune.bunuri-sechestrate'),
@@ -1563,7 +1563,7 @@ var CalculatorDobîndaÎntîrziere = {
 
   calculeazăDobînda: function() {
     var secţiune = CalculatorDobîndaÎntîrziere.$,
-        întîrziere = SubsecţiuniProcedurăPecuniară.întîrzieri.colectează(secţiune),
+        întîrziere = Subsecţiuni.întîrzieri.colectează(secţiune),
         dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
 
     secţiune.find('.dobîndă').val(dobînda);
@@ -1679,7 +1679,7 @@ var CîmpuriPersonalizate = {
 
 // --------------------------------------------------
 
-var FormularPensie = {
+var ÎncasarePensie = {
   $: $(),
   $cota: $(),
 
@@ -1689,8 +1689,7 @@ var FormularPensie = {
       .on('închidere', this.elimină);
 
     Formular.$obiectulUrmăririi
-      .on('input', '.încasare input', this.caluleazăOnorariulŞiPensia)
-      .on('click', '.încasare button.adaugă', this.adaugăÎncasare);
+      .on('input', '.încasare input', this.caluleazăOnorariulŞiPensia);
   },
 
   evalueazăCota: function(cota) {
@@ -1713,12 +1712,12 @@ var FormularPensie = {
         modulDeCuantificare = $încasare.find('#modul-de-cuantificare-' + genulÎncasării).val(),
         cota, pensia;
 
-    FormularPensie.calculare[genulÎncasării + ' ' + modulDeCuantificare]($încasare);
+    ÎncasarePensie.calculare[genulÎncasării + ' ' + modulDeCuantificare]($încasare);
   },
 
   calculare: {
     'periodică cotă': function($încasare) {
-      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+      var cota = ÎncasarePensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
           venitul = $încasare.find('#venitul').suma(),
           pensia = venitul * cota;
 
@@ -1737,7 +1736,7 @@ var FormularPensie = {
     },
 
     'periodică mixtă': function($încasare) {
-      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+      var cota = ÎncasarePensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
           venitul = $încasare.find('#venitul').suma(),
           pensiaCotă = venitul * cota;
 
@@ -1755,7 +1754,7 @@ var FormularPensie = {
     },
 
     'restantă cotă': function($încasare) {
-      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+      var cota = ÎncasarePensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
           totalVenit = $încasare.find('#total-venit-pe-perioadă').suma(),
           totalPensieCotă = cota * totalVenit;
 
@@ -1766,7 +1765,7 @@ var FormularPensie = {
     },
 
     'restantă sumă fixă': function($încasare) {
-      var numărulDeLuni = FormularPensie.numărulDeLuni($încasare),
+      var numărulDeLuni = ÎncasarePensie.numărulDeLuni($încasare),
           pensiaLunară = $încasare.find('#pensia-lunară-suma-fixă').suma(),
           totalPensie = pensiaLunară * numărulDeLuni;
 
@@ -1777,7 +1776,7 @@ var FormularPensie = {
     },
 
     'restantă mixtă': function($încasare) {
-      var cota = FormularPensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
+      var cota = ÎncasarePensie.evalueazăCota($încasare.find('#cota-din-venit').val()),
           totalVenit = $încasare.find('#total-venit-pe-perioadă').suma(),
           totalPensieCotă = cota * totalVenit;
 
@@ -1785,7 +1784,7 @@ var FormularPensie = {
 
       $încasare.find('#total-pensie-cotă').val(totalPensieCotă.toFixed(2));
 
-      var numărulDeLuni = FormularPensie.numărulDeLuni($încasare),
+      var numărulDeLuni = ÎncasarePensie.numărulDeLuni($încasare),
           pensiaLunarăSumăFixă = $încasare.find('#pensia-lunară-suma-fixă').suma(),
           totalPensieSumăFixă = numărulDeLuni * pensiaLunarăSumăFixă;
 
@@ -1812,33 +1811,17 @@ var FormularPensie = {
     return sfîrşitPerioadă.diff(începutPerioadă, 'months', true);
   },
 
-  adaugăÎncasare: function() {
-    var $încasare = $($şabloane.find('#formular-încasare').html());
-
-    $încasare
-      .hide()
-      .insertBefore(this)
-      .show('blind');
-
-    $.fx.off = true;
-    $încasare.find('#genul-încasării').trigger('change');
-    $.fx.off = false;
-
-    if (!Formular.sePopulează) $încasare.find('input').first().focus();
-  },
-
   inserează: function() {
     if (!Formular.pensieDeÎntreţinere()) return;
 
-    var $secţiune = Formular.$obiectulUrmăririi.find('.conţinut'),
-        şablon = FormulareŞablon.parseazăIncluderile($şabloane.find('#pensie-de-întreținere').html());
+    var $secţiune = Formular.$obiectulUrmăririi.find('.conţinut');
 
     $secţiune
-      .data('conţinut-iniţial', $secţiune.html())
-      .html(şablon)
-      .find('#genul-încasării').trigger('change');
+      .data('conţinut-iniţial', $secţiune.find('ul:first').remove())
+      .find('#adaugă-subsecţiune .încasare').click().end()
+      .find('.subsecţiune.încasare #genul-încasării').trigger('change');
 
-    FormularPensie.$ = $secţiune;
+    ÎncasarePensie.$ = $secţiune;
     Formular.focusează();
   },
 
@@ -1847,7 +1830,7 @@ var FormularPensie = {
 
     var secţiune = Formular.$obiectulUrmăririi.find('.conţinut');
 
-    secţiune.html(secţiune.data('conţinut-iniţial'));
+    secţiune.prepend(secţiune.data('conţinut-iniţial'));
     secţiune.removeData('conţinut-iniţial');
   }
 };
@@ -2125,52 +2108,92 @@ var Sume = {
 
 // --------------------------------------------------
 
-var SubsecţiuniProcedurăPecuniară = {
+var Subsecţiuni = {
   init: function() {
-    Formular.$.on('închidere', this.eliminăButonDeAdăugare);
-    Formular.$obiectulUrmăririi.on('change', '#caracter', this.insereazăSauEliminăButonDeAdăugareSubsecţiune);
-    Formular.$.on('mouseenter', '.listă', this.includeSauExcludeOpţiuneaBunuriSechestrate)
+    Formular.$
+      .on('înainte-de-deschidere', this.ajusteazăVizibilitateOpţiuni)
+      .on('mouseenter', '#adaugă-subsecţiune', this.ajusteazăVizibilitateOpţiuni)
+      .on('închidere', this.eliminăButonDeAdăugare);
 
+    Formular.$obiectulUrmăririi
+      .on('change', '#caracter', this.ajusteazăVizibilitateOpţiuni);
+
+    this.încasări.init();
     this.întîrzieri.init();
     this.bunuriSechestrate.init();
   },
 
-  includeSauExcludeOpţiuneaBunuriSechestrate: function() {
-    Formular.$obiectulUrmăririi.find('#adaugă-subsecţiune li:contains("bunuri sechestrate")').toggle(
-      !Formular.$obiectulUrmăririi.find('.bunuri-sechestrate').există()
-    );
+  ajusteazăVizibilitateOpţiuneBunuriSechestrate: function() {
   },
 
-  insereazăSauEliminăButonDeAdăugareSubsecţiune: function() {
-    var caracter = $(this);
+  ajusteazăVizibilitateOpţiuni: function() {
+    if (Formular.pensieDeÎntreţinere()) return;
 
-    if (caracter.val() == 'pecuniar') {
-      $şabloane.find('#adaugă-subsecţiune').clone()
-        .appendTo(caracter.closest('.conţinut'));
-    } else {
-      SubsecţiuniProcedurăPecuniară.eliminăButonDeAdăugare();
+    var $secţiune = Formular.$obiectulUrmăririi,
+        $opţiuni = $secţiune.find('#adaugă-subsecţiune'),
+        $amendă = $secţiune.find('#amendă'),
+        caracter = $secţiune.find('#caracter').val();
+
+    $opţiuni.find('.încasare').hide();
+
+    $opţiuni.find('.bunuri-sechestrate').toggle(
+      !$secţiune.find('.subsecţiune.bunuri-sechestrate').există()
+    );
+
+    if (caracter == 'nonpecuniar') {
+      $opţiuni
+        .find('.bunuri-sechestrate').show().end()
+        .find('.întîrziere').hide();
+    } else if (caracter == 'pecuniar') {
+      $opţiuni
+        .find('.bunuri-sechestrate').show().end()
+        .find('.întîrziere').toggle(!$amendă.is(':checked'));
     }
+
   },
 
   eliminăButonDeAdăugare: function() {
-    Formular.$.find('#adaugă-subsecţiune, .întîrziere, .bunuri-sechestrate').remove();
+    Formular.$.find('.subsecţiune').remove();
+  },
+
+  încasări: {
+    init: function() {
+      Formular.$obiectulUrmăririi
+        .on('click', '#adaugă-subsecţiune .încasare', this.adaugăSubsecţiune);
+    },
+
+    adaugăSubsecţiune: function() {
+      var $încasare = $($şabloane.find('#subsecţiune-încasare').html());
+
+      $încasare
+        .hide()
+        .insertBefore($(this).closest('#adaugă-subsecţiune'))
+        .show('blind');
+
+      $.fx.off = true;
+      $încasare.find('#genul-încasării').trigger('change');
+      $.fx.off = false;
+
+      if (!Formular.sePopulează) $încasare.find('input').first().focus();
+
+      $(this).siblings().show();
+    }
   },
 
   întîrzieri: {
     init: function() {
       Formular.$obiectulUrmăririi
         .on('input change', '.subsecţiune.întîrziere :input:not(.dobîndă)', this.calculeazăDobînda)
-        .on('click', '#adaugă-subsecţiune li:contains("întîrziere")', this.adaugăSubsecţiune);
+        .on('click', '#adaugă-subsecţiune li.întîrziere', this.adaugăSubsecţiune);
     },
 
     adaugăSubsecţiune: function() {
       var $secţiune = $(this).closest('.conţinut');
 
-      $şabloane.find('.întîrziere').clone()
+      $şabloane.find('.subsecţiune.întîrziere').clone()
         .find(':radio').attr('name', function(i, name) {
-          return name + $secţiune.find('.întîrziere').length;
+          return name + $secţiune.find('.subsecţiune.întîrziere').length;
         }).end()
-        .find('input').addClass('în-subsecţiune').end()
         .hide()
         .insertBefore($(this).closest('#adaugă-subsecţiune'))
         .show('blind');
@@ -2179,8 +2202,8 @@ var SubsecţiuniProcedurăPecuniară = {
     calculeazăDobînda: function() {
       if (Formular.sePopulează || Formular.seIniţializează) return;
 
-      var $întîrziere = $(this).closest('.întîrziere'),
-          întîrziere = SubsecţiuniProcedurăPecuniară.întîrzieri.colectează($întîrziere),
+      var $întîrziere = $(this).closest('.subsecţiune.întîrziere'),
+          întîrziere = Subsecţiuni.întîrzieri.colectează($întîrziere),
           dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
 
       $întîrziere.find('.sumă.dobîndă').val(dobînda);
@@ -2200,7 +2223,7 @@ var SubsecţiuniProcedurăPecuniară = {
   bunuriSechestrate: {
     init: function() {
       Formular.$obiectulUrmăririi
-        .on('click', '#adaugă-subsecţiune li:contains("bunuri sechestrate")', this.adaugăSubsecţiune)
+        .on('click', '#adaugă-subsecţiune .bunuri-sechestrate', this.adaugăSubsecţiune)
         .on('click', '.subsecţiune.bunuri-sechestrate .adaugă-cîmp-personalizat', this.scoateClasaDeTot)
         .on('eliminare', '.personalizat', this.calculeazăTotal)
         .on('input', ':input', this.calculeazăTotal);
@@ -2209,7 +2232,7 @@ var SubsecţiuniProcedurăPecuniară = {
     adaugăSubsecţiune: function() {
       var $secţiune = $(this).parent();
 
-      $şabloane.find('.bunuri-sechestrate').clone()
+      $şabloane.find('.subsecţiune.bunuri-sechestrate').clone()
         .hide()
         .insertBefore($(this).closest('#adaugă-subsecţiune'))
         .show().find('textarea.etichetă').focus().end().hide() // ajustează dimensiunea etichetei personalizate
@@ -2253,7 +2276,7 @@ var Rapoarte = {
   'întîrziere': {
     pagina: '/rapoarte/întîrziere.html',
     date: function() {
-      var întîrziere = SubsecţiuniProcedurăPecuniară.întîrzieri.colectează(this.$el.closest('.întîrziere'));
+      var întîrziere = Subsecţiuni.întîrzieri.colectează(this.$el.closest('.întîrziere'));
 
       return {
         total: DobîndaDeÎntîrziere.calculează(întîrziere),
@@ -2267,7 +2290,7 @@ var Rapoarte = {
     date: function() {
       return {
         întîrzieri: this.$el.closest('fieldset').find('.întîrziere').map(function() {
-          var întîrziere = SubsecţiuniProcedurăPecuniară.întîrzieri.colectează($(this));
+          var întîrziere = Subsecţiuni.întîrzieri.colectează($(this));
 
           return {
             total: DobîndaDeÎntîrziere.calculează(întîrziere),

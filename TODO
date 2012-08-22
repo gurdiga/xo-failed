@@ -1,9 +1,4 @@
 * Introducere
-  * La procedurile nonpecuniare trebui de scos „adaugă întîrzieri”
-    pentru că nu se urmăresc bani. Va rămîne doar „adaugă bunuri sechestrate”.
-    „adaugă întîrzieri” va rămîne doar la cele pecuniare, cu excepţia
-    celor de încasare a amenzilor.
-    Adică la amenzi iarăşi nu va fi „adaugă întîrzieri”
   - băguleţ la adăugarea unei persoane terţe: un cîmp rămne highlighted
   - “poliţă” temporară: la click în afara formularului în punem pe polţă
 
@@ -26,3 +21,6 @@
   - menţine istoria parolelor pentru a preveni repetarea
   - blocare după 3 încercări greşite
   - istoria înregistrărilor
+ 
+Idei:
+ - packaged code as tools
