@@ -1021,9 +1021,14 @@ input~button+.opţiuni {
   padding: 0;
 }
 
-input~button:hover+.opţiuni,
-input~button+.opţiuni:hover {
+input~button+.opţiuni.cu.umbră {
+  border-width: 0;
+}
+
+input~button:hover+.opţiuni.cu.umbră,
+input~button+.opţiuni.cu.umbră:hover {
   padding: .2em .5em .5em 0;
+  border-width: 1px;
 }
 
 input~button+.opţiuni li {
