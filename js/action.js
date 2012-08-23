@@ -552,12 +552,20 @@ var Utilizator = {
 
     $('#autentificare').toggle(!Utilizator.autentificat);
     $('body').toggleClass('autentificat', Utilizator.autentificat);
+  },
 
-    $(document).ajaxError(function(e, response) {
-      if (response.status == 401) { // 401 Authorization Required
-        $.cookie('login', null);
-        location.href = $('#autentificare a').attr('href');
-      }
+  logout: function() {
+    $.get('/bin/logout_pas1.php', function(data) {
+      $.cookie('login', null);
+      $.ajax({
+        url: '/bin/logout_pas2.php',
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('Authorization', 'Basic ' + data);
+        },
+        error: function() {
+          location = '/';
+        }
+      });
     });
   }
 };
