@@ -752,7 +752,7 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăÎntîrzieri($secţiune) {
-      return $secţiune.find('.întîrziere').map(function() {
+      return $secţiune.find('.subsecţiune.întîrziere').map(function() {
         var $întîrziere = $(this);
 
         return {
