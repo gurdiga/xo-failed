@@ -689,7 +689,7 @@ var Formular = {
   },
 
   colectează: function() {
-    var procedură = {
+    return {
       'număr': (Formular.$.find('#număr').text().match(/[SP]?-\d+/) || [null])[0],
       'document-executoriu': colectează('#document-executoriu'),
       'obiectul-urmăririi': colecteazăObiectulUrmăririi(),
@@ -698,8 +698,6 @@ var Formular = {
       'persoane-terţe': colecteazăPersoaneTerţe(),
       'debitori': colecteazăDebitori()
     };
-
-    return procedură;
 
 
     // ------------------------------------------
@@ -2284,44 +2282,15 @@ var Subsecţiuni = {
 
 var Rapoarte = {
   init: function() {
-    $(document)
-      .on('click', '[data-raport]', this.deschide);
+    $(document).on('click', '[data-raport]', this.deschide);
   },
 
   deschide: function() {
-    var raport = $(this).data('raport');
+    var raport = $(this).data('raport'),
+        pagina = '/rapoarte/' + raport + '.html';
 
-    Rapoarte[raport].$el = $(this);
-    Rapoarte[raport].tab = window.open(Rapoarte[raport].pagina, raport, '', true);
+    window.open(pagina, raport, '', true);
   },
-
-  'întîrziere': {
-    pagina: '/rapoarte/întîrziere.html',
-    date: function() {
-      var întîrziere = Subsecţiuni.întîrzieri.colectează(this.$el.closest('.întîrziere'));
-
-      return {
-        total: DobîndaDeÎntîrziere.calculează(întîrziere),
-        raport: DobîndaDeÎntîrziere.raport
-      };
-    }
-  },
-
-  'întîrzieri': {
-    pagina: '/rapoarte/întîrzieri.html',
-    date: function() {
-      return {
-        întîrzieri: this.$el.closest('fieldset').find('.întîrziere').map(function() {
-          var întîrziere = Subsecţiuni.întîrzieri.colectează($(this));
-
-          return {
-            total: DobîndaDeÎntîrziere.calculează(întîrziere),
-            raport: DobîndaDeÎntîrziere.raport
-          };
-        })
-      };
-    }
-  }
 };
 
 // --------------------------------------------------

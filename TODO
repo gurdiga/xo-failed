@@ -1,15 +1,16 @@
-* Introducere
-  - băguleţ la adăugarea unei persoane terţe: un cîmp rămne highlighted
-  - “poliţă” temporară: la click în afara formularului în punem pe polţă
+- Introducere
+  - profil executor
 
 - Imprimare
-  - butoane imprimare încheiere şi anexă pentru întîrzieri
+  - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
-  - history.replaceState(null, null, '/număr-procedură/tutlu-raport')
-  - de încercat listă în loc de tabel ca să nu se rupă rîndul între pagini
+  - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')
+
+- Convenienţe
+  - “poliţă” temporară: la click în afara formularului în punem pe polţă
 
 - Listare
-- Profil
+- IE: nginx charset utf-8?
 - Admin
   - înregistrare utilizator
   - dezactivare după o perioadă de inactivitate

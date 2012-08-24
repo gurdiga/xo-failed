@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Închiere cu privire la calcularea dobînzilor de întîrziere</title>
+    <link type="text/css" rel="stylesheet" href="/css/raport.css"/>
+    <script src="/js/raport.js"></script>
+  </head>
+
+  <body>
+    <script type="text/micro-template">
+      <h1>ÎNCHEIERE</h1>
+      <p class="subtitlu">cu privire la calcularea dobînzilor de întîrziere 
+      rezultate din întîrzierea executării documentului executoriu</p>
+
+      <%= documentExecutoriu.data %>
+      <%= documentExecutoriu.instanţaDeJudecată %>
+      <%= procedură.număr %>
+
+      <p>Executorul judecătoresc <%= executor.nume %> cu adresa juridică <%= executor.adresă %>
+      deţinînd procedura de executare pornită la cererea <%= creditor %> cu privire la executarea
+      documentului executoriu <%= documentExecutoriu.număr %> din <%= documentExecutoriu.data %>
+      emis de <%= documentExecutoriu.instanţaDeJudecată %> prin care s-a dispus încasarea în beneficiul
+      <%= creditor %> de la <%= debitor %> a datoriei în mărime totală de <%= suma %>,</p>
+
+      <h2>A STABILIT</h2>
+
+      <p>La data de <%= procedură.data %> a fost pornită procedura de executare a documentului
+      executoriu <%= documentExecutoriu.număr %> din <%= documentExecutoriu.data %> emis de
+      <%= documentExecutoriu.instanţaDeJudecată %> prin care s-a dispus încasarea în beneficiul
+      <%= creditor %> de la <%= debitor %> a datoriei în mărime totală de <%= suma %>.</p>
+
+      <p>În procesul executării creditorul urmăritor a înaintat o cerere cu privire la calcularea
+      dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu.</p>
+
+      <p>În conformitate cu art. 24 al Codului de executare: la cererea creditorului, executorul
+      judecătoresc calculează dobînzile, penalităţile şi alte sume rezultate din întîrzierea executării,
+      în funcţie de rata inflaţiei şi în conformitate cu art. 619 din Codul civil. Sumele menţionate
+      se calculează de la data la care hotărîrea judecătorească a devenit definitivă sau, în cazul
+      celorlalte documente executorii, de la data la care creanţa a devenit exigibilă (scadentă) şi
+      pînă la data plăţii efective a obligaţiei cuprinse în orice document dintre acestea, în perioada
+      de calcul fiind inclusă şi durata suspendării procedurii de executare, în condiţiile prevăzute de
+      prezentul cod.</p>
+
+      <p>Art. 619 al Codului civil prevede că obligaţiilor pecuniare li se aplică dobînzi pe perioada
+      întîrzierii. Dobînda de întîrziere reprezintă 5% peste rata dobînzii prevăzută la art. 585 dacă
+      legea sau contractul nu prevede altfel. În cazul actelor juridice la care nu participă consumatorul,
+      dobînda este de 9% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede
+      altfel.</p>
+
+      <p>Hotărîrea judecătorească în baza căreia a fost emis documentul executoriu a devenit definitivă
+      la data de <%= documentExecutoriu.dataRămîneriiDefinitive %>.</p>
+
+
+
+
+
+    </script>
+  </body>
+</head>
