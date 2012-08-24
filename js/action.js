@@ -2308,6 +2308,8 @@ var Secţiuni = {
       set = Formular.$.find('#creditor, .debitor, .persoană-terţă');
     } else if (fieldset.is('#document-executoriu') || fieldset.is('#obiectul-urmăririi')) {
       set = Formular.$.find('#document-executoriu, #obiectul-urmăririi');
+    } else {
+      set = fieldset;
     }
 
     set.find('.conţinut').toggle('blind', function() {
