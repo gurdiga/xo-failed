@@ -2130,18 +2130,15 @@ var Subsecţiuni = {
   init: function() {
     Formular.$
       .on('înainte-de-deschidere', this.ajusteazăVizibilitateOpţiuni)
-      .on('mouseenter', '#adaugă-subsecţiune', this.ajusteazăVizibilitateOpţiuni)
-      .on('închidere', this.eliminăButonDeAdăugare);
+      .on('închidere', this.eliminăSubsecţiuni);
 
     Formular.$obiectulUrmăririi
+      .on('mouseenter', '#adaugă-subsecţiune', this.ajusteazăVizibilitateOpţiuni)
       .on('change', '#caracter', this.ajusteazăVizibilitateOpţiuni);
 
     this.încasări.init();
     this.întîrzieri.init();
     this.bunuriSechestrate.init();
-  },
-
-  ajusteazăVizibilitateOpţiuneBunuriSechestrate: function() {
   },
 
   ajusteazăVizibilitateOpţiuni: function() {
@@ -2170,8 +2167,8 @@ var Subsecţiuni = {
 
   },
 
-  eliminăButonDeAdăugare: function() {
-    Formular.$.find('.subsecţiune').remove();
+  eliminăSubsecţiuni: function() {
+    Formular.$obiectulUrmăririi.find('.subsecţiune').remove();
   },
 
   încasări: {
