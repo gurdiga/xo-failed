@@ -473,14 +473,13 @@ var Destinatari = {
 
 var ButonDeEliminare = {
   $: $şabloane.find('.elimină'),
-  itemPrecedent: $(),
+  eliminabilPrecedent: $(),
 
   init: function() {
-    this.$
-      .hide()
-      .on('click', this.acţionează);
+    this.$.hide();
 
-    $('#formular')
+    Formular.$
+      .on('click', '.elimină', this.acţionează)
       .on('mousemove', '.eliminabil', this.afişează)
       .on('mouseleave', '.eliminabil', this.ascunde);
   },
@@ -502,8 +501,8 @@ var ButonDeEliminare = {
 
     buton.hide().delay(500).fadeIn('slow');
 
-    ButonDeEliminare.itemPrecedent.removeClass('spre-eliminare');
-    ButonDeEliminare.itemPrecedent = eliminabil.addClass('spre-eliminare');
+    ButonDeEliminare.eliminabilPrecedent.removeClass('spre-eliminare');
+    ButonDeEliminare.eliminabilPrecedent = eliminabil.addClass('spre-eliminare');
   },
 
   ascunde: function() {
