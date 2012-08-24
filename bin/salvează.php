@@ -52,6 +52,11 @@ function reindexează($procedură) {
     if (!in_array($număr, $index[$cîmp])) $index[$cîmp][] = $număr;
   };
 
+  function opţional(&$valoare) {
+    if (isset($valoare)) return $valoare;
+    else return '';
+  }
+
   function date_relevante($procedură) {
     $persoane_terţe = array();
 
@@ -65,7 +70,7 @@ function reindexează($procedură) {
       $debitori[] = persoană($debitor);
 
     $date = array(
-      'data-hotărîrii' => $procedură['document-executoriu']['data-hotărîrii'],
+      'data-hotărîrii' => opţional($procedură['document-executoriu']['data-hotărîrii']),
       'creditor' => persoană($procedură['creditor']),
       'persoane-terţe' => $persoane_terţe,
       'debitori' => $debitori
