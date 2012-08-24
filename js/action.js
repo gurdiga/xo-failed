@@ -744,7 +744,7 @@ var Formular = {
       if (obiectulUrmăririi.caracter == 'pecuniar') {
         obiectulUrmăririi['sume'] = colecteazăSumeÎnValută($secţiune);
         obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
-        obiectulUrmăririi['bunuri-sechestrate'] = colecteazăBunuriSechestrate($secţiune);
+        obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
       }
 
       return obiectulUrmăririi;
@@ -766,19 +766,23 @@ var Formular = {
     }
 
     // ------------------------------------------
-    function colecteazăBunuriSechestrate($secţiune) {
-      var bunuri = {};
+    function colecteazăSechestrăriBunuri($secţiune) {
+      return $secţiune.find('.subsecţiune.sechestrare-bunuri').map(function() {
+        var $sechestrare = $(this);
 
-      $secţiune.find('.subsecţiune.bunuri-sechestrate .personalizat').each(function() {
-        var $bun = $(this);
+        return {
+          data: $sechestrare.find('.dată').val(),
+          bunuri: $sechestrare.find('.personalizat').map(function() {
+            var cîmp = $(this);
 
-        bunuri[$bun.find('.etichetă').val()] = {
-          sumă: $bun.find('.sumă').val(),
-          valuta: $bun.find('.valuta').val()
+            return {
+              descriere: cîmp.find('.etichetă').val(),
+              sumă: cîmp.find('.sumă').val(),
+              valuta: cîmp.find('.valuta').val()
+            };
+          }).get()
         };
-      });
-
-      return bunuri;
+      }).get();
     }
 
     // ------------------------------------------
@@ -1000,7 +1004,7 @@ var Formular = {
       populeazăPensieÎntreţinere($secţiune, secţiune['încasări']);
       populeazăSume($secţiune, secţiune['sume']);
       populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
-      populeazăBunuriSechestrate($secţiune, secţiune['bunuri-sechestrate']);
+      populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
     }
 
     // ------------------------------------------
@@ -1016,7 +1020,7 @@ var Formular = {
         $încasare = $secţiune.find('.subsecţiune.încasare:last');
         populeazăSecţiune($încasare, încasări[i]);
 
-        prima = false;
+        if (prima) prima = false;
       }
     }
 
@@ -1041,26 +1045,33 @@ var Formular = {
     }
 
     // ------------------------------------------
-    function populeazăBunuriSechestrate($secţiune, bunuri) {
-      if (!bunuri) return;
+    function populeazăSechestrăriBunuri($secţiune, sechestrări) {
+      if (!sechestrări) return;
 
-      $secţiune.find('#adaugă-subsecţiune .bunuri-sechestrate').click();
+      var sechestrare, $sechestrare, bun, $bun, primul = true,
+          buton = $secţiune.find('#adaugă-subsecţiune .sechestrare-bunuri');
 
-      var bun, $bun, primul = true,
-          $subsecţiune = $secţiune.find('.subsecţiune.bunuri-sechestrate'),
-          buton = $subsecţiune.find('.adaugă-cîmp-personalizat');
+      for (var i = 0; i < sechestrări.length; i++) {
+        buton.click();
 
-      for (var etichetă in bunuri) {
-        bun = bunuri[etichetă];
+        sechestrare = sechestrări[i];
+        $sechestrare = $secţiune.find('.subsecţiune.sechestrare-bunuri:last'),
 
-        if (!primul) buton.click();
+        $sechestrare.find('.dată').val(sechestrare.data);
+        primul = true;
 
-        $bun = $subsecţiune.find('.personalizat:last');
-        $bun.find('.etichetă').val(etichetă);
-        $bun.find('.sumă').val(bun.sumă);
-        $bun.find('.valuta').val(bun.valuta).trigger('input');
+        for (var j = 0; j < sechestrare.bunuri.length; j++) {
+          bun = sechestrare.bunuri[j];
 
-        primul = false;
+          if (!primul) $sechestrare.find('.adaugă-cîmp-personalizat').click();
+
+          $bun = $sechestrare.find('.personalizat:last');
+          $bun.find('.etichetă').val(bun.descriere);
+          $bun.find('.sumă').val(bun.sumă);
+          $bun.find('.valuta').val(bun.valuta).trigger('input');
+
+          if (primul) primul = false;
+        }
       }
     }
 
@@ -2151,17 +2162,13 @@ var Subsecţiuni = {
 
     $opţiuni.find('.încasare').hide();
 
-    $opţiuni.find('.bunuri-sechestrate').toggle(
-      !$secţiune.find('.subsecţiune.bunuri-sechestrate').există()
-    );
-
     if (caracter == 'nonpecuniar') {
       $opţiuni
-        .find('.bunuri-sechestrate').show().end()
+        .find('.sechestrare-bunuri').show().end()
         .find('.întîrziere').hide();
     } else if (caracter == 'pecuniar') {
       $opţiuni
-        .find('.bunuri-sechestrate').show().end()
+        .find('.sechestrare-bunuri').show().end()
         .find('.întîrziere').toggle(!$amendă.is(':checked'));
     }
 
@@ -2238,16 +2245,16 @@ var Subsecţiuni = {
   bunuriSechestrate: {
     init: function() {
       Formular.$obiectulUrmăririi
-        .on('click', '#adaugă-subsecţiune .bunuri-sechestrate', this.adaugăSubsecţiune)
-        .on('click', '.subsecţiune.bunuri-sechestrate .adaugă-cîmp-personalizat', this.scoateClasaDeTot)
+        .on('click', '#adaugă-subsecţiune .sechestrare-bunuri', this.adaugăSubsecţiune)
+        .on('click', '.subsecţiune.sechestrare-bunuri .adaugă-cîmp-personalizat', this.scoateClasaDeTot)
         .on('eliminare', '.personalizat', this.calculeazăTotal)
-        .on('input change', ':input', this.calculeazăTotal);
+        .on('input change', ':input:not(.etichetă)', this.calculeazăTotal);
     },
 
     adaugăSubsecţiune: function() {
       var $secţiune = $(this).parent();
 
-      $şabloane.find('.subsecţiune.bunuri-sechestrate').clone()
+      $şabloane.find('.subsecţiune.sechestrare-bunuri').clone()
         .hide()
         .insertBefore($(this).closest('#adaugă-subsecţiune'))
         .show().find('textarea.etichetă').focus().end().hide() // ajustează dimensiunea etichetei personalizate
