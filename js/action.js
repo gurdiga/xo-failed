@@ -710,6 +710,7 @@ var Formular = {
           cîmpuri = [
             'ul:not(.subsecţiune) label+:input:not(.calculat):last-child',
             'ul:not(.subsecţiune) label+select.foarte.lat',
+            'ul:not(.subsecţiune) label+.dată',
             'ul:not(.subsecţiune) label+input#salariu-recuperat',
             'ul:not(.subsecţiune) label+input#valoarea-acţiunii',
             'ul:not(.subsecţiune) .etichetă+:input'
