@@ -1606,6 +1606,16 @@ var Calendar = {
   },
 
   init: function() {
+    this.insereazăButon();
+
+    $(document)
+      .on('click', '.dată+.ui-icon-calendar', this.afişează)
+      .on('keydown', '.dată', function(e) {
+        if (e.keyCode == 27) Calendar.închide();
+      });
+  },
+
+  insereazăButon: function() {
     $('.dată')
       .after(
         $('<span>')
@@ -1613,43 +1623,39 @@ var Calendar = {
           .attr('title', 'Calendar')
       )
       .attr('title', 'Data trebuie să fie în formatul ZZ.LL.AAAA');
+  },
 
-    $(document)
-      .on('click', '.dată+.ui-icon-calendar', function() {
-        var cîmp = $(this).prev(),
-            calendar = cîmp.datepicker('widget');
+  afişează: function() {
+    var cîmp = $(this).prev(),
+        calendar = cîmp.datepicker('widget');
 
-        if (calendar.is(':visible')) {
-          cîmp.datepicker('destroy');
-        } else {
-          if (!cîmp.data('datepicker')) {
-            if (cîmp.attr('id')) {
-              cîmp
-                .data('id', cîmp.attr('id'))
-                .removeAttr('id');
-            }
-
-            cîmp.datepicker(Calendar.opţiuni);
-
-            if (cîmp.is('.dată.sfîrşit.perioadă')) {
-              var începutPerioadă = cîmp.siblings('.început.perioadă');
-
-              începutPerioadă = $.trim(începutPerioadă.val());
-
-              if (RE_FORMATUL_DATEI.test(începutPerioadă)) {
-                var minDate = moment(începutPerioadă, FORMATUL_DATEI).add('days', 1).toDate();
-
-                cîmp.datepicker('option', 'minDate', minDate);
-              }
-            }
-          }
-
-          cîmp.datepicker('show');
+    if (calendar.is(':visible')) {
+      cîmp.datepicker('destroy');
+    } else {
+      if (!cîmp.data('datepicker')) {
+        if (cîmp.attr('id')) {
+          cîmp
+            .data('id', cîmp.attr('id'))
+            .removeAttr('id');
         }
-      })
-      .on('keydown', '.dată', function(e) {
-        if (e.keyCode == 27) Calendar.închide();
-      });
+
+        cîmp.datepicker(Calendar.opţiuni);
+
+        if (cîmp.is('.dată.sfîrşit.perioadă')) {
+          var începutPerioadă = cîmp.siblings('.început.perioadă');
+
+          începutPerioadă = $.trim(începutPerioadă.val());
+
+          if (RE_FORMATUL_DATEI.test(începutPerioadă)) {
+            var minDate = moment(începutPerioadă, FORMATUL_DATEI).add('days', 1).toDate();
+
+            cîmp.datepicker('option', 'minDate', minDate);
+          }
+        }
+      }
+
+      cîmp.datepicker('show');
+    }
   }
 };
 
