@@ -1610,19 +1610,17 @@ var Calendar = {
 
     $(document)
       .on('click', '.dată+.ui-icon-calendar', this.afişează)
+      .on('focus', '.dată', this.seteazăMasca)
       .on('keydown', '.dată', function(e) {
         if (e.keyCode == 27) Calendar.închide();
       });
   },
 
   insereazăButon: function() {
-    $('.dată')
-      .after(
-        $('<span>')
-          .addClass('ui-icon ui-icon-calendar semiascuns')
-          .attr('title', 'Calendar')
-      )
-      .attr('title', 'Data trebuie să fie în formatul ZZ.LL.AAAA');
+    $('<span>')
+      .addClass('ui-icon ui-icon-calendar semiascuns')
+      .attr('title', 'Calendar')
+      .insertAfter('.dată');
   },
 
   afişează: function() {
@@ -1656,6 +1654,10 @@ var Calendar = {
 
       cîmp.datepicker('show');
     }
+  },
+
+  seteazăMasca: function() {
+    $(this).mask('99.99.9999');
   }
 };
 
