@@ -2110,15 +2110,17 @@ var TotalCheltuieli = {
 
 var Sume = {
   init: function() {
-    $('body').on('input keyup', 'input.sumă', function(e) {
-      if (!/,/.test(this.value)) return;
+    $(document).on('input keyup', 'input.sumă', this.înlocuieşteVirgulaCuPunct);
+  },
 
-      var poziţieCursor = this.selectionStart;
+  înlocuieşteVirgulaCuPunct: function(e) {
+    if (!/,/.test(this.value)) return;
 
-      this.value = this.value.replace(/,/g, '.');
-      this.selectionStart = poziţieCursor;
-      this.selectionEnd = poziţieCursor;
-    });
+    var poziţieCursor = this.selectionStart;
+
+    this.value = this.value.replace(/,/g, '.');
+    this.selectionStart = poziţieCursor;
+    this.selectionEnd = poziţieCursor;
   }
 };
 
