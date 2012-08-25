@@ -1090,17 +1090,34 @@ button.cu.opţiuni:hover:after {
   width: auto;
 }
 
+.dialog legend button.ui-icon {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
 .dialog>ul {
   clear: left;
-  margin-top: 3em;
+  margin-top: 2.5em;
 }
 
-.dialog input[type="text"] {
+#profil.dialog li label {
+  width: 8em;
+}
+
+#profil.dialog li {
+  white-space: nowrap;
+}
+
+#profil.dialog input,
+#profil.dialog textarea {
+  width: 16em;
+}
+
+#calculator.dialog input[type="text"] {
   width: 5.3em;
-}
-
-.dialog select.valuta {
-  padding: 0;
 }
 
 .ui-icon-calendar {

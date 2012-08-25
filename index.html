@@ -28,12 +28,22 @@
         <h1><a href="#">executori.org</a></h1>
 
         <div class="instrumente">
-          <fieldset class="dialog cu umbră">
-            <legend><label>Profil</label></legend>
+          <fieldset id="profil" class="dialog cu umbră">
+            <legend>
+              <label>Profil</label>
+              <button class="ui-icon ui-icon-disk salvează semiascuns" title="Salvează"></button>
+            </legend>
 
             <ul>
-              <li>Aici vor fi cîteva cîmpuri: numărul licenţei, numele,
-              şi adresa juridică a executorului.</li>
+              <li>
+                <label for="nume-executor">Nume</label>
+                <input id="nume-executor" type="text"/>
+              </li>
+
+              <li>
+                <label for="adresa-executor">Adresa juridică</label>
+                <textarea id="adresa-executor"></textarea>
+              </li>
             </ul>
 
             <button class="închide semiascuns" title="Închide">×</button>

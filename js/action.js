@@ -20,7 +20,6 @@ var Action = {
     Subsecţiuni.init();
     Formular.init();
     BaraDeSus.init();
-    CalculatorDobîndaÎntîrziere.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
     ProceduriRecente.init();
@@ -1551,12 +1550,11 @@ var BaraDeSus = {
       .on('afişare', '.dialog', this.selecteazăButonul)
       .on('click', '.dialog button.închide', this.închideDialog)
       .on('keyup', '.dialog :input', function(e) {
-        if (e.keyCode == 27) {
-          $(this).closest('.dialog')
-            .ascunde()
-            .next('button').focus();
-        }
+        if (e.keyCode == 27) $(this).closest('.dialog').ascunde();
       });
+
+    Profil.init();
+    CalculatorDobîndaÎntîrziere.init();
   },
 
   afişeazăDialog: function() {
@@ -1569,7 +1567,7 @@ var BaraDeSus = {
       BaraDeSus.$.find('.dialog:visible').not(this).ascunde();
 
       dialog.afişează(function() {
-        $(this).find('input:first').focus();
+        $(this).find('input:not([readonly]):first').focus();
       });
     }
   },
@@ -1584,6 +1582,45 @@ var BaraDeSus = {
 
   deselecteazăButonul: function() {
     $(this).next('button').removeClass('selectat');
+  }
+};
+
+// --------------------------------------------------
+
+var Profil = {
+  $: $('#profil'),
+
+  init: function() {
+    this.url = '/date/' + Utilizator.login + '/profil';
+
+    this.încarcăDate();
+    this.$
+      .on('click', 'button.salvează', this.salvează)
+      .on('ascundere', this.reseteazăDialog);
+  },
+
+  încarcăDate: function() {
+    $.getJSON(Profil.url, function(date) {
+      Profil.date = date;
+      Profil.reseteazăDialog();
+    });
+  },
+
+  salvează: function() {
+    Profil.date = {
+      nume: Profil.$.find('#nume-executor').val(),
+      adresa: Profil.$.find('#adresa-executor').val()
+    };
+
+    $.post(Profil.url, JSON.stringify(Profil.date), function() {
+      Profil.$.find('button.închide').click();
+    });
+  },
+
+  reseteazăDialog: function() {
+    Profil.$
+      .find('#nume-executor').val(Profil.date.nume).end()
+      .find('#adresa-executor').val(Profil.date.adresa);
   }
 };
 
