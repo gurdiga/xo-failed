@@ -19,6 +19,7 @@ var Action = {
     ButonDeEliminare.init();
     Subsecţiuni.init();
     Formular.init();
+    BaraDeSus.init();
     CalculatorDobîndaÎntîrziere.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
@@ -1540,7 +1541,51 @@ var ListăDeProceduri = {
 
 // --------------------------------------------------
 
+var BaraDeSus = {
+  $: $('#bara-de-sus'),
 
+  init: function() {
+    this.$
+      .on('click', '.dialog+button', this.afişeazăDialog)
+      .on('ascundere', '.dialog', this.deselecteazăButonul)
+      .on('afişare', '.dialog', this.selecteazăButonul)
+      .on('click', '.dialog button.închide', this.închideDialog)
+      .on('keyup', '.dialog :input', function(e) {
+        if (e.keyCode == 27) {
+          $(this).closest('.dialog')
+            .ascunde()
+            .next('button').focus();
+        }
+      });
+  },
+
+  afişeazăDialog: function() {
+    var buton = $(this),
+        dialog = buton.prev('.dialog');
+
+    if (dialog.is(':visible')) {
+      dialog.ascunde();
+    } else {
+      BaraDeSus.$.find('.dialog:visible').not(this).ascunde();
+
+      dialog.afişează(function() {
+        $(this).find('input:first').focus();
+      });
+    }
+  },
+
+  închideDialog: function() {
+    $(this).closest('.dialog').ascunde();
+  },
+
+  selecteazăButonul: function() {
+    $(this).next('button').addClass('selectat');
+  },
+
+  deselecteazăButonul: function() {
+    $(this).next('button').removeClass('selectat');
+  }
+};
 
 // --------------------------------------------------
 
@@ -1549,23 +1594,8 @@ var CalculatorDobîndaÎntîrziere = {
 
   init: function() {
     this.$
-      .on('click', 'button.închide', this.închide)
       .on('input change', ':input:not(.dobîndă)', this.calculeazăDobînda)
-      .find(':input').bind('keydown', 'esc', this.închide);
-
-    $('#bara-de-sus .calculator').on('click', function() {
-      if (CalculatorDobîndaÎntîrziere.$.is(':visible')) CalculatorDobîndaÎntîrziere.închide();
-      else CalculatorDobîndaÎntîrziere.deschide();
-    });
-  },
-
-  deschide: function() {
-    CalculatorDobîndaÎntîrziere.$
-      .stop(true, true)
-      .fadeToggle('fast', 'easeInCirc')
-      .find('input').first().focus();
-
-    CalculatorDobîndaÎntîrziere.resetează();
+      .on('afişare', this.resetează);
   },
 
   resetează: function() {
@@ -1574,12 +1604,6 @@ var CalculatorDobîndaÎntîrziere = {
       .find('#art619-1').removeAttr('checked').end()
       .find('#art619-2').attr('checked', 'checked').end()
       .find('#sume .item:not(.prima)').remove();
-  },
-
-  închide: function() {
-    CalculatorDobîndaÎntîrziere.$
-      .stop(true, true)
-      .hide();
   },
 
   calculeazăDobînda: function() {
@@ -2353,13 +2377,13 @@ $.fn.există = function() {
 // --------------------------------------------------
 
 $.fn.ascunde = function() {
-  return this.stop(true, true).fadeOut();
+  return this.stop(true, true).fadeOut().trigger('ascundere');
 };
 
 // --------------------------------------------------
 
 $.fn.afişează = function(callback) {
-  return this.delay(200).fadeIn(callback);
+  return this.delay(200).fadeIn(callback).trigger('afişare');
 };
 
 // --------------------------------------------------

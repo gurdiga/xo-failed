@@ -146,8 +146,9 @@ button {
 
 #bara-de-sus .instrumente {
   display: none;
-  float: right;
-  margin-top: 17px;
+  position: absolute;
+  right: 0;
+  top: 17px;
 }
 
 #bara-de-sus .instrumente>button {
@@ -181,6 +182,7 @@ button {
   background-position: -112px -112px;
 }
 
+#bara-de-sus .instrumente>button.selectat,
 #bara-de-sus .instrumente>button:focus,
 #bara-de-sus .instrumente>button:hover {
   opacity: 1;
@@ -365,6 +367,7 @@ h1 {
   width: 960px;
   margin: 0 auto;
   min-height: 610px;
+  position: relative;
 }
 
 .coloană {
@@ -1068,15 +1071,10 @@ button.cu.opţiuni:hover:after {
 .dialog {
   display: none;
   position: absolute;
-  background: white;
-  border: 1px solid silver;
   padding: .5em 1.5em;
-  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
   z-index: 1;
-  -webkit-transition: opacity .5s;
-  -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
-  transition: opacity .5s;
+  top: 20px;
+  right: 0;
 }
 
 .dialog button.închide {
@@ -1085,7 +1083,6 @@ button.cu.opţiuni:hover:after {
 
 .dialog legend {
   position: absolute;
-  text-align: center;
 }
 
 .dialog legend label {
@@ -1095,7 +1092,7 @@ button.cu.opţiuni:hover:after {
 
 .dialog>ul {
   clear: left;
-  margin-top: 4em;
+  margin-top: 3em;
 }
 
 .dialog input[type="text"] {
