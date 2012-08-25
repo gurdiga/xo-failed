@@ -1720,7 +1720,10 @@ var CîmpuriPersonalizate = {
     li
       .before(şablon)
       .prev()
-        .find('.etichetă').val(buton.data('etichetă')).end()
+        .find('.etichetă')
+          .val(buton.data('etichetă'))
+          .trigger('input')
+        .end()
         .show('blind', function() {
           if (Formular.sePopulează || Formular.seIniţializează) return;
 
