@@ -1085,7 +1085,7 @@ var Formular = {
         if (!$cîmp.există()) {
           $secţiune.find('.adaugă-cîmp-personalizat').click();
           $cîmp = $secţiune.find('.etichetă+.sumă').last();
-          $cîmp.prev().val(cîmp).trigger('focus');
+          $cîmp.prev().val(cîmp).trigger('input');
         }
 
         $cîmp.val(sume[cîmp].suma);
@@ -1540,6 +1540,10 @@ var ListăDeProceduri = {
 
 // --------------------------------------------------
 
+
+
+// --------------------------------------------------
+
 var CalculatorDobîndaÎntîrziere = {
   $: $('#calculator'),
 
@@ -1692,12 +1696,13 @@ var CîmpuriPersonalizate = {
     li
       .before(şablon)
       .prev()
-        .find('.etichetă')
-          .val(buton.data('etichetă'))
-          .focus()
-        .end()
+        .find('.etichetă').val(buton.data('etichetă')).end()
         .show('blind', function() {
-          $(this).find('.etichetă').select();
+          if (Formular.sePopulează || Formular.seIniţializează) return;
+
+          $(this).find('.etichetă')
+            .focus()
+            .select();
         });
   }
 };
@@ -2255,7 +2260,7 @@ var Subsecţiuni = {
       $şabloane.find('.subsecţiune.sechestrare-bunuri').clone()
         .hide()
         .insertBefore($(this).closest('#adaugă-subsecţiune'))
-        .show().find('textarea.etichetă').focus().end().hide() // ajustează dimensiunea etichetei personalizate
+        .show().find('textarea.etichetă').trigger('input').end().hide() // ajustează dimensiunea etichetei personalizate
         .show('blind', function() {
           $(this).find('textarea.etichetă').select();
         });
