@@ -2358,8 +2358,8 @@ $.fn.ascunde = function() {
 
 // --------------------------------------------------
 
-$.fn.afişează = function() {
-  return this.delay(200).fadeIn();
+$.fn.afişează = function(callback) {
+  return this.delay(200).fadeIn(callback);
 };
 
 // --------------------------------------------------
