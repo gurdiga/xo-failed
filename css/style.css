@@ -21,6 +21,7 @@ body {
 
 input[type="checkbox"]:focus,
 input[type="radio"]:focus,
+input[readonly]:focus,
 button:focus {
   outline: 1px solid #ddd;
   opacity: 1;
@@ -1061,9 +1062,12 @@ button.cu.opţiuni:hover:after {
 }
 
 #calculator {
+  width: 26em;
+}
+
+.dialog {
   display: none;
   position: absolute;
-  width: 26em;
   background: white;
   border: 1px solid silver;
   padding: .5em 1.5em;
@@ -1075,30 +1079,30 @@ button.cu.opţiuni:hover:after {
   transition: opacity .5s;
 }
 
-#calculator button.închide {
+.dialog button.închide {
   font-size: 1.5em;
 }
 
-#calculator legend {
+.dialog legend {
   position: absolute;
   text-align: center;
 }
 
-#calculator legend label {
+.dialog legend label {
   color: #333;
   width: auto;
 }
 
-#calculator>ul {
+.dialog>ul {
   clear: left;
   margin-top: 4em;
 }
 
-#calculator input[type="text"] {
+.dialog input[type="text"] {
   width: 5.3em;
 }
 
-#calculator select.valuta {
+.dialog select.valuta {
   padding: 0;
 }
 
@@ -1111,12 +1115,12 @@ button.cu.opţiuni:hover:after {
   cursor: pointer;
 }
 
-#calculator ul li.total {
+.dialog ul li.total {
   padding-top: 1em;
 }
 
-#calculator ul li.total input,
-#calculator ul li.total label {
+.dialog ul li.total input,
+.dialog ul li.total label {
   font-weight: bold;
 }
 
@@ -1307,7 +1311,7 @@ label.checkbox input {
     letter-spacing: -.05em;
   }
 
-  #calculator legend label {
+  .dialog legend label {
     letter-spacing: -.05em;
   }
 
