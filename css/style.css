@@ -1050,18 +1050,15 @@ input~button+.opţiuni li:hover {
 button.cu.opţiuni {
   text-indent: 0;
   overflow: visible;
-  width: 20px;
 }
 
 button.cu.opţiuni:after {
-  content: '▿';
+  content: '▾';
   position: absolute;
   font-size: smaller;
-  margin: -6px 0 0 8px;
-}
-
-button.cu.opţiuni:hover:after {
-  content: '▾';
+  margin: -6px 0 0 4px;
+  display: inline-block;
+  width: 10px;
 }
 
 #calculator {
