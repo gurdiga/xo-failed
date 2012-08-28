@@ -691,6 +691,7 @@ var Formular = {
   colectează: function() {
     return {
       'număr': (Formular.$.find('#număr').text().match(/[SP]?-\d+/) || [null])[0],
+      'data-intentării': Formular.$.find('#data-intentării').val(),
       'document-executoriu': colectează('#document-executoriu'),
       'obiectul-urmăririi': colecteazăObiectulUrmăririi(),
       'cheltuieli': colecteazăCheltuieli(),
@@ -956,6 +957,7 @@ var Formular = {
     $.fx.off = true;
     Formular.sePopulează = true;
 
+    Formular.$.find('#data-intentării').val(procedură['data-intentării']);
     Formular.$.find('#data-ultimei-modificări span').text(procedură.dataUltimeiModificări);
 
     populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);

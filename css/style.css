@@ -393,6 +393,7 @@ fieldset {
   margin-bottom: 30px;
 }
 
+#container-data-intentării label,
 .etichetă,
 fieldset label {
   display: inline-block;
@@ -400,6 +401,7 @@ fieldset label {
   color: #555;
 }
 
+#container-data-intentării label,
 #cheltuieli .adăugate .subformular .stînga,
 .etichetă,
 fieldset label {
@@ -487,8 +489,13 @@ input.sumă {
   width: 850px;
 }
 
-#formular #număr {
-  margin-left: .3em;
+#formular #container-data-intentării {
+  margin-top: -2em;
+}
+
+#formular #data {
+  font-size: 14px;
+  margin: -.5em 0 0;
 }
 
 button.închide {
@@ -1242,6 +1249,7 @@ ul.subsecţiune li:last-child input {
   padding-bottom: 0;
 }
 
+.dată.intentării,
 .dată.perioadă {
   width: 5.8em;
 }
