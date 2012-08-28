@@ -24,5 +24,7 @@
   - blocare după 3 încercări greşite
   - istoria înregistrărilor
  
-Idei:
- - teste automatizate?
+Idei
+  - teste automatizate?
+  - data backup (s3cmd): /yyyy/mm/dd/hh.tgz
+  - bootable tonido flash
