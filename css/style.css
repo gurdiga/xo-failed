@@ -29,11 +29,15 @@ button:focus {
 
 textarea {
   font: inherit;
-  line-height: 24px!important;
-  height: 64px;
-  min-height: 64px;
+  height: 72px;
+  min-height: 72px;
   overflow: hidden;
   resize: none;
+}
+
+textarea.note {
+  min-height: 0;
+  height: 24px;
 }
 
 fieldset input[type="radio"],
@@ -77,9 +81,10 @@ input,
 fieldset select {
   margin: 0;
   vertical-align: top;
-  padding: .3em;
+  padding: 0 .3em;
   color: black;
   font-weight: bold;
+  line-height: 1.75;
 }
 
 fieldset ul select {
