@@ -1137,6 +1137,7 @@ button.cu.opţiuni:after {
   display: inline-block;
   background-color: transparent;
   cursor: pointer;
+  vertical-align: -2px;
 }
 
 .dialog ul li.total {
