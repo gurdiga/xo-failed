@@ -1353,6 +1353,7 @@ label.checkbox input {
     outline: 1px solid #ddd;
   }
 
+  #bara-de-sus .instrumente>button,
   textarea:focus,
   select:focus,
   input:focus {
@@ -1361,5 +1362,9 @@ label.checkbox input {
 
   .ui-icon-print {
     vertical-align: 4px;
+  }
+
+  input {
+    padding: .3em;
   }
 }
