@@ -1123,7 +1123,7 @@ var Formular = {
         $item.find('.subformular.achitare .la .dată').val(item['data-achitării']);
 
         if (item.subformular) {
-          var prima = true, $cîmp;
+          var prima = true, $cîmp, $itemSubformular;
 
           $.each(item.subformular, function(nume, valoare) {
             if (prima) {
@@ -2359,6 +2359,7 @@ var Rapoarte = {
         pagina = '/rapoarte/' + raport + '.html';
 
     window.open(pagina, raport, '', true);
+    Rapoarte[pagina] = {$el: $(this)};
   },
 };
 

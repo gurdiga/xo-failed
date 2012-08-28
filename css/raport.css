@@ -10,52 +10,52 @@ body {
   font-size: 1.2em;
 }
 
-li {
+.calcule li {
   border-bottom: 1px solid silver;
   list-style-type: none;
   display: inline-block;
 }
 
-ul span {
+ul.calcule span {
   text-align: right;
   display: inline-block;
 }
 
-li.total,
-ul span {
+.calcule li.total,
+ul.calcule span {
   padding: .2em .6em;
 }
 
-ul span:nth-child(1) {
+ul.calcule span:nth-child(1) {
   width: 1.2em;
 }
 
-ul span:nth-child(2) {
+ul.calcule span:nth-child(2) {
   width: 5em;
 }
 
-ul span:nth-child(3) {
+ul.calcule span:nth-child(3) {
   width: 3.5em;
 }
 
-ul span:nth-child(4) {
+ul.calcule span:nth-child(4) {
   width: 5.5em;
 }
 
-ul span:nth-child(5) {
+ul.calcule span:nth-child(5) {
   width: 4em;
 }
 
-li.antet {
+.calcule li.antet {
   border-bottom: 1px solid black;
   font-weight: bold;
 }
 
-li:nth-last-child(2) {
+.calcule li:nth-last-child(2) {
   border-bottom: none;
 }
 
-li.total {
+.calcule li.total {
   border-top: 1px solid black;
   border-bottom: none;
   text-align: right;

@@ -1,7 +1,10 @@
 - Introducere
+  * data intentării procedurii
   - Materiale
 
 - Imprimare
+  * rapoarte/încheiere-dobîndă-de-întîrziere.html
+    * include-uri?
   - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
   - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')

@@ -1,9 +1,18 @@
 window.onload = function() {
   var nume = decodeURIComponent(location.pathname.match(/\/([^\/]+).html$/)[1]),
+      pagina = decodeURIComponent(location.pathname),
       context = {
-        procedură: top.opener.Formular.colectează(),
-        executor: top.opener.Profil.date
+        procedură: opener.Formular.colectează(),
+        executor: opener.Profil.date,
+        moment: opener.moment,
+        login: opener.Utilizator.login,
+        $el: opener.Rapoarte[pagina].$el,
+        nume: function(persoană) {
+          return persoană['gen-persoană'] == 'fizică' ? persoană['nume'] : persoană['denumire'];
+        }
       };
 
-  top.opener.compile(context, this.document);
+  if (window.init) window.init(context);
+
+  opener.compile(context, this.document);
 };
