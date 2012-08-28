@@ -80,11 +80,15 @@ textarea,
 input,
 fieldset select {
   margin: 0;
-  vertical-align: top;
+  vertical-align: 0;
   padding: 0 .3em;
   color: black;
   font-weight: bold;
   line-height: 1.75;
+}
+
+label.textarea {
+  vertical-align: top;
 }
 
 fieldset ul select {
@@ -410,16 +414,21 @@ fieldset label {
 .etichetă {
   background-image: none;
   font-weight: normal;
-  padding: .4em 0 .3em 6px;
+  padding: .3em 0 .2em 6px;
   min-height: 1em;
   line-height: normal!important;
   margin: 0;
+  vertical-align: top;
 }
 
-.etichetă:hover,
-.etichetă:focus {
+.etichetă:focus,
+.etichetă:focus:hover {
   outline: 1px solid #ddd;
   background: white;
+}
+
+.etichetă:hover {
+  background: #eee;
 }
 
 fieldset legend label {
@@ -615,7 +624,7 @@ button.adaugă {
 }
 
 button.adaugă-cîmp-personalizat {
-  padding: 0 .2em .2em;
+  padding: 0 .2em .1em;
   top: -.5em;
 }
 
@@ -1238,6 +1247,7 @@ ul.subsecţiune li:last-child input {
 
 input+span.ui-icon-locked {
   display: none;
+  cursor: help;
 }
 
 input[readonly]+span.ui-icon-locked {
