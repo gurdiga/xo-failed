@@ -19,7 +19,6 @@ var Action = {
     ButonDeEliminare.init();
     Subsecţiuni.init();
     Formular.init();
-    BaraDeSus.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
     ProceduriRecente.init();
@@ -32,6 +31,7 @@ var Action = {
     $(window).trigger('hashchange');
 
     if (Utilizator.autentificat) {
+      BaraDeSus.init();
       Căutare.init();
     }
   },
