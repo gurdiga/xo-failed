@@ -797,6 +797,7 @@ input[type="checkbox"]+label {
 #cheltuieli .document .adaugă-destinatar {
   margin-left: 9em;
   display: inline-block;
+  padding-top: 5px;
 }
 
 #cheltuieli .document .destinatari {
@@ -865,7 +866,7 @@ input[type="checkbox"]+label {
 
 .destinatari-adăugaţi.comprimaţi::before {
   content: '▹';
-  margin-left: -.9em;
+  margin-left: -.6em;
 }
 
 .destinatari-adăugaţi.comprimaţi:hover::before {
@@ -895,7 +896,7 @@ input[type="checkbox"]+label {
 }
 
 .destinatari-adăugaţi.comprimaţi {
-  padding: 0;
+  padding: 4px 0 0 0;
   margin-left: 2em;
   margin-top: 0;
   z-index: 0;
