@@ -211,6 +211,7 @@ button {
 
 #căutare input {
   font: bold 1.3em/1.4em Arial, sans-serif;
+  padding: .3em;
 }
 
 #căutare input:focus {
