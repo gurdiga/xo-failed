@@ -7,7 +7,7 @@
 body {
   width: 18cm;
   padding: .5cm 1.5cm;
-  font-size: 1.2em;
+  /*font-size: 1.2em;*/
 }
 
 .calcule li {
@@ -65,5 +65,20 @@ ul.calcule span:nth-child(5) {
 }
 
 p {
-  width: 45em;
+  max-width: 45em;
+  text-align: justify;
+}
+
+p.titlu {
+  text-align: center;
+}
+
+.dreapta {
+  float: right;
+  width: auto;
+  margin: 0;
+}
+
+.editabil:hover {
+  background-color: #eee;
 }

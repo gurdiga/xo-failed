@@ -15,4 +15,6 @@ window.onload = function() {
   if (window.init) window.init(context);
 
   opener.compile(context, this.document);
+  opener.$(this.document.body).find('.editabil').attr('contenteditable', true);
+  history.replaceState(null, null, '/' + opener.Utilizator.login + context.procedură.număr + '/text-personalizabil-text-personalizabil');
 };

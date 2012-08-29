@@ -23,29 +23,27 @@
 
   <body>
     <script type="text/micro-template">
-<p>ÎNCHEIERE<br/>
+<p class="titlu">ÎNCHEIERE<br/>
 cu privire la calcularea dobînzilor de întîrziere<br/>
 rezultate din întîrzierea executării documentului executoriu</p>
 
-<%= moment(new Date).format('DD.MM.YYYY') %>, <%= executor.adresa %><br/>
-<%= login %><%= procedură.număr %><br/>
+<p class="dreapta"><%= executor.adresa %></p>
+<p><%= moment(new Date).format('DD.MM.YYYY') %><br/>
+<%= login %><%= procedură.număr %></p>
 
-<p>Executorul judecătoresc <%= executor.nume %> cu adresa juridică <%= executor.adresa %> deţinînd procedura de executare pornită la cererea <%= nume(procedură.creditor) %> cu privire la executarea documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de instanţa de judecată <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %> de la <%= debitori %> a datoriei în mărime totală de <%= întîrziere.suma %>,</p>
+<p class="editabil">Executorul judecătoresc <%= executor.nume %> cu adresa juridică <%= executor.adresa %> deţinînd procedura de executare pornită la cererea <%= nume(procedură.creditor) %> cu privire la executarea documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de instanţa de judecată <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %> de la <%= debitori %> a datoriei în mărime totală de <%= întîrziere.suma %>,</p>
 
-<p>A STABILIT:</p>
+<p class="titlu">A STABILIT:</p>
 
-<p>La data de <%= procedură['data-intentării'] %> a fost pornită procedura de executare a documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de instanţa de judecată <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %> de la <%= debitori %> a datoriei în mărime totală de <%= întîrziere.suma %>.</p>
-<p>În procesul executării creditorul urmăritor a înaintat o cerere cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu.</p>
-<p>În conformitate cu art. 24 al Codului de executare: la cererea creditorului, executorul judecătoresc calculează dobînzile, penalităţile şi alte sume rezultate din întîrzierea executării, în funcţie de rata inflaţiei şi în conformitate cu art. 619 din Codul civil. Sumele menţionate se calculează de la data la care hotărîrea judecătorească a devenit definitivă sau, în cazul celorlalte documente executorii, de la data la care creanţa a devenit exigibilă (scadentă) şi pînă la data plăţii efective a obligaţiei cuprinse în orice document dintre acestea, în perioada de calcul fiind inclusă şi durata suspendării procedurii de executare, în condiţiile prevăzute de prezentul cod.</p>
-<p>Art. 619 al Codului civil prevede că obligaţiilor pecuniare li se aplică dobînzi pe perioada întîrzierii. Dobînda de întîrziere reprezintă 5% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede altfel. În cazul actelor juridice la care nu participă consumatorul, dobînda este de 9% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede altfel.</p>
-<p>Hotărîrea judecătorească în baza căreia a fost emis documentul executoriu a devenit definitivă la data de <%= procedură['document-executoriu']['data-rămînerii-definitive'] %>.</p>
-<p>Suma din care urmează a fi calculată dobînda de întîrziere constituie <%= întîrziere.suma %>.</p>
-<p>Calculul dobînzii de întîrziere se efectuează conform formulei: (suma datoriei) x (rata dobînzii BNM + 5 sau 9%) x zile de întîrziere / 365 şi la data emiterii prezentei încheieri constituie /suma totală a dobînzii de întîrziere/ Calculul desfăşurat al dobînzii de întîrziere este anexat la prezenta încheiere fiind parte componentă a acesteia.</p>
+<p class="editabil">La data de <%= procedură['data-intentării'] %> a fost pornită procedura de executare a documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de instanţa de judecată <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %> de la <%= debitori %> a datoriei în mărime totală de <%= întîrziere.suma %>. În procesul executării creditorul urmăritor a înaintat o cerere cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu.</p>
+<p class="editabil">În conformitate cu art. 24 al Codului de executare: la cererea creditorului, executorul judecătoresc calculează dobînzile, penalităţile şi alte sume rezultate din întîrzierea executării, în funcţie de rata inflaţiei şi în conformitate cu art. 619 din Codul civil. Sumele menţionate se calculează de la data la care hotărîrea judecătorească a devenit definitivă sau, în cazul celorlalte documente executorii, de la data la care creanţa a devenit exigibilă (scadentă) şi pînă la data plăţii efective a obligaţiei cuprinse în orice document dintre acestea, în perioada de calcul fiind inclusă şi durata suspendării procedurii de executare, în condiţiile prevăzute de prezentul cod.</p>
+<p class="editabil">Art. 619 al Codului civil prevede că obligaţiilor pecuniare li se aplică dobînzi pe perioada întîrzierii. Dobînda de întîrziere reprezintă 5% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede altfel. În cazul actelor juridice la care nu participă consumatorul, dobînda este de 9% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede altfel. Hotărîrea judecătorească în baza căreia a fost emis documentul executoriu a devenit definitivă la data de <%= procedură['document-executoriu']['data-rămînerii-definitive'] %>.</p>
+<p class="editabil">Suma din care urmează a fi calculată dobînda de întîrziere constituie <%= întîrziere.suma %>. Calculul dobînzii de întîrziere se efectuează conform formulei: (suma datoriei) x (rata dobînzii BNM + 5 sau 9%) x zile de întîrziere / 365 şi la data emiterii prezentei încheieri constituie /suma totală a dobînzii de întîrziere/ Calculul desfăşurat al dobînzii de întîrziere este anexat la prezenta încheiere fiind parte componentă a acesteia.</p>
 
-<p>În baza celor expuse şi în conformitate cu art. 11, 22, 24, 66 al Codului de executare RM,</p>
+<p class="editabil">În baza celor expuse şi în conformitate cu art. 11, 22, 24, 66 al Codului de executare RM,</p>
 
-<p>DISPUN:</p>
-<ol>
+<p class="titlu">DISPUN:</p>
+<ol class="editabil">
 <li>A încasa în beneficiul /nume, prenume, denumire PJ creditor/ de la /nume, prenume, denumire PJ debitor/ dobînda de întîrziere rezultată din întîrzierea executării documentului executoriu nr. /nr./ din /data/ emis de /organul emitent/ în sumă de /suma totală a dobînzii de întîrziere/ calculată din data rămînerii definitive a hotărîrii judecătoreşti pînă la data emiterii prezentei încheieri.</li>
 <li>A aplica sechestru pe mijloacele băneşti aflate în conturile <%= debitori %> în limita sumei de <%= întîrziere.suma %>.</li>
 <li>Încheierea dată reprezintă un titlu executoriu.</li>
@@ -53,8 +51,8 @@ rezultate din întîrzierea executării documentului executoriu</p>
 </ol>
 
 
-<p>Executor judecătoresc <%= executor.nume %>.
-(Semnătura)
+<p class="dreapta"><%= executor.nume %>.
+<p>Executor judecătoresc</p>
 
     </script>
   </body>
