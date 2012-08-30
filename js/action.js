@@ -980,19 +980,6 @@ var Formular = {
           .val1(secţiune[id])
           .trigger('change');
       }
-
-      var item;
-
-      if (secţiune.subformular) {
-        var adaugă = $secţiune.find('.adaugă-cîmp-personalizat');
-
-        for (item in secţiune.subformular) {
-          adaugă.click();
-          $secţiune.find('.personalizat').last()
-            .find('.etichetă').val(item).end()
-            .find('input').val(secţiune.subformular[item]);
-        }
-      }
     }
 
     // ------------------------------------------
@@ -1079,13 +1066,15 @@ var Formular = {
     function populeazăSume($secţiune, sume) {
       if (!sume) return;
 
-      var cîmp, $cîmp;
+      var cîmp, $cîmp,
+          $secţiune = $secţiune.find('ul:first'),
+          buton = $secţiune.find('.adaugă-cîmp-personalizat');
 
       for (cîmp in sume) {
         $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
 
         if (!$cîmp.există()) {
-          $secţiune.find('.adaugă-cîmp-personalizat').click();
+          buton.click();
           $cîmp = $secţiune.find('.etichetă+.sumă').last();
           $cîmp.prev().val(cîmp).trigger('input');
         }
