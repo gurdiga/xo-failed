@@ -551,6 +551,7 @@ var Utilizator = {
 
     $('#autentificare').toggle(!Utilizator.autentificat);
     $('body').toggleClass('autentificat', Utilizator.autentificat);
+    $('#număr-licenţă').val(Utilizator.login);
   },
 
   logout: function() {
