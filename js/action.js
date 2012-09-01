@@ -1599,9 +1599,18 @@ var Profil = {
   },
 
   salvează: function() {
+    function cîmp(selector) {return Profil.$.find(selector).val()}
+
     Profil.date = {
-      nume: Profil.$.find('#nume-executor').val(),
-      adresa: Profil.$.find('#adresa-executor').val()
+      'nume': cîmp('#nume-executor'),
+      'adresa': cîmp('#adresa-executor'),
+      'codul-fiscal': cîmp('#codul-fiscal'),
+      'instanţa-teritorială': cîmp('#instanţa-teritorială'),
+      'email': cîmp('#email'),
+      'cont-taxe-speze': cîmp('#cont-taxe-speze'),
+      'banca-taxe-speze': cîmp('#banca-taxe-speze'),
+      'cont-onorarii': cîmp('#cont-onorarii'),
+      'banca-onorarii': cîmp('#banca-onorarii')
     };
 
     $.post(Profil.url, JSON.stringify(Profil.date), function() {
@@ -1610,9 +1619,17 @@ var Profil = {
   },
 
   reseteazăDialog: function() {
-    Profil.$
-      .find('#nume-executor').val(Profil.date.nume).end()
-      .find('#adresa-executor').val(Profil.date.adresa);
+    function cîmp(selector, valoare) {Profil.$.find(selector).val(valoare)}
+
+    cîmp('#nume-executor', Profil.date['nume']);
+    cîmp('#adresa-executor', Profil.date['adresa']);
+    cîmp('#codul-fiscal', Profil.date['codul-fiscal']);
+    cîmp('#instanţa-teritorială', Profil.date['instanţa-teritorială']);
+    cîmp('#email', Profil.date['email']);
+    cîmp('#cont-taxe-speze', Profil.date['cont-taxe-speze']);
+    cîmp('#banca-taxe-speze', Profil.date['banca-taxe-speze']);
+    cîmp('#cont-onorarii', Profil.date['cont-onorarii']);
+    cîmp('#banca-onorarii', Profil.date['banca-onorarii']);
   }
 };
 

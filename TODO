@@ -1,5 +1,7 @@
 - Introducere
+  - profil: de completat codul băncilor
   - Materiale
+  - versionare?
 
 - Imprimare
   * rapoarte/încheiere-dobîndă-de-întîrziere.html
@@ -24,7 +26,7 @@
   - blocare după 3 încercări greşite
   - istoria înregistrărilor
  
-Idei
+Chestii tehnice
   - teste automatizate?
-  - data backup (s3cmd): /yyyy/mm/dd/hh.tgz
-  - bootable tonido flash
+  - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
+  * bootable tonido flash

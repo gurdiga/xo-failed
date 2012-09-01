@@ -1118,13 +1118,13 @@ button.cu.opţiuni:after {
   background-color: transparent;
 }
 
-.dialog>ul {
+.dialog>ul:nth-child(2) {
   clear: left;
   margin-top: 2.5em;
 }
 
 #profil.dialog li label {
-  width: 8em;
+  width: 9em;
 }
 
 #profil.dialog li {
@@ -1207,6 +1207,7 @@ button.cu.opţiuni:after {
   color: black;
 }
 
+.dialog ul.subsecţiune,
 fieldset .conţinut .ui-effects-wrapper ul.subsecţiune,
 fieldset .conţinut ul.subsecţiune {
   margin: .5em -4px 1em;
@@ -1271,6 +1272,7 @@ input[readonly]+span.ui-icon-locked {
   transition: opacity .5s;
 }
 
+input[readonly]:focus+span.ui-icon-locked,
 input[readonly]+span.ui-icon-locked:hover,
 input[readonly]:hover+span.ui-icon-locked {
   opacity: .3;
