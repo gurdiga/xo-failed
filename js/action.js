@@ -1890,6 +1890,9 @@ var CîmpuriPersonalizate = {
           $(this).next().focus();
           e.stopPropagation();
         }
+      })
+      .on('eliminare', '.personalizat', function() {
+        $(this).find('input').val(0).trigger('input');
       });
   },
 
@@ -2213,7 +2216,7 @@ var Onorariu = {
 
       Onorariu.$.val(onorariu.toFixed(2));
       Onorariu.timerCalculare = false;
-    }, 500);
+    }, 200);
   },
 
   pecuniar: function(suma) {
@@ -2356,7 +2359,10 @@ var Subsecţiuni = {
 
     Formular.$obiectulUrmăririi
       .on('mouseenter', '#adaugă-subsecţiune', this.ajusteazăVizibilitateOpţiuni)
-      .on('change', '#caracter', this.ajusteazăVizibilitateOpţiuni);
+      .on('change', '#caracter', this.ajusteazăVizibilitateOpţiuni)
+      .on('eliminare', '.subsecţiune', function() {
+        $(this).find('.sumă').val(0).trigger('input');
+      });
 
     this.încasări.init();
     this.întîrzieri.init();
