@@ -1583,12 +1583,13 @@ var Profil = {
   $: $('#profil'),
 
   init: function() {
-    this.url = '/date/' + Utilizator.login + '/profil';
-
-    this.încarcăDate();
-    this.$
-      .on('click', 'button.salvează', this.salvează)
-      .on('ascundere', this.reseteazăDialog);
+    Bănci.încarcă(function() {
+      Profil.url = '/date/' + Utilizator.login + '/profil';
+      Profil.încarcăDate();
+      Profil.$
+        .on('click', 'button.salvează', Profil.salvează)
+        .on('ascundere', Profil.reseteazăDialog);
+    });
   },
 
   încarcăDate: function() {
@@ -1628,9 +1629,142 @@ var Profil = {
     cîmp('#email', Profil.date['email']);
     cîmp('#cont-taxe-speze', Profil.date['cont-taxe-speze']);
     cîmp('#banca-taxe-speze', Profil.date['banca-taxe-speze']);
+    Bănci.setează(Profil.date['banca-taxe-speze'], Profil.$.find('#banca-taxe-speze'));
     cîmp('#cont-onorarii', Profil.date['cont-onorarii']);
     cîmp('#banca-onorarii', Profil.date['banca-onorarii']);
+    Bănci.setează(Profil.date['banca-onorarii'], Profil.$.find('#banca-onorarii'));
   }
+};
+
+// --------------------------------------------------
+
+var Bănci = {
+  lista: {},
+
+  încarcă: function(callback) {
+    if ($.isEmptyObject(this.lista)) {
+      $.getJSON('/rate-bnm/bănci.json', function(lista) {
+        Bănci.lista = lista;
+        Bănci.initCîmpuri();
+
+        callback();
+      })
+    }
+  },
+
+  initCîmpuri: function() {
+    $(document)
+      .on('input', 'input.sufix-cod-bancă', Bănci.listeazăDupăSufix);
+  },
+
+  listeazăDupăSufix: function(e) {
+    var cîmp = $(this),
+        sufix = $.trim(cîmp.val());
+
+    if (!sufix) {
+      ascundeRezultate();
+      return;
+    }
+
+    var rezultate = Bănci.cautăDupăSufix(sufix);
+
+    if ($.isEmptyObject(rezultate)) return;
+
+    var primul = true,
+        lista = '', cod;
+
+    for (cod in rezultate) {
+      lista +=
+        '<li class="item' + (primul ? ' selectat' : '') + '">' +
+          cod.replace(/(.{3})$/, ' <b>$1</b>') + ': ' + rezultate[cod] +
+        '</li>';
+
+      if (primul) primul = false;
+    }
+
+    lista = '<ul class="rezultate cu umbră">' + lista + '</ul>';
+    ascundeRezultate();
+
+    $(lista)
+      .insertBefore(cîmp)
+      .on('mouseenter', '.item', function() {$(this).addClass('selectat').siblings().removeClass('selectat')})
+      .on('mouseleave', '.item', function() {$(this).removeClass('selectat')})
+      .on('click', '.item', alegeItem);
+
+    cîmp
+      .bind('keydown', 'down', evidenţiazăItem)
+      .bind('keydown', 'up', evidenţiazăItem)
+      .bind('keyup', 'esc', ascundeRezultate)
+      .bind('keydown', 'return', alegeItem);
+
+    function evidenţiazăItem(e) {
+      var tasta = e.data,
+          lista = cîmp.prev('.rezultate'),
+          curent = lista.find('.selectat'), următorul;
+
+      switch (tasta) {
+      case 'down':
+        următorul = curent.is(':last-child') ? lista.children().first() : curent.next('.item');
+        break;
+      case 'up':
+        următorul = curent.is(':first-child') ? lista.children().last() : curent.prev('.item');
+        break;
+      }
+
+      curent.removeClass('selectat');
+      următorul.addClass('selectat');
+    }
+
+    function alegeItem() {
+      var banca = cîmp.prev('.rezultate').find('.selectat').text(),
+          sufix = banca.match(/(\d{3}): /)[1];
+
+      Bănci.setează(sufix, cîmp);
+      ascundeRezultate();
+    }
+
+
+    function ascundeRezultate() {
+      cîmp
+        .off('keydown keyup')
+        .prev('.rezultate').remove();
+    }
+  },
+
+  cautăDupăSufix: function(sufix) {
+    var MAX_REZULTATE = 10;
+    var lungimeSufix = sufix.length,
+        cod, numărRezultate = 0,
+        rezultate = {};
+
+    for (cod in Bănci.lista) {
+      if (cod.substr(8, lungimeSufix) == sufix) {
+        rezultate[cod] = Bănci.lista[cod];
+        numărRezultate++;
+
+        if (numărRezultate == MAX_REZULTATE) break;
+      }
+    }
+
+    return rezultate;
+  },
+
+  setează: function(sufix, cîmp) {
+    banca = Bănci.cautăDupăSufix(sufix);
+
+    if ($.isEmptyObject(banca)) return;
+
+    var cod, sufix, denumire;
+
+    for (cod in banca) denumire = banca[cod];
+
+    sufix = $.trim(cod.substr(8))
+    cîmp = $(cîmp);
+
+    cîmp.val(sufix);
+    cîmp.siblings('.şoaptă-cod-bancă').text(cod.substr(0, 8)), cod.substr(0, 8);
+    cîmp.siblings('p').text(denumire);
+}
 };
 
 // --------------------------------------------------

@@ -558,6 +558,7 @@ button.elimină-persoană {
   top: .4em;
 }
 
+.dialog .şoaptă,
 #formular .şoaptă {
   margin: 0 1em .7em 13.5em;
   line-height: 1em;
@@ -1134,6 +1135,46 @@ button.cu.opţiuni:after {
 #profil.dialog input,
 #profil.dialog textarea {
   width: 16em;
+}
+
+#profil.dialog span.şoaptă-cod-bancă {
+  font-weight: bold;
+  color: #999;
+}
+
+#profil.dialog input.sufix-cod-bancă {
+  width: 2em;
+  padding: 0;
+}
+
+#profil.dialog input.sufix-cod-bancă+.şoaptă {
+  display: inline;
+  margin: 0;
+}
+
+#profil.dialog span.şoaptă-cod-bancă+ul.rezultate {
+  position: absolute;
+  background: white;
+  z-index: 1;
+  margin-left: 9.1em;
+  padding: .2em .5em;
+  color: #777;
+}
+
+#profil.dialog span.şoaptă-cod-bancă+ul.rezultate .item {
+  margin-bottom: .2em;
+}
+
+#profil.dialog span.şoaptă-cod-bancă+ul.rezultate .item:hover,
+#profil.dialog span.şoaptă-cod-bancă+ul.rezultate .item.selectat {
+  color: black;
+  cursor: pointer;
+}
+
+#profil.dialog input.sufix-cod-bancă ~ p {
+  margin: 0 0 0 9.75em;
+  font-weight: bold;
+  white-space: normal;
 }
 
 #calculator.dialog input[type="text"] {
