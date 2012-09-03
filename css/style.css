@@ -1140,7 +1140,7 @@ button.cu.opţiuni:after {
 #profil.dialog span.şoaptă-cod-bancă {
   font-weight: bold;
   color: #999;
-  margin-left: .3em;
+  padding-left: .3em;
   background: url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 -8px;
 }
 
