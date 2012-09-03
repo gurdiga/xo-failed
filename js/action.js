@@ -579,7 +579,7 @@ var Formular = {
 
   init: function() {
     this.$
-      .on('keydown', function(e) {if (e.keyCode == 27) Formular.închide()})
+      .on('keyup', function(e) {if (e.keyCode == 27) Formular.închide()})
       .on('click', 'button.închide', this.închide)
       .on('click', 'button.salvează', this.trimite)
       .on('închidere', this.resetează)
@@ -1828,10 +1828,7 @@ var Calendar = {
 
     $(document)
       .on('click', '.dată+.ui-icon-calendar', this.afişează)
-      .on('focus', '.dată', this.seteazăMasca)
-      .on('keydown', '.dată', function(e) {
-        if (e.keyCode == 27) Calendar.închide();
-      });
+      .on('focus', '.dată', this.seteazăMasca);
   },
 
   insereazăButon: function() {
