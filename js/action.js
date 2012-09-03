@@ -1654,7 +1654,8 @@ var Bănci = {
 
   initCîmpuri: function() {
     $(document)
-      .on('input', 'input.sufix-cod-bancă', Bănci.listeazăDupăSufix);
+      .on('input', 'input.sufix-cod-bancă', Bănci.listeazăDupăSufix)
+      .on('click', '.şoaptă-cod-bancă', function() {$(this).next().focus().select()});
   },
 
   listeazăDupăSufix: function(e) {
