@@ -9,6 +9,9 @@ window.onload = function() {
         $el: opener.Rapoarte[pagina].$el,
         nume: function(persoană) {
           return persoană['gen-persoană'] == 'fizică' ? persoană['nume'] : persoană['denumire'];
+        },
+        id: function(persoană) {
+          return persoană['gen-persoană'] == 'fizică' ? ('IDNP ' + persoană['idnp']) : ('IDNO ' + persoană['idno']);
         }
       };
 
