@@ -165,7 +165,7 @@ button {
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .3;
+  opacity: .2;
   border: none;
   background: transparent;
   font-size: 1em;
@@ -516,7 +516,7 @@ button.închide {
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .3;
+  opacity: .2;
 }
 
 .semiascuns:hover {
@@ -1041,36 +1041,6 @@ button+.opţiuni li:hover {
   opacity: 1;
 }
 
-input~button+.opţiuni {
-  right: auto;
-  display: inline-block;
-  margin: 20px 0 0 -20px;
-  list-style: inside disc;
-  padding: 0;
-}
-
-input~button+.opţiuni.cu.umbră {
-  border-width: 0;
-}
-
-input~button:hover+.opţiuni.cu.umbră,
-input~button+.opţiuni.cu.umbră:hover {
-  padding: .2em .5em .5em 0;
-  border-width: 1px;
-}
-
-input~button+.opţiuni li {
-  color: #333;
-  background-color: white;
-  font-size: small;
-  line-height: normal;
-}
-
-input~button+.opţiuni li:hover {
-  color: blue;
-  text-decoration: underline;
-}
-
 button.cu.opţiuni {
   text-indent: 0;
   overflow: visible;
@@ -1294,6 +1264,25 @@ ul.subsecţiune li:last-child input {
   padding-bottom: 0;
 }
 
+.buton.cu.listă {
+  display: inline-block;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.buton.cu.listă:after {
+  content: ' '; /*&nbsp;*/
+}
+
+.buton.cu.listă:hover .ui-icon {
+  opacity: 1;
+}
+
+.buton.cu.listă .itemi {
+  margin-top: -.15em;
+  cursor: pointer;
+}
+
 .dată.intentării,
 .dată.perioadă {
   width: 5.8em;
@@ -1318,7 +1307,7 @@ input[readonly]+span.ui-icon-locked {
 input[readonly]:focus+span.ui-icon-locked,
 input[readonly]+span.ui-icon-locked:hover,
 input[readonly]:hover+span.ui-icon-locked {
-  opacity: .3;
+  opacity: .2;
 }
 
 #adaugă-subsecţiune {
@@ -1372,11 +1361,13 @@ label.checkbox input {
   list-style: disc inside;
   padding: .1em 1em .3em;
   display: none;
+  z-index: 1;
 }
 
 .listă:hover>.titlu,
 .listă:hover>.titlu::before,
 .listă>.titlu+.itemi>li:hover,
+.buton.cu.listă .itemi li:hover,
 #destinatari .listă .itemi li:hover {
   text-decoration: underline;
   color: blue;
