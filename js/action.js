@@ -1337,7 +1337,19 @@ var ProceduriRecente = {
   },
 
   notează: function(număr) {
-    $.post(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
+    setTimeout(function() {
+      if (ProceduriRecente.numărulUltimei() == număr) return;
+
+      $.post(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
+    }, 500);
+  },
+
+  numărulUltimei: function() {
+    var ceaMaiRecentăProcedură = ProceduriRecente.$.find('.item');
+
+    if (!ceaMaiRecentăProcedură.există()) return;
+
+    return ceaMaiRecentăProcedură.first().find('.număr').contents(':first').text().replace(Utilizator.login, '');
   }
 }
 
