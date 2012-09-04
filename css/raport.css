@@ -75,8 +75,6 @@ p.titlu {
 
 .dreapta {
   float: right;
-  width: auto;
-  margin: 0;
 }
 
 .editabil:hover {
