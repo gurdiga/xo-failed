@@ -13,7 +13,7 @@ function notează_ca_recentă($număr, $afişează = false) {
 
   global $login;
 
-  $fişier = "../date/$login/proceduri/recente";
+  $fişier = "../date/$login/proceduri/recente.json";
 
   if (file_exists($fişier)) {
     $lista = json_decode(file_get_contents($fişier), true);
@@ -55,7 +55,7 @@ function cale($procedură) {
 
   $număr = $procedură['număr'];
 
-  return "../date/$login/proceduri/$număr";
+  return "../date/$login/proceduri/$număr.json";
 }
 
 // ------------------------------

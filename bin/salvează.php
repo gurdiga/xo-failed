@@ -97,6 +97,6 @@ function reindexează($procedură) {
     }
   }
 
-  file_put_contents("$dir/index", json_encode($index));
-  file_put_contents("$dir/index.gz", gzencode(json_encode($index)));
+  file_put_contents("$dir/index.json", json_encode($index));
+  file_put_contents("$dir/index.json.gz", gzencode(json_encode($index)));
 }

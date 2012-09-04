@@ -901,7 +901,7 @@ var Formular = {
     if (procedură.număr) post();
     else $.get('/date/' + Utilizator.login + '/proceduri/', function(răspuns) {
       var ultimulNumăr = $(răspuns).find('a').map(function() {
-        var reNumăr = /^([SP]?)-(\d+)$/;
+        var reNumăr = /^([SP]?)-(\d+).json$/;
 
         if (reNumăr.test(this.firstChild.data)) {
           return parseInt(this.firstChild.data.match(reNumăr)[2]);
@@ -921,7 +921,7 @@ var Formular = {
     function post() {
       procedură.dataUltimeiModificări = moment().format('DD.MM.YYYY HH:mm');
 
-      $.post('/date/' + Utilizator.login + '/proceduri/' + procedură.număr, JSON.stringify(procedură), function() {
+      $.post('/date/' + Utilizator.login + '/proceduri/' + procedură.număr + '.json', JSON.stringify(procedură), function() {
         if (Formular.seCreazăProcedurăNouă()) {
           window.skipEventOnce.hashchange = true;
           location.hash = 'formular?' + procedură.număr;
@@ -945,7 +945,7 @@ var Formular = {
   încarcă: function() {
     var număr = HashController.date();
 
-    $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr)
+    $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr + '.json')
       .success(function(procedură) {
         ProceduriRecente.notează(număr);
         Formular.populează(procedură);
@@ -1308,7 +1308,7 @@ var ProceduriRecente = {
   },
 
   url: function() {
-    return '/date/' + Utilizator.login + '/proceduri/recente';
+    return '/date/' + Utilizator.login + '/proceduri/recente.json';
   },
 
   încarcă: function() {
@@ -1358,7 +1358,7 @@ var Căutare = {
       .on('mouseenter', '.item', function() {$(this).addClass('selectat')})
       .on('mouseleave', '.item', function() {$(this).removeClass('selectat')});
 
-    Căutare.adresăIndex = '/date/' + Utilizator.login + '/proceduri/index';
+    Căutare.adresăIndex = '/date/' + Utilizator.login + '/proceduri/index.json';
     Căutare.încarcăIndex();
   },
 
@@ -1584,7 +1584,7 @@ var Profil = {
 
   init: function() {
     Bănci.încarcă(function() {
-      Profil.url = '/date/' + Utilizator.login + '/profil';
+      Profil.url = '/date/' + Utilizator.login + '/profil.json';
       Profil.încarcăDate();
       Profil.$
         .on('click', 'button.salvează', Profil.salvează)
