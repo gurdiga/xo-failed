@@ -1,4 +1,5 @@
-rate-bnm/
-!rate-bnm/*.php
-!rate-bnm/*.json
+bnm/
+!bnm/*.php
+!bnm/*.json
+!bnm/rata_de_bază.js.bak
 date

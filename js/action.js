@@ -1655,7 +1655,7 @@ var Bănci = {
 
   încarcă: function(callback) {
     if ($.isEmptyObject(this.lista)) {
-      $.getJSON('/rate-bnm/bănci.json', function(lista) {
+      $.getJSON('/bnm/bănci.json', function(lista) {
         Bănci.lista = lista;
         Bănci.initCîmpuri();
 
