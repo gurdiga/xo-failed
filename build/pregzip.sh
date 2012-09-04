@@ -16,4 +16,4 @@ for file in $files; do
   cat $file | gzip > $file.gz
 done
 
-echo 'OK'
+echo ''
