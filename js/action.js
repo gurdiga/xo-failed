@@ -2526,8 +2526,10 @@ var Rapoarte = {
     var raport = $(this).data('raport'),
         pagina = '/rapoarte/' + raport + '.html';
 
-    window.open(pagina, raport, '', true);
-    Rapoarte[pagina] = {$el: $(this)};
+    Rapoarte[pagina] = {
+      tab: window.open(pagina, raport, '', true),
+      el: $(this)
+    };
   },
 };
 
