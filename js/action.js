@@ -1423,7 +1423,9 @@ var Căutare = {
 
       if (!item.există()) return;
 
-      var număr = item.find('.număr').contents()[0].data.replace(Utilizator.login, '');
+      var număr = item.find('.număr').text()
+        .replace(item.find('.data-hotărîrii').text(), '')
+        .replace(Utilizator.login, '');
 
       location.hash = 'formular?' + număr;
     }
