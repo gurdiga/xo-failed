@@ -1230,6 +1230,10 @@ fieldset .conţinut ul.subsecţiune {
   position: relative;
 }
 
+fieldset .conţinut ul.subsecţiune:first-child {
+  margin-top: .8em;
+}
+
 ul.subsecţiune .titlu {
   color: #bbb;
   font-size: small;

@@ -27,5 +27,6 @@
  
 Chestii tehnice
   - teste automatizate?
+    - cel mai simplu test: listă cu opţiuni
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   * bootable tonido flash
