@@ -29,6 +29,7 @@ function notează_ca_recentă($număr, $afişează = false) {
 
   $json = json_encode($lista);
   file_put_contents($fişier, $json);
+  file_put_contents("$fişier.gz", gzencode($json));
 
   if ($afişează) {
     header('Content-Type: application/json');
