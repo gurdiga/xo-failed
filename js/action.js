@@ -788,7 +788,13 @@ var Formular = {
     // ------------------------------------------
     function colecteazăÎncasări($secţiune) {
       return $secţiune.find('.subsecţiune.încasare').map(function() {
-        return colectează(this);
+        var date = {};
+
+        $(this).find(':input:not([readonly])').each(function() {
+          date[this.id] = $.trim($(this).val());
+        });
+
+        return date;
       }).get();
     }
 
@@ -1007,6 +1013,7 @@ var Formular = {
 
         $încasare = $secţiune.find('.subsecţiune.încasare:last');
         populeazăSecţiune($încasare, încasări[i]);
+        $încasare.find('#venitul').trigger('input');
 
         if (prima) prima = false;
       }
