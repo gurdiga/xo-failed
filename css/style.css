@@ -165,7 +165,7 @@ button {
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .2;
+  opacity: .3;
   border: none;
   background: transparent;
   font-size: 1em;
@@ -516,7 +516,7 @@ button.închide {
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  opacity: .2;
+  opacity: .3;
 }
 
 .semiascuns:hover {
@@ -1311,7 +1311,7 @@ input[readonly]+span.ui-icon-locked {
 input[readonly]:focus+span.ui-icon-locked,
 input[readonly]+span.ui-icon-locked:hover,
 input[readonly]:hover+span.ui-icon-locked {
-  opacity: .2;
+  opacity: .3;
 }
 
 #adaugă-subsecţiune {
