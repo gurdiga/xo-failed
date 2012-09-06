@@ -1,13 +1,13 @@
-- separă partea publică de cea privată?
-- Introducere
-  - Materiale
-
 - Imprimare
   * rapoarte/încheiere-dobîndă-de-întîrziere.html
     * buton de salvare
+    * buton de închidere ca la formular
   - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
   - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')
+
+- Introducere
+  - Materiale
 
 - Convenienţe
   - “poliţă” temporară: la click în afara formularului în punem pe polţă
@@ -29,4 +29,4 @@ Chestii tehnice
   - teste automatizate?
     - cel mai simplu test: listă cu opţiuni
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
-  * bootable tonido flash
+  - bootable tonido flash
