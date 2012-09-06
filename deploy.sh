@@ -1,8 +1,9 @@
 #!/bin/bash
 
 cd /var/www/executori.org
-git pull
 
+echo 'Git pull...'
+git pull origin master >> .git.log 2>&1
 echo ''
 
 ./build/permissions.sh

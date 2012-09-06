@@ -3,3 +3,4 @@ bnm/
 !bnm/*.json
 !bnm/rata_de_bază.js.bak
 date
+.git.log
