@@ -598,14 +598,6 @@ var Formular = {
   baraDeInstrumente: {
     init: function() {
       Formular.$.find('.bara-de-instrumente')
-        .draggable({
-          cancel: '', // permite handle-ul să fie şi un buton
-          handle: '.mînier',
-          containment: 'document',
-          start: function() {
-            $(this).css('right', 'auto');
-          }
-        })
         .on('click', '.spre-secţiuni', Formular.focusează)
         .on('click', '.spre-secţiuni+.opţiuni li', Formular.focuseazăSecţiunea);
     }
