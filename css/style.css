@@ -932,7 +932,7 @@ input[type="checkbox"]+label {
   padding: .1em .3em;
 }
 
-.meniu {
+.bara-de-instrumente {
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   padding: 0;
   position: fixed;
@@ -945,20 +945,20 @@ input[type="checkbox"]+label {
   opacity: .25;
 }
 
-.meniu:hover {
+.bara-de-instrumente:hover {
   opacity: 1;
 }
 
-.meniu .deplasator {
+.bara-de-instrumente .mînier {
   cursor: move;
   opacity: 1;
 }
 
-.meniu .spre-secţiuni {
+.bara-de-instrumente .spre-secţiuni {
   cursor: pointer;
 }
 
-.meniu>button {
+.bara-de-instrumente>button {
   height: 48px;
   width: 48px;
   padding: 0;
@@ -972,11 +972,11 @@ input[type="checkbox"]+label {
   display: block;
 }
 
-.meniu>button:hover {
+.bara-de-instrumente>button:hover {
   opacity: .9;
 }
 
-.meniu>button+.mesaj {
+.bara-de-instrumente>button+.mesaj {
   display: none;
   position: absolute;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
@@ -987,15 +987,15 @@ input[type="checkbox"]+label {
   color: #333;
 }
 
-.meniu>button.salvează {
+.bara-de-instrumente>button.salvează {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCQpHDl7uAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAEJSURBVFjD7ZetDsIwFEbPCMnmKIpJkCheYygkwYFiEh4DB4/AY8wh9wg46sARFKkCQwh/HYOuQEK/qabLTu/97u1ar3zAqkrgAA7gAA7wTGX9VAgofGDH/sF8gGDzfgQCiWSNRDJ6+EYPydQkAp0GdIAxADFo8AYetIiIEKdRzMy2ycPMRBVSRTGN/+wDnRJ2kKMDXgAEVC9GKSkAlVwAT3eqELnXCNBk9aMmJwRPnrm5B5OMbMdFmFynZrdMu7b7YHFVpLcbXwGABMHBZgRT/PO/7V6+OWCZYXKAMgf0qWjWr8wjqBHhoU4fu1eb8Nt7kae/QoVXychKhWL7egTu6OgADuAAHwQcAbNkL6DGQJSyAAAAAElFTkSuQmCC');
 }
 
-.meniu>button.imprimă {
+.bara-de-instrumente>button.imprimă {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
 }
 
-.meniu>button.ui-icon.colorat-invers {
+.bara-de-instrumente>button.ui-icon.colorat-invers {
   height: 20px;
   margin: 0;
   border: solid black;

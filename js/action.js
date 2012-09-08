@@ -587,7 +587,7 @@ var Formular = {
       .on('populat iniţializat', this.eliminăAmendaDupăCaz)
       .on('salvat', this.actualizeazăDataUltimeiModificări);
 
-    this.meniu.init();
+    this.baraDeInstrumente.init();
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
@@ -595,12 +595,12 @@ var Formular = {
     });
   },
 
-  meniu: {
+  baraDeInstrumente: {
     init: function() {
-      Formular.$.find('.meniu')
+      Formular.$.find('.bara-de-instrumente')
         .draggable({
           cancel: '', // permite handle-ul să fie şi un buton
-          handle: '.deplasator',
+          handle: '.mînier',
           containment: 'document',
           start: function() {
             $(this).css('right', 'auto');
@@ -937,7 +937,7 @@ var Formular = {
 
         Formular.$.trigger('salvat', [procedură]);
         Formular.focusează();
-        Formular.$.find('.meniu .salvează+.mesaj')
+        Formular.$.find('.bara-de-instrumente .salvează+.mesaj')
           .fadeIn()
           .delay(1000)
           .fadeOut();
@@ -1230,7 +1230,7 @@ var Formular = {
     Formular.focusează();
     Formular.$
       .stop(true, true)
-      .find('.meniu').fadeOut().end()
+      .find('.bara-de-instrumente').fadeOut().end()
       .animate({'top': $(window).height()}, function() {
         $(this).hide();
         location.hash = '';
@@ -1245,7 +1245,7 @@ var Formular = {
 
     Formular.$
       .stop(true, true)
-      .find('.meniu').fadeIn('slow').end()
+      .find('.bara-de-instrumente').fadeIn('slow').end()
       .css('top', $(window).height())
       .show()
       .animate({'top': '80px'});
