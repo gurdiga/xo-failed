@@ -1,7 +1,6 @@
 - Imprimare
-  * rapoarte/încheiere-dobîndă-de-întîrziere.html
-    * buton de salvare
-    * buton de închidere ca la formular
+  * js/raport.js
+    * de implementat salvarea raportului
   - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
   - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')
@@ -30,3 +29,4 @@ Chestii tehnice
     - cel mai simplu test: listă cu opţiuni
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
+  - custom build of $UI

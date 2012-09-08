@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+@import url(//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css);
+@import url(/css/shared.css) screen;
+
 @page {
   /*size: A4;*/
 }
@@ -87,9 +90,14 @@ p.titlu {
   }
 
   body {
+    position: relative;
     margin: 1em auto;
     border: 1px solid #ddd;
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
     background-color: white;
+  }
+
+  button {
+    cursor: pointer;
   }
 }
