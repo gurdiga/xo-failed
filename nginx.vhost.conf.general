@@ -76,7 +76,7 @@ server {
     }
 
     location ~ /date/\d+/proceduri/[PS]?-\d+.json$ {
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează.php;
+      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-procedură.php;
       include conf.d/executori.org/rest.conf;
     }
 
