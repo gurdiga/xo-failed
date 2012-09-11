@@ -8,3 +8,4 @@ echo ''
 
 ./build/permissions.sh
 ./build/pregzip.sh
+./build/update-config.sh

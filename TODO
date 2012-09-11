@@ -1,6 +1,7 @@
+-  git mv bin/salvează.php bin/salvează-procedură.php
 - Imprimare
   * js/raport.js
-    * de implementat salvarea raportului
+    * de implementat salvarea raportului: AJAX + php?
   - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
   - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')
