@@ -628,7 +628,9 @@ var Formular = {
   },
 
   actualizeazăDataUltimeiModificări: function(e, procedură) {
-    Formular.$.find('#data-ultimei-modificări span').text(procedură.dataUltimeiModificări);
+    Formular.$.find('#data-ultimei-modificări span')
+      .text(procedură.dataUltimeiModificări)
+      .parent().show();
   },
 
   calculează: function() {
@@ -957,7 +959,9 @@ var Formular = {
     Formular.sePopulează = true;
 
     Formular.$.find('#data-intentării').val(procedură['data-intentării']);
-    Formular.$.find('#data-ultimei-modificări span').text(procedură.dataUltimeiModificări);
+    Formular.$.find('#data-ultimei-modificări span')
+      .text(procedură.dataUltimeiModificări)
+      .parent().show();
 
     populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);
     populeazăObiectulUrmăririi();
@@ -1255,7 +1259,7 @@ var Formular = {
     Formular.seIniţializează = true;
 
     Formular.$
-      .find('#data-ultimei-modificări span').text('încă nu e salvată').end()
+      .find('#data-ultimei-modificări').hide().end()
       .find('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
     if (Formular.seCreazăProcedurăNouă()) {
