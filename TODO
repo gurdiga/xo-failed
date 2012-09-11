@@ -1,4 +1,6 @@
--  git mv bin/salvează.php bin/salvează-procedură.php
+- General
+  - buton de închidere ca la formular?
+
 - Imprimare
   * js/raport.js
     * de implementat salvarea raportului: AJAX + php?
@@ -26,6 +28,7 @@
   - istoria înregistrărilor
  
 Chestii tehnice
+  - build: de setat un stage env unde se vor rula testele şi doar după aceea de instalat pe prod?
   - teste automatizate?
     - cel mai simplu test: listă cu opţiuni
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
