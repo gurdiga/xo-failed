@@ -1344,7 +1344,7 @@ var ProceduriRecente = {
       if (ProceduriRecente.numărulUltimei() == număr) return;
 
       $.post(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
-    }, 500);
+    }, 1000);
   },
 
   numărulUltimei: function() {
