@@ -931,10 +931,14 @@ var Formular = {
 
         Formular.$.trigger('salvat', [procedură]);
         Formular.focusează();
-        Formular.$.find('.bara-de-instrumente .salvează+.mesaj')
-          .fadeIn()
-          .delay(1000)
-          .fadeOut();
+
+        var mesaj = Formular.$.find('.bara-de-instrumente .salvează+.mesaj');
+
+        mesaj.addClass('afişat');
+
+        setTimeout(function() {
+          mesaj.removeClass('afişat');
+        }, 1000);
 
         Căutare.încarcăIndexFărăCache();
         ProceduriRecente.încărcat = false;

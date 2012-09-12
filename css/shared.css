@@ -68,7 +68,6 @@ button.închide {
 }
 
 .bara-de-instrumente>button+.mesaj {
-  display: none;
   position: absolute;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background: white;
@@ -76,6 +75,15 @@ button.închide {
   top: -3.5em;
   right: 0;
   color: #333;
+  -webkit-transition: opacity .75s;
+  -moz-transition: opacity .75s;
+  -o-transition: opacity .75s;
+  transition: opacity .75s;
+  opacity: 0;
+}
+
+.bara-de-instrumente>button+.mesaj.afişat {
+  opacity: 1;
 }
 
 .bara-de-instrumente>button.salvează {

@@ -14,7 +14,7 @@ var Raport = {
   },
 
   compilează: function() {
-    var context = {
+    Raport.context = {
       procedură: opener.Formular.colectează(),
       executor: opener.Profil.date,
       moment: opener.moment,
@@ -28,9 +28,9 @@ var Raport = {
       }
     };
 
-    if (window.init) window.init(context);
+    if (window.init) window.init(Raport.context);
 
-    opener.compile(context, document);
+    opener.compile(Raport.context, document);
   },
 
   baraDeInstrumente: {
@@ -43,7 +43,19 @@ var Raport = {
   },
 
   salvează: function() {
-    console.log('TODO: post');
+    var cale = '/date/' + opener.Utilizator.login + '/rapoarte/',
+        fişier = document.title,// + Raport.context.întîrziere,
+        conţinut = 'conţinutul raportului';
+
+    opener.$.post(cale + fişier, conţinut, function() {
+      var mesaj = Raport.$.find('.bara-de-instrumente .salvează+.mesaj');
+
+      mesaj.addClass('afişat');
+
+      setTimeout(function() {
+        mesaj.removeClass('afişat');
+      }, 1000);
+    });
   },
 
   imprimă: function() {
