@@ -44,8 +44,20 @@ var Raport = {
 
   salvează: function() {
     var cale = '/date/' + opener.Utilizator.login + '/rapoarte/',
-        fişier = document.title,// + Raport.context.întîrziere,
-        conţinut = 'conţinutul raportului';
+        fişier = document.title + '.html',// TODO + Raport.context.întîrziere,
+        conţinut = '';
+
+    conţinut = '<!doctype html>' +
+      '<html>' +
+        '<head>' + document.head.innerHTML + '</head>' +
+        '<body>' +
+          opener.$('<div>' + document.body.innerHTML + '</div>')
+            .find('button.închide')
+              .nextAll().remove().end()
+            .remove().end()
+          .html() +
+        '</body>' +
+      '</html>';
 
     opener.$.post(cale + fişier, conţinut, function() {
       var mesaj = Raport.$.find('.bara-de-instrumente .salvează+.mesaj');
