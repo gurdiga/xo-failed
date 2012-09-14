@@ -7,6 +7,8 @@ echo 'Salvează procedura...'
 SURSA="`dirname $0`/fixturi/procedură.json"
 DESTINATIA="date/$LOGIN/proceduri/-1.json"
 
+sudo rm -f $DESTINATIA
+
 curl $CURL_DEFAULT_ARGS \
   --request POST \
   --data @$SURSA \

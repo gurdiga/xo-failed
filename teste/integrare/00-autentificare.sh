@@ -14,7 +14,7 @@ curl \
 
 verifică 'răspuns OK'
 
-grep '^Set-Cookie: login=007; path=/' $TMP_FILE > /dev/null
+grep "^Set-Cookie: login=$LOGIN; path=/" $TMP_FILE > /dev/null
 verifică 'cookie'
 
 rm $TMP_FILE

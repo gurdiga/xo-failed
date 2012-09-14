@@ -1,18 +1,20 @@
 #!/bin/bash
 
-echo 'Notare ca recentă...'
+echo 'Proceduri recente...'
 
 . `dirname $0`/config.sh
 
 NUMAR='-1'
 JSON="date/$LOGIN/proceduri/recente.json"
+RASPUNS=$TMP_FILE
+
+sudo rm -f $JSON
 
 curl $CURL_DEFAULT_ARGS \
   --request POST \
-  --include \
   --data $NUMAR \
   --silent \
-  --output $TMP_FILE \
+  --output $RASPUNS \
   https://$SERVER_NAME/$JSON
 
 verifică 'răspuns OK'
@@ -20,4 +22,7 @@ verifică 'răspuns OK'
 grep "^\[\"$NUMAR\"" $JSON > /dev/null
 verifică 'notat'
 
-rm $TMP_FILE
+diff --ignore-all-space $RASPUNS $JSON > /dev/null
+verifică 'răspuns corect'
+
+sudo rm $RASPUNS

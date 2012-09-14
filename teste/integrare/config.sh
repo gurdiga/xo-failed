@@ -1,8 +1,8 @@
 #!/bin/bash
 
 SERVER_NAME=$(basename `pwd`)
-LOGIN='007'
-PASSWORD='Executarea!'
+LOGIN='001'
+PASSWORD='Verificarea!'
 TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
 
 CURL_DEFAULT_ARGS="--insecure --user $LOGIN:$PASSWORD --fail"
