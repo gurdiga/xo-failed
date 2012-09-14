@@ -2,9 +2,6 @@
 
 echo 'Salvare profil...'
 
-. `dirname $0`/config.sh
-
-
 SURSA="`dirname $0`/fixturi/profil.json"
 DESTINATIA="date/$LOGIN/profil.json"
 

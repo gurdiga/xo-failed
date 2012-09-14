@@ -2,8 +2,6 @@
 
 echo 'Salvează procedura...'
 
-. `dirname $0`/config.sh
-
 SURSA="`dirname $0`/fixturi/procedură.json"
 DESTINATIA="date/$LOGIN/proceduri/-1.json"
 

@@ -2,9 +2,6 @@
 
 echo 'Autentificarea...'
 
-. `dirname $0`/config.sh
-
-
 curl \
   $CURL_DEFAULT_ARGS \
   --include \

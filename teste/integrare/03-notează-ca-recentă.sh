@@ -2,8 +2,6 @@
 
 echo 'Proceduri recente...'
 
-. `dirname $0`/config.sh
-
 NUMAR='-1'
 JSON="date/$LOGIN/proceduri/recente.json"
 RASPUNS=$TMP_FILE
