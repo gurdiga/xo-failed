@@ -6,9 +6,9 @@ else
   cd /var/www/preprod.executori.org
 fi
 
-. build/git-pull.sh
-. build/setez-permisiuni.sh
-. build/pregzipuiesc.sh
-. build/configurez-nginx.sh
+. ./build/git-pull.sh
+. ./build/setez-permisiuni.sh
+. ./build/pregzipuiesc.sh
+. ./build/configurez-nginx.sh
 
 ./build/teste/integrare/start.sh && . $0 prod
