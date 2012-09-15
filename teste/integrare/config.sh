@@ -8,19 +8,24 @@ TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
 DOCUMENT_ROOT="$DIR/../.."
 DATE="$DOCUMENT_ROOT/date/$LOGIN"
 
-CURL_DEFAULT_ARGS="--insecure --user $LOGIN:$PASSWORD --fail"
+CURL_DEFAULT_ARGS="--insecure --user $LOGIN:$PASSWORD --fail --silent --show-error"
+
+
+RED="\e[00;31m"
+GREEN="\e[00;32m"
+RESET_COLOR="\e[00m"
+
+SUCCESS_MARK="✓"
+FAIL_MARK="×"
+
 
 function verifică {
   RETURN_CODE=$?
 
-  local RED="\e[00;31m"
-  local GREEN="\e[00;32m"
-  local RESET_COLOR="\e[00m"
-
   if [ $RETURN_CODE -eq 0 ]; then
-    echo -e -n " $GREEN✓"
+    echo -e -n " $GREEN$SUCCESS_MARK"
   else
-    echo -e -n " $RED×"
+    echo -e -n " $RED$FAIL_MARK"
   fi
 
   echo -e " $1$RESET_COLOR"

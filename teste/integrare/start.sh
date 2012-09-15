@@ -8,7 +8,12 @@ DIR=`dirname $0`
 
 for step in $DIR/[0-9]*.sh ; do
   . $step
-done
+done | tee $DIR/log
 
-sudo rm -rf $DATE
-sudo rm -f $TMP_FILE
+. $DIR/şterge-utilizator.sh
+. $DIR/şterge-director-de-date.sh
+
+echo '================='
+fgrep $FAIL_MARK $DIR/log > /dev/null
+test $? -eq 1
+verifică 'TOTUL E OK'

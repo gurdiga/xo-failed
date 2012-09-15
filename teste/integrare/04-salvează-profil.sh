@@ -8,6 +8,7 @@ DESTINATIA="date/$LOGIN/profil.json"
 sudo rm -f $DESTINATIA
 
 curl \
+  $CURL_DEFAULT_ARGS \
   --request POST \
   --insecure \
   --data @$SURSA \
