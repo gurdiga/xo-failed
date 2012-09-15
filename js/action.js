@@ -1135,7 +1135,7 @@ var Formular = {
             $cîmp = $itemSubformular.find(':input');
 
             if (this.document) {
-              $cîmp.val(this.document);
+              $cîmp.val(this.document).trigger('input');
               Destinatari.adăugaţiDeja = $cîmp.next('.destinatari-adăugaţi');
 
               if (this.destinatari) {

@@ -787,6 +787,7 @@ input[type="checkbox"]+label {
   margin-left: 9em;
   display: inline-block;
   padding-top: 5px;
+  vertical-align: top;
 }
 
 #cheltuieli .document .destinatari {
