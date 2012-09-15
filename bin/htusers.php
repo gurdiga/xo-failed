@@ -1,9 +1,11 @@
 <?
 
-if (isset($argv) && count($argv) == 3) echo "{$argv[1]}:" . encrypt_passsword($argv[2]) . "\n";
-
-
-define('HTUSERS', "{$_SERVER['DOCUMENT_ROOT']}/.htusers");
+if (getenv('TERM')) {
+  define('HTUSERS', realpath(dirname(dirname(__FILE__))) .'/.htusers');
+  require_once './bin/htusers-cli.php';
+} else {
+  define('HTUSERS', "{$_SERVER['DOCUMENT_ROOT']}/.htusers");
+}
 
 
 # --------------------------------------------------
