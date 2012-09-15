@@ -5,3 +5,4 @@ bnm/
 date
 .git.log
 teste/integrare/log
+nginx.vhost.conf

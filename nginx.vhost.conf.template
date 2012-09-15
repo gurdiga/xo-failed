@@ -1,13 +1,13 @@
 server {
   listen 80;
-  server_name www.dev.executori.org;
-  return 301 https://dev.executori.org$request_uri;
+  server_name www.%%SERVER_NAME%%;
+  return 301 https://%%SERVER_NAME%%$request_uri;
 }
 
 server {
   listen 443;
-  server_name www.dev.executori.org;
-  return 301 https://dev.executori.org$request_uri;
+  server_name www.%%SERVER_NAME%%;
+  return 301 https://%%SERVER_NAME%%$request_uri;
 
   ssl on;
   ssl_certificate /etc/nginx/ssl/executori.org/executori_org.crt;
@@ -18,13 +18,13 @@ server {
 
 server {
   listen 80;
-  server_name dev.executori.org;
+  server_name %%SERVER_NAME%%;
   return 301 https://$host$request_uri;
 }
 
 server {
   listen 443;
-  server_name dev.executori.org;
+  server_name %%SERVER_NAME%%;
 
   ssl on;
   ssl_certificate /etc/nginx/ssl/executori.org/executori_org.crt;
@@ -62,7 +62,7 @@ server {
 
     set $method_and_uri "${request_uri}";
 
-    location ~ /date/\d+/proceduri/index.json {
+    location ~ /date/\d+/proceduri/index\.json {
       more_clear_headers 'Content-Type';
       more_set_headers 'Content-Type: text/javascript; charset=utf-8';
 
@@ -70,27 +70,27 @@ server {
       include conf.d/executori.org/rest.conf;
     }
 
-    location ~ /date/\d+/proceduri/recente.json$ {
+    location ~ /date/\d+/proceduri/recente\.json$ {
       fastcgi_param SCRIPT_FILENAME $document_root/bin/notează-ca-recentă.php;
       include conf.d/executori.org/rest.conf;
     }
 
-    location ~ /date/\d+/proceduri/[PS]?-\d+.json$ {
+    location ~ /date/\d+/proceduri/[PS]?-\d+\.json$ {
       fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-procedură.php;
       include conf.d/executori.org/rest.conf;
     }
 
-    location ~ /date/\d+/rapoarte/[PS]?-\d+.html$ {
+    location ~ /date/\d+/rapoarte/.+\.html$ {
       fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-raport.php;
       include conf.d/executori.org/rest.conf;
     }
 
-    location ~ /date/\d+/profil.json$ {
+    location ~ /date/\d+/profil\.json$ {
       fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-profil.php;
       include conf.d/executori.org/rest.conf;
     }
 
-    location ~ /date/\d+/rapoarte/.* {
+    location ~ /date/\d+/rapoarte/.+\.html {
       fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-raport.php;
       include conf.d/executori.org/rest.conf;
     }
