@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ "$1" == 'prod' ]; then
-  echo cd /var/www/executori.org
+  cd /var/www/executori.org
 else
-  echo cd /var/www/preprod.executori.org
+  cd /var/www/preprod.executori.org
 fi
 
 . build/git-pull.sh
