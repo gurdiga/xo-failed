@@ -71,6 +71,7 @@ var Raport = {
   },
 
   imprimă: function() {
+    Raport.salvează();
     window.print();
   },
 
