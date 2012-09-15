@@ -1,4 +1,4 @@
-echo 'Setting permissions...'
+echo 'Setez permisiuni...'
 
 echo '- .htusers'
 sudo chown www-data .htusers

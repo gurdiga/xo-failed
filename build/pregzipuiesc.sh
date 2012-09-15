@@ -9,7 +9,7 @@ files="
   js/raport.js
 "
 
-echo "Pregzipping..."
+echo "Pregzipuiesc..."
 
 for file in $files; do
   echo "- $file"

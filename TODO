@@ -31,6 +31,7 @@
 Chestii tehnice
   - build: de setat un stage env unde se vor rula testele şi doar după aceea de instalat pe prod?
   - teste automatizate?
+    - node jake + lint
     - cel mai simplu test: listă cu opţiuni
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
