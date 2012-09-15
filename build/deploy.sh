@@ -1,19 +1,14 @@
 #!/bin/bash
 
-cd /var/www/preprod.executori.org
-
-echo 'Git pull...'
-git pull origin master >> .git.log 2>&1
-
-if [ $? -ne 0 ]; then
-  cat .git.log
-  exit
+if [ "$1" == 'prod' ]; then
+  echo cd /var/www/executori.org
+else
+  echo cd /var/www/preprod.executori.org
 fi
 
-echo ''
+. build/git-pull.sh
+. build/setez-permisiuni.sh
+. build/pregzipuiesc.sh
+. build/configurez-nginx.sh
 
-. ./build/setez-permisiuni.sh
-. ./build/pregzipuiesc.sh
-. ./build/configurez-nginx.sh
-
-./build/teste/integrare/start.sh
+./build/teste/integrare/start.sh && . $0 prod
