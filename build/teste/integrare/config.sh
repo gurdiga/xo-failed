@@ -5,7 +5,7 @@ LOGIN='001'
 PASSWORD='Verificarea!'
 TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
 
-DOCUMENT_ROOT="$DIR/../.."
+DOCUMENT_ROOT="$DIR/../../.."
 DATE="$DOCUMENT_ROOT/date/$LOGIN"
 
 CURL_DEFAULT_ARGS="--insecure --user $LOGIN:$PASSWORD --fail --silent --show-error"
