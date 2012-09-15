@@ -11,4 +11,6 @@ fi
 . ./build/pregzipuiesc.sh
 . ./build/configurez-nginx.sh
 
-./build/teste/integrare/start.sh
+if [ ! "$1" == 'prod' ]; then
+  ./build/teste/integrare/start.sh
+fi
