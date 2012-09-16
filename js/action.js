@@ -476,8 +476,6 @@ var ButonDeEliminare = {
   eliminabilPrecedent: $(),
 
   init: function() {
-    this.$.hide();
-
     Formular.$
       .on('click', '.elimină', this.acţionează)
       .on('mousemove', '.eliminabil', this.afişează)
@@ -499,7 +497,9 @@ var ButonDeEliminare = {
       eliminabil.prepend(buton);
     }
 
-    buton.hide().delay(500).fadeIn('slow');
+    setTimeout(function() {
+      buton.addClass('afişat');
+    }, 50);
 
     ButonDeEliminare.eliminabilPrecedent.removeClass('spre-eliminare');
     ButonDeEliminare.eliminabilPrecedent = eliminabil.addClass('spre-eliminare');
@@ -507,6 +507,7 @@ var ButonDeEliminare = {
 
   ascunde: function() {
     ButonDeEliminare.$
+      .removeClass('afişat')
       .parent().removeClass('spre-eliminare').end()
       .stop(true, true)
       .appendTo(document.body);
