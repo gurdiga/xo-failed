@@ -1194,6 +1194,12 @@ input[readonly]:hover+span.ui-icon-locked {
 
 #adaugă-subsecţiune {
   margin-left: 1em;
+  margin-top: 1em;
+  display: inline-block;
+}
+
+.subsecţiune + #adaugă-subsecţiune {
+  margin-top: 0;
 }
 
 label.checkbox {
