@@ -10,6 +10,7 @@ body {
   background-image: url('/imagini/fundal.png');
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #autentificare a {
@@ -822,8 +823,21 @@ input[type="checkbox"]+label {
   line-height: 1.4em;
 }
 
+.destinatari-adăugaţi,
+#destinatari .listă .itemi {
+  width: 25em;
+}
+
+.destinatari-adăugaţi>li,
 #destinatari .listă .itemi li {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.destinatari-adăugaţi>li:hover,
+#destinatari .listă .itemi li:hover {
+  overflow: visible;
 }
 
 #destinatari .listă .itemi li.dezactivat,
@@ -884,7 +898,6 @@ input[type="checkbox"]+label {
 
 .destinatari-adăugaţi>li {
   list-style: inside circle;
-  white-space: nowrap;
   counter-increment: destinatari;
   cursor: text;
 }
@@ -900,6 +913,7 @@ input[type="checkbox"]+label {
   margin-left: 2em;
   margin-top: 0;
   z-index: 0;
+  width: auto;
 }
 
 .destinatari-adăugaţi.comprimaţi>li {
