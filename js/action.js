@@ -1302,18 +1302,23 @@ var Formular = {
     Formular.$.addClass('încă-nu-verificat-rapoarte');
 
     $.get('/date/' + Utilizator.login + '/rapoarte/', function(html) {
-      var rapoarte = {};
+      var rapoarte = Formular.$.find('#rapoarte');
 
       $(html).find('a:not([href="../"])').map(function() {
         var numeRaport = decodeURI(this.getAttribute('href').replace(/\.html$/, '')),
             dataŞiOraSalvării = this.nextSibling.data.match(/(\d{2}-[a-z]{3}-\d{4} \d{2}:\d{2})/i)[1];
 
         dataŞiOraSalvării = moment(dataŞiOraSalvării, 'D-MMM-YYYY H:m').format('DD.MM.YYYY H:m');
-        rapoarte[numeRaport] = dataŞiOraSalvării;
+
+        $('<li>')
+          .append($('<a>').text(numeRaport).attr('href', this.href))
+          .append($('<span>').text(dataŞiOraSalvării).addClass('data-şi-ora-salvării'))
+          .appendTo(rapoarte);
       });
 
       // TODO
       // populează subsecţiunea cu rapoarte din Materiale
+      // CSS
 
       Formular.$.removeClass('încă-nu-verificat-rapoarte');
     });

@@ -369,6 +369,10 @@ h1 {
   font: bold 2em/1.5em Oswald, sans-serif;
 }
 
+h3 {
+  font: bold 1.2em/1.5em Oswald, sans-serif;
+}
+
 #conţinut {
   width: 960px;
   margin: 0 auto;
@@ -1260,6 +1264,18 @@ label.checkbox input {
 
 .listă:hover>.titlu::before {
   text-decoration: none;
+}
+
+#materiale h3 {
+  color: #bbb;
+  height: .8em;
+  margin: .5em 0 1em;
+  border-bottom: 1px solid #EEE;
+}
+
+#materiale h3 span {
+  background-color: white;
+  padding-right: .5em;
 }
 
 @-moz-document url-prefix() {
