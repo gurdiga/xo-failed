@@ -519,15 +519,6 @@ button.elimină-persoană {
   left: -16px;
   top: 0;
   background: white;
-  -webkit-transition: opacity 2s;
-  -moz-transition: opacity 2s;
-  -o-transition: opacity 2s;
-  transition: opacity 2s;
-  opacity: 0;
-}
-
-/* .elimină */.afişat {
-  opacity: .3;
 }
 
 .spre-eliminare {

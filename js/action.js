@@ -497,9 +497,7 @@ var ButonDeEliminare = {
       eliminabil.prepend(buton);
     }
 
-    setTimeout(function() {
-      buton.addClass('afişat');
-    }, 50);
+    buton.show();
 
     ButonDeEliminare.eliminabilPrecedent.removeClass('spre-eliminare');
     ButonDeEliminare.eliminabilPrecedent = eliminabil.addClass('spre-eliminare');
