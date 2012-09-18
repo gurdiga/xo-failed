@@ -2444,15 +2444,19 @@ var Subsecţiuni = {
     },
 
     adaugăSubsecţiune: function() {
-      var $secţiune = $(this).closest('.conţinut');
+      var $secţiune = $(this).closest('.conţinut'), $subsecţiune;
 
-      $şabloane.find('.subsecţiune.întîrziere').clone()
+      $subsecţiune = $şabloane.find('.subsecţiune.întîrziere').clone()
         .find(':radio').attr('name', function(i, name) {
           return name + $secţiune.find('.subsecţiune.întîrziere').length;
         }).end()
         .hide()
         .insertBefore($(this).closest('#adaugă-subsecţiune'))
         .show('blind');
+
+      if (!Formular.seIniţializează && !Formular.sePopulează) {
+        $subsecţiune.find('.început.perioadă').focus();
+      }
     },
 
     calculeazăDobînda: function() {
