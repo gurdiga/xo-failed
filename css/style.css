@@ -1122,6 +1122,14 @@ ul.subsecţiune .titlu {
   position: absolute;
 }
 
+ul.subsecţiune .titlu button {
+  margin-left: -.3em;
+}
+
+ul.subsecţiune .titlu button:first-of-type {
+  margin-left: .2em;
+}
+
 ul.subsecţiune .titlu+li {
   margin-top: .2em;
 }
@@ -1144,25 +1152,6 @@ ul.subsecţiune .personalizat .elimină {
 
 ul.subsecţiune li:last-child input {
   padding-bottom: 0;
-}
-
-.buton.cu.listă {
-  display: inline-block;
-  white-space: nowrap;
-  cursor: default;
-}
-
-.buton.cu.listă:after {
-  content: ' '; /*&nbsp;*/
-}
-
-.buton.cu.listă:hover .ui-icon {
-  opacity: 1;
-}
-
-.buton.cu.listă .itemi {
-  margin-top: -.15em;
-  cursor: pointer;
 }
 
 .dată.intentării,
@@ -1255,7 +1244,6 @@ label.checkbox input {
 .listă:hover>.titlu,
 .listă:hover>.titlu::before,
 .listă>.titlu+.itemi>li:hover,
-.buton.cu.listă .itemi li:hover,
 #destinatari .listă .itemi li:hover {
   text-decoration: underline;
   color: blue;

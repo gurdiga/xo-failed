@@ -1407,7 +1407,12 @@
 
 
       <ul class="subsecţiune întîrziere eliminabil de tot">
-        <li class="titlu">întîrziere</li>
+        <li class="titlu">
+          întîrziere
+
+          <button class="ui-icon ui-icon-print semiascuns" data-raport="încheiere-dobîndă-de-întîrziere" title="Imprimă încheiere"></button>
+          <button class="ui-icon ui-icon-print semiascuns" data-raport="anexă-dobîndă-de-întîrziere" title="Imprimă anexa"></button>
+        </li>
 
         <li>
           <label>Perioada de întîrziere</label>
@@ -1432,15 +1437,6 @@
           <input class="sumă dobîndă calculat" readonly/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
-
-          <div class="buton cu listă">
-            <span class="ui-icon ui-icon-print semiascuns"></span>
-            <ul class="itemi cu umbră">
-              <li data-raport="încheiere-dobîndă-de-întîrziere">încheiere</li>
-              <li data-raport="anexă-dobîndă-de-întîrziere">anexă</li>
-            </ul>
-          </div>
-
         </li>
       </ul>
 
