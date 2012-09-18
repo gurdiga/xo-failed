@@ -952,6 +952,7 @@ var Formular = {
       .success(function(procedură) {
         ProceduriRecente.notează(număr);
         Formular.populează(procedură);
+        Formular.verificăRapoarte();
       })
       .error(Formular.închide);
 
@@ -1295,6 +1296,27 @@ var Formular = {
 
     $.fx.off = false;
     Formular.seIniţializează = false;
+  },
+
+  verificăRapoarte: function() {
+    Formular.$.addClass('încă-nu-verificat-rapoarte');
+
+    $.get('/date/' + Utilizator.login + '/rapoarte/', function(html) {
+      var rapoarte = {};
+
+      $(html).find('a:not([href="../"])').map(function() {
+        var numeRaport = decodeURI(this.getAttribute('href').replace(/\.html$/, '')),
+            dataŞiOraSalvării = this.nextSibling.data.match(/(\d{2}-[a-z]{3}-\d{4} \d{2}:\d{2})/i)[1];
+
+        dataŞiOraSalvării = moment(dataŞiOraSalvării, 'D-MMM-YYYY H:m').format('DD.MM.YYYY H:m');
+        rapoarte[numeRaport] = dataŞiOraSalvării;
+      });
+
+      // TODO
+      // populează subsecţiunea cu rapoarte din Materiale
+
+      Formular.$.removeClass('încă-nu-verificat-rapoarte');
+    });
   }
 }
 
@@ -2477,6 +2499,22 @@ var Subsecţiuni = {
         rata: $întîrziere.find(':radio:checked').val(),
         suma: $întîrziere.find('.sumă.întîrziată').val()
       };
+    },
+
+    titluÎncheiere: function($subsecţiune) {
+      var începutPerioadă = $subsecţiune.find('.început.perioadă').val(),
+          sfîrşitPerioadă = $subsecţiune.find('.sfîrşit.perioadă').val();
+
+      return 'Închiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
+          începutPerioadă + '-' + sfîrşitPerioadă;
+    },
+
+    titluAnexă: function($subsecţiune) {
+      var începutPerioadă = $subsecţiune.find('.început.perioadă').val(),
+          sfîrşitPerioadă = $subsecţiune.find('.sfîrşit.perioadă').val();
+
+      return 'Anexă-închiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
+          începutPerioadă + '-' + sfîrşitPerioadă;
     }
   },
 
@@ -2526,6 +2564,10 @@ var Rapoarte = {
   },
 
   deschide: function() {
+    // TODO
+    // 1. verifică dacă raportul există deja în subsecţiunea Rapoarte din Materiale
+    // 2. dacă nu există deschide obişnuit /rapoarte/respectiv.html, salvează şi zi history.replaceState
+    // 2.1. setează Rapoarte[url-nou] şi şterge Rapoarte[/rapoarte/respectiv.html]
     var raport = $(this).data('raport'),
         pagina = '/rapoarte/' + raport + '.html';
 
