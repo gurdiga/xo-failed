@@ -1266,16 +1266,31 @@ label.checkbox input {
   text-decoration: none;
 }
 
-#materiale h3 {
-  color: #bbb;
-  height: .8em;
-  margin: .5em 0 1em;
-  border-bottom: 1px solid #EEE;
+#materiale .subsecţiune {
+  margin-left: .5em;
+  padding-left: .5em;
 }
 
-#materiale h3 span {
-  background-color: white;
-  padding-right: .5em;
+#materiale .subsecţiune .titlu {
+  padding: 0 .2em;
+}
+
+#materiale .subsecţiune .titlu+li {
+  padding: .5em 0 .2em;
+}
+
+#materiale .subsecţiune li {
+  padding: .1em 0 .2em;
+}
+
+#materiale #rapoarte .data-şi-ora-salvării {
+  font-size: .9em;
+  margin-left: .5em;
+  color: #ccc;
+}
+
+#materiale #rapoarte li:hover .data-şi-ora-salvării {
+  color: #aaa;
 }
 
 @-moz-document url-prefix() {
