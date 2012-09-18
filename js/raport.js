@@ -1,7 +1,13 @@
 var Raport = {
   init: function() {
-    Raport.$ = opener.$(document.body);
     Raport.pagina = decodeURIComponent(location.pathname);
+
+    if (!opener || !opener.Rapoarte[Raport.pagina]) {
+      window.close();
+      return;
+    }
+
+    Raport.$ = opener.$(document.body);
 
     Raport.compilează();
     Raport.butonDeÎnchidere.init();
