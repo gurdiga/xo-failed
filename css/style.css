@@ -1127,11 +1127,11 @@ ul.subsecţiune .titlu {
 }
 
 ul.subsecţiune .titlu button {
-  margin-left: -.3em;
+  margin-left: .2em;
 }
 
 ul.subsecţiune .titlu button:first-of-type {
-  margin-left: .2em;
+  margin-left: .5em;
 }
 
 #formular.încă-nu-verificat-rapoarte ul.subsecţiune .titlu button {
@@ -1220,6 +1220,14 @@ label.checkbox input {
   vertical-align: -3px;
   border: none;
   background-color: transparent;
+  text-indent: 0;
+}
+
+.ui-icon-print.imprimat::after {
+  content: '✓';
+  margin: -8px 0 0 5px;
+  display: inline-block;
+  position: absolute;
 }
 
 #destinatari .listă .itemi li,
