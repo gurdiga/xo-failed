@@ -4,7 +4,7 @@ button.închide {
   font-size: 1.7em;
   font-weight: normal;
   position: absolute;
-  right: 2px;
+  right: 0;
   top: 2px;
   padding: .1em;
   line-height: .6em;
