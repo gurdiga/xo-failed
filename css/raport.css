@@ -101,3 +101,9 @@ p.titlu {
     cursor: pointer;
   }
 }
+
+@media print {
+  button.închide, .bara-de-instrumente {
+    display: none;
+  }
+}
