@@ -18,7 +18,7 @@ reindexează($procedură);
 // ==============================
 
 function salvează($procedură) {
-  file_put_contents(cale($procedură), json_encode($procedură));
+  înscrie_fişier(cale($procedură), json_encode($procedură));
 }
 
 // ------------------------------
@@ -82,7 +82,7 @@ function reindexează($procedură) {
   }
 
   foreach ($fişiere as $fişier) {
-    $procedură = json_decode(file_get_contents($fişier), true);
+    $procedură = json_decode(citeşte_fişier(str_replace('.gz', '', $fişier)), true);
     $număr = $login . $procedură['număr'];
     $index[''][$număr] = date_relevante($procedură);
 
@@ -99,6 +99,5 @@ function reindexează($procedură) {
     }
   }
 
-  file_put_contents("$dir/index.json", json_encode($index));
-  file_put_contents("$dir/index.json.gz", gzencode(json_encode($index)));
+  înscrie_fişier("$dir/index.json", json_encode($index));
 }

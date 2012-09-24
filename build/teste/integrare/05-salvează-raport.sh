@@ -14,11 +14,8 @@ curl $CURL_DEFAULT_ARGS \
 verifică 'trimis datele'
 
 
-file $DESTINATIA > /dev/null
+file "$DESTINATIA.gz" > /dev/null
 verifică 'salvat'
 
-# `echo` hack here is to prevent diff happy about "\ No newline at end of file"
-echo -n "$( < $SURSA )" | /usr/bin/diff - $DESTINATIA
+zcat $DESTINATIA | /usr/bin/diff - $SURSA
 verifică 'datele salvate corespund cu cele trimise'
-
-sudo rm -f $DESTINATIA

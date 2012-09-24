@@ -1,10 +1,14 @@
 - General
   - buton de logout ca la formular?
-  - butoanele de imprimare încheiere şi anexă ambele visibile?
+  - de trecut mai multe animaţii spre tranziţii CSS
 
 - Imprimare
+  * de revizuit poziţionarea butoanelor de imprimare a încheierilor
+    - de ordin general, nonpecuniare
+    - în beneficiul statului
+    - pensie de întreţinere
   * js/raport.js
-    * de implementat salvarea raportului: AJAX + php?
+    * meta - un fel de checksum
   - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
   - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')

@@ -17,10 +17,10 @@ curl $CURL_DEFAULT_ARGS \
 
 verifică 'răspuns OK'
 
-grep "^\[\"$NUMAR\"" $JSON > /dev/null
+zgrep "^\[\"$NUMAR\"" "$JSON.gz" > /dev/null
 verifică 'notat'
 
-diff --ignore-all-space $RASPUNS $JSON > /dev/null
+zcat "$JSON.gz" | diff $RASPUNS - > /dev/null
 verifică 'răspuns corect'
 
 sudo rm $RASPUNS

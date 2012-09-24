@@ -16,7 +16,9 @@ notează_ca_recentă($procedură, true);
 function verifică_dacă_există($procedură) {
   global $login;
 
-  if (!file_exists("../date/$login/proceduri/$procedură.json")) {
-    stop("Nu există procedura: [$login/proceduri/$procedură.json]");
+  $cale = "../date/$login/proceduri/$procedură.json.gz";
+
+  if (!file_exists($cale)) {
+    stop("Nu există procedura: [$cale]");
   }
 }

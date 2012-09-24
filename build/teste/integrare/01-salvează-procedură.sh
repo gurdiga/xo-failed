@@ -3,9 +3,8 @@
 echo 'Salvează procedura...'
 
 SURSA="`dirname $0`/fixturi/procedură.json"
+INDEX="`dirname $0`/fixturi/index.json.gz"
 DESTINATIA="date/$LOGIN/proceduri/-1.json"
-
-sudo rm -f $DESTINATIA
 
 curl $CURL_DEFAULT_ARGS \
   --request POST \
@@ -15,11 +14,14 @@ curl $CURL_DEFAULT_ARGS \
 verifică 'trimis datele'
 
 
-file $DESTINATIA > /dev/null
+file "$DESTINATIA.gz" > /dev/null
 verifică 'salvat'
 
-/usr/bin/diff $SURSA $DESTINATIA
+zcat "$DESTINATIA.gz" | /usr/bin/diff $SURSA -
 verifică 'datele salvate corespund cu cele trimise'
 
-/bin/grep '^\["-1"' date/$LOGIN/proceduri/recente.json > /dev/null
+zgrep '^\["-1"' date/$LOGIN/proceduri/recente.json.gz > /dev/null
 verifică 'procedura e marcată ca recent deschisă'
+
+diff date/$LOGIN/proceduri/index.json.gz $INDEX > /dev/null
+verifică 'procedura este indexată'

@@ -62,11 +62,12 @@ server {
 
     set $method_and_uri "${request_uri}";
 
-    location ~ /date/\d+/proceduri/index\.json {
+    location ~ /date/\d+/proceduri/index\.json$ {
       more_clear_headers 'Content-Type';
+      more_set_headers 'Content-Encoding: gzip';
       more_set_headers 'Content-Type: text/javascript; charset=utf-8';
 
-      fastcgi_param SCRIPT_FILENAME $document_root$uri;
+      fastcgi_param SCRIPT_FILENAME $document_root$uri.gz;
       include conf.d/executori.org/rest.conf;
     }
 

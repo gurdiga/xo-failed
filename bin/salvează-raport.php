@@ -11,4 +11,4 @@ $cale = "../date/$login/rapoarte";
 verifică_nume_fişier($fişier);
 if (!is_dir($cale)) mkdir($cale);
 
-file_put_contents("$cale/$fişier", $conţinut);
+înscrie_fişier("$cale/$fişier", $conţinut);

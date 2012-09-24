@@ -23,8 +23,8 @@ function notează_ca_recentă($număr, $afişează = false) {
 
   $fişier = "../date/$login/proceduri/recente.json";
 
-  if (file_exists($fişier)) {
-    $lista = json_decode(file_get_contents($fişier), true);
+  if (file_exists("$fişier.gz")) {
+    $lista = json_decode(citeşte_fişier($fişier), true);
     $lista = array_filter($lista, function($item) use ($număr) {
       return $item != $număr;
     });
@@ -36,8 +36,7 @@ function notează_ca_recentă($număr, $afişează = false) {
   array_splice($lista, MAX_RECENTE);
 
   $json = json_encode($lista);
-  file_put_contents($fişier, $json);
-  file_put_contents("$fişier.gz", gzencode($json));
+  înscrie_fişier($fişier, $json);
 
   if ($afişează) {
     header('Content-Type: application/json');
@@ -72,4 +71,21 @@ function cale($procedură) {
 function stop($mesaj) {
   error_log($mesaj);
   die();
+}
+
+// ------------------------------
+
+function înscrie_fişier($cale, $conţinut) {
+  file_put_contents("$cale.gz", gzencode($conţinut));
+}
+
+// ------------------------------
+
+function citeşte_fişier($cale) {
+  ob_start();
+  readgzfile("$cale.gz");
+  $content = ob_get_contents();
+  ob_end_clean();
+
+  return $content;
 }
