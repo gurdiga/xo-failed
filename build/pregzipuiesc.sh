@@ -16,13 +16,9 @@ for file in $files; do
   cat $file | gzip > $file.gz
 done
 
+echo ''
+
 
 echo "Pregzipuiesc date..."
-
-for file in `find date -type f ! -name '*.gz'`; do
-  echo "- $file"
-  gzip $file
-done
-
-
+sudo su www-data -c 'gzip -rf date'
 echo ''
