@@ -80,6 +80,7 @@ button.închide {
   -o-transition: opacity .75s;
   transition: opacity .75s;
   opacity: 0;
+  font-family: sans-serif;
 }
 
 .bara-de-instrumente>button+.mesaj.afişat {
