@@ -929,15 +929,12 @@ var Formular = {
         }
 
         Formular.$.trigger('salvat', [procedură]);
-        Formular.focusează();
+        //Formular.focusează();
 
         var mesaj = Formular.$.find('.bara-de-instrumente .salvează+.mesaj');
 
         mesaj.addClass('afişat');
-
-        setTimeout(function() {
-          mesaj.removeClass('afişat');
-        }, 1000);
+        setTimeout(function() {mesaj.removeClass('afişat')}, 1000);
 
         Căutare.încarcăIndexFărăCache();
         ProceduriRecente.încărcat = false;
