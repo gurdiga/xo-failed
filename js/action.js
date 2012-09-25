@@ -1248,7 +1248,7 @@ var Formular = {
       .find('.bara-de-instrumente').fadeIn('slow').end()
       .css('top', $(window).height())
       .show()
-      .animate({'top': '80px'});
+      .animate({'top': '50px'});
 
     if (Formular.seDeschideProcedurăSalvată()) {
       Formular.încarcă();
@@ -1588,8 +1588,20 @@ var BaraDeSus = {
         if (e.keyCode == 27) $(this).closest('.dialog').ascunde();
       });
 
+    Formular.$
+      .on('iniţializat populat', this.semiascundeInstrumente)
+      .on('închidere', this.semiaratăInstrumente);
+
     Profil.init();
     CalculatorDobîndaÎntîrziere.init();
+  },
+
+  semiascundeInstrumente: function() {
+    BaraDeSus.$.find('.instrumente').addClass('semiascuns');
+  },
+
+  semiaratăInstrumente: function() {
+    BaraDeSus.$.find('.instrumente').removeClass('semiascuns');
   },
 
   afişeazăDialog: function() {
