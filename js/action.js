@@ -590,7 +590,7 @@ var Formular = {
 
     $(window).on('hashchange', function() {
       if (/^#formular/.test(location.hash)) Formular.deschide();
-      else Formular.închide();
+      else if (Formular.$.is(':visible')) Formular.închide();
     });
   },
 
@@ -1199,6 +1199,7 @@ var Formular = {
 
   resetează: function() {
     Formular.$
+      .find('#data-intentării').val('').end()
       .find('#document-executoriu')
         .find(':input').val('').end()
         .find('select').val(function() {return $(this).find('option:first').val()}).end()
