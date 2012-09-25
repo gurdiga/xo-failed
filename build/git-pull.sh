@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo 'Git pull...'
-git pull origin master >> .git.log 2>&1
+git pull origin master &> .git.log
 
 if [ $? -ne 0 ]; then
   cat .git.log
