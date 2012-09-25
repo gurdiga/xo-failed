@@ -38,7 +38,7 @@ button.închide {
   -moz-transition: opacity .75s;
   -o-transition: opacity .75s;
   transition: opacity .75s;
-  opacity: .25;
+  opacity: .1;
 }
 
 .bara-de-instrumente:hover {
