@@ -2572,6 +2572,8 @@ var Subsecţiuni = {
 var Rapoarte = {
   init: function() {
     $(document).on('click', '[data-raport]', this.deschide);
+
+    Formular.$.on('închidere', this.închide);
   },
 
   deschide: function() {
@@ -2587,6 +2589,24 @@ var Rapoarte = {
       $el: $(this)
     };
   },
+
+  închide: function() {
+    var excepţii = {
+      init: 0,
+      deschide: 0,
+      închide: 0
+    };
+
+    var nume, raport;
+
+    for (var nume in Rapoarte) {
+      if (nume in excepţii) continue;
+
+      raport = Rapoarte[nume];
+
+      if (raport && raport.tab) raport.tab.close()
+    }
+  }
 };
 
 // --------------------------------------------------
