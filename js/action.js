@@ -640,7 +640,7 @@ var Formular = {
 
   actualizeazăDataUltimeiModificări: function(e, procedură) {
     Formular.$.find('#data-ultimei-modificări span')
-      .text(procedură.dataUltimeiModificări)
+      .text(procedură['data-ultimei-modificări'])
       .parent().show();
   },
 
@@ -703,7 +703,9 @@ var Formular = {
       'cheltuieli': colecteazăCheltuieli(),
       'creditor': colectează('#creditor'),
       'persoane-terţe': colecteazăPersoaneTerţe(),
-      'debitori': colecteazăDebitori()
+      'debitori': colecteazăDebitori(),
+      'tip': HashController.date().match(/^[SP]?/)[0],
+      'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm')
     };
 
 
@@ -872,9 +874,7 @@ var Formular = {
             item.subformular = {};
 
             $subformular.find(':input').each(function() {
-              var $input = $(this);
-
-              item.subformular[this.id] = $input.val1();
+              item.subformular[this.id] = $(this).val1();
             });
           }
         }
@@ -907,8 +907,6 @@ var Formular = {
   salvează: function() {
     var procedură = Formular.colectează();
 
-    procedură.tip = HashController.date().match(/^[SP]?/)[0];
-
     if (procedură.număr) post();
     else $.get('/date/' + Utilizator.login + '/proceduri/', function(răspuns) {
       var ultimulNumăr = $(răspuns).find('a').map(function() {
@@ -930,9 +928,9 @@ var Formular = {
 
     // -----
     function post() {
-      procedură.dataUltimeiModificări = moment().format('DD.MM.YYYY HH:mm');
+      var cale = '/date/' + Utilizator.login + '/proceduri/' + procedură.număr + '.json';
 
-      $.post('/date/' + Utilizator.login + '/proceduri/' + procedură.număr + '.json', JSON.stringify(procedură), function() {
+      $.post(cale, JSON.stringify(procedură), function(_, status) {
         if (Formular.seCreazăProcedurăNouă()) {
           window.skipEventOnce.hashchange = true;
           location.hash = 'formular?' + procedură.număr;
@@ -969,7 +967,7 @@ var Formular = {
 
     Formular.$.find('#data-intentării').val(procedură['data-intentării']);
     Formular.$.find('#data-ultimei-modificări span')
-      .text(procedură.dataUltimeiModificări)
+      .text(procedură['data-ultimei-modificări'])
       .parent().show();
 
     populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);
@@ -2532,7 +2530,7 @@ var Subsecţiuni = {
       var începutPerioadă = $subsecţiune.find('.început.perioadă').val(),
           sfîrşitPerioadă = $subsecţiune.find('.sfîrşit.perioadă').val();
 
-      return 'Anexă-închiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
+      return 'Anexă-încheiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
           începutPerioadă + '-' + sfîrşitPerioadă;
     }
   },
@@ -2588,7 +2586,7 @@ var Rapoarte = {
     // TODO
     // 1. verifică dacă raportul există deja în subsecţiunea Rapoarte din Materiale
     // 2. dacă nu există deschide obişnuit /rapoarte/respectiv.html, salvează şi zi history.replaceState
-    // 2.1. setează Rapoarte[url-nou] şi şterge Rapoarte[/rapoarte/respectiv.html]
+    // 2.1. setează Rapoarte[url-nou]
     var raport = $(this).data('raport'),
         pagina = '/rapoarte/' + raport + '.html';
 
