@@ -599,6 +599,18 @@ var Formular = {
       Formular.$.find('.bara-de-instrumente')
         .on('click', '.spre-secţiuni', Formular.focusează)
         .on('click', '.spre-secţiuni+.opţiuni li', Formular.focuseazăSecţiunea);
+
+      Formular.$.on('salvat', this.anunţăSalvarea);
+    },
+
+    anunţăSalvarea: function() {
+      var mesaj = Formular.$.find('.bara-de-instrumente .salvează+.mesaj');
+
+      mesaj.addClass('afişat');
+
+      setTimeout(function() {
+        mesaj.removeClass('afişat');
+      }, 1000);
     }
   },
 
@@ -929,12 +941,7 @@ var Formular = {
         }
 
         Formular.$.trigger('salvat', [procedură]);
-        //Formular.focusează();
 
-        var mesaj = Formular.$.find('.bara-de-instrumente .salvează+.mesaj');
-
-        mesaj.addClass('afişat');
-        setTimeout(function() {mesaj.removeClass('afişat')}, 1000);
         if (status == 'notmodified') return;
 
         Căutare.încarcăIndexFărăCache();
