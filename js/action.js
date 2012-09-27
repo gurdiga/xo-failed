@@ -767,7 +767,9 @@ var Formular = {
           sfîrşitPerioadă: $întîrziere.find('.sfîrşit.perioadă').val(),
           rata: $întîrziere.find(':radio:checked').val(),
           suma: $întîrziere.find('.sumă.întîrziată').val(),
-          dobînda: $întîrziere.find('.sumă.dobîndă').val()
+          dobînda: $întîrziere.find('.sumă.dobîndă').val(),
+          încheiere: $întîrziere.find('button[data-raport="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
+          anexa: $întîrziere.find('button[data-raport="anexa-dobîndă-de-întîrziere"]').data('pagina')
         };
       }).get();
     }
@@ -1039,6 +1041,14 @@ var Formular = {
         $întîrziere.find(':radio[value="' + întîrziere['rata'] + '"]').attr('checked', true);
         $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
         $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
+
+        console.log($întîrziere.find('button[data-raport="încheiere-dobîndă-de-întîrziere"]')
+          .data('pagina', întîrziere['încheiere'])
+          .toggleClass('salvat', !!întîrziere['încheiere']));
+
+        $întîrziere.find('button[data-raport="anexa-dobîndă-de-întîrziere"]')
+          .data('pagina', întîrziere['anexa'])
+          .toggleClass('salvat', !!întîrziere['anexa']);
       }
     }
 
@@ -2583,10 +2593,7 @@ var Rapoarte = {
   },
 
   deschide: function() {
-    // TODO
-    // 1. verifică dacă raportul există deja în subsecţiunea Rapoarte din Materiale
-    // 2. dacă nu există deschide obişnuit /rapoarte/respectiv.html, salvează şi zi history.replaceState
-    // 2.1. setează Rapoarte[url-nou]
+    // TODO: verifică dacă e salvat
     var raport = $(this).data('raport'),
         pagina = '/rapoarte/' + raport + '.html';
 

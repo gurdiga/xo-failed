@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Închiere cu privire la calcularea dobînzilor de întîrziere</title>
     <link type="text/css" rel="stylesheet" href="/css/raport.css"/>
-    <script>
+    <script id="init">
       function init(context) {
         var $întîrziere = context.$el.closest('.subsecţiune.întîrziere'),
             debitori = [];
@@ -13,10 +13,16 @@
         context.întîrziere.dobînda = $întîrziere.find('.sumă.dobîndă').val();
 
         for (var i = 0; i < context.procedură.debitori.length; i++) {
-          debitori.push(context.nume(context.procedură.debitori[i]) + ' (' + context.id(context.procedură.debitori[i]) + ')');
+          debitori.push(
+              context.nume(context.procedură.debitori[i]) +
+              ' (' + context.id(context.procedură.debitori[i]) + ')'
+          );
         }
 
         context.debitori = debitori.join(', ');
+        context.uid =
+          context.întîrziere.începutPerioadă.replace(/\./g, '') + '-' +
+          context.întîrziere.sfîrşitPerioadă.replace(/\./g, '');
       }
     </script>
     <script src="/js/raport.js"></script>

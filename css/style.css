@@ -1126,10 +1126,6 @@ ul.subsecţiune .titlu {
   position: absolute;
 }
 
-ul.subsecţiune .titlu button {
-  margin-left: .2em;
-}
-
 ul.subsecţiune .titlu button:first-of-type {
   margin-left: .5em;
 }
@@ -1215,7 +1211,7 @@ label.checkbox input {
   margin: 5px 0;
 }
 
-.ui-icon-print {
+button[data-raport] {
   display: inline-block;
   vertical-align: -3px;
   border: none;
@@ -1223,9 +1219,9 @@ label.checkbox input {
   text-indent: 0;
 }
 
-.ui-icon-print.imprimat::after {
+button[data-raport].salvat::after {
   content: '✓';
-  margin: -8px 0 0 5px;
+  margin: -8px 0 0 4px;
   display: inline-block;
   position: absolute;
 }

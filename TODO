@@ -1,14 +1,10 @@
-- General
-  - buton de logout ca la formular?
-  - de trecut mai multe animaţii spre tranziţii CSS
-
 - Imprimare
+  * de adăugat ID unic pentru butoanele de imprimare
+  * de adăugat buton de regenerare raport
   * de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
     - în beneficiul statului
     - pensie de întreţinere
-  * js/raport.js
-    * meta - un fel de checksum
   - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
   - de adăugat buton de imprimare în tab-ul raportului
   - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')
@@ -40,3 +36,6 @@ Chestii tehnice
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
   - custom build of $UI
+  - rollback deploy?
+  - try a Centos VM deploy?
+  - upstart nginx & fcgi?

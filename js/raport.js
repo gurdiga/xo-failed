@@ -1,25 +1,31 @@
 var Raport = {
   init: function() {
     Raport.pagina = decodeURIComponent(location.pathname);
-
-    if (!opener || !opener.Rapoarte[Raport.pagina]) {
-      window.close();
-      return;
-    }
+    setInterval(Raport.verificăDacăFormularulEDeschis, 100);
 
     Raport.$ = opener.$(document.body);
 
-    Raport.compilează();
+    if (!Raport.compilat()) Raport.compilează();
+    Raport.iniţial = Raport.conţinut();
     Raport.butonDeÎnchidere.init();
     Raport.baraDeInstrumente.init();
 
     Raport.$.find('.editabil').attr('contenteditable', true);
+  },
 
-    //var originalLocation = location.href;
-    //history.replaceState(null, null, '/' + opener.Utilizator.login + context.procedură.număr + '/text-personalizabil-text-personalizabil');
+  verificăDacăFormularulEDeschis: function() {
+    if (!opener || !opener.Rapoarte[Raport.pagina]) {
+      window.close();
+      return;
+    }
   },
 
   compilează: function() {
+    Raport.initContext();
+    opener.compile(Raport.context, document);
+  },
+
+  initContext: function() {
     Raport.context = {
       procedură: opener.Formular.colectează(),
       executor: opener.Profil.date,
@@ -34,28 +40,20 @@ var Raport = {
       }
     };
 
+    // cod specific pentru fiecare raport
     if (window.init) window.init(Raport.context);
-
-    opener.compile(Raport.context, document);
   },
 
-  baraDeInstrumente: {
-    init: function() {
-      opener.$şabloane.find('.bara-de-instrumente.pentru.raport').clone()
-        .appendTo(Raport.$)
-        .on('click', '.salvează', Raport.salvează)
-        .on('click', '.imprimă', Raport.imprimă)
-    }
+  compilat: function() {
+    return !Raport.$.find('>script').există();
   },
 
-  salvează: function() {
-    var cale = '/date/' + opener.Utilizator.login + '/rapoarte/',
-        fişier = document.title + '.html',// TODO + Raport.context.întîrziere,
-        conţinut = '';
-
-    conţinut = '<!doctype html>' +
+  conţinut: function() {
+    return '<!doctype html>' +
       '<html>' +
-        '<head>' + document.head.innerHTML + '</head>' +
+        '<head>' + document.head.innerHTML
+          .replace(/\n\s*<script id="init">(.|\n)*?<\/script>/m, '') +
+        '</head>' +
         '<body>' +
           opener.$('<div>' + document.body.innerHTML + '</div>')
             .find('button.închide')
@@ -64,16 +62,40 @@ var Raport = {
           .html() +
         '</body>' +
       '</html>';
+  },
 
-    opener.$.post(cale + fişier, conţinut, function() {
-      var mesaj = Raport.$.find('.bara-de-instrumente .salvează+.mesaj');
+  salvează: function() {
+    if (!Raport.modificat()) return;
 
-      mesaj.addClass('afişat');
+    var pagina = Raport.cale();
 
-      setTimeout(function() {
-        mesaj.removeClass('afişat');
-      }, 1000);
+    opener.$.post(pagina, Raport.conţinut(), function() {
+      opener.Rapoarte[pagina] = opener.Rapoarte[Raport.pagina];
+      Raport.pagina = pagina;
+      Raport.iniţial = Raport.conţinut();
+      history.replaceState(null, null, pagina);
+
+      Raport.marcheazăButonul();
+      Raport.baraDeInstrumente.anunţăSalvarea();
     });
+  },
+
+  marcheazăButonul: function() {
+    var buton = opener.Rapoarte[Raport.pagina].$el;
+
+    if (!buton.is('.salvat')) {
+       buton
+        .addClass('salvat')
+        .data('pagina', Raport.pagina)
+        .attr('title', function(_, title) {return title + ' (salvat)'});
+    }
+  },
+
+  cale: function() {
+    var director = '/date/' + opener.Utilizator.login + '/rapoarte/',
+        fişier = document.title.replace(/\s+/g, '-') + '-' + Raport.context.uid + '.html';
+
+    return director + fişier;
   },
 
   imprimă: function() {
@@ -81,11 +103,32 @@ var Raport = {
     window.print();
   },
 
+  modificat: function() {
+    return Raport.iniţial != Raport.conţinut();
+  },
+
   butonDeÎnchidere: {
     init: function() {
       opener.Formular.$.find('button.închide').clone()
         .appendTo(Raport.$)
         .on('click', Raport.închide);
+    }
+  },
+
+  baraDeInstrumente: {
+    init: function() {
+      opener.$şabloane.find('.bara-de-instrumente.pentru.raport').clone()
+        .appendTo(Raport.$)
+        .on('click', '.salvează', Raport.salvează)
+        .on('click', '.imprimă', Raport.imprimă);
+    },
+
+    anunţăSalvarea: function() {
+      var mesaj = Raport.$.find('.bara-de-instrumente .salvează+.mesaj');
+
+      mesaj.addClass('afişat');
+      setTimeout(function() {mesaj.removeClass('afişat')}, 1000);
+      opener.Formular.salvează();
     }
   },
 
