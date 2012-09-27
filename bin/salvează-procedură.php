@@ -11,14 +11,19 @@ verifică_login($login);
 if (!is_dir($cale)) mkdir($cale);
 verifică_număr($procedură['număr']);
 salvează($procedură);
-notează_ca_recentă($procedură['număr']);
-reindexează($procedură);
 
 
 // ==============================
 
 function salvează($procedură) {
+  if (citeşte_fişier(cale($procedură)) == json_encode($procedură)) {
+    header('HTTP/1.1 304 Not Modified');
+    return;
+  }
+
   înscrie_fişier(cale($procedură), json_encode($procedură));
+  notează_ca_recentă($procedură['număr']);
+  reindexează($procedură);
 }
 
 // ------------------------------

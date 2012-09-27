@@ -935,6 +935,7 @@ var Formular = {
 
         mesaj.addClass('afişat');
         setTimeout(function() {mesaj.removeClass('afişat')}, 1000);
+        if (status == 'notmodified') return;
 
         Căutare.încarcăIndexFărăCache();
         ProceduriRecente.încărcat = false;
