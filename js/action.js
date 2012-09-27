@@ -580,7 +580,7 @@ var Formular = {
     this.$
       .on('keyup', function(e) {if (e.keyCode == 27) Formular.închide()})
       .on('click', 'button.închide', this.închide)
-      .on('click', 'button.salvează', this.trimite)
+      .on('click', 'button.salvează', this.salvează)
       .on('închidere', this.resetează)
       .on('populat iniţializat', this.calculează)
       .on('populat iniţializat', this.eliminăAmendaDupăCaz)
@@ -892,7 +892,7 @@ var Formular = {
     }
   },
 
-  trimite: function() {
+  salvează: function() {
     var procedură = Formular.colectează();
 
     procedură.tip = HashController.date().match(/^[SP]?/)[0];
