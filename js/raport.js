@@ -31,7 +31,7 @@ var Raport = {
       executor: opener.Profil.date,
       moment: opener.moment,
       login: opener.Utilizator.login,
-      $el: opener.Rapoarte[Raport.pagina].$el,
+      buton: opener.Rapoarte[Raport.pagina].buton,
       nume: function(persoană) {
         return persoană['gen-persoană'] == 'fizică' ? persoană['nume'] : persoană['denumire'];
       },
@@ -81,7 +81,7 @@ var Raport = {
   },
 
   marcheazăButonul: function() {
-    var buton = opener.Rapoarte[Raport.pagina].$el;
+    var buton = opener.Rapoarte[Raport.pagina].buton;
 
     if (!buton.is('.salvat')) {
        buton
@@ -103,6 +103,12 @@ var Raport = {
     window.print();
   },
 
+  regenerează: function() {
+    opener.Rapoarte[Raport.pagina].buton
+      .removeClass('salvat')
+      .click();
+  },
+
   modificat: function() {
     return Raport.iniţial != Raport.conţinut();
   },
@@ -120,7 +126,8 @@ var Raport = {
       opener.$şabloane.find('.bara-de-instrumente.pentru.raport').clone()
         .appendTo(Raport.$)
         .on('click', '.salvează', Raport.salvează)
-        .on('click', '.imprimă', Raport.imprimă);
+        .on('click', '.imprimă', Raport.imprimă)
+        .on('click', '.regenerează', Raport.regenerează);
     },
 
     anunţăSalvarea: function() {

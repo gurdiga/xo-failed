@@ -2605,7 +2605,7 @@ var Rapoarte = {
 
     Rapoarte[pagina] = {
       tab: window.open(pagina, raport, '', true),
-      $el: $(this)
+      buton: $(this)
     };
   },
 

@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/css/raport.css"/>
     <script id="init">
       function init(context) {
-        var $întîrziere = context.$el.closest('.subsecţiune.întîrziere'),
+        var $întîrziere = context.buton.closest('.subsecţiune.întîrziere'),
             debitori = [];
 
         context.întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere);
