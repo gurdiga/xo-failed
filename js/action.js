@@ -1042,9 +1042,9 @@ var Formular = {
         $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
         $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
 
-        console.log($întîrziere.find('button[data-raport="încheiere-dobîndă-de-întîrziere"]')
+        $întîrziere.find('button[data-raport="încheiere-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['încheiere'])
-          .toggleClass('salvat', !!întîrziere['încheiere']));
+          .toggleClass('salvat', !!întîrziere['încheiere']);
 
         $întîrziere.find('button[data-raport="anexa-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['anexa'])
@@ -2593,9 +2593,15 @@ var Rapoarte = {
   },
 
   deschide: function() {
-    // TODO: verifică dacă e salvat
-    var raport = $(this).data('raport'),
-        pagina = '/rapoarte/' + raport + '.html';
+    var buton = $(this),
+        raport = buton.data('raport'),
+        pagina;
+
+    if (buton.is('.salvat')) {
+      pagina = buton.data('pagina');
+    } else {
+      pagina = '/rapoarte/' + raport + '.html';
+    }
 
     Rapoarte[pagina] = {
       tab: window.open(pagina, raport, '', true),
