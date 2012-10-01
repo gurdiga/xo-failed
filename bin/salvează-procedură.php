@@ -11,6 +11,7 @@ verifică_login($login);
 if (!is_dir($cale)) mkdir($cale);
 verifică_număr($procedură['număr']);
 salvează($procedură);
+curăţă_încheierile_salvate($procedură);
 
 
 // ==============================
@@ -105,4 +106,26 @@ function reindexează($procedură) {
   }
 
   înscrie_fişier("$dir/index.json", json_encode($index));
+}
+
+// ------------------------------
+
+function curăţă_încheierile_salvate($procedură) {
+  global $login;
+
+  $curente = array();
+
+  array_walk_recursive($procedură, function($value, $key) use (&$curente) {
+    if ($key === 'încheiere' || $key === 'anexa') {
+      $curente[] = end(split('/', $value)) . '.gz';
+    }
+  });
+
+  $cale_rapoarte = "../date/$login/rapoarte";
+  $existente = scandir($cale_rapoarte);
+
+  array_walk(array_diff($existente, $curente), function($expirată) use ($cale_rapoarte) {
+    if ($expirată === '.' || $expirată == '..') return;
+    unlink("$cale_rapoarte/$expirată");
+  });
 }
