@@ -121,11 +121,11 @@ function curăţă_încheierile_salvate($procedură) {
     }
   });
 
-  $cale_rapoarte = "../date/$login/rapoarte";
-  $existente = scandir($cale_rapoarte);
+  $cale_încheieri = "../date/$login/încheieri";
+  $existente = scandir($cale_încheieri);
 
-  array_walk(array_diff($existente, $curente), function($expirată) use ($cale_rapoarte) {
+  array_walk(array_diff($existente, $curente), function($expirată) use ($cale_încheieri) {
     if ($expirată === '.' || $expirată == '..') return;
-    unlink("$cale_rapoarte/$expirată");
+    unlink("$cale_încheieri/$expirată");
   });
 }

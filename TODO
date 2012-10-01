@@ -1,14 +1,8 @@
 - Imprimare
-  - bin/salvează-procedură.php: curăţă rapoarte
-  - corectează termeni DSL:
-   - raport -> formular
   * de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
     - în beneficiul statului
     - pensie de întreţinere
-  - butonul cu opţiuni: la click pe buton să se deschidă ambele rapoarte
-  - de adăugat buton de imprimare în tab-ul raportului
-  - raport.js: history.replaceState(null, null, '/număr-procedură/tutlu-raport')
 
 - Introducere
   - Materiale

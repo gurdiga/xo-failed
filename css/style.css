@@ -1130,7 +1130,7 @@ ul.subsecţiune .titlu button:first-of-type {
   margin-left: .5em;
 }
 
-#formular.încă-nu-verificat-rapoarte ul.subsecţiune .titlu button {
+#formular.încă-nu-verificat-încheieri ul.subsecţiune .titlu button {
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   -o-transition: opacity .5s;
@@ -1211,7 +1211,7 @@ label.checkbox input {
   margin: 5px 0;
 }
 
-button[data-raport] {
+button[data-încheiere] {
   display: inline-block;
   vertical-align: -3px;
   border: none;
@@ -1219,7 +1219,7 @@ button[data-raport] {
   text-indent: 0;
 }
 
-button[data-raport].salvat::after {
+button[data-încheiere].salvat::after {
   content: '✓';
   margin: -8px 0 0 4px;
   display: inline-block;
@@ -1287,13 +1287,13 @@ button[data-raport].salvat::after {
   padding: .1em 0 .2em;
 }
 
-#materiale #rapoarte .data-şi-ora-salvării {
+#materiale #încheieri .data-şi-ora-salvării {
   font-size: .9em;
   margin-left: .5em;
   color: #ccc;
 }
 
-#materiale #rapoarte li:hover .data-şi-ora-salvării {
+#materiale #încheieri li:hover .data-şi-ora-salvării {
   color: #aaa;
 }
 

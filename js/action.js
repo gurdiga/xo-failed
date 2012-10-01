@@ -24,7 +24,7 @@ var Action = {
     ProceduriRecente.init();
     Sume.init();
     ÎncasarePensie.init();
-    Rapoarte.init();
+    Încheieri.init();
     Secţiuni.init();
     ListeMeniu.init();
 
@@ -768,8 +768,8 @@ var Procedura = {
           rata: $întîrziere.find(':radio:checked').val(),
           suma: $întîrziere.find('.sumă.întîrziată').val(),
           dobînda: $întîrziere.find('.sumă.dobîndă').val(),
-          încheiere: $întîrziere.find('button[data-raport="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
-          anexa: $întîrziere.find('button[data-raport="anexa-dobîndă-de-întîrziere"]').data('pagina')
+          încheiere: $întîrziere.find('button[data-încheiere="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
+          anexa: $întîrziere.find('button[data-încheiere="anexa-dobîndă-de-întîrziere"]').data('pagina')
         };
       }).get();
     }
@@ -957,7 +957,7 @@ var Procedura = {
       .success(function(procedură) {
         ProceduriRecente.notează(număr);
         Procedura.populează(procedură);
-        Procedura.verificăRapoarte();
+        Procedura.verificăÎncheieri();
       })
       .error(Procedura.închide);
 
@@ -1042,11 +1042,11 @@ var Procedura = {
         $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
         $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
 
-        $întîrziere.find('button[data-raport="încheiere-dobîndă-de-întîrziere"]')
+        $întîrziere.find('button[data-încheiere="încheiere-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['încheiere'])
           .toggleClass('salvat', !!întîrziere['încheiere']);
 
-        $întîrziere.find('button[data-raport="anexa-dobîndă-de-întîrziere"]')
+        $întîrziere.find('button[data-încheiere="anexa-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['anexa'])
           .toggleClass('salvat', !!întîrziere['anexa']);
       }
@@ -1312,25 +1312,25 @@ var Procedura = {
     Procedura.seIniţializează = false;
   },
 
-  verificăRapoarte: function() {
-    Procedura.$.addClass('încă-nu-verificat-rapoarte');
+  verificăÎncheieri: function() {
+    Procedura.$.addClass('încă-nu-verificat-încheieri');
 
-    $.get('/date/' + Utilizator.login + '/rapoarte/', function(html) {
-      var rapoarte = Procedura.$.find('#rapoarte').find('li:not(.titlu)').remove().end();
+    $.get('/date/' + Utilizator.login + '/încheieri/', function(html) {
+      var încheieri = Procedura.$.find('#încheieri').find('li:not(.titlu)').remove().end();
 
       $(html).find('a:not([href="../"])').map(function() {
-        var numeRaport = decodeURI(this.getAttribute('href').replace(/\.html$/, '')),
+        var numeÎncheiere = decodeURI(this.getAttribute('href').replace(/\.html$/, '')),
             dataŞiOraSalvării = this.nextSibling.data.match(/(\d{2}-[a-z]{3}-\d{4} \d{2}:\d{2})/i)[1];
 
         dataŞiOraSalvării = moment(dataŞiOraSalvării, 'D-MMM-YYYY H:m').format('DD.MM.YYYY H:m');
 
         $('<li>')
-          .append($('<a>').text(numeRaport).attr('href', this.href))
+          .append($('<a>').text(numeÎncheiere).attr('href', this.href))
           .append($('<span>').text(dataŞiOraSalvării).addClass('data-şi-ora-salvării'))
-          .appendTo(rapoarte);
+          .appendTo(încheieri);
       });
 
-      Procedura.$.removeClass('încă-nu-verificat-rapoarte');
+      Procedura.$.removeClass('încă-nu-verificat-încheieri');
     });
   }
 }
@@ -2158,7 +2158,7 @@ var DobîndaDeÎntîrziere = {
     sfîrşitPerioadă = moment(sfîrşitPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
     rata = parseInt(rata);
 
-    DobîndaDeÎntîrziere.raport = {
+    DobîndaDeÎntîrziere.date = {
       începutPerioadă: moment(începutPerioadă, 'YYYY-MM-DD').format(FORMATUL_DATEI),
       sfîrşitPerioadă: moment(sfîrşitPerioadă, 'YYYY-MM-DD').format(FORMATUL_DATEI),
       rata: rata,
@@ -2213,7 +2213,7 @@ var DobîndaDeÎntîrziere = {
       dobîndaPerRînd = parseFloat((suma * rataFinală / 365 * durate[data]).toFixed(2));
       dobînda += dobîndaPerRînd;
 
-      DobîndaDeÎntîrziere.raport.rînduri[data] = {
+      DobîndaDeÎntîrziere.date.rînduri[data] = {
         data: moment(primulRînd ? începutPerioadă : data, 'YYYY-MM-DD').format(FORMATUL_DATEI),
         durata: durate[data],
         rata: RateDeBază[data],
@@ -2226,7 +2226,7 @@ var DobîndaDeÎntîrziere = {
     return parseFloat(dobînda.toFixed(2));
   },
 
-  raport: {}
+  date: {}
 };
 
 // --------------------------------------------------
@@ -2532,7 +2532,7 @@ var Subsecţiuni = {
       var începutPerioadă = $subsecţiune.find('.început.perioadă').val(),
           sfîrşitPerioadă = $subsecţiune.find('.sfîrşit.perioadă').val();
 
-      return 'Încheiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
+      return 'cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
           începutPerioadă + '-' + sfîrşitPerioadă;
     },
 
@@ -2540,7 +2540,7 @@ var Subsecţiuni = {
       var începutPerioadă = $subsecţiune.find('.început.perioadă').val(),
           sfîrşitPerioadă = $subsecţiune.find('.sfîrşit.perioadă').val();
 
-      return 'Anexă-încheiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
+      return 'anexă-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
           începutPerioadă + '-' + sfîrşitPerioadă;
     }
   },
@@ -2585,26 +2585,26 @@ var Subsecţiuni = {
 
 // --------------------------------------------------
 
-var Rapoarte = {
+var Încheieri = {
   init: function() {
-    $(document).on('click', '[data-raport]', this.deschide);
+    $(document).on('click', '[data-încheiere]', this.deschide);
 
     Procedura.$.on('închidere', this.închide);
   },
 
   deschide: function() {
     var buton = $(this),
-        raport = buton.data('raport'),
+        încheiere = buton.data('încheiere'),
         pagina;
 
     if (buton.is('.salvat')) {
       pagina = buton.data('pagina');
     } else {
-      pagina = '/rapoarte/' + raport + '.html';
+      pagina = '/formulare/' + încheiere + '.html';
     }
 
-    Rapoarte[pagina] = {
-      tab: window.open(pagina, raport, '', true),
+    Încheieri[pagina] = {
+      tab: window.open(pagina, încheiere, '', true),
       buton: $(this)
     };
   },
@@ -2616,14 +2616,14 @@ var Rapoarte = {
       închide: 0
     };
 
-    var nume, raport;
+    var nume, încheiere;
 
-    for (var nume in Rapoarte) {
+    for (var nume in Încheieri) {
       if (nume in excepţii) continue;
 
-      raport = Rapoarte[nume];
+      încheiere = Încheieri[nume];
 
-      if (raport && raport.tab) raport.tab.close()
+      if (încheiere && încheiere.tab) încheiere.tab.close()
     }
   }
 };
