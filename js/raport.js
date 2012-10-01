@@ -27,7 +27,7 @@ var Raport = {
 
   initContext: function() {
     Raport.context = {
-      procedură: opener.Formular.colectează(),
+      procedură: opener.Procedura.colectează(),
       executor: opener.Profil.date,
       moment: opener.moment,
       login: opener.Utilizator.login,
@@ -119,7 +119,7 @@ var Raport = {
 
   butonDeÎnchidere: {
     init: function() {
-      opener.Formular.$.find('button.închide').clone()
+      opener.Procedura.$.find('button.închide').clone()
         .appendTo(Raport.$)
         .on('click', Raport.închide);
     }
@@ -139,7 +139,7 @@ var Raport = {
 
       mesaj.addClass('afişat');
       setTimeout(function() {mesaj.removeClass('afişat')}, 1000);
-      opener.Formular.salvează();
+      opener.Procedura.salvează();
     }
   },
 

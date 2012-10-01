@@ -18,7 +18,7 @@ var Action = {
     Cheltuieli.init();
     ButonDeEliminare.init();
     Subsecţiuni.init();
-    Formular.init();
+    Procedura.init();
     Calendar.init();
     CîmpuriPersonalizate.init();
     ProceduriRecente.init();
@@ -55,7 +55,7 @@ var Valute = {
 
 var Persoane = {
   init: function() {
-    Formular.$.on('click', 'button.adaugă.persoană', this.adaugă);
+    Procedura.$.on('click', 'button.adaugă.persoană', this.adaugă);
   },
 
   adaugă: function() {
@@ -128,7 +128,7 @@ var CîmpuriTextarea = {
   evenimente: 'keydown keyup input focus mouseup',
 
   autodimensionează: function() {
-    Formular.$
+    Procedura.$
       .attr('spellcheck', 'false')
       .on(this.evenimente, 'textarea', function() {
         var textarea = $(this);
@@ -156,7 +156,7 @@ var CîmpuriTextarea = {
 
 var SelecturiFoarteLate = {
   seteazăŞoapte: function() {
-    Formular.$
+    Procedura.$
       .on('change', 'select.foarte.lat', function() {
         var select = $(this);
 
@@ -183,7 +183,7 @@ var FormulareŞablon = {
   selector: 'select.care.schimbă.formularul',
 
   init: function() {
-    Formular.$
+    Procedura.$
       .on('change', this.selector, this.inserează);
   },
 
@@ -200,7 +200,7 @@ var FormulareŞablon = {
     $subformular = item.nextAll();
     $subformular.find(FormulareŞablon.selector).trigger('change');
 
-    if (!Formular.sePopulează && !Formular.seIniţializează) {
+    if (!Procedura.sePopulează && !Procedura.seIniţializează) {
       $subformular
         .find(':input:not(' + FormulareŞablon.selector + ')').first().focus().end().end()
         .find('.adaugă-cîmp-personalizat.implicit').click();
@@ -291,7 +291,7 @@ var Cheltuieli = {
         .appendTo(Cheltuieli.adăugate)
         .show('blind');
 
-      if (!Formular.sePopulează) item.find('textarea').focus();
+      if (!Procedura.sePopulează) item.find('textarea').focus();
 
       Cheltuieli.adăugate.trigger('recalculare');
 
@@ -316,7 +316,7 @@ var Cheltuieli = {
         .insertBefore($(this).parent())
         .show('blind');
 
-      if (!Formular.sePopulează) $subformular.find('textarea,input').first().focus();
+      if (!Procedura.sePopulează) $subformular.find('textarea,input').first().focus();
 
       TotalCheltuieli.calculează();
     }
@@ -459,7 +459,7 @@ var Destinatari = {
       Destinatari.adăugaţiDeja.click();
       destinatar.append('<input/>');
 
-      if (!Formular.sePopulează && !Formular.seIniţializează) {
+      if (!Procedura.sePopulează && !Procedura.seIniţializează) {
         destinatar.find('input').focus();
         Destinatari.$.hide();
       }
@@ -476,7 +476,7 @@ var ButonDeEliminare = {
   eliminabilPrecedent: $(),
 
   init: function() {
-    Formular.$
+    Procedura.$
       .on('click', '.elimină', this.acţionează)
       .on('mousemove', '.eliminabil', this.afişează)
       .on('mouseleave', '.eliminabil', this.ascunde);
@@ -571,14 +571,14 @@ var Utilizator = {
 
 // --------------------------------------------------
 
-var Formular = {
+var Procedura = {
   $: $('#formular'),
   $titlu: $('#formular h1'),
   $obiectulUrmăririi: $('#formular #obiectul-urmăririi'),
 
   init: function() {
     this.$
-      .on('keyup', function(e) {if (e.keyCode == 27) Formular.închide()})
+      .on('keyup', function(e) {if (e.keyCode == 27) Procedura.închide()})
       .on('click', 'button.închide', this.închide)
       .on('click', 'button.salvează', this.salvează)
       .on('închidere', this.resetează)
@@ -589,22 +589,22 @@ var Formular = {
     this.baraDeInstrumente.init();
 
     $(window).on('hashchange', function() {
-      if (/^#formular/.test(location.hash)) Formular.deschide();
-      else if (Formular.$.is(':visible')) Formular.închide();
+      if (/^#formular/.test(location.hash)) Procedura.deschide();
+      else if (Procedura.$.is(':visible')) Procedura.închide();
     });
   },
 
   baraDeInstrumente: {
     init: function() {
-      Formular.$.find('.bara-de-instrumente')
-        .on('click', '.spre-secţiuni', Formular.focusează)
-        .on('click', '.spre-secţiuni+.opţiuni li', Formular.focuseazăSecţiunea);
+      Procedura.$.find('.bara-de-instrumente')
+        .on('click', '.spre-secţiuni', Procedura.focusează)
+        .on('click', '.spre-secţiuni+.opţiuni li', Procedura.focuseazăSecţiunea);
 
-      Formular.$.on('salvat', this.anunţăSalvarea);
+      Procedura.$.on('salvat', this.anunţăSalvarea);
     },
 
     anunţăSalvarea: function() {
-      var mesaj = Formular.$.find('.bara-de-instrumente .salvează+.mesaj');
+      var mesaj = Procedura.$.find('.bara-de-instrumente .salvează+.mesaj');
 
       mesaj.addClass('afişat');
 
@@ -616,7 +616,7 @@ var Formular = {
 
   focuseazăSecţiunea: function() {
     var secţiune = $(this).text().substr(2),
-        $titluSecţiune = Formular.$.find('legend label:contains("' + secţiune + '")'),
+        $titluSecţiune = Procedura.$.find('legend label:contains("' + secţiune + '")'),
         $opţiuni = $(this).closest('.opţiuni'),
         top = $titluSecţiune.offset().top;
 
@@ -633,34 +633,34 @@ var Formular = {
   },
 
   eliminăAmendaDupăCaz: function() {
-    if (Formular.deOrdingGeneral()) {
-      Formular.$obiectulUrmăririi.find('li:has(#amendă)').remove();
+    if (Procedura.deOrdingGeneral()) {
+      Procedura.$obiectulUrmăririi.find('li:has(#amendă)').remove();
     }
   },
 
   actualizeazăDataUltimeiModificări: function(e, procedură) {
-    Formular.$.find('#data-ultimei-modificări span')
+    Procedura.$.find('#data-ultimei-modificări span')
       .text(procedură['data-ultimei-modificări'])
       .parent().show();
   },
 
   calculează: function() {
-    Formular.deschis = true;
+    Procedura.deschis = true;
 
     $.fx.off = true;
 
     TotalCheltuieli.calculează();
     Onorariu.calculează();
-    Formular.seteazăTitlu();
+    Procedura.seteazăTitlu();
 
     $.fx.off = false;
 
-    Formular.focusează();
+    Procedura.focusează();
   },
 
   focusează: function() {
     $('html,body').animate({scrollTop: 0}, 500, function() {
-      Formular.$titlu
+      Procedura.$titlu
         .attr('tabindex', 1)
         .focus()
         .removeAttr('tabindex');
@@ -687,17 +687,17 @@ var Formular = {
     var literă = HashController.date().match(/^[SP]?/)[0],
         href = '#formular' + (literă ? '?' + literă : ''),
         descriereProcedură = $('#crează-procedură').find('a[href="' + href + '"]').text(),
-        număr = Formular.seCreazăProcedurăNouă() ? '' : Utilizator.login + HashController.date();
+        număr = Procedura.seCreazăProcedurăNouă() ? '' : Utilizator.login + HashController.date();
 
-    Formular.$
+    Procedura.$
       .find('#descriere').text(descriereProcedură).end()
       .find('#număr').text(număr).end();
   },
 
   colectează: function() {
     return {
-      'număr': (Formular.$.find('#număr').text().match(/[SP]?-\d+/) || [null])[0],
-      'data-intentării': Formular.$.find('#data-intentării').val(),
+      'număr': (Procedura.$.find('#număr').text().match(/[SP]?-\d+/) || [null])[0],
+      'data-intentării': Procedura.$.find('#data-intentării').val(),
       'document-executoriu': colectează('#document-executoriu'),
       'obiectul-urmăririi': colecteazăObiectulUrmăririi(),
       'cheltuieli': colecteazăCheltuieli(),
@@ -741,10 +741,10 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăObiectulUrmăririi() {
-      var $secţiune = Formular.$obiectulUrmăririi,
+      var $secţiune = Procedura.$obiectulUrmăririi,
           obiectulUrmăririi = colectează($secţiune);
 
-      if (Formular.pensieDeÎntreţinere()) {
+      if (Procedura.pensieDeÎntreţinere()) {
         obiectulUrmăririi = {'încasări': colecteazăÎncasări($secţiune)};
       }
 
@@ -893,21 +893,21 @@ var Formular = {
 
     // ------------------------------------------
     function colecteazăPersoaneTerţe() {
-      return Formular.$.find('.persoană-terţă').map(function() {
+      return Procedura.$.find('.persoană-terţă').map(function() {
         return colectează(this);
       }).get();
     }
 
     // ------------------------------------------
     function colecteazăDebitori() {
-      return Formular.$.find('.debitor').map(function() {
+      return Procedura.$.find('.debitor').map(function() {
         return colectează(this);
       }).get();
     }
   },
 
   salvează: function() {
-    var procedură = Formular.colectează();
+    var procedură = Procedura.colectează();
 
     if (procedură.număr) post();
     else $.get('/date/' + Utilizator.login + '/proceduri/', function(răspuns) {
@@ -933,14 +933,14 @@ var Formular = {
       var cale = '/date/' + Utilizator.login + '/proceduri/' + procedură.număr + '.json';
 
       $.post(cale, JSON.stringify(procedură), function(_, status) {
-        if (Formular.seCreazăProcedurăNouă()) {
+        if (Procedura.seCreazăProcedurăNouă()) {
           window.skipEventOnce.hashchange = true;
           location.hash = 'formular?' + procedură.număr;
 
-          Formular.seteazăTitlu();
+          Procedura.seteazăTitlu();
         }
 
-        Formular.$.trigger('salvat', [procedură]);
+        Procedura.$.trigger('salvat', [procedură]);
 
         if (status == 'notmodified') return;
 
@@ -956,19 +956,19 @@ var Formular = {
     $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr + '.json')
       .success(function(procedură) {
         ProceduriRecente.notează(număr);
-        Formular.populează(procedură);
-        Formular.verificăRapoarte();
+        Procedura.populează(procedură);
+        Procedura.verificăRapoarte();
       })
-      .error(Formular.închide);
+      .error(Procedura.închide);
 
   },
 
   populează: function(procedură) {
     $.fx.off = true;
-    Formular.sePopulează = true;
+    Procedura.sePopulează = true;
 
-    Formular.$.find('#data-intentării').val(procedură['data-intentării']);
-    Formular.$.find('#data-ultimei-modificări span')
+    Procedura.$.find('#data-intentării').val(procedură['data-intentării']);
+    Procedura.$.find('#data-ultimei-modificări span')
       .text(procedură['data-ultimei-modificări'])
       .parent().show();
 
@@ -980,8 +980,8 @@ var Formular = {
     populeazăDebitori();
 
     $.fx.off = false;
-    Formular.sePopulează = false;
-    Formular.$.trigger('populat');
+    Procedura.sePopulează = false;
+    Procedura.$.trigger('populat');
 
     // ------------------------------------------
     function populeazăSecţiune(selector, secţiune) {
@@ -996,7 +996,7 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăObiectulUrmăririi() {
-      var $secţiune = Formular.$obiectulUrmăririi,
+      var $secţiune = Procedura.$obiectulUrmăririi,
           secţiune = procedură['obiectul-urmăririi'];
 
       populeazăSecţiune($secţiune, secţiune);
@@ -1182,13 +1182,13 @@ var Formular = {
 
     // ------------------------------------------
     function populeazăPersoaneleTerţe() {
-      var $adaugă = Formular.$.find('#creditor+button.adaugă');
+      var $adaugă = Procedura.$.find('#creditor+button.adaugă');
 
       if (procedură['persoane-terţe']) {
         $.each(procedură['persoane-terţe'], function() {
           $adaugă.click();
 
-          $secţiune = Formular.$.find('.persoană-terţă:last');
+          $secţiune = Procedura.$.find('.persoană-terţă:last');
           populeazăSecţiune($secţiune, this);
         });
       }
@@ -1198,7 +1198,7 @@ var Formular = {
     function populeazăDebitori() {
       var $secţiune,
           prima = true,
-          $adaugă = Formular.$.find('.debitor+button.adaugă');
+          $adaugă = Procedura.$.find('.debitor+button.adaugă');
 
       $.each(procedură['debitori'], function() {
         if (prima) {
@@ -1207,14 +1207,14 @@ var Formular = {
           $adaugă.click();
         }
 
-        $secţiune = Formular.$.find('.debitor:last');
+        $secţiune = Procedura.$.find('.debitor:last');
         populeazăSecţiune($secţiune, this);
       });
     }
   },
 
   resetează: function() {
-    Formular.$
+    Procedura.$
       .find('#data-intentării').val('').end()
       .find('#document-executoriu')
         .find(':input').val('').end()
@@ -1241,8 +1241,8 @@ var Formular = {
   },
 
   închide: function() {
-    Formular.focusează();
-    Formular.$
+    Procedura.focusează();
+    Procedura.$
       .stop(true, true)
       .find('.bara-de-instrumente').fadeOut().end()
       .animate({'top': $(window).height()}, function() {
@@ -1254,37 +1254,37 @@ var Formular = {
 
   deschide: function() {
     $.fx.off = true;
-    Formular.$.trigger('înainte-de-deschidere');
+    Procedura.$.trigger('înainte-de-deschidere');
     $.fx.off = false;
 
-    Formular.$
+    Procedura.$
       .stop(true, true)
       .find('.bara-de-instrumente').fadeIn('slow').end()
       .css('top', $(window).height())
       .show()
       .animate({'top': '40px'});
 
-    if (Formular.seDeschideProcedurăSalvată()) {
-      Formular.încarcă();
+    if (Procedura.seDeschideProcedurăSalvată()) {
+      Procedura.încarcă();
     } else {
-      Formular.iniţializează();
-      Formular.$.trigger('iniţializat');
+      Procedura.iniţializează();
+      Procedura.$.trigger('iniţializat');
     }
   },
 
   iniţializează: function() {
     $.fx.off = true;
-    Formular.seIniţializează = true;
+    Procedura.seIniţializează = true;
 
-    Formular.$
+    Procedura.$
       .find('#data-ultimei-modificări').hide().end()
       .find('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
 
-    if (Formular.seCreazăProcedurăNouă()) {
+    if (Procedura.seCreazăProcedurăNouă()) {
       Cheltuieli.$.find('#taxaA1').click();
 
-      var caracterProcedură = Formular.$obiectulUrmăririi.find('#caracter'),
-          genCreditor = Formular.$.find('#creditor #gen-persoană');
+      var caracterProcedură = Procedura.$obiectulUrmăririi.find('#caracter'),
+          genCreditor = Procedura.$.find('#creditor #gen-persoană');
 
       switch (HashController.date()) {
         case 'S':
@@ -1309,14 +1309,14 @@ var Formular = {
     TotalCheltuieli.calculează();
 
     $.fx.off = false;
-    Formular.seIniţializează = false;
+    Procedura.seIniţializează = false;
   },
 
   verificăRapoarte: function() {
-    Formular.$.addClass('încă-nu-verificat-rapoarte');
+    Procedura.$.addClass('încă-nu-verificat-rapoarte');
 
     $.get('/date/' + Utilizator.login + '/rapoarte/', function(html) {
-      var rapoarte = Formular.$.find('#rapoarte').find('li:not(.titlu)').remove().end();
+      var rapoarte = Procedura.$.find('#rapoarte').find('li:not(.titlu)').remove().end();
 
       $(html).find('a:not([href="../"])').map(function() {
         var numeRaport = decodeURI(this.getAttribute('href').replace(/\.html$/, '')),
@@ -1330,7 +1330,7 @@ var Formular = {
           .appendTo(rapoarte);
       });
 
-      Formular.$.removeClass('încă-nu-verificat-rapoarte');
+      Procedura.$.removeClass('încă-nu-verificat-rapoarte');
     });
   }
 }
@@ -1602,7 +1602,7 @@ var BaraDeSus = {
         if (e.keyCode == 27) $(this).closest('.dialog').ascunde();
       });
 
-    Formular.$
+    Procedura.$
       .on('iniţializat populat', this.semiascundeInstrumente)
       .on('închidere', this.semiaratăInstrumente);
 
@@ -1949,7 +1949,7 @@ var Calendar = {
 
 var CîmpuriPersonalizate = {
   init: function() {
-    Formular.$
+    Procedura.$
       .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
       .on('keydown', '.etichetă', function(e) {
         if (e.keyCode == 13 || e.keyCode == 27) {
@@ -1975,7 +1975,7 @@ var CîmpuriPersonalizate = {
           .trigger('input')
         .end()
         .show('blind', function() {
-          if (Formular.sePopulează || Formular.seIniţializează) return;
+          if (Procedura.sePopulează || Procedura.seIniţializează) return;
 
           $(this).find('.etichetă')
             .focus()
@@ -1991,11 +1991,11 @@ var ÎncasarePensie = {
   $cota: $(),
 
   init: function() {
-    Formular.$
+    Procedura.$
       .on('înainte-de-deschidere', this.inserează)
       .on('închidere', this.elimină);
 
-    Formular.$obiectulUrmăririi
+    Procedura.$obiectulUrmăririi
       .on('input', '.încasare input', this.caluleazăOnorariulŞiPensia);
   },
 
@@ -2119,9 +2119,9 @@ var ÎncasarePensie = {
   },
 
   inserează: function() {
-    if (!Formular.pensieDeÎntreţinere()) return;
+    if (!Procedura.pensieDeÎntreţinere()) return;
 
-    var $secţiune = Formular.$obiectulUrmăririi.find('.conţinut');
+    var $secţiune = Procedura.$obiectulUrmăririi.find('.conţinut');
 
     $secţiune
       .data('conţinut-iniţial', $secţiune.find('ul:first').remove())
@@ -2129,13 +2129,13 @@ var ÎncasarePensie = {
       .find('.subsecţiune.încasare #genul-încasării').trigger('change');
 
     ÎncasarePensie.$ = $secţiune;
-    Formular.focusează();
+    Procedura.focusează();
   },
 
   elimină: function() {
-    if (!Formular.pensieDeÎntreţinere()) return;
+    if (!Procedura.pensieDeÎntreţinere()) return;
 
-    var secţiune = Formular.$obiectulUrmăririi.find('.conţinut');
+    var secţiune = Procedura.$obiectulUrmăririi.find('.conţinut');
 
     secţiune.prepend(secţiune.data('conţinut-iniţial'));
     secţiune.removeData('conţinut-iniţial');
@@ -2245,22 +2245,22 @@ var Onorariu = {
           '#obiect'
         ].join(',');
 
-    Formular.$obiectulUrmăririi.on(schimbareDate, cîmpuriRelevante, this.calculează);
-    Formular.$.on(schimbareDate, '.debitor #gen-persoană, #părţile-au-ajuns-la-conciliere', this.calculează);
+    Procedura.$obiectulUrmăririi.on(schimbareDate, cîmpuriRelevante, this.calculează);
+    Procedura.$.on(schimbareDate, '.debitor #gen-persoană, #părţile-au-ajuns-la-conciliere', this.calculează);
   },
 
   calculează: function() {
-    if (Formular.seIniţializează || Formular.sePopulează) return;
+    if (Procedura.seIniţializează || Procedura.sePopulează) return;
     if (Onorariu.timerCalculare) return;
 
     Onorariu.timerCalculare = setTimeout(function() {
-      var $secţiune = Formular.$obiectulUrmăririi,
+      var $secţiune = Procedura.$obiectulUrmăririi,
           caracter = $secţiune.find('#caracter').val(),
           onorariu = 0;
 
       if (caracter == 'nonpecuniar') {
-        var obiect = Formular.$obiectulUrmăririi.find('#obiect').val(),
-            genPersoană = Formular.$.find('.debitor #gen-persoană').val();
+        var obiect = Procedura.$obiectulUrmăririi.find('#obiect').val(),
+            genPersoană = Procedura.$.find('.debitor #gen-persoană').val();
 
         valoare = Onorariu.nonpecuniar[obiect][genPersoană];
         onorariu = typeof valoare == 'function' ? valoare() : valoare;
@@ -2269,7 +2269,7 @@ var Onorariu = {
 
         $secţiune.find('#total').val(total).trigger('change');
 
-        if (Formular.pensieDeÎntreţinere()) {
+        if (Procedura.pensieDeÎntreţinere()) {
           onorariu = $secţiune.find('.încasare #onorariul-calculat').suma();
         } else {
           onorariu = Onorariu.pecuniar(total);
@@ -2287,7 +2287,7 @@ var Onorariu = {
 
   pecuniar: function(suma) {
     if (suma <= 100000) {
-      var minim = Formular.$obiectulUrmăririi.find('#amendă').is(':checked') ? 200 : 500;
+      var minim = Procedura.$obiectulUrmăririi.find('#amendă').is(':checked') ? 200 : 500;
 
       return Math.max(suma * .10, minim);
     } else if (suma <= 300000) {
@@ -2304,20 +2304,20 @@ var Onorariu = {
     'stabilirea domiciliului copilului': {fizică: 200 * UC, juridică: 200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {fizică: 200 * UC, juridică:200 * UC},
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
-      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
-      juridică: function() { return 200 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 200 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
-      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
-      juridică: function() { return 200 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 200 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'confiscarea bunurilor': {
-      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
-      juridică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 100 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'nimicirea unor bunuri': {
-      fizică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() },
-      juridică: function() { return 100 * UC + .01 * Formular.$obiectulUrmăririi.find('.sumă').suma() }
+      fizică: function() { return 100 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() },
+      juridică: function() { return 100 * UC + .01 * Procedura.$obiectulUrmăririi.find('.sumă').suma() }
     },
     'restabilirea la locul de muncă': {fizică: 200 * UC, juridică: 200 * UC},
     'aplicarea măsurilor de asigurare a acţiunii': {
@@ -2419,11 +2419,11 @@ var Sume = {
 
 var Subsecţiuni = {
   init: function() {
-    Formular.$
+    Procedura.$
       .on('înainte-de-deschidere', this.ajusteazăVizibilitateOpţiuni)
       .on('închidere', this.eliminăSubsecţiuni);
 
-    Formular.$obiectulUrmăririi
+    Procedura.$obiectulUrmăririi
       .on('mouseenter', '#adaugă-subsecţiune', this.ajusteazăVizibilitateOpţiuni)
       .on('change', '#caracter', this.ajusteazăVizibilitateOpţiuni)
       .on('eliminare', '.subsecţiune', function() {
@@ -2436,9 +2436,9 @@ var Subsecţiuni = {
   },
 
   ajusteazăVizibilitateOpţiuni: function() {
-    if (Formular.pensieDeÎntreţinere()) return;
+    if (Procedura.pensieDeÎntreţinere()) return;
 
-    var $secţiune = Formular.$obiectulUrmăririi,
+    var $secţiune = Procedura.$obiectulUrmăririi,
         $opţiuni = $secţiune.find('#adaugă-subsecţiune'),
         $amendă = $secţiune.find('#amendă'),
         caracter = $secţiune.find('#caracter').val();
@@ -2458,12 +2458,12 @@ var Subsecţiuni = {
   },
 
   eliminăSubsecţiuni: function() {
-    Formular.$obiectulUrmăririi.find('.subsecţiune').remove();
+    Procedura.$obiectulUrmăririi.find('.subsecţiune').remove();
   },
 
   încasări: {
     init: function() {
-      Formular.$obiectulUrmăririi
+      Procedura.$obiectulUrmăririi
         .on('click', '#adaugă-subsecţiune .încasare', this.adaugăSubsecţiune);
     },
 
@@ -2479,7 +2479,7 @@ var Subsecţiuni = {
       $încasare.find('#genul-încasării').trigger('change');
       $.fx.off = false;
 
-      if (!Formular.sePopulează) $încasare.find('input').first().focus();
+      if (!Procedura.sePopulează) $încasare.find('input').first().focus();
 
       $(this).siblings().show();
     }
@@ -2487,7 +2487,7 @@ var Subsecţiuni = {
 
   întîrzieri: {
     init: function() {
-      Formular.$obiectulUrmăririi
+      Procedura.$obiectulUrmăririi
         .on('input change', '.subsecţiune.întîrziere :input:not(.dobîndă)', this.calculeazăDobînda)
         .on('click', '#adaugă-subsecţiune li.întîrziere', this.adaugăSubsecţiune);
     },
@@ -2503,13 +2503,13 @@ var Subsecţiuni = {
         .insertBefore($(this).closest('#adaugă-subsecţiune'))
         .show('blind');
 
-      if (!Formular.seIniţializează && !Formular.sePopulează) {
+      if (!Procedura.seIniţializează && !Procedura.sePopulează) {
         $subsecţiune.find('.început.perioadă').focus();
       }
     },
 
     calculeazăDobînda: function() {
-      if (Formular.sePopulează || Formular.seIniţializează) return;
+      if (Procedura.sePopulează || Procedura.seIniţializează) return;
 
       var $întîrziere = $(this).closest('.subsecţiune.întîrziere'),
           întîrziere = Subsecţiuni.întîrzieri.colectează($întîrziere),
@@ -2547,7 +2547,7 @@ var Subsecţiuni = {
 
   bunuriSechestrate: {
     init: function() {
-      Formular.$obiectulUrmăririi
+      Procedura.$obiectulUrmăririi
         .on('click', '#adaugă-subsecţiune .sechestrare-bunuri', this.adaugăSubsecţiune)
         .on('click', '.subsecţiune.sechestrare-bunuri .adaugă-cîmp-personalizat', this.scoateClasaDeTot)
         .on('eliminare', '.personalizat', this.calculeazăTotal)
@@ -2589,7 +2589,7 @@ var Rapoarte = {
   init: function() {
     $(document).on('click', '[data-raport]', this.deschide);
 
-    Formular.$.on('închidere', this.închide);
+    Procedura.$.on('închidere', this.închide);
   },
 
   deschide: function() {
@@ -2632,7 +2632,7 @@ var Rapoarte = {
 
 var Secţiuni = {
   init: function() {
-    Formular.$.on('click', 'fieldset button.desfăşoară', this.desfăşoară);
+    Procedura.$.on('click', 'fieldset button.desfăşoară', this.desfăşoară);
   },
 
   desfăşoară: function() {
@@ -2640,9 +2640,9 @@ var Secţiuni = {
         set;
 
     if (fieldset.is('#creditor') || fieldset.is('.debitor') || fieldset.is('.persoană-terţă')) {
-      set = Formular.$.find('#creditor, .debitor, .persoană-terţă');
+      set = Procedura.$.find('#creditor, .debitor, .persoană-terţă');
     } else if (fieldset.is('#document-executoriu') || fieldset.is('#obiectul-urmăririi')) {
-      set = Formular.$.find('#document-executoriu, #obiectul-urmăririi');
+      set = Procedura.$.find('#document-executoriu, #obiectul-urmăririi');
     } else {
       set = fieldset;
     }
@@ -2660,7 +2660,7 @@ var Secţiuni = {
 
 var ListeMeniu = {
   init: function() {
-    Formular.$
+    Procedura.$
       .on('mouseenter', '.listă', this.afişează)
       .on('mouseleave', '.listă', this.ascunde);
   },

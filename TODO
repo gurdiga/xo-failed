@@ -1,7 +1,6 @@
 - Imprimare
   - bin/salvează-procedură.php: curăţă rapoarte
   - corectează termeni DSL:
-   - Formular -> Procedură
    - raport -> formular
   * de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
