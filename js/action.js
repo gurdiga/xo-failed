@@ -2532,7 +2532,7 @@ var Subsecţiuni = {
       var începutPerioadă = $subsecţiune.find('.început.perioadă').val(),
           sfîrşitPerioadă = $subsecţiune.find('.sfîrşit.perioadă').val();
 
-      return 'Închiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
+      return 'Încheiere-cu-privire-la-calcularea-dobînzilor-de-întîrziere-' +
           începutPerioadă + '-' + sfîrşitPerioadă;
     },
 

@@ -64,8 +64,11 @@ var Raport = {
       '</html>';
   },
 
-  salvează: function() {
-    if (!Raport.modificat()) return;
+  salvează: function(callback) {
+    if (!Raport.modificat()) {
+      if (opener.$.isFunction(callback)) callback();
+      return;
+    }
 
     var pagina = Raport.cale();
 
@@ -77,6 +80,8 @@ var Raport = {
 
       Raport.marcheazăButonul();
       Raport.baraDeInstrumente.anunţăSalvarea();
+
+      if (opener.$.isFunction(callback)) callback();
     });
   },
 
@@ -99,8 +104,7 @@ var Raport = {
   },
 
   imprimă: function() {
-    Raport.salvează();
-    window.print();
+    Raport.salvează(window.print);
   },
 
   regenerează: function() {

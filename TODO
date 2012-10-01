@@ -20,6 +20,7 @@
 - Listare
 - Admin
   - înregistrare utilizator
+    - de creat structura de subdirectoare
   - dezactivare după o perioadă de inactivitate
   - autentificarea mutuală
   - dezactivare la break-in
