@@ -1859,7 +1859,7 @@ var CalculatorDobîndaÎntîrziere = {
   calculeazăDobînda: function() {
     var secţiune = CalculatorDobîndaÎntîrziere.$,
         întîrziere = Subsecţiuni.întîrzieri.colectează(secţiune),
-        dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
+        dobînda = DobîndaDeÎntîrziere.calculează(întîrziere).dobînda;
 
     secţiune.find('.dobîndă').val(dobînda);
   }
@@ -2150,15 +2150,18 @@ var DobîndaDeÎntîrziere = {
     var începutPerioadă = întîrziere.începutPerioadă,
         sfîrşitPerioadă = întîrziere.sfîrşitPerioadă,
         rata = întîrziere.rata,
-        suma = întîrziere.suma;
+        suma = întîrziere.suma,
+        detalii;
 
-    if (!RE_FORMATUL_DATEI.test(începutPerioadă) || !RE_FORMATUL_DATEI.test(sfîrşitPerioadă)) return;
+    if (!RE_FORMATUL_DATEI.test(începutPerioadă) || !RE_FORMATUL_DATEI.test(sfîrşitPerioadă)) {
+      return {dobînda: 0};
+    }
 
     începutPerioadă = moment(începutPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
     sfîrşitPerioadă = moment(sfîrşitPerioadă, FORMATUL_DATEI).format('YYYY-MM-DD');
     rata = parseInt(rata);
 
-    DobîndaDeÎntîrziere.date = {
+    detalii = {
       începutPerioadă: moment(începutPerioadă, 'YYYY-MM-DD').format(FORMATUL_DATEI),
       sfîrşitPerioadă: moment(sfîrşitPerioadă, 'YYYY-MM-DD').format(FORMATUL_DATEI),
       rata: rata,
@@ -2213,7 +2216,7 @@ var DobîndaDeÎntîrziere = {
       dobîndaPerRînd = parseFloat((suma * rataFinală / 365 * durate[data]).toFixed(2));
       dobînda += dobîndaPerRînd;
 
-      DobîndaDeÎntîrziere.date.rînduri[data] = {
+      detalii.rînduri[data] = {
         data: moment(primulRînd ? începutPerioadă : data, 'YYYY-MM-DD').format(FORMATUL_DATEI),
         durata: durate[data],
         rata: RateDeBază[data],
@@ -2223,10 +2226,11 @@ var DobîndaDeÎntîrziere = {
       primulRînd = false;
     }
 
-    return parseFloat(dobînda.toFixed(2));
-  },
-
-  date: {}
+    return {
+      dobînda: parseFloat(dobînda.toFixed(2)),
+      detalii: detalii
+    };
+  }
 };
 
 // --------------------------------------------------
@@ -2513,7 +2517,7 @@ var Subsecţiuni = {
 
       var $întîrziere = $(this).closest('.subsecţiune.întîrziere'),
           întîrziere = Subsecţiuni.întîrzieri.colectează($întîrziere),
-          dobînda = DobîndaDeÎntîrziere.calculează(întîrziere);
+          dobînda = DobîndaDeÎntîrziere.calculează(întîrziere).dobînda;
 
       $întîrziere.find('.sumă.dobîndă').val(dobînda);
       Onorariu.calculează();

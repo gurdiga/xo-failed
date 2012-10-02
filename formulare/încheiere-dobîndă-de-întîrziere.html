@@ -6,20 +6,10 @@
     <link type="text/css" rel="stylesheet" href="/css/încheiere.css"/>
     <script id="init">
       function init(context) {
-        var $întîrziere = context.buton.closest('.subsecţiune.întîrziere'),
-            debitori = [];
+        var $întîrziere = context.buton.closest('.subsecţiune.întîrziere');
 
         context.întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere);
         context.întîrziere.dobînda = $întîrziere.find('.sumă.dobîndă').val();
-
-        for (var i = 0; i < context.procedură.debitori.length; i++) {
-          debitori.push(
-              context.nume(context.procedură.debitori[i]) +
-              ' (' + context.id(context.procedură.debitori[i]) + ')'
-          );
-        }
-
-        context.debitori = debitori.join(', ');
         context.uid =
           context.întîrziere.începutPerioadă.replace(/\./g, '') + '-' +
           context.întîrziere.sfîrşitPerioadă.replace(/\./g, '');

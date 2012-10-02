@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Anexă încheiere cu privire la calcularea dobînzilor de întîrziere</title>
+    <link type="text/css" rel="stylesheet" href="/css/încheiere.css"/>
+    <script id="init">
+      function init(context) {
+        var $întîrziere = context.buton.closest('.subsecţiune.întîrziere'),
+            întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere),
+            calcule = opener.DobîndaDeÎntîrziere.calculează(întîrziere);
+
+        context.întîrziere = întîrziere;
+        context.detalii = calcule.detalii;
+        context.întîrziere.dobînda = calcule.dobînda;
+        context.uid =
+          context.întîrziere.începutPerioadă.replace(/\./g, '') + '-' +
+          context.întîrziere.sfîrşitPerioadă.replace(/\./g, '');
+
+        Încheiere.modificat = function() {return true};
+      }
+    </script>
+    <script src="/js/încheiere.js"></script>
+  </head>
+
+  <body>
+    <script type="text/micro-template">
+      <% if (detalii.suma && detalii.începutPerioadă && detalii.sfîrşitPerioadă) { %>
+        <p class="titlu">ÎNCHEIERE<br/>
+        cu privire la calcularea dobînzilor de întîrziere<br/>
+        rezultate din întîrzierea executării documentului executoriu</p>
+
+        <p>
+          Calculul dobînzii de întîrziere a sumei de
+          <%= detalii.suma %>&nbsp;de&nbsp;lei pentru perioada
+          <%= detalii.începutPerioadă %>&ndash;<%= detalii.sfîrşitPerioadă %>
+          cu rata aplicată de&nbsp;<%= detalii.rata %>%:
+        </p>
+
+        <ul class="calcule">
+          <li class="antet">
+            <span>Nr.</span>
+            <span>Începînd cu</span>
+            <span>Durata</span>
+            <span>Rata, %</span>
+            <span>Suma, lei</span>
+          </li>
+
+          <% var i = 0; %>
+          <% for (var rînd in detalii.rînduri) { rînd = detalii.rînduri[rînd]; %>
+          <li>
+            <span><%= ++i %></span>
+            <span><%= rînd.data %></span>
+            <span><%= rînd.durata %> zile</span>
+            <span><%= rînd.rata %>+<%= detalii.rata %>=<%= (rînd.rata + detalii.rata).toFixed(1) %></span>
+            <span><%= rînd.dobînda.toFixed(2) %></span>
+          </li>
+          <% } %>
+          <li class="total"><%= întîrziere.dobînda %></li>
+        </ul>
+      <% } else { %>
+        <% if (!detalii.începutPerioadă) { %>
+          <p>Trebuie să introduceţi <b>începutul perioadei</b>.</p>
+        <% } %>
+
+        <% if (!detalii.sfîrşitPerioadă) { %>
+          <p>Trebuie să introduceţi <b>sfîrşitul perioadei</b>.</p>
+        <% } %>
+
+        <% if (!detalii.suma) { %>
+          <p>Trebuie să introduceţi <b>suma</b>.</p>
+        <% } %>
+
+      <% } %>
+    </script>
+  </body>
+</head>

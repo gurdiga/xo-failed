@@ -26,18 +26,25 @@ var Încheiere = {
   },
 
   initContext: function() {
+    var procedură = opener.Procedura.colectează(),
+        nume = function(persoană) {
+          return persoană['gen-persoană'] == 'fizică' ? persoană['nume'] : persoană['denumire'];
+        },
+        id = function(persoană) {
+          return persoană['gen-persoană'] == 'fizică' ? ('IDNP ' + persoană['idnp']) : ('IDNO ' + persoană['idno']);
+        };
+
     Încheiere.context = {
-      procedură: opener.Procedura.colectează(),
+      procedură: procedură,
       executor: opener.Profil.date,
       moment: opener.moment,
       login: opener.Utilizator.login,
       buton: opener.Încheieri[Încheiere.pagina].buton,
-      nume: function(persoană) {
-        return persoană['gen-persoană'] == 'fizică' ? persoană['nume'] : persoană['denumire'];
-      },
-      id: function(persoană) {
-        return persoană['gen-persoană'] == 'fizică' ? ('IDNP ' + persoană['idnp']) : ('IDNO ' + persoană['idno']);
-      }
+      nume: nume,
+      id: id,
+      debitori: procedură.debitori.map(function(debitor) {
+        return nume(debitor) + ' (' + id(debitor) + ')';
+      })
     };
 
     // cod specific pentru fiecare încheiere
