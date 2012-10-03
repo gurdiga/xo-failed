@@ -2,11 +2,12 @@
 
 files="
   index.html
+  css/shared.css
   css/style.css
-  css/raport.css
+  css/încheiere.css
   js/action.js
   js/lib.js
-  js/raport.js
+  js/încheiere.js
 "
 
 echo "Pregzipuiesc cod..."
