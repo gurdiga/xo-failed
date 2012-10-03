@@ -25,7 +25,7 @@
 
   <body>
     <script type="text/micro-template">
-      <% if (detalii.suma && detalii.începutPerioadă && detalii.sfîrşitPerioadă) { %>
+      <% if (detalii && detalii.suma && detalii.începutPerioadă && detalii.sfîrşitPerioadă) { %>
         <p class="titlu">ÎNCHEIERE<br/>
         cu privire la calcularea dobînzilor de întîrziere<br/>
         rezultate din întîrzierea executării documentului executoriu</p>
@@ -59,16 +59,22 @@
           <li class="total"><%= întîrziere.dobînda %></li>
         </ul>
       <% } else { %>
-        <% if (!detalii.începutPerioadă) { %>
-          <p>Trebuie să introduceţi <b>începutul perioadei</b>.</p>
-        <% } %>
+        <% if (!detalii) { %>
+          <p>Trebuie să introduceţi datele.</p>
+        <% } else { %>
 
-        <% if (!detalii.sfîrşitPerioadă) { %>
-          <p>Trebuie să introduceţi <b>sfîrşitul perioadei</b>.</p>
-        <% } %>
+          <% if (!detalii.începutPerioadă) { %>
+            <p>Trebuie să introduceţi <b>începutul perioadei</b>.</p>
+          <% } %>
 
-        <% if (!detalii.suma) { %>
-          <p>Trebuie să introduceţi <b>suma</b>.</p>
+          <% if (!detalii.sfîrşitPerioadă) { %>
+            <p>Trebuie să introduceţi <b>sfîrşitul perioadei</b>.</p>
+          <% } %>
+
+          <% if (!detalii.suma) { %>
+            <p>Trebuie să introduceţi <b>suma</b>.</p>
+          <% } %>
+
         <% } %>
 
       <% } %>
