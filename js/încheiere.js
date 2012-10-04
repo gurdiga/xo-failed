@@ -84,6 +84,7 @@ var Încheiere = {
       history.replaceState(null, null, pagina);
 
       Încheiere.marcheazăButonul();
+      opener.Procedura.salvează();
       Încheiere.baraDeInstrumente.anunţăSalvarea();
 
       if (opener.$.isFunction(callback)) callback();
@@ -146,7 +147,6 @@ var Încheiere = {
 
       mesaj.addClass('afişat');
       setTimeout(function() {mesaj.removeClass('afişat')}, 1000);
-      opener.Procedura.salvează();
     }
   },
 

@@ -769,7 +769,7 @@ var Procedura = {
           suma: $întîrziere.find('.sumă.întîrziată').val(),
           dobînda: $întîrziere.find('.sumă.dobîndă').val(),
           încheiere: $întîrziere.find('button[data-încheiere="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
-          anexa: $întîrziere.find('button[data-încheiere="anexa-dobîndă-de-întîrziere"]').data('pagina')
+          anexa: $întîrziere.find('button[data-încheiere="anexă-dobîndă-de-întîrziere"]').data('pagina')
         };
       }).get();
     }
@@ -1046,7 +1046,7 @@ var Procedura = {
           .data('pagina', întîrziere['încheiere'])
           .toggleClass('salvat', !!întîrziere['încheiere']);
 
-        $întîrziere.find('button[data-încheiere="anexa-dobîndă-de-întîrziere"]')
+        $întîrziere.find('button[data-încheiere="anexă-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['anexa'])
           .toggleClass('salvat', !!întîrziere['anexa']);
       }
