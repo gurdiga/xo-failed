@@ -105,7 +105,7 @@ var Încheiere = {
   cale: function() {
     var director = '/date/' + opener.Utilizator.login + '/încheieri/',
         buton = opener.Încheieri[Încheiere.pagina].buton,
-        fişier = buton.data('încheiere') + '-' + Încheiere.context.uid + '.html';
+        fişier = buton.data('formular') + '-' + opener.moment().format('YYMMDDhhmmss') + '.html';
 
     return director + fişier;
   },

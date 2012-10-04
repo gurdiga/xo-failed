@@ -1211,7 +1211,7 @@ label.checkbox input {
   margin: 5px 0;
 }
 
-button[data-încheiere] {
+button[data-formular] {
   display: inline-block;
   vertical-align: -3px;
   border: none;
@@ -1219,7 +1219,7 @@ button[data-încheiere] {
   text-indent: 0;
 }
 
-button[data-încheiere].salvat::after {
+button[data-formular].salvat::after {
   content: '✓';
   margin: -8px 0 0 4px;
   display: inline-block;

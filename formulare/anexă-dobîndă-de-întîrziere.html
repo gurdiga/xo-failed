@@ -13,9 +13,6 @@
         context.întîrziere = întîrziere;
         context.detalii = calcule.detalii;
         context.întîrziere.dobînda = calcule.dobînda;
-        context.uid =
-          context.întîrziere.începutPerioadă.replace(/\./g, '') + '-' +
-          context.întîrziere.sfîrşitPerioadă.replace(/\./g, '');
 
         Încheiere.modificat = function() {return true};
       }

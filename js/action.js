@@ -768,8 +768,8 @@ var Procedura = {
           rata: $întîrziere.find(':radio:checked').val(),
           suma: $întîrziere.find('.sumă.întîrziată').val(),
           dobînda: $întîrziere.find('.sumă.dobîndă').val(),
-          încheiere: $întîrziere.find('button[data-încheiere="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
-          anexa: $întîrziere.find('button[data-încheiere="anexă-dobîndă-de-întîrziere"]').data('pagina')
+          încheiere: $întîrziere.find('button[data-formular="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
+          anexa: $întîrziere.find('button[data-formular="anexă-dobîndă-de-întîrziere"]').data('pagina')
         };
       }).get();
     }
@@ -1042,11 +1042,11 @@ var Procedura = {
         $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
         $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
 
-        $întîrziere.find('button[data-încheiere="încheiere-dobîndă-de-întîrziere"]')
+        $întîrziere.find('button[data-formular="încheiere-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['încheiere'])
           .toggleClass('salvat', !!întîrziere['încheiere']);
 
-        $întîrziere.find('button[data-încheiere="anexă-dobîndă-de-întîrziere"]')
+        $întîrziere.find('button[data-formular="anexă-dobîndă-de-întîrziere"]')
           .data('pagina', întîrziere['anexa'])
           .toggleClass('salvat', !!întîrziere['anexa']);
       }
@@ -2591,14 +2591,14 @@ var Subsecţiuni = {
 
 var Încheieri = {
   init: function() {
-    $(document).on('click', '[data-încheiere]', this.deschide);
+    $(document).on('click', '[data-formular]', this.deschide);
 
     Procedura.$.on('închidere', this.închide);
   },
 
   deschide: function() {
     var buton = $(this),
-        încheiere = buton.data('încheiere'),
+        încheiere = buton.data('formular'),
         pagina;
 
     if (buton.is('.salvat')) {
