@@ -5,7 +5,6 @@ var Încheiere = {
 
     Încheiere.$ = opener.$(document.body);
 
-    Încheiere.initContext();
     if (!Încheiere.compilat()) Încheiere.compilează();
     Încheiere.iniţial = Încheiere.conţinut();
     Încheiere.butonDeÎnchidere.init();
@@ -22,10 +21,10 @@ var Încheiere = {
   },
 
   compilează: function() {
-    opener.compile(Încheiere.context, document);
+    opener.compile(Încheiere.context(), document);
   },
 
-  initContext: function() {
+  context: function() {
     var procedură = opener.Procedura.colectează(),
         nume = function(persoană) {
           return persoană['gen-persoană'] == 'fizică' ? persoană['nume'] : persoană['denumire'];
@@ -34,7 +33,7 @@ var Încheiere = {
           return persoană['gen-persoană'] == 'fizică' ? ('IDNP ' + persoană['idnp']) : ('IDNO ' + persoană['idno']);
         };
 
-    Încheiere.context = {
+    var context = {
       procedură: procedură,
       executor: opener.Profil.date,
       moment: opener.moment,
@@ -48,7 +47,9 @@ var Încheiere = {
     };
 
     // cod specific pentru fiecare încheiere
-    if (window.init) window.init(Încheiere.context);
+    if (window.init) window.init(context);
+
+    return context;
   },
 
   compilat: function() {
