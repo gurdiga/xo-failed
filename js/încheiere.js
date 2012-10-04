@@ -5,7 +5,7 @@ var Încheiere = {
 
     Încheiere.$ = opener.$(document.body);
 
-    if (!Încheiere.compilat()) Încheiere.compilează();
+    if (!Încheiere.compilată()) Încheiere.compilează();
     Încheiere.iniţial = Încheiere.conţinut();
     Încheiere.butonDeÎnchidere.init();
     Încheiere.baraDeInstrumente.init();
@@ -52,7 +52,7 @@ var Încheiere = {
     return context;
   },
 
-  compilat: function() {
+  compilată: function() {
     return !Încheiere.$.find('>script').există();
   },
 
