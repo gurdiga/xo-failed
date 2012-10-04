@@ -957,7 +957,6 @@ var Procedura = {
       .success(function(procedură) {
         ProceduriRecente.notează(număr);
         Procedura.populează(procedură);
-        Procedura.verificăÎncheieri();
       })
       .error(Procedura.închide);
 
@@ -1310,28 +1309,6 @@ var Procedura = {
 
     $.fx.off = false;
     Procedura.seIniţializează = false;
-  },
-
-  verificăÎncheieri: function() {
-    Procedura.$.addClass('încă-nu-verificat-încheieri');
-
-    $.get('/date/' + Utilizator.login + '/încheieri/', function(html) {
-      var încheieri = Procedura.$.find('#încheieri').find('li:not(.titlu)').remove().end();
-
-      $(html).find('a:not([href="../"])').map(function() {
-        var numeÎncheiere = decodeURI(this.getAttribute('href').replace(/\.html$/, '')),
-            dataŞiOraSalvării = this.nextSibling.data.match(/(\d{2}-[a-z]{3}-\d{4} \d{2}:\d{2})/i)[1];
-
-        dataŞiOraSalvării = moment(dataŞiOraSalvării, 'D-MMM-YYYY H:m').format('DD.MM.YYYY H:m');
-
-        $('<li>')
-          .append($('<a>').text(numeÎncheiere).attr('href', this.href))
-          .append($('<span>').text(dataŞiOraSalvării).addClass('data-şi-ora-salvării'))
-          .appendTo(încheieri);
-      });
-
-      Procedura.$.removeClass('încă-nu-verificat-încheieri');
-    });
   }
 }
 
