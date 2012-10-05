@@ -592,8 +592,12 @@ button.elimină-persoană {
   height: 0;
 }
 
+.container-buton:last-child {
+  height: 5px;
+}
+
 .personalizat:hover+.container-buton {
-  display: none;
+  opacity: 0;
 }
 
 button.adaugă-cîmp-personalizat,
