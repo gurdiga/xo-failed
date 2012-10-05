@@ -543,6 +543,10 @@ button.elimină-persoană {
   color: gray;
 }
 
+#formular p.şoaptă {
+  margin-bottom: .3em;
+}
+
 #formular span.şoaptă {
   margin: 0;
 }
