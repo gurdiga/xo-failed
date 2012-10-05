@@ -1137,15 +1137,6 @@ ul.subsecţiune .titlu button:first-of-type {
   margin-left: .5em;
 }
 
-#formular.încă-nu-verificat-încheieri ul.subsecţiune .titlu button {
-  -webkit-transition: opacity .5s;
-  -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
-  transition: opacity .5s;
-  opacity: 0;
-  cursor: text;
-}
-
 ul.subsecţiune .titlu+li {
   margin-top: .2em;
 }
