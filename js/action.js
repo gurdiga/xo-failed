@@ -13,7 +13,7 @@ var Action = {
     Valute.populeazăListe();
     FormulareŞablon.init();
     CîmpuriTextarea.autodimensionează();
-    SelecturiFoarteLate.seteazăŞoapte();
+    SelecturiFoarteLate.init();
     Persoane.init();
     Cheltuieli.init();
     ButonDeEliminare.init();
@@ -155,25 +155,29 @@ var CîmpuriTextarea = {
 // --------------------------------------------------
 
 var SelecturiFoarteLate = {
-  seteazăŞoapte: function() {
+  init: function() {
     Procedura.$
-      .on('change', 'select.foarte.lat', function() {
-        var select = $(this);
-
-        select.next('.şoaptă').remove();
-
-        $('<p>')
-          .insertAfter(select)
-          .text(select.find('option:selected').text())
-          .addClass('şoaptă');
-      })
+      .on('change', 'select.foarte.lat', this.afişeazăŞoaptă)
       .find('select.foarte.lat').trigger('change').end()
-      .on('change', 'select.care.schimbă.formularul', function(e) {
-        $(this).closest('li')
-          .nextAll().find('select.foarte.lat')
-            .not(function() {return $(this).next().is('.şoaptă')})
-            .trigger('change');
-      });
+      .on('change', 'select.care.schimbă.formularul', this.afişeazăŞoaptePentruSelecturileUrmătoare);
+  },
+
+  afişeazăŞoaptă: function() {
+    var select = $(this);
+
+    select.next('.şoaptă').remove();
+
+    $('<p>')
+      .insertAfter(select)
+      .text(select.find('option:selected').text())
+      .addClass('şoaptă');
+  },
+
+  afişeazăŞoaptePentruSelecturileUrmătoare: function(e) {
+    $(this).closest('li')
+      .nextAll().find('select.foarte.lat')
+        .not(function() {return $(this).next().is('.şoaptă')})
+        .trigger('change');
   }
 };
 
