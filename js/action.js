@@ -28,12 +28,12 @@ var Action = {
     Secţiuni.init();
     ListeMeniu.init();
 
-    $(window).trigger('hashchange');
-
     if (Utilizator.autentificat) {
       BaraDeSus.init();
       Căutare.init();
     }
+
+    $(window).trigger('hashchange');
   },
 
   '#index': function() {
