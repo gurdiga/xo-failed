@@ -1209,19 +1209,21 @@ label.checkbox input {
   margin: 5px 0;
 }
 
-button[data-formular] {
+.buton[data-formular] {
   display: inline-block;
   vertical-align: -3px;
   border: none;
   background-color: transparent;
   text-indent: 0;
+  cursor: pointer;
 }
 
-button[data-formular].salvat::after {
+.buton[data-formular].salvat::after {
   content: '✓';
-  margin: -8px 0 0 4px;
+  margin: 0 0 0 11px;
   display: inline-block;
   position: absolute;
+  color: black;
 }
 
 #destinatari .listă .itemi li,
