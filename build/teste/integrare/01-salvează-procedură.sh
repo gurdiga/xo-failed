@@ -10,8 +10,14 @@ curl $CURL_DEFAULT_ARGS \
   --request POST \
   --data @$SURSA \
   https://$SERVER_NAME/$DESTINATIA
-
 verifică 'trimis datele'
+
+curl $CURL_DEFAULT_ARGS \
+  --include \
+  --output $TMP_FILE \
+  https://$SERVER_NAME/date/$LOGIN/
+grep "^Cache-Control: private" $TMP_FILE > /dev/null
+verifică 'datele sunt marcate private pentru proxy-uri'
 
 
 file "$DESTINATIA.gz" > /dev/null

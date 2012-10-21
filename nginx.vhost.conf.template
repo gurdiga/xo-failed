@@ -59,6 +59,7 @@ server {
   location /date/ {
     auth_basic "Autentificare";
     auth_basic_user_file /var/www/$host/.htusers;
+    more_set_headers 'Cache-Control: private';
 
     set $method_and_uri "${request_uri}";
 
