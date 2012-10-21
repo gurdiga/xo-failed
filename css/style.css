@@ -1123,10 +1123,11 @@ fieldset .conţinut ul.subsecţiune:first-child {
   margin-top: .8em;
 }
 
+#formular fieldset>.conţinut>ul>.titlu,
 ul.subsecţiune .titlu {
   color: #bbb;
   font-size: small;
-  margin: -.7em 0 -.3em .35em;
+  margin: -.8em 0 -.3em .35em;
   background: white;
   padding: 0 .2em;
   display: inline-block;
