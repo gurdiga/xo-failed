@@ -549,12 +549,23 @@ var Utilizator = {
   autentificat: false,
 
   init: function() {
+    Utilizator.verificăSessiuneaHttp();
+
     Utilizator.login = $.cookie('login');
     Utilizator.autentificat = !!$.trim(Utilizator.login);
 
     $('#autentificare').toggle(!Utilizator.autentificat);
     $('body').toggleClass('autentificat', Utilizator.autentificat);
     $('#număr-licenţă').val(Utilizator.login);
+  },
+
+  verificăSessiuneaHttp: function() {
+    $(document).ajaxError(function(event, response, settings) {
+      if (response.status === 401) {
+        $.cookie('login', null);
+        location.reload();
+      }
+    });
   },
 
   logout: function() {
