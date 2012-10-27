@@ -1,3 +1,0 @@
-[submodule "js/testing_framework.js"]
-	path = js/testing_framework.js
-	url = git@github.com:gurdiga/testing_framework.js.git
