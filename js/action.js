@@ -1592,11 +1592,11 @@ var BaraDeSus = {
   },
 
   semiascundeInstrumente: function() {
-    BaraDeSus.$.find('.instrumente').addClass('semiascuns');
+    BaraDeSus.$.addClass('semiascuns');
   },
 
   semiaratăInstrumente: function() {
-    BaraDeSus.$.find('.instrumente').removeClass('semiascuns');
+    BaraDeSus.$.removeClass('semiascuns');
   },
 
   afişeazăDialog: function() {
