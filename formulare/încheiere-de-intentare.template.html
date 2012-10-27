@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Încheiere cu privire la intentarea procedurii de executare</title>
+    <link type="text/css" rel="stylesheet" href="/css/încheiere.css"/>
+    <script id="init">
+      function init(context) {
+        var total = context.opener.Procedura.$.find('#total').val();
+
+        context.totalDatorie = context.opener.accounting.formatNumber(total, 2, ' ', '.');
+      }
+    </script>
+    <script src="/js/încheiere.js"></script>
+  </head>
+
+  <body>
+    <script type="text/micro-template">
+      <article>
+
+        <hgroup>
+          <h1>Încheiere</h1>
+          <h2>cu privire la intentarea procedurii de executare</h2>
+        </hgroup>
+
+        <section>
+          <header>Procedura</header>
+          <div class="conţinut" contenteditable="true" spellcheck="false">
+            <p><%= login %><%= procedură['număr'] %> din <%= procedură['data-intentării'] %></p>
+          </div>
+        </section>
+
+        <section>
+          <header>Chestiunea</header>
+          <div class="conţinut" contenteditable="true" spellcheck="false">
+            <p>Examinînd cererea creditorului BC “April’s Bank” S.A. cu privire la
+            intentarea procedurii de executare în baza documentului executoriu
+            <%= procedură['document-executoriu']['numărul-de'] %> din
+            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
+            judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
+            prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %>
+            (<%= id(procedură.creditor) %>) de la <%= debitori %> a datoriei în
+            mărime totală de <span class="sumă"><%= totalDatorie %></span> MDL formată din:</p>
+
+            <ol>
+            <%
+              for (var descriere in procedură['obiectul-urmăririi']['sume']) {
+                var sumă = procedură['obiectul-urmăririi']['sume'][descriere]; %>
+              <li><%= descriere %> — <%= sumă.suma %> <%= sumă.valuta %></li>
+            <% } %>
+            </ol>
+
+            <p>am stabilit:</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Motivele</header>
+          <div class="conţinut" contenteditable="true" spellcheck="false">
+            <p>Documentul executoriu a fost înaintat spre executare în termen de persoana
+            împuternicită conform legii, respectîndu-se competenţa teritorială şi cuprinsul
+            acestuia corespunde cerinţelor legislaţiei în vigoare. Acesta nu are termen de
+            executare benevolă stabilit prin lege, şi nici nu este stabilit în documentul
+            executoriu.</p>
+
+            <p>În conformitate cu art. 10, 11, 14-16, 22, 60, 62, 66 al Codului de executare
+            RM, dispun:</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Dispoziţia</header>
+          <div class="conţinut" contenteditable="true" spellcheck="false">
+            <ol>
+              <li>a primi spre executare documentul executoriu numărul
+              <%= procedură['document-executoriu']['numărul-de'] %> din
+              <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
+              judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %></li>
+
+              <li>a intenta procedura de executare <%= login %>
+              <%= procedură['număr'] %> din <%= procedură['data-intentării'] %></li>
+
+              <li>a stabili concilierea părţilor la data de 26.10.2012, ora 14:30</li>
+              <li>a propune <%= debitori %> de a executa benevol documentul
+              executoriu în termen de 15 zile</li>
+            </ol>
+
+            <p>Încheierea este executorie din momentul emiterii şi poate fi contestată doar de
+            debitor în temeiul prevăzut de art. 61 lit. a) şi e) al Codului de executare RM.</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Executor</header>
+          <div class="conţinut" contenteditable="true" spellcheck="false">
+            <p><%= executor.nume %>, <%= executor.adresa %></p>
+          </div>
+        </section>
+
+        <section>
+          <div class="conţinut">
+            <div id="semnătura">
+              <p><%= moment(new Date).format('DD.MM.YYYY') %></p>
+              <p>Semnătura _____________</p>
+            </div>
+            <div id="ştampila">(loc pentru ştampilă)</div>
+          </div>
+        </section>
+
+      </article>
+    </script>
+  </body>
+</html>

@@ -108,3 +108,56 @@ p.titlu {
     display: none;
   }
 }
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+hgroup h2 {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0;
+  width: 70%;
+  margin-bottom: 1em;
+}
+
+section {
+  margin: .5em 0;
+}
+
+section header {
+  width: 8em;
+  float: left;
+  font-weight: bold;
+  text-align: right;
+}
+
+hgroup,
+section .conţinut {
+  margin-left: 8.5em;
+}
+
+p {
+  margin: .5em 0;
+  text-align: left;
+}
+
+ul,
+ol {
+  margin: .5em 0;
+}
+
+#semnătura, #ştampila {
+  display: inline-block;
+  padding: 4em 3em;
+}
+
+#ştampila {
+  font-size: .7em;
+}
+
+.sumă {
+  white-space: nowrap;
+}
