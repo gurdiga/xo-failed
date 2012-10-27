@@ -2596,6 +2596,7 @@ var Încheieri = {
     if (buton.is('.salvat')) {
       pagina = buton.data('pagina');
     } else {
+      // TODO: adaugă genul procedurii (-[SP])?
       pagina = '/formulare/' + încheiere + '.html';
     }
 
