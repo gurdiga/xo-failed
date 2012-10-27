@@ -1,18 +1,17 @@
-- de testat explorator preprod şi de făcut deploy pe prod
-  - de actualizat structura directoarelor de date
-  - de clarificat de ce nu se păstrează anexa 0_o
-
 - Imprimare
+  - formularul de intentare: în funcţie de genul procedurii (-[SP])?
+  - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
     - în beneficiul statului
     - pensie de întreţinere
+  - clasa no-print pentru controale în formulare
 
-- Introducere
+- Introducerea datelor
   - Materiale
 
 - Convenienţe
-  - “poliţă” temporară: la click în afara formularului în punem pe polţă
+  - “poliţă” temporară: la click în afara formularului în punem pe poliţă
 
 - Listare
 - Admin
@@ -29,13 +28,9 @@
   - istoria înregistrărilor
  
 Chestii tehnice
-  - build: de setat un stage env unde se vor rula testele şi doar după aceea de instalat pe prod?
-  - teste automatizate?
-    - node jake + lint
-    - cel mai simplu test: listă cu opţiuni
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
   - custom build of $UI
   - rollback deploy?
   - try a Centos VM deploy?
-  - upstart nginx & fcgi?
+
