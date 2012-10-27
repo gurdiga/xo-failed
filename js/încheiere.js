@@ -34,9 +34,9 @@ var Încheiere = {
         };
 
     var context = {
+      opener: opener,
       procedură: procedură,
       executor: opener.Profil.date,
-      moment: opener.moment,
       login: opener.Utilizator.login,
       buton: opener.Încheieri[Încheiere.pagina].buton,
       nume: nume,
