@@ -9,6 +9,17 @@
         var total = context.opener.Procedura.$.find('#total').val();
 
         context.totalDatorie = context.opener.accounting.formatNumber(total, 2, ' ', '.');
+
+        var conciliere = context.procedură.cheltuieli.itemi.taxaB11;
+
+        if (conciliere) {
+          context.conciliere = {
+            data: conciliere.subformular['data-concilierii'],
+            ora: conciliere.subformular['ora-concilierii']
+          };
+        } else {
+          context.conciliere = false;
+        }
       }
     </script>
     <script src="/js/încheiere.js"></script>
@@ -80,7 +91,10 @@
               <li>a intenta procedura de executare <%= login %>
               <%= procedură['număr'] %> din <%= procedură['data-intentării'] %></li>
 
-              <li>a stabili concilierea părţilor la data de 26.10.2012, ora 14:30</li>
+              <% if (conciliere) { %>
+              <li>a stabili concilierea părţilor la data de <%= conciliere.data %> ora <%= conciliere.ora %></li>
+              <% } %>
+
               <li>a propune <%= debitori %> de a executa benevol documentul
               executoriu în termen de 15 zile</li>
             </ol>
