@@ -720,7 +720,8 @@ var Procedura = {
       'persoane-terţe': colecteazăPersoaneTerţe(),
       'debitori': colecteazăDebitori(),
       'tip': HashController.date().match(/^[SP]?/)[0],
-      'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm')
+      'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm'),
+      'încheiere': Procedura.$.find('#container-data-intentării .buton[data-formular]').data('pagina')
     };
 
 
@@ -982,6 +983,13 @@ var Procedura = {
     Procedura.sePopulează = true;
 
     Procedura.$.find('#data-intentării').val(procedură['data-intentării']);
+
+    if (procedură['încheiere']) {
+      Procedura.$.find('#container-data-intentării .buton[data-formular]')
+        .data('pagina', procedură['încheiere'])
+        .addClass('salvat');
+    }
+
     Procedura.$.find('#data-ultimei-modificări span')
       .text(procedură['data-ultimei-modificări'])
       .parent().show();

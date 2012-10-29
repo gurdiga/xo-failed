@@ -5,8 +5,12 @@ var Încheiere = {
 
     Încheiere.$ = opener.$(document.body);
 
-    if (!Încheiere.compilată()) Încheiere.compilează();
-    Încheiere.iniţial = Încheiere.conţinut();
+    if (!Încheiere.compilată()) {
+      Încheiere.compilează();
+    } else {
+      Încheiere.iniţial = Încheiere.conţinut();
+    }
+
     Încheiere.butonDeÎnchidere.init();
     Încheiere.baraDeInstrumente.init();
 
@@ -95,12 +99,11 @@ var Încheiere = {
   marcheazăButonul: function() {
     var buton = opener.Încheieri[Încheiere.pagina].buton;
 
-    if (!buton.is('.salvat')) {
-       buton
-        .addClass('salvat')
-        .data('pagina', Încheiere.pagina)
-        .attr('title', function(_, title) {return title + ' (salvat)'});
-    }
+    if (!buton.is('.salvat')) buton.addClass('salvat');
+
+    buton
+      .data('pagina', Încheiere.pagina)
+      .attr('title', function(_, title) {return title + ' (salvat)'});
   },
 
   cale: function() {
