@@ -772,6 +772,14 @@ input[type="checkbox"]+label {
   vertical-align: -.8em;
 }
 
+#cheltuieli .adăugate .item[data-şablon-subformular="data şi ora concilierii"] input[type="text"] {
+  width: 7em;
+}
+
+#cheltuieli .adăugate .item[data-şablon-subformular="data şi ora concilierii"] .subformular {
+  padding: 0;
+}
+
 button,
 .elimină,
 input[type="radio"],
