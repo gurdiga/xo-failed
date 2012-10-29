@@ -33,11 +33,19 @@
     document: false
   };
 
-  var skipLint = 'qunit-1.10.0.js jshint.js qhint.js'.split(' '),
-      selector = 'script', i, l;
+  var IGNORE_URLS = [
+    'qunit-1.10.0.js',
+    'jshint.js',
+    'qhint.js',
+    '//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js',
+    '//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js',
+    '/js/lib.js'
+  ];
 
-  for (i = 0, l = skipLint.length; i < l; i++) {
-    selector += ':not([src="' + skipLint[i] + '"])';
+  var selector = 'script', i, l;
+
+  for (i = 0, l = IGNORE_URLS.length; i < l; i++) {
+    selector += ':not([src="' + IGNORE_URLS[i] + '"])';
   }
 
   var scripts = document.querySelectorAll(selector), script;
