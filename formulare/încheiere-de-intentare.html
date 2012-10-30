@@ -44,9 +44,9 @@
         <section>
           <header>Chestiunea</header>
           <div class="conţinut" contenteditable="true" spellcheck="false">
-            <p>Examinînd cererea creditorului BC “April’s Bank” S.A. cu privire la
-            intentarea procedurii de executare în baza documentului executoriu
-            <%= procedură['document-executoriu']['numărul-de'] %> din
+            <p>Examinînd cererea creditorului urmăritor <%= nume(procedură.creditor) %>
+            cu privire la intentarea procedurii de executare în baza documentului
+            executoriu <%= procedură['document-executoriu']['numărul-de'] %> din
             <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
             judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
             prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %>
