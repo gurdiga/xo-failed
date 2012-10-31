@@ -92,11 +92,13 @@
               <%= procedură['număr'] %> din <%= procedură['data-intentării'] %></li>
 
               <% if (conciliere) { %>
-              <li>a stabili concilierea părţilor la data de <%= conciliere.data %> ora <%= conciliere.ora %></li>
+              <li>a stabili concilierea părţilor la data de <%= conciliere.data %> ora
+              <%= conciliere.ora %></li>
               <% } %>
 
               <li>a propune <%= debitori %> de a executa benevol documentul
               executoriu în termen de 15 zile</li>
+              <li>a expedia încheierea prezentă părţilor pentru informare</li>
             </ol>
 
             <p>Încheierea este executorie din momentul emiterii şi poate fi contestată doar de

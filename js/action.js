@@ -609,6 +609,10 @@ var Procedura = {
     });
   },
 
+  tip: function () {
+    return HashController.date().match(/^[SP]?/)[0];
+  },
+
   baraDeInstrumente: {
     init: function () {
       Procedura.$.find('.bara-de-instrumente')
@@ -699,7 +703,7 @@ var Procedura = {
   },
 
   seteazăTitlu: function () {
-    var literă = HashController.date().match(/^[SP]?/)[0],
+    var literă = Procedura.tip(),
         href = '#formular' + (literă ? '?' + literă : ''),
         descriereProcedură = $('#crează-procedură').find('a[href="' + href + '"]').text(),
         număr = Procedura.seCreazăProcedurăNouă() ? '' : Utilizator.login + HashController.date();
@@ -719,7 +723,7 @@ var Procedura = {
       'creditor': colectează('#creditor'),
       'persoane-terţe': colecteazăPersoaneTerţe(),
       'debitori': colecteazăDebitori(),
-      'tip': HashController.date().match(/^[SP]?/)[0],
+      'tip': Procedura.tip(),
       'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm'),
       'încheiere': Procedura.$.find('#container-data-intentării .buton[data-formular]').data('pagina')
     };
@@ -2599,11 +2603,14 @@ var Încheieri = {
   deschide: function () {
     var buton = $(this),
         încheiere = buton.data('formular'),
+        prefix = '',
         pagina;
 
     if (buton.is('.salvat')) {
       pagina = buton.data('pagina');
     } else {
+      prefix = Procedura.$obiectulUrmăririi.find('#caracter').val().substr(0, 1);
+      prefix += Procedura.tip().toLowerCase();
       // TODO: adaugă genul procedurii (-[SP])?
       pagina = '/formulare/' + încheiere + '.html';
     }
