@@ -8,7 +8,7 @@ files="
   js/action.js
   js/lib.js
   js/încheiere.js
-  formulare/*
+  formulare/*.html
 "
 
 echo "Pregzipuiesc cod..."
