@@ -944,6 +944,7 @@ var Procedura = {
       var literă = HashController.date();
 
       procedură.număr = literă + '-' + (ultimulNumăr + 1);
+      ProceduriRecente.încarcăForţat = true;
       post();
     });
 
@@ -1364,6 +1365,12 @@ var ProceduriRecente = {
     $.getJSON(ProceduriRecente.url(), ProceduriRecente.afişează);
   },
 
+  încarcăFărăCache: function () {
+    var cacheBuster = '?' + +new Date;
+
+    $.getJSON(ProceduriRecente.url() + cacheBuster, ProceduriRecente.afişează);
+  },
+
   afişează: function (proceduri) {
     if (proceduri.length == 0 || !Căutare.index) return;
 
@@ -1531,7 +1538,13 @@ var Căutare = {
 
   seteazăIndex: function (data) {
     Căutare.index = data;
-    ProceduriRecente.încarcă();
+
+    if (ProceduriRecente.încarcăForţat) {
+      ProceduriRecente.încarcăForţat = false;
+      ProceduriRecente.încarcăFărăCache();
+    } else {
+      ProceduriRecente.încarcă();
+    }
   }
 };
 
