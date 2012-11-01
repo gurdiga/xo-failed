@@ -932,7 +932,7 @@ var Procedura = {
     if (procedură.număr) post();
     else $.get('/date/' + Utilizator.login + '/proceduri/', function (răspuns) {
       var ultimulNumăr = $(răspuns).find('a').map(function () {
-        var reNumăr = /^([SP]?)-(\d+).json$/;
+        var reNumăr = /^([SP]?)-(\d+).json.gz$/;
 
         if (reNumăr.test(this.firstChild.data)) {
           return parseInt(this.firstChild.data.match(reNumăr)[2]);
