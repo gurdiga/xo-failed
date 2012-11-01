@@ -66,9 +66,9 @@ server {
     location ~ /date/\d+/proceduri/index\.json$ {
       more_clear_headers 'Content-Type';
       more_set_headers 'Content-Encoding: gzip';
-      more_set_headers 'Content-Type: text/javascript; charset=utf-8';
+      more_set_headers 'Content-Type: application/json; charset=utf-8';
 
-      fastcgi_param SCRIPT_FILENAME $document_root$uri.gz;
+      fastcgi_param SCRIPT_FILENAME $document_root/bin/citeşte.php;
       include conf.d/executori.org/rest.conf;
     }
 
