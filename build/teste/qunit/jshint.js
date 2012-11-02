@@ -790,7 +790,7 @@ var JSHINT = (function () {
 
 	// Regular expressions. Some of these are stupidly long.
 	var ax, cx, tx, nx, nxg, lx, ix, jx, ft;
-	var uLu, uLl, uL;
+	var uLu, uLl, uL, uLre;
 	var constructorName, camelCase;
 
 	(function () {
@@ -838,6 +838,7 @@ var JSHINT = (function () {
 			"𝞶𝞷𝞸𝞹𝞺𝞻𝞼𝞽𝞾𝞿𝟀𝟁𝟂𝟄𝟅𝟆𝟇𝟈𝟉";
 
 		uL = uLu + uLl;
+		uLre = new RegExp('[' + uL + ']');
 
 
 		constructorName = new RegExp("^[" + uLu + "]([" + uLu + "0-9_$]*[" + uLl + "][" + uL + "0-9_$]*)?$");
@@ -968,8 +969,7 @@ var JSHINT = (function () {
 	// Non standard methods
 
 	function isAlpha(str) {
-		return (str >= "a" && str <= "z\uffff") ||
-			(str >= "A" && str <= "Z\uffff");
+		return uLre.test(str);
 	}
 
 	function isDigit(str) {
