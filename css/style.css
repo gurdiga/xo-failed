@@ -13,6 +13,10 @@ body {
   overflow-x: hidden;
 }
 
+:focus {
+  outline: 1px solid #ddd;
+}
+
 #autentificare a {
   color: blue;
 }
@@ -62,7 +66,13 @@ input {
   outline-width: 0;
   border: none;
   width: 14em;
-  background: transparent url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 0;
+  background-position: 0 0;
+}
+
+#profil.dialog span.şoaptă-cod-bancă,
+textarea,
+input {
+  background-image: url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7');
 }
 
 textarea.lat {
@@ -479,6 +489,9 @@ input.sumă {
 #formular h1 {
   margin: 40px 0 20px;
   font-size: 3em;
+}
+
+#formular h1:focus {
   outline: none;
 }
 
@@ -1008,7 +1021,7 @@ button.cu.opţiuni:after {
   font-weight: bold;
   color: #999;
   padding-left: .3em;
-  background: url('data:image/gif;base64,R0lGODlhMgAYAIABAN3d3f///yH5BAEKAAEALAAAAAAyABgAAAIrjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyrAGBjd96zu9+D/wFCgA7') 0 -8px;
+  background-position: 0 -8px;
 }
 
 #profil.dialog input.sufix-cod-bancă {
@@ -1304,33 +1317,4 @@ label.checkbox input {
 
 #materiale #încheieri li:hover .data-şi-ora-salvării {
   color: #aaa;
-}
-
-@-moz-document url-prefix() {
-  h1 {
-    letter-spacing: -.05em;
-  }
-
-  .dialog legend label {
-    letter-spacing: -.05em;
-  }
-
-  :focus {
-    outline: 1px solid #ddd;
-  }
-
-  #bara-de-sus .instrumente>button,
-  textarea:focus,
-  select:focus,
-  input:focus {
-    outline: none;
-  }
-
-  .ui-icon-print {
-    vertical-align: 4px;
-  }
-
-  input {
-    padding: .3em;
-  }
 }

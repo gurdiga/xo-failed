@@ -12,43 +12,37 @@
     noempty: true,
     nonew: true,
     quotmark: true,
-    regexp: true,
     undef: true,
     unused: true,
     strict: true,
     trailing: true,
     maxparams: 3,
     maxdepth: 4,
-    maxstatements: 20,
+    maxstatements: 30,
     maxcomplexity: 4,
-    maxlen: 100
+    maxlen: 120,
+    sub: true
   };
 
   var JSHINT_GLOBALS = {
     module: false,
+    start: false,
     test: false,
+    asyncTest: false,
     equal: false,
     ok: false,
     jsHintTest: false,
-    document: false
+    document: false,
+    window: false,
+    location: true,
+    $: false,
+    setTimeout: false,
+    setInterval: false,
+    opener: false,
+    history: false
   };
 
-  var IGNORE_URLS = [
-    'qunit-1.10.0.js',
-    'jshint.js',
-    'qhint.js',
-    '//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js',
-    '//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js',
-    '/js/lib.js'
-  ];
-
-  var selector = 'script', i, l;
-
-  for (i = 0, l = IGNORE_URLS.length; i < l; i++) {
-    selector += ':not([src="' + IGNORE_URLS[i] + '"])';
-  }
-
-  var scripts = document.querySelectorAll(selector), script;
+  var scripts = document.querySelectorAll('script:not(.dont-lint)'), script, i, l;
 
   module('Linting');
 
