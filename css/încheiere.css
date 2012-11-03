@@ -7,10 +7,16 @@
   /*size: A4;*/
 }
 
+@media print {
+  [contenteditable="true"]:focus {
+    outline-width: 0;
+  }
+}
+
 body {
   width: 18cm;
   padding: 0 1.5cm;
-  /*font-size: 1.2em;*/
+  font-size: 14px;
   font-family: Georgia, serif;
 }
 
