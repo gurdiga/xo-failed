@@ -2802,7 +2802,7 @@
 
   // --------------------------------------------------
 
-  Action.init();
+  if (!('QUnit' in window)) Action.init();
 
   window.Profil = Profil;
   window.Procedura = Procedura;
