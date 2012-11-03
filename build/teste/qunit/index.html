@@ -4,9 +4,26 @@
   <meta charset="utf-8">
   <title>QUnit</title>
   <link rel="stylesheet" href="qunit-1.10.0.css">
+  <style>
+    iframe#app {
+      position: absolute;
+      top: 5%;
+      right: 20px;
+      width: 80%;
+      height: 90%;
+      border: 1px solid silver;
+      box-sizing: border-box;
+      display: none;
+    }
+
+    #qunit:hover+#app {
+      opacity: .1;
+    }
+  </style>
 </head>
 <body>
   <div id="qunit"></div>
+  <iframe name="app" id="app" src=""></iframe>
   <script class="dont-lint" src="qunit-1.10.0.js"></script>
   <script class="dont-lint" src="jshint.js"></script>
   <script class="dont-lint" src="qhint.js"></script>
@@ -19,7 +36,7 @@
   <script class="dont-lint" src="/js/lib.js"></script>
   <script src="/js/action.js"></script>
   <script src="/js/încheiere.js"></script>
-  <script src="tests.js"></script>
+  <script src="integrare.js"></script>
 
   <script src="qunit-csslint.js"></script>
   <script src="lint.js"></script>

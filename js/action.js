@@ -1307,7 +1307,9 @@
         .find('.bara-de-instrumente').fadeIn('slow').end()
         .css('top', $(window).height())
         .show()
-        .animate({'top': '40px'});
+        .animate({'top': '40px'}, function () {
+          Procedura.$.trigger('finalizat-animaţie');
+        });
 
       if (Procedura.seDeschideProcedurăSalvată()) {
         Procedura.încarcă();
@@ -2808,5 +2810,8 @@
   window.Procedura = Procedura;
   window.Utilizator = Utilizator;
   window.Încheieri = Încheieri;
+
+  // pentru testare
+  window.FORMATUL_DATEI = FORMATUL_DATEI;
 
 })();
