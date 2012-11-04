@@ -7,13 +7,17 @@
   <style>
     iframe#app {
       position: absolute;
-      top: 5%;
+      top: 1.5%;
       right: 20px;
       width: 80%;
-      height: 90%;
+      height: 95%;
       border: 1px solid silver;
       box-sizing: border-box;
       display: none;
+      -webkit-transition: opacity .25s;
+      -moz-transition: opacity .25s;
+      -o-transition: opacity .25s;
+      transition: opacity .25s;
     }
 
     #qunit:hover+#app {
@@ -36,6 +40,7 @@
   <script class="dont-lint" src="/js/lib.js"></script>
   <script src="/js/action.js"></script>
   <script src="/js/încheiere.js"></script>
+  <script src="utilitare.js"></script>
   <script src="integrare.js"></script>
 
   <script src="qunit-csslint.js"></script>
