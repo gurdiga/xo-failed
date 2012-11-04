@@ -96,6 +96,7 @@
     init: function () {
       $(window)
         .on('hashchange', function (e) {
+          if (!(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
           if (window.skipEventOnce.hashchange) {
             e.stopImmediatePropagation();
             delete window.skipEventOnce.hashchange;
@@ -1386,7 +1387,7 @@
     },
 
     încarcăFărăCache: function () {
-      var cacheBuster = '?' + (new Date()).getTme();
+      var cacheBuster = '?' + (new Date()).getTime();
 
       $.getJSON(ProceduriRecente.url() + cacheBuster, ProceduriRecente.afişează);
     },
@@ -1408,6 +1409,7 @@
         .on('mouseleave', '.item', function () { $(this).removeClass('selectat'); });
 
       ProceduriRecente.încărcat = true;
+      $(document).trigger('încărcat-proceduri-recente');
     },
 
     notează: function (număr) {
@@ -2340,6 +2342,7 @@
 
         Onorariu.$.val(onorariu.toFixed(2));
         Onorariu.timerCalculare = false;
+        $(document).trigger('calculat-onorariul');
       }, 200);
     },
 
@@ -2813,5 +2816,6 @@
 
   // pentru testare
   window.FORMATUL_DATEI = FORMATUL_DATEI;
+  window.UC = UC;
 
 })();

@@ -1,5 +1,6 @@
+- delete procedură
+
 - Imprimare
-  - 14px
   - blur contenteditables on print
   - formularul de intentare: în funcţie de genul procedurii (-[SP])?
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
@@ -11,6 +12,7 @@
 
 - Introducerea datelor
   - Materiale
+  - de trecut recentele la symlink-uri gen timestamp+#
 
 - Convenienţe
   - “poliţă” temporară: la click în afara formularului în punem pe poliţă
@@ -30,9 +32,14 @@
   - istoria înregistrărilor
  
 Chestii tehnice
+  - tidy formularele de încheiere? sed-out <%%>
+  - switch updates to HTTP PUT
+  - timeout session from JS and logout?
+  - http://wiki.nginx.org/HttpRefererModule#valid_referers?
+  - protect php scripts from direct access? whitelist?
+  - de verificat versiunea browserului?
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
   - custom build of $UI
   - rollback deploy?
   - try a Centos VM deploy?
-
