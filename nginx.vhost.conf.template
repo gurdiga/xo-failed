@@ -61,7 +61,11 @@ server {
     auth_basic_user_file /var/www/$host/.htusers;
     more_set_headers 'Cache-Control: private';
 
-    set $method_and_uri "${request_uri}";
+    set $permission_tuple "$remote_user:$request_uri";
+
+    if ($permission_tuple !~ "^([^:]+):/date/\1/") {
+      return 403;
+    }
 
     location ~ /date/\d+/proceduri/index\.json$ {
       more_clear_headers 'Content-Type';
