@@ -1,8 +1,5 @@
 <?
 
-require dirname(__FILE__) . '/htusers.php';
-
-
 if (isset($argv) && count($argv) == 3) {
   if ($argv[1] == 'delete') {
     $login = $argv[2];
