@@ -12,16 +12,17 @@
     },
 
     venit: function (e) {
-      /*jshint maxcomplexity:5*/
-      var întîmplat = this.întîmplat;
+      /*jshint maxcomplexity:6*/
+      var întîmplat = this.întîmplat,
+          venitToate = true;
 
       for (var eveniment in întîmplat) {
         if (!întîmplat.hasOwnProperty(eveniment)) continue;
         if (eveniment === e.type) întîmplat[eveniment] = true;
-        if (!întîmplat[eveniment]) return;
+        if (!întîmplat[eveniment]) venitToate = false;
       }
 
-      start();
+      if (venitToate) start();
     }
   };
 
