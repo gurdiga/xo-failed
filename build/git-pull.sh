@@ -2,12 +2,8 @@
 
 echo 'Git pull...'
 
-git pull origin master &> .git.log
-git reset --hard origin/master &>> .git.log
-
-if [ $? -ne 0 ]; then
-  cat .git.log
-  exit
-fi
+git pull origin master
+git checkout master
+git reset --hard origin/master
 
 echo ''
