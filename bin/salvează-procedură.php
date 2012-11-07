@@ -24,7 +24,7 @@ function salvează($procedură) {
 
   înscrie_fişier(cale($procedură), json_encode($procedură));
   notează_ca_recentă($procedură['număr']);
-  reindexează($procedură);
+  reindexează_proceduri();
 }
 
 // ------------------------------

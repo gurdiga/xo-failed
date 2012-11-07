@@ -92,10 +92,10 @@ function citeşte_fişier($cale) {
 
 // ------------------------------
 
-function reindexează($procedură) {
+function reindexează_proceduri() {
   global $login;
 
-  $dir = dirname(cale($procedură));
+  $dir = "../date/$login/proceduri";
   $fişiere = glob("$dir/*-[0-9]*");
 
   $index = array('' => array());

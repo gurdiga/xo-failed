@@ -7,7 +7,7 @@ curl \
   --include \
   --silent \
   --output $TMP_FILE \
-  https://$SERVER_NAME/bin/login.php
+  https://$SERVER_NAME/login
 
 verifică 'răspuns OK'
 

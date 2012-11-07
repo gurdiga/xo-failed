@@ -44,60 +44,36 @@ server {
   error_page 404 /erori/404.html;
   error_page 401 /erori/401.html;
 
-  location ~ /js/.*\.js$ {
-    more_set_headers 'Content-Type: text/javascript; charset=utf-8';
+  location = /login {
+    auth_basic "Autentificare";
+    auth_basic_user_file /var/www/$host/.htusers;
+
+    if ($remote_user != "") {
+      more_set_headers "Set-Cookie: login=$remote_user; path=/";
+      return 302 '/';
+    }
   }
 
-  location ~ .*\.json$ {
-    more_set_headers 'Content-Type: application/json; charset=utf-8';
+  location ~ /js/.*\.js$ {
+    add_header Content-Type 'text/javascript; charset=utf-8';
   }
 
   location /css/ {
-    more_set_headers 'Content-Type: text/css; charset=utf-8';
+    add_header Content-Type 'text/css; charset=utf-8';
   }
 
   location /date/ {
     auth_basic "Autentificare";
     auth_basic_user_file /var/www/$host/.htusers;
-    more_set_headers 'Cache-Control: private';
 
-    set $permission_tuple "$remote_user:$request_uri";
+    add_header Cache-Control private;
 
-    if ($permission_tuple !~ "^([^:]+):/date/\1/") {
-      return 403;
-    }
-
-    location ~ /date/\d+/proceduri/index\.json$ {
-      more_clear_headers 'Content-Type';
-      more_set_headers 'Content-Encoding: gzip';
+    location ~ /date/\d+/.*\.json$ {
       more_set_headers 'Content-Type: application/json; charset=utf-8';
-
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/citeşte.php;
-      include conf.d/executori.org/rest.conf;
-    }
-
-    location ~ /date/\d+/proceduri/recente\.json$ {
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/notează-ca-recentă.php;
-      include conf.d/executori.org/rest.conf;
-    }
-
-    location ~ /date/\d+/proceduri/[PS]?-\d+\.json$ {
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-procedură.php;
       include conf.d/executori.org/rest.conf;
     }
 
     location ~ /date/\d+/încheieri/.+\.html$ {
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-încheiere.php;
-      include conf.d/executori.org/rest.conf;
-    }
-
-    location ~ /date/\d+/profil\.json$ {
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-profil.php;
-      include conf.d/executori.org/rest.conf;
-    }
-
-    location ~ /date/\d+/încheieri/.+\.html {
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/salvează-încheiere.php;
       include conf.d/executori.org/rest.conf;
     }
   }
