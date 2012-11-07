@@ -3,26 +3,20 @@
 
 
   window.Evenimente = {
-    întîmplat: {},
+    aşteptate: [],
 
-    aşteaptă: function (evenimente) {
-      for (var i = 0, l = evenimente.length; i < l; i++) {
-        this.întîmplat[evenimente[i]] = false;
-      }
+    aşteaptă: function (eveniment) {
+      this.aşteptate.push(eveniment);
     },
 
-    venit: function (e) {
-      /*jshint maxcomplexity:6*/
-      var întîmplat = this.întîmplat,
-          venitToate = true;
+    venit: function (eveniment) {
+      var index = this.aşteptate.indexOf(eveniment);
 
-      for (var eveniment in întîmplat) {
-        if (!întîmplat.hasOwnProperty(eveniment)) continue;
-        if (eveniment === e.type) întîmplat[eveniment] = true;
-        if (!întîmplat[eveniment]) venitToate = false;
-      }
+      if (index === -1) throw 'Venit eveniment neaşteptat: ' + eveniment;
 
-      if (venitToate) start();
+      this.aşteptate.splice(index, 1);
+
+      if (this.aşteptate.length === 0) start();
     }
   };
 

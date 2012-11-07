@@ -4,6 +4,9 @@ $('#app').on('load', function () {
 
   module('Integrare');
 
+
+  QUnit.config.testTimeout = 10000;
+
   var app = window.frames['app'];
 
   // --------------------------------------------------
@@ -115,44 +118,47 @@ $('#app').on('load', function () {
       $obiectulUrmăririi.find('.adaugă-cîmp-personalizat').click();
       $obiectulUrmăririi.find('.personalizat:last')
         .find('.etichetă').val('Datorie adăugătoare').end()
-        .find('.sumă').val(sume['Datorie adăugătoare']).trigger('change');
+        .find('.sumă').val(sume['Datorie adăugătoare']);
 
-      Evenimente.aşteaptă(['calculat-onorariul']);
-      app.$(app.document).one('calculat-onorariul', function (e) {
+      Evenimente.aşteaptă('calculat-onorariul');
+      app.$(app.document).one('calculat-onorariul', function () {
         equal(
           $obiectulUrmăririi.find('#total').suma(),
           sume['Suma de bază'] + sume['Datorie adăugătoare'],
           'totalul e suma sumelor'
         );
 
-        Evenimente.venit(e);
+        Evenimente.venit('calculat-onorariul');
       });
 
       var onorariuImplicit = dateProcedură['cheltuieli']['onorariu'];
 
-      equal(app.Procedura.$.find('#onorariu').suma(), onorariuImplicit,
+      equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit,
         'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
       equal(app.Procedura.$.find('#total-taxe-şi-speze').suma(), app.UC,
         'cheltuieli: total implicit taxe şi speze == taxa de intentare');
       ok(app.Procedura.$.find('#cheltuieli .adăugate #taxaA1').există(),
         'cheltuieli: taxa de intentare este adăugată implicit');
 
-      Evenimente.aşteaptă(['încărcat-proceduri-recente']);
+      Evenimente.aşteaptă('încărcat-proceduri-recente');
       app.$(app.document).one('încărcat-proceduri-recente', verificăProceduraNouCreată);
 
       app.Procedura.$.find('.bara-de-instrumente .salvează').click();
       app.Procedura.$.find('.închide').click();
     });
 
-    function verificăProceduraNouCreată(e) {
+    function verificăProceduraNouCreată() {
       var id = dateProcedură['creditor']['idno'],
-          proceduraNouCreată = app.$('#proceduri-recente .item:first .persoane .id:contains("' + id + '")');
+          proceduraNouCreată = '#proceduri-recente .item .persoane .id:contains("' + id + '"):first',
+          $proceduraNouCreată = app.$(proceduraNouCreată);
 
-      ok(proceduraNouCreată.există(), 'procedura nou creată e adăugată prima în lista celor recente');
+      ok($proceduraNouCreată.există(), 'procedura nou creată e adăugată prima în lista celor recente');
 
-      Evenimente.aşteaptă(['populat']);
-      proceduraNouCreată.click();
-      app.Procedura.$.one('populat', function (e) {
+      Evenimente.aşteaptă('populat');
+      Evenimente.venit('încărcat-proceduri-recente');
+      $proceduraNouCreată.click();
+
+      app.Procedura.$.one('populat', function () {
         equal($dataIntentării.val(), dateProcedură['data-intentării'], 'salvat data intentării');
         equal($creditor.find('#denumire').val(), creditor['denumire'], 'salvat denumire creditor');
         equal($creditor.find('#idno').val(), creditor['idno'], 'salvat idno creditor');
@@ -177,10 +183,25 @@ $('#app').on('load', function () {
         equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL',
             'salvat valuta datorie adăugătoare');
 
-        Evenimente.venit(e);
-      });
+        app.Procedura.$.find('.închide').click();
 
-      Evenimente.venit(e);
+        Evenimente.aşteaptă('şters-procedura-nou-creată');
+        Evenimente.venit('populat');
+
+        var numărProcedură = app.Procedura.$.find('#număr').text().match(/-\d+/)[0];
+
+        $.ajax({
+          url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '.json',
+          type: 'DELETE',
+          success: function () {
+            ok(true, 'şters procedura de test');
+
+            Evenimente.venit('şters-procedura-nou-creată');
+            app.ProceduriRecente.încarcăFărăCache();
+          }
+        });
+
+      });
     }
   });
 
@@ -192,12 +213,30 @@ $('#app').on('load', function () {
 
 
   // --------------------------------------------------
-  test('TODO: Căutare', function () {
-    var $secţiune = app.$('#căutare');
+  asyncTest('TODO: Căutare', function () {
+    Evenimente.aşteaptă('actualizat-index');
+    app.Căutare.încarcăIndexFărăCache();
 
-    $secţiune.find('input').val('vlad').trigger('input');
-    ok(true);
-    //ok($secţiune.find('#rezultate').length > 0, 'găsit rezultate');
+    app.$(app.document).one('actualizat-index', function () {
+      var $secţiune = app.$('#căutare');
+
+      $secţiune.find('input').val(app.Utilizator.login).trigger('input');
+
+      var rezultate = $secţiune.find('#rezultate .item');
+
+      ok(rezultate.există(), 'găsit rezultate');
+      rezultate.first().trigger('mouseenter').click();
+
+      Evenimente.aşteaptă('populat');
+      Evenimente.venit('actualizat-index');
+
+      app.$(app.Procedura.$).one('populat', function () {
+        ok(true, 'click pe itemi din lista de rezultate deschide procedura');
+        app.Procedura.$.find('.închide').click();
+
+        Evenimente.venit('populat');
+      });
+    });
   });
 
-}).attr('src', 'http://dev.executori.org/').show();
+}).attr('src', 'https://dev.executori.org/').show();

@@ -25,6 +25,7 @@
   };
 
   var JSHINT_GLOBALS = {
+    QUnit: false,
     module: false,
     start: false,
     test: false,

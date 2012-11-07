@@ -1,6 +1,8 @@
-default: tidy
+default: lint
 
-tidy:
+lint: linthtml lintnginx lintphp
+
+linthtml:
 	@echo " - index.html"
 	@tidy -quiet -errors -utf8 -xml index.html
 
@@ -9,11 +11,17 @@ tidy:
 		fgrep -v 'text/micro-template' $$formular | tidy -quiet -errors -utf8 -xml; \
 	done
 
-deploy:
+lintnginx:
+	@# TODO lintnginx
+
+lintphp:
+	@# TODO lintphp
+
+deploy: lint stage
 	@./build/deploy.sh prod
 
-preprod:
+stage: lint
 	@./build/deploy.sh preprod
 
-ce:
+what:
 	@rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build

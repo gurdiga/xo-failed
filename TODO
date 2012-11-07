@@ -1,4 +1,7 @@
-- delete procedură
+- require.js pentru redundanţă la CDN
+- Căutare
+  - de scris: Proceduri găsite
+  - link pentru toate procedurile
 
 - Imprimare
   - blur contenteditables on print
@@ -12,12 +15,13 @@
 
 - Introducerea datelor
   - Materiale
+  - de trecut de la link-uri pentru file la <li>, e mai uşor de testat cu .click()
   - de trecut recentele la symlink-uri gen timestamp+#
+  - arhivare proceduri
 
 - Convenienţe
   - “poliţă” temporară: la click în afara formularului în punem pe poliţă
 
-- Listare
 - Admin
   - înregistrare utilizator
     - de creat structura de subdirectoare

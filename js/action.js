@@ -1403,21 +1403,16 @@
         lista[număr] = Căutare.index[''][număr];
       });
 
-      ProceduriRecente.$
-        .html(ListăDeProceduri.formatează(lista))
-        .on('mouseenter', '.item', function () { $(this).addClass('selectat'); })
-        .on('mouseleave', '.item', function () { $(this).removeClass('selectat'); });
+      ProceduriRecente.$.html(ListăDeProceduri.formatează(lista));
 
       ProceduriRecente.încărcat = true;
       $(document).trigger('încărcat-proceduri-recente');
     },
 
     notează: function (număr) {
-      setTimeout(function () {
-        if (ProceduriRecente.numărulUltimei() === număr) return;
+      if (ProceduriRecente.numărulUltimei() === număr) return;
 
-        $.post(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
-      }, 1000);
+      $.post(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
     },
 
     numărulUltimei: function () {
@@ -1443,6 +1438,7 @@
         .bind('keyup', 'esc', function () { $(this).val('').trigger('input'); });
 
       Căutare.rezultate.$
+        .on('click', '.item', Căutare.rezultate.deschide)
         .on('mouseenter', '.item', function () { $(this).addClass('selectat'); })
         .on('mouseleave', '.item', function () { $(this).removeClass('selectat'); });
 
@@ -1568,6 +1564,8 @@
       } else {
         ProceduriRecente.încarcă();
       }
+
+      $(document).trigger('actualizat-index');
     }
   },
 
@@ -2343,7 +2341,7 @@
         Onorariu.$.val(onorariu.toFixed(2));
         Onorariu.timerCalculare = false;
         $(document).trigger('calculat-onorariul');
-      }, 200);
+      }, 100);
     },
 
     pecuniar: function (suma) {
@@ -2811,11 +2809,14 @@
 
   window.Profil = Profil;
   window.Procedura = Procedura;
+  window.ProceduriRecente = ProceduriRecente;
   window.Utilizator = Utilizator;
   window.Încheieri = Încheieri;
+  window.Subsecţiuni = Subsecţiuni;
 
   // pentru testare
   window.FORMATUL_DATEI = FORMATUL_DATEI;
   window.UC = UC;
+  window.Căutare = Căutare;
 
 })();
