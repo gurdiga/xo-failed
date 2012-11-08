@@ -1,4 +1,5 @@
 - require.js pentru redundanţă la CDN
+- http://www.webpagetest.org/
 - Căutare
   - de scris: Proceduri găsite
   - link pentru toate procedurile
@@ -36,10 +37,9 @@
   - istoria înregistrărilor
  
 Chestii tehnice
-  - tidy formularele de încheiere? sed-out <%%>
+  - performanţă: YSlow & PageSpeed, about:tracing
   - switch updates to HTTP PUT
   - timeout session from JS and logout?
-  - http://wiki.nginx.org/HttpRefererModule#valid_referers?
   - protect php scripts from direct access? whitelist?
   - de verificat versiunea browserului?
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)

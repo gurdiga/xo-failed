@@ -569,7 +569,7 @@
 
     verificăSessiuneaHttp: function () {
       $(document).ajaxError(function (event, response) {
-        if (response.status === 401) {
+        if (response.status === 401 || response.status === 403) {
           $.cookie('login', null);
           location.reload();
         }
