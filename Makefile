@@ -23,10 +23,10 @@ lintphp:
 	done
 
 deploy: lint stage
-	@./build/deploy.sh prod
+	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org; build/deploy.sh prod'
 
 stage: lint
-	@./build/deploy.sh preprod
+	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/executori.org; build/deploy.sh stage'
 
 what:
 	@rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build
