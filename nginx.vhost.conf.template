@@ -61,7 +61,7 @@ server {
   }
 
   location /bnm/ {
-    add_header Content-Type 'text/javascript; charset=utf-8';
+    more_set_headers 'Content-Type: text/javascript; charset=utf-8';
     expires 3h;
   }
 
