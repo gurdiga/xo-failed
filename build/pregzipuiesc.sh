@@ -9,6 +9,8 @@ files="
   js/lib.js
   js/încheiere.js
   formulare/*.html
+  bnm/current.js
+  bnm/rata_de_bază.js
 "
 
 echo "Pregzipuiesc cod..."
