@@ -66,11 +66,11 @@ server {
   }
 
   location ~ /js/.*\.js$ {
-    add_header Content-Type 'text/javascript; charset=utf-8';
+    more_set_headers 'Content-Type: text/javascript; charset=utf-8';
   }
 
   location /css/ {
-    add_header Content-Type 'text/css; charset=utf-8';
+    more_set_headers 'Content-Type: text/css; charset=utf-8';
   }
 
   location /date/ {
