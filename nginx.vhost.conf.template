@@ -37,6 +37,8 @@ server {
   include conf.d/locations/favicon.conf;
   include conf.d/locations/bin.conf;
 
+  charset utf-8;
+
   gzip_static on;
   autoindex on;
   autoindex_localtime on;
