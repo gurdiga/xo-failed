@@ -22,11 +22,13 @@ lintphp:
 		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
 	done
 
+PULL = git pull; git reset --hard origin/master
+
 deploy: lint stage
-	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org; build/deploy.sh prod'
+	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org; ${PULL}; build/start.sh'
 
 stage: lint
-	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org; build/deploy.sh stage'
+	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org; ${PULL}; build/start.sh'
 
 what:
 	@rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build
