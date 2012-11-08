@@ -1,5 +1,4 @@
 - require.js pentru redundanţă la CDN
-- http://www.webpagetest.org/
 - Căutare
   - de scris: Proceduri găsite
   - link pentru toate procedurile
@@ -38,6 +37,8 @@
  
 Chestii tehnice
   - performanţă: YSlow & PageSpeed, about:tracing
+  - http://www.webpagetest.org/
+  - https://developers.google.com/speed/pagespeed/insights
   - switch updates to HTTP PUT
   - timeout session from JS and logout?
   - protect php scripts from direct access? whitelist?
