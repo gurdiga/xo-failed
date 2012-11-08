@@ -1,21 +1,26 @@
 default: lint
 
 lint: linthtml lintnginx lintphp
+	@echo ""
 
 linthtml:
-	@echo " - index.html"
+	@echo -n "."
 	@tidy -quiet -errors -utf8 -xml index.html
 
 	@for formular in formulare/*.html; do \
-		echo " - $$formular"; \
+		echo -n "."; \
 		fgrep -v 'text/micro-template' $$formular | tidy -quiet -errors -utf8 -xml; \
 	done
 
 lintnginx:
-	@# TODO lintnginx
+	@echo -n "."
+	@sudo /usr/sbin/nginx -t -q
 
 lintphp:
-	@# TODO lintphp
+	@for script in bin/*; do \
+		echo -n "."; \
+		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
+	done
 
 deploy: lint stage
 	@./build/deploy.sh prod
