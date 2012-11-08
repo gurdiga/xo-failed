@@ -58,6 +58,11 @@ server {
     expires 1w;
   }
 
+  location /bnm/ {
+    add_header Content-Type 'text/javascript; charset=utf-8';
+    expires 3h;
+  }
+
   location ~ /js/.*\.js$ {
     add_header Content-Type 'text/javascript; charset=utf-8';
   }
