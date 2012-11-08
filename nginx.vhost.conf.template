@@ -54,6 +54,10 @@ server {
     }
   }
 
+  location /imagini/ {
+    expires 1w;
+  }
+
   location ~ /js/.*\.js$ {
     add_header Content-Type 'text/javascript; charset=utf-8';
   }
