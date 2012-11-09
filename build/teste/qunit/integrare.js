@@ -183,12 +183,8 @@ $('#app').on('load', function () {
         equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL',
             'salvat valuta datorie adăugătoare');
 
-        app.Procedura.$.find('.închide').click();
-
         Evenimente.aşteaptă('şters-procedura-nou-creată');
         Evenimente.venit('populat');
-
-        var numărProcedură = app.Procedura.$.find('#număr').text().match(/-\d+/)[0];
 
         $.ajax({
           url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '.json',

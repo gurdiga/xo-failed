@@ -2649,24 +2649,30 @@
       Procedura.$.on('închidere', this.închide);
     },
 
+    formular: function (buton) {
+      var prefix, încheiere = buton.data('formular');
+
+      prefix = Procedura.$obiectulUrmăririi.find('#caracter').val().substr(0, 1);
+      prefix += Procedura.tip().toLowerCase();
+      // TODO: adaugă genul procedurii (-[SP])?
+
+      return '/formulare/' + încheiere + '.html';
+    },
+
     deschide: function () {
       var buton = $(this),
           încheiere = buton.data('formular'),
-          prefix = '',
           pagina;
 
       if (buton.is('.salvat')) {
         pagina = buton.data('pagina');
       } else {
-        prefix = Procedura.$obiectulUrmăririi.find('#caracter').val().substr(0, 1);
-        prefix += Procedura.tip().toLowerCase();
-        // TODO: adaugă genul procedurii (-[SP])?
-        pagina = '/formulare/' + încheiere + '.html';
+        pagina = Încheieri.formular(buton);
       }
 
       Încheieri[pagina] = {
         tab: window.open(pagina, încheiere, '', true),
-        buton: $(this)
+        buton: buton
       };
     },
 
