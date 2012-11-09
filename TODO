@@ -1,7 +1,9 @@
-- require.js pentru redundanţă la CDN
+- test pentru încheiere de intentare
+- in loc de proceduri recente, afişează toate procedurile în ordinea descrescătoare timpului ultimei deschideri
 - Căutare
   - de scris: Proceduri găsite
   - link pentru toate procedurile
+- require.js pentru redundanţă la CDN
 
 - Imprimare
   - blur contenteditables on print
