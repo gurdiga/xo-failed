@@ -21,7 +21,7 @@
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!opener || !opener.Încheieri[Încheiere.pagina]) {
+      if (!opener || !opener.Încheieri[Încheiere.pagina] || !opener.Procedura.is(':visible')) {
         window.close();
         return;
       }
