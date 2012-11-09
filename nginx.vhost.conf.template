@@ -89,4 +89,8 @@ server {
     }
   }
 
+  location /build/ {
+    auth_basic "Autentificare";
+    auth_basic_user_file /var/www/$host/.htusers;
+  }
 }
