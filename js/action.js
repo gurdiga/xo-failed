@@ -1421,11 +1421,11 @@
     },
 
     numărulUltimei: function () {
-      var ceaMaiRecentăProcedură = ProceduriRecente.$.find('.item');
+      var ceaMaiRecentăProcedură = ProceduriRecente.$.find('.item').first();
 
       if (!ceaMaiRecentăProcedură.există()) return;
 
-      return ceaMaiRecentăProcedură.first().find('.număr').contents(':first').text().replace(Utilizator.login, '');
+      return ceaMaiRecentăProcedură.find('.număr').contents(':first').text().replace(Utilizator.login, '');
     }
   },
 
