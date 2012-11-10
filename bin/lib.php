@@ -46,18 +46,6 @@ function notează_ca_recentă($număr, $afişează = false) {
 
 // ------------------------------
 
-function verifică_login($login) {
-  if (!preg_match('/^\d+$/', $login)) {
-    stop("Login invalid: [$login]");
-  }
-
-  if (!is_dir("../date/$login")) {
-    stop("Nu există director pentru date: [$login]");
-  }
-}
-
-// ------------------------------
-
 function cale($procedură) {
   global $login;
 

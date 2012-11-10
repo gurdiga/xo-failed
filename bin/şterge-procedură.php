@@ -15,6 +15,7 @@ $număr = $matches[1];
 unlink("..$file.gz");
 elimină_din_recente($număr);
 reindexează_proceduri();
+# TODO: şterge încheierile
 
 
 // ==============================
