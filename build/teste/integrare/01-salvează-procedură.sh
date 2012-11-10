@@ -33,7 +33,7 @@ grep "^Content-Encoding: gzip" $TMP_FILE > /dev/null
 verifică 'Content-Encoding este gzip'
 
 file "$DOCUMENT_ROOT/$DESTINATIA.gz" > /dev/null
-verifică 'salvat'
+verifică 'salvat pe disc'
 
 zcat "$DOCUMENT_ROOT/$DESTINATIA.gz" | /usr/bin/diff $SURSA -
 verifică 'datele salvate corespund cu cele trimise'
