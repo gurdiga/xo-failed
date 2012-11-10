@@ -1,4 +1,4 @@
-default: lint
+default: lint test
 
 lint: linthtml lintnginx lintphp
 	@echo ""
@@ -21,6 +21,9 @@ lintphp:
 		echo -n "."; \
 		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
 	done
+
+test:
+	@build/teste/integrare/start.sh
 
 PULL = git pull; git reset --hard origin/master
 
