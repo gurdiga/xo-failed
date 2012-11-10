@@ -19,6 +19,18 @@ curl $CURL_DEFAULT_ARGS \
 grep "^Cache-Control: private" $TMP_FILE > /dev/null
 verifică 'datele sunt marcate private pentru proxy-uri'
 
+curl $CURL_DEFAULT_ARGS \
+  --include \
+  --header 'Accept-Encoding: gzip' \
+  --output $TMP_FILE \
+  https://$SERVER_NAME/$DESTINATIA
+verifică 'se poate descărca'
+
+grep "^Content-Type: application/json; charset=utf-8" $TMP_FILE > /dev/null
+verifică 'Content-Type este "application/json; charset=utf-8"'
+
+grep "^Content-Encoding: gzip" $TMP_FILE > /dev/null
+verifică 'Content-Encoding este gzip'
 
 file "$DESTINATIA.gz" > /dev/null
 verifică 'salvat'
