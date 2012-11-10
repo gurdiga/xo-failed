@@ -103,7 +103,12 @@
           }
         })
         .on('hashchange', function () {
-          $(document.body).toggleClass('autentificat', Utilizator.autentificat);
+          if (!Utilizator.autentificat) {
+            location.hash = '';
+            return;
+          }
+
+          $(document.body).addClass('autentificat');
 
           var pagina = HashController.pagină();
 
