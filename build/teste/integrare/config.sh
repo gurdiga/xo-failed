@@ -1,11 +1,10 @@
 #!/bin/bash
 
-SERVER_NAME=$(basename `pwd`)
+DOCUMENT_ROOT=`readlink -f $DIR/../../..`
+SERVER_NAME=`basename $DOCUMENT_ROOT`
 LOGIN='001'
 PASSWORD='Verificarea!'
 TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
-
-DOCUMENT_ROOT="$DIR/../../.."
 DATE="$DOCUMENT_ROOT/date/$LOGIN"
 
 CURL_DEFAULT_ARGS="--insecure --user $LOGIN:$PASSWORD --fail --silent --show-error"

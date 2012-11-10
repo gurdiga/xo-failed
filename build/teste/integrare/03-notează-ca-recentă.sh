@@ -6,8 +6,6 @@ NUMAR='-1'
 JSON="date/$LOGIN/proceduri/recente.json"
 RASPUNS=$TMP_FILE
 
-sudo rm -f $JSON
-
 curl $CURL_DEFAULT_ARGS \
   --request POST \
   --data $NUMAR \
@@ -17,10 +15,10 @@ curl $CURL_DEFAULT_ARGS \
 
 verifică 'răspuns OK'
 
-zgrep "^\[\"$NUMAR\"" "$JSON.gz" > /dev/null
+zgrep "^\[\"$NUMAR\"" "$DOCUMENT_ROOT/$JSON.gz" > /dev/null
 verifică 'notat'
 
-zcat "$JSON.gz" | diff $RASPUNS - > /dev/null
+zcat "$DOCUMENT_ROOT/$JSON.gz" | diff $RASPUNS - > /dev/null
 verifică 'răspuns corect'
 
 sudo rm $RASPUNS
