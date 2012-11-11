@@ -5,9 +5,7 @@ require_once './lib.php';
 
 if (!$_SERVER['SERVER_NAME'] == 'executori.org') stop('Nu ştergem proceduri în producţie');
 
-$login = $_SERVER['PHP_AUTH_USER'];
 $file = $_SERVER['REQUEST_URI'];
-
 $matches = array();
 preg_match('|/([SP]?-\d+).json$|', $file, $matches);
 $număr = $matches[1];

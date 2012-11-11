@@ -1,5 +1,10 @@
 <?
 
+$login = $_SERVER['PHP_AUTH_USER'];
+
+
+// ------------------------------
+
 function verifică_număr($număr) {
   if (!preg_match('/^[SP]?-\d+$/', $număr)) {
     stop("Număr de procedură invalid: [$număr]");

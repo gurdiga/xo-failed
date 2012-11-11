@@ -3,7 +3,6 @@
 require_once './lib.php';
 
 
-$login = $_SERVER['PHP_AUTH_USER'];
 $procedură = json_decode(file_get_contents('php://input'), true);
 $cale = "../date/$login/proceduri";
 
