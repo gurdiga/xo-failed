@@ -1374,11 +1374,6 @@
     $: $('#proceduri-recente').find('.listă-proceduri'),
 
     init: function () {
-      ProceduriRecente.$.on('click', '.item', function () {
-        var număr = $(this).find('.număr').contents()[0].data.replace(Utilizator.login, '');
-
-        location.hash = 'formular?' + număr;
-      });
     },
 
     url: function () {
@@ -1421,11 +1416,7 @@
     },
 
     numărulUltimei: function () {
-      var ceaMaiRecentăProcedură = ProceduriRecente.$.find('.item').first();
-
-      if (!ceaMaiRecentăProcedură.există()) return;
-
-      return ceaMaiRecentăProcedură.find('.număr').contents(':first').text().replace(Utilizator.login, '');
+      return ListăDeProceduri.extrageNumăr(ProceduriRecente.$.find('.item').first());
     }
   },
 
@@ -1442,8 +1433,8 @@
         .bind('keydown', 'return', Căutare.rezultate.deschide)
         .bind('keyup', 'esc', function () { $(this).val('').trigger('input'); });
 
-      Căutare.rezultate.$
-        .on('click', '.item', Căutare.rezultate.deschide)
+      Căutare.$
+        .on('click', '.item', ListăDeProceduri.deschide)
         .on('mouseenter', '.item', function () { $(this).addClass('selectat'); })
         .on('mouseleave', '.item', function () { $(this).removeClass('selectat'); });
 
@@ -1489,15 +1480,7 @@
       deschide: function (e) {
         e.preventDefault();
 
-        var item = Căutare.rezultate.$.find('.selectat');
-
-        if (!item.există()) return;
-
-        var număr = item.find('.număr').text()
-          .replace(item.find('.data-hotărîrii').text(), '')
-          .replace(Utilizator.login, '');
-
-        location.hash = 'formular?' + număr;
+        Căutare.rezultate.$.find('.selectat').click();
       }
     },
 
@@ -1624,7 +1607,7 @@
         rezultate +=
           '<li class="item">' +
             '<div class="număr">' +
-              evidenţiază(număr) +
+              '<span>' + evidenţiază(număr) + '</span>' +
               '<div class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</div>' +
             '</div>' +
             '<div class="persoane">' + creditor + persoaneTerţe + '</div>' +
@@ -1633,7 +1616,14 @@
       }
 
       return rezultate;
+    },
 
+    deschide: function () {
+      location.hash = 'formular?' + ListăDeProceduri.extrageNumăr(this);
+    },
+
+    extrageNumăr: function (item) {
+      return $(item).find('.număr span').text().replace(Utilizator.login, '');
     }
   },
 
