@@ -128,13 +128,14 @@ $('#app').on('load', function () {
           'totalul e suma sumelor'
         );
 
+        var onorariuImplicit = dateProcedură['cheltuieli']['onorariu'];
+
+        equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit,
+          'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
+
         Evenimente.venit('calculat-onorariul');
       });
 
-      var onorariuImplicit = dateProcedură['cheltuieli']['onorariu'];
-
-      equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit,
-        'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
       equal(app.Procedura.$.find('#total-taxe-şi-speze').suma(), app.UC,
         'cheltuieli: total implicit taxe şi speze == taxa de intentare');
       ok(app.Procedura.$.find('#cheltuieli .adăugate #taxaA1').există(),
