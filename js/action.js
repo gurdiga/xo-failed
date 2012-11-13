@@ -2307,6 +2307,9 @@
       if (Onorariu.timerCalculare) return;
 
       Onorariu.timerCalculare = setTimeout(function () {
+        /*jshint maxcomplexity:6*/
+        if (!Procedura.$.is(':visible')) return;
+
         var $secţiune = Procedura.$obiectulUrmăririi,
             caracter = $secţiune.find('#caracter').val(),
             onorariu = 0, valoare;
