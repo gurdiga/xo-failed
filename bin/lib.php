@@ -13,14 +13,6 @@ function verifică_număr($număr) {
 
 // ------------------------------
 
-function verifică_nume_fişier($nume) {
-  if (preg_match('/\.\./', $nume)) {
-    stop("Nume de fişier invalid: [$nume]");
-  }
-}
-
-// ------------------------------
-
 function notează_ca_recentă($număr, $afişează = false) {
   define('MAX_RECENTE', 10);
 
