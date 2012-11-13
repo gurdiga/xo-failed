@@ -151,11 +151,6 @@ button {
   font: bold 2em/1.5em Oswald, sans-serif;
 }
 
-#bara-de-sus h1 a {
-  color: #333;
-  text-decoration: none;
-}
-
 #bara-de-sus .instrumente {
   display: none;
   position: absolute;
