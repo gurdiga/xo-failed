@@ -4,12 +4,12 @@ echo 'Salvează procedura...'
 
 SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/procedură.json"
 INDEX="$DOCUMENT_ROOT/build/teste/integrare/fixturi/index.json.gz"
-DESTINATIA="date/$LOGIN/proceduri/-1.json"
+DESTINATIA="date/$LOGIN/proceduri/-1/date.json"
 
 curl $CURL_DEFAULT_ARGS \
-  --request POST \
+  --request PUT \
   --data @$SURSA \
-  https://$SERVER_NAME/$DESTINATIA
+  https://$SERVER_NAME/date/$LOGIN/proceduri/ > /dev/null
 verifică 'trimis datele'
 
 curl $CURL_DEFAULT_ARGS \
@@ -38,7 +38,7 @@ verifică 'salvat pe disc'
 zcat "$DOCUMENT_ROOT/$DESTINATIA.gz" | /usr/bin/diff $SURSA -
 verifică 'datele salvate corespund cu cele trimise'
 
-zgrep '^\["-1"' $DOCUMENT_ROOT/date/$LOGIN/proceduri/recente.json.gz > /dev/null
+zgrep '^\[-1' $DOCUMENT_ROOT/date/$LOGIN/proceduri/recente.json.gz > /dev/null
 verifică 'procedura e marcată ca recent deschisă'
 
 diff $DOCUMENT_ROOT/date/$LOGIN/proceduri/index.json.gz $INDEX > /dev/null

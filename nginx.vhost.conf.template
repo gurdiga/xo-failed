@@ -79,18 +79,19 @@ server {
 
     add_header Cache-Control private;
 
-    location ~ /date/\d+/.*\.json$ {
+    location ~ /date/\d+/.* {
       more_set_headers 'Content-Type: application/json; charset=utf-8';
-      include conf.d/executori.org/rest.conf;
+      include conf.d/%%SERVER_NAME%%/rest.conf;
     }
 
-    location ~ /date/\d+/încheieri/.+\.html$ {
-      include conf.d/executori.org/rest.conf;
+    location ~ /date/\d+/proceduri/[SP]?-\d+/încheieri/.+\.html$ {
+      include conf.d/%%SERVER_NAME%%/rest.conf;
     }
   }
 
   location /build/ {
     auth_basic "Autentificare";
     auth_basic_user_file /var/www/$host/.htusers;
+    more_set_headers 'Cache-Control: no-cache, max-age=0, no-store';
   }
 }

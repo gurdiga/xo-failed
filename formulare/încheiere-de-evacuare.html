@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Încheiere de numire a datei evacuării forţate</title>
+    <link type="text/css" rel="stylesheet" href="/css/încheiere.css"/>
+    <script id="init">
+      function init(context) {
+        var $întîrziere = context.buton.closest('.subsecţiune.întîrziere');
+
+        context.întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere);
+        context.întîrziere.dobînda = $întîrziere.find('.sumă.dobîndă').val();
+      }
+    </script>
+    <script src="/js/încheiere.js"></script>
+  </head>
+
+  <body>
+    <script type="text/micro-template">
+      <p class="titlu">ÎNCHEIERE<br/>
+      de numire a datei evacuării forţate</p>
+
+      <p class="dreapta"><%= executor.adresa %></p>
+      <p><%= opener.moment(new Date).format('DD.MM.YYYY') %><br/>
+      <%= login %><%= procedură.număr %></p>
+
+      <p class="editabil">Executorul judecătoresc <%= executor.nume %> cu adresa
+      juridică <%= executor.adresa %> deţinînd procedura de executare pornită la cererea
+      <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>) cu privire la
+      stabilirea datei evacuării forţate,</p>
+
+      <p class="titlu">A STABILIT:</p>
+
+      <p class="editabil">La data de <%= procedură['data-intentării'] %> a fost
+      pornită procedura de executare a documentului executoriu
+      <%= procedură['document-executoriu']['numărul-de'] %> din
+      <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de judecătoria
+      <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus.</p>
+
+      <p class="editabil">În conformitate cu art. 24 al Codului de executare:
+      la cererea creditorului, executorul judecătoresc calculează dobînzile,
+      penalităţile şi alte sume rezultate din întîrzierea executării, în funcţie
+      de rata inflaţiei şi în conformitate cu art. 619 din Codul civil. Sumele
+      menţionate se calculează de la data la care hotărîrea judecătorească a
+      devenit definitivă sau, în cazul celorlalte documente executorii, de la
+      data la care creanţa a devenit exigibilă (scadentă) şi pînă la data plăţii efective a obligaţiei cuprinse în orice document dintre acestea, în perioada de calcul fiind inclusă şi durata suspendării procedurii de executare, în condiţiile prevăzute de prezentul cod.</p>
+      <p class="editabil">Art. 619 al Codului civil prevede că obligaţiilor pecuniare li se aplică dobînzi pe perioada întîrzierii. Dobînda de întîrziere reprezintă 5% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede altfel. În cazul actelor juridice la care nu participă consumatorul, dobînda este de 9% peste rata dobînzii prevăzută la art. 585 dacă legea sau contractul nu prevede altfel.</p>
+      <p class="editabil">Hotărîrea judecătorească în baza căreia a fost emis documentul executoriu a devenit definitivă la data de <%= procedură['document-executoriu']['data-rămînerii-definitive'] %>.</p>
+      <p class="editabil">Suma din care urmează a fi calculată dobînda de întîrziere constituie <%= întîrziere.suma %> MDL. Calculul dobînzii de întîrziere se efectuează conform formulei: (suma datoriei) x (rata dobînzii BNM + 5 sau 9%) x zile de întîrziere / 365, şi, la data emiterii prezentei încheieri constituie <%= întîrziere.dobînda %> MDL Calculul desfăşurat al dobînzii de întîrziere este anexat la prezenta încheiere fiind parte componentă a acesteia.</p>
+
+      <p class="editabil">În baza celor expuse şi în conformitate cu art. 11, 22, 24, 66 al Codului de executare RM,</p>
+
+      <p class="titlu">DISPUN:</p>
+      <ol class="editabil">
+      <li>A încasa în beneficiul <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>) de la <%= debitori %> dobînda de întîrziere rezultată din întîrzierea executării documentului executoriu nr. <%= procedură['document-executoriu']['numărul-de'] %> din <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %> în sumă de <%= întîrziere.dobînda %> MDL calculată din data rămînerii definitive a hotărîrii judecătoreşti pînă la data emiterii prezentei încheieri.</li>
+      <li>A aplica sechestru pe mijloacele băneşti aflate în conturile <%= debitori %> în limita sumei de <%= întîrziere.dobînda %> MDL.</li>
+      <li>Încheierea dată reprezintă un titlu executoriu.</li>
+      <li>Încheierea este executorie din momentul emiterii şi poate fi contestată în termen de 10 zile de la data comunicării în Judecătoria <%= executor['instanţa-teritorială'] %>.</li>
+      </ol>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
+
+      <p class="dreapta"><%= executor.nume %></p>
+      <p>Executor judecătoresc</p>
+
+    </script><!-- text/micro-template -->
+  </body>
+</html>

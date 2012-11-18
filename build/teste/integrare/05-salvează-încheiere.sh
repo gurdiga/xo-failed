@@ -3,12 +3,12 @@
 echo 'Salvează încheierea...'
 
 SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/Încheiere-de-test.html"
-DESTINATIA_FS="$DOCUMENT_ROOT/date/$LOGIN/încheieri/`basename $SURSA`.gz"
+DESTINATIA_FS="$DOCUMENT_ROOT/date/$LOGIN/proceduri/-1/încheieri/`basename $SURSA`.gz"
 
 curl $CURL_DEFAULT_ARGS \
-  --request POST \
+  --request PUT \
   --data @$SURSA \
-  https://$SERVER_NAME/date/$LOGIN/%C3%AEncheieri/%C3%8Encheiere-de-test.html
+  https://$SERVER_NAME/date/$LOGIN/proceduri/-1/%C3%AEncheieri/%C3%8Encheiere-de-test.html
 
 verifică 'trimis datele'
 

@@ -7,7 +7,7 @@ JSON="date/$LOGIN/proceduri/recente.json"
 RASPUNS=$TMP_FILE
 
 curl $CURL_DEFAULT_ARGS \
-  --request POST \
+  --request PUT \
   --data $NUMAR \
   --silent \
   --output $RASPUNS \
@@ -15,7 +15,7 @@ curl $CURL_DEFAULT_ARGS \
 
 verifică 'răspuns OK'
 
-zgrep "^\[\"$NUMAR\"" "$DOCUMENT_ROOT/$JSON.gz" > /dev/null
+zgrep "^\[$NUMAR" "$DOCUMENT_ROOT/$JSON.gz" > /dev/null
 verifică 'notat'
 
 zcat "$DOCUMENT_ROOT/$JSON.gz" | diff $RASPUNS - > /dev/null

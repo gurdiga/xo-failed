@@ -7,7 +7,7 @@ DESTINATIA="date/$LOGIN/profil.json"
 
 curl \
   $CURL_DEFAULT_ARGS \
-  --request POST \
+  --request PUT \
   --insecure \
   --data @$SURSA \
   --user $LOGIN:$PASSWORD \

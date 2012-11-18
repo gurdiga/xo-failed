@@ -1,4 +1,4 @@
-$('#app').on('load', function () {
+$('#app').one('load', function () {
   'use strict';
 
 
@@ -12,7 +12,7 @@ $('#app').on('load', function () {
   // --------------------------------------------------
   test('încărcat', function () {
     ok(app.$('#conţinut').există(), '#conţinut');
-    equal(location.protocol, 'https:', 'trecut la HTTPS');
+    equal(location.protocol, 'https:', 'HTTPS');
   });
 
 
@@ -157,6 +157,7 @@ $('#app').on('load', function () {
 
       Evenimente.aşteaptă('populat');
       Evenimente.venit('încărcat-proceduri-recente');
+
       $proceduraNouCreată.click();
 
       app.Procedura.$.one('populat', function () {
@@ -188,7 +189,7 @@ $('#app').on('load', function () {
         Evenimente.venit('populat');
 
         $.ajax({
-          url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '.json',
+          url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
           type: 'DELETE',
           success: function () {
             ok(true, 'şters procedura de test');
@@ -210,7 +211,7 @@ $('#app').on('load', function () {
 
 
   // --------------------------------------------------
-  asyncTest('TODO: Căutare', function () {
+  /*asyncTest('TODO: Căutare', function () {
     Evenimente.aşteaptă('actualizat-index');
     app.Căutare.încarcăIndexFărăCache();
 
@@ -234,6 +235,6 @@ $('#app').on('load', function () {
         Evenimente.venit('populat');
       });
     });
-  });
+  });*/
 
 }).attr('src', 'https://dev.executori.org/').show();

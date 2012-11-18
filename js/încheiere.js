@@ -85,6 +85,7 @@
 
       var pagina = Încheiere.cale();
 
+      // TODO switch to $.put
       opener.$.post(pagina, Încheiere.conţinut(), function () {
         opener.Încheieri[pagina] = opener.Încheieri[Încheiere.pagina];
         Încheiere.pagina = pagina;

@@ -1,7 +1,13 @@
 <?
 
 $login = $_SERVER['PHP_AUTH_USER'];
+$doc_root = $_SERVER['DOCUMENT_ROOT'];
+$calea = $doc_root . urldecode($_SERVER['REQUEST_URI']);
+$conţinut = file_get_contents('php://input');
 
+set_error_handler(function($no, $message, $file, $line) {
+  stop("Error $no: $message @$file:$line");
+});
 
 // ------------------------------
 
@@ -16,9 +22,10 @@ function verifică_număr($număr) {
 function notează_ca_recentă($număr, $afişează = false) {
   define('MAX_RECENTE', 10);
 
-  global $login;
+  global $login, $doc_root;
 
-  $fişier = "../date/$login/proceduri/recente.json";
+  $număr = json_decode($număr, true);
+  $fişier = "$doc_root/date/$login/proceduri/recente.json";
 
   if (file_exists("$fişier.gz")) {
     $lista = json_decode(citeşte_fişier($fişier), true);
@@ -44,17 +51,29 @@ function notează_ca_recentă($număr, $afişează = false) {
 // ------------------------------
 
 function cale($procedură) {
-  global $login;
+  global $login, $doc_root;
 
   $număr = $procedură['număr'];
 
-  return "../date/$login/proceduri/$număr.json";
+  return "$doc_root/date/$login/proceduri/$număr.json";
+}
+
+// ------------------------------
+
+function timp_execuţie() {
+  global $început_execuţie;
+
+  return round(microtime(true) - $început_execuţie, 3);
 }
 
 // ------------------------------
 
 function stop($mesaj) {
+  header('HTTP/1.1 500 Application Error');
+  header('X-Runtime: ' . timp_execuţie());
   error_log($mesaj);
+  error_log('X-Runtime: ' . timp_execuţie());
+
   die();
 }
 
@@ -78,10 +97,10 @@ function citeşte_fişier($cale) {
 // ------------------------------
 
 function reindexează_proceduri() {
-  global $login;
+  global $login, $doc_root;
 
-  $dir = "../date/$login/proceduri";
-  $fişiere = glob("$dir/*-[0-9]*");
+  $dir = "$doc_root/date/$login/proceduri";
+  $fişiere = glob("$dir/*[1-9]*/date.json.gz");
 
   $index = array('' => array());
   $cîmpuri = array('idno', 'denumire', 'idnp', 'nume');
@@ -99,10 +118,8 @@ function reindexează_proceduri() {
       );
   }
 
-  $colectează = function(&$cîmp, $procedură) use (&$index, $login) {
+  $colectează = function(&$cîmp, $procedură, $număr) use (&$index, $login) {
     if (!isset($cîmp) || !$cîmp) return;
-
-    $număr = $login . $procedură['număr'];
 
     if (!isset($index[$cîmp])) $index[$cîmp] = array();
     if (!in_array($număr, $index[$cîmp])) $index[$cîmp][] = $număr;
@@ -137,19 +154,19 @@ function reindexează_proceduri() {
 
   foreach ($fişiere as $fişier) {
     $procedură = json_decode(citeşte_fişier(str_replace('.gz', '', $fişier)), true);
-    $număr = $login . $procedură['număr'];
+    $număr = $login . basename(dirname($fişier));
     $index[''][$număr] = date_relevante($procedură);
 
     foreach ($cîmpuri as $cîmp) {
-      $colectează($număr, $procedură);
-      $colectează($procedură['creditor'][$cîmp], $procedură);
+      $colectează($număr, $procedură, $număr);
+      $colectează($procedură['creditor'][$cîmp], $procedură, $număr);
 
       if (isset($procedură['persoane-terţe']))
         foreach ($procedură['persoane-terţe'] as $persoană_terţă)
-          $colectează($persoană_terţă[$cîmp], $procedură);
+          $colectează($persoană_terţă[$cîmp], $procedură, $număr);
 
       foreach ($procedură['debitori'] as $debitor)
-        $colectează($debitor[$cîmp], $procedură);
+        $colectează($debitor[$cîmp], $procedură, $număr);
     }
   }
 
@@ -159,9 +176,9 @@ function reindexează_proceduri() {
 // ------------------------------
 
 function verifică_dacă_există($procedură) {
-  global $login;
+  global $login, $doc_root;
 
-  $cale = "../date/$login/proceduri/$procedură.json.gz";
+  $cale = "$doc_root/date/$login/proceduri/$procedură.json.gz";
 
   if (!file_exists($cale)) {
     stop("Nu există procedura: [$cale]");
