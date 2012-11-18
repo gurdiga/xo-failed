@@ -26,12 +26,13 @@ test:
 	@build/teste/integrare/start.sh
 
 PULL = git pull; git reset --hard origin/master
+PUSH = git push
 
 deploy: lint stage
 	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org; ${PULL}; build/start.sh'
 
 stage: lint test
-	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org; ${PULL}; build/start.sh'
+	@${PUSH}; ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org; ${PULL}; build/start.sh'
 
 what:
 	@rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build
