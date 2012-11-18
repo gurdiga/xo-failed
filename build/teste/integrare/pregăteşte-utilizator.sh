@@ -2,7 +2,7 @@
 
 echo 'Cont utilizator de test...'
 
-php $DOCUMENT_ROOT/bin/htusers.php $LOGIN $PASSWORD
+php -c /etc/php5/cli/php.ini $DOCUMENT_ROOT/bin/htusers.php $LOGIN $PASSWORD
 php $DOCUMENT_ROOT/bin/htusers.php $LOGIN $PASSWORD >> $DOCUMENT_ROOT/.htusers
 grep "$LOGIN:" $DOCUMENT_ROOT/.htusers
 verifică 'creat'
