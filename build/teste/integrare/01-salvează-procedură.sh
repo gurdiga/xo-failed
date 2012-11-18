@@ -6,7 +6,6 @@ SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/procedură.json"
 INDEX="$DOCUMENT_ROOT/build/teste/integrare/fixturi/index.json.gz"
 DESTINATIA="date/$LOGIN/proceduri/-1/date.json"
 
-cat .htusers
 curl $CURL_DEFAULT_ARGS \
   --request PUT \
   --data @$SURSA \
