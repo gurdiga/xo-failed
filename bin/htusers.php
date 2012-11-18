@@ -1,6 +1,6 @@
 <?
 
-if (getenv('TERM')) {
+if (isset($_SERVER['SHELL'])) {
   define('HTUSERS', realpath(dirname(dirname(__FILE__))) .'/.htusers');
   require_once './bin/htusers-cli.php';
 } else {
