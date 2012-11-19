@@ -24,5 +24,5 @@ echo ''
 
 
 echo "Pregzipuiesc date..."
-sudo su www-data -c 'gzip -rf date'
+sudo su www-data -c 'gzip -rf date/[0-9]*'
 echo ''
