@@ -25,14 +25,22 @@ lintphp:
 test:
 	@build/teste/integrare/start.sh
 
-PULL = git pull -f --depth 1 origin master; git checkout master; git reset --hard origin/master
-PUSH = git push
+push:
+	git push
+
+pull:
+	git pull -f --depth 1 origin master
+	git checkout master
+	git reset --hard origin/master
+
+build: pull
+	@build/start.sh
 
 deploy: stage
-	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org; ${PULL}; build/start.sh'
+	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make pull build'
 
-stage: lint test
-	@${PUSH}; ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org; ${PULL}; build/start.sh'
+stage: lint test push
+	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org && make pull build'
 
 what:
 	@rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build
