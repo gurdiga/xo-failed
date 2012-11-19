@@ -81,7 +81,17 @@ server {
 
     location ~ /date/\d+/.* {
       more_set_headers 'Content-Type: application/json; charset=utf-8';
-      include conf.d/%%SERVER_NAME%%/rest.conf;
+
+      include fastcgi_params;
+      fastcgi_intercept_errors on;
+      fastcgi_param SCRIPT_FILENAME $document_root/bin/router.php;
+      fastcgi_keep_conn on;
+      include conf.d/dev.executori.org/rest.conf;
+
+      set $permission_tuple "$remote_user:$request_uri";
+      if ($permission_tuple !~ "^(\d+):/date/\1/") {
+        return 403;
+      }
 
       location ~ /date/\d+/proceduri/[SP]?-\d+/încheieri/.+\.html$ {
         more_set_headers 'Content-Type: text/html; charset=utf-8';
