@@ -1,4 +1,5 @@
 - require.js pentru redundanţă la CDN
+- eliminare $UI.css
 - Căutare
   - de scris: Proceduri găsite
   - in loc de proceduri recente, afişează toate procedurile

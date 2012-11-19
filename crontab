@@ -1,1 +1,1 @@
-* */3 * * * cd /var/www/executori.org/date && sudo chown -R www-data:nati . && sudo chmod -R g+w . && git add . && git diff --quiet --exit-code --cached || (git commit -am $(date     +\%F\%T) && git push -q)
+* * * * * /var/www/executori.org/date/backup.sh
