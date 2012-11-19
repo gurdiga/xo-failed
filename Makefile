@@ -37,10 +37,12 @@ build: pull
 	@build/start.sh
 
 deploy: stage
-	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make pull build'
+	@echo '---- Deploying production ----'
+	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make build'
 
 stage: lint test push
-	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org && make pull build'
+	@echo '---- Deploying stage ----'
+	@ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org && make build'
 
 what:
 	@rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build
