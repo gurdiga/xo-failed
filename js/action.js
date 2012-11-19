@@ -973,7 +973,7 @@
         Procedura.$.trigger('salvat', [procedură]);
         Căutare.încarcăIndexFărăCache();
 
-        if (callback) callback();
+        if ($.isFunction(callback)) callback();
       });
     },
 
@@ -991,7 +991,7 @@
         Procedura.$.trigger('salvat', [procedură]);
         Căutare.încarcăIndexFărăCache();
 
-        if (callback) callback();
+        if ($.isFunction(callback)) callback();
       });
     },
 
