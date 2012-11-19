@@ -25,10 +25,10 @@ lintphp:
 test:
 	@build/teste/integrare/start.sh
 
-PULL = git pull -f --depth 1 origin master; git reset --hard origin/master
+PULL = git pull -f --depth 1 origin master; git checkout master; git reset --hard origin/master
 PUSH = git push
 
-deploy: lint stage
+deploy: stage
 	@ssh -p59922 nati@executori.org 'cd /var/www/executori.org; ${PULL}; build/start.sh'
 
 stage: lint test
