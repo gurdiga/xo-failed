@@ -29,9 +29,7 @@ push:
 	git push
 
 pull:
-	git pull -f --depth 1 origin master
-	git checkout master
-	git reset --hard origin/master
+	git pull
 
 build: pull
 	@build/start.sh
