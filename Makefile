@@ -25,7 +25,7 @@ lintphp:
 test:
 	@build/teste/integrare/start.sh
 
-PULL = git pull -f; git reset --hard origin/master
+PULL = git pull -f --depth 1 origin master; git reset --hard origin/master
 PUSH = git push
 
 deploy: lint stage
