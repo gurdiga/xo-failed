@@ -82,10 +82,11 @@ server {
     location ~ /date/\d+/.* {
       more_set_headers 'Content-Type: application/json; charset=utf-8';
       include conf.d/%%SERVER_NAME%%/rest.conf;
-    }
 
-    location ~ /date/\d+/proceduri/[SP]?-\d+/încheieri/.+\.html$ {
-      include conf.d/%%SERVER_NAME%%/rest.conf;
+      location ~ /date/\d+/proceduri/[SP]?-\d+/încheieri/.+\.html$ {
+        more_set_headers 'Content-Type: text/html; charset=utf-8';
+        include conf.d/%%SERVER_NAME%%/rest.conf;
+      }
     }
   }
 

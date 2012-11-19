@@ -83,17 +83,28 @@
         return;
       }
 
+      if (opener.Procedura.număr()) {
+        Încheiere.trimite(callback);
+      } else {
+        opener.Procedura.salveazăSauCrează(function () {
+          var salvatProceduraDeja = true;
+
+          Încheiere.trimite(callback, salvatProceduraDeja);
+        });
+      }
+    },
+
+    trimite: function (callback, salvatProceduraDeja) {
       var pagina = Încheiere.cale();
 
-      // TODO switch to $.put
-      opener.$.post(pagina, Încheiere.conţinut(), function () {
+      opener.$.put(pagina, Încheiere.conţinut(), function () {
         opener.Încheieri[pagina] = opener.Încheieri[Încheiere.pagina];
         Încheiere.pagina = pagina;
         Încheiere.iniţial = Încheiere.conţinut();
         history.replaceState(null, null, pagina);
 
         Încheiere.marcheazăButonul();
-        opener.Procedura.salvează();
+        if (!salvatProceduraDeja) opener.Procedura.salveazăSauCrează();
         Încheiere.baraDeInstrumente.anunţăSalvarea();
 
         if (opener.$.isFunction(callback)) callback();
@@ -111,7 +122,7 @@
     },
 
     cale: function () {
-      var director = '/date/' + opener.Utilizator.login + '/încheieri/',
+      var director = '/date/' + opener.Utilizator.login + '/proceduri/' + opener.Procedura.număr() + '/încheieri/',
           buton = opener.Încheieri[Încheiere.pagina].buton,
           fişier = buton.data('formular') + '-' + opener.moment().format('YYMMDDhhmmss') + '.html';
 
