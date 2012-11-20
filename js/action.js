@@ -2659,13 +2659,11 @@
     },
 
     formular: function (buton) {
-      var prefix, încheiere = buton.data('formular');
+      var încheiere = buton.data('formular'),
+          caracter = Procedura.$obiectulUrmăririi.find('#caracter').val() || '',
+          sufix = Procedura.tip() + caracter;
 
-      prefix = Procedura.$obiectulUrmăririi.find('#caracter').val().substr(0, 1);
-      prefix += Procedura.tip().toLowerCase();
-      // TODO: adaugă genul procedurii (-[SP])?
-
-      return '/formulare/' + încheiere + '.html';
+      return '/formulare/' + încheiere + '-' + sufix + '.html';
     },
 
     deschide: function () {
