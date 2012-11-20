@@ -1,13 +1,11 @@
-- require.js pentru redundanţă la CDN
-- eliminare $UI.css
 - Căutare
   - de scris: Proceduri găsite
   - in loc de proceduri recente, afişează toate procedurile
     în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
 
 - Imprimare
-  - blur contenteditables on print
-  - formularul de intentare: în funcţie de genul procedurii (-[SP])?
+  - de dezactivat butoanele de formare a înehierilor dacă procedura e nouă şi încă nu e salvată
+  - blur contenteditables on print?
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
@@ -42,7 +40,11 @@ Chestii tehnice
   - http://www.webpagetest.org/
   - https://developers.google.com/speed/pagespeed/insights
   - timeout session from JS and logout?
-  - protect php scripts from direct access? whitelist?
+  - protect PHP scripts from direct access? whitelist?
+  - require.js pentru redundanţă la CDN
+  - eliminare $UI?
+    - treb’ de mutat imaginile pentru butonaşe inline in CSS
+    - calendar alternativ
   - de verificat versiunea browserului?
   - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
