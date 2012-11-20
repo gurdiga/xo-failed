@@ -1225,7 +1225,7 @@ label.checkbox input {
 
 .buton[data-formular] {
   display: inline-block;
-  vertical-align: -3px;
+  vertical-align: -2px;
   border: none;
   background-color: transparent;
   text-indent: 0;
