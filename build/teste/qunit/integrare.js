@@ -196,6 +196,7 @@ $('#app').one('load', function () {
 
             Evenimente.venit('şters-procedura-nou-creată');
             app.ProceduriRecente.încarcăFărăCache();
+            app.Procedura.$.find('.închide').click();
           }
         });
 
