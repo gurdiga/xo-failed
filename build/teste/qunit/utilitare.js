@@ -9,14 +9,14 @@
       this.aşteptate.push(eveniment);
     },
 
-    venit: function (eveniment) {
+    anunţă: function (eveniment) {
       var index = this.aşteptate.indexOf(eveniment);
 
       if (index === -1) throw 'Venit eveniment neaşteptat: ' + eveniment;
 
       this.aşteptate.splice(index, 1);
 
-      if (this.aşteptate.length === 0) start();
+      if (this.aşteptate.length === 0) QUnit.start();
     }
   };
 
