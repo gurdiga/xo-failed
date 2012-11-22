@@ -39,7 +39,6 @@
   <script class="dont-lint" src="qunit-1.10.0.js"></script>
   <script class="dont-lint" src="jshint.js"></script>
   <script class="dont-lint" src="qhint.js"></script>
-
   <script class="dont-lint" src="csslint.js"></script>
 
   <!-- source and test files go here -->
@@ -52,6 +51,7 @@
   <script>
     QUnit.config.autostart = false;
     QUnit.config.reorder = false;
+    QUnit.config.testTimeout = 10000;
   </script>
   <script src="integrare.js"></script>
 

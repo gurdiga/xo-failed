@@ -17,12 +17,6 @@ $('#app').one('load', function () {
 
 
   // --------------------------------------------------
-  test('TODO: Interfaţa', function () {
-    ok(app.$('#crează-procedură li[data-href]').is(':visible'), 'avem file pentru proceduri noi');
-  });
-
-
-  // --------------------------------------------------
   asyncTest('Creare precedură', function () {
     /*global Evenimente*/
 
@@ -59,7 +53,13 @@ $('#app').one('load', function () {
     };
 
 
-    app.$('#crează-procedură li.g').click();
+    var file = app.$('#crează-procedură li[data-href]');
+
+    ok(file.is(':visible'), 'avem file pentru proceduri noi');
+
+    var filăProcedurăDeOrdinGeneral = file.filter('.g');
+
+    filăProcedurăDeOrdinGeneral.click();
 
     var $dataIntentării, $creditor, creditor, $debitor, debitor, $de, de,
         $obiectulUrmăririi, sume;
