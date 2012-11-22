@@ -277,6 +277,8 @@ button {
   margin-top: 5px;
 }
 
+.listă-proceduri .item:focus,
+.listă-proceduri .item:hover,
 .listă-proceduri .item.selectat {
   color: black;
   box-shadow: 7px 7px 10px rgba(0, 0, 0, .5);
@@ -334,27 +336,19 @@ button {
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background-color: white;
   font: 1.4em Oswald, sans-serif;
-}
-
-#crează-procedură li a {
-  -webkit-transition: opacity .5s;
-  -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
-  transition: opacity .5s;
-  opacity: .5;
-  color: black;
   text-decoration: none;
-}
-
-#crează-procedură li a:focus,
-#crează-procedură li a:hover {
-  opacity: 1;
-}
-
-#crează-procedură li a {
   display: block;
   padding: 6% 20px 0;
-  height: 95%;
+  color: #777;
+  -webkit-transition: color .5s;
+  -moz-transition: color .5s;
+  -o-transition: color .5s;
+  transition: color .5s;
+}
+
+#crează-procedură li:hover,
+#crează-procedură li:focus {
+  color: black;
 }
 
 #crează-procedură li.s {
@@ -365,6 +359,10 @@ button {
 #crează-procedură li.g {
   top: 6em;
   left: 10px;
+}
+
+li[data-href] {
+  cursor: pointer;
 }
 
 h1 {

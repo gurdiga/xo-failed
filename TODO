@@ -15,8 +15,6 @@
 
 - Introducerea datelor
   - Materiale
-  - de trecut de la link-uri pentru file la <li>, e mai uşor de testat cu .click()
-  - de trecut recentele la symlink-uri gen timestamp+#
   - arhivare proceduri
 
 - Convenienţe

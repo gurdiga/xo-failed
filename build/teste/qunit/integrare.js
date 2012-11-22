@@ -18,7 +18,7 @@ $('#app').one('load', function () {
 
   // --------------------------------------------------
   test('TODO: Interfaţa', function () {
-    ok(app.$('#crează-procedură a').is(':visible'), 'avem file pentru proceduri noi');
+    ok(app.$('#crează-procedură li[data-href]').is(':visible'), 'avem file pentru proceduri noi');
   });
 
 
@@ -59,7 +59,7 @@ $('#app').one('load', function () {
     };
 
 
-    app.location.hash = app.$('#crează-procedură li.g a').attr('href');
+    app.$('#crează-procedură li.g').click();
 
     var $dataIntentării, $creditor, creditor, $debitor, debitor, $de, de,
         $obiectulUrmăririi, sume;
@@ -161,6 +161,8 @@ $('#app').one('load', function () {
       $proceduraNouCreată.click();
 
       app.Procedura.$.one('populat', function () {
+        app.Procedura.$.find('#data-intentării').siblings('[data-formular]').click();
+
         equal($dataIntentării.val(), dateProcedură['data-intentării'], 'salvat data intentării');
         equal($creditor.find('#denumire').val(), creditor['denumire'], 'salvat denumire creditor');
         equal($creditor.find('#idno').val(), creditor['idno'], 'salvat idno creditor');

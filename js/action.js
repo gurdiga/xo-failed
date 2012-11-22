@@ -32,6 +32,7 @@
       Încheieri.init();
       Secţiuni.init();
       ListeMeniu.init();
+      ButoaneFormular.init();
 
       if (Utilizator.autentificat) {
         BaraDeSus.init();
@@ -1444,7 +1445,6 @@
         .bind('keyup', 'esc', function () { $(this).val('').trigger('input'); });
 
       Căutare.$
-        .on('click', '.item', ListăProceduri.deschide)
         .on('mouseenter', '.item', function () { $(this).addClass('selectat'); })
         .on('mouseleave', '.item', function () { $(this).removeClass('selectat'); });
 
@@ -1487,10 +1487,8 @@
         $spre.addClass('selectat');
       },
 
-      deschide: function (e) {
-        e.preventDefault();
-
-        Căutare.rezultate.$.find('.selectat').click();
+      deschide: function () {
+        Căutare.rezultate.$.find('.selectat').first().click();
       }
     },
 
@@ -1613,10 +1611,11 @@
         var procedură = evidenţiază(proceduri[număr]),
             creditor = persoană(procedură['creditor']),
             persoaneTerţe = $.map(procedură['persoane-terţe'], function (p) { return persoană(p); }).join(''),
-            debitori = $.map(procedură['debitori'], function (p) { return persoană(p); }).join('');
+            debitori = $.map(procedură['debitori'], function (p) { return persoană(p); }).join(''),
+            href = '#formular?' + număr.replace(Utilizator.login, '');
 
         rezultate +=
-          '<li class="item">' +
+          '<li class="item" tabindex="0" data-href="' + href + '">' +
             '<div class="număr">' +
               '<span>' + evidenţiază(număr) + '</span>' +
               '<div class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</div>' +
@@ -1627,10 +1626,6 @@
       }
 
       return rezultate;
-    },
-
-    deschide: function () {
-      location.hash = 'formular?' + ListăProceduri.extrageNumăr(this);
     },
 
     extrageNumăr: function (item) {
@@ -2745,6 +2740,18 @@
 
     ascunde: function () {
       $(this).children('.itemi').ascunde();
+    }
+  },
+
+  // --------------------------------------------------
+
+  ButoaneFormular = {
+    init: function () {
+      $(document).on('click', 'li[data-href]', this.deschide);
+    },
+
+    deschide: function () {
+      location.hash = $(this).data('href');
     }
   };
 
