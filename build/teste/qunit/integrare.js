@@ -62,56 +62,63 @@ $('#app').one('load', function () {
 
     filăProcedurăDeOrdinGeneral.click();
 
+    function găseşteCîmpuri() {
+      $dataIntentării = app.Procedura.$.find('#data-intentării');
+      $creditor = app.Procedura.$.find('#creditor');
+      $debitor = app.Procedura.$.find('.debitor');
+      $de = app.Procedura.$.find('#document-executoriu');
+      $obiectulUrmăririi = app.Procedura.$obiectulUrmăririi;
+    }
+
+    function verificăSetăriImplicite() {
+      ok(app.Procedura.$.is(':visible'), 's-a afişat formularul');
+      equal($creditor.find('#gen-persoană').val(), 'juridică',
+        'pentru procedura de orgin general creditorul e implicit persoană juridică');
+      equal($debitor.find('#gen-persoană').val(), 'fizică',
+        'pentru procedura de orgin general debitorul e implicit persoană fizică');
+      equal($obiectulUrmăririi.find('#caracter').val(), 'pecuniar',
+         'pentru procedura de ordin general caracterul implicit este pcuniar');
+      equal(app.Procedura.$.find('#total-taxe-şi-speze').suma(), app.UC,
+        'cheltuieli: total implicit taxe şi speze == taxa de intentare');
+      ok(app.Procedura.$.find('#cheltuieli .adăugate #taxaA1').există(),
+        'cheltuieli: taxa de intentare este adăugată implicit');
+    }
+
     var $dataIntentării, $creditor, creditor, $debitor, debitor, $de, de,
         $obiectulUrmăririi, sume;
 
-    app.Procedura.$.one('finalizat-animaţie', function () {
-      /*jshint maxstatements:100*/
-      ok(app.Procedura.$.is(':visible'), 's-a afişat formularul');
-
-      $dataIntentării = app.Procedura.$.find('#data-intentării');
+    function completeazăFormular() {
       $dataIntentării.val(dateProcedură['data-intentării']);
 
-      $creditor = app.Procedura.$.find('#creditor');
       creditor = dateProcedură['creditor'];
-
-      equal($creditor.find('#gen-persoană').val(), 'juridică',
-        'pentru procedura de orgin general creditorul e implicit persoană juridică');
-
       $creditor.find('#denumire').val(creditor['denumire']);
       $creditor.find('#idno').val(creditor['idno']);
       $creditor.find('#sediu').val(creditor['sediu']);
 
-      $debitor = app.Procedura.$.find('.debitor');
       debitor = dateProcedură['debitori'][0];
-
-      equal($debitor.find('#gen-persoană').val(), 'fizică',
-        'pentru procedura de orgin general debitorul e implicit persoană fizică');
-
       $debitor.find('#nume').val(debitor['nume']);
       $debitor.find('#idnp').val(debitor['idnp']);
       $debitor.find('#data-naşterii').val(debitor['data-naşterii']);
 
-      $de = app.Procedura.$.find('#document-executoriu');
       de = dateProcedură['document-executoriu'];
-
       $de.find('#instanţa-de-judecată').val(de['instanţa-de-judecată']);
       $de.find('#numărul-de').val(de['numărul-de']);
       $de.find('#data-hotărîrii').val(de['data-hotărîrii']);
       $de.find('#dispozitivul').val(de['dispozitivul']).trigger('input');
       $de.find('#data-rămînerii-definitive').val(de['data-rămînerii-definitive']);
 
-      $obiectulUrmăririi = app.Procedura.$obiectulUrmăririi;
       sume = dateProcedură['obiectul-urmăririi']['sume'];
-
-      equal($obiectulUrmăririi.find('#caracter').val(), 'pecuniar',
-         'pentru procedura de ordin general caracterul implicit este pcuniar');
-
       $obiectulUrmăririi.find('#suma-de-bază').val(sume['Suma de bază']);
       $obiectulUrmăririi.find('.adaugă-cîmp-personalizat').click();
       $obiectulUrmăririi.find('.personalizat:last')
         .find('.etichetă').val('Datorie adăugătoare').end()
         .find('.sumă').val(sume['Datorie adăugătoare']);
+    }
+
+    app.Procedura.$.one('finalizat-animaţie', function () {
+      găseşteCîmpuri();
+      verificăSetăriImplicite();
+      completeazăFormular();
 
       Evenimente.aşteaptă('calculat-onorariul');
       app.$(app.document).one('calculat-onorariul', function () {
@@ -128,11 +135,6 @@ $('#app').one('load', function () {
 
         Evenimente.anunţă('calculat-onorariul');
       });
-
-      equal(app.Procedura.$.find('#total-taxe-şi-speze').suma(), app.UC,
-        'cheltuieli: total implicit taxe şi speze == taxa de intentare');
-      ok(app.Procedura.$.find('#cheltuieli .adăugate #taxaA1').există(),
-        'cheltuieli: taxa de intentare este adăugată implicit');
 
       Evenimente.aşteaptă('încărcat-proceduri-recente');
       app.$(app.document).one('încărcat-proceduri-recente', verificăProceduraNouCreată);
@@ -174,11 +176,9 @@ $('#app').one('load', function () {
         var sumăPersonalizată = $obiectulUrmăririi.find('.personalizat .etichetă');
 
         equal(sumăPersonalizată.val(), 'Datorie adăugătoare',
-            'salvat etichetă personalzată pentru datorie adăugătoare');
-        equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'],
-            'salvat valoare datorie adăugătoare');
-        equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL',
-            'salvat valuta datorie adăugătoare');
+          'salvat etichetă personalzată pentru datorie adăugătoare');
+        equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'], 'salvat valoare datorie adăugătoare');
+        equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL', 'salvat valuta datorie adăugătoare');
 
         Evenimente.aşteaptă('şters-procedura-nou-creată');
         Evenimente.anunţă('populat');
