@@ -35,7 +35,6 @@ server {
   root /var/www/$host;
 
   include conf.d/locations/favicon.conf;
-  include conf.d/locations/bin.conf;
 
   charset utf-8;
 

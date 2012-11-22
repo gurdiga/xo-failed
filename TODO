@@ -38,7 +38,6 @@ Chestii tehnice
   - http://www.webpagetest.org/
   - https://developers.google.com/speed/pagespeed/insights
   - timeout session from JS and logout?
-  - protect PHP scripts from direct access? whitelist?
   - require.js pentru redundanţă la CDN
   - eliminare $UI?
     - treb’ de mutat imaginile pentru butonaşe inline in CSS
