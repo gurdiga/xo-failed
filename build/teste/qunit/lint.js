@@ -43,7 +43,7 @@
     history: false
   };
 
-  var scripts = document.querySelectorAll('script:not(.dont-lint)'), script, i, l;
+  var scripts = document.querySelectorAll('script:not(.dont-lint)[src]'), script, i, l;
 
   module('Linting');
 

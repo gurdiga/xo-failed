@@ -24,9 +24,16 @@
     #qunit:hover+#app {
       opacity: .1;
     }
+
+    #start {
+      position: absolute;
+      left: 100px;
+      top: 18px;
+    }
   </style>
 </head>
 <body>
+  <button id="start" onclick="QUnit.start()">start</button>
   <div id="qunit"></div>
   <iframe name="app" id="app" src=""></iframe>
   <script class="dont-lint" src="qunit-1.10.0.js"></script>
@@ -42,6 +49,10 @@
   <script src="/js/action.js"></script>
   <script src="/js/încheiere.js"></script>
   <script src="utilitare.js"></script>
+  <script>
+    QUnit.config.autostart = false;
+    QUnit.config.reorder = false;
+  </script>
   <script src="integrare.js"></script>
 
   <script src="qunit-csslint.js"></script>
