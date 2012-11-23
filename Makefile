@@ -9,7 +9,7 @@ linthtml:
 
 	@for formular in formulare/*.html; do \
 		echo -n "."; \
-		fgrep -v 'text/micro-template' $$formular | tidy -quiet -errors -utf8 -xml; \
+		fgrep -v 'text/micro-template' $$formular | tidy -quiet -errors -utf8 -xml || echo "$$formular\n"; \
 	done
 
 lintnginx:
