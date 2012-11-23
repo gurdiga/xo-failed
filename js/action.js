@@ -1322,7 +1322,7 @@
         .find('.bara-de-instrumente').fadeIn('slow').end()
         .css('top', $(window).height())
         .show()
-        .animate({'top': '40px'}, function () {
+        .animate({'top': '40px'}, 'fast', function () {
           Procedura.$.trigger('finalizat-animaţie');
         });
 
