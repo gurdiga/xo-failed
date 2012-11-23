@@ -8,6 +8,7 @@ linthtml:
 	@tidy -quiet -errors -utf8 -xml index.html
 
 	@for formular in formulare/*.html; do \
+		if [ -L $$formular ]; then continue; fi; \
 		echo -n "."; \
 		fgrep -v 'text/micro-template' $$formular | tidy -quiet -errors -utf8 -xml; \
 		RETVAL=$$?; \
