@@ -28,6 +28,7 @@
     QUnit: false,
     module: false,
     start: false,
+    stop: false,
     test: false,
     asyncTest: false,
     equal: false,

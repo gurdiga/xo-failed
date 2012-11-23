@@ -1322,9 +1322,7 @@
         .find('.bara-de-instrumente').fadeIn('slow').end()
         .css('top', $(window).height())
         .show()
-        .animate({'top': '40px'}, 'fast', function () {
-          Procedura.$.trigger('finalizat-animaţie');
-        });
+        .animate({'top': '40px'}, 'fast');
 
       if (Procedura.seDeschideProcedurăSalvată()) {
         Procedura.încarcă();
@@ -2292,6 +2290,7 @@
 
   Onorariu = {
     $: $('#onorariu'),
+    timeout: 500,
 
     init: function () {
       var schimbareDate = 'change input';
@@ -2345,7 +2344,7 @@
         Onorariu.$.val(onorariu.toFixed(2));
         Onorariu.timerCalculare = false;
         $(document).trigger('calculat-onorariul');
-      }, 500);
+      }, Onorariu.timeout);
     },
 
     pecuniar: function (suma) {
@@ -2838,16 +2837,22 @@
 
   if (!('QUnit' in window)) Action.init();
 
-  window.Profil = Profil;
-  window.Procedura = Procedura;
-  window.ProceduriRecente = ProceduriRecente;
-  window.Utilizator = Utilizator;
-  window.Încheieri = Încheieri;
-  window.Subsecţiuni = Subsecţiuni;
+  $.extend(window, {
+    Profil: Profil,
+    Procedura: Procedura,
+    ProceduriRecente: ProceduriRecente,
+    Utilizator: Utilizator,
+    Încheieri: Încheieri,
+    Subsecţiuni: Subsecţiuni
+  });
 
-  // pentru testare
-  window.FORMATUL_DATEI = FORMATUL_DATEI;
-  window.UC = UC;
-  window.Căutare = Căutare;
+  if (window.parent.location.pathname === '/build/teste/qunit/') {
+    $.extend(window, {
+      FORMATUL_DATEI: FORMATUL_DATEI,
+      UC: UC,
+      Căutare: Căutare,
+      Onorariu: Onorariu
+    });
+  }
 
 })();
