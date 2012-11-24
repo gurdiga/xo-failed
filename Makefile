@@ -9,8 +9,7 @@ lint-html:
 
 	@for formular in formulare/*.html; do \
 		if [ -L $$formular ]; then continue; fi; \
-		echo -n "."; \
-		fgrep -v 'text/micro-template' $$formular | tidy -quiet -errors -utf8 -xml; \
+		tidy -quiet -errors -utf8 -xml < $$formular && echo -n "."; \
 		RETVAL=$$?; \
 		if [ $$RETVAL -ne 0 ]; then echo "$$formular\n"; exit $$RETVAL; fi; \
 	done
