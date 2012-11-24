@@ -1,25 +1,5 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title></title>
-    <link type="text/css" rel="stylesheet" href="/css/încheiere.css"/>
-    <script id="init">
-function init(context) {
-  'use strict';
-
-  var $întîrziere = context.buton.closest('.subsecţiune.întîrziere');
-
-  context.întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere);
-  context.întîrziere.dobînda = $întîrziere.find('.sumă.dobîndă').val();
-}
-    </script>
-    <script src="/js/încheiere.js"></script>
-  </head>
-
-  <body>
-    <script type="text/micro-template">
-      <article>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
 
         <hgroup>
           <h1>Încheiere</h1>
@@ -126,23 +106,5 @@ function init(context) {
           </div>
         </section>
 
-          <section>
-            <header>Executor</header>
-            <div class="conţinut editabil" spellcheck="false">
-              <p><%= executor.nume %>, <%= executor.adresa %></p>
-            </div>
-          </section>
-
-          <section>
-            <div class="conţinut">
-              <div id="semnătura">
-                <p><%= moment(new Date).format('DD.MM.YYYY') %></p>
-                <p>Semnătura _____________</p>
-              </div>
-              <div id="ştampila">(loc pentru ştampilă)</div>
-            </div>
-          </section>
-      </article>
-    </script>
-  </body>
-</html>
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>

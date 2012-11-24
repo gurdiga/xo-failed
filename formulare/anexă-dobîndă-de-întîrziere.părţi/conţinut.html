@@ -1,30 +1,5 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title></title>
-    <link type="text/css" rel="stylesheet" href="/css/încheiere.css"/>
-    <script id="init">
-function init(context) {
-  'use strict';
-
-  var $întîrziere = context.buton.closest('.subsecţiune.întîrziere'),
-      întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere),
-      calcule = opener.DobîndaDeÎntîrziere.calculează(întîrziere);
-
-  context.întîrziere = întîrziere;
-  context.detalii = calcule.detalii;
-  context.întîrziere.dobînda = calcule.dobînda;
-
-  window.Încheiere.modificat = function () { return true; };
-}
-    </script>
-    <script src="/js/încheiere.js"></script>
-  </head>
-
-  <body>
-    <script type="text/micro-template">
-      <article>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
 
       <% if (detalii && detalii.suma && detalii.începutPerioadă && detalii.sfîrşitPerioadă) { %>
           <hgroup>
@@ -102,7 +77,4 @@ function init(context) {
 
       <% } %>
 
-      </article>
-    </script>
-  </body>
-</html>
+<? require 'partea-de-jos.html' ?>
