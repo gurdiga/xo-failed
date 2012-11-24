@@ -174,6 +174,8 @@
     }
   };
 
+  window.Încheiere = Încheiere;
+
   // the check for opener is for qHint
   if (opener) window.onload = Încheiere.init;
 

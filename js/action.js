@@ -2843,7 +2843,8 @@
     ProceduriRecente: ProceduriRecente,
     Utilizator: Utilizator,
     Încheieri: Încheieri,
-    Subsecţiuni: Subsecţiuni
+    Subsecţiuni: Subsecţiuni,
+    DobîndaDeÎntîrziere: DobîndaDeÎntîrziere
   });
 
   if (window.parent.location.pathname === '/build/teste/qunit/') {

@@ -14,7 +14,7 @@
         context.detalii = calcule.detalii;
         context.întîrziere.dobînda = calcule.dobînda;
 
-        Încheiere.modificat = function() {return true};
+        window.Încheiere.modificat = function() {return true};
       }
     </script>
     <script src="/js/încheiere.js"></script>
@@ -23,38 +23,64 @@
   <body>
     <script type="text/micro-template">
       <% if (detalii && detalii.suma && detalii.începutPerioadă && detalii.sfîrşitPerioadă) { %>
-        <p class="titlu">ANEXĂ la încheiere<br/>
-        cu privire la calcularea dobînzilor de întîrziere<br/>
-        rezultate din întîrzierea executării documentului executoriu</p>
+        <article>
 
-        <p>
-          Calculul dobînzii de întîrziere a sumei de
-          <%= detalii.suma %>&nbsp;de&nbsp;lei pentru perioada
-          <%= detalii.începutPerioadă %>&ndash;<%= detalii.sfîrşitPerioadă %>
-          cu rata aplicată de&nbsp;<%= detalii.rata %>%:
-        </p>
+          <hgroup>
+            <h1>Anexă</h1>
+            <h2>cu privire la calcularea dobînzilor de întîrziere rezultate
+            din întîrzierea executării documentului executoriu</h2>
+          </hgroup>
 
-        <ul class="calcule">
-          <li class="antet">
-            <span>Nr.</span>
-            <span>Începînd cu</span>
-            <span>Durata</span>
-            <span>Rata, %</span>
-            <span>Suma, lei</span>
-          </li>
+          <section>
+            <header>Calculul</header>
+            <div class="conţinut" spellcheck="false">
+              <p>
+                dobînzii de întîrziere a sumei de <span class="sumă"><%= detalii.suma %> de lei</span> pentru perioada
+                <span class="perioadă"><%= detalii.începutPerioadă %>&ndash;<%= detalii.sfîrşitPerioadă %></span>
+                cu rata aplicată de <%= detalii.rata %>%:
+              </p>
 
-          <% var i = 0; %>
-          <% for (var rînd in detalii.rînduri) { rînd = detalii.rînduri[rînd]; %>
-          <li>
-            <span><%= ++i %></span>
-            <span><%= rînd.data %></span>
-            <span><%= rînd.durata %> zile</span>
-            <span><%= rînd.rata %>+<%= detalii.rata %>=<%= (rînd.rata + detalii.rata).toFixed(1) %></span>
-            <span><%= rînd.dobînda.toFixed(2) %></span>
-          </li>
-          <% } %>
-          <li class="total"><%= întîrziere.dobînda %></li>
-        </ul>
+              <ul class="calcule">
+                <li class="antet">
+                  <span>Nr.</span>
+                  <span>Începînd cu</span>
+                  <span>Durata</span>
+                  <span>Rata, %</span>
+                  <span>Suma, lei</span>
+                </li>
+
+                <% var i = 0; %>
+                <% for (var rînd in detalii.rînduri) { rînd = detalii.rînduri[rînd]; %>
+                <li>
+                  <span><%= ++i %></span>
+                  <span><%= rînd.data %></span>
+                  <span><%= rînd.durata %> zile</span>
+                  <span><%= rînd.rata %>+<%= detalii.rata %>=<%= (rînd.rata + detalii.rata).toFixed(1) %></span>
+                  <span><%= rînd.dobînda.toFixed(2) %></span>
+                </li>
+                <% } %>
+                <li class="total"><%= întîrziere.dobînda %></li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <header>Executor</header>
+            <div class="conţinut editabil" spellcheck="false">
+              <p><%= executor.nume %>, <%= executor.adresa %></p>
+            </div>
+          </section>
+
+          <section>
+            <div class="conţinut">
+              <div id="semnătura">
+                <p><%= moment(new Date).format('DD.MM.YYYY') %></p>
+                <p>Semnătura _____________</p>
+              </div>
+              <div id="ştampila">(loc pentru ştampilă)</div>
+            </div>
+          </section>
+        </article>
       <% } else { %>
         <% if (!detalii) { %>
           <p>Trebuie să introduceţi datele.</p>
@@ -71,7 +97,6 @@
           <% if (!detalii.suma) { %>
             <p>Trebuie să introduceţi <b>suma</b>.</p>
           <% } %>
-
         <% } %>
 
       <% } %>

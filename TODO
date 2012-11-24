@@ -1,17 +1,21 @@
-- Căutare
-  - de scris: Proceduri găsite
-  - in loc de proceduri recente, afişează toate procedurile
-    în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
+- Formulare
+  - descompus
 
 - Imprimare
   - de dezactivat butoanele de formare a înehierilor dacă procedura e nouă şi încă nu e salvată
-  - blur contenteditables on print?
+    - de activat la populat?
+    - de adăugat data-titlu-dez/activat
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
     - în beneficiul statului
     - pensie de întreţinere
   - clasa no-print pentru controale în formulare
+
+- Căutare
+  - de scris: Proceduri găsite
+  - in loc de proceduri recente, afişează toate procedurile
+    în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
 
 - Introducerea datelor
   - Materiale
@@ -39,12 +43,11 @@ Chestii tehnice
   - https://developers.google.com/speed/pagespeed/insights
   - timeout session from JS and logout?
   - require.js pentru redundanţă la CDN
+  - custom build of $UI?
   - eliminare $UI?
     - treb’ de mutat imaginile pentru butonaşe inline in CSS
     - calendar alternativ
   - de verificat versiunea browserului?
-  - data backup (s3cmd): /yyyy/mm/dd/hh.tgz (OS logs?)
   - bootable tonido flash
-  - custom build of $UI
   - rollback deploy?
   - try a Centos VM deploy?

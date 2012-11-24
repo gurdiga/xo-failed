@@ -36,14 +36,14 @@
 
         <section>
           <header>Procedura</header>
-          <div class="conţinut" contenteditable="true" spellcheck="false">
+          <div class="conţinut" spellcheck="false">
             <p><%= login %><%= procedură['număr'] %> din <%= procedură['data-intentării'] %></p>
           </div>
         </section>
 
         <section>
           <header>Chestiunea</header>
-          <div class="conţinut" contenteditable="true" spellcheck="false">
+          <div class="conţinut editabil" spellcheck="false">
             <p>Examinînd cererea creditorului urmăritor <%= nume(procedură.creditor) %>
             cu privire la intentarea procedurii de executare în baza documentului
             executoriu <%= procedură['document-executoriu']['numărul-de'] %> din
@@ -67,7 +67,7 @@
 
         <section>
           <header>Motivele</header>
-          <div class="conţinut" contenteditable="true" spellcheck="false">
+          <div class="conţinut editabil" spellcheck="false">
             <p>Documentul executoriu a fost înaintat spre executare în termen de persoana
             împuternicită conform legii, respectîndu-se competenţa teritorială şi cuprinsul
             acestuia corespunde cerinţelor legislaţiei în vigoare. Acesta nu are termen de
@@ -81,7 +81,7 @@
 
         <section>
           <header>Dispoziţia</header>
-          <div class="conţinut" contenteditable="true" spellcheck="false">
+          <div class="conţinut editabil" spellcheck="false">
             <ol>
               <li>a primi spre executare documentul executoriu numărul
               <%= procedură['document-executoriu']['numărul-de'] %> din
@@ -108,7 +108,7 @@
 
         <section>
           <header>Executor</header>
-          <div class="conţinut" contenteditable="true" spellcheck="false">
+          <div class="conţinut editabil" spellcheck="false">
             <p><%= executor.nume %>, <%= executor.adresa %></p>
           </div>
         </section>
