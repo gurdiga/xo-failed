@@ -719,7 +719,7 @@
     seteazăTitlu: function () {
       var literă = Procedura.tip(),
           href = '#formular' + (literă ? '?' + literă : ''),
-          descriereProcedură = $('#crează-procedură').find('a[href="' + href + '"]').text(),
+          descriereProcedură = $('#crează-procedură').find('li[data-href="' + href + '"]').text(),
           număr = Procedura.seCreazăProcedurăNouă() ? '' : Utilizator.login + HashController.date();
 
       Procedura.$
