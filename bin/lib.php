@@ -42,10 +42,7 @@ function notează_ca_recentă($număr, $afişează = false) {
   $json = json_encode($lista);
   înscrie_fişier($fişier, $json);
 
-  if ($afişează) {
-    header('Content-Type: application/json');
-    echo $json;
-  }
+  if ($afişează) echo $json;
 }
 
 // ------------------------------
