@@ -169,3 +169,39 @@ ol {
 .sumă {
   white-space: nowrap;
 }
+
+.cu-opţiuni {
+  cursor: pointer;
+}
+
+section:hover .cu-opţiuni,
+.cu-opţiuni:hover {
+  cursor: pointer;
+  outline: 1px solid silver;
+}
+
+.cu-opţiuni:hover::before {
+  content: '▾';
+  position: absolute;
+  background-color: silver;
+  padding: 0 .2em;
+}
+
+ul.opţiuni {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border: 1px solid silver;
+  box-shadow: 3px 3px 14px rgba(0,0,0,0.3);
+  list-style-position: inside;
+}
+
+ul.opţiuni li {
+  padding: .2em 1em;
+}
+
+ul.opţiuni li:hover {
+  background-color: #ddd;
+}

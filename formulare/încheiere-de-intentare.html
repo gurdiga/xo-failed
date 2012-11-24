@@ -27,6 +27,13 @@
 
   <body>
     <script type="text/micro-template">
+
+      <ul class="opţiuni mod-iniţiere">
+        <li>cererea creditorului urmăritor <%= nume(procedură.creditor) %> cu privire la
+          intentarea procedurii de executare în baza documentului executoriu</li>
+        <li>din oficiu documentul executoriu</li>
+      </ul>
+
       <article>
 
         <hgroup>
@@ -44,9 +51,9 @@
         <section>
           <header>Chestiunea</header>
           <div class="conţinut editabil" spellcheck="false">
-            <p>Examinînd cererea creditorului urmăritor <%= nume(procedură.creditor) %>
-            cu privire la intentarea procedurii de executare în baza documentului
-            executoriu <%= procedură['document-executoriu']['numărul-de'] %> din
+            <p>Examinînd <span class="cu-opţiuni" data-opţiuni="mod-iniţiere">cererea creditorului urmăritor
+            <%= nume(procedură.creditor) %> cu privire la intentarea procedurii de executare în baza
+            documentului executoriu</span> <%= procedură['document-executoriu']['numărul-de'] %> din
             <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
             judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
             prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %>
@@ -54,8 +61,7 @@
             mărime totală de <span class="sumă"><%= totalDatorie %></span> MDL formată din:</p>
 
             <ol>
-            <%
-              for (var descriere in procedură['obiectul-urmăririi']['sume']) {
+            <% for (var descriere in procedură['obiectul-urmăririi']['sume']) {
                 var sumă = procedură['obiectul-urmăririi']['sume'][descriere]; %>
               <li><%= descriere %> — <%= sumă.suma %> <%= sumă.valuta %></li>
             <% } %>
@@ -124,6 +130,7 @@
         </section>
 
       </article>
+
     </script><!-- text/micro-template -->
   </body>
 </html>

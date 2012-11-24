@@ -18,6 +18,7 @@
       Încheiere.baraDeInstrumente.init();
 
       Încheiere.$.find('.editabil').attr('contenteditable', true);
+      Opţiuni.init();
     },
 
     verificăDacăFormularulEDeschis: function () {
@@ -171,6 +172,45 @@
 
     închide: function () {
       opener.Încheieri[Încheiere.pagina].tab.close();
+    }
+  };
+
+  var Opţiuni = {
+    init: function () {
+      opener.$(document.body)
+        .on('mouseenter', '.cu-opţiuni', this.afişează)
+        .on('mouseleave', '.cu-opţiuni', this.ascunde)
+        .on('click', '.opţiuni li', this.inserează);
+    },
+
+    afişează: function () {
+      var $this = opener.$(this),
+          opţiuni = $this.data('opţiuni'),
+          $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni),
+          position = $this.offset();
+
+      $opţiuni
+        .appendTo($this)
+        .show();
+
+      $this.data('$opţiuni', $opţiuni);
+    },
+
+    ascunde: function () {
+      opener.$(this).data('$opţiuni')
+        .prependTo(document.body)
+        .hide();
+    },
+
+    inserează: function () {
+      var $this = opener.$(this),
+          $cîmp = $this.closest('.cu-opţiuni');
+
+      $this.parent()
+        .prependTo(document.body)
+        .hide();
+
+      $cîmp.html($this.html());
     }
   };
 
