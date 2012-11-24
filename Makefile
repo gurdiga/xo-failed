@@ -1,9 +1,9 @@
 default: lint test
 
-lint: linthtml lintnginx lintphp
+lint: lint-html lint-nginx lint-php
 	@echo ""
 
-linthtml:
+lint-html:
 	@echo -n "."
 	@tidy -quiet -errors -utf8 -xml index.html
 
@@ -15,17 +15,17 @@ linthtml:
 		if [ $$RETVAL -ne 0 ]; then echo "$$formular\n"; exit $$RETVAL; fi; \
 	done
 
-lintnginx:
+lint-nginx:
 	@echo -n "."
 	@sudo /usr/sbin/nginx -t -q
 
-lintphp:
+lint-php:
 	@for script in bin/*; do \
 		echo -n "."; \
 		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
 	done
 
-test:
+test: lint
 	@build/teste/integrare/start.sh
 
 push:
