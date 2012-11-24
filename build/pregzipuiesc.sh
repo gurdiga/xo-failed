@@ -17,7 +17,7 @@ echo "Pregzipuiesc cod..."
 
 for file in $files; do
   echo "- $file"
-  cat $file | gzip > $file.gz
+  gzip < $file > $file.gz
 done
 
 echo ''
