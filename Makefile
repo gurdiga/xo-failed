@@ -31,7 +31,8 @@ push:
 
 pull:
 	git fetch
-	git checkout
+	git checkout master
+	git reset --hard origin/master
 
 build: pull
 	build/start.sh
