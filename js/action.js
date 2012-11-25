@@ -604,6 +604,7 @@
     $: $('#formular'),
     $titlu: $('#formular h1'),
     $obiectulUrmăririi: $('#formular #obiectul-urmăririi'),
+    cache: {},
 
     init: function () {
       this.$
@@ -977,6 +978,11 @@
       var procedură = Procedura.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json';
 
+      if (!Procedura.schimbat(procedură, număr)) {
+        Procedura.$.trigger('salvat-deja', [procedură]);
+        return;
+      }
+
       $.put(cale, JSON.stringify(procedură), function (_, status) {
         if (status === 'notmodified') {
           Procedura.$.trigger('salvat-deja', [procedură]);
@@ -984,6 +990,7 @@
         }
 
         Procedura.$.trigger('salvat', [procedură]);
+        Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
 
         if ($.isFunction(callback)) callback();
@@ -1002,10 +1009,22 @@
 
         Procedura.seteazăTitlu();
         Procedura.$.trigger('salvat', [procedură]);
+        Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
 
         if ($.isFunction(callback)) callback();
       });
+    },
+
+    puneÎnCache: function (procedură, număr) {
+      delete procedură['data-ultimei-modificări'];
+      Procedura.cache[număr] = JSON.stringify(procedură);
+    },
+
+    schimbat: function (procedură, număr) {
+      delete procedură['data-ultimei-modificări'];
+
+      return Procedura.cache[număr] !== JSON.stringify(procedură);
     },
 
     încarcă: function () {
@@ -1015,6 +1034,7 @@
         .success(function (procedură) {
           ProceduriRecente.notează(număr);
           Procedura.populează(procedură);
+          Procedura.puneÎnCache(procedură, număr);
         })
         .error(Procedura.închide);
 
