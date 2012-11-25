@@ -15,5 +15,3 @@ curl -s \
  http://closure-compiler.appspot.com/compile > $SURSA
 
 rm $SURSA.original
-
-echo ''

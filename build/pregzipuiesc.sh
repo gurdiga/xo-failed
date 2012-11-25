@@ -19,5 +19,3 @@ for file in $files; do
   echo "- $file"
   gzip < $file > $file.gz
 done
-
-echo ''
