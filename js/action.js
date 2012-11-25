@@ -1604,7 +1604,7 @@
 
       // ------------------------------------------
       function evidenţiază(conţinut) {
-        /*jshint maxcomplexity:5*/
+        /*jshint maxcomplexity:6*/
         if ($.isPlainObject(conţinut)) {
           var itemi = {};
 
@@ -1619,10 +1619,12 @@
           return itemi;
         } else if ($.isArray(conţinut)) {
           return $.map(conţinut, function (item) { return evidenţiază(item); });
-        } else {
+        } else if (conţinut) {
           var reFragment = new RegExp('(' + text + ')', 'gi');
 
           return conţinut.replace(reFragment, '<b>$1</b>');
+        } else {
+          return '';
         }
       }
 
