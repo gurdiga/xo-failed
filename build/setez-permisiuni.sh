@@ -1,15 +1,8 @@
 echo 'Setez permisiuni...'
 
-echo '- .htusers'
-sudo chown www-data .htusers
-sudo chmod g+w .htusers
+TARGETS=".htusers bnm date"
 
-echo '- bnm/'
-sudo chown -R www-data bnm
-sudo chmod -R g+w bnm
-
-echo '- date/'
-sudo chown -R www-data date
-sudo chmod -R g+w date
+sudo chown www-data $TARGETS
+sudo chmod g+w $TARGETS
 
 echo ''
