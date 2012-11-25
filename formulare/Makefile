@@ -1,6 +1,6 @@
 .PHONY: formulare
 formulare:
-	@for formular in formulare/*.părţi; do \
+	for formular in formulare/*.părţi; do \
 		for parte in $$formular/*.html; do \
 			tidy -quiet -errors -utf8 -xml < $$parte; \
 			RETVAL=$$?; \
