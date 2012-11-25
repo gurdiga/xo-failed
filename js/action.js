@@ -2869,23 +2869,19 @@
 
   if (!('QUnit' in window)) Action.init();
 
-  $.extend(window, {
-    Profil: Profil,
-    Procedura: Procedura,
-    ProceduriRecente: ProceduriRecente,
-    Utilizator: Utilizator,
-    Încheieri: Încheieri,
-    Subsecţiuni: Subsecţiuni,
-    DobîndaDeÎntîrziere: DobîndaDeÎntîrziere
-  });
+  window.Profil = Profil;
+  window.Procedura = Procedura;
+  window.ProceduriRecente = ProceduriRecente;
+  window.Utilizator = Utilizator;
+  window.Încheieri = Încheieri;
+  window.Subsecţiuni = Subsecţiuni;
+  window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
 
   if (window.parent.location.pathname === '/build/teste/qunit/') {
-    $.extend(window, {
-      FORMATUL_DATEI: FORMATUL_DATEI,
-      UC: UC,
-      Căutare: Căutare,
-      Onorariu: Onorariu
-    });
+    window.FORMATUL_DATEI = FORMATUL_DATEI;
+    window.UC = UC;
+    window.Căutare = Căutare;
+    window.Onorariu = Onorariu;
   }
 
 })();
