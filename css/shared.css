@@ -67,7 +67,7 @@
   opacity: .9;
 }
 
-.bara-de-instrumente>button+.mesaj {
+.bara-de-instrumente>button~.mesaj {
   position: absolute;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   background: white;
@@ -83,7 +83,7 @@
   font-family: sans-serif;
 }
 
-.bara-de-instrumente>button+.mesaj.afişat {
+.bara-de-instrumente>button~.mesaj.afişat {
   opacity: 1;
 }
 

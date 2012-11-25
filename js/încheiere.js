@@ -80,7 +80,10 @@
 
     salvează: function (callback) {
       if (!Încheiere.modificat()) {
+        Încheiere.baraDeInstrumente.anunţăSalvatDeja();
+
         if (opener.$.isFunction(callback)) callback();
+
         return;
       }
 
@@ -163,10 +166,21 @@
       },
 
       anunţăSalvarea: function () {
-        var mesaj = Încheiere.$.find('.bara-de-instrumente .salvează+.mesaj');
+        Încheiere.baraDeInstrumente.afişeazăMesaj('salvat');
+      },
+
+      anunţăSalvatDeja: function () {
+        Încheiere.baraDeInstrumente.afişeazăMesaj('salvat-deja');
+      },
+
+      afişeazăMesaj: function (mesaj) {
+        var mesaj = Încheiere.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
 
         mesaj.addClass('afişat');
-        setTimeout(function () { mesaj.removeClass('afişat'); }, 1000);
+
+        setTimeout(function () {
+          mesaj.removeClass('afişat');
+        }, 1000);
       }
     },
 

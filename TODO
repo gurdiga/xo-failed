@@ -1,5 +1,6 @@
 - Formulare
   - descompus
+    - use `make formular.html` to make formulare?
 
 - Imprimare
   - de dezactivat butoanele de formare a înehierilor dacă procedura e nouă şi încă nu e salvată

@@ -634,10 +634,19 @@
           .on('click', '.spre-secţiuni+.opţiuni li', Procedura.focuseazăSecţiunea);
 
         Procedura.$.on('salvat', this.anunţăSalvarea);
+        Procedura.$.on('salvat-deja', this.anunţăSalvatDeja);
       },
 
       anunţăSalvarea: function () {
-        var mesaj = Procedura.$.find('.bara-de-instrumente .salvează+.mesaj');
+        Procedura.baraDeInstrumente.afişeazăMesaj('salvat');
+      },
+
+      anunţăSalvatDeja: function () {
+        Procedura.baraDeInstrumente.afişeazăMesaj('salvat-deja');
+      },
+
+      afişeazăMesaj: function (mesaj) {
+        var mesaj = Procedura.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
 
         mesaj.addClass('afişat');
 
@@ -969,7 +978,10 @@
           cale = '/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json';
 
       $.put(cale, JSON.stringify(procedură), function (_, status) {
-        if (status === 'notmodified') return;
+        if (status === 'notmodified') {
+          Procedura.$.trigger('salvat-deja', [procedură]);
+          return;
+        }
 
         Procedura.$.trigger('salvat', [procedură]);
         Căutare.încarcăIndexFărăCache();
