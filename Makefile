@@ -5,8 +5,6 @@ default: lint test
 lint: lint-html lint-nginx lint-php formulare
 	echo ""
 
-include formulare/Makefile
-
 lint-html:
 	echo -n "."
 	tidy -quiet -errors -utf8 -xml index.html
@@ -20,6 +18,10 @@ lint-php:
 		echo -n "."; \
 		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
 	done
+
+.PHONY: formulare
+formulare:
+	formulare/build.sh
 
 test: lint
 	build/teste/integrare/start.sh
