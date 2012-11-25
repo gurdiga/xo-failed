@@ -30,7 +30,8 @@ push:
 	git push
 
 pull:
-	git pull
+	git fetch
+	git checkout
 
 build: pull
 	build/start.sh
