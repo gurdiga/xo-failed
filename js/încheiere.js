@@ -174,12 +174,12 @@
       },
 
       afişeazăMesaj: function (mesaj) {
-        var mesaj = Încheiere.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
+        var $mesaj = Încheiere.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
 
-        mesaj.addClass('afişat');
+        $mesaj.addClass('afişat');
 
         setTimeout(function () {
-          mesaj.removeClass('afişat');
+          $mesaj.removeClass('afişat');
         }, 1000);
       }
     },
