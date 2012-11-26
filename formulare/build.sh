@@ -10,7 +10,9 @@ function verifică {
   fi
 }
 
-for formular in formulare/*.părţi; do
+cd formulare
+
+for formular in *.părţi; do
   for parte in $formular/*.html; do
     tidy -quiet -errors -utf8 -xml < $parte;
     verifică $parte
@@ -22,4 +24,11 @@ for formular in formulare/*.părţi; do
 
   tidy -quiet -errors -utf8 -xml < $DESTINATIE && echo -n "."
   verifică $formular
+
+  BASENAME=${formular/.părţi/}
+  ln -sf $DESTINATIE "$BASENAME-P.html"
+  ln -sf $DESTINATIE "$BASENAME-pecuniar.html"
+  ln -sf $DESTINATIE "$BASENAME-nonpecuniar.html"
+  ln -sf $DESTINATIE "$BASENAME-Specuniar.html"
+  ln -sf $DESTINATIE "$BASENAME-Snonpecuniar.html"
 done
