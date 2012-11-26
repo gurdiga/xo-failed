@@ -1,6 +1,6 @@
 /*global moment:true RateDeBază:false RateBNM:false*/
 
-(function () {
+(function (window, document, moment) {
   'use strict';
 
   var UC = 20, // valoarea unităţii convenţionale în MDL
@@ -2886,4 +2886,4 @@
     window.Onorariu = Onorariu;
   }
 
-})();
+})(window, document, moment);
