@@ -22,7 +22,7 @@
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!opener || !opener.Încheieri[Încheiere.pagina] || !opener.Procedura.$.is(':visible')) {
+      if (!opener || !opener.ButoanePentruÎncheieri[Încheiere.pagina] || !opener.Procedura.$.is(':visible')) {
         window.close();
         return;
       }
@@ -46,7 +46,7 @@
         procedură: procedură,
         executor: opener.Profil.date,
         login: opener.Utilizator.login,
-        buton: opener.Încheieri[Încheiere.pagina].buton,
+        buton: opener.ButoanePentruÎncheieri[Încheiere.pagina].buton,
         nume: nume,
         id: id,
         debitori: procedură.debitori.map(function (debitor) {
@@ -102,7 +102,7 @@
       var pagina = Încheiere.cale();
 
       opener.$.put(pagina, Încheiere.conţinut(), function () {
-        opener.Încheieri[pagina] = opener.Încheieri[Încheiere.pagina];
+        opener.ButoanePentruÎncheieri[pagina] = opener.ButoanePentruÎncheieri[Încheiere.pagina];
         Încheiere.pagina = pagina;
         Încheiere.iniţial = Încheiere.conţinut();
         history.replaceState(null, null, pagina);
@@ -116,7 +116,7 @@
     },
 
     marcheazăButonul: function () {
-      var buton = opener.Încheieri[Încheiere.pagina].buton;
+      var buton = opener.ButoanePentruÎncheieri[Încheiere.pagina].buton;
 
       if (!buton.is('.salvat')) buton.addClass('salvat');
 
@@ -127,7 +127,7 @@
 
     cale: function () {
       var director = '/date/' + opener.Utilizator.login + '/proceduri/' + opener.Procedura.număr() + '/încheieri/',
-          buton = opener.Încheieri[Încheiere.pagina].buton,
+          buton = opener.ButoanePentruÎncheieri[Încheiere.pagina].buton,
           fişier = buton.data('formular') + '-' + opener.moment().format('YYMMDDhhmmss') + '.html';
 
       return director + fişier;
@@ -138,7 +138,7 @@
     },
 
     regenerează: function () {
-      opener.Încheieri[Încheiere.pagina].buton
+      opener.ButoanePentruÎncheieri[Încheiere.pagina].buton
         .removeClass('salvat')
         .removeData('pagina')
         .click();
@@ -185,7 +185,7 @@
     },
 
     închide: function () {
-      opener.Încheieri[Încheiere.pagina].tab.close();
+      opener.ButoanePentruÎncheieri[Încheiere.pagina].tab.close();
     }
   };
 
