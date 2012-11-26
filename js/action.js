@@ -1,14 +1,15 @@
-/*global $şabloane:false moment:true RateDeBază:false RateBNM:false*/
+/*global moment:true RateDeBază:false RateBNM:false*/
 
 (function () {
   'use strict';
 
-  window.$şabloane = $('#şabloane');
-  window.skipEventOnce = {};
-
   var UC = 20, // valoarea unităţii convenţionale în MDL
       RE_FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/,
       FORMATUL_DATEI = 'DD.MM.YYYY',
+
+  $şabloane = $('#şabloane'),
+
+  skipEventOnce = {},
 
   Action = {
     init: function () {
@@ -98,9 +99,9 @@
       $(window)
         .on('hashchange', function (e) {
           if (!(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
-          if (window.skipEventOnce.hashchange) {
+          if (skipEventOnce.hashchange) {
             e.stopImmediatePropagation();
-            delete window.skipEventOnce.hashchange;
+            delete skipEventOnce.hashchange;
           }
         })
         .on('hashchange', function () {
@@ -1004,7 +1005,7 @@
       $.put(cale, JSON.stringify(procedură), function (cale) {
         var număr = cale.match(/(-\d+)\/date.json$/)[1];
 
-        window.skipEventOnce.hashchange = true;
+        skipEventOnce.hashchange = true;
         location.hash = 'formular?' + număr;
 
         Procedura.seteazăTitlu();
@@ -2876,6 +2877,7 @@
   window.Încheieri = Încheieri;
   window.Subsecţiuni = Subsecţiuni;
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
+  window.$şabloane = $şabloane;
 
   if (window.parent.location.pathname === '/build/teste/qunit/') {
     window.FORMATUL_DATEI = FORMATUL_DATEI;
