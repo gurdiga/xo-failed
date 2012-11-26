@@ -1,3 +1,6 @@
+- qunit
+- jslint:
+  - listează JS-urie în script nu în index.html
 - Formulare
   - descompus
     - use `make formular.html` to make formulare?

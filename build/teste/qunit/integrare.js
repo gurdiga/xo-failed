@@ -51,12 +51,12 @@ $('#app').one('load', function () {
     };
 
     var $dataIntentării, $creditor, creditor, $debitor, debitor, $de, de,
-        $obiectulUrmăririi, sume;
+        $obiectulUrmăririi, sume, numărulProceduriiCreate;
 
     var file = app.$('#crează-procedură li[data-href]'),
         filăProcedurăDeOrdinGeneral = file.filter('.g');
 
-    stop(3);
+    stop(1);
 
     ok(file.is(':visible'), 'avem file pentru proceduri noi');
     filăProcedurăDeOrdinGeneral.click();
@@ -78,16 +78,16 @@ $('#app').one('load', function () {
         equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit,
           'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
 
-        start();
-      });
+        app.$(app.Procedura.$).one('salvat', function (e, procedură, număr) {
+          numărulProceduriiCreate = număr;
 
-      // aşteaptă o leacă să se calculeze onorariul
-      setTimeout(function () {
-        app.$(app.document).one('încărcat-proceduri-recente', verificăProceduraNouCreată);
+          app.$(app.Procedura.$).one('închidere', function (e, procedură, număr) {
+            app.$(app.document).one('încărcat-proceduri-recente', verificăProceduraCreată);
+          });
+          app.Procedura.$.find('.închide').click();
+        });
         app.Procedura.$.find('.bara-de-instrumente .salvează').click();
-        app.Procedura.$.find('.închide').click();
-        start();
-      }, 1000);
+      });
     });
 
     function localizeazăCîmpuri() {
@@ -140,18 +140,16 @@ $('#app').one('load', function () {
         .find('.sumă').val(sume['Datorie adăugătoare']);
     }
 
-    function verificăProceduraNouCreată() {
-      var id = dateProcedură['creditor']['idno'],
-          proceduraNouCreată = '#proceduri-recente .item .persoane .id:contains("' + id + '"):first',
-          $proceduraNouCreată = app.$(proceduraNouCreată);
+    function verificăProceduraCreată() {
+      var proceduraCreată = '.item[data-href="#formular?' + numărulProceduriiCreate + '"]',
+          $proceduraCreată = app.ProceduriRecente.$.find(proceduraCreată);
 
-      ok($proceduraNouCreată.există(), 'procedura nou creată e adăugată prima în lista celor recente');
+      ok($proceduraCreată.există(), 'procedura nou creată e în lista celor recente');
+      ok($proceduraCreată.is(':first-child'), 'pe prima poziţie');
 
-      $proceduraNouCreată.click();
+      $proceduraCreată.click();
 
       app.Procedura.$.one('populat', function () {
-        app.Procedura.$.find('#data-intentării').siblings('[data-formular]').click();
-
         equal($dataIntentării.val(), dateProcedură['data-intentării'], 'salvat data intentării');
         equal($creditor.find('#denumire').val(), creditor['denumire'], 'salvat denumire creditor');
         equal($creditor.find('#idno').val(), creditor['idno'], 'salvat idno creditor');
@@ -174,11 +172,28 @@ $('#app').one('load', function () {
         equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'], 'salvat valoare datorie adăugătoare');
         equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL', 'salvat valuta datorie adăugătoare');
 
-        ştergeProceduraNouCreată();
+        verificăÎncheiereaDeIntentare();
       });
     }
 
-    function ştergeProceduraNouCreată() {
+    function verificăÎncheiereaDeIntentare() {
+      var buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
+          încheieri = app.ButoanePentruÎncheieri,
+          formular = încheieri.formular(buton);
+
+      buton.click();
+
+      app.$(încheieri[formular].tab).one('load', function () {
+        var încheiere = this;
+
+        // TODO
+        // aşteaptă să se încarce, salvează, închide, redeschide
+
+        ştergeProceduraCreată();
+      });
+    }
+
+    function ştergeProceduraCreată() {
       $.ajax({
         url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
         type: 'DELETE',
