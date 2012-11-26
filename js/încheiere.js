@@ -1,12 +1,20 @@
-(function () {
+(function (window, document, app) {
   'use strict';
+
+  var $, Procedura, ButoanePentruÎncheieri, Utilizator, Profil;
 
   var Încheiere = {
     init: function () {
       Încheiere.pagina = decodeURIComponent(location.pathname);
-      setInterval(Încheiere.verificăDacăFormularulEDeschis, 100);
+      setInterval(Încheiere.verificăDacăFormularulEDeschis, 500);
 
-      Încheiere.$ = opener.$(document.body);
+      $ = app.$;
+      Procedura = app.Procedura;
+      ButoanePentruÎncheieri = app.ButoanePentruÎncheieri;
+      Utilizator = app.Utilizator;
+      Profil = app.Profil;
+
+      Încheiere.$ = $(document.body);
 
       if (!Încheiere.compilată()) {
         Încheiere.compilează();
@@ -14,26 +22,26 @@
         Încheiere.iniţial = Încheiere.conţinut();
       }
 
-      Încheiere.butonDeÎnchidere.init();
-      Încheiere.baraDeInstrumente.init();
+      ButonDeÎnchidere.init();
+      BaraDeInstrumente.init();
 
       Încheiere.$.find('.editabil').attr('contenteditable', true);
       Opţiuni.init();
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!opener || !opener.ButoanePentruÎncheieri[Încheiere.pagina] || !opener.Procedura.$.is(':visible')) {
+      if (!opener || !ButoanePentruÎncheieri[Încheiere.pagina] || !Procedura.$.is(':visible')) {
         window.close();
         return;
       }
     },
 
     compilează: function () {
-      opener.compile(Încheiere.context(), document);
+      app.compile(Încheiere.context(), document);
     },
 
     context: function () {
-      var procedură = opener.Procedura.colectează(),
+      var procedură = Procedura.colectează(),
           nume = function (persoană) {
             return persoană['gen-persoană'] === 'fizică' ? persoană['nume'] : persoană['denumire'];
           },
@@ -44,9 +52,9 @@
       var context = {
         opener: opener,
         procedură: procedură,
-        executor: opener.Profil.date,
-        login: opener.Utilizator.login,
-        buton: opener.ButoanePentruÎncheieri[Încheiere.pagina].buton,
+        executor: Profil.date,
+        login: Utilizator.login,
+        buton: ButoanePentruÎncheieri[Încheiere.pagina].buton,
         nume: nume,
         id: id,
         debitori: procedură.debitori.map(function (debitor) {
@@ -69,7 +77,7 @@
         '<html>' +
           '<head>' + document.head.innerHTML + '</head>' +
           '<body>' +
-            opener.$('<div>' + document.body.innerHTML + '</div>')
+            $('<div>' + document.body.innerHTML + '</div>')
               .find('button.închide')
                 .nextAll().remove().end()
               .remove().end()
@@ -80,17 +88,17 @@
 
     salvează: function (callback) {
       if (!Încheiere.modificat()) {
-        Încheiere.baraDeInstrumente.anunţăSalvatDeja();
+        BaraDeInstrumente.anunţăSalvatDeja();
 
-        if (opener.$.isFunction(callback)) callback();
+        if ($.isFunction(callback)) callback();
 
         return;
       }
 
-      if (opener.Procedura.număr()) {
+      if (Procedura.număr()) {
         Încheiere.trimite(callback);
       } else {
-        opener.Procedura.salveazăSauCrează(function () {
+        Procedura.salveazăSauCrează(function () {
           var salvatProceduraDeja = true;
 
           Încheiere.trimite(callback, salvatProceduraDeja);
@@ -101,22 +109,22 @@
     trimite: function (callback, salvatProceduraDeja) {
       var pagina = Încheiere.cale();
 
-      opener.$.put(pagina, Încheiere.conţinut(), function () {
-        opener.ButoanePentruÎncheieri[pagina] = opener.ButoanePentruÎncheieri[Încheiere.pagina];
+      $.put(pagina, Încheiere.conţinut(), function () {
+        ButoanePentruÎncheieri[pagina] = ButoanePentruÎncheieri[Încheiere.pagina];
         Încheiere.pagina = pagina;
         Încheiere.iniţial = Încheiere.conţinut();
         history.replaceState(null, null, pagina);
 
         Încheiere.marcheazăButonul();
-        if (!salvatProceduraDeja) opener.Procedura.salveazăSauCrează();
-        Încheiere.baraDeInstrumente.anunţăSalvarea();
+        if (!salvatProceduraDeja) Procedura.salveazăSauCrează();
+        BaraDeInstrumente.anunţăSalvarea();
 
-        if (opener.$.isFunction(callback)) callback();
+        if ($.isFunction(callback)) callback();
       });
     },
 
     marcheazăButonul: function () {
-      var buton = opener.ButoanePentruÎncheieri[Încheiere.pagina].buton;
+      var buton = ButoanePentruÎncheieri[Încheiere.pagina].buton;
 
       if (!buton.is('.salvat')) buton.addClass('salvat');
 
@@ -126,9 +134,9 @@
     },
 
     cale: function () {
-      var director = '/date/' + opener.Utilizator.login + '/proceduri/' + opener.Procedura.număr() + '/încheieri/',
-          buton = opener.ButoanePentruÎncheieri[Încheiere.pagina].buton,
-          fişier = buton.data('formular') + '-' + opener.moment().format('YYMMDDhhmmss') + '.html';
+      var director = '/date/' + Utilizator.login + '/proceduri/' + Procedura.număr() + '/încheieri/',
+          buton = ButoanePentruÎncheieri[Încheiere.pagina].buton,
+          fişier = buton.data('formular') + '-' + app.moment().format('YYMMDDhhmmss') + '.html';
 
       return director + fişier;
     },
@@ -138,7 +146,7 @@
     },
 
     regenerează: function () {
-      opener.ButoanePentruÎncheieri[Încheiere.pagina].buton
+      ButoanePentruÎncheieri[Încheiere.pagina].buton
         .removeClass('salvat')
         .removeData('pagina')
         .click();
@@ -148,83 +156,89 @@
       return Încheiere.iniţial !== Încheiere.conţinut();
     },
 
-    butonDeÎnchidere: {
-      init: function () {
-        opener.Procedura.$.find('button.închide').clone()
-          .appendTo(Încheiere.$)
-          .on('click', Încheiere.închide);
-      }
-    },
-
-    baraDeInstrumente: {
-      init: function () {
-        opener.$şabloane.find('.bara-de-instrumente.pentru.încheiere').clone()
-          .appendTo(Încheiere.$)
-          .on('click', '.salvează', Încheiere.salvează)
-          .on('click', '.imprimă', Încheiere.imprimă)
-          .on('click', '.regenerează', Încheiere.regenerează);
-      },
-
-      anunţăSalvarea: function () {
-        Încheiere.baraDeInstrumente.afişeazăMesaj('salvat');
-      },
-
-      anunţăSalvatDeja: function () {
-        Încheiere.baraDeInstrumente.afişeazăMesaj('salvat-deja');
-      },
-
-      afişeazăMesaj: function (mesaj) {
-        var $mesaj = Încheiere.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
-
-        $mesaj.addClass('afişat');
-
-        setTimeout(function () {
-          $mesaj.removeClass('afişat');
-        }, 1000);
-      }
-    },
-
     închide: function () {
-      opener.ButoanePentruÎncheieri[Încheiere.pagina].tab.close();
+      ButoanePentruÎncheieri[Încheiere.pagina].tab.close();
     }
-  };
+  },
 
-  var Opţiuni = {
+  // --------------------------------------------------
+
+  ButonDeÎnchidere = {
     init: function () {
-      opener.$(document.body)
+      Procedura.$.find('button.închide').clone()
+        .appendTo(Încheiere.$)
+        .on('click', Încheiere.închide);
+    }
+  },
+
+  BaraDeInstrumente = {
+    init: function () {
+      app.$şabloane.find('.bara-de-instrumente.pentru.încheiere').clone()
+        .appendTo(Încheiere.$)
+        .on('click', '.salvează', Încheiere.salvează)
+        .on('click', '.imprimă', Încheiere.imprimă)
+        .on('click', '.regenerează', Încheiere.regenerează);
+    },
+
+    anunţăSalvarea: function () {
+      BaraDeInstrumente.afişeazăMesaj('salvat');
+    },
+
+    anunţăSalvatDeja: function () {
+      BaraDeInstrumente.afişeazăMesaj('salvat-deja');
+    },
+
+    afişeazăMesaj: function (mesaj) {
+      var $mesaj = Încheiere.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
+
+      $mesaj.addClass('afişat');
+
+      setTimeout(function () {
+        $mesaj.removeClass('afişat');
+      }, 1000);
+    }
+  },
+
+  // --------------------------------------------------
+
+  Opţiuni = {
+    init: function () {
+      $(document.body)
         .on('mouseenter', '.cu-opţiuni', this.afişează)
         .on('mouseleave', '.cu-opţiuni', this.ascunde)
         .on('click', '.opţiuni li', this.inserează);
     },
 
     afişează: function () {
-      var $this = opener.$(this),
-          opţiuni = $this.data('opţiuni'),
+      var $cîmp = $(this),
+          opţiuni = $cîmp.data('opţiuni'),
           $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni),
-          position = $this.offset();
+          position = $cîmp.offset();
 
       $opţiuni
-        .appendTo($this)
+        .appendTo($cîmp)
         .show();
 
-      $this.data('$opţiuni', $opţiuni);
+      $cîmp.data('$opţiuni', $opţiuni);
     },
 
     ascunde: function () {
-      opener.$(this).data('$opţiuni')
+      var $cîmp = $(this);
+
+      $cîmp.data('$opţiuni')
         .prependTo(document.body)
         .hide();
     },
 
     inserează: function () {
-      var $this = opener.$(this),
-          $cîmp = $this.closest('.cu-opţiuni');
+      var $opţiune = $(this),
+          $cîmp = $opţiune.closest('.cu-opţiuni');
 
-      $this.parent()
+      $opţiune.parent()
         .prependTo(document.body)
         .hide();
 
-      $cîmp.html($this.html());
+      $cîmp.html($opţiune.html());
     }
   };
 
@@ -233,4 +247,4 @@
   // the check for opener is for qHint
   if (opener) window.onload = Încheiere.init;
 
-})();
+})(window, document, window.opener);
