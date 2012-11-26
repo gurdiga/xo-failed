@@ -1,6 +1,17 @@
 (function () {
   'use strict';
 
+  var SCRIPTS = [
+    '/js/action.js',
+    '/js/încheiere.js',
+    'integrare.js',
+    '/formulare/încheiere-dobîndă-de-întîrziere.părţi/script.js',
+    '/formulare/încheiere-de-intentare.părţi/script.js',
+    '/formulare/anexă-dobîndă-de-întîrziere.părţi/script.js',
+    'qunit-csslint.js',
+    'lint.js'
+  ];
+
   var JSHINT_OPTIONS = {
     bitwise: true,
     camelcase: true,
@@ -44,12 +55,12 @@
     history: false
   };
 
-  var scripts = document.querySelectorAll('script:not(.dont-lint)[src]'), script, i, l;
+  var script, i, l;
 
-  module('Linting');
+  module('JSHint');
 
-  for (i = 0, l = scripts.length; i < l; i ++) {
-    script = scripts[i].getAttribute('src');
+  for (i = 0, l = SCRIPTS.length; i < l; i ++) {
+    script = SCRIPTS[i];
     jsHintTest(script, script, JSHINT_OPTIONS, JSHINT_GLOBALS);
   }
 
