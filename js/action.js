@@ -1601,8 +1601,6 @@
 
   ListăProceduri = {
     formatează: function (proceduri, text) {
-      /*jshint loopfunc:true*/
-
       // ------------------------------------------
       function evidenţiază(conţinut) {
         /*jshint maxcomplexity:5*/
@@ -1641,8 +1639,8 @@
       for (var număr in proceduri) {
         var procedură = evidenţiază(proceduri[număr]),
             creditor = persoană(procedură['creditor']),
-            persoaneTerţe = $.map(procedură['persoane-terţe'], function (p) { return persoană(p); }).join(''),
-            debitori = $.map(procedură['debitori'], function (p) { return persoană(p); }).join(''),
+            persoaneTerţe = $.map(procedură['persoane-terţe'], persoană).join(''),
+            debitori = $.map(procedură['debitori'], persoană).join(''),
             href = '#formular?' + număr.replace(Utilizator.login, '');
 
         rezultate +=
@@ -1657,10 +1655,6 @@
       }
 
       return rezultate;
-    },
-
-    extrageNumăr: function (item) {
-      return $(item).find('.număr span').text().replace(Utilizator.login, '');
     }
   },
 
