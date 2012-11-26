@@ -1,4 +1,4 @@
-/*global moment:true RateDeBază:false RateBNM:false*/
+/*global top:false moment:false RateDeBază:false RateBNM:false*/
 
 (function (window, document, moment) {
   'use strict';
@@ -7,9 +7,8 @@
       RE_FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/,
       FORMATUL_DATEI = 'DD.MM.YYYY',
 
+  location = window.location,
   $şabloane = $('#şabloane'),
-
-  skipEventOnce = {},
 
   Action = {
     init: function () {
@@ -97,14 +96,8 @@
   HashController = {
     init: function () {
       $(window)
-        .on('hashchange', function (e) {
-          if (!(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
-          if (skipEventOnce.hashchange) {
-            e.stopImmediatePropagation();
-            delete skipEventOnce.hashchange;
-          }
-        })
         .on('hashchange', function () {
+          if (location.hash && !(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
           if (!Utilizator.autentificat) {
             location.hash = '';
             return;
@@ -1003,10 +996,10 @@
           cale = '/date/' + Utilizator.login + '/proceduri/';
 
       $.put(cale, JSON.stringify(procedură), function (cale) {
-        var număr = cale.match(/(-\d+)\/date.json$/)[1];
+        var număr = cale.match(/([SP]?-\d+)\/date.json$/)[1],
+            adresaNouă = location.href + '?' + număr;
 
-        skipEventOnce.hashchange = true;
-        location.hash = 'formular?' + număr;
+        history.replaceState(null, null, adresaNouă);
 
         Procedura.seteazăTitlu();
         Procedura.$.trigger('salvat', [procedură, număr]);
@@ -1334,13 +1327,14 @@
     },
 
     închide: function () {
+      location.hash = '';
+
       Procedura.focusează();
       Procedura.$
         .stop(true, true)
         .find('.bara-de-instrumente').fadeOut().end()
         .animate({'top': $(window).height()}, function () {
           $(this).hide();
-          location.hash = '';
         })
         .trigger('închidere');
     },
@@ -1617,7 +1611,7 @@
 
           return itemi;
         } else if ($.isArray(conţinut)) {
-          return $.map(conţinut, function (item) { return evidenţiază(item); });
+          return $.map(conţinut, evidenţiază);
         } else {
           var reFragment = new RegExp('(' + text + ')', 'gi');
 
@@ -2873,7 +2867,7 @@
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
   window.$şabloane = $şabloane;
 
-  if (window.parent.location.pathname === '/build/teste/qunit/') {
+  if (top.location.pathname === '/build/teste/qunit/') {
     window.FORMATUL_DATEI = FORMATUL_DATEI;
     window.UC = UC;
     window.Căutare = Căutare;
