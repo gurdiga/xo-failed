@@ -990,7 +990,7 @@
           return;
         }
 
-        Procedura.$.trigger('salvat', [procedură]);
+        Procedura.$.trigger('salvat', [procedură, număr]);
         Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
 
@@ -1009,7 +1009,7 @@
         location.hash = 'formular?' + număr;
 
         Procedura.seteazăTitlu();
-        Procedura.$.trigger('salvat', [procedură]);
+        Procedura.$.trigger('salvat', [procedură, număr]);
         Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
 
