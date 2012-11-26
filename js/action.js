@@ -30,7 +30,7 @@
       ProceduriRecente.init();
       Sume.init();
       ÎncasarePensie.init();
-      Încheieri.init();
+      ButoanePentruÎncheieri.init();
       Secţiuni.init();
       ListeMeniu.init();
       ButoaneFormular.init();
@@ -2678,7 +2678,7 @@
 
   // --------------------------------------------------
 
-  Încheieri = {
+  ButoanePentruÎncheieri = {
     init: function () {
       $(document).on('click', '[data-formular]', this.deschide);
 
@@ -2701,10 +2701,10 @@
       if (buton.is('.salvat')) {
         pagina = buton.data('pagina');
       } else {
-        pagina = Încheieri.formular(buton);
+        pagina = ButoanePentruÎncheieri.formular(buton);
       }
 
-      Încheieri[pagina] = {
+      ButoanePentruÎncheieri[pagina] = {
         tab: window.open(pagina, încheiere, '', true),
         buton: buton
       };
@@ -2719,10 +2719,10 @@
 
       var nume, încheiere;
 
-      for (nume in Încheieri) {
+      for (nume in ButoanePentruÎncheieri) {
         if (nume in excepţii) continue;
 
-        încheiere = Încheieri[nume];
+        încheiere = ButoanePentruÎncheieri[nume];
 
         if (încheiere && încheiere.tab) încheiere.tab.close();
       }
@@ -2874,7 +2874,7 @@
   window.Procedura = Procedura;
   window.ProceduriRecente = ProceduriRecente;
   window.Utilizator = Utilizator;
-  window.Încheieri = Încheieri;
+  window.ButoanePentruÎncheieri = ButoanePentruÎncheieri;
   window.Subsecţiuni = Subsecţiuni;
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
   window.$şabloane = $şabloane;
