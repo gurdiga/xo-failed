@@ -2,14 +2,14 @@
   'use strict';
 
   var SCRIPTS = [
+    'jslint-config.js',
+    'csslint-config.js',
     '/js/action.js',
     '/js/încheiere.js',
     'integrare.js',
     '/formulare/încheiere-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare/încheiere-de-intentare.părţi/script.js',
-    '/formulare/anexă-dobîndă-de-întîrziere.părţi/script.js',
-    'qunit-csslint.js',
-    'lint.js'
+    '/formulare/anexă-dobîndă-de-întîrziere.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {
