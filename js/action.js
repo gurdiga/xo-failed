@@ -465,7 +465,7 @@
         .addClass('eliminabil de tot')
         .appendTo(Destinatari.adăugaţiDeja);
 
-      $(this).addClass('dezactivat');
+      $(this).addClass('dezactivat').hide().show();
 
       if (destinatar.is('.persoană.terţă')) {
         Destinatari.adăugaţiDeja.click();
