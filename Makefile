@@ -3,21 +3,22 @@
 default: lint test
 
 lint: lint-html lint-nginx lint-php formulare
-	echo ""
 
 lint-html:
-	echo -n "."
+	echo "HTML lint."
 	tidy -quiet -errors -utf8 -xml index.html
 
 lint-nginx:
-	echo -n "."
+	echo "nginx lint."
 	sudo /usr/sbin/nginx -t -q
 
 lint-php:
+	echo -n "PHP lint"
 	for script in bin/*; do \
 		echo -n "."; \
 		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
 	done
+	echo ""
 
 .PHONY: formulare
 formulare:
