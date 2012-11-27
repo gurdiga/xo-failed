@@ -2,7 +2,7 @@
 
 DOCUMENT_ROOT=`readlink -f $DIR/../../..`
 SERVER_NAME=`basename $DOCUMENT_ROOT`
-LOGIN='001'
+LOGIN='000'
 PASSWORD='Verificarea!'
 TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
 DATE="$DOCUMENT_ROOT/date/$LOGIN"

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-php -n bin/htusers.php delete 001
+php -n bin/htusers.php delete 000
