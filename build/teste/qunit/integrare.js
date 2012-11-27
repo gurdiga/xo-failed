@@ -186,10 +186,18 @@ $('#app').one('load', function () {
       app.$(încheieri[formular].tab).one('load', function () {
         var încheiere = this;
 
-        // TODO
-        // aşteaptă să se încarce, salvează, închide, redeschide
+        app.$(app.document).one('iniţializat-încheiere', function () {
+          var butonDeSalvare = app.$(încheiere.document).find('.salvează');
 
-        ştergeProceduraCreată();
+          ok(true, 'iniţializat încheiere');
+
+          app.$(app.document).one('salvat-încheiere', function () {
+            ok(true, 'salvat încheiere');
+
+            ştergeProceduraCreată();
+          });
+          butonDeSalvare.click();
+        });
       });
     }
 

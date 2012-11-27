@@ -27,6 +27,7 @@
 
       Încheiere.$.find('.editabil').attr('contenteditable', true);
       Opţiuni.init();
+      app.$(app.document).trigger('iniţializat-încheiere');
     },
 
     verificăDacăFormularulEDeschis: function () {
@@ -86,41 +87,24 @@
         '</html>';
     },
 
-    salvează: function (callback) {
+    salvează: function () {
       if (!Încheiere.modificat()) {
         BaraDeInstrumente.anunţăSalvatDeja();
-
-        if ($.isFunction(callback)) callback();
-
-        return;
-      }
-
-      if (Procedura.număr()) {
-        Încheiere.trimite(callback);
       } else {
-        Procedura.salveazăSauCrează(function () {
-          var salvatProceduraDeja = true;
+        var pagina = Încheiere.cale();
 
-          Încheiere.trimite(callback, salvatProceduraDeja);
+        $.put(pagina, Încheiere.conţinut(), function () {
+          ButoanePentruÎncheieri[pagina] = ButoanePentruÎncheieri[Încheiere.pagina];
+          Încheiere.pagina = pagina;
+          Încheiere.iniţial = Încheiere.conţinut();
+          history.replaceState(null, null, pagina);
+
+          Încheiere.marcheazăButonul();
+          BaraDeInstrumente.anunţăSalvarea();
+
+          app.$(app.document).trigger('salvat-încheiere');
         });
       }
-    },
-
-    trimite: function (callback, salvatProceduraDeja) {
-      var pagina = Încheiere.cale();
-
-      $.put(pagina, Încheiere.conţinut(), function () {
-        ButoanePentruÎncheieri[pagina] = ButoanePentruÎncheieri[Încheiere.pagina];
-        Încheiere.pagina = pagina;
-        Încheiere.iniţial = Încheiere.conţinut();
-        history.replaceState(null, null, pagina);
-
-        Încheiere.marcheazăButonul();
-        if (!salvatProceduraDeja) Procedura.salveazăSauCrează();
-        BaraDeInstrumente.anunţăSalvarea();
-
-        if ($.isFunction(callback)) callback();
-      });
     },
 
     marcheazăButonul: function () {
@@ -142,7 +126,10 @@
     },
 
     imprimă: function () {
-      Încheiere.salvează(window.print);
+      Încheiere.salvează();
+      app.$(app.document).one('salvat-încheiere', function () {
+        window.print();
+      });
     },
 
     regenerează: function () {
