@@ -21,7 +21,9 @@ lint-php:
 
 .PHONY: formulare
 formulare:
+	echo -n "Compilez formulare"
 	formulare/build.sh
+	echo ""
 
 test: lint
 	build/teste/integrare/start.sh
@@ -34,7 +36,7 @@ pull:
 	git checkout master
 	git reset --hard origin/master
 
-build: pull
+build: pull formulare
 	build/start.sh
 
 deploy: stage
