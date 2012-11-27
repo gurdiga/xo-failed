@@ -1,10 +1,11 @@
 #!/bin/bash
 
-echo 'Minific JS...'
+echo -n 'Minific JS'
 
 function minifică() {
   SURSA=$1
 
+  echo -n '.'
   mv $SURSA $SURSA.original
 
   curl -s \
@@ -28,3 +29,5 @@ function minifică() {
 
 minifică "js/action.js"
 minifică "js/încheiere.js"
+
+echo ''

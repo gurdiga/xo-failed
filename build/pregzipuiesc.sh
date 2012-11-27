@@ -13,9 +13,11 @@ files="
   bnm/rata_de_bază.js
 "
 
-echo "Pregzipuiesc cod..."
+echo -n 'Pregzipuiesc cod'
 
 for file in $files; do
-  echo "- $file"
+  echo -n '.'
   gzip < $file > $file.gz
 done
+
+echo ''
