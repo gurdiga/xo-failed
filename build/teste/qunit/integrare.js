@@ -186,10 +186,16 @@ $('#app').one('load', function () {
       app.$(încheieri[formular].tab).one('load', function () {
         var încheiere = this;
 
+        ok(true, 'deschis tab pentru încheiere');
+
         app.$(app.document).one('iniţializat-încheiere', function () {
-          var butonDeSalvare = app.$(încheiere.document).find('.salvează');
+          var $încheiere = app.$(încheiere.document),
+              butonDeSalvare = $încheiere.find('.salvează');
 
           ok(true, 'iniţializat încheiere');
+          ok(butonDeSalvare.există(), 'avem buton de salvare');
+          ok($încheiere.find('.bara-de-instrumente.pentru.încheiere').există(), 'avem bară de instrumente');
+          ok($încheiere.find('div.conţinut.editabil[contenteditable="true"]').există(), 'avem secţiuni editabile');
 
           app.$(app.document).one('salvat-încheiere', function () {
             ok(true, 'salvat încheiere');
