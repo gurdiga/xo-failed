@@ -17,7 +17,7 @@ $('#app').one('load', function () {
 
 
   // --------------------------------------------------
-  test('Creare precedură', function () {
+  asyncTest('Creare precedură', function () {
     var dateProcedură = {
       'data-intentării': app.moment().format(app.FORMATUL_DATEI),
       'creditor': {
@@ -56,8 +56,6 @@ $('#app').one('load', function () {
     var file = app.$('#crează-procedură li[data-href]'),
         filăProcedurăDeOrdinGeneral = file.filter('.g');
 
-    stop(1);
-
     ok(file.is(':visible'), 'avem file pentru proceduri noi');
     filăProcedurăDeOrdinGeneral.click();
 
@@ -90,6 +88,7 @@ $('#app').one('load', function () {
       });
     });
 
+    // ------------------------
     function localizeazăCîmpuri() {
       $dataIntentării = app.Procedura.$.find('#data-intentării');
       $creditor = app.Procedura.$.find('#creditor');
@@ -98,6 +97,7 @@ $('#app').one('load', function () {
       $obiectulUrmăririi = app.Procedura.$obiectulUrmăririi;
     }
 
+    // ------------------------
     function verificăValoriImplicite() {
       ok(app.Procedura.$.is(':visible'), 's-a afişat formularul');
       equal($creditor.find('#gen-persoană').val(), 'juridică',
@@ -112,6 +112,7 @@ $('#app').one('load', function () {
         'cheltuieli: taxa de intentare este adăugată implicit');
     }
 
+    // ------------------------
     function completeazăFormular() {
       $dataIntentării.val(dateProcedură['data-intentării']);
 
@@ -140,6 +141,7 @@ $('#app').one('load', function () {
         .find('.sumă').val(sume['Datorie adăugătoare']);
     }
 
+    // ------------------------
     function verificăProceduraCreată() {
       var proceduraCreată = '.item[data-href="#formular?' + numărulProceduriiCreate + '"]',
           $proceduraCreată = app.ProceduriRecente.$.find(proceduraCreată);
@@ -176,6 +178,7 @@ $('#app').one('load', function () {
       });
     }
 
+    // ------------------------
     function verificăÎncheiereaDeIntentare() {
       var buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
           încheieri = app.ButoanePentruÎncheieri,
@@ -196,39 +199,79 @@ $('#app').one('load', function () {
           ok(butonDeSalvare.există(), 'avem buton de salvare');
           ok($încheiere.find('.bara-de-instrumente.pentru.încheiere').există(), 'avem bară de instrumente');
           ok($încheiere.find('div.conţinut.editabil[contenteditable="true"]').există(), 'avem secţiuni editabile');
+          ok($încheiere.find('.închide').există(), 'avem buton de închidere');
 
-          app.$(app.document).one('salvat-încheiere', function () {
-            ok(true, 'salvat încheiere');
-
-            var cale = decodeURIComponent(încheiere.location.pathname),
-                caleER = new RegExp(
-                  '^/date/' + app.Utilizator.login + '/proceduri/' +
-                  app.Procedura.număr() + '/încheieri/încheiere-de-intentare-\\d{12}\\.html'
-                );
-
-            ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
-            ok(buton.is('.salvat'), 'butonul din procedură e marcat ca salvat');
-            equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
-
-            var secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
-
-            secţiuneEditabilă.append('<b class="adăugat">schimbare</b>');
-
-            app.$(app.document).one('salvat-încheiere', function () {
-              app.$(app.document).one('iniţializat-încheiere', function () {
-                ok(secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările sunt prezente');
-
-                ştergeProceduraCreată();
-              });
-              încheiere.location.reload(true);
-            });
-            butonDeSalvare.click();
-          });
-          butonDeSalvare.click();
+          verificăSalvareaÎncheierii(încheiere);
         });
       });
     }
 
+    // ------------------------
+    function verificăSalvareaÎncheierii(încheiere) {
+      var buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
+          încheieri = app.ButoanePentruÎncheieri,
+          $încheiere = app.$(încheiere.document),
+          butonDeSalvare = $încheiere.find('.salvează'),
+          formular = încheieri.formular(buton);
+
+      app.$(app.document).one('salvat-încheiere', function () {
+        ok(true, 'salvat încheiere');
+
+        var cale = decodeURIComponent(încheiere.location.pathname),
+            caleER = new RegExp(
+              '^/date/' + app.Utilizator.login + '/proceduri/' +
+              app.Procedura.număr() + '/încheieri/încheiere-de-intentare-\\d{12}\\.html'
+            );
+
+        ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
+        ok(buton.is('.salvat'), 'butonul din procedură e marcat ca salvat');
+        equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
+
+        var secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
+
+        secţiuneEditabilă.append('<b class="adăugat">schimbare</b>');
+
+        app.$(app.document).one('salvat-încheiere', function () {
+          app.$(app.document).one('iniţializat-încheiere', function () {
+            ok(secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările sunt prezente');
+
+            $încheiere.find('.închide').click();
+
+            setTimeout(function () {
+              equal(app.ButoanePentruÎncheieri[cale], undefined, 'tabul încheierii s-a închis');
+              app.Procedura.$.find('.închide').click();
+
+              verificăCăutarea();
+            }, 900);
+          });
+          încheiere.location.reload(true);
+        });
+        butonDeSalvare.click();
+      });
+      butonDeSalvare.click();
+    }
+
+    // ------------------------
+    function verificăCăutarea() {
+      var $secţiune = app.$('#căutare');
+
+      ok($secţiune.există(), 'avem secţiune de căutare');
+      $secţiune.find('input').val(numărulProceduriiCreate).trigger('input');
+
+      var rezultate = $secţiune.find('#rezultate .item');
+
+      ok(rezultate.există(), 'găsit procedura');
+      rezultate.first().click();
+
+      app.$(app.Procedura.$).one('populat', function () {
+        ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
+        app.Procedura.$.find('.închide').click();
+
+        ştergeProceduraCreată();
+      });
+    }
+
+    // ------------------------
     function ştergeProceduraCreată() {
       $.ajax({
         url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
@@ -249,28 +292,5 @@ $('#app').one('load', function () {
   test('TODO: Profil', function () {
     ok(true);
   });
-
-
-  // --------------------------------------------------
-  /*asyncTest('TODO: Căutare', function () {
-    app.Căutare.încarcăIndexFărăCache();
-
-    app.$(app.document).one('actualizat-index', function () {
-      var $secţiune = app.$('#căutare');
-
-      $secţiune.find('input').val(app.Utilizator.login).trigger('input');
-
-      var rezultate = $secţiune.find('#rezultate .item');
-
-      ok(rezultate.există(), 'găsit rezultate');
-      rezultate.first().trigger('mouseenter').click();
-
-      app.$(app.Procedura.$).one('populat', function () {
-        ok(true, 'click pe itemi din lista de rezultate deschide procedura');
-        app.Procedura.$.find('.închide').click();
-        start();
-      });
-    });
-  });*/
 
 }).attr('src', 'https://dev.executori.org/').show();
