@@ -1749,7 +1749,9 @@
       };
 
       $.put(Profil.url, JSON.stringify(Profil.date), function () {
-        Profil.$.find('button.închide').click();
+        Profil.$
+          .find('button.închide').click().end()
+          .trigger('salvat');
       });
     },
 
