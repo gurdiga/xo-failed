@@ -200,7 +200,29 @@ $('#app').one('load', function () {
           app.$(app.document).one('salvat-încheiere', function () {
             ok(true, 'salvat încheiere');
 
-            ştergeProceduraCreată();
+            var cale = decodeURIComponent(încheiere.location.pathname),
+                caleER = new RegExp(
+                  '^/date/' + app.Utilizator.login + '/proceduri/' +
+                  app.Procedura.număr() + '/încheieri/încheiere-de-intentare-\\d{12}\\.html'
+                );
+
+            ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
+            ok(buton.is('.salvat'), 'butonul din procedură e marcat ca salvat');
+            equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
+
+            var secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
+
+            secţiuneEditabilă.append('<b class="adăugat">schimbare</b>');
+
+            app.$(app.document).one('salvat-încheiere', function () {
+              app.$(app.document).one('iniţializat-încheiere', function () {
+                ok(secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările sunt prezente');
+
+                ştergeProceduraCreată();
+              });
+              încheiere.location.reload(true);
+            });
+            butonDeSalvare.click();
           });
           butonDeSalvare.click();
         });
