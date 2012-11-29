@@ -94,8 +94,12 @@
         var pagina = Încheiere.cale();
 
         $.put(pagina, Încheiere.conţinut(), function () {
-          ButoanePentruÎncheieri[pagina] = ButoanePentruÎncheieri[Încheiere.pagina];
-          Încheiere.pagina = pagina;
+          if (pagina !== Încheiere.pagina) {
+            ButoanePentruÎncheieri[pagina] = ButoanePentruÎncheieri[Încheiere.pagina];
+            delete ButoanePentruÎncheieri[Încheiere.pagina];
+            Încheiere.pagina = pagina;
+          }
+
           Încheiere.iniţial = Încheiere.conţinut();
           history.replaceState(null, null, pagina);
 
@@ -110,11 +114,9 @@
     marcheazăButonul: function () {
       var buton = ButoanePentruÎncheieri[Încheiere.pagina].buton;
 
-      if (!buton.is('.salvat')) buton.addClass('salvat');
+      if (buton.is(':not(.salvat)')) buton.addClass('salvat');
 
-      buton
-        .data('pagina', Încheiere.pagina)
-        .attr('title', function (_, title) { return title + ' (salvat)'; });
+      buton.data('pagina', Încheiere.pagina);
     },
 
     cale: function () {
@@ -144,7 +146,8 @@
     },
 
     închide: function () {
-      ButoanePentruÎncheieri[Încheiere.pagina].tab.close();
+      delete ButoanePentruÎncheieri[Încheiere.pagina];
+      window.close();
     }
   },
 
