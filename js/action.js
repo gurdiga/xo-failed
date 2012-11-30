@@ -1281,9 +1281,12 @@
           .addClass('salvat');
       }
 
-      Procedura.$.find('#data-ultimei-modificări span')
-        .text(procedură['data-ultimei-modificări'])
-        .parent().show();
+      Procedura.$
+        .find('#data-ultimei-modificări span')
+          .text(procedură['data-ultimei-modificări'])
+          .parent().show().end()
+        .end()
+        .find('.buton[data-formular]').removeAttr('dezactivat');
 
       populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);
       populeazăObiectulUrmăririi();
@@ -1319,7 +1322,10 @@
 
         .find('fieldset .conţinut').removeAttr('style').end()
 
-        .find('.buton[data-formular]').removeClass('salvat').end()
+        .find('.buton[data-formular]')
+          .removeClass('salvat')
+          .attr('dezactivat', 'da')
+        .end()
 
         .find('#categorii-taxe-şi-speze')
           .find('.dezactivat').removeClass('dezactivat').end()
@@ -1354,6 +1360,7 @@
       if (Procedura.seDeschideProcedurăSalvată()) {
         Procedura.încarcă();
       } else {
+        Procedura.resetează();
         Procedura.iniţializează();
         Procedura.$.trigger('iniţializat');
       }
@@ -2670,9 +2677,33 @@
 
   ButoanePentruÎncheieri = {
     init: function () {
-      $(document).on('click', '[data-formular]', this.deschide);
+      $(document)
+        .on('click', '.buton[data-formular]', this.deschide)
+        .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
 
-      Procedura.$.on('închidere', this.închide);
+      Procedura.$
+        .on('închidere', this.închide)
+        .on('salvat', this.activează);
+    },
+
+    activează: function () {
+      Procedura.$.find('.buton[data-formular]').removeAttr('dezactivat');
+    },
+
+    seteazăŞoaptă: function () {
+      var $buton = $(this);
+
+      if ($buton.is('[dezactivat]')) {
+        if (!$buton.attr('şoaptă-activ')) {
+          $buton
+            .attr('şoaptă-activ', $buton.attr('title'))
+            .attr('title', $buton.attr('title') + ' (mai întîi trebuie salvată procedura)');
+        }
+      } else {
+        if ($buton.attr('şoaptă-activ')) {
+          $buton.attr('title', $buton.attr('şoaptă-activ'));
+        }
+      }
     },
 
     formular: function (buton) {
@@ -2688,6 +2719,7 @@
           încheiere = buton.data('formular'),
           pagina;
 
+      if (buton.is('[dezactivat]')) return;
       if (buton.is('.salvat')) {
         pagina = buton.data('pagina');
       } else {
@@ -2701,10 +2733,12 @@
     },
 
     închide: function () {
+      // TODO refactor?
       var excepţii = {
         init: 0,
         deschide: 0,
-        închide: 0
+        închide: 0,
+        seteazăŞoaptă: 0
       };
 
       var nume, încheiere;

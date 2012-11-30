@@ -101,15 +101,21 @@ $('#app').one('load', function () {
     function verificăValoriImplicite() {
       ok(app.Procedura.$.is(':visible'), 's-a afişat formularul');
       equal($creditor.find('#gen-persoană').val(), 'juridică',
-        'pentru procedura de orgin general creditorul e implicit persoană juridică');
+          'pentru procedura de orgin general creditorul e implicit persoană juridică');
       equal($debitor.find('#gen-persoană').val(), 'fizică',
-        'pentru procedura de orgin general debitorul e implicit persoană fizică');
+          'pentru procedura de orgin general debitorul e implicit persoană fizică');
       equal($obiectulUrmăririi.find('#caracter').val(), 'pecuniar',
-         'pentru procedura de ordin general caracterul implicit este pcuniar');
+           'pentru procedura de ordin general caracterul implicit este pcuniar');
       equal(app.Procedura.$.find('#total-taxe-şi-speze').suma(), app.UC,
-        'cheltuieli: total implicit taxe şi speze == taxa de intentare');
+          'cheltuieli: total implicit taxe şi speze == taxa de intentare');
       ok(app.Procedura.$.find('#cheltuieli .adăugate #taxaA1').există(),
-        'cheltuieli: taxa de intentare este adăugată implicit');
+          'cheltuieli: taxa de intentare este adăugată implicit');
+
+      var butoaneÎncheiere = app.Procedura.$.find('.buton[data-formular]'),
+          butoaneÎncheiereDezactivate = butoaneÎncheiere.filter('[dezactivat]');
+
+      equal(butoaneÎncheiere.length, butoaneÎncheiereDezactivate.length,
+          'butoanele pentru încheieri sunt dezactivate');
     }
 
     // ------------------------
@@ -184,6 +190,7 @@ $('#app').one('load', function () {
           încheieri = app.ButoanePentruÎncheieri,
           formular = încheieri.formular(buton);
 
+      ok(buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
       buton.click();
 
       app.$(încheieri[formular].tab).one('load', function () {
