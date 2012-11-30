@@ -1,5 +1,3 @@
-#!/bin/bash
-
 DOCUMENT_ROOT=`readlink -f $DIR/../../..`
 SERVER_NAME=`basename $DOCUMENT_ROOT`
 LOGIN='000'

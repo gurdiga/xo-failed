@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Verifică build/...'
 
 curl $CURL_DEFAULT_ARGS \

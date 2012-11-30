@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Salvează încheierea...'
 
 SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/Încheiere-de-test.html"

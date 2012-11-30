@@ -1,5 +1,3 @@
-#!/bin/bash
-
 files="
   index.html
   css/shared.css

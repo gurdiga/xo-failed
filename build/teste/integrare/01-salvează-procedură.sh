@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Salvează procedura...'
 
 SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/procedură.json"

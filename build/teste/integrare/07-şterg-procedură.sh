@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Şterge procedura...'
 
 DESTINATIA="date/$LOGIN/proceduri/-1/"

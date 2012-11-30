@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Creez director de date...'
 
 sudo mkdir -p $DATE

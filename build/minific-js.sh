@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo -n 'Minific JS'
 
 function minifică() {

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Proceduri recente...'
 
 NUMAR='-1'

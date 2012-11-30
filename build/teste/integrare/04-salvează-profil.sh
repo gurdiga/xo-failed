@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo 'Salvare profil...'
 
 SURSA="`dirname $0`/fixturi/profil.json"
