@@ -273,6 +273,7 @@ $('#app').one('load', function () {
       app.$(app.Procedura.$).one('populat', function () {
         ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
         app.Procedura.$.find('.închide').click();
+        $secţiune.find('input').val('').trigger('input');
 
         ştergeProceduraCreată();
       });
@@ -292,6 +293,7 @@ $('#app').one('load', function () {
         }
       });
     }
+
   });
 
 
