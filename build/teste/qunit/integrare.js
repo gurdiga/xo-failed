@@ -76,7 +76,7 @@ $('#app').one('load', function () {
         equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit,
           'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
 
-        app.$(app.Procedura.$).one('salvat', function (e, procedură, număr) {
+        app.Procedura.$.one('salvat', function (e, procedură, număr) {
           numărulProceduriiCreate = număr;
 
           app.$(app.Procedura.$).one('închidere', function (e, procedură, număr) {
