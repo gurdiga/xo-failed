@@ -17,7 +17,9 @@ $('#app').one('load', function () {
 
 
   // --------------------------------------------------
-  asyncTest('Creare precedură', function () {
+  test('Creare precedură', function () {
+    stop(2);
+
     var dateProcedură = {
       'data-intentării': app.moment().format(app.FORMATUL_DATEI),
       'creditor': {
@@ -233,6 +235,11 @@ $('#app').one('load', function () {
         ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
         ok(buton.is('.salvat'), 'butonul din procedură e marcat ca salvat');
         equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
+
+        app.Procedura.$.one('salvat', function () {
+          ok(true, 'se salvează şi procedura la salvarea încheierii');
+          start();
+        });
 
         verificăEditabilitate(încheiere);
         butonDeSalvare.click();

@@ -616,6 +616,8 @@
         if (/^#formular/.test(location.hash)) Procedura.deschide();
         else if (Procedura.$.is(':visible')) Procedura.închide();
       });
+
+      $(document).on('salvat-încheiere', this.salveazăSauCrează);
     },
 
     tip: function () {
