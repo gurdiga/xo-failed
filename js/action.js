@@ -957,18 +957,18 @@
       }
     },
 
-    salveazăSauCrează: function (callback) {
+    salveazăSauCrează: function () {
       var număr = Procedura.număr();
 
       if (număr) {
         număr = număr.match(/[SP]?-\d+/)[0];
-        Procedura.salvează(număr, callback);
+        Procedura.salvează(număr);
       } else {
-        Procedura.crează(callback);
+        Procedura.crează();
       }
     },
 
-    salvează: function (număr, callback) {
+    salvează: function (număr) {
       var procedură = Procedura.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json';
 
@@ -986,12 +986,10 @@
         Procedura.$.trigger('salvat', [procedură, număr]);
         Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
-
-        if ($.isFunction(callback)) callback();
       });
     },
 
-    crează: function (callback) {
+    crează: function () {
       var procedură = Procedura.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/';
 
@@ -1005,8 +1003,6 @@
         Procedura.$.trigger('salvat', [procedură, număr]);
         Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
-
-        if ($.isFunction(callback)) callback();
       });
     },
 
