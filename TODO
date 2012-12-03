@@ -1,4 +1,5 @@
-- Imprimare
+- Încheieri
+  - de afişat editabilitatea cîmpurile editabile după o pauză de .5s
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare
@@ -10,10 +11,12 @@
   - de scris: Proceduri găsite
   - in loc de proceduri recente, afişează toate procedurile
     în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
+  - index partitioning
 
 - Introducerea datelor
   - Materiale
   - arhivare proceduri
+  - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
 
 - Convenienţe
   - “poliţă” temporară: la click în afara formularului în punem pe poliţă

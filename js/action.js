@@ -2907,6 +2907,7 @@
     window.UC = UC;
     window.Căutare = Căutare;
     window.Onorariu = Onorariu;
+    window.Cheltuieli = Cheltuieli;
   }
 
 })(window, document, moment);

@@ -182,8 +182,17 @@ $('#app').one('load', function () {
         equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'], 'salvat valoare datorie adăugătoare');
         equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL', 'salvat valuta datorie adăugătoare');
 
+        verificăPrezenţăButoaneÎncheieri();
         verificăÎncheiereaDeIntentare();
       });
+    }
+
+    // ------------------------
+    function verificăPrezenţăButoaneÎncheieri() {
+      var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
+          butonBorderou = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]');
+
+      ok(butonBorderou.există(), 'avem buton pentru borderoul de calcul');
     }
 
     // ------------------------
