@@ -115,11 +115,11 @@ function reindexează_proceduri() {
       );
   }
 
-  $colectează = function(&$cîmp, $procedură, $număr) use (&$index, $login) {
+  $colectează = function(&$cîmp, $procedură, $număr) use (&$index) {
     if (!isset($cîmp) || !$cîmp) return;
 
     if (!isset($index[$cîmp])) $index[$cîmp] = array();
-    if (!in_array($număr, $index[$cîmp])) $index[$cîmp][] = $număr;
+    $index[$cîmp][] = $număr;
   };
 
   function opţional(&$valoare) {
@@ -165,6 +165,11 @@ function reindexează_proceduri() {
       foreach ($procedură['debitori'] as $debitor)
         $colectează($debitor[$cîmp], $procedură, $număr);
     }
+  }
+
+  foreach ($index as $cîmp=>$numere) {
+    if ($cîmp == "") continue;
+    $index[$cîmp] = array_unique($numere);
   }
 
   înscrie_fişier("$dir/index.json", json_encode($index));
