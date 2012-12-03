@@ -1,4 +1,6 @@
+- async /bnm/
 - Încheieri
+  - formular borderou de calcul
   - de afişat editabilitatea cîmpurile editabile după o pauză de .5s
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
@@ -35,6 +37,7 @@
   - istoria înregistrărilor
  
 Chestii tehnice
+  - X-Runtime-<function_name>
   - performanţă: YSlow & PageSpeed, about:tracing
   - http://www.webpagetest.org/
   - https://developers.google.com/speed/pagespeed/insights
