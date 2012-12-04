@@ -33,9 +33,10 @@ push:
 	git push
 
 pull:
-	git fetch
+	git fetch --force --depth 10
 	git checkout master
 	git reset --hard origin/master
+	git gc
 
 build: pull formulare
 	build/start.sh
