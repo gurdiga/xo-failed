@@ -15,15 +15,15 @@ cd formulare
 for formular in *.părţi; do
   for parte in $formular/*.html; do
     tidy -quiet -errors -utf8 -xml < $parte;
-    verifică $parte
+    verifică formulare/$parte
   done;
 
   DESTINATIE=${formular/.părţi/.html}
   php $formular/conţinut.html > $DESTINATIE
-  verifică $DESTINATIE
+  verifică formulare/$DESTINATIE
 
   tidy -quiet -errors -utf8 -xml < $DESTINATIE && echo -n "."
-  verifică $formular
+  verifică formulare/$formular
 
   BASENAME=${formular/.părţi/}
   ln -sf $DESTINATIE "$BASENAME-P.html"
