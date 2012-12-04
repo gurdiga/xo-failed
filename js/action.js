@@ -12,6 +12,7 @@
 
   Action = {
     init: function () {
+      BNM.init();
       Utilizator.init();
       HashController.init();
 
@@ -44,6 +45,15 @@
 
     '#index': function () {
       $('#căutare input').focus();
+    }
+  },
+
+  // --------------------------------------------------
+
+  BNM = {
+    init: function () {
+      $.get('/bnm/current.js');
+      $.get('/bnm/rata_de_bază.js');
     }
   },
 
