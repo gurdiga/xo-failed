@@ -1,4 +1,4 @@
-.SILENT:
+#.SILENT:
 
 default: lint test
 
