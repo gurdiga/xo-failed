@@ -21,7 +21,7 @@ function următorul_număr() {
 
   $proceduri = glob("$doc_root/date/$login/proceduri/*[0-9]*", GLOB_ONLYDIR);
   $numere = array_map(function($file) {
-    preg_match('/\d+/', basename($file), $matches);
+    preg_match('/\d+$/', $file, $matches);
 
     return (int) $matches[0];
   }, $proceduri);
