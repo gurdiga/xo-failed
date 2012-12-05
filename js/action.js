@@ -926,9 +926,7 @@
 
         var $încheiere = $secţiune.find('.buton[data-formular="borderou-de-calcul"]');
 
-        if ($încheiere.is('.salvat')) {
-          cheltuieli['încheiere'] = $încheiere.data('pagina');
-        }
+        if ($încheiere.is('.salvat')) cheltuieli['încheiere'] = $încheiere.data('pagina');
 
         return cheltuieli;
       }
@@ -972,7 +970,7 @@
       var re = /^#formular\?([SP]?-\d+)/;
 
       if (re.test(location.hash)) {
-        return location.hash.match(/^#formular\?([SP]?-\d+)/)[1];
+        return location.hash.match(re)[1];
       }
     },
 
@@ -988,9 +986,7 @@
     },
 
     salvează: function (număr) {
-      if (Procedura.seSalvează) return;
-
-      Procedura.seSalvează = true;
+      if (Procedura.seTrimite) return;
 
       var procedură = Procedura.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json';
@@ -1000,13 +996,16 @@
         return;
       }
 
+      Procedura.seTrimite = true;
+
       $.put(cale, JSON.stringify(procedură), function (_, status) {
+        Procedura.seTrimite = false;
+
         if (status === 'notmodified') {
           Procedura.$.trigger('salvat-deja', [procedură]);
           return;
         }
 
-        Procedura.seSalvează = false;
         Procedura.$.trigger('salvat', [procedură, număr]);
         Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
@@ -1014,10 +1013,16 @@
     },
 
     crează: function () {
+      if (Procedura.seTrimite) return;
+
       var procedură = Procedura.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/';
 
+      Procedura.seTrimite = true;
+
       $.put(cale, JSON.stringify(procedură), function (cale) {
+        Procedura.seTrimite = false;
+
         var număr = cale.match(/([SP]?-\d+)\/date.json$/)[1],
             adresaNouă = location.href + '?' + număr;
 
@@ -2929,9 +2934,9 @@
   window.Subsecţiuni = Subsecţiuni;
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
   window.$şabloane = $şabloane;
+  window.FORMATUL_DATEI = FORMATUL_DATEI;
 
   if (top.location.pathname === '/build/teste/qunit/') {
-    window.FORMATUL_DATEI = FORMATUL_DATEI;
     window.UC = UC;
     window.Căutare = Căutare;
     window.Onorariu = Onorariu;

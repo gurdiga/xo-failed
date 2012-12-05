@@ -92,26 +92,35 @@
         '</html>';
     },
 
+    trimite: function () {
+      var pagina = Încheiere.cale();
+
+      $.put(pagina, Încheiere.conţinut(), function () {
+        if (location.pathname.substr(0, 11) === '/formulare/') { // e o încheiere nouă încă nesalvată
+          Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
+          delete Încheieri.deschise[Încheiere.pagina];
+          Încheiere.pagina = pagina;
+          history.replaceState(null, null, pagina);
+        }
+
+        Încheiere.conţinutIniţial = Încheiere.conţinut();
+        Încheiere.marcheazăButonul();
+        BaraDeInstrumente.anunţăSalvarea();
+
+        app.$(window).trigger('salvat');
+      });
+    },
+
     salvează: function () {
       if (!Încheiere.modificat()) {
         BaraDeInstrumente.anunţăSalvatDeja();
       } else {
-        var pagina = Încheiere.cale();
-
-        $.put(pagina, Încheiere.conţinut(), function () {
-          if (pagina !== Încheiere.pagina) {
-            Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
-            delete Încheieri.deschise[Încheiere.pagina];
-            Încheiere.pagina = pagina;
-            history.replaceState(null, null, pagina);
-          }
-
-          Încheiere.conţinutIniţial = Încheiere.conţinut();
-          Încheiere.marcheazăButonul();
-          BaraDeInstrumente.anunţăSalvarea();
-
-          app.$(window).trigger('salvat');
-        });
+        if (!app.Procedura.număr()) { // e o procedură nouă încă nesalvată
+          app.Procedura.crează();
+          app.Procedura.$.one('salvat', Încheiere.trimite);
+        } else {
+          Încheiere.trimite();
+        }
       }
     },
 

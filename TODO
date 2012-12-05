@@ -1,5 +1,6 @@
-- use $ event namespaces
 - Încheieri
+  - de reparat numărul în încheierea de intentare: acum se afişează doar numărul licenţei
+  - de salvat procedura înainte de salvarea încheierii
   - formular borderou de calcul: build/teste/qunit/integrare.js:205
   - de afişat editabilitatea cîmpurile editabile după o pauză de .5s
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare

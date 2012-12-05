@@ -78,7 +78,7 @@ $('#app').one('load', function () {
         equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit,
           'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
 
-        app.Procedura.$.one('salvat', function (e, procedură, număr) {
+        app.Procedura.$.one('salvat salvat-deja', function (e, procedură, număr) {
           numărulProceduriiCreate = număr;
 
           app.$(app.Procedura.$).one('închidere', function (e, procedură, număr) {
@@ -210,11 +210,12 @@ $('#app').one('load', function () {
 
           app.$(încheiere).one('salvat', function () {
             ok(true, 'salvat borderoul de calcul');
+            equal(app.Procedura.colectează().cheltuieli.încheiere, încheiere.Încheiere.pagina,
+                '…înregistrat în procedură');
 
-            // TODO: verifică că la salvare + colectare încheierea nouă se
-            // salvează în date
-            //console.log(app.Procedura.colectează());
-            //console.log(încheiere.location.pathname);
+            ok($încheiere.find('h1:contains("Borderou de calcul")').există(), '…avem titlu');
+            // TODO: de verificat datele?
+
             start();
           });
           butonDeSalvare.click();
@@ -270,8 +271,9 @@ $('#app').one('load', function () {
         ok(buton.is('.salvat'), 'marcat butonul din procedură ca salvat');
         equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
 
-        app.Procedura.$.one('salvat', function () {
+        app.Procedura.$.one('salvat salvat-deja', function () {
           ok(true, 'salvat şi procedura la salvarea încheierii');
+
           start();
         });
 
@@ -334,17 +336,21 @@ $('#app').one('load', function () {
 
     // ------------------------
     function ştergeProceduraCreată() {
-      $.ajax({
-        url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
-        type: 'DELETE',
-        success: function () {
-          ok(true, 'şters procedura de test');
+      // aşteptăm oleacă să se termine alte eventuale request-uri
+      setTimeout(function () {
+        $.ajax({
+          url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
+          type: 'DELETE',
+          success: function () {
+            ok(true, 'şters procedura de test');
 
-          app.ProceduriRecente.încarcăFărăCache();
-          app.Procedura.$.find('.închide').click();
-          start();
-        }
-      });
+            app.ProceduriRecente.încarcăFărăCache();
+            app.Procedura.$.find('.închide').click();
+
+            start();
+          }
+        });
+      }, 500);
     }
 
   });

@@ -225,6 +225,10 @@ button {
   margin-left: 30px;
 }
 
+.listă-proceduri>p {
+  color: #aaa;
+}
+
 .listă-proceduri .item {
   cursor: pointer;
   color: #555;
