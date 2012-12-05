@@ -1,6 +1,6 @@
-- async /bnm/
+- use $ event namespaces
 - Încheieri
-  - formular borderou de calcul
+  - formular borderou de calcul: build/teste/qunit/integrare.js:205
   - de afişat editabilitatea cîmpurile editabile după o pauză de .5s
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor

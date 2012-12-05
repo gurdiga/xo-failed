@@ -7,6 +7,7 @@
     '/js/action.js',
     '/js/încheiere.js',
     'integrare.js',
+    '/formulare/borderou-de-calcul.părţi/script.js',
     '/formulare/încheiere-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare/încheiere-de-intentare.părţi/script.js',
     '/formulare/anexă-dobîndă-de-întîrziere.părţi/script.js'

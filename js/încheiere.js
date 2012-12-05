@@ -1,25 +1,29 @@
 (function (window, document, app) {
   'use strict';
 
-  var $, Procedura, ButoanePentruÎncheieri, Utilizator, Profil;
+  var $, Procedura, Încheieri, Utilizator, Profil;
 
   var Încheiere = {
+    formular: '',
+
     init: function () {
-      Încheiere.pagina = decodeURIComponent(location.pathname);
       setInterval(Încheiere.verificăDacăFormularulEDeschis, 500);
 
       $ = app.$;
       Procedura = app.Procedura;
-      ButoanePentruÎncheieri = app.ButoanePentruÎncheieri;
+      Încheieri = app.Încheieri;
       Utilizator = app.Utilizator;
       Profil = app.Profil;
 
       Încheiere.$ = $(document.body);
+      Încheiere.pagina = decodeURIComponent(location.pathname);
+      Încheiere.buton = Încheieri.deschise[Încheiere.pagina].buton;
+      Încheiere.formular = Încheiere.buton.data('formular');
 
       if (!Încheiere.compilată()) {
         Încheiere.compilează();
       } else {
-        Încheiere.iniţial = Încheiere.conţinut();
+        Încheiere.conţinutIniţial = Încheiere.conţinut();
       }
 
       ButonDeÎnchidere.init();
@@ -27,11 +31,12 @@
 
       Încheiere.$.find('.editabil').attr('contenteditable', true);
       Opţiuni.init();
-      app.$(app.document).trigger('iniţializat-încheiere');
+
+      app.$(window).trigger('iniţializat');
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!opener || !ButoanePentruÎncheieri[Încheiere.pagina] || !Procedura.$.is(':visible')) {
+      if (!opener || !Încheieri.deschise[Încheiere.pagina] || !Procedura.$.is(':visible')) {
         window.close();
         return;
       }
@@ -55,7 +60,7 @@
         procedură: procedură,
         executor: Profil.date,
         login: Utilizator.login,
-        buton: ButoanePentruÎncheieri[Încheiere.pagina].buton,
+        buton: Încheiere.buton,
         nume: nume,
         id: id,
         debitori: procedură.debitori.map(function (debitor) {
@@ -95,24 +100,23 @@
 
         $.put(pagina, Încheiere.conţinut(), function () {
           if (pagina !== Încheiere.pagina) {
-            ButoanePentruÎncheieri[pagina] = ButoanePentruÎncheieri[Încheiere.pagina];
-            delete ButoanePentruÎncheieri[Încheiere.pagina];
+            Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
+            delete Încheieri.deschise[Încheiere.pagina];
             Încheiere.pagina = pagina;
+            history.replaceState(null, null, pagina);
           }
 
-          Încheiere.iniţial = Încheiere.conţinut();
-          history.replaceState(null, null, pagina);
-
+          Încheiere.conţinutIniţial = Încheiere.conţinut();
           Încheiere.marcheazăButonul();
           BaraDeInstrumente.anunţăSalvarea();
 
-          app.$(app.document).trigger('salvat-încheiere');
+          app.$(window).trigger('salvat');
         });
       }
     },
 
     marcheazăButonul: function () {
-      var buton = ButoanePentruÎncheieri[Încheiere.pagina].buton;
+      var buton = Încheiere.buton;
 
       if (buton.is(':not(.salvat)')) buton.addClass('salvat');
 
@@ -121,32 +125,31 @@
 
     cale: function () {
       var director = '/date/' + Utilizator.login + '/proceduri/' + Procedura.număr() + '/încheieri/',
-          buton = ButoanePentruÎncheieri[Încheiere.pagina].buton,
-          fişier = buton.data('formular') + '-' + app.moment().format('YYMMDDhhmmss') + '.html';
+          fişier = Încheiere.formular + '-' + app.moment().format('YYMMDDhhmmss') + '.html';
 
       return director + fişier;
     },
 
     imprimă: function () {
       Încheiere.salvează();
-      app.$(app.document).one('salvat-încheiere', function () {
+      app.$(Încheiere).one('salvat', function () {
         window.print();
       });
     },
 
     regenerează: function () {
-      ButoanePentruÎncheieri[Încheiere.pagina].buton
+      Încheiere.buton
         .removeClass('salvat')
         .removeData('pagina')
         .click();
     },
 
     modificat: function () {
-      return Încheiere.iniţial !== Încheiere.conţinut();
+      return Încheiere.conţinutIniţial !== Încheiere.conţinut();
     },
 
     închide: function () {
-      delete ButoanePentruÎncheieri[Încheiere.pagina];
+      delete Încheieri.deschise[Încheiere.pagina];
       window.close();
     }
   },
@@ -202,8 +205,7 @@
     afişează: function () {
       var $cîmp = $(this),
           opţiuni = $cîmp.data('opţiuni'),
-          $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni),
-          position = $cîmp.offset();
+          $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni);
 
       $opţiuni
         .appendTo($cîmp)

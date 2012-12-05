@@ -18,7 +18,7 @@ $('#app').one('load', function () {
 
   // --------------------------------------------------
   test('Creare precedură', function () {
-    stop(2);
+    stop(3);
 
     var dateProcedură = {
       'data-intentării': app.moment().format(app.FORMATUL_DATEI),
@@ -182,34 +182,60 @@ $('#app').one('load', function () {
         equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'], 'salvat valoare datorie adăugătoare');
         equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL', 'salvat valuta datorie adăugătoare');
 
-        verificăPrezenţăButoaneÎncheieri();
-        verificăÎncheiereaDeIntentare();
+        verificăBorderouDeCalcul();
+        verificăÎncheiereDeIntentare();
       });
     }
 
     // ------------------------
-    function verificăPrezenţăButoaneÎncheieri() {
+    function verificăBorderouDeCalcul() {
       var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
-          butonBorderou = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]');
+          butonÎncheiere = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]'),
+          formular = app.ButoanePentruÎncheieri.formular(butonÎncheiere);
 
-      ok(butonBorderou.există(), 'avem buton pentru borderoul de calcul');
+      ok(butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
+
+      butonÎncheiere.click();
+
+      var încheiere = app.Încheieri.deschise[formular].tab;
+
+      app.$(încheiere).one('load', function () {
+        ok(true, 'avem formular borderoul de calcul');
+
+        app.$(încheiere).one('iniţializat', function () {
+          ok(true, 'iniţializat borderoul de calcul');
+
+          var $încheiere = app.$(încheiere.document),
+              butonDeSalvare = $încheiere.find('.salvează');
+
+          app.$(încheiere).one('salvat', function () {
+            ok(true, 'salvat borderoul de calcul');
+
+            // TODO: verifică că la salvare + colectare încheierea nouă se
+            // salvează în date
+            //console.log(app.Procedura.colectează());
+            //console.log(încheiere.location.pathname);
+            start();
+          });
+          butonDeSalvare.click();
+        });
+      });
     }
 
     // ------------------------
-    function verificăÎncheiereaDeIntentare() {
+    function verificăÎncheiereDeIntentare() {
       var buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
-          încheieri = app.ButoanePentruÎncheieri,
-          formular = încheieri.formular(buton);
+          formular = app.ButoanePentruÎncheieri.formular(buton);
 
       ok(buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
       buton.click();
 
-      app.$(încheieri[formular].tab).one('load', function () {
-        var încheiere = this;
+      var încheiere = app.Încheieri.deschise[formular].tab;
 
+      app.$(încheiere).one('load', function () {
         ok(true, 'deschis tab pentru încheiere');
 
-        app.$(app.document).one('iniţializat-încheiere', function () {
+        app.$(încheiere).one('iniţializat', function () {
           var $încheiere = app.$(încheiere.document),
               butonDeSalvare = $încheiere.find('.salvează');
 
@@ -227,26 +253,25 @@ $('#app').one('load', function () {
     // ------------------------
     function verificăSalvareaÎncheierii(încheiere) {
       var buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
-          încheieri = app.ButoanePentruÎncheieri,
           $încheiere = app.$(încheiere.document),
           butonDeSalvare = $încheiere.find('.salvează'),
-          formular = încheieri.formular(buton);
+          formular = app.ButoanePentruÎncheieri.formular(buton);
 
-      app.$(app.document).one('salvat-încheiere', function () {
+      app.$(încheiere).one('salvat', function () {
         ok(true, 'salvat încheiere');
 
         var cale = decodeURIComponent(încheiere.location.pathname),
             caleER = new RegExp(
               '^/date/' + app.Utilizator.login + '/proceduri/' +
-              app.Procedura.număr() + '/încheieri/încheiere-de-intentare-\\d{12}\\.html'
+              app.Procedura.număr() + '/încheieri/' + buton.data('formular') + '-\\d{12}\\.html'
             );
 
         ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
-        ok(buton.is('.salvat'), 'butonul din procedură e marcat ca salvat');
+        ok(buton.is('.salvat'), 'marcat butonul din procedură ca salvat');
         equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
 
         app.Procedura.$.one('salvat', function () {
-          ok(true, 'se salvează şi procedura la salvarea încheierii');
+          ok(true, 'salvat şi procedura la salvarea încheierii');
           start();
         });
 
@@ -260,24 +285,29 @@ $('#app').one('load', function () {
     function verificăEditabilitate(încheiere) {
       var $încheiere = app.$(încheiere.document),
           cale = decodeURIComponent(încheiere.location.pathname),
+          butonDeSalvare = $încheiere.find('.salvează'),
           secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
 
       secţiuneEditabilă.append('<b class="adăugat">schimbare</b>');
 
-      app.$(app.document).one('salvat-încheiere', function () {
-        app.$(app.document).one('iniţializat-încheiere', function () {
+      app.$(încheiere).one('salvat', function () {
+        încheiere.close();
+        app.Încheieri.deschise[cale].buton.click();
+        încheiere = app.Încheieri.deschise[cale].tab;
+
+        app.$(încheiere).one('iniţializat', function () {
           ok(secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările sunt prezente');
 
           $încheiere.find('.închide').click();
 
+          // închiderea ferestrei poate dura un pic
           setTimeout(function () {
-            equal(app.ButoanePentruÎncheieri[cale], undefined, 'tabul încheierii s-a închis');
+            equal(app.Încheieri.deschise[cale], undefined, 'tabul încheierii s-a închis');
             app.Procedura.$.find('.închide').click();
 
             verificăCăutarea();
-          }, 900);
+          }, 100);
         });
-        încheiere.location.reload(true);
       });
     }
 
@@ -329,6 +359,7 @@ $('#app').one('load', function () {
 
     buton.click();
 
+    // fade-in durează un pic
     setTimeout(function () {
       var dialog = buton.prev('.dialog');
 

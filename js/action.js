@@ -626,8 +626,6 @@
         if (/^#formular/.test(location.hash)) Procedura.deschide();
         else if (Procedura.$.is(':visible')) Procedura.închide();
       });
-
-      $(document).on('salvat-încheiere', this.salveazăSauCrează);
     },
 
     tip: function () {
@@ -919,11 +917,20 @@
           itemi[$item.attr('id')] = item;
         });
 
-        return {
+
+        var cheltuieli = {
           'onorariu': $secţiune.find('#onorariu').val1(),
           'părţile-au-ajuns-la-conciliere': $secţiune.find('#părţile-au-ajuns-la-conciliere').val1(),
           'itemi': itemi
         };
+
+        var $încheiere = $secţiune.find('.buton[data-formular="borderou-de-calcul"]');
+
+        if ($încheiere.is('.salvat')) {
+          cheltuieli['încheiere'] = $încheiere.data('pagina');
+        }
+
+        return cheltuieli;
       }
 
       // ------------------------------------------
@@ -981,10 +988,14 @@
     },
 
     salvează: function (număr) {
+      if (Procedura.seSalvează) return;
+
+      Procedura.seSalvează = true;
+
       var procedură = Procedura.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json';
 
-      if (!Procedura.schimbat(procedură, număr)) {
+      if (!Procedura.saSchimbat(procedură, număr)) {
         Procedura.$.trigger('salvat-deja', [procedură]);
         return;
       }
@@ -995,6 +1006,7 @@
           return;
         }
 
+        Procedura.seSalvează = false;
         Procedura.$.trigger('salvat', [procedură, număr]);
         Procedura.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
@@ -1023,7 +1035,7 @@
       Procedura.cache[număr] = JSON.stringify(procedură);
     },
 
-    schimbat: function (procedură, număr) {
+    saSchimbat: function (procedură, număr) {
       delete procedură['data-ultimei-modificări'];
 
       return Procedura.cache[număr] !== JSON.stringify(procedură);
@@ -1172,11 +1184,18 @@
         /*jshint maxcomplexity:6, loopfunc:true */
 
         var $secţiune = Cheltuieli.$,
-            $lista = Cheltuieli.$.find('#categorii-taxe-şi-speze');
+            $lista = Cheltuieli.$.find('#categorii-taxe-şi-speze'),
+            încheiere = procedură.cheltuieli['încheiere'];
 
         $.each(['onorariu', 'părţile-au-ajuns-la-conciliere'], function (i, cîmp) {
           $secţiune.find('#' + cîmp).val1(procedură.cheltuieli[cîmp]);
         });
+
+        if (încheiere) {
+          $secţiune.find('.buton[data-formular="borderou-de-calcul"]')
+            .addClass('salvat')
+            .data('pagina', încheiere);
+        }
 
         for (var id in procedură.cheltuieli.itemi) {
           $lista.find('#' + id).click();
@@ -2684,6 +2703,22 @@
 
   // --------------------------------------------------
 
+  Încheieri = {
+    deschise: {},
+
+    închide: function () {
+      var nume, încheiere;
+
+      for (nume in Încheieri.deschise) {
+        încheiere = Încheieri.deschise[nume];
+
+        if (încheiere && încheiere.tab) încheiere.tab.close();
+      }
+    }
+  },
+
+  // --------------------------------------------------
+
   ButoanePentruÎncheieri = {
     init: function () {
       $(document)
@@ -2716,11 +2751,11 @@
     },
 
     formular: function (buton) {
-      var încheiere = buton.data('formular'),
+      var formular = buton.data('formular'),
           caracter = Procedura.$obiectulUrmăririi.find('#caracter').val() || '',
           sufix = Procedura.tip() + caracter;
 
-      return '/formulare/' + încheiere + '-' + sufix + '.html';
+      return '/formulare/' + formular + '-' + sufix + '.html';
     },
 
     deschide: function () {
@@ -2735,30 +2770,12 @@
         pagina = ButoanePentruÎncheieri.formular(buton);
       }
 
-      ButoanePentruÎncheieri[pagina] = {
+      Încheieri.deschise[pagina] = {
         tab: window.open(pagina, încheiere, '', true),
         buton: buton
       };
-    },
 
-    închide: function () {
-      // TODO refactor?
-      var excepţii = {
-        init: 0,
-        deschide: 0,
-        închide: 0,
-        seteazăŞoaptă: 0
-      };
-
-      var nume, încheiere;
-
-      for (nume in ButoanePentruÎncheieri) {
-        if (nume in excepţii) continue;
-
-        încheiere = ButoanePentruÎncheieri[nume];
-
-        if (încheiere && încheiere.tab) încheiere.tab.close();
-      }
+      $(Încheieri.deschise[pagina].tab).on('salvat', Procedura.salveazăSauCrează);
     }
   },
 
@@ -2908,6 +2925,7 @@
   window.ProceduriRecente = ProceduriRecente;
   window.Utilizator = Utilizator;
   window.ButoanePentruÎncheieri = ButoanePentruÎncheieri;
+  window.Încheieri = Încheieri;
   window.Subsecţiuni = Subsecţiuni;
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
   window.$şabloane = $şabloane;
