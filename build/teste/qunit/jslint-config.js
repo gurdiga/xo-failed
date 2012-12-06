@@ -72,7 +72,7 @@
 
   for (i = 0, l = SCRIPTS.length; i < l; i ++) {
     script = SCRIPTS[i];
-    jsHintTest(script, script, JSHINT_OPTIONS, JSHINT_GLOBALS);
+    jsHintTest(script, script + '?' + (new Date()).getTime(), JSHINT_OPTIONS, JSHINT_GLOBALS);
   }
 
 })();
