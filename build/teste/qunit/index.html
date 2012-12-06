@@ -13,7 +13,6 @@
       height: 95%;
       border: 1px solid silver;
       box-sizing: border-box;
-      display: none;
       box-shadow: 7px 7px 10px rgba(0, 0, 0, .5);
       -webkit-transition: opacity 1s;
       -moz-transition: opacity 1s;
@@ -36,7 +35,7 @@
 <body>
   <button id="start" onclick="QUnit.start(); this.disabled = true">start</button>
   <div id="qunit"></div>
-  <iframe name="app" id="app" src="about:blank"></iframe>
+  <iframe name="app" id="app" src="https://dev.executori.org/"></iframe>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   <script src="qunit-1.10.0.js"></script>
@@ -53,9 +52,16 @@
   <script src="csslint.js"></script>
   <script src="csslint-config.js"></script>
 
-  <script>module('Integrare');</script>
   <script src="integrare/init.js"></script>
+  <script src="integrare/general.js"></script>
+  <script src="integrare/iniţializare-formular.js"></script>
+  <script src="integrare/localizare-cîmpuri-şi-secţiuni.js"></script>
+  <script src="integrare/verificare-valori-implicite.js"></script>
+  <script src="integrare/verificare-cîmpuri-şi-onorariu.js"></script>
+  <script src="integrare/salvare-procedură.js"></script>
+  <script src="integrare/verifică-încheiere-de-intentare.js"></script>
+  <script src="integrare/verifică-borderou-de-calcul.js"></script>
+  <script src="integrare/căutare-procedură.js"></script>
   <script src="integrare/profil.js"></script>
-  <script src="integrare/creare-procedură.js"></script>
 </body>
 </html
