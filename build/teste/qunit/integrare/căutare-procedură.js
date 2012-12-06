@@ -24,6 +24,7 @@ asyncTest('Procedură: căutare', function () {
   // ------------------------
   function ştergeProceduraCreată() {
     // aşteptăm oleacă să se termine alte eventuale request-uri
+    // pentru a evita 500 la PUT
     setTimeout(function () {
       $.ajax({
         url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
@@ -37,6 +38,6 @@ asyncTest('Procedură: căutare', function () {
           start();
         }
       });
-    }, 500);
+    }, 1000);
   }
 });
