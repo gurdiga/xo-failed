@@ -4,4 +4,4 @@
 . ./build/minific-js.sh
 . ./build/pregzipuiesc.sh
 . ./build/configurez-nginx.sh
-. ./build/teste/integrare/start.sh
+. ./build/teste/server/start.sh

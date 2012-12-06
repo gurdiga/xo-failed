@@ -1,6 +1,6 @@
 echo 'Salvare profil...'
 
-SURSA="`dirname $0`/fixturi/profil.json"
+SURSA="$DIR/fixturi/profil.json"
 DESTINATIA="date/$LOGIN/profil.json"
 
 curl \

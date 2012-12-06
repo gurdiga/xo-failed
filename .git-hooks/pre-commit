@@ -2,7 +2,7 @@
 
 git diff --exit-code --quiet --staged
 
-# dacă sunt modificări, lintuieşte
+# dacă sunt modificări
 if [ $? -eq 1 ]; then
-  make lint
+  make
 fi

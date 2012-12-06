@@ -1,6 +1,6 @@
 echo 'Salvează încheierea...'
 
-SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/Încheiere-de-test.html"
+SURSA="$DIR/fixturi/Încheiere-de-test.html"
 DESTINATIA_FS="$DOCUMENT_ROOT/date/$LOGIN/proceduri/-1/încheieri/`basename $SURSA`.gz"
 
 curl $CURL_DEFAULT_ARGS \

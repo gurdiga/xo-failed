@@ -22,7 +22,7 @@ formulare:
 	echo ""
 
 test: lint
-	build/teste/integrare/start.sh
+	build/teste/server/start.sh
 
 push:
 	git push

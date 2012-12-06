@@ -26,4 +26,5 @@ function verifică {
   fi
 
   echo -e " $1$RESET_COLOR"
+  return $RETURN_CODE
 }

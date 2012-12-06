@@ -1,7 +1,7 @@
 echo 'Salvează procedura...'
 
-SURSA="$DOCUMENT_ROOT/build/teste/integrare/fixturi/procedură.json"
-INDEX="$DOCUMENT_ROOT/build/teste/integrare/fixturi/index.json.gz"
+SURSA="$DIR/fixturi/procedură.json"
+INDEX="$DIR/fixturi/index.json.gz"
 DESTINATIA="date/$LOGIN/proceduri/-1/date.json"
 
 curl $CURL_DEFAULT_ARGS \

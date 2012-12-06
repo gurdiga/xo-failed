@@ -4,6 +4,6 @@ bnm/
 !bnm/rata_de_bază.js.bak
 date
 .git.log
-build/teste/integrare/log
+build/teste/server/log
 nginx.vhost.conf
 formulare/*.html
