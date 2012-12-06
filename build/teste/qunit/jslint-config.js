@@ -75,5 +75,4 @@
     jsHintTest(script, script, JSHINT_OPTIONS, JSHINT_GLOBALS);
   }
 
-  module();
 })();
