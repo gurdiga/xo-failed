@@ -7,9 +7,20 @@
         </hgroup>
 
         <section>
+          <header></header>
+          <div class="conţinut">
+            <p>emis în corespundere cu Codul de executare al RM şi Regulamentul
+            privind modul de determinare a mărimii taxelor pentru efectuarea actelor
+            executorului judecătoresc şi a spezelor procedurii de executare aprobat
+            prin Hotărîrea Guvenului nr. 886 din 23.09.2010.</p>
+          </div>
+        </section>
+
+
+        <section>
           <header>Procedura</header>
           <div class="conţinut" spellcheck="false">
-            <p><%= login %><%= procedură['număr'] %> din <%= procedură['data-intentării'] %></p>
+            <p><%= login %><%= opener.Procedura.număr() %> din <%= procedură['data-intentării'] %></p>
           </div>
         </section>
 
@@ -30,12 +41,7 @@
         <section>
           <header></header>
           <div class="conţinut">
-            <p>emis în corespundere cu Codul de executare al RM şi Regulamentul
-            privind modul de determinare a mărimii taxelor pentru efectuarea actelor
-            executorului judecătoresc şi a spezelor procedurii de executare aprobat
-            prin Hotărîrea Guvenului nr. 886 din 23.09.2010</p>
-
-            <table>
+            <table id="borderou-de-calcul">
               <thead>
                 <tr>
                   <th>Nr.</th>
@@ -46,85 +52,36 @@
                 </tr>
               </thead>
 
+              <thead><tr><th colspan="5">Taxe</th></tr></thead>
               <tbody>
-                <tr>
-                  <th colspan="5">Taxe</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Scurtă descriere</td>
-                  <td>1234</td>
-                  <td>123</td>
-                  <td>123</td>
-                </tr>
-                <tr>
-                  <th colspan="2">Total taxe</th>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
+                <tr><td>1</td><td>Scurtă descriere</td><td>1234</td><td>123</td><td>123</td></tr>
+                <tr><td>2</td><td>Scurtă descriere</td><td>1234</td><td>123</td><td>123</td></tr>
+                <tr><td>3</td><td>Scurtă descriere</td><td>1234</td><td>123</td><td>123</td></tr>
+                <tr><td></td><th>Total</th><td>0</td><td>0</td><td>0</td></tr>
               </tbody>
 
+              <thead><tr><th colspan="5">Speze</th></tr></thead>
               <tbody>
-                <tr>
-                  <th colspan="5">Speze</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Scurtă descriere</td>
-                  <td>123</td>
-                  <td>123</td>
-                  <td>123</td>
-                </tr>
-                <tr>
-                  <th colspan="2">Total speze</th>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
+                <tr><td>1</td><td>Scurtă descriere</td><td>123</td><td>123</td><td>123</td></tr>
+                <tr><td></td><th>Total</th><td>0</td><td>0</td><td>0</td></tr>
               </tbody>
 
+              <thead><tr><th colspan="5">Onorariu</th></tr></thead>
               <tbody>
-                <tr>
-                  <th colspan="5">Onorariu</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Scurtă descriere</td>
-                  <td>123</td>
-                  <td>123</td>
-                  <td>123</td>
-                </tr>
+                <tr><td>1</td><td>Scurtă descriere</td><td>123</td><td>123</td><td>123</td></tr>
               </tbody>
             </table>
 
-            <h3>Rechizite bancare:</h3>
+            <p>Rechizite bancare:</p>
 
-            <p>(din profil?)</p>
-            <table>
-              <tr>
-                <th>Beneficiar:</th>
-                <td>sdlkhflsjhflkjew</td>
-              </tr>
-              <tr>
-                <th>Cod fiscal:</th>
-                <td>29378598345793</td>
-              </tr>
-              <tr>
-                <th>Nr cod bancar</th>
-                <td>9067459834579834534453</td>
-              </tr>
-              <tr>
-                <th>Banca beneficiară:</th>
-                <td>sldjuhishtrewt ret e</td>
-              </tr>
-              <tr>
-                <th>Cod bancă:</th>
-                <td>94789345345345</td>
-              </tr>
+            <table id="rechizite-bancare">
+              <tr><th>Beneficiar:</th><td><%= executor['nume'] %></td></tr>
+              <tr><th>Cod fiscal:</th><td><%= executor['codul-fiscal'] %></td></tr>
+              <tr><th>Nr. cod bancar:</th><td><%= executor['cont-taxe-speze'] || '[nu e completat în profil]' %></td></tr>
+              <tr><th>Banca beneficiară:</th><td>[de corectat]<%= executor['cont-taxe-speze'] || '[nu e completat în profil]' %></td></tr>
+              <tr><th>Cod bancă:</th><td>[de corectat]<%= executor['banca-taxe-speze'] || '[nu e completat în profil]' %></td></tr>
             </table>
 
-            <a href="https://docs.google.com/file/d/0B7oxhpLcMhrDZVo0SE5IbGJLQk0/edit">model google docs</a>
           </div>
         </section>
 

@@ -36,6 +36,7 @@ ul.calcule span {
   display: inline-block;
 }
 
+td, th,
 .calcule li.total,
 ul.calcule span {
   padding: .2em .6em;
@@ -46,11 +47,11 @@ ul.calcule span:nth-child(1) {
 }
 
 ul.calcule span:nth-child(2) {
-  width: 6em;
+  width: 8em;
 }
 
 ul.calcule span:nth-child(3) {
-  width: 3.5em;
+  width: 4em;
 }
 
 ul.calcule span:nth-child(4) {
@@ -58,9 +59,11 @@ ul.calcule span:nth-child(4) {
 }
 
 ul.calcule span:nth-child(5) {
-  width: 5em;
+  width: 6em;
 }
 
+thead th,
+thead td,
 .calcule li.antet {
   border-bottom: 1px solid black;
   font-weight: bold;
@@ -206,6 +209,45 @@ ul.opţiuni li:hover {
   background-color: #ddd;
 }
 
+table {
+  border-spacing: 0;
+  margin: 1em 0;
+}
+
 th {
+  text-align: left;
+  white-space: nowrap;
+}
+
+td {
+  vertical-align: top;
+}
+
+table#borderou-de-calcul th:nth-child(1),
+table#borderou-de-calcul td:nth-child(1),
+table#borderou-de-calcul th:nth-child(3),
+table#borderou-de-calcul td:nth-child(3),
+table#borderou-de-calcul th:nth-child(4),
+table#borderou-de-calcul td:nth-child(4),
+table#borderou-de-calcul th:nth-child(5),
+table#borderou-de-calcul td:nth-child(5) {
+  text-align: right;
+}
+
+table#borderou-de-calcul thead:first-child th {
+  font-weight: normal;
+}
+
+table#borderou-de-calcul thead th[colspan] {
+  padding-top: .5em;
+}
+
+table#borderou-de-calcul tbody th,
+table#borderou-de-calcul tbody td {
+  border-bottom: 1px solid silver;
+}
+
+table#borderou-de-calcul td:nth-child(1)[colspan],
+table#borderou-de-calcul th:nth-child(1)[colspan] {
   text-align: left;
 }
