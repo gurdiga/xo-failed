@@ -2,7 +2,7 @@
 
 default: test
 
-lint: lint-html lint-nginx lint-php formulare
+lint: lint-bash lint-html lint-nginx lint-php formulare
 
 lint-html:
 	echo "HTML lint."
@@ -14,6 +14,9 @@ lint-nginx:
 
 lint-php:
 	build/lint-php.sh
+
+lint-bash:
+	build/lint-bash.sh
 
 .PHONY: formulare
 formulare:
