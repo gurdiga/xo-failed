@@ -31,7 +31,7 @@ push:
 	git push
 
 pull:
-	git fetch --force --depth 10
+	git fetch --force --depth 50
 	git checkout master
 	git reset --hard origin/master
 	git gc
