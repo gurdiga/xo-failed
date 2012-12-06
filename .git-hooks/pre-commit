@@ -1,0 +1,8 @@
+#!/bin/sh
+
+git diff --exit-code --quiet --staged
+
+# dacă sunt modificări, lintuieşte
+if [ $? -eq 1 ]; then
+  make lint
+fi
