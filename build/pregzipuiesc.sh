@@ -1,14 +1,9 @@
 files="
   index.html
-  css/shared.css
-  css/style.css
-  css/încheiere.css
-  js/action.js
-  js/lib.js
-  js/încheiere.js
+  css/*.css
+  js/*.js
   formulare/*.html
-  bnm/current.js
-  bnm/rata_de_bază.js
+  bnm/*.js
 "
 
 echo -n 'Pregzipuiesc cod'

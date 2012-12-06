@@ -28,4 +28,12 @@ function minifică() {
 minifică "js/action.js"
 minifică "js/încheiere.js"
 
+# concatenează lib.js cu action.js
+cat js/action.js >> js/lib.js
+mv js/lib.js js/action.js
+
+grep --fixed-strings --invert-match '<script defer src="/js/lib.js"></script>' index.html > index.html.1
+mv index.html.1 index.html
+
+
 echo ''
