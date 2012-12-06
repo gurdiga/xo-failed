@@ -78,10 +78,19 @@ test('Creare precedură', function () {
   // ------------------------
   function localizeazăCîmpuri() {
     $dataIntentării = app.Procedura.$.find('#data-intentării');
+    ok($dataIntentării.există(), 'găsit #data-intentării');
+
     $creditor = app.Procedura.$.find('#creditor');
+    ok($creditor.există(), 'găsit #creditor');
+
     $debitor = app.Procedura.$.find('.debitor');
+    ok($debitor.există(), 'găsit .debitor');
+
     $de = app.Procedura.$.find('#document-executoriu');
+    ok($de.există(), 'găsit #document-executoriu');
+
     $obiectulUrmăririi = app.Procedura.$obiectulUrmăririi;
+    ok($obiectulUrmăririi.există(), 'găsit Procedura.$obiectulUrmăririi');
   }
 
   // ------------------------
