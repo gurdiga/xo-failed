@@ -36,7 +36,7 @@
 <body>
   <button id="start" onclick="QUnit.start(); this.disabled = true">start</button>
   <div id="qunit"></div>
-  <iframe name="app" id="app" src=""></iframe>
+  <iframe name="app" id="app" src="about:blank"></iframe>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   <script src="qunit-1.10.0.js"></script>
@@ -53,6 +53,9 @@
   <script src="csslint.js"></script>
   <script src="csslint-config.js"></script>
 
-  <script src="integrare.js"></script>
+  <script>module('Integrare');</script>
+  <script src="integrare/init.js"></script>
+  <script src="integrare/profil.js"></script>
+  <script src="integrare/creare-procedură.js"></script>
 </body>
 </html
