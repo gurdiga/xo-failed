@@ -1,6 +1,6 @@
 .SILENT:
 
-default: lint test
+default: test
 
 lint: lint-html lint-nginx lint-php formulare
 
@@ -13,12 +13,7 @@ lint-nginx:
 	sudo /usr/sbin/nginx -t -q
 
 lint-php:
-	echo -n "PHP lint"
-	for script in bin/*; do \
-		echo -n "."; \
-		php -l $$script > /tmp/php-l.log || (cat /tmp/php-l.log && false); \
-	done
-	echo ""
+	build/lint-php.sh
 
 .PHONY: formulare
 formulare:
