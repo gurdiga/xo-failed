@@ -28,6 +28,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         equal(app.Procedura.colectează().cheltuieli.încheiere, încheiere.Încheiere.pagina,
             '…înregistrat în procedură');
 
+        equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
         ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
 
         var numărComplet = app.Utilizator.login + app.Procedura.număr(),
@@ -48,9 +49,6 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         ok(tabel.find('th[colspan=5]:contains("Onorariu")').există(), 'în el avem secţiunea Onorariu');
         equal(tabel.find('tbody th:contains("Total")').length, 2,
             'în el avem 2 rînduri Total: pentru taxe şi pentru speze');
-
-        // TODO: de verificat datele?
-        // context.executor
 
         var $rechiziteBancare = $încheiere.find('table#rechizite-bancare');
 
