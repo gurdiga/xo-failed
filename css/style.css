@@ -665,6 +665,10 @@ button.adaugă .legend.label {
   margin-left: 11.25em;
 }
 
+#cheltuieli .adăugate p {
+  margin: 0;
+}
+
 #cheltuieli .item.achitat {
   border-left-color: white;
 }
