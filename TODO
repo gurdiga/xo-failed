@@ -2,7 +2,7 @@
   - de reparat numărul în încheierea de intentare: acum se afişează doar numărul licenţei
   - de salvat procedura înainte de salvarea încheierii
   - formular borderou de calcul: build/teste/qunit/integrare.js:205
-  - de afişat editabilitatea cîmpurile editabile după o pauză de .5s
+  - de afişat editabilitatea cîmpurile editabile după o pauză de .5s (transition-delay?)
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
     - de ordin general, nonpecuniare

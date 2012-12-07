@@ -1,4 +1,4 @@
-function init(context) {
+window.init = function (context) {
   'use strict';
 
   var $întîrziere = context.buton.closest('.subsecţiune.întîrziere'),
@@ -10,4 +10,4 @@ function init(context) {
   context.întîrziere.dobînda = calcule.dobînda;
 
   window.Încheiere.modificat = function () { return true; };
-}
+};

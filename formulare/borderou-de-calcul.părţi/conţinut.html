@@ -17,7 +17,6 @@
           </div>
         </section>
 
-
         <section>
           <header>Procedura</header>
           <div class="conţinut" spellcheck="false">
@@ -47,29 +46,29 @@
                 <tr>
                   <th>Nr.</th>
                   <th>Descriere</th>
-                  <th>Calculat</th>
-                  <th>Achitat, data</th>
-                  <th>Rămas</th>
+                  <th>Sumă</th>
                 </tr>
               </thead>
 
               <thead><tr><th colspan="5">Taxe</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>Scurtă descriere</td><td>1234</td><td>123</td><td>123</td></tr>
-                <tr><td>2</td><td>Scurtă descriere</td><td>1234</td><td>123</td><td>123</td></tr>
-                <tr><td>3</td><td>Scurtă descriere</td><td>1234</td><td>123</td><td>123</td></tr>
-                <tr><td></td><th>Total</th><td>0</td><td>0</td><td>0</td></tr>
+                <% for (număr in taxe) { %>
+                <tr><td><%= număr %></td><td><%= taxe[număr].descriere %></td><td><%= taxe[număr].cost %></td></tr>
+                <% } %>
+                <tr><td></td><th>Total</th><td><%= totalTaxe %></td></tr>
               </tbody>
 
               <thead><tr><th colspan="5">Speze</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>Scurtă descriere</td><td>123</td><td>123</td><td>123</td></tr>
-                <tr><td></td><th>Total</th><td>0</td><td>0</td><td>0</td></tr>
+                <% for (număr in speze) { %>
+                <tr><td><%= număr %></td><td><%= speze[număr].descriere %></td><td><%= speze[număr].cost %></td></tr>
+                <% } %>
+                <tr><td></td><th>Total</th><td><%= totalSpeze %></td></tr>
               </tbody>
 
               <thead><tr><th colspan="5">Onorariu</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>Scurtă descriere</td><td>123</td><td>123</td><td>123</td></tr>
+                <tr><td>1</td><td>Suma</td><td><%= procedură.cheltuieli.onorariu %></td></tr>
               </tbody>
             </table>
 

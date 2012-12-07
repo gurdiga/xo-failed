@@ -25,9 +25,10 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
       app.$(încheiere).one('salvat', function () {
         ok(true, 'salvat borderoul de calcul');
-        equal(app.Procedura.colectează().cheltuieli.încheiere, încheiere.Încheiere.pagina,
-            '…înregistrat în procedură');
 
+        var procedura = app.Procedura.colectează();
+
+        equal(procedura.cheltuieli.încheiere, încheiere.Încheiere.pagina, '…înregistrat în procedură');
         equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
         ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
 
@@ -49,6 +50,10 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         ok(tabel.find('th[colspan=5]:contains("Onorariu")').există(), 'în el avem secţiunea Onorariu');
         equal(tabel.find('tbody th:contains("Total")').length, 2,
             'în el avem 2 rînduri Total: pentru taxe şi pentru speze');
+
+        var taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').text().trim();
+
+        ok(tabel.find('td:contains("' + taxaDeIntentare + '")').există(), 'găsit ' + taxaDeIntentare);
 
         var $rechiziteBancare = $încheiere.find('table#rechizite-bancare');
 

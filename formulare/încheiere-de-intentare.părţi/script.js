@@ -1,4 +1,4 @@
-function init(context) {
+window.init = function (context) {
   'use strict';
 
   var total = context.opener.Procedura.$.find('#total').val();
@@ -15,4 +15,4 @@ function init(context) {
   } else {
     context.conciliere = false;
   }
-}
+};

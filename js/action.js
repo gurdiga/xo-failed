@@ -2934,13 +2934,13 @@
   window.Subsecţiuni = Subsecţiuni;
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
   window.$şabloane = $şabloane;
+  window.Cheltuieli = Cheltuieli;
   window.FORMATUL_DATEI = FORMATUL_DATEI;
+  window.UC = UC;
 
   if (top.location.pathname === '/build/teste/qunit/') {
-    window.UC = UC;
     window.Căutare = Căutare;
     window.Onorariu = Onorariu;
-    window.Cheltuieli = Cheltuieli;
   }
 
 })(window, document, moment);
