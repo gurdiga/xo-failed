@@ -38,6 +38,7 @@
   - istoria înregistrărilor
  
 Chestii tehnice
+  - configurare nginx in build /etc/
   - X-Runtime-<function_name>
   - performanţă: YSlow & PageSpeed, about:tracing
   - http://www.webpagetest.org/
