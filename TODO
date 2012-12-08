@@ -17,6 +17,7 @@
   - index partitioning
 
 - Introducerea datelor
+  - de ajustat CSS pntru sume în itemi subformulare la cheltuieli
   - Materiale
   - arhivare proceduri
   - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
@@ -38,7 +39,9 @@
   - istoria înregistrărilor
  
 Chestii tehnice
-  - configurare nginx in build /etc/
+  - de extins build
+    - configurare nginx parte globală /etc/
+    - build nginx
   - X-Runtime-<function_name>
   - performanţă: YSlow & PageSpeed, about:tracing
   - http://www.webpagetest.org/
