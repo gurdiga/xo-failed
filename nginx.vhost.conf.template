@@ -104,4 +104,8 @@ server {
     auth_basic_user_file /var/www/$host/.htusers;
     more_set_headers 'Cache-Control: no-cache, max-age=0, no-store';
   }
+
+  location /bin/ {
+    return 404;
+  }
 }
