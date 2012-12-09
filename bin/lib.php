@@ -4,10 +4,13 @@ $login = $_SERVER['PHP_AUTH_USER'];
 $doc_root = $_SERVER['DOCUMENT_ROOT'];
 $calea = $doc_root . urldecode($_SERVER['REQUEST_URI']);
 $conţinut = file_get_contents('php://input');
+$development = substr($_SERVER['SERVER_NAME'], 0, 4) == 'dev.';
 
-set_error_handler(function($no, $message, $file, $line) {
-  stop("Error $no: $message @$file:$line");
-});
+if (!$development) {
+  set_error_handler(function($no, $message, $file, $line) {
+    stop("Error $no: $message @$file:$line " . $_SERVER['SERVER_NAME']);
+  });
+}
 
 // ------------------------------
 
