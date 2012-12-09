@@ -89,7 +89,7 @@ textarea,
 input,
 fieldset select {
   margin: 0;
-  vertical-align: 0;
+  vertical-align: top;
   padding: 0 .3em;
   color: black;
   font-weight: bold;
@@ -665,7 +665,8 @@ button.adaugă .legend.label {
   margin-left: 11.25em;
 }
 
-#cheltuieli .adăugate p {
+#cheltuieli .adăugate p,
+#categorii-taxe-şi-speze .item p {
   margin: 0;
 }
 
