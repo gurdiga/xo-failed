@@ -48,7 +48,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         ok(tabel.find('th[colspan=5]:contains("Taxe")').există(), 'în el avem secţiunea Taxe');
         ok(tabel.find('th[colspan=5]:contains("Speze")').există(), 'în el avem secţiunea Speze');
         ok(tabel.find('th[colspan=5]:contains("Onorariu")').există(), 'în el avem secţiunea Onorariu');
-        equal(tabel.find('tbody th:contains("Total")').length, 2,
+        equal(tabel.find('tbody td:contains("Total")').length, 2,
             'în el avem 2 rînduri Total: pentru taxe şi pentru speze');
 
         var taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').text().trim();
@@ -57,9 +57,9 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
         var $rechiziteBancare = $încheiere.find('table#rechizite-bancare');
 
-        ok($rechiziteBancare.find('th:contains("Beneficiar:")').există(), '…avem Beneficiar');
-        equal($rechiziteBancare.find('th:contains("Beneficiar:")').next('td').text(),
-            app.Profil.date['nume'], '…cu valoare a corespunzătoare');
+        ok($rechiziteBancare.find('th:contains("Beneficiar:"):first').există(), '…avem Beneficiar');
+        equal($rechiziteBancare.find('th:contains("Beneficiar:"):first').next('td').text(),
+            app.Profil.date['nume'], '…cu valoarea corespunzătoare');
         ok($rechiziteBancare.find('th:contains("Cod fiscal:")').există(), '…avem Cod fiscal');
         // TODO de verificat celelalte cîmpuri, inclusiv cînd nu sunt completate în profil
         ok($rechiziteBancare.find('th:contains("Nr. cod bancar:")').există(), '…avem Nr. cod bancar');

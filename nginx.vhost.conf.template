@@ -108,4 +108,8 @@ server {
   location /bin/ {
     return 404;
   }
+
+  location /.git/ {
+    return 404;
+  }
 }

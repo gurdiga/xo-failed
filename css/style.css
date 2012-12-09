@@ -77,10 +77,6 @@ textarea.lat {
   margin: 0 0 0 .7em;
 }
 
-input {
-  background-position: 0 -4px;
-}
-
 fieldset>.conţinut {
   padding-top: 1px;
 }
@@ -90,7 +86,7 @@ input,
 fieldset select {
   margin: 0;
   vertical-align: top;
-  padding: 0 .3em;
+  padding: .2em .3em 0;
   color: black;
   font-weight: bold;
   line-height: 1.75;
@@ -107,7 +103,7 @@ fieldset ul select {
 
 fieldset ul>li>textarea {
   padding-top: 0;
-  background-position: 0 -4px;
+  background-position: 0 -3px;
 }
 
 fieldset ul select.valuta {
@@ -597,6 +593,8 @@ button.elimină-persoană {
 #cheltuieli .subformular .valoare,
 .subformular .sumă {
   width: 5em;
+  padding-top: 0;
+  background-position: 0 -4px;
 }
 
 .container-buton {
@@ -662,7 +660,7 @@ button.adaugă .legend.label {
 }
 
 #cheltuieli .adăugate {
-  margin-left: 11.25em;
+  margin: 0 2em 0 11.25em;
 }
 
 #cheltuieli .adăugate p,
