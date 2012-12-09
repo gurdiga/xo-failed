@@ -62,8 +62,8 @@ ul.calcule span:nth-child(5) {
   width: 6em;
 }
 
-thead th,
-thead td,
+table#borderou-de-calcul thead th,
+table#borderou-de-calcul thead td,
 .calcule li.antet {
   border-bottom: 1px solid black;
   font-weight: bold;
@@ -129,7 +129,7 @@ hgroup h2 {
   font-size: 1em;
   font-weight: normal;
   margin: 0;
-  width: 70%;
+  width: 85%;
   margin-bottom: 1em;
 }
 
@@ -223,6 +223,15 @@ td {
   vertical-align: top;
 }
 
+table#borderou-de-calcul {
+  margin-bottom: 2em;
+}
+
+table#borderou-de-calcul thead th,
+table#borderou-de-calcul thead td {
+  border-bottom: 1px solid silver;
+}
+
 table#borderou-de-calcul th:nth-child(1),
 table#borderou-de-calcul td:nth-child(1),
 table#borderou-de-calcul th:nth-child(3),
@@ -247,7 +256,32 @@ table#borderou-de-calcul tbody td {
   border-bottom: 1px solid silver;
 }
 
+table#borderou-de-calcul tbody tr:last-child th,
+table#borderou-de-calcul tbody tr:last-child td {
+  border: none;
+}
+
 table#borderou-de-calcul td:nth-child(1)[colspan],
 table#borderou-de-calcul th:nth-child(1)[colspan] {
   text-align: left;
+}
+
+table#borderou-de-calcul tr.total td:last-child {
+  font-weight: bold;
+}
+
+table#rechizite-bancare td,
+table#rechizite-bancare th {
+  padding: 0 .5em 0 0;
+  font-size: .8em;
+}
+
+table#rechizite-bancare th {
+  padding-left: 30px;
+}
+
+table#rechizite-bancare thead th {
+  padding-bottom: 1em;
+  font-size: 1em;
+  font-weight: normal;
 }

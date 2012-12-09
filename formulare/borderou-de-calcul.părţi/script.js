@@ -4,45 +4,48 @@ window.init = function (context) {
 
   var taxe = {},
       speze = {},
-      număr = 0,
       $ = context.opener.$,
+      numărTaxe = 0,
+      numărSpeze = 0,
       totalTaxe = 0,
       totalSpeze = 0,
       id, $item, tip, descriere,
       cost, costPerItem;
 
   for (id in context.procedură.cheltuieli.itemi) {
-    număr++;
     tip = id.substr(0, 4);
 
     $item = context.opener.Cheltuieli.$.find('#' + id);
     descriere = $item.find('p').text().trim();
 
     if (tip === 'taxa') {
+      numărTaxe++;
+
       if ($item.find('.subformular:has(.document)').există()) {
-        costPerItem = parseFloat($item.find('input.cost-per-item').val()) * context.opener.UC;
+        costPerItem = $item.find('input.cost-per-item').suma() * context.opener.UC;
         cost = 0;
 
         $item.find('.subformular .document').each(function () {
-          cost += parseFloat($(this).find('.cantitate').val()) * costPerItem;
+          cost += $(this).find('.cantitate').suma() * costPerItem;
         });
       } else {
-        cost = parseFloat($item.find('input.cost').val()) * context.opener.UC;
+        cost = $item.find('input.cost').suma() * context.opener.UC;
       }
 
-      taxe[număr] = {
+      taxe[numărTaxe] = {
         descriere: descriere,
         cost: cost.toFixed(2)
       };
       totalTaxe += cost;
     } else {
+      numărSpeze++;
       cost = 0;
 
       $item.find('.subformular .document').each(function () {
-        cost += parseFloat($(this).find('.sumă').val());
+        cost += $(this).find('.sumă').suma();
       });
 
-      speze[număr] = {
+      speze[numărSpeze] = {
         descriere: descriere,
         cost: cost.toFixed(2)
       };
@@ -55,4 +58,6 @@ window.init = function (context) {
 
   context.speze = speze;
   context.totalSpeze = totalSpeze.toFixed(2);
+
+  context.necompletat = '[nu e completat în profil]';
 };
