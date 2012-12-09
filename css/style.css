@@ -11,7 +11,8 @@ body {
 }
 
 :focus {
-  outline: 1px solid #ddd;
+  box-shadow: 0 0 3px 2px silver;
+  border-radius: 2px;
 }
 
 #autentificare a {
@@ -63,7 +64,7 @@ input {
   outline-width: 0;
   border: none;
   width: 14em;
-  background-position: 0 0;
+  background-position: 0 -2px;
 }
 
 #profil.dialog span.şoaptă-cod-bancă,
@@ -86,7 +87,7 @@ input,
 fieldset select {
   margin: 0;
   vertical-align: top;
-  padding: .2em .3em 0;
+  padding: 1px 3px 0;
   color: black;
   font-weight: bold;
   line-height: 1.75;
@@ -406,7 +407,7 @@ fieldset label {
 #cheltuieli .adăugate .subformular .stînga,
 .etichetă,
 fieldset label {
-  padding: .4em 0 0 6px;
+  padding: 4px 0 0 6px;
 }
 
 #formular fieldset legend {
@@ -452,6 +453,10 @@ fieldset .conţinut>ul {
   margin: .4em 0;
 }
 
+fieldset .conţinut>ul li {
+  margin-bottom: 2px;
+}
+
 ul {
   padding: 0;
   list-style-type: none;
@@ -482,6 +487,7 @@ input.sumă {
 }
 
 #formular h1:focus {
+  box-shadow: none;
   outline: none;
 }
 
@@ -632,7 +638,7 @@ button.adaugă-cîmp-personalizat {
 
 button.adaugă.persoană {
   font-weight: bold;
-  padding: .2em .5em .5em;
+  padding: .2em .5em;
   position: relative;
   left: .5em;
   top: -1.6em;
