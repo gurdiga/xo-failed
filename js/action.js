@@ -1756,6 +1756,8 @@
   Profil = {
     $: $('#profil'),
 
+    cîmpNecompletat: '[lipseşte în profil]',
+
     init: function () {
       Bănci.încarcă(function () {
         Profil.url = '/date/' + Utilizator.login + '/profil.json';
@@ -1770,6 +1772,8 @@
       $.getJSON(Profil.url, function (date) {
         Profil.date = date;
         Profil.reseteazăDialog();
+
+        $(Profil.$).trigger('încărcat');
       });
     },
 
@@ -2937,6 +2941,7 @@
   window.Cheltuieli = Cheltuieli;
   window.FORMATUL_DATEI = FORMATUL_DATEI;
   window.UC = UC;
+  window.Bănci = Bănci;
 
   if (top.location.pathname === '/build/teste/qunit/') {
     window.Căutare = Căutare;

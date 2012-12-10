@@ -58,7 +58,7 @@
       var context = {
         opener: opener,
         procedură: procedură,
-        executor: Profil.date,
+        executor: JSON.parse(JSON.stringify(Profil.date)),
         login: Utilizator.login,
         buton: Încheiere.buton,
         nume: nume,

@@ -42,14 +42,6 @@
           <header></header>
           <div class="conţinut">
             <table id="borderou-de-calcul">
-              <thead>
-                <tr>
-                  <th>Nr.</th>
-                  <th>Descriere</th>
-                  <th>Sumă</th>
-                </tr>
-              </thead>
-
               <thead><tr><th colspan="5">Taxe</th></tr></thead>
               <tbody>
                 <% for (număr in taxe) { %>
@@ -79,30 +71,18 @@
           <div class="conţinut">
             <table id="rechizite-bancare">
               <thead>
-                <tr><th colspan="2">Pentru cauţiuni, taxe şi speze:</th><th colspan="2">Pentru onorarii:</th></tr>
-                <!-- TODO: de inserat datele corespunzătoare din profil -->
+                <tr>
+                  <th></th>
+                  <th>Pentru cauţiuni, taxe şi speze</th>
+                  <th>Pentru onorarii</th>
+                </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>Beneficiar:</th><td><%= executor['nume'] || necompletat %></td>
-                  <th>Beneficiar:</th><td><%= executor['nume'] || necompletat %></td>
-                </tr>
-                <tr>
-                  <th>Cod fiscal:</th><td><%= executor['codul-fiscal'] || necompletat %></td>
-                  <th>Cod fiscal:</th><td><%= executor['codul-fiscal'] || necompletat %></td>
-                </tr>
-                <tr>
-                  <th>Nr. cod bancar:</th><td><%= executor['cont-taxe-speze'] || necompletat %></td>
-                  <th>Nr. cod bancar:</th><td><%= executor['cont-taxe-speze'] || necompletat %></td>
-                </tr>
-                <tr>
-                  <th>Banca beneficiară:</th><td><%= executor['cont-taxe-speze'] || necompletat %></td>
-                  <th>Banca beneficiară:</th><td><%= executor['cont-taxe-speze'] || necompletat %></td>
-                </tr>
-                <tr>
-                  <th>Cod bancă:</th><td><%= executor['banca-taxe-speze'] || necompletat %></td>
-                  <th>Cod bancă:</th><td><%= executor['banca-taxe-speze'] || necompletat %></td>
-                </tr>
+                <tr><th>Beneficiar:</th><td><%= executor['nume'] %></td><td><%= executor['nume'] %></td></tr>
+                <tr><th>Cod fiscal:</th><td><%= executor['codul-fiscal'] %></td><td><%= executor['codul-fiscal'] %></td></tr>
+                <tr><th>Cod bancar:</th><td><%= executor['cont-taxe-speze'] %></td><td><%= executor['cont-onorarii'] %></td></tr>
+                <tr><th>Bancă:</th><td><%= executor['denumire-bancă-taxe-speze'] %></td><td><%= executor['denumire-bancă-onorarii'] %></td></tr>
+                <tr><th>Cod bancă:</th><td><%= executor['cod-bancă-taxe-speze'] %></td><td><%= executor['cod-bancă-onorarii'] %></td></tr>
               </tbody>
             </table>
 

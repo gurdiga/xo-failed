@@ -1,8 +1,9 @@
 asyncTest('Procedură: verifică borderou de calcul', function () {
   'use strict';
 
-  var app = this.app;
+  var app = this.app, încheiere;
 
+  app.Profil.date['codul-fiscal'] = ''; // pentru verificare ulterioară
   app.ProceduriRecente.$.find('.item:first-child').click();
 
   app.$(app.Procedura.$).one('populat', function () {
@@ -13,7 +14,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
     ok($butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
     $butonÎncheiere.click();
 
-    var încheiere = app.Încheieri.deschise[formular].tab;
+    încheiere = app.Încheieri.deschise[formular].tab;
 
     app.$(încheiere).one('iniţializat', function () {
       ok(true, 'iniţializat borderoul de calcul');
@@ -55,16 +56,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
         ok(tabel.find('td:contains("' + taxaDeIntentare + '")').există(), 'găsit ' + taxaDeIntentare);
 
-        var $rechiziteBancare = $încheiere.find('table#rechizite-bancare');
-
-        ok($rechiziteBancare.find('th:contains("Beneficiar:"):first').există(), '…avem Beneficiar');
-        equal($rechiziteBancare.find('th:contains("Beneficiar:"):first').next('td').text(),
-            app.Profil.date['nume'], '…cu valoarea corespunzătoare');
-        ok($rechiziteBancare.find('th:contains("Cod fiscal:")').există(), '…avem Cod fiscal');
-        // TODO de verificat celelalte cîmpuri, inclusiv cînd nu sunt completate în profil
-        ok($rechiziteBancare.find('th:contains("Nr. cod bancar:")').există(), '…avem Nr. cod bancar');
-        ok($rechiziteBancare.find('th:contains("Banca beneficiară:")').există(), '…avem Banca beneficiară:');
-        ok($rechiziteBancare.find('th:contains("Cod bancă:")').există(), '…avem Cod bancă:');
+        verificăRechiziteleBancare($încheiere);
 
         ok($încheiere.find('#semnătura').există(), 'avem loc pentru semnătură');
         ok($încheiere.find('#ştampila').există(), 'avem loc pentru ştampila');
@@ -74,5 +66,58 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
       });
     });
   });
+
+  // --------------------------------------------------
+  function verificăRechiziteleBancare($încheiere) {
+    var $rechiziteBancare = $încheiere.find('table#rechizite-bancare'),
+        profil = app.Profil.date;
+
+    var $beneficiar = $rechiziteBancare.find('th:contains("Beneficiar:"):first'),
+        $rîndBeneficiar = $beneficiar.parent('tr');
+
+    ok($beneficiar.există(), '…avem Beneficiar');
+    equal($rîndBeneficiar.find('td').eq(0).text(), profil['nume'],
+        '…valoare pentru cauţiuni, taxe şi speze');
+    equal($rîndBeneficiar.find('td').eq(1).text(), profil['nume'],
+        '…valoare onorarii');
+
+    var $codFiscal = $rechiziteBancare.find('th:contains("Cod fiscal:")'),
+        $rîndCodFiscal = $codFiscal.parent('tr');
+
+    ok($codFiscal.există(), '…avem Cod fiscal');
+    equal($rîndCodFiscal.find('td').eq(0).text(), app.Profil.cîmpNecompletat,
+        '…valoare pentru cauţiuni, taxe şi speze');
+    equal($rîndCodFiscal.find('td').eq(1).text(), app.Profil.cîmpNecompletat,
+        '…valoare onorarii');
+
+    var $codBancar = $rechiziteBancare.find('th:contains("Cod bancar:")'),
+        $rîndCodBancar = $codBancar.parent('tr');
+
+    ok($codBancar.există(), '…avem Nr. cod bancar');
+    equal($rîndCodBancar.find('td').eq(0).text(), profil['cont-taxe-speze'],
+        '…valoare pentru cauţiuni, taxe şi speze');
+    equal($rîndCodBancar.find('td').eq(1).text(), profil['cont-onorarii'],
+        '…valoare pentru onorarii');
+
+    var context = încheiere.Încheiere.context();
+
+    var $banca = $rechiziteBancare.find('th:contains("Bancă:")'),
+        $rîndBanca = $banca.parent('tr');
+
+    ok($banca.există(), '…avem Banca beneficiară:');
+    equal($rîndBanca.find('td').eq(0).text(), context.executor['denumire-bancă-taxe-speze'],
+        '…valoare pentru cauţiuni, taxe şi speze');
+    equal($rîndBanca.find('td').eq(1).text(), context.executor['denumire-bancă-onorarii'],
+        '…valoare pentru onorarii');
+
+    var $codBancă = $rechiziteBancare.find('th:contains("Cod bancă:")'),
+        $rîndCodBancă = $codBancă.parent('tr');
+
+    ok($codBancă.există(), '…avem Cod bancă:');
+    equal($rîndCodBancă.find('td').eq(0).text(), context.executor['cod-bancă-taxe-speze'],
+        '…valoare pentru cauţiuni, taxe şi speze');
+    equal($rîndCodBancă.find('td').eq(1).text(), context.executor['cod-bancă-onorarii'],
+        '…valoare pentru onorarii');
+  }
 });
 

@@ -219,7 +219,7 @@ th {
   white-space: nowrap;
 }
 
-td {
+th, td {
   vertical-align: top;
 }
 
@@ -241,10 +241,6 @@ table#borderou-de-calcul td:nth-child(4),
 table#borderou-de-calcul th:nth-child(5),
 table#borderou-de-calcul td:nth-child(5) {
   text-align: right;
-}
-
-table#borderou-de-calcul thead:first-child th {
-  font-weight: normal;
 }
 
 table#borderou-de-calcul thead th[colspan] {
@@ -276,12 +272,10 @@ table#rechizite-bancare th {
   font-size: .8em;
 }
 
-table#rechizite-bancare th {
-  padding-left: 30px;
+table#rechizite-bancare thead th {
+  padding-bottom: .6em;
 }
 
-table#rechizite-bancare thead th {
-  padding-bottom: 1em;
-  font-size: 1em;
-  font-weight: normal;
+table#rechizite-bancare th:first-child {
+  padding: 0 1em;
 }
