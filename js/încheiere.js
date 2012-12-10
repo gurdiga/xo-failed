@@ -69,7 +69,7 @@
       };
 
       // cod specific pentru fiecare încheiere
-      if (window.init) window.init(context);
+      if ($.isFunction(window.init)) window.init(context);
 
       return context;
     },
