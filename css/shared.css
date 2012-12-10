@@ -18,6 +18,7 @@
   opacity: .3;
 }
 
+.semiascuns:focus,
 .semiascuns:hover {
   opacity: 1;
 }

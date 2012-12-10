@@ -11,12 +11,17 @@ body {
 }
 
 :focus {
-  box-shadow: 0 0 3px 2px Highlight;
+  box-shadow: 0 0 3px 2px #b5d5ff;
   border-radius: 2px;
 }
 
 #căutare input:focus {
   border-color: white;
+}
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+  outline: 2px solid #b5d5ff;
 }
 
 #autentificare a {
@@ -25,14 +30,6 @@ body {
 
 #şabloane {
   display: none;
-}
-
-input[type="checkbox"]:focus,
-input[type="radio"]:focus,
-input[readonly]:focus,
-button:focus {
-  outline: 1px solid #ddd;
-  opacity: 1;
 }
 
 textarea {
@@ -68,7 +65,7 @@ input {
   outline-width: 0;
   border: none;
   width: 14em;
-  background-position: 0 -2px;
+  background-position: 0 0;
 }
 
 #profil.dialog span.şoaptă-cod-bancă,
@@ -91,7 +88,7 @@ input,
 fieldset select {
   margin: 0;
   vertical-align: top;
-  padding: 1px 3px 0;
+  padding: 3px 4px 0;
   color: black;
   font-weight: bold;
   line-height: 1.75;
@@ -107,8 +104,8 @@ fieldset ul select {
 }
 
 fieldset ul>li>textarea {
-  padding-top: 0;
-  background-position: 0 -3px;
+  padding-top: 3px;
+  background-position: 0 -1px;
 }
 
 fieldset ul select.valuta {
@@ -431,7 +428,6 @@ fieldset label {
 
 .etichetă:focus,
 .etichetă:focus:hover {
-  outline: 1px solid #ddd;
   background: white;
 }
 
@@ -1017,11 +1013,13 @@ button.cu.opţiuni:after {
 
 #profil.dialog li {
   white-space: nowrap;
+  z-index: -1;
 }
 
 #profil.dialog input,
 #profil.dialog textarea {
   width: 16em;
+  margin-bottom: 2px;
 }
 
 #profil.dialog span.şoaptă-cod-bancă {
@@ -1033,7 +1031,10 @@ button.cu.opţiuni:after {
 
 #profil.dialog input.sufix-cod-bancă {
   width: 2em;
-  padding: 0;
+  padding: 2px 0 0 3px;
+  background-position: 0 -2px;
+  margin-left: -3px;
+  vertical-align: 0;
 }
 
 #profil.dialog input.sufix-cod-bancă+.şoaptă {
@@ -1145,6 +1146,7 @@ fieldset .conţinut ul.subsecţiune {
   border-width: 1px 0 0 4px;
   border-top-color: #eee;
   position: relative;
+  z-index: -1;
 }
 
 fieldset .conţinut ul.subsecţiune:first-child {
