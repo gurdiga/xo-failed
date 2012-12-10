@@ -1678,7 +1678,7 @@
             href = '#formular?' + număr.replace(Utilizator.login, '');
 
         rezultate +=
-          '<li class="item" tabindex="0" data-href="' + href + '">' +
+          '<li class="item" data-href="' + href + '">' +
             '<div class="număr">' +
               '<span>' + evidenţiază(număr) + '</span>' +
               '<div class="data-hotărîrii">' + procedură['data-hotărîrii'] + '</div>' +

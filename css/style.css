@@ -11,8 +11,12 @@ body {
 }
 
 :focus {
-  box-shadow: 0 0 3px 2px silver;
+  box-shadow: 0 0 3px 2px Highlight;
   border-radius: 2px;
+}
+
+#căutare input:focus {
+  border-color: white;
 }
 
 #autentificare a {
