@@ -6,9 +6,9 @@ require_once './lib.php';
 
 
 $rute = array(
-  'PUT/date/\d+/proceduri/recente\.json' => 'notează-ca-recentă.php',
   'PUT/date/\d+/proceduri/' => 'proceduri/crează.php',
   'PUT/date/\d+/proceduri/[PS]?-\d+/date\.json' => 'proceduri/salvează.php',
+  'PUT/date/\d+/proceduri/recente\.json' => 'proceduri/notează-ca-recentă.php',
   'DELETE/date/\d+/proceduri/[PS]?-\d+/' => 'proceduri/şterge.php',
   'PUT/date/\d+/proceduri/[PS]?-\d+/încheieri/.+\.html' => 'încheieri/salvează.php',
   'PUT/date/\d+/profil\.json' => 'salvează-profil.php'
