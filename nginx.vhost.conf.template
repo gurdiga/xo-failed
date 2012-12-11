@@ -61,7 +61,7 @@ server {
 
   location /bnm/ {
     more_set_headers 'Content-Type: text/javascript; charset=utf-8';
-    expires 3h;
+    expires modified +24h;
   }
 
   location ~ /js/.*\.js$ {
