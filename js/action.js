@@ -1500,6 +1500,7 @@
 
   Căutare = {
     $: $('#căutare'),
+    pauză: 200,
 
     init: function () {
       Căutare.$.find('input')
@@ -1519,16 +1520,19 @@
 
     rezultate: {
       $: $('#rezultate'),
+      $găsite: $('#găsite'),
       $nimic: $('#nimic'),
 
       afişează: function (proceduri, text) {
         var rezultate = ListăProceduri.formatează(proceduri, text);
 
         if (rezultate) {
+          Căutare.rezultate.$găsite.show();
           Căutare.rezultate.$nimic.hide();
           Căutare.rezultate.$.html(rezultate);
         } else {
           Căutare.rezultate.$nimic.fadeIn();
+          Căutare.rezultate.$găsite.hide();
         }
 
         ProceduriRecente.$.parent().hide();
@@ -1558,7 +1562,10 @@
     },
 
     găseşte: function () {
-      /*jshint maxcomplexity:6*/
+      if (Căutare.înAşteptare && !Căutare.seÎndeplineşte) {
+        clearTimeout(Căutare.înAşteptare);
+      }
+
       var text = $.reEscape($.trim(this.value));
 
       if (!text.length) {
@@ -1566,45 +1573,56 @@
         return;
       }
 
-      var re = {
-        laÎnceputDeRînd: new RegExp('^' + text, 'gi'),
-        laÎnceputDeCuvînt: new RegExp('\\b' + text, 'gi'),
-        oriunde: new RegExp(text, 'gi')
-      };
+      Căutare.înAşteptare = setTimeout(function () {
+        /*jshint maxcomplexity:6*/
+        Căutare.seÎndeplineşte = true;
 
-      var rezultate = {
-        laÎnceputDeRînd: [],
-        laÎnceputDeCuvînt: [],
-        oriunde: [],
-        unificate: function () {
-          var unice = {},
-              toate = this.laÎnceputDeRînd
-                .concat(this.laÎnceputDeCuvînt)
-                .concat(this.oriunde);
+        var rezultate = {
+          laÎnceputDeRînd: [],
+          laÎnceputDeCuvînt: [],
+          oriunde: [],
+          unificate: function () {
+            var unice = {},
+                index = Căutare.index,
+                date = index[''],
+                toate = this.laÎnceputDeRînd
+                  .concat(this.laÎnceputDeCuvînt)
+                  .concat(this.oriunde);
 
-          $.each(toate, function (_, i) {
-            $.each(Căutare.index[i], function (_, număr) {
-              if (!unice[număr]) unice[număr] = Căutare.index[''][număr];
+            toate.forEach(function (i) {
+              $.each(index[i], colectează);
             });
-          });
 
-          return unice;
+            function colectează(_, număr) {
+              if (!unice[număr]) unice[număr] = date[număr];
+            }
+
+            return unice;
+          }
+        };
+
+        var laÎnceputDeRînd = new RegExp('^' + text, 'gi'),
+            laÎnceputDeCuvînt = new RegExp('\\b' + text, 'gi'),
+            oriunde = new RegExp(text, 'gi');
+
+        var index = Căutare.index, item;
+
+        for (item in index) {
+          if (laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(item);
+          else if (laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(item);
+          else if (oriunde.test(item)) rezultate.oriunde.push(item);
         }
-      };
 
-      for (var item in Căutare.index) {
-        if (re.laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(item);
-        else if (re.laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(item);
-        else if (re.oriunde.test(item)) rezultate.oriunde.push(item);
-      }
-
-      Căutare.anulează();
-      Căutare.rezultate.afişează(rezultate.unificate(), text);
+        Căutare.anulează();
+        Căutare.rezultate.afişează(rezultate.unificate(), text);
+        Căutare.seÎndeplineşte = false;
+      }, Căutare.pauză);
     },
 
     anulează: function () {
       Căutare.rezultate.$.html('');
       Căutare.rezultate.$nimic.hide();
+      Căutare.rezultate.$găsite.hide();
       ProceduriRecente.$.parent().show();
     },
 

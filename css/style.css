@@ -214,6 +214,7 @@ button {
   background: white;
 }
 
+#căutare .şoaptă#găsite,
 #căutare .şoaptă#nimic {
   display: none;
 }

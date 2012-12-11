@@ -6,6 +6,7 @@
     'csslint-config.js',
     '/js/action.js',
     '/js/încheiere.js',
+    '/js/indexer.js',
     'integrare/profil.js',
     'integrare/init.js',
     'integrare/general.js',
@@ -61,6 +62,7 @@
     location: true,
     $: false,
     setTimeout: false,
+    clearTimeout: false,
     setInterval: false,
     opener: false,
     history: false
