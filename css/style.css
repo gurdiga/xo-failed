@@ -1014,7 +1014,10 @@ button.cu.opţiuni:after {
 
 #profil.dialog li {
   white-space: nowrap;
-  z-index: -1;
+}
+
+#profil.dialog li.titlu+li {
+  margin-top: 10px;
 }
 
 #profil.dialog input,
@@ -1147,7 +1150,6 @@ fieldset .conţinut ul.subsecţiune {
   border-width: 1px 0 0 4px;
   border-top-color: #eee;
   position: relative;
-  z-index: -1;
 }
 
 fieldset .conţinut ul.subsecţiune:first-child {

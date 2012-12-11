@@ -1841,8 +1841,7 @@
 
     încarcă: function (callback) {
       if ($.isEmptyObject(this.lista)) {
-        $.getJSON('/bnm/bănci.json', function (lista) {
-          Bănci.lista = lista;
+        $.get('/bnm/bănci.js', function () {
           Bănci.initCîmpuri();
 
           callback();
