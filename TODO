@@ -1,4 +1,5 @@
 - Încheieri
+  - dacă nu e nimic achitat, nu afişa liniţele
   - de afişat data achitării în borderoul de calcul
   - de prevenit clickuri multiple pe save
   - de afişat editabilitatea cîmpurile editabile după o pauză de .5s (transition-delay?)
@@ -22,6 +23,7 @@
 
 - Convenienţe
   - “poliţă” temporară: la click în afara formularului în punem pe poliţă
+  - de eliminat titlurile dialogurilor butoanelor de pe bara de sus
 
 - Admin
   - înregistrare utilizator

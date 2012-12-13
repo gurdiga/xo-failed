@@ -10,7 +10,7 @@
   var Init = {
     // --------------------------------------------------
     pregăteşteDatelePentruTabel: function (context) {
-      /*jshint loopfunc:true */
+      /*jshint loopfunc:true, maxcomplexity:5 */
       var taxe = {},
           speze = {},
           $ = context.opener.$,
@@ -18,14 +18,22 @@
           numărSpeze = 0,
           totalTaxe = 0,
           totalSpeze = 0,
+          nimicAchitat = true,
           id, $item, tip, descriere,
-          cost, costPerItem;
+          cost, achitat, dataAchitării, costPerItem;
 
       for (id in context.procedură.cheltuieli.itemi) {
         tip = id.substr(0, 4);
-
         $item = context.opener.Cheltuieli.$.find('#' + id);
         descriere = $item.find('p').text().trim();
+        achitat = $item.find('.achitare :checkbox').is(':checked');
+
+        if (achitat) {
+          dataAchitării = $item.find('.achitare .dată').val();
+          nimicAchitat = false;
+        } else {
+          dataAchitării = '—';
+        }
 
         if (tip === 'taxa') {
           numărTaxe++;
@@ -43,7 +51,9 @@
 
           taxe[numărTaxe] = {
             descriere: descriere,
-            cost: cost.toFixed(2)
+            cost: cost.toFixed(2),
+            achitat: achitat,
+            dataAchitării: dataAchitării
           };
           totalTaxe += cost;
         } else {
@@ -56,7 +66,9 @@
 
           speze[numărSpeze] = {
             descriere: descriere,
-            cost: cost.toFixed(2)
+            cost: cost.toFixed(2),
+            achitat: achitat,
+            dataAchitării: dataAchitării
           };
           totalSpeze += cost;
         }
@@ -67,6 +79,8 @@
 
       context.speze = speze;
       context.totalSpeze = totalSpeze.toFixed(2);
+
+      context.nimicAchitat = nimicAchitat;
     },
 
     // --------------------------------------------------

@@ -45,7 +45,12 @@
               <thead><tr><th colspan="5">Taxe</th></tr></thead>
               <tbody>
                 <% for (număr in taxe) { %>
-                <tr><td><%= număr %></td><td><%= taxe[număr].descriere %></td><td><%= taxe[număr].cost %></td></tr>
+                <tr <%= (taxe[număr].achitat ? ' class="achitat"' : '') %>>
+                  <td><%= număr %></td>
+                  <td><%= taxe[număr].descriere %></td>
+                  <td><%= taxe[număr].cost %></td>
+                  <td><%= taxe[număr].dataAchitării %></td>
+                </tr>
                 <% } %>
                 <tr class="total"><td></td><td>Total</td><td><%= totalTaxe %></td></tr>
               </tbody>
@@ -53,7 +58,12 @@
               <thead><tr><th colspan="5">Speze</th></tr></thead>
               <tbody>
                 <% for (număr in speze) { %>
-                <tr><td><%= număr %></td><td><%= speze[număr].descriere %></td><td><%= speze[număr].cost %></td></tr>
+                <tr>
+                  <td><%= număr %></td>
+                  <td><%= speze[număr].descriere %></td>
+                  <td><%= speze[număr].cost %></td>
+                  <td><%= speze[număr].dataAchitării %></td>
+                </tr>
                 <% } %>
                 <tr class="total"><td></td><td>Total</td><td><%= totalSpeze %></td></tr>
               </tbody>

@@ -8,6 +8,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
   app.$(app.Procedura.$).one('populat', function () {
     adaugăOSpeză();
+    marcheazăPrimaTaxăAchitată();
 
     setTimeout(function () { // aşteptăm o leacă să se termine animaţia
       var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
@@ -65,6 +66,11 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
   }
 
   // --------------------------------------------------
+  function marcheazăPrimaTaxăAchitată() {
+    app.Cheltuieli.$.find('.adăugate #taxaA1 :checkbox').attr('checked', true);
+  }
+
+  // --------------------------------------------------
   function verificăStructura($încheiere) {
     var numărComplet = app.Utilizator.login + app.Procedura.număr(),
         $secţiuneProcedură = $încheiere.find('section header:contains("Procedura")'),
@@ -90,12 +96,15 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
     var $secţiuni = $tabel.find('thead'),
         $taxe = $secţiuni.eq(0),
         $primaTaxă = $taxe.next('tbody').children('tr').eq(0),
-        taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').text().trim();
+        taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').text().trim(),
+        dataAchitării = app.Cheltuieli.$.find('.adăugate #taxaA1 .achitare .dată').val();
 
+    ok($primaTaxă.is('.achitat'), 'rîndul e marcat achitat');
     equal($taxe.find('th').text(), 'Taxe', 'prima secţiune e Taxe');
     equal($primaTaxă.find('td').eq(0).text(), 1, 'în prima coloniţă e numărul de ordine: 1');
     equal($primaTaxă.find('td').eq(1).text(), taxaDeIntentare, 'în a doua coloniţă e descrierea: ' + taxaDeIntentare);
     equal($primaTaxă.find('td').eq(2).text(), app.UC, 'în a treia coloniţă e costul' + app.UC + 'lei');
+    equal($primaTaxă.find('td').eq(3).text(), dataAchitării, 'în a patra coloniţă e data achitării');
 
     var $speze = $secţiuni.eq(1),
         $primaSpeză = $speze.next('tbody').children('tr').eq(0),
@@ -103,10 +112,12 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         $costuriItemiSpeză = app.Cheltuieli.$.find('.adăugate #speza1 .document .sumă'),
         totalCostSpeză = $costuriItemiSpeză.eq(0).suma() + $costuriItemiSpeză.eq(1).suma();
 
+    ok($primaSpeză.find('td').is(':not(.achitat)'), 'rîndul nu e marcat achitat');
     equal($speze.find('th').text(), 'Speze', 'a doua secţiune e Speze');
     equal($primaSpeză.find('td').eq(0).text(), 1, 'în prima coloniţă e numărul de ordine: 1');
     equal($primaSpeză.find('td').eq(1).text(), descriereSpeză, 'în a doua coloniţă e descrierea: ' + descriereSpeză);
     equal($primaSpeză.find('td').eq(2).text(), totalCostSpeză, 'în a treia coloniţă e suma costurilor itemilor din speză: ' + totalCostSpeză);
+    equal($primaSpeză.find('td').eq(3).text(), '—', 'în a patra coloniţă e liniuţă (nu e achitat)');
 
     var $onorariu = $secţiuni.eq(2),
         $sumaOnorariu = $onorariu.next('tbody').children('tr').eq(0);
