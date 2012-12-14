@@ -1,10 +1,17 @@
 asyncTest('Precedură: salvare', function () {
+  /*jshint maxlen:142*/
   'use strict';
 
   var app = this.app,
       dateProcedură = this.dateProcedură,
       context = this,
+      $cheltuieli = app.Cheltuieli.$,
+      $taxaA1 = $cheltuieli.find('.adăugate #taxaA1'),
+      dataAchităriiTaxeiA1 = app.moment().format(app.FORMATUL_DATEI),
       numărulProceduriiNouCreate;
+
+  $taxaA1.find('.achitare :checkbox').attr('checked', true);
+  $taxaA1.find('.achitare .dată').val(dataAchităriiTaxeiA1);
 
   app.Procedura.$.find('.bara-de-instrumente .salvează').click();
   app.Procedura.$.one('salvat salvat-deja', function (e, procedură, număr) {
@@ -31,27 +38,22 @@ asyncTest('Precedură: salvare', function () {
           equal(context.$creditor.find('#idno').val(), creditor['idno'], 'salvat idno creditor');
           equal(context.$debitor.find('#nume').val(), debitor['nume'], 'salvat nume debitor');
           equal(context.$debitor.find('#idnp').val(), debitor['idnp'], 'salvat idnp debitor');
-          equal(context.$debitor.find('#data-naşterii').val(), debitor['data-naşterii'],
-              'salvat data naşterii debitor');
-          equal(context.$de.find('#instanţa-de-judecată').val(), de['instanţa-de-judecată'],
-              'salvat instanţa de judecată DE');
+          equal(context.$debitor.find('#data-naşterii').val(), debitor['data-naşterii'], 'salvat data naşterii debitor');
+          equal(context.$de.find('#instanţa-de-judecată').val(), de['instanţa-de-judecată'], 'salvat instanţa de judecată DE');
           equal(context.$de.find('#numărul-de').val(), de['numărul-de'], 'salvat numărul DE');
           equal(context.$de.find('#data-hotărîrii').val(), de['data-hotărîrii'], 'salvat data hotărîrii DE');
           equal(context.$de.find('#dispozitivul').val(), de['dispozitivul'], 'salvat dispozitivul DE');
-          equal(context.$de.find('#data-rămînerii-definitive').val(), de['data-rămînerii-definitive'],
-              'salvat data rămînerii definitive DE');
-          equal(context.$obiectulUrmăririi.find('#suma-de-bază').val(), sume['Suma de bază'],
-              'salvat valoare suma de bază');
-          equal(context.$obiectulUrmăririi.find('#suma-de-bază').next('.valuta').val(), 'MDL',
-              'salvat valuta suma de bază');
+          equal(context.$de.find('#data-rămînerii-definitive').val(), de['data-rămînerii-definitive'], 'salvat data rămînerii definitive DE');
+          equal(context.$obiectulUrmăririi.find('#suma-de-bază').val(), sume['Suma de bază'], 'salvat valoare suma de bază');
+          equal(context.$obiectulUrmăririi.find('#suma-de-bază').next('.valuta').val(), 'MDL', 'salvat valuta suma de bază');
 
           var sumăPersonalizată = context.$obiectulUrmăririi.find('.personalizat .etichetă');
 
-          equal(sumăPersonalizată.val(), 'Datorie adăugătoare',
-              'salvat etichetă personalzată pentru datorie adăugătoare');
-          equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'],
-              'salvat valoare datorie adăugătoare');
+          equal(sumăPersonalizată.val(), 'Datorie adăugătoare', 'salvat etichetă personalzată pentru datorie adăugătoare');
+          equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'], 'salvat valoare datorie adăugătoare');
           equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL', 'salvat valuta datorie adăugătoare');
+
+          verificăSecţiuneaCheltuieli();
 
           start();
         });
@@ -59,5 +61,12 @@ asyncTest('Precedură: salvare', function () {
     });
     app.Procedura.$.find('.închide').click();
   });
+
+  function verificăSecţiuneaCheltuieli() {
+    equal($cheltuieli.find('#total-taxe-şi-speze').val(), '20.00', 'avem totalul pe taxe şi speze');
+    ok($taxaA1.există(), 'avem taxa de intentare şi formare a procedurii de executare');
+    ok($taxaA1.find('.achitare :checkbox').is(':checked'), '…e bifată achitată');
+    equal($taxaA1.find('.achitare .dată').val(), dataAchităriiTaxeiA1, '…avem data achitării');
+  }
 });
 

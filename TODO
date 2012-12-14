@@ -21,7 +21,8 @@
   - arhivare proceduri
   - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
 
-- Convenienţe
+- Convenienţe (“nice to have”s)
+  - better tooltips (bootstrap?)
   - “poliţă” temporară: la click în afara formularului în punem pe poliţă
   - de eliminat titlurile dialogurilor butoanelor de pe bara de sus
 

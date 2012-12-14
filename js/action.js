@@ -2538,7 +2538,7 @@
         }
       });
 
-      Cheltuieli.$.find('#total-taxe-şi-speze').val(total);
+      Cheltuieli.$.find('#total-taxe-şi-speze').val(total.toFixed(2));
     }
   },
 
