@@ -110,6 +110,15 @@ fieldset ul>li>textarea {
 
 fieldset ul select.valuta {
   width: auto;
+  vertical-align: -2px;
+}
+
+.personalizat select.valuta {
+  vertical-align: -6px;
+}
+
+.sumă~b {
+  vertical-align: -3px;
 }
 
 button {
@@ -1023,7 +1032,13 @@ button.cu.opţiuni:after {
 #profil.dialog input,
 #profil.dialog textarea {
   width: 16em;
-  margin-bottom: 2px;
+  vertical-align: 1px;
+}
+
+#profil.dialog input:focus,
+#profil.dialog textarea:focus {
+  position: relative;
+  z-index: 1;
 }
 
 #profil.dialog span.şoaptă-cod-bancă {
@@ -1207,6 +1222,7 @@ input+span.ui-icon-locked {
 
 input[readonly]+span.ui-icon-locked {
   position: absolute;
+  z-index: 2;
   margin: .3em 0 0 -1.2em;
   display: inline-block;
   opacity: 0;
