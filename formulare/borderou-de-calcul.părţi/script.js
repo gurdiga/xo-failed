@@ -18,7 +18,7 @@
           numărSpeze = 0,
           totalTaxe = 0,
           totalSpeze = 0,
-          nimicAchitat = true,
+          afişămColoniţaCuDataAchitării = false,
           id, $item, tip, descriere,
           cost, achitat, dataAchitării, costPerItem;
 
@@ -30,7 +30,7 @@
 
         if (achitat) {
           dataAchitării = $item.find('.achitare .dată').val();
-          nimicAchitat = false;
+          afişămColoniţaCuDataAchitării = true;
         } else {
           dataAchitării = '—';
         }
@@ -80,7 +80,7 @@
       context.speze = speze;
       context.totalSpeze = totalSpeze.toFixed(2);
 
-      context.nimicAchitat = nimicAchitat;
+      context.afişămColoniţaCuDataAchitării = afişămColoniţaCuDataAchitării;
     },
 
     // --------------------------------------------------

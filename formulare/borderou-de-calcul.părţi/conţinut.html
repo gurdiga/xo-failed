@@ -49,7 +49,9 @@
                   <td><%= număr %></td>
                   <td><%= taxe[număr].descriere %></td>
                   <td><%= taxe[număr].cost %></td>
+                  <% if (afişămColoniţaCuDataAchitării) { %>
                   <td><%= taxe[număr].dataAchitării %></td>
+                  <% } %>
                 </tr>
                 <% } %>
                 <tr class="total"><td></td><td>Total</td><td><%= totalTaxe %></td></tr>
@@ -62,7 +64,9 @@
                   <td><%= număr %></td>
                   <td><%= speze[număr].descriere %></td>
                   <td><%= speze[număr].cost %></td>
+                  <% if (afişămColoniţaCuDataAchitării) { %>
                   <td><%= speze[număr].dataAchitării %></td>
+                  <% } %>
                 </tr>
                 <% } %>
                 <tr class="total"><td></td><td>Total</td><td><%= totalSpeze %></td></tr>
