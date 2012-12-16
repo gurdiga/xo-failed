@@ -2489,7 +2489,7 @@
         'input.valoare',
         'input.sumă',
         'input.cantitate',
-        'input.din.arhivă',
+        'input#din-arhivă',
         '#taxaB5 .licitaţie.repetată',
         '#taxaB6 .licitaţie.repetată'
       ].join(',');
@@ -2507,7 +2507,7 @@
       total += lista.find('input.cost').suma() * UC;
       total += lista.find('#taxaB2-1 .cantitate').suma() * 0.5 * UC;
       total += lista.find('#taxaB9 .cantitate').suma() * 5 * UC;
-      total += lista.find('#taxaA6 .din.arhivă').is(':checked') ? 1 * UC : 0;
+      total += lista.find('#taxaA6 #din-arhivă').is(':checked') ? 1 * UC : 0;
 
       var licitaţieRepetată = lista.find('#taxaB6 .licitaţie.repetată');
 

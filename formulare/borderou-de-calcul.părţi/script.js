@@ -1,3 +1,4 @@
+// <![CDATA[  prevent tidy from compaining about unescaped && which is a JS operator
 (function () {
   'use strict';
 
@@ -11,33 +12,34 @@
     // --------------------------------------------------
     pregăteşteDatelePentruTabel: function (context) {
       /*jshint loopfunc:true, maxcomplexity:5 */
-      var taxe = {},
-          speze = {},
-          $ = context.opener.$,
-          numărTaxe = 0,
-          numărSpeze = 0,
-          totalTaxe = 0,
-          totalSpeze = 0,
-          afişămColoniţaCuDataAchitării = false,
-          id, $item, tip, descriere,
-          cost, achitat, dataAchitării, costPerItem;
+      var număr = {
+        taxe: 0,
+        speze: 0
+      };
+
+      var total = {
+        taxe: {
+          achitat: 0,
+          rămasDeAchitat: 0
+        },
+        speze: {
+          achitat: 0,
+          rămasDeAchitat: 0
+        }
+      };
+
+      var $ = context.opener.$,
+          id, $item, tip,
+          cost, achitat, costPerItem;
 
       for (id in context.procedură.cheltuieli.itemi) {
-        tip = id.substr(0, 4);
+        tip = id.substr(0, 4) === 'taxa' ? 'taxe' : 'speze';
         $item = context.opener.Cheltuieli.$.find('#' + id);
-        descriere = $item.find('p').text().trim();
+
+        număr[tip]++;
         achitat = $item.find('.achitare :checkbox').is(':checked');
 
-        if (achitat) {
-          dataAchitării = $item.find('.achitare .dată').val();
-          afişămColoniţaCuDataAchitării = true;
-        } else {
-          dataAchitării = '—';
-        }
-
-        if (tip === 'taxa') {
-          numărTaxe++;
-
+        if (tip === 'taxe') {
           if ($item.find('.subformular:has(.document)').există()) {
             costPerItem = $item.find('input.cost-per-item').suma() * context.opener.UC;
             cost = 0;
@@ -49,38 +51,32 @@
             cost = $item.find('input.cost').suma() * context.opener.UC;
           }
 
-          taxe[numărTaxe] = {
-            descriere: descriere,
-            cost: cost.toFixed(2),
-            achitat: achitat,
-            dataAchitării: dataAchitării
-          };
-          totalTaxe += cost;
+          if ($item.is('#taxaA6') && $item.find('#din-arhivă').is(':checked')) {
+            cost += context.opener.UC;
+          }
         } else {
-          numărSpeze++;
           cost = 0;
 
           $item.find('.subformular .document').each(function () {
             cost += $(this).find('.sumă').suma();
           });
-
-          speze[numărSpeze] = {
-            descriere: descriere,
-            cost: cost.toFixed(2),
-            achitat: achitat,
-            dataAchitării: dataAchitării
-          };
-          totalSpeze += cost;
         }
+
+        context[tip] = context[tip] || {};
+        context[tip][număr[tip]] = {
+          descriere: $item.find('p').contents(':not(.uc)').text().trim(),
+          cost: cost,
+          achitat: achitat,
+          dataAchitării: achitat ? $item.find('.achitare .dată').val() : '—'
+        };
+
+        total[tip] = total[tip] || {};
+        total[tip][achitat ? 'achitat' : 'rămasDeAchitat'] += cost;
       }
 
-      context.taxe = taxe;
-      context.totalTaxe = totalTaxe.toFixed(2);
-
-      context.speze = speze;
-      context.totalSpeze = totalSpeze.toFixed(2);
-
-      context.afişămColoniţaCuDataAchitării = afişămColoniţaCuDataAchitării;
+      context.speze = context.speze || false;
+      context.total = total;
+      context.afişămColoniţaCuDataAchitării = total.taxe.achitat || total.speze.achitat;
     },
 
     // --------------------------------------------------
@@ -118,3 +114,4 @@
 
   window.Init = Init;
 })();
+// ]]>

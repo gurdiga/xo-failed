@@ -7,6 +7,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
   app.ProceduriRecente.$.find('.item:first-child').click();
 
   app.$(app.Procedura.$).one('populat', function () {
+    adaugăTaxaA6();
     adaugăOSpeză();
     marcheazăPrimaTaxăAchitată();
 
@@ -49,6 +50,15 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
   });
 
   // --------------------------------------------------
+  function adaugăTaxaA6() {
+    app.Cheltuieli.$.find('#categorii-taxe-şi-speze').find('#taxaA6').click();
+
+    var $taxa = app.Cheltuieli.$.find('.adăugate #taxaA6');
+
+    $taxa.find('#din-arhivă').attr('checked', true);
+  }
+
+  // --------------------------------------------------
   function adaugăOSpeză() {
     app.Cheltuieli.$.find('#categorii-taxe-şi-speze').find('#speza1').click();
 
@@ -89,35 +99,50 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
   // --------------------------------------------------
   function verificăTabelul($încheiere) {
     /*jshint maxlen:142*/
-    var $tabel = $încheiere.find('section .conţinut table#borderou-de-calcul');
+    var $tabel = $încheiere.find('section .conţinut table#borderou-de-calcul'),
+        $titluriColoniţe = $tabel.find('thead:first-child:not(.secţiune)');
 
     ok($tabel.există(), 'avem tabelul');
+    ok($titluriColoniţe.există(), 'avem titlurile pentru coloniţe');
+    equal($titluriColoniţe.find('th').eq(0).text(), '', 'în coloniţa 1 nu avem nimic');
+    equal($titluriColoniţe.find('th').eq(1).text(), '', 'în coloniţa 2 nu avem nimic');
+    equal($titluriColoniţe.find('th').eq(2).text(), 'lei', 'în coloniţa 3 avem «lei»');
+    equal($titluriColoniţe.find('th').eq(3).text(), 'achitat la', 'în coloniţa 4 avem «achitat la»');
 
-    var $secţiuni = $tabel.find('thead'),
+    var $secţiuni = $tabel.find('thead.secţiune'),
         $taxe = $secţiuni.eq(0),
-        $primaTaxă = $taxe.next('tbody').children('tr').eq(0),
-        taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').text().trim(),
+        $taxeItemi = $taxe.next('tbody'),
+        $primaTaxă = $taxeItemi.children('tr').eq(0),
+        $aDouaTaxă = $taxeItemi.children('tr').eq(1),
+        $totalTaxeAchitat = $taxeItemi.children('tr').eq(2),
+        $totalTaxeRămasDeAchitat = $taxeItemi.children('tr').eq(3),
+        taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').contents(':not(.uc)').text().trim(),
         dataAchitării = app.Cheltuieli.$.find('.adăugate #taxaA1 .achitare .dată').val();
 
-    ok($primaTaxă.is('.achitat'), 'rîndul e marcat achitat');
     equal($taxe.find('th').text(), 'Taxe', 'prima secţiune e Taxe');
     equal($primaTaxă.find('td').eq(0).text(), 1, 'în prima coloniţă e numărul de ordine: 1');
     equal($primaTaxă.find('td').eq(1).text(), taxaDeIntentare, 'în a doua coloniţă e descrierea: ' + taxaDeIntentare);
     equal($primaTaxă.find('td').eq(2).text(), app.UC, 'în a treia coloniţă e costul' + app.UC + 'lei');
     equal($primaTaxă.find('td').eq(3).text(), dataAchitării, 'în a patra coloniţă e data achitării');
+    equal($totalTaxeAchitat.find('td').eq(1).text(), 'Total achitat', 'avem linia cu total taxe achitat');
+    equal($totalTaxeAchitat.find('td').eq(2).text(), app.UC, 'totalul cheltuielilor achitate e caclulat corect');
+    equal($totalTaxeRămasDeAchitat.find('td').eq(1).text(), 'Total rămas de achitat', 'avem linia cu total taxe rămas de achitat');
+    equal($totalTaxeRămasDeAchitat.find('td').eq(2).text(), app.UC * 2, 'totalul cheltuielilor rămase de achitat e calculat corect');
 
     var $speze = $secţiuni.eq(1),
-        $primaSpeză = $speze.next('tbody').children('tr').eq(0),
+        $spezeItemi = $speze.next('tbody'),
+        $primaSpeză = $spezeItemi.children('tr').eq(0),
         descriereSpeză = app.Cheltuieli.$.find('.adăugate #speza1 p').text().trim(),
         $costuriItemiSpeză = app.Cheltuieli.$.find('.adăugate #speza1 .document .sumă'),
+        $totalSpezeRămasDeAchitat = $spezeItemi.children('tr').eq(1),
         totalCostSpeză = $costuriItemiSpeză.eq(0).suma() + $costuriItemiSpeză.eq(1).suma();
 
-    ok($primaSpeză.find('td').is(':not(.achitat)'), 'rîndul nu e marcat achitat');
     equal($speze.find('th').text(), 'Speze', 'a doua secţiune e Speze');
     equal($primaSpeză.find('td').eq(0).text(), 1, 'în prima coloniţă e numărul de ordine: 1');
     equal($primaSpeză.find('td').eq(1).text(), descriereSpeză, 'în a doua coloniţă e descrierea: ' + descriereSpeză);
     equal($primaSpeză.find('td').eq(2).text(), totalCostSpeză, 'în a treia coloniţă e suma costurilor itemilor din speză: ' + totalCostSpeză);
     equal($primaSpeză.find('td').eq(3).text(), '—', 'în a patra coloniţă e liniuţă (nu e achitat)');
+    equal($totalSpezeRămasDeAchitat.find('td').eq(1).text(), 'Total rămas de achitat', 'avem linia cu total speze rămas de achitat');
 
     var $onorariu = $secţiuni.eq(2),
         $sumaOnorariu = $onorariu.next('tbody').children('tr').eq(0);
