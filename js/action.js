@@ -1485,7 +1485,6 @@
     },
 
     notează: function (număr) {
-      if (!număr) return;
       if (ProceduriRecente.numărulUltimei() === număr) return;
 
       $.put(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
