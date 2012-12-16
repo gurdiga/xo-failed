@@ -1,7 +1,4 @@
 - Încheieri
-  - dacă nu e nimic achitat, nu afişa liniţele
-  - de afişat data achitării în borderoul de calcul
-  - de prevenit clickuri multiple pe save
   - de afişat editabilitatea cîmpurile editabile după o pauză de .5s (transition-delay?)
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
