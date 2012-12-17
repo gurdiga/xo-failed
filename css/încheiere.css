@@ -79,7 +79,7 @@ table#borderou-de-calcul thead td,
   text-align: right;
   font-weight: bold;
   display: block;
-  width: 25.1em;
+  width: 30.7em; /* (1.2 + 8 + 4 + 5.5 + 6) + (5*2*.6) */
 }
 
 p {
