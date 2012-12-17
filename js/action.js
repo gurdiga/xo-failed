@@ -1992,7 +1992,7 @@
           întîrziere = Subsecţiuni.întîrzieri.colectează(secţiune),
           dobînda = DobîndaDeÎntîrziere.calculează(întîrziere).dobînda;
 
-      secţiune.find('.dobîndă').val(dobînda);
+      secţiune.find('.dobîndă').val(dobînda.toFixed(2));
     }
   },
 
