@@ -7,8 +7,6 @@
     formular: '',
 
     init: function () {
-      setInterval(Încheiere.verificăDacăFormularulEDeschis, 500);
-
       $ = app.$;
       Procedura = app.Procedura;
       Încheieri = app.Încheieri;
@@ -19,6 +17,11 @@
       Încheiere.pagina = decodeURIComponent(location.pathname);
       Încheiere.buton = Încheieri.deschise[Încheiere.pagina].buton;
       Încheiere.formular = Încheiere.buton.data('formular');
+
+      if (Încheiere.buton.parents('#formular').există()) {
+        // s-a deschis cu din formularul de procedură
+        setInterval(Încheiere.verificăDacăFormularulEDeschis, 500);
+      }
 
       if (!Încheiere.compilată()) {
         Încheiere.compilează();

@@ -979,7 +979,33 @@ button.cu.opţiuni:after {
 }
 
 #calculator {
-  width: 26em;
+  width: 25em;
+}
+
+#calculator li>label {
+  width: 10em;
+  padding-top: 7px;
+}
+
+#calculator li>label.checkbox {
+  margin-left: 2px;
+}
+
+#calculator .sumă~b {
+  vertical-align: 0;
+}
+
+#calculator .ui-icon {
+  vertical-align: -2px;
+}
+
+#calculator ul li.total {
+  padding-top: .5em;
+}
+
+#calculator ul li.total input,
+#calculator ul li.total label {
+  font-weight: bold;
 }
 
 .dialog {
@@ -1090,21 +1116,20 @@ button.cu.opţiuni:after {
   width: 5.3em;
 }
 
-.ui-icon-calendar {
-  margin-left: -1em;
+.ui-icon-calendar,
+.buton[data-formular] {
   display: inline-block;
   background-color: transparent;
   cursor: pointer;
-  vertical-align: -2px;
+  vertical-align: -5px;
 }
 
-.dialog ul li.total {
-  padding-top: 1em;
+.ui-icon-calendar {
+  margin-left: -1em;
 }
 
-.dialog ul li.total input,
-.dialog ul li.total label {
-  font-weight: bold;
+.titlu .buton[data-formular] {
+  vertical-align: -3px;
 }
 
 #ui-datepicker-div {
@@ -1223,7 +1248,7 @@ input+span.ui-icon-locked {
 input[readonly]+span.ui-icon-locked {
   position: absolute;
   z-index: 2;
-  margin: .3em 0 0 -1.2em;
+  margin: .5em 0 0 -1.2em;
   display: inline-block;
   opacity: 0;
   -webkit-transition: opacity .5s;
@@ -1250,22 +1275,13 @@ input[readonly]:hover+span.ui-icon-locked {
 
 label.checkbox {
   color: black;
-  margin: 3px .3em 0 -2px;
   font-weight: bold;
   display: inline;
+  margin: 0 5px 0 -2px;
 }
 
 label.checkbox input {
   margin: 5px 0;
-}
-
-.buton[data-formular] {
-  display: inline-block;
-  vertical-align: -2px;
-  border: none;
-  background-color: transparent;
-  text-indent: 0;
-  cursor: pointer;
 }
 
 .buton[data-formular].salvat::after {

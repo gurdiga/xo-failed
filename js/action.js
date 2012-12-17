@@ -2776,11 +2776,16 @@
     },
 
     formular: function (buton) {
-      var formular = buton.data('formular'),
-          caracter = Procedura.$obiectulUrmăririi.find('#caracter').val() || '',
-          sufix = Procedura.tip() + caracter;
+      var formular = buton.data('formular');
 
-      return '/formulare/' + formular + '-' + sufix + '.html';
+      if (Procedura.$.is(':visible')) {
+        var caracter = Procedura.$obiectulUrmăririi.find('#caracter').val() || '',
+            sufix = Procedura.tip() + caracter;
+
+        return '/formulare/' + formular + '-' + sufix + '.html';
+      } else {
+        return '/formulare/' + formular + '.html';
+      }
     },
 
     deschide: function () {

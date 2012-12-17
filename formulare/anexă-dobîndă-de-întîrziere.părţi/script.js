@@ -1,7 +1,9 @@
 window.init = function (context) {
+  /*jshint maxlen:130 */
   'use strict';
 
-  var $întîrziere = context.buton.closest('.subsecţiune.întîrziere'),
+  var dinBaraDeSus = context.buton.parent().is(':not(.titlu)'),
+      $întîrziere = dinBaraDeSus ? context.opener.$('#calculator .întîrziere') : context.buton.closest('.subsecţiune.întîrziere'),
       întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere),
       calcule = opener.DobîndaDeÎntîrziere.calculează(întîrziere);
 
