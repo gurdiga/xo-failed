@@ -74,7 +74,6 @@
   padding: .5em 1em;
   right: 0;
   margin-top: -.3em;
-  width: 17em;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   color: #333;
   -webkit-transition: opacity .75s;
@@ -83,7 +82,10 @@
   transition: opacity .75s;
   opacity: 0;
   font-family: sans-serif;
-  text-align: right;
+}
+
+.mesaj.dinamicitate {
+  width: 17em;
 }
 
 .bara-de-instrumente>button~.mesaj.afişat {
