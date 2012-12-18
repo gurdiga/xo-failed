@@ -15,10 +15,10 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
     app.$(încheiere).one('iniţializat', function () {
       var $încheiere = app.$(încheiere.document),
-          butonDeSalvare = $încheiere.find('.salvează');
+          $butonDeSalvare = $încheiere.find('.salvează');
 
       ok(true, 'iniţializat încheiere');
-      ok(butonDeSalvare.există(), 'avem buton de salvare');
+      ok($butonDeSalvare.există(), 'avem buton de salvare');
       ok($încheiere.find('.bara-de-instrumente.pentru.încheiere').există(), 'avem bară de instrumente');
       ok($încheiere.find('div.conţinut.editabil[contenteditable="true"]').există(), 'avem secţiuni editabile');
       ok($încheiere.find('.închide').există(), 'avem buton de închidere');
@@ -29,10 +29,10 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
   // ------------------------
   function verificăSalvareaÎncheierii(încheiere) {
-    var buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
+    var $buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
         $încheiere = app.$(încheiere.document),
-        butonDeSalvare = $încheiere.find('.salvează'),
-        formular = app.ButoanePentruÎncheieri.formular(buton);
+        $butonDeSalvare = $încheiere.find('.salvează'),
+        formular = app.ButoanePentruÎncheieri.formular($buton);
 
     app.$(încheiere).one('salvat', function () {
       ok(true, 'salvat încheiere');
@@ -40,12 +40,12 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       var cale = decodeURIComponent(încheiere.location.pathname),
           caleER = new RegExp(
             '^/date/' + app.Utilizator.login + '/proceduri/' +
-            app.Procedura.număr() + '/încheieri/' + buton.data('formular') + '-\\d{12}\\.html'
+            app.Procedura.număr() + '/încheieri/' + $buton.data('formular') + '-\\d{12}\\.html'
           );
 
       ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
-      ok(buton.is('.salvat'), 'marcat butonul din procedură ca salvat');
-      equal(buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
+      ok($buton.is('.salvat'), 'marcat butonul din procedură ca salvat');
+      equal($buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
 
       app.Procedura.$.one('salvat salvat-deja', function () {
         ok(true, 'salvat şi procedura la salvarea încheierii');
@@ -54,16 +54,15 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       });
 
       verificăEditabilitate(încheiere);
-      butonDeSalvare.click();
+      $butonDeSalvare.click();
     });
-    butonDeSalvare.click();
+    $butonDeSalvare.click();
   }
 
   // ------------------------
   function verificăEditabilitate(încheiere) {
     var $încheiere = app.$(încheiere.document),
         cale = decodeURIComponent(încheiere.location.pathname),
-        butonDeSalvare = $încheiere.find('.salvează'),
         secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
 
     secţiuneEditabilă.append('<b class="adăugat">schimbare</b>');
