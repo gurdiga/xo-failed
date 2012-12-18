@@ -1290,6 +1290,7 @@ label.checkbox input {
   display: inline-block;
   position: absolute;
   color: black;
+  text-indent: 0; /* altfel ✓ nu se vede */
 }
 
 #destinatari .listă .itemi li,
