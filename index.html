@@ -195,7 +195,8 @@
                 <input class="sumă dobîndă" readonly="readonly"/>
                 <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                 <b>MDL</b>
-                <span class="ui-icon ui-icon-document buton semiascuns" data-formular="anexă-dobîndă-de-întîrziere" title="Detalii depre calcul"></span>
+                <span class="ui-icon ui-icon-document buton semiascuns" title="Detalii depre calcul"
+                    data-formular="anexă-dobîndă-de-întîrziere" data-dinamic="da"></span>
               </li>
             </ul>
 
@@ -478,8 +479,8 @@
                   <input id="total-taxe-şi-speze" class="sumă calculat" readonly="readonly"/>
                   <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                   <b>MDL</b>
-                  <span class="ui-icon ui-icon-document buton semiascuns" data-formular="borderou-de-calcul"
-                      title="Borderou de calcul"></span>
+                  <span class="ui-icon ui-icon-document buton semiascuns" title="Borderou de calcul"
+                      data-formular="borderou-de-calcul" data-dinamic="da"></span>
 
                   <ul class="adăugate"></ul>
                 </li>
@@ -1568,10 +1569,13 @@
 
       <div class="bara-de-instrumente pentru încheiere">
         <button class="salvează" title="Salvează"></button>
+        <p class="mesaj dinamicitate">Acest document se generează la fiecare deschidere şi nu se va salva</p>
         <p class="mesaj salvat">Salvat</p>
         <p class="mesaj salvat-deja">Nu sunt schimbări</p>
 
         <button class="regenerează" title="Regenerează"></button>
+        <p class="mesaj dinamicitate">Acest document se regenerează automat la fiecare deschidere</p>
+
         <button class="imprimă" title="Imprimă"></button>
       </div>
 

@@ -2791,10 +2791,11 @@
     deschide: function () {
       var buton = $(this),
           încheiere = buton.data('formular'),
+          dinamic = buton.data('dinamic'),
           pagina;
 
       if (buton.is('[dezactivat]')) return;
-      if (buton.is('.salvat')) {
+      if (!dinamic && buton.is('.salvat')) {
         pagina = buton.data('pagina');
       } else {
         pagina = ButoanePentruÎncheieri.formular(buton);

@@ -78,6 +78,7 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
         tab;
 
     $buton.click();
+    ok($buton.data('dinamic'), 'raportul e marcat dinamic');
     tab = app.Încheieri.deschise[formular].tab;
 
     app.$(tab).one('iniţializat', function () {

@@ -1,4 +1,5 @@
 asyncTest('Procedură: verifică borderou de calcul', function () {
+  /*jshint maxlen:135 */
   'use strict';
 
   var app = this.app, încheiere;
@@ -25,26 +26,28 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         ok(true, 'iniţializat borderoul de calcul');
 
         var $încheiere = app.$(încheiere.document),
-            $butonDeSalvare = $încheiere.find('.salvează');
+            $butonDeSalvare = $încheiere.find('.salvează'),
+            $butonDeRegenerare = $încheiere.find('.regenerează');
 
         $butonDeSalvare.click();
+        ok($butonDeSalvare.next('.mesaj.dinamicitate').is('.afişat'), 'butonul de salvare afişează mesaj despre dinamicitate');
 
-        app.$(încheiere).one('salvat', function () {
-          ok(true, 'salvat borderoul de calcul');
+        $butonDeRegenerare.click();
+        ok($butonDeRegenerare.next('.mesaj.dinamicitate').is('.afişat'), 'butonul de regenerare afişează mesajul despre dinamicitate');
 
-          var procedura = app.Procedura.colectează();
+        verificăImprimarea($încheiere);
 
-          equal(procedura.cheltuieli.încheiere, încheiere.Încheiere.pagina, '…înregistrat în procedură');
-          equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
-          ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
+        var procedura = app.Procedura.colectează();
 
-          verificăStructura($încheiere);
-          verificăTabelul($încheiere);
-          verificăRechiziteleBancare($încheiere);
+        equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
+        ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
 
-          app.Procedura.$.find('.închide').click();
-          start();
-        });
+        verificăStructura($încheiere);
+        verificăTabelul($încheiere);
+        verificăRechiziteleBancare($încheiere);
+
+        app.Procedura.$.find('.închide').click();
+        start();
       });
     }, 500);
   });
@@ -196,6 +199,22 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
     ok($codBancă.există(), '…avem Cod bancă:');
     equal($rîndCodBancă.find('td').eq(0).text(), context.executor['cod-bancă-taxe-speze'], '…valoare pentru cauţiuni, taxe şi speze');
     equal($rîndCodBancă.find('td').eq(1).text(), context.executor['cod-bancă-onorarii'], '…valoare pentru onorarii');
+  }
+
+  // --------------------------------------------------
+  function verificăImprimarea($încheiere) {
+    var $butonDeImprimare = $încheiere.find('.imprimă'),
+        seImprimă = false;
+
+    încheiere.originalPrint = încheiere.print;
+    încheiere.print = function () {
+      seImprimă = true;
+    };
+
+    $butonDeImprimare.click();
+    ok(seImprimă, 'click pe butonul de imprimare imprimă');
+
+    încheiere.print = încheiere.originalPrint;
   }
 });
 

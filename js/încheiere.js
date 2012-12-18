@@ -18,8 +18,8 @@
       Încheiere.buton = Încheieri.deschise[Încheiere.pagina].buton;
       Încheiere.formular = Încheiere.buton.data('formular');
 
+      // nu s-a deschis din calculatorul de dobînzi de întîrziere din bara de sus
       if (Încheiere.buton.parents('#formular').există()) {
-        // s-a deschis cu din formularul de procedură
         setInterval(Încheiere.verificăDacăFormularulEDeschis, 500);
       }
 
@@ -115,6 +115,18 @@
     },
 
     salvează: function () {
+      if (Încheiere.buton.data('dinamic')) {
+        var $mesaj = Încheiere.$.find('.salvează').next('.mesaj.dinamicitate');
+
+        $mesaj.addClass('afişat');
+
+        setTimeout(function () {
+          $mesaj.removeClass('afişat');
+        }, 1000);
+
+        return;
+      }
+
       if (!Încheiere.modificat()) {
         BaraDeInstrumente.anunţăSalvatDeja();
       } else {
@@ -143,13 +155,29 @@
     },
 
     imprimă: function () {
-      Încheiere.salvează();
-      app.$(Încheiere).one('salvat', function () {
+      if (Încheiere.buton.data('dinamic')) {
         window.print();
-      });
+      } else {
+        Încheiere.salvează();
+        app.$(window).one('salvat', function () {
+          window.print();
+        });
+      }
     },
 
     regenerează: function () {
+      if (Încheiere.buton.data('dinamic')) {
+        var $mesaj = Încheiere.$.find('.regenerează').next('.mesaj.dinamicitate');
+
+        $mesaj.addClass('afişat');
+
+        setTimeout(function () {
+          $mesaj.removeClass('afişat');
+        }, 1000);
+
+        return;
+      }
+
       Încheiere.buton
         .removeClass('salvat')
         .removeData('pagina')
