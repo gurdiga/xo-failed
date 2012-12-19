@@ -112,4 +112,8 @@ server {
   location /.git/ {
     return 404;
   }
+
+  location /date/.git/ {
+    return 404;
+  }
 }
