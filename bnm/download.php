@@ -1,6 +1,7 @@
 <?
 
 ini_set('display_errors', 1);
+date_default_timezone_set('Europe/Chisinau');
 
 $data = date('d.m.Y');
 $url = "http://bnm.md/md/official_exchange_rates?get_xml=1&date=$data";
