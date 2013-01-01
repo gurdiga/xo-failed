@@ -10,6 +10,9 @@ curl $CURL_DEFAULT_ARGS \
   https://$SERVER_NAME/date/$LOGIN/proceduri/ > /dev/null
 verifică 'trimis datele'
 
+file "$DOCUMENT_ROOT/$DESTINATIA.gz" > /dev/null
+verifică 'salvat pe disc'
+
 curl $CURL_DEFAULT_ARGS \
   --include \
   --output $TMP_FILE \
@@ -29,9 +32,6 @@ verifică 'Content-Type este "application/json; charset=utf-8"'
 
 grep "^Content-Encoding: gzip" $TMP_FILE > /dev/null
 verifică 'Content-Encoding este gzip'
-
-file "$DOCUMENT_ROOT/$DESTINATIA.gz" > /dev/null
-verifică 'salvat pe disc'
 
 zcat "$DOCUMENT_ROOT/$DESTINATIA.gz" | /usr/bin/diff $SURSA -
 verifică 'datele salvate corespund cu cele trimise'
