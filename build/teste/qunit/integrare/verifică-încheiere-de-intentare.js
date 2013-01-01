@@ -30,11 +30,12 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
   // ------------------------
   function verificăSalvareaÎncheierii(încheiere) {
     var $buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
-        $încheiere = app.$(încheiere.document),
+        $încheiere = încheiere.Încheiere.$,
         $butonDeSalvare = $încheiere.find('.salvează'),
         formular = app.ButoanePentruÎncheieri.formular($buton);
 
     app.$(încheiere).one('salvat', function () {
+      încheiere = this;
       ok(true, 'salvat încheiere');
 
       var cale = decodeURIComponent(încheiere.location.pathname),
@@ -50,7 +51,33 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       app.Procedura.$.one('salvat salvat-deja', function () {
         ok(true, 'salvat şi procedura la salvarea încheierii');
 
+        var $butonDeRegenerare = $încheiere.find('.regenerează'),
+            încheiereaSalvată = încheiere.Încheiere.pagina,
+            formular = app.ButoanePentruÎncheieri.formular(încheiere.Încheiere.buton);
+
+        $butonDeRegenerare.click();
+        ok(!app.Încheieri.deschise[încheiereaSalvată], 'încheierea precedent salvată este deregistrată');
         start();
+
+        /*
+        încheiere = app.Încheieri.deschise[formular].tab;
+
+        app.$(încheiere).one('iniţializat', function () {
+          ok(true, 'regenerare: reiniţializat');
+
+
+          // TODO verifică salvarea procedurii la regenerarea şi resalvarea încheierii
+          $butonDeSalvare = încheiere.Încheiere.$.find('.salvează');
+          $butonDeSalvare.click();
+
+          app.$(încheiere).one('salvat', function () {
+            ok(true, 'regenerare: după salvat');
+
+            app.Procedura.$.one('salvat', function () {
+              ok(true, 'regenerare: salvat procedura *după* salvarea încheierii');
+            });
+          });
+        });*/
       });
 
       verificăEditabilitate(încheiere);
@@ -61,7 +88,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
   // ------------------------
   function verificăEditabilitate(încheiere) {
-    var $încheiere = app.$(încheiere.document),
+    var $încheiere = încheiere.Încheiere.$,
         cale = decodeURIComponent(încheiere.location.pathname),
         secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
 

@@ -130,11 +130,14 @@
       if (!Încheiere.modificat()) {
         BaraDeInstrumente.anunţăSalvatDeja();
       } else {
-        if (!app.Procedura.număr()) { // e o procedură nouă încă nesalvată
-          app.Procedura.crează();
-          app.Procedura.$.one('salvat', Încheiere.trimite);
-        } else {
+        var număr = Procedura.număr();
+
+        if (număr) { // e o procedură care a fost deja salvată vreodată, are număr
           Încheiere.trimite();
+          $(window).one('salvat', Procedura.salveazăSauCrează);
+        } else { // e o procedură nouă încă nesalvată
+          Procedura.crează();
+          Procedura.$.one('salvat', Încheiere.trimite);
         }
       }
     },
@@ -178,6 +181,7 @@
         return;
       }
 
+      delete Încheieri.deschise[Încheiere.pagina];
       Încheiere.buton
         .removeClass('salvat')
         .removeData('pagina')
