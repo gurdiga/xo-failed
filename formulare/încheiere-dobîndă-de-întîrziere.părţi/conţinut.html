@@ -15,15 +15,11 @@
         </section>
 
         <section>
-          <header>Procedura</header>
+          <header>Chestiunea</header>
           <div class="conţinut editabil" spellcheck="false">
             <p>Examinînd cererea creditorului urmăritor <%= nume(procedură.creditor) %>
-            (<%= id(procedură.creditor) %>) cu privire la executarea documentului executoriu
-            <%= procedură['document-executoriu']['numărul-de'] %> din
-            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de instanţa de judecată
-            <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus
-            încasarea în beneficiul <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>) de la
-            <%= debitori %> a datoriei în mărime totală de <%= întîrziere.suma %> MDL, am stabilit:</p>
+            (<%= id(procedură.creditor) %>) cu privire la calcularea dobînzilor de întîrziere,
+            am stabili:</p>
           </div>
         </section>
 
@@ -36,9 +32,6 @@
             <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus
             încasarea în beneficiul <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>)
             de la <%= debitori %> a datoriei în mărime totală de <%= întîrziere.suma %> MDL.</p>
-
-            <p>În procesul executării creditorul urmăritor a înaintat o cerere cu privire la calcularea
-            dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu.</p>
 
             <p>În conformitate cu art. 24 al Codului de executare: la cererea creditorului,
             executorul judecătoresc calculează dobînzile, penalităţile şi alte sume rezultate din întîrzierea
