@@ -24,6 +24,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       ok($încheiere.find('.închide').există(), 'avem buton de închidere');
 
       verificăSalvareaÎncheierii(încheiere);
+      verificăImprimarea($încheiere);
     });
   });
 
@@ -111,5 +112,23 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
         }, 100);
       });
     });
+  }
+
+  // --------------------------------------------------
+  function verificăImprimarea($încheiere) {
+    var $butonDeImprimare = $încheiere.find('.imprimă'),
+        seImprimă = false;
+
+    încheiere.originalPrint = încheiere.print;
+    încheiere.print = function () {
+      seImprimă = true;
+    };
+
+    app.$(app).one('salvat', function () {
+      ok(seImprimă, 'click pe butonul de imprimare imprimă');
+
+      încheiere.print = încheiere.originalPrint;
+    });
+    $butonDeImprimare.click();
   }
 });

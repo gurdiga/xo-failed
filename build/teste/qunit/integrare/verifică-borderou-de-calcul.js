@@ -25,18 +25,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
       app.$(încheiere).one('iniţializat', function () {
         ok(true, 'iniţializat borderoul de calcul');
 
-        var $încheiere = app.$(încheiere.document),
-            $butonDeSalvare = $încheiere.find('.salvează'),
-            $butonDeRegenerare = $încheiere.find('.regenerează');
-
-        $butonDeSalvare.click();
-        ok($butonDeSalvare.next('.mesaj.dinamicitate').is('.afişat'), 'butonul de salvare afişează mesaj despre dinamicitate');
-
-        $butonDeRegenerare.click();
-        ok($butonDeRegenerare.next('.mesaj.dinamicitate').is('.afişat'), 'butonul de regenerare afişează mesajul despre dinamicitate');
-
-        verificăImprimarea($încheiere);
-
+        var $încheiere = app.$(încheiere.document);
         var procedura = app.Procedura.colectează();
 
         equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
@@ -199,22 +188,6 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
     ok($codBancă.există(), '…avem Cod bancă:');
     equal($rîndCodBancă.find('td').eq(0).text(), context.executor['cod-bancă-taxe-speze'], '…valoare pentru cauţiuni, taxe şi speze');
     equal($rîndCodBancă.find('td').eq(1).text(), context.executor['cod-bancă-onorarii'], '…valoare pentru onorarii');
-  }
-
-  // --------------------------------------------------
-  function verificăImprimarea($încheiere) {
-    var $butonDeImprimare = $încheiere.find('.imprimă'),
-        seImprimă = false;
-
-    încheiere.originalPrint = încheiere.print;
-    încheiere.print = function () {
-      seImprimă = true;
-    };
-
-    $butonDeImprimare.click();
-    ok(seImprimă, 'click pe butonul de imprimare imprimă');
-
-    încheiere.print = încheiere.originalPrint;
   }
 });
 
