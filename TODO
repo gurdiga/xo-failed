@@ -1,30 +1,12 @@
 - Încheieri
-  - de afişat editabilitatea cîmpurile editabile după o pauză de .5s (transition-delay?)
-  - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
-  - de revizuit poziţionarea butoanelor de imprimare a încheierilor
-    - de ordin general, nonpecuniare
-    - în beneficiul statului
-    - pensie de întreţinere
-  - clasa no-print pentru controale în formulare
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
     în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
-  - index partitioning?
-  - JSON-P + custom format + JS worker pentru max performance? experiment: /js/indexer.js
 
 - Introducerea datelor
-  - de folosit CSS translate pentru animarea formuarului de procedura
-  - extrage datele pentru index cu indexOf?
-  - index persoane
-  - Materiale
-  - arhivare proceduri
   - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
-
-- Convenienţe (“nice to have”s)
-  - better tooltips (bootstrap?)
-  - “poliţă” temporară: la click în afara formularului în punem pe poliţă
-  - de eliminat titlurile dialogurilor butoanelor de pe bara de sus
+  - index persoane
 
 - Admin
   - înregistrare utilizator
@@ -38,22 +20,41 @@
   - menţine istoria parolelor pentru a preveni repetarea
   - blocare după 3 încercări greşite
   - istoria înregistrărilor
+
+----------------------------------------------------------------------------------------------------
+
+ÎMBUNĂTĂŢIRI DUPĂ LANSARE
  
 Chestii tehnice
   - de extins build
     - configurare nginx parte globală /etc/
-    - build nginx
-  - X-Runtime-<function_name>
-  - performanţă: YSlow & PageSpeed, about:tracing
-  - http://www.webpagetest.org/
-  - https://developers.google.com/speed/pagespeed/insights
   - timeout session from JS and logout?
-  - require.js pentru redundanţă la CDN
-  - custom build of $UI?
-  - eliminare $UI?
-    - treb’ de mutat imaginile pentru butonaşe inline in CSS
-    - calendar alternativ
   - de verificat versiunea browserului?
   - bootable tonido flash
   - rollback deploy?
   - try a Centos VM deploy?
+  - Materiale
+  - arhivare proceduri
+
+- Performanţă
+  - performanţă: YSlow & PageSpeed, about:tracing
+  - http://www.webpagetest.org/
+  - https://developers.google.com/speed/pagespeed/insights
+  - de folosit CSS translate pentru animarea formuarului de procedura
+  - eliminare $UI?
+    - treb’ de mutat imaginile pentru butonaşe inline in CSS
+    - calendar alternativ
+  - custom build local la $/UI cu Expire la +∞?
+
+- Indexare
+  - extrage datele pentru index cu indexOf?
+  - index partitioning?
+  - JSON-P + custom format + JS worker pentru max performance? experiment: /js/indexer.js
+
+- Convenienţe (“nice to have”s)
+  - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
+  - de afişat editabilitatea cîmpurile editabile după o pauză de .5s (transition-delay?)
+  - better tooltips (bootstrap?)
+  - “poliţă” temporară: la click în afara formularului în punem pe poliţă
+  - de eliminat titlurile dialogurilor butoanelor de pe bara de sus
+
