@@ -14,6 +14,8 @@
           </div>
         </section>
 
+<? require 'părţile.html' ?>
+
         <ul class="opţiuni mod-iniţiere">
           <li>cererea creditorului urmăritor <%= nume(procedură.creditor) %> cu privire la
             intentarea procedurii de executare în baza documentului executoriu</li>
@@ -28,9 +30,8 @@
             documentului executoriu</span> <%= procedură['document-executoriu']['numărul-de'] %> din
             <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
             judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
-            prin care s-a dispus încasarea în beneficiul <%= nume(procedură.creditor) %>
-            (<%= id(procedură.creditor) %>) de la <%= debitori %> a datoriei în
-            mărime totală de <span class="sumă"><%= totalDatorie %></span> MDL formată din:</p>
+            prin care s-a dispus încasarea în beneficiul CREDITORULUI de la <%= debitori.length == 1 ? 'DEBITOR' : 'DEBITORI' %>
+            a datoriei în mărime totală de <span class="sumă"><%= totalDatorie %></span> MDL formată din:</p>
 
             <ol>
             <% for (var descriere in procedură['obiectul-urmăririi']['sume']) {

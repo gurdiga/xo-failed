@@ -11,35 +11,16 @@
         </hgroup>
 
         <section>
-          <header></header>
-          <div class="conţinut">
-            <p></p>
-          </div>
-        </section>
-
-        <section>
           <header>Procedura</header>
           <div class="conţinut" spellcheck="false">
             <p><%= login %><%= opener.Procedura.număr() %> din <%= procedură['data-intentării'] %></p>
           </div>
         </section>
 
-        <section>
-          <header>Creditor</header>
-          <div class="conţinut" spellcheck="false">
-            <p><%= nume(procedură.creditor) %></p>
-          </div>
-        </section>
+<? require 'părţile.html' ?>
 
         <section>
-          <header>Debitor</header>
-          <div class="conţinut" spellcheck="false">
-            <p><%= debitori %></p>
-          </div>
-        </section>
-
-        <section>
-          <header></header>
+          <header>Calculele</header>
           <div class="conţinut">
             <table id="borderou-de-calcul">
               <thead>

@@ -23,10 +23,18 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       ok($încheiere.find('div.conţinut.editabil[contenteditable="true"]').există(), 'avem secţiuni editabile');
       ok($încheiere.find('.închide').există(), 'avem buton de închidere');
 
+      verificăPărţile($încheiere);
       verificăSalvareaÎncheierii(încheiere);
       verificăImprimarea($încheiere);
     });
   });
+
+
+  // ------------------------
+  function verificăPărţile($încheiere) {
+    ok($încheiere.find('section header:contains("Creditorul")+div.conţinut').există(), 'avem secţiune “Creditorul”');
+    ok($încheiere.find('section header:contains("Debitorul")+div.conţinut').există(), 'avem secţiune “Debitorul”');
+  }
 
   // ------------------------
   function verificăSalvareaÎncheierii(încheiere) {

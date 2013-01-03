@@ -1,0 +1,21 @@
+<section>
+  <header>Creditorul</header>
+  <div class="conţinut">
+    <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>)
+  </div>
+</section>
+
+<section>
+  <header><%= debitori.length == 1 ? 'Debitorul' : 'Debitori' %></header>
+  <div class="conţinut">
+    <% if (debitori.length > 1) { %>
+      <ul>
+      <% for (var i = 0; i < debitori.length; i++) { %>
+        <li><%= debitori[i] %></li>
+      <% } %>
+      </ul>
+    <% } else { %>
+      <%= debitori %>
+    <% } %>
+  </div>
+</section>

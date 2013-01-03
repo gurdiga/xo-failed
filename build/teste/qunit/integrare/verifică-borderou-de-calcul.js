@@ -80,9 +80,9 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
     ok($secţiuneProcedură.există(), 'avem secţiunea Procedura');
     ok($secţiuneProcedurăConţinut.is(':contains("' + numărComplet + '")'), 'avem numărul procedurii');
-    ok($încheiere.find('section header:contains("Creditor")').există(), 'avem secţiunea Creditor');
-    ok($încheiere.find('section header:contains("Debitor")').există(), 'avem secţiunea Debitor');
-    ok($încheiere.find('section header:contains("Executor")').există(), 'avem secţiunea Executor');
+    ok($încheiere.find('section header:contains("Creditorul")').există(), 'avem secţiunea Creditor');
+    ok($încheiere.find('section header:contains("Debitorul")').există(), 'avem secţiunea Debitorul');
+    ok($încheiere.find('section header:contains("Executorul")').există(), 'avem secţiunea Executorul');
 
     ok($încheiere.find('#semnătura').există(), 'avem loc pentru semnătură');
     ok($încheiere.find('#ştampila').există(), 'avem loc pentru ştampila');
