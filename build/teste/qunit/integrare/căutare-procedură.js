@@ -24,7 +24,7 @@ asyncTest('Procedură: căutare', function () {
 
   // ------------------------
   function ştergeProceduraCreată() {
-    // aşteptăm oleacă să se termine alte eventuale request-uri
+    // aşteptăm o leacă să se termine alte eventuale request-uri
     // pentru a evita 500 la PUT
     setTimeout(function () {
       $.ajax({

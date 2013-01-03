@@ -55,7 +55,9 @@ asyncTest('Precedură: salvare', function () {
 
           verificăSecţiuneaCheltuieli();
 
-          start();
+          setTimeout(function () { // aşteptăm o leacă înainte de a deschide încheierea de intentare
+            start();
+          }, 500);
         });
       });
     });

@@ -66,27 +66,31 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
         $butonDeRegenerare.click();
         ok(!app.Încheieri.deschise[încheiereaSalvată], 'încheierea precedent salvată este deregistrată');
-        start();
 
-        /*
         încheiere = app.Încheieri.deschise[formular].tab;
 
         app.$(încheiere).one('iniţializat', function () {
           ok(true, 'regenerare: reiniţializat');
 
-
-          // TODO verifică salvarea procedurii la regenerarea şi resalvarea încheierii
           $butonDeSalvare = încheiere.Încheiere.$.find('.salvează');
           $butonDeSalvare.click();
 
           app.$(încheiere).one('salvat', function () {
-            ok(true, 'regenerare: după salvat');
+            ok(true, 'regenerare: resalvat salvat');
 
             app.Procedura.$.one('salvat', function () {
               ok(true, 'regenerare: salvat procedura *după* salvarea încheierii');
+
+              încheiere.Încheiere.$.find('.închide').click();
+
+              setTimeout(function () { // aşteptăm o leacă
+                app.Procedura.$.find('.închide').click();
+
+                start();
+              }, 100);
             });
           });
-        });*/
+        });
       });
 
       verificăEditabilitate(încheiere);
@@ -116,7 +120,6 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
         // închiderea ferestrei poate dura un pic
         setTimeout(function () {
           equal(app.Încheieri.deschise[cale], undefined, 'tabul încheierii s-a închis');
-          app.Procedura.$.find('.închide').click();
         }, 100);
       });
     });

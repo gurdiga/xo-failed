@@ -1,5 +1,5 @@
 - Încheieri
-  - de testat calculatorul de dobînzi
+  - body[spellcheck=false]
   - de afişat editabilitatea cîmpurile editabile după o pauză de .5s (transition-delay?)
   - buton “?” pe bara de instrumente cu intrucţiuni despre formatare
   - de revizuit poziţionarea butoanelor de imprimare a încheierilor
@@ -15,6 +15,9 @@
   - JSON-P + custom format + JS worker pentru max performance? experiment: /js/indexer.js
 
 - Introducerea datelor
+  - de folosit CSS translate pentru animarea formuarului de procedura
+  - extrage datele pentru index cu indexOf?
+  - index persoane
   - Materiale
   - arhivare proceduri
   - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
