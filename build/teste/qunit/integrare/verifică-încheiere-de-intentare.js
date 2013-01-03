@@ -22,6 +22,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       ok($încheiere.find('.bara-de-instrumente.pentru.încheiere').există(), 'avem bară de instrumente');
       ok($încheiere.find('div.conţinut.editabil[contenteditable="true"]').există(), 'avem secţiuni editabile');
       ok($încheiere.find('.închide').există(), 'avem buton de închidere');
+      ok($încheiere.find('body').is('[spellcheck=false]'), 'dezavtivat verificarea gramaticii pentru Firefox');
 
       verificăPărţile($încheiere);
       verificăSalvareaÎncheierii(încheiere);
