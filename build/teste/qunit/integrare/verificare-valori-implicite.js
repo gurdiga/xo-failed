@@ -1,4 +1,4 @@
-test('Procedura: verifică valori implicite', function () {
+asyncTest('Procedura: verifică valori implicite', function () {
   'use strict';
 
   var app = this.app;
@@ -19,4 +19,6 @@ test('Procedura: verifică valori implicite', function () {
 
   equal($butoaneÎncheiere.length, $butoaneÎncheiereDezactivate.length,
       'butoanele pentru încheieri sunt dezactivate');
+
+  start();
 });

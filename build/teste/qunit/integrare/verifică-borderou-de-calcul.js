@@ -35,8 +35,11 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         verificăTabelul($încheiere);
         verificăRechiziteleBancare($încheiere);
 
-        app.Procedura.$.find('.închide').click();
-        start();
+        setTimeout(function () {
+          app.Procedura.$.find('.închide').click();
+
+          start();
+        }, 1000);
       });
     }, 500);
   });
