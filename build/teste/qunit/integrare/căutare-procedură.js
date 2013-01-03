@@ -7,7 +7,8 @@ asyncTest('Procedură: căutare', function () {
 
   ok($secţiune.există(), 'avem secţiune de căutare');
   $secţiune.find('input').val(numărComplet).trigger('input');
-  setTimeout(function () {
+
+  setTimeout(function () { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
     var rezultate = $secţiune.find('#rezultate .item');
 
     ok(rezultate.există(), 'găsit procedura');
@@ -20,7 +21,7 @@ asyncTest('Procedură: căutare', function () {
 
       ştergeProceduraCreată();
     });
-  }, app.Căutare.pauză + 10);
+  }, app.Căutare.pauză + 500);
 
   // ------------------------
   function ştergeProceduraCreată() {

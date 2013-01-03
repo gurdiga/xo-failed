@@ -17,7 +17,10 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
     verificăŞiCompleteazăCîmpurile($dialog);
     verificăDetaliileCalculului($dialog);
-    verificăRaportul($dialog);
+
+    setTimeout(function () { // aşteptăm o leacă să fie urmăribil testul
+      verificăRaportul($dialog);
+    }, 500);
   }, 200);
 
   // ------------------------
@@ -114,9 +117,12 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
         equal($calcule.find('.total').text(), calcule.dobînda, 'afişat dobînda');
 
         tab.close();
-        $dialog.find('.închide').click();
 
-        start();
+        setTimeout(function () { // aşteptăm o leacă să fie urmăribil testul
+          $dialog.find('.închide').click();
+
+          start();
+        }, 500);
       }, 700);
     });
   }
