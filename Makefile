@@ -48,4 +48,4 @@ stage: lint test push
 	ssh -p59922 nati@preprod.executori.org 'cd /var/www/preprod.executori.org && make build'
 
 what:
-	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare/*.părţi
+	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare/*.părţi || true
