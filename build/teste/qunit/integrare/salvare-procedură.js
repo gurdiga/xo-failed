@@ -14,10 +14,10 @@ asyncTest('Precedură: salvare', function () {
   $taxaA1.find('.achitare .dată').val(dataAchităriiTaxeiA1);
 
   app.Procedura.$.find('.bara-de-instrumente .salvează').click();
-  app.Procedura.$.one('salvat salvat-deja', function (e, procedură, număr) {
+  app.Procedura.$.one('salvat', function (e, procedură, număr) {
     numărulProceduriiNouCreate = număr;
 
-    app.$(app.Procedura.$).one('închidere', function (e, procedură, număr) {
+    app.$(app.Procedura.$).one('închidere', function () {
       app.$(app.document).one('încărcat-proceduri-recente', function () {
         var proceduraCreată = '.item[data-href="#formular?' + numărulProceduriiNouCreate + '"]',
             $proceduraCreată = app.ProceduriRecente.$.find(proceduraCreată);

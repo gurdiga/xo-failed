@@ -36,6 +36,7 @@
       Opţiuni.init();
 
       app.$(window).trigger('iniţializat');
+      app.$(Încheieri.deschise[Încheiere.pagina]).trigger('iniţializat');
     },
 
     verificăDacăFormularulEDeschis: function () {
@@ -127,18 +128,18 @@
         return;
       }
 
-      if (!Încheiere.modificat()) {
-        BaraDeInstrumente.anunţăSalvatDeja();
-      } else {
-        var număr = Procedura.număr();
+      if (Încheiere.modificat()) {
+        var salvareaIniţialăAProcedurii = !Procedura.număr();
 
-        if (număr) { // e o procedură care a fost deja salvată vreodată, are număr
-          Încheiere.trimite();
-          $(window).one('salvat', Procedura.salveazăSauCrează);
-        } else { // e o procedură nouă încă nesalvată
+        if (salvareaIniţialăAProcedurii) {
           Procedura.crează();
           Procedura.$.one('salvat', Încheiere.trimite);
+        } else {
+          Încheiere.trimite();
+          $(window).one('salvat', Procedura.salveazăSauCrează);
         }
+      } else {
+        BaraDeInstrumente.anunţăSalvatDeja();
       }
     },
 
@@ -158,12 +159,17 @@
     },
 
     imprimă: function () {
-      if (Încheiere.buton.data('dinamic')) {
-        window.print();
+      var imprimă = window.print; // pentru mockabilitate
+
+      if (Încheiere.buton.data('dinamic') || !Încheiere.modificat()) {
+        imprimă();
+        app.$(window).trigger('imprimat');
       } else {
         Încheiere.salvează();
+
         app.$(window).one('salvat', function () {
-          window.print();
+          imprimă();
+          app.$(window).trigger('imprimat');
         });
       }
     },
