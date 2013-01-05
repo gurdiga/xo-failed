@@ -765,7 +765,7 @@ input[type="checkbox"]+label {
 }
 
 #categorii-taxe-şi-speze {
-  margin: 0 0 0 12em;
+  margin: 1em 0 2em 1em;
 }
 
 #categorii-taxe-şi-speze .listă .itemi {
@@ -1318,11 +1318,19 @@ label.checkbox input {
 }
 
 .listă>.titlu::before {
-  content: '▾';
+  content: '+';
   margin-left: -1em;
   color: #aaa;
   padding-right: .1em;
   display: inline-block;
+}
+
+.listă>.titlu::after {
+  content: '▾';
+  color: #aaa;
+  padding-left: .3em;
+  text-decoration: none;
+  display: inline-block; /* ca să nu moştenească text-decoration: underline */
 }
 
 .listă>.itemi {
