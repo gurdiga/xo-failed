@@ -126,7 +126,7 @@
 
               <li>
                 <label for="email">Email</label>
-                <input id="email"/>
+                <input type="text" id="email"/>
               </li>
             </ul>
 
@@ -141,7 +141,7 @@
               <li>
                 <label for="banca-taxe-speze">Banca</label>
                 <span class="şoaptă-cod-bancă">XXXXMD2X</span>
-                <input id="banca-taxe-speze" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
+                <input type="text" id="banca-taxe-speze" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
                 <p></p>
               </li>
 
@@ -158,7 +158,7 @@
               <li>
                 <label for="banca-taxe-speze">Banca</label>
                 <span class="şoaptă-cod-bancă">XXXXMD2X</span>
-                <input id="banca-onorarii" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
+                <input type="text" id="banca-onorarii" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
                 <p></p>
               </li>
 
@@ -174,7 +174,7 @@
             <ul class="întîrziere">
               <li>
                 <label>Perioada de întîrziere</label>
-                <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
+                <input type="text" class="dată început perioadă"/>&ndash;<input type="text" class="dată sfîrşit perioadă"/>
               </li>
 
               <li>
@@ -186,13 +186,13 @@
 
               <li>
                 <label>Suma întîrziată</label>
-                <input class="sumă întîrziată"/>
+                <input type="text" class="sumă întîrziată"/>
                 <b>MDL</b>
               </li>
 
               <li class="total">
                 <label>Dobînda calculată</label>
-                <input class="sumă dobîndă" readonly="readonly"/>
+                <input type="text" class="sumă dobîndă" readonly="readonly"/>
                 <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                 <b>MDL</b>
                 <span class="ui-icon ui-icon-document buton semiascuns" title="Detalii depre calcul"
@@ -248,7 +248,7 @@
 
           <p id="container-data-intentării">
             <label for="data-intentării">Data intentării</label>
-            <input id="data-intentării" class="dată intentării"/>
+            <input type="text" id="data-intentării" class="dată intentării"/>
             <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-intentare"
                 title="Încheiere de intentare"></span>
           </p>
@@ -388,12 +388,12 @@
 
                   <li>
                     <label for="numărul-de">Numărul documentului</label>
-                    <input id="numărul-de"/>
+                    <input type="text" id="numărul-de"/>
                   </li>
 
                   <li>
                     <label for="data-hotărîrii">Data hotărîrii</label>
-                    <input id="data-hotărîrii" class="dată"/>
+                    <input type="text" id="data-hotărîrii" class="dată"/>
                   </li>
 
                   <li>
@@ -403,12 +403,12 @@
 
                   <li>
                     <label for="data-rămînerii-definitive">Data rămînerii definitive</label>
-                    <input id="data-rămînerii-definitive" class="dată"/>
+                    <input type="text" id="data-rămînerii-definitive" class="dată"/>
                   </li>
 
                   <li>
                     <label for="data-eliberării">Data eliberării</label>
-                    <input id="data-eliberării" class="dată"/>
+                    <input type="text" id="data-eliberării" class="dată"/>
                   </li>
                 </ul>
               </div>
@@ -463,7 +463,7 @@
               <ul>
                 <li>
                   <label for="onorariu">Onorariul</label>
-                  <input id="onorariu" class="sumă" readonly="readonly"/>
+                  <input type="text" id="onorariu" class="sumă" readonly="readonly"/>
                   <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                   <b>MDL</b>
                 </li>
@@ -476,7 +476,7 @@
 
                 <li>
                   <label for="total-taxe-şi-speze">Total taxe şi speze</label>
-                  <input id="total-taxe-şi-speze" class="sumă calculat" readonly="readonly"/>
+                  <input type="text" id="total-taxe-şi-speze" class="sumă calculat" readonly="readonly"/>
                   <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                   <b>MDL</b>
                   <span class="ui-icon ui-icon-document buton semiascuns" title="Borderou de calcul"
@@ -852,7 +852,7 @@
 
         <li>
           <label for="suma-de-bază">Suma de bază</label>
-          <input id="suma-de-bază" class="sumă"/>
+          <input type="text" id="suma-de-bază" class="sumă"/>
           <select class="valuta"></select>
         </li>
 
@@ -863,7 +863,7 @@
 
         <li>
           <label for="total">Total</label>
-          <input id="total" class="sumă calculat" readonly="readonly"/>
+          <input type="text" id="total" class="sumă calculat" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -892,12 +892,12 @@
       <ul class="conţinut gen-persoană" title="juridică">
         <li>
           <label for="denumire">Denumire</label>
-          <input id="denumire"/>
+          <input type="text" id="denumire"/>
         </li>
 
         <li>
           <label for="idno">IDNO</label>
-          <input id="idno"/>
+          <input type="text" id="idno"/>
         </li>
 
         <li>
@@ -907,7 +907,7 @@
 
         <li>
           <label for="persoană-de-contact">Persoană de contact</label>
-          <input id="persoană-de-contact"/>
+          <input type="text" id="persoană-de-contact"/>
         </li>
 
         <li>
@@ -920,17 +920,17 @@
       <ul class="conţinut gen-persoană" title="fizică">
         <li>
           <label for="nume">Nume</label>
-          <input id="nume"/>
+          <input type="text" id="nume"/>
         </li>
 
         <li>
           <label for="idnp">IDNP</label>
-          <input id="idnp"/>
+          <input type="text" id="idnp"/>
         </li>
 
         <li>
           <label for="data-naşterii">Data naşterii</label>
-          <input id="data-naşterii" class="dată"/>
+          <input type="text" id="data-naşterii" class="dată"/>
         </li>
 
         <li>
@@ -1133,12 +1133,12 @@
 
         <li>
           <label for="funcţie">Funcţie</label>
-          <input id="funcţie"/>
+          <input type="text" id="funcţie"/>
         </li>
 
         <li>
           <label for="salariu-recuperat">Salariu recuperat</label>
-          <input id="salariu-recuperat" class="sumă"/>
+          <input type="text" id="salariu-recuperat" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1180,7 +1180,7 @@
 
         <li>
           <label for="valoarea-acţiunii">Valoarea acţiunii</label>
-          <input id="valoarea-acţiunii" class="sumă"/>
+          <input type="text" id="valoarea-acţiunii" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>
@@ -1194,7 +1194,7 @@
 
         <li class="document eliminabil">
           <textarea class="label denumire"></textarea>
-          <input class="cantitate" value="1"/>
+          <input type="text" class="cantitate" value="1"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă document">+</button></li>
@@ -1233,7 +1233,7 @@
 
       <div class="subformular" title="ore lucrate">
         <label class="stînga" for="ore-lucrate">Ore lucrate</label>
-        <input class="cantitate" id="ore-lucrate"/>
+        <input type="text" class="cantitate" id="ore-lucrate"/>
       </div>
 
 
@@ -1251,7 +1251,7 @@
 
         <li class="document eliminabil">
           <textarea class="label denumire"></textarea>
-          <input class="sumă"/>
+          <input type="text" class="sumă"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă contract">+</button></li>
@@ -1264,7 +1264,7 @@
         </li>
 
         <li class="document eliminabil">
-          <input class="descriere"/>
+          <input type="text" class="descriere"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă participant">+</button></li>
@@ -1279,7 +1279,7 @@
 
         <li class="document eliminabil">
           <textarea class="label descriere"></textarea>
-          <input class="sumă"/>
+          <input type="text" class="sumă"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă cîmp">+</button></li>
@@ -1292,7 +1292,7 @@
       <div class="subformular achitare">
         <input type="checkbox"/>
         <label>achitat</label>
-        <span class="la">la <input class="dată"/></span>
+        <span class="la">la <input type="text" class="dată"/></span>
       </div>
 
 
@@ -1305,7 +1305,7 @@
       <ul class="cîmpul-personalizat">
         <li class="personalizat eliminabil de tot">
           <textarea class="etichetă" title="Editabil"></textarea>
-          <input class="sumă"/>
+          <input type="text" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>
@@ -1335,7 +1335,7 @@
       <ul class="conţinut genul-încasării" title="periodică">
         <li>
           <label>Data încasării</label>
-          <input class="dată" id="data-încasării"/>
+          <input type="text" class="dată" id="data-încasării"/>
         </li>
 
         <li>
@@ -1352,8 +1352,8 @@
       <ul class="conţinut genul-încasării" title="restantă">
         <li>
           <label>Perioada</label>
-          <input class="dată început perioadă" id="început-perioadă"/>&ndash;
-          <input class="dată sfîrşit perioadă" id="sfîrşit-perioadă"/>
+          <input type="text" class="dată început perioadă" id="început-perioadă"/>&ndash;
+          <input type="text" class="dată sfîrşit perioadă" id="sfîrşit-perioadă"/>
         </li>
 
         <li>
@@ -1420,7 +1420,7 @@
       <ul id="cîmpul-cotă">
         <li class="cîmp">
           <label>Cota din venit</label>
-          <input id="cota-din-venit" class="cotă"/>
+          <input type="text" id="cota-din-venit" class="cotă"/>
           <span class="şoaptă">Exemple: 1/3, 25%</span>
         </li>
       </ul>
@@ -1429,7 +1429,7 @@
       <ul id="cîmpul-pensia-sumă-fixă">
         <li class="cîmp">
           <label>Pensia lunară sumă fixă</label>
-          <input id="pensia-lunară-suma-fixă" class="sumă"/>
+          <input type="text" id="pensia-lunară-suma-fixă" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1438,7 +1438,7 @@
       <ul id="cîmpul-onorariul-calculat">
         <li>
           <label>Onorariul calculat</label>
-          <input id="onorariul-calculat" class="sumă" readonly="readonly"/>
+          <input type="text" id="onorariul-calculat" class="sumă" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -1448,7 +1448,7 @@
       <ul id="cîmpul-pensie-cotă">
         <li>
           <label>Pensie cotă</label>
-          <input id="pensie-cotă" class="sumă" readonly="readonly"/>
+          <input type="text" id="pensie-cotă" class="sumă" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -1458,7 +1458,7 @@
       <ul id="cîmpul-total-pensie-cotă">
         <li>
           <label>Total pensie cotă</label>
-          <input id="total-pensie-cotă" class="sumă" readonly="readonly"/>
+          <input type="text" id="total-pensie-cotă" class="sumă" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -1468,7 +1468,7 @@
       <ul id="cîmpul-total-pensie-sumă-fixă">
         <li>
           <label>Total pensie sumă fixă</label>
-          <input id="total-pensie-sumă-fixă" class="sumă" readonly="readonly"/>
+          <input type="text" id="total-pensie-sumă-fixă" class="sumă" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -1478,7 +1478,7 @@
       <ul id="cîmpul-total-pensie-general">
         <li>
           <label>Total pensie general</label>
-          <input id="total-pensie-general" class="sumă" readonly="readonly"/>
+          <input type="text" id="total-pensie-general" class="sumă" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -1488,7 +1488,7 @@
       <ul id="cîmpul-venitul">
         <li>
           <label>Venitul</label>
-          <input id="venitul" class="sumă irelevant-pentru-onorariu"/>
+          <input type="text" id="venitul" class="sumă irelevant-pentru-onorariu"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1497,7 +1497,7 @@
       <ul id="cîmpul-total-venit-pe-perioadă">
         <li>
           <label>Total venit pe perioadă</label>
-          <input id="total-venit-pe-perioadă" class="sumă irelevant-pentru-onorariu"/>
+          <input type="text" id="total-venit-pe-perioadă" class="sumă irelevant-pentru-onorariu"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1515,7 +1515,7 @@
 
         <li>
           <label>Perioada de întîrziere</label>
-          <input class="dată început perioadă"/>&ndash;<input class="dată sfîrşit perioadă"/>
+          <input type="text" class="dată început perioadă"/>&ndash;<input type="text" class="dată sfîrşit perioadă"/>
         </li>
 
         <li>
@@ -1527,13 +1527,13 @@
 
         <li>
           <label>Suma întîrziată</label>
-          <input class="sumă întîrziată"/>
+          <input type="text" class="sumă întîrziată"/>
           <b>MDL</b>
         </li>
 
         <li>
           <label>Dobînda calculată</label>
-          <input class="sumă dobîndă calculat" readonly="readonly"/>
+          <input type="text" class="sumă dobîndă calculat" readonly="readonly"/>
           <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
           <b>MDL</b>
         </li>
@@ -1545,12 +1545,12 @@
 
         <li>
           <label>Data sechestrării</label>
-          <input class="dată"/>
+          <input type="text" class="dată"/>
         </li>
 
         <li class="personalizat eliminabil">
           <textarea class="etichetă" title="Editabil">Descriere bun</textarea>
-          <input class="sumă"/>
+          <input type="text" class="sumă"/>
           <select class="valuta"></select>
         </li>
 
@@ -1561,7 +1561,7 @@
 
         <li>
           <label>Total</label>
-          <input class="sumă total calculat"/>
+          <input type="text" class="sumă total calculat"/>
           <b>MDL</b>
         </li>
       </ul>
