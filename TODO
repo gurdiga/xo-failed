@@ -58,3 +58,5 @@ Chestii tehnice
   - “poliţă” temporară: la click în afara formularului în punem pe poliţă
   - de eliminat titlurile dialogurilor butoanelor de pe bara de sus
 
+- Dev
+ - SASS + :autocmd BufWritePost *.sass !compile_sas.sh <afile>
