@@ -46,6 +46,7 @@ asyncTest('Precedură: salvare', function () {
           equal(context.$de.find('#data-rămînerii-definitive').val(), de['data-rămînerii-definitive'], 'salvat data rămînerii definitive DE');
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').val(), sume['Suma de bază'], 'salvat valoare suma de bază');
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').next('.valuta').val(), 'MDL', 'salvat valuta suma de bază');
+          ok(app.Procedura.$.find('#data-ultimei-modificări span').text().trim() !== '', 'se afişează data ultimei modificări');
 
           var sumăPersonalizată = context.$obiectulUrmăririi.find('.personalizat .etichetă');
 

@@ -618,6 +618,7 @@
         .on('închidere', this.resetează)
         .on('populat iniţializat', this.calculează)
         .on('populat iniţializat', this.eliminăAmendaDupăCaz)
+        .on('populat', this.actualizeazăDataUltimeiModificări)
         .on('salvat', this.actualizeazăDataUltimeiModificări);
 
       this.baraDeInstrumente.init();
@@ -1036,14 +1037,17 @@
     },
 
     puneÎnCache: function (procedură, număr) {
-      delete procedură['data-ultimei-modificări'];
-      Procedura.cache[număr] = JSON.stringify(procedură);
+      var copieProcedură = $.extend(true, {}, procedură);
+
+      delete copieProcedură['data-ultimei-modificări'];
+      Procedura.cache[număr] = JSON.stringify(copieProcedură);
     },
 
     saSchimbat: function (procedură, număr) {
-      delete procedură['data-ultimei-modificări'];
+      var copieProcedură = $.extend(true, {}, procedură);
 
-      return Procedura.cache[număr] !== JSON.stringify(procedură);
+      delete copieProcedură['data-ultimei-modificări'];
+      return Procedura.cache[număr] !== JSON.stringify(copieProcedură);
     },
 
     încarcă: function () {
@@ -1313,12 +1317,7 @@
           .addClass('salvat');
       }
 
-      Procedura.$
-        .find('#data-ultimei-modificări span')
-          .text(procedură['data-ultimei-modificări'])
-          .parent().show().end()
-        .end()
-        .find('.buton[data-formular]').removeAttr('dezactivat');
+      Procedura.$.find('.buton[data-formular]').removeAttr('dezactivat');
 
       populeazăSecţiune('#document-executoriu', procedură['document-executoriu']);
       populeazăObiectulUrmăririi();
@@ -1329,7 +1328,7 @@
 
       $.fx.off = false;
       Procedura.sePopulează = false;
-      Procedura.$.trigger('populat');
+      Procedura.$.trigger('populat', [procedură]);
     },
 
     resetează: function () {
