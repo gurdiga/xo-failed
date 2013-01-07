@@ -1364,6 +1364,8 @@
     },
 
     închide: function () {
+      FormularProcedură.$.trigger('înainte-de-închidere');
+
       location.hash = '';
 
       FormularProcedură.focusează();
@@ -2125,7 +2127,7 @@
     init: function () {
       FormularProcedură.$
         .on('înainte-de-deschidere', this.inserează)
-        .on('închidere', this.elimină);
+        .on('înainte-de-închidere', this.elimină);
 
       FormularProcedură.$obiectulUrmăririi
         .on('input', '.încasare input', this.caluleazăOnorariulŞiPensia);
