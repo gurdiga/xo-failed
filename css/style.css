@@ -633,6 +633,7 @@ button.elimină-persoană {
   height: 5px;
 }
 
+.personalizat.focusat+.container-buton,
 .personalizat:hover+.container-buton {
   opacity: 0;
 }

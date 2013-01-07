@@ -2085,6 +2085,12 @@
     init: function () {
       FormularProcedură.$
         .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
+        .on('focus', '.etichetă', function (e) {
+          $(this).parent().addClass('focusat');
+        })
+        .on('blur', '.etichetă', function (e) {
+          $(this).parent().removeClass('focusat');
+        })
         .on('keydown', '.etichetă', function (e) {
           if (e.keyCode === 13 || e.keyCode === 27) {
             $(this).next().focus();
