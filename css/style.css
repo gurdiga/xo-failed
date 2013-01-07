@@ -1382,3 +1382,13 @@ label.checkbox input {
 #materiale #încheieri li:hover .data-şi-ora-salvării {
   color: #aaa;
 }
+
+::-webkit-input-placeholder {
+  color: #bbb;
+  font-weight: normal;
+}
+
+::-moz-placeholder {
+  color: #bbb;
+  font-weight: normal;
+}
