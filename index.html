@@ -852,7 +852,7 @@
 
         <li>
           <label for="suma-de-bază">Suma de bază</label>
-          <input type="text" id="suma-de-bază" class="sumă"/>
+          <input type="text" id="suma-de-bază" placeholder="Suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
 
@@ -871,20 +871,21 @@
 
       <ul class="conţinut caracter" title="nonpecuniar">
         <li>
-          <label for="obiect">Obiectul</label>
+          <label for="obiect">Obiectul urmăririi</label>
           <select id="obiect" class="foarte lat care schimbă formularul">
-            <option class="scurtă">evacuarea</option>
-            <option class="scurtă">instalarea</option>
-            <option class="scurtă">schimbul forţat</option>
-            <option>stabilirea domiciliului copilului</option>
-            <option>efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
-            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
-            <option>efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
-            <option class="scurtă">confiscarea bunurilor</option>
-            <option class="scurtă">nimicirea unor bunuri</option>
-            <option class="scurtă">restabilirea la locul de muncă</option>
-            <option>aplicarea măsurilor de asigurare a acţiunii</option>
+            <option data-formular-încheiere="încheiere-de-evacuare" class="scurtă">evacuarea</option>
+            <option data-formular-încheiere="încheiere-de-instalare" class="scurtă">instalarea</option>
+            <option data-formular-încheiere="încheiere-de-schimb-forţat" class="scurtă">schimbul forţat</option>
+            <option data-formular-încheiere="încheiere-de-stabilire-a-domiciliului-copilului">stabilirea domiciliului copilului</option>
+            <option data-formular-încheiere="încheiere-de-efectuare-a-unor-acte-nelegate-de-bunuri">efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri</option>
+            <option data-formular-încheiere="încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-mobile">efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile</option>
+            <option data-formular-încheiere="încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile">efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
+            <option data-formular-încheiere="încheiere-de-confiscare-a-bunurilor" class="scurtă">confiscarea bunurilor</option>
+            <option data-formular-încheiere="încheiere-de-nimicire-a-bunurilor" class="scurtă">nimicirea unor bunuri</option>
+            <option data-formular-încheiere="încheiere-de-restabilire-la-locul-de-muncă" class="scurtă">restabilirea la locul de muncă</option>
+            <option data-formular-încheiere="încheiere-de-aplicare-a-asigurare-a-acţiunii">aplicarea măsurilor de asigurare a acţiunii</option>
           </select>
+          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Încheiere de confiscare a bunurilor"></span>
         </li>
       </ul>
 
@@ -995,13 +996,6 @@
 
 
       <ul class="conţinut obiect" title="evacuarea">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-evacuare"
-              title="Încheiere de evacuare"></span>
-          ————
-        </li>
-
         <li>
           <label for="din-încăperea" class="textarea">Din încăperea</label>
           <textarea id="din-încăperea"></textarea>
@@ -1015,13 +1009,6 @@
 
 
       <ul class="conţinut obiect" title="instalarea">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-instalare"
-              title="Încheiere de instalare"></span>
-          ————
-        </li>
-
         <li>
           <label for="în-încăperea" class="textarea">În încăperea</label>
           <textarea id="în-încăperea"></textarea>
@@ -1030,13 +1017,6 @@
 
 
       <ul class="conţinut obiect" title="schimbul forţat">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-schimb-forţat"
-              title="Încheiere de schimb forţat"></span>
-          ————
-        </li>
-
         <li>
           <label for="încăperea-pentru-creditor" class="textarea">Încăperea pentru creditor</label>
           <textarea id="încăperea-pentru-creditor"></textarea>
@@ -1050,13 +1030,6 @@
 
 
       <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-efectuare-a-unor-acte-nelegate-de-bunuri"
-              title="Încheiere de efectuare a unor acte nelegate de bunuri"></span>
-          ————
-        </li>
-
         <li>
           <label for="acte" class="textarea">Acte</label>
           <textarea id="acte"></textarea>
@@ -1065,12 +1038,6 @@
 
 
       <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-mobile"
-              title="Încheiere de efectuare a unor acte legate de bunuri mobile"></span>
-        </li>
-
         <li class="container-buton">
           <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
           data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
@@ -1079,13 +1046,6 @@
 
 
       <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile"
-              title="Încheiere de efectuare a unor acte legate de bunuri imobile"></span>
-          ————
-        </li>
-
         <li class="container-buton">
           <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
           data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
@@ -1094,13 +1054,6 @@
 
 
       <ul class="conţinut obiect" title="confiscarea bunurilor">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-confiscare-a-bunurilor"
-              title="Încheiere de confiscare a bunurilor"></span>
-          ————
-        </li>
-
         <li class="container-buton">
           <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
           data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
@@ -1109,13 +1062,6 @@
 
 
       <ul class="conţinut obiect" title="nimicirea unor bunuri">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-nimicire-a-bunurilor"
-              title="Încheiere de nimicire a bunurilor"></span>
-          ————
-        </li>
-
         <li class="container-buton">
           <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
           data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
@@ -1124,13 +1070,6 @@
 
 
       <ul class="conţinut obiect" title="restabilirea la locul de muncă">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-restabilire-la-locul-de-muncă"
-              title="Încheiere de restabilire la locul de muncă"></span>
-          ————
-        </li>
-
         <li>
           <label for="funcţie">Funcţie</label>
           <input type="text" id="funcţie"/>
@@ -1138,20 +1077,13 @@
 
         <li>
           <label for="salariu-recuperat">Salariu recuperat</label>
-          <input type="text" id="salariu-recuperat" class="sumă"/>
+          <input type="text" id="salariu-recuperat" placeholder="Suma" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
 
 
       <ul class="conţinut obiect" title="aplicarea măsurilor de asigurare a acţiunii">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-aplicare-a-măsurilor-de-asigurare"
-              title="Încheiere de aplicare a măsurilor de asigurare"></span>
-          ————
-        </li>
-
         <li>
           <label for="măsura-de-asigurare">Măsura de asigurare</label>
           <select class="foarte lat care schimbă formularul" id="măsura-de-asigurare">
@@ -1171,16 +1103,9 @@
 
 
       <ul class="conţinut măsura-de-asigurare" title="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
-        <li class="titlu">
-          – încheiere
-          <span class="ui-icon ui-icon-document buton semiascuns" data-formular="încheiere-de-aplicare-a-sechestrului"
-              title="Încheiere de aplicare a sechestrului"></span>
-          ————
-        </li>
-
         <li>
           <label for="valoarea-acţiunii">Valoarea acţiunii</label>
-          <input type="text" id="valoarea-acţiunii" class="sumă"/>
+          <input type="text" id="valoarea-acţiunii" placeholder="Suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>
@@ -1251,7 +1176,7 @@
 
         <li class="document eliminabil">
           <textarea class="label denumire"></textarea>
-          <input type="text" class="sumă"/>
+          <input type="text" placeholder="Suma" class="sumă"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă contract">+</button></li>
@@ -1279,7 +1204,7 @@
 
         <li class="document eliminabil">
           <textarea class="label descriere"></textarea>
-          <input type="text" class="sumă"/>
+          <input type="text" placeholder="Suma" class="sumă"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă cîmp">+</button></li>
@@ -1304,8 +1229,8 @@
 
       <ul class="cîmpul-personalizat">
         <li class="personalizat eliminabil de tot">
-          <textarea class="etichetă" title="Editabil"></textarea>
-          <input type="text" class="sumă"/>
+          <textarea class="etichetă" title="Etichetă editabilă"></textarea>
+          <input type="text" placeholder="Suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>
@@ -1429,7 +1354,7 @@
       <ul id="cîmpul-pensia-sumă-fixă">
         <li class="cîmp">
           <label>Pensia lunară sumă fixă</label>
-          <input type="text" id="pensia-lunară-suma-fixă" class="sumă"/>
+          <input type="text" id="pensia-lunară-suma-fixă" placeholder="Suma" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1549,8 +1474,8 @@
         </li>
 
         <li class="personalizat eliminabil">
-          <textarea class="etichetă" title="Editabil">Descriere bun</textarea>
-          <input type="text" class="sumă"/>
+          <textarea class="etichetă" title="Etichetă editabilă">Descriere bun</textarea>
+          <input type="text" placeholder="Suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
 

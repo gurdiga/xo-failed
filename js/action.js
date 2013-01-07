@@ -2799,9 +2799,13 @@
 
     deschide: function () {
       var buton = $(this),
-          încheiere = buton.data('formular'),
+          formular = buton.data('formular'),
           dinamic = buton.data('dinamic'),
           pagina;
+
+      if (buton.siblings('#obiect').există()) { // obiectul urmăririi
+        formular = buton.siblings('#obiect').find('option:selected').data('formular-încheiere');
+      }
 
       if (buton.is('[dezactivat]')) return;
       if (!dinamic && buton.is('.salvat')) {
@@ -2811,7 +2815,7 @@
       }
 
       Încheieri.deschise[pagina] = {
-        tab: window.open(pagina, încheiere, '', true),
+        tab: window.open(pagina, formular, '', true),
         buton: buton
       };
 

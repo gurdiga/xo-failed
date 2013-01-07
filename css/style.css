@@ -434,7 +434,7 @@ fieldset label {
   padding: .3em 0 .2em 3px;
   min-height: 1em;
   line-height: normal!important;
-  margin:  0 0 0 3px;
+  margin:  1px 0 0 3px;
   vertical-align: top;
 }
 
@@ -467,6 +467,7 @@ fieldset .conţinut>ul {
 
 fieldset .conţinut>ul li {
   margin-bottom: 2px;
+  position: relative; /* pentru poziţionarea butoanelor penutru încheieri */
 }
 
 ul {
@@ -1135,6 +1136,12 @@ button.cu.opţiuni:after {
   background-color: transparent;
   cursor: pointer;
   vertical-align: -3px;
+}
+
+select#obiect~.buton[data-formular] {
+  position: absolute;
+  right: -8px;
+  top: 4px;
 }
 
 .ui-icon-calendar {
