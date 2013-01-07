@@ -1393,3 +1393,7 @@ label.checkbox input {
   color: #bbb;
   font-weight: normal;
 }
+
+input::-ms-clear {
+  display: none;
+}
