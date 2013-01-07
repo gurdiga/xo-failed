@@ -1322,6 +1322,7 @@ label.checkbox input {
 
 .listă>.titlu {
   margin-left: 1em;
+  color: #aaa;
 }
 
 .listă:hover>.titlu {
@@ -1331,14 +1332,12 @@ label.checkbox input {
 .listă>.titlu::before {
   content: '+';
   margin-left: -1em;
-  color: #aaa;
   padding-right: .1em;
   display: inline-block;
 }
 
 .listă>.titlu::after {
   content: '▾';
-  color: #aaa;
   padding-left: .3em;
   text-decoration: none;
   display: inline-block; /* ca să nu moştenească text-decoration: underline */
