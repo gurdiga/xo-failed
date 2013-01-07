@@ -17,7 +17,7 @@
       HashController.init();
 
       Valute.populeazăListe();
-      FormulareŞablon.init();
+      SubsecţiuniDinamice.init();
       CîmpuriTextarea.autodimensionează();
       SelecturiFoarteLate.init();
       Persoane.init();
@@ -199,7 +199,7 @@
 
   // --------------------------------------------------
 
-  FormulareŞablon = {
+  SubsecţiuniDinamice = {
     selector: 'select.care.schimbă.formularul',
 
     init: function () {
@@ -210,7 +210,7 @@
     inserează: function () {
       var $select = $(this),
           selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
-          şablon = FormulareŞablon.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
+          şablon = SubsecţiuniDinamice.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
           item = $select.closest('li'),
           $subformular;
 
@@ -218,11 +218,11 @@
       item.after(şablon);
 
       $subformular = item.nextAll();
-      $subformular.find(FormulareŞablon.selector).trigger('change');
+      $subformular.find(SubsecţiuniDinamice.selector).trigger('change');
 
       if (!FormularProcedură.sePopulează && !FormularProcedură.seIniţializează) {
         $subformular
-          .find(':input:not(' + FormulareŞablon.selector + ')').first().focus().end().end()
+          .find(':input:not(' + SubsecţiuniDinamice.selector + ')').first().focus().end().end()
           .find('.adaugă-cîmp-personalizat.implicit').click();
       }
 
@@ -2379,7 +2379,7 @@
       var cîmpuriRelevante = [
         '.sumă:not(.irelevant-pentru-onorariu, .calculat)',
         '.valuta',
-        FormulareŞablon.selector,
+        SubsecţiuniDinamice.selector,
         'input:checkbox',
         '#caracter',
         '#obiect'
