@@ -14,9 +14,9 @@ asyncTest('Procedură: căutare', function () {
     ok(rezultate.există(), 'găsit procedura');
     rezultate.first().click();
 
-    app.$(app.Procedura.$).one('populat', function () {
+    app.$(app.FormularProcedură.$).one('populat', function () {
       ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
-      app.Procedura.$.find('.închide').click();
+      app.FormularProcedură.$.find('.închide').click();
       $secţiune.find('input').val('').trigger('input');
 
       ştergeProceduraCreată();
@@ -35,7 +35,7 @@ asyncTest('Procedură: căutare', function () {
           ok(true, 'şters procedura de test');
 
           app.ProceduriRecente.încarcăFărăCache();
-          app.Procedura.$.find('.închide').click();
+          app.FormularProcedură.$.find('.închide').click();
 
           start();
         }

@@ -1,5 +1,5 @@
 asyncTest('Procedură: verificare prezenţă cîmpuri şi calcul onorariu', function () {
-  /*jshint maxlen:162*/
+  /*jshint maxlen:170*/
   'use strict';
 
   var dateProcedură = this.dateProcedură,
@@ -42,7 +42,7 @@ asyncTest('Procedură: verificare prezenţă cîmpuri şi calcul onorariu', func
 
     var onorariuImplicit = dateProcedură['cheltuieli']['onorariu'];
 
-    equal(app.Procedura.$.find('#onorariu').val(), onorariuImplicit, 'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
+    equal(app.FormularProcedură.$.find('#onorariu').val(), onorariuImplicit, 'cheltuieli: pentru procedura de ordin general onorariul implicit este ' + onorariuImplicit);
 
     start();
   });

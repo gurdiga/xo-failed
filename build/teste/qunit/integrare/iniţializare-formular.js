@@ -8,9 +8,9 @@ asyncTest('Procedură: iniţializare formular', function () {
     filăProcedurăDeOrdinGeneral.click()
     .există(), 'găsit filă pentru crearea procedurii de ordin general');
 
-  app.Procedura.$.one('iniţializat', function () {
+  app.FormularProcedură.$.one('iniţializat', function () {
     ok(true, 'iniţializat formularul');
-    ok(app.Procedura.$.is(':visible'), 'afişat formularul');
+    ok(app.FormularProcedură.$.is(':visible'), 'afişat formularul');
 
     start();
   });

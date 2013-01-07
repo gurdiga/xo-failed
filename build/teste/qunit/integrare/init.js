@@ -41,11 +41,11 @@
       this.app = app;
       this.dateProcedură = dateProcedură;
 
-      this.$dataIntentării = app.Procedura.$.find('#data-intentării'),
-      this.$creditor = app.Procedura.$.find('#creditor'),
-      this.$debitor = app.Procedura.$.find('.debitor'),
-      this.$de = app.Procedura.$.find('#document-executoriu'),
-      this.$obiectulUrmăririi = app.Procedura.$obiectulUrmăririi;
+      this.$dataIntentării = app.FormularProcedură.$.find('#data-intentării'),
+      this.$creditor = app.FormularProcedură.$.find('#creditor'),
+      this.$debitor = app.FormularProcedură.$.find('.debitor'),
+      this.$de = app.FormularProcedură.$.find('#document-executoriu'),
+      this.$obiectulUrmăririi = app.FormularProcedură.$obiectulUrmăririi;
     }
   });
 })();

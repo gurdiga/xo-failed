@@ -1,7 +1,7 @@
 window.init = function (context) {
   'use strict';
 
-  var total = context.opener.Procedura.$.find('#total').val();
+  var total = context.opener.FormularProcedură.$.find('#total').val();
 
   context.totalDatorie = context.opener.accounting.formatNumber(total, 2, ' ', '.');
 

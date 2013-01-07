@@ -13,11 +13,11 @@ asyncTest('Precedură: salvare', function () {
   $taxaA1.find('.achitare :checkbox').attr('checked', true);
   $taxaA1.find('.achitare .dată').val(dataAchităriiTaxeiA1);
 
-  app.Procedura.$.find('.bara-de-instrumente .salvează').click();
-  app.Procedura.$.one('salvat', function (e, procedură, număr) {
+  app.FormularProcedură.$.find('.bara-de-instrumente .salvează').click();
+  app.FormularProcedură.$.one('salvat', function (e, procedură, număr) {
     numărulProceduriiNouCreate = număr;
 
-    app.$(app.Procedura.$).one('închidere', function () {
+    app.$(app.FormularProcedură.$).one('închidere', function () {
       app.$(app.document).one('încărcat-proceduri-recente', function () {
         var proceduraCreată = '.item[data-href="#formular?' + numărulProceduriiNouCreate + '"]',
             $proceduraCreată = app.ProceduriRecente.$.find(proceduraCreată);
@@ -27,7 +27,7 @@ asyncTest('Precedură: salvare', function () {
 
         $proceduraCreată.click();
 
-        app.Procedura.$.one('populat', function () {
+        app.FormularProcedură.$.one('populat', function () {
           var creditor = dateProcedură['creditor'],
               debitor = dateProcedură['debitori'][0],
               de = dateProcedură['document-executoriu'],
@@ -46,7 +46,7 @@ asyncTest('Precedură: salvare', function () {
           equal(context.$de.find('#data-rămînerii-definitive').val(), de['data-rămînerii-definitive'], 'salvat data rămînerii definitive DE');
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').val(), sume['Suma de bază'], 'salvat valoare suma de bază');
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').next('.valuta').val(), 'MDL', 'salvat valuta suma de bază');
-          ok(app.Procedura.$.find('#data-ultimei-modificări span').text().trim() !== '', 'se afişează data ultimei modificări');
+          ok(app.FormularProcedură.$.find('#data-ultimei-modificări span').text().trim() !== '', 'se afişează data ultimei modificări');
 
           var sumăPersonalizată = context.$obiectulUrmăririi.find('.personalizat .etichetă');
 
@@ -62,7 +62,7 @@ asyncTest('Precedură: salvare', function () {
         });
       });
     });
-    app.Procedura.$.find('.închide').click();
+    app.FormularProcedură.$.find('.închide').click();
   });
 
   function verificăSecţiuneaCheltuieli() {

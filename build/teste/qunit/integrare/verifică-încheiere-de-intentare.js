@@ -2,7 +2,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
   'use strict';
 
   var app = this.app,
-      $buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
+      $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
       formular = app.ButoanePentruÎncheieri.formular($buton);
 
   ok($buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
@@ -38,7 +38,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
   // ------------------------
   function verificăSalvareaÎncheierii(încheiere) {
-    var $buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
+    var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
         $încheiere = încheiere.Încheiere.$,
         $butonDeSalvare = $încheiere.find('.salvează'),
         formular = app.ButoanePentruÎncheieri.formular($buton);
@@ -52,7 +52,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       var cale = decodeURIComponent(încheiere.location.pathname),
           caleER = new RegExp(
             '^/date/' + app.Utilizator.login + '/proceduri/' +
-            app.Procedura.număr() + '/încheieri/' + $buton.data('formular') + '-\\d{12}\\.html'
+            app.FormularProcedură.număr() + '/încheieri/' + $buton.data('formular') + '-\\d{12}\\.html'
           );
 
       ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
@@ -61,7 +61,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
       $butonDeSalvare.click();
 
-      app.Procedura.$.one('salvat', function () {
+      app.FormularProcedură.$.one('salvat', function () {
         ok(true, 'salvat şi procedura la salvarea încheierii');
 
         var $butonDeRegenerare = $încheiere.find('.regenerează'),
@@ -81,7 +81,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
           app.$(încheiere).one('salvat', function () {
             ok(true, 'regenerare: resalvat salvat');
 
-            app.Procedura.$.one('salvat', function () {
+            app.FormularProcedură.$.one('salvat', function () {
               ok(true, 'regenerare: salvat procedura *după* salvarea încheierii');
 
               verificăEditabilitate();
@@ -94,7 +94,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
 
   // ------------------------
   function verificăEditabilitate() {
-    var $buton = app.Procedura.$.find('#data-intentării').siblings('[data-formular]'),
+    var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
         $încheiere = încheiere.Încheiere.$,
         cale = decodeURIComponent(încheiere.location.pathname),
         $secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
@@ -146,7 +146,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
           $încheiere.find('.închide').click();
           equal(app.Încheieri.deschise[cale], undefined, 'tabul încheierii s-a închis');
 
-          app.Procedura.$.find('.închide').click();
+          app.FormularProcedură.$.find('.închide').click();
 
           start();
         });

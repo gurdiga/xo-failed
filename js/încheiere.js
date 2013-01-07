@@ -1,14 +1,14 @@
 (function (window, document, app) {
   'use strict';
 
-  var $, Procedura, Încheieri, Utilizator, Profil;
+  var $, FormularProcedură, Încheieri, Utilizator, Profil;
 
   var Încheiere = {
     formular: '',
 
     init: function () {
       $ = app.$;
-      Procedura = app.Procedura;
+      FormularProcedură = app.FormularProcedură;
       Încheieri = app.Încheieri;
       Utilizator = app.Utilizator;
       Profil = app.Profil;
@@ -40,7 +40,7 @@
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!opener || !Încheieri.deschise[Încheiere.pagina] || !Procedura.$.is(':visible')) {
+      if (!opener || !Încheieri.deschise[Încheiere.pagina] || !FormularProcedură.$.is(':visible')) {
         window.close();
         return;
       }
@@ -51,7 +51,7 @@
     },
 
     context: function () {
-      var procedură = Procedura.colectează(),
+      var procedură = FormularProcedură.colectează(),
           nume = function (persoană) {
             return persoană['gen-persoană'] === 'fizică' ? persoană['nume'] : persoană['denumire'];
           },
@@ -129,14 +129,14 @@
       }
 
       if (Încheiere.modificat()) {
-        var salvareaIniţialăAProcedurii = !Procedura.număr();
+        var salvareaIniţialăAProcedurii = !FormularProcedură.număr();
 
         if (salvareaIniţialăAProcedurii) {
-          Procedura.crează();
-          Procedura.$.one('salvat', Încheiere.trimite);
+          FormularProcedură.crează();
+          FormularProcedură.$.one('salvat', Încheiere.trimite);
         } else {
           Încheiere.trimite();
-          $(window).one('salvat', Procedura.salveazăSauCrează);
+          $(window).one('salvat', FormularProcedură.salveazăSauCrează);
         }
       } else {
         BaraDeInstrumente.anunţăSalvatDeja();
@@ -152,7 +152,7 @@
     },
 
     cale: function () {
-      var director = '/date/' + Utilizator.login + '/proceduri/' + Procedura.număr() + '/încheieri/',
+      var director = '/date/' + Utilizator.login + '/proceduri/' + FormularProcedură.număr() + '/încheieri/',
           fişier = Încheiere.formular + '-' + app.moment().format('YYMMDDhhmmss') + '.html';
 
       return director + fişier;
@@ -208,7 +208,7 @@
 
   ButonDeÎnchidere = {
     init: function () {
-      Procedura.$.find('button.închide').clone()
+      FormularProcedură.$.find('button.închide').clone()
         .appendTo(Încheiere.$)
         .on('click', Încheiere.închide);
     }

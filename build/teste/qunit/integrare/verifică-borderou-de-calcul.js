@@ -7,7 +7,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
   app.Profil.date['codul-fiscal'] = ''; // pentru verificare ulterioară
   app.ProceduriRecente.$.find('.item:first-child').click();
 
-  app.$(app.Procedura.$).one('populat', function () {
+  app.$(app.FormularProcedură.$).one('populat', function () {
     adaugăTaxaA6();
     adaugăOSpeză();
     marcheazăPrimaTaxăAchitată();
@@ -26,7 +26,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
         ok(true, 'iniţializat borderoul de calcul');
 
         var $încheiere = app.$(încheiere.document);
-        var procedura = app.Procedura.colectează();
+        var procedura = app.FormularProcedură.colectează();
 
         equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
         ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
@@ -39,7 +39,7 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
           încheiere.Încheiere.$.find('.închide').click();
 
           setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
-            app.Procedura.$.find('.închide').click();
+            app.FormularProcedură.$.find('.închide').click();
 
             start();
           }, 500);
@@ -81,11 +81,11 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
   // --------------------------------------------------
   function verificăStructura($încheiere) {
-    var numărComplet = app.Utilizator.login + app.Procedura.număr(),
+    var numărComplet = app.Utilizator.login + app.FormularProcedură.număr(),
         $secţiuneProcedură = $încheiere.find('section header:contains("Procedura")'),
         $secţiuneProcedurăConţinut = $secţiuneProcedură.next('.conţinut');
 
-    ok($secţiuneProcedură.există(), 'avem secţiunea Procedura');
+    ok($secţiuneProcedură.există(), 'avem secţiunea Procedură');
     ok($secţiuneProcedurăConţinut.is(':contains("' + numărComplet + '")'), 'avem numărul procedurii');
     ok($încheiere.find('section header:contains("Creditorul")').există(), 'avem secţiunea Creditor');
     ok($încheiere.find('section header:contains("Debitorul")').există(), 'avem secţiunea Debitorul');

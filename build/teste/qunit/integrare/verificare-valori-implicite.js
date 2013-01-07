@@ -1,4 +1,4 @@
-asyncTest('Procedura: verifică valori implicite', function () {
+asyncTest('FormularProcedură. verifică valori implicite', function () {
   'use strict';
 
   var app = this.app;
@@ -9,12 +9,12 @@ asyncTest('Procedura: verifică valori implicite', function () {
       'pentru procedura de orgin general debitorul e implicit persoană fizică');
   equal(this.$obiectulUrmăririi.find('#caracter').val(), 'pecuniar',
        'pentru procedura de ordin general caracterul implicit este pcuniar');
-  equal(app.Procedura.$.find('#total-taxe-şi-speze').suma(), app.UC,
+  equal(app.FormularProcedură.$.find('#total-taxe-şi-speze').suma(), app.UC,
       'cheltuieli: total implicit taxe şi speze == taxa de intentare');
-  ok(app.Procedura.$.find('#cheltuieli .adăugate #taxaA1').există(),
+  ok(app.FormularProcedură.$.find('#cheltuieli .adăugate #taxaA1').există(),
       'cheltuieli: taxa de intentare este adăugată implicit');
 
-  var $butoaneÎncheiere = app.Procedura.$.find('.buton[data-formular]'),
+  var $butoaneÎncheiere = app.FormularProcedură.$.find('.buton[data-formular]'),
       $butoaneÎncheiereDezactivate = $butoaneÎncheiere.filter('[dezactivat]');
 
   equal($butoaneÎncheiere.length, $butoaneÎncheiereDezactivate.length,
