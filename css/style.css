@@ -123,10 +123,6 @@ fieldset ul select.valuta {
   vertical-align: 2px;
 }
 
-.personalizat select.valuta {
-  vertical-align: -6px;
-}
-
 button {
   padding: .3em .6em;
   font-weight: bold;
