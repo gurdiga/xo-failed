@@ -183,6 +183,8 @@
 
       select.next('.şoaptă').remove();
 
+      if (select.find('option:selected').is('.scurtă')) return;
+
       $('<p>')
         .insertAfter(select)
         .text(select.find('option:selected').text())
