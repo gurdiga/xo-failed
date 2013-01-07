@@ -33,7 +33,7 @@
       ButoanePentruÎncheieri.init();
       Secţiuni.init();
       ListeMeniu.init();
-      ButoaneFormular.init();
+      ButoaneProceduri.init();
 
       if (Utilizator.autentificat) {
         BaraDeSus.init();
@@ -2857,7 +2857,7 @@
 
   // --------------------------------------------------
 
-  ButoaneFormular = {
+  ButoaneProceduri = {
     init: function () {
       $(document).on('click', 'li[data-href]', this.deschide);
     },
