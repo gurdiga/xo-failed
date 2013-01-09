@@ -88,7 +88,7 @@ server {
       fastcgi_intercept_errors on;
       fastcgi_param SCRIPT_FILENAME $document_root/bin/router.php;
       fastcgi_keep_conn on;
-      include conf.d/dev.executori.org/rest.conf;
+      include conf.d/%%SERVER_NAME%%/rest.conf;
 
       set $permission_tuple "$remote_user:$request_uri";
       if ($permission_tuple !~ "^(\d+):/date/\1/") {
