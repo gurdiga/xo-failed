@@ -1,5 +1,7 @@
 echo -n 'Minific JS'
 
+TIMESTAMP=`date +'%F-%H-%m-%M'`
+
 function minifică() {
   SURSA=$1
 
@@ -35,7 +37,7 @@ cat \
   js/lib.js \
   js/action.js \
   > js/one.js
-mv js/one.js js/action.js
+mv js/one.js js/action-$TIMESTAMP.js
 
 grep --fixed-strings --invert-match \
   -e '<script defer src="/js/lib/jquery-1.8.js"></script>' \
@@ -44,6 +46,8 @@ grep --fixed-strings --invert-match \
   index.html > index.html.1
 
 mv index.html.1 index.html
+
+sed -i "s/action.js/action-$TIMESTAMP.js/g" index.html
 
 
 echo ''
