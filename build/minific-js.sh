@@ -29,11 +29,17 @@ minifică "js/action.js"
 minifică "js/încheiere.js"
 
 # concatenează lib.js cu action.js
-cat js/lib/jquery-1.8.js js/lib.js js/action.js >> js/one.js
+cat \
+  js/lib/jquery-1.8.js \
+  lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js \
+  js/lib.js \
+  js/action.js \
+  >> js/one.js
 mv js/one.js js/action.js
 
 grep --fixed-strings --invert-match \
   -e '<script defer src="/js/lib/jquery-1.8.js"></script>' \
+  -e '<script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>' \
   -e '<script defer src="/js/lib.js"></script>' \
   index.html > index.html.1
 mv index.html.1 index.html
