@@ -144,6 +144,7 @@ button {
 
 #conţinut>.coloană {
   display: none;
+  padding-bottom: 100px;
 }
 
 .autentificat #conţinut>.coloană,
@@ -399,6 +400,7 @@ h3 {
   margin: 0 auto;
   min-height: 610px;
   position: relative;
+  padding-bottom: 100px;
 }
 
 .coloană {
@@ -490,7 +492,7 @@ input.sumă {
 #formular {
   display: none;
   position: absolute;
-  padding-bottom: 40px;
+  padding-bottom: 100px;
 }
 
 #formular>.conţinut {
