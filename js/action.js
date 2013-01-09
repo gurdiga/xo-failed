@@ -26,7 +26,7 @@
       Subsecţiuni.init();
       FormularProcedură.init();
       Calendar.init();
-      CîmpuriPersonalizate.init();
+      EticheteEditabile.init();
       ProceduriRecente.init();
       Sume.init();
       ÎncasarePensie.init();
@@ -2083,7 +2083,7 @@
 
   // --------------------------------------------------
 
-  CîmpuriPersonalizate = {
+  EticheteEditabile = {
     init: function () {
       FormularProcedură.$
         .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
