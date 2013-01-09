@@ -1005,6 +1005,10 @@ button.cu.opţiuni:after {
   width: 25em;
 }
 
+#calculator li {
+  margin: 3px 0;
+}
+
 #calculator li>label {
   width: 10em;
   padding-top: 7px;
@@ -1120,10 +1124,6 @@ button.cu.opţiuni:after {
   margin: 0 0 0 10.05em;
   font-weight: bold;
   white-space: normal;
-}
-
-#calculator.dialog input[type="text"] {
-  width: 5.3em;
 }
 
 .ui-icon-calendar,
