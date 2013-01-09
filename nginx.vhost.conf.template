@@ -67,6 +67,10 @@ server {
     expires modified +24h;
   }
 
+  location ~ /js/lib/ {
+    expires max;
+  }
+
   location ~ /js/.*\.js$ {
     more_set_headers 'Content-Type: text/javascript; charset=utf-8';
   }
