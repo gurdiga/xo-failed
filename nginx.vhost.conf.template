@@ -59,7 +59,7 @@ server {
   }
 
   location /imagini/ {
-    expires 1w;
+    expires max;
   }
 
   location /bnm/ {
@@ -67,7 +67,11 @@ server {
     expires modified +24h;
   }
 
-  location ~ /js/lib/ {
+  location /lib/ {
+    expires max;
+  }
+
+  location /js/lib/ {
     expires max;
   }
 
