@@ -34,7 +34,7 @@ cat \
   lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js \
   js/lib.js \
   js/action.js \
-  >> js/one.js
+  > js/one.js
 mv js/one.js js/action.js
 
 grep --fixed-strings --invert-match \
@@ -42,6 +42,7 @@ grep --fixed-strings --invert-match \
   -e '<script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>' \
   -e '<script defer src="/js/lib.js"></script>' \
   index.html > index.html.1
+
 mv index.html.1 index.html
 
 
