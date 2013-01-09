@@ -67,6 +67,16 @@ server {
     expires modified +24h;
   }
 
+  # CSS concatenat
+  location ~ /css/style-.*\.css {
+    expires max;
+  }
+
+  # JS concatenat
+  location ~ /js/action-.*.js {
+    expires max;
+  }
+
   location /lib/ {
     expires max;
   }
