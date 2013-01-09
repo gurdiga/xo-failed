@@ -1008,25 +1008,12 @@ button.cu.opţiuni:after {
   padding-top: 7px;
 }
 
-#calculator li>label.checkbox {
-  margin-left: 2px;
-}
-
 #calculator .sumă~b {
   vertical-align: 0;
 }
 
 #calculator .ui-icon {
   vertical-align: -2px;
-}
-
-#calculator ul li.total {
-  padding-top: .5em;
-}
-
-#calculator ul li.total input,
-#calculator ul li.total label {
-  font-weight: bold;
 }
 
 .dialog {
@@ -1304,11 +1291,12 @@ label.checkbox {
   color: black;
   font-weight: bold;
   display: inline;
-  margin: 0 5px 0 -2px;
+  margin: 0 10px 0 -2px;
 }
 
 label.checkbox input {
-  margin: 5px 0;
+  margin: 0 3px 0 3px;
+  vertical-align: 0;
 }
 
 .buton[data-formular].salvat::after {
