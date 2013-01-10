@@ -1198,7 +1198,7 @@ select#obiect~.buton[data-formular] {
 .dialog ul.subsecţiune,
 fieldset .conţinut .ui-effects-wrapper ul.subsecţiune,
 fieldset .conţinut ul.subsecţiune {
-  margin: .5em -4px 1em;
+  margin: 1em -4px;
   border: 1px solid #ddd;
   border-width: 1px 0 0 4px;
   border-top-color: #eee;
@@ -1242,10 +1242,6 @@ ul.subsecţiune .personalizat .elimină {
   padding-right: .5em;
   line-height: .8em;
   background: transparent;
-}
-
-ul.subsecţiune li:last-child input {
-  padding-bottom: 0;
 }
 
 .dată.intentării,
