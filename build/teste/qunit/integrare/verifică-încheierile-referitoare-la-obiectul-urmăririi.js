@@ -1,4 +1,5 @@
 asyncTest('Procedură: verifică referitoare la obiectul urmăririi', function () {
+  /*global UtilitareÎncheiere:false */
   'use strict';
 
   var app = this.app, încheiere;
@@ -25,7 +26,13 @@ asyncTest('Procedură: verifică referitoare la obiectul urmăririi', function (
     app.$(meta).one('iniţializat', function () {
       ok(true, 's-a iniţializat');
 
-      // TODO un modul care verifică părţile structurale principale ale înheierii?
+      var $încheiere = app.$(this.tab.document);
+
+      UtilitareÎncheiere.verificăSecţiuni($încheiere,
+        ['Procedura', 'Creditorul', 'Debitorul', 'Executorul']);
+
+      // TODO de adăugat secţiunile corespunzătoare, poate de generalizat verificarea secţiunilor
+      // pentru toate încheierile din acest loc
 
       app.FormularProcedură.$.find('.închide').click();
       app.$(app.FormularProcedură.$).one('închidere', function () {

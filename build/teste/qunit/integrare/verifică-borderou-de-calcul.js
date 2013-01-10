@@ -1,4 +1,5 @@
 asyncTest('Procedură: verifică borderou de calcul', function () {
+  /*global UtilitareÎncheiere:false */
   /*jshint maxlen:135 */
   'use strict';
 
@@ -81,18 +82,8 @@ asyncTest('Procedură: verifică borderou de calcul', function () {
 
   // --------------------------------------------------
   function verificăStructura($încheiere) {
-    var numărComplet = app.Utilizator.login + app.FormularProcedură.număr(),
-        $secţiuneProcedură = $încheiere.find('section header:contains("Procedura")'),
-        $secţiuneProcedurăConţinut = $secţiuneProcedură.next('.conţinut');
-
-    ok($secţiuneProcedură.există(), 'avem secţiunea Procedură');
-    ok($secţiuneProcedurăConţinut.is(':contains("' + numărComplet + '")'), 'avem numărul procedurii');
-    ok($încheiere.find('section header:contains("Creditorul")').există(), 'avem secţiunea Creditor');
-    ok($încheiere.find('section header:contains("Debitorul")').există(), 'avem secţiunea Debitorul');
-    ok($încheiere.find('section header:contains("Executorul")').există(), 'avem secţiunea Executorul');
-
-    ok($încheiere.find('#semnătura').există(), 'avem loc pentru semnătură');
-    ok($încheiere.find('#ştampila').există(), 'avem loc pentru ştampila');
+    UtilitareÎncheiere.verificăSecţiuni($încheiere,
+      ['Procedura', 'Creditorul', 'Debitorul', 'Calculele', 'Rechizite bancare', 'Executorul']);
   }
 
   // --------------------------------------------------

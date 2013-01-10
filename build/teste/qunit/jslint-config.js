@@ -7,6 +7,7 @@
     '/js/action.js',
     '/js/încheiere.js',
     '/js/indexer.js',
+    'integrare/utilitare-încheiere.js',
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',
     'integrare/init.js',

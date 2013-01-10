@@ -1,4 +1,5 @@
 asyncTest('Procedură: verifică încheiere de intentare', function () {
+  /*global UtilitareÎncheiere:false */
   'use strict';
 
   var app = this.app,
@@ -24,17 +25,12 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       ok($încheiere.find('.închide').există(), 'avem buton de închidere');
       ok($încheiere.find('body').is('[spellcheck=false]'), 'dezavtivat verificarea gramaticii pentru Firefox');
 
-      verificăPărţile($încheiere);
+      UtilitareÎncheiere.verificăSecţiuni($încheiere,
+          ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
+
       verificăSalvareaÎncheierii(încheiere);
     });
   });
-
-
-  // ------------------------
-  function verificăPărţile($încheiere) {
-    ok($încheiere.find('section header:contains("Creditorul")+div.conţinut').există(), 'avem secţiune “Creditorul”');
-    ok($încheiere.find('section header:contains("Debitorul")+div.conţinut').există(), 'avem secţiune “Debitorul”');
-  }
 
   // ------------------------
   function verificăSalvareaÎncheierii(încheiere) {
