@@ -153,7 +153,7 @@
 
     cale: function () {
       var director = '/date/' + Utilizator.login + '/proceduri/' + FormularProcedură.număr() + '/încheieri/',
-          fişier = Încheiere.formular + '-' + app.moment().format('YYMMDDhhmmss') + '.html';
+          fişier = Încheiere.formular + '-' + (new Date()).getTime() + '.html';
 
       return director + fişier;
     },

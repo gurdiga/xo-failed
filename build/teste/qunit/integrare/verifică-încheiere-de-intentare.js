@@ -52,7 +52,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
       var cale = decodeURIComponent(încheiere.location.pathname),
           caleER = new RegExp(
             '^/date/' + app.Utilizator.login + '/proceduri/' +
-            app.FormularProcedură.număr() + '/încheieri/' + $buton.data('formular') + '-\\d{12}\\.html'
+            app.FormularProcedură.număr() + '/încheieri/' + $buton.data('formular') + '-\\d{13}\\.html'
           );
 
       ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
@@ -79,7 +79,7 @@ asyncTest('Procedură: verifică încheiere de intentare', function () {
           $butonDeSalvare.click();
 
           app.$(încheiere).one('salvat', function () {
-            ok(true, 'regenerare: resalvat salvat');
+            ok(true, 'regenerare: resalvat');
 
             app.FormularProcedură.$.one('salvat', function () {
               ok(true, 'regenerare: salvat procedura *după* salvarea încheierii');
