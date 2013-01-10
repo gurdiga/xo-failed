@@ -2805,6 +2805,7 @@
 
       if (buton.siblings('#obiect').există()) { // obiectul urmăririi
         formular = buton.siblings('#obiect').find('option:selected').data('formular-încheiere');
+        buton.data('formular', formular);
       }
 
       if (buton.is('[dezactivat]')) return;
