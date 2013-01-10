@@ -89,7 +89,7 @@ server {
     more_set_headers 'Content-Type: text/javascript; charset=utf-8';
   }
 
-  location /css/ {
+  location ~ /css/.*\.css {
     more_set_headers 'Content-Type: text/css; charset=utf-8';
   }
 
