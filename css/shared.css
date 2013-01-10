@@ -26,7 +26,7 @@
 .ui-icon.colorat-invers {
   border: none;
   background-color: transparent;
-  background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/images/ui-icons_cccccc_256x240.png');
+  background-image: url('/css/images/ui-icons_cccccc_256x240.png');
 }
 
 .bara-de-instrumente {

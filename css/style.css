@@ -193,7 +193,7 @@ button {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/images/ui-icons_222222_256x240.png');
+  background-image: url('/css/images/ui-icons_222222_256x240.png');
   content: ' ';
 }
 
