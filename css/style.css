@@ -222,9 +222,6 @@ button {
   -moz-transition: background-color 1s;
   -o-transition: background-color 1s;
   transition: background-color 1s;
-}
-
-#căutare input {
   font: bold 1.3em/1.4em Arial, sans-serif;
   padding: .3em;
 }
