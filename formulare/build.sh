@@ -11,6 +11,7 @@ function verifică {
 }
 
 cd formulare
+rm *.html
 
 for formular in *.părţi; do
   for parte in $formular/*.html; do
