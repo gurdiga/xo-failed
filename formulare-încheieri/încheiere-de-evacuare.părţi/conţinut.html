@@ -21,9 +21,11 @@
         <section>
           <header>Motivele</header>
           <div class="conţinut" spellcheck="false">
-            <p>La data de /data intentării/ a fost intentată procedura de
-            executare a documentului executoriu /nr./ din /data/ emis de
-            /organul emitent/ prin care s-a dispus evacuarea DEBITORULUI (LOR) /............./
+            <p>La data de <%= procedură['data-intentării'] %> a fost intentată procedura de executare
+            a documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din
+            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de judecătoria
+            <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus
+            evacuarea <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>.
             Evacuarea în cadrul acestei proceduri a fost amînată din cauza /........./
             În baza celor expuse şi în conformitate cu art. 8, 10, 11, 14-16, 22, 66, 147, 149
             al Codului de executare RM, </p>
