@@ -36,16 +36,16 @@ pull:
 	git reset --hard origin/master
 	git gc
 
-build: pull lint
+build: lint
 	build/start.sh
 
 deploy: stage
 	echo '---- Deploying production ----'
-	ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make build'
+	ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make pull && make build'
 
 stage: lint test push
 	echo '---- Deploying stage ----'
-	ssh -p59922 nati@stage.executori.org 'cd /var/www/stage.executori.org && make build'
+	ssh -p59922 nati@stage.executori.org 'cd /var/www/stage.executori.org && make pull && make build'
 
 what:
 	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare-încheieri/*.părţi || true
