@@ -42,4 +42,23 @@
     equal(utilitare._DEBITOR(context), 'DEBITORI', '_DEBITOR == "DEBITORI" dacă sunt mai mulţi debitori în context');
   });
 
+
+  test('Încheiere.utilitare._DEBITORULUI', function () {
+    var utilitare = window.Încheiere.utilitare;
+
+    var context = {};
+
+    equal(utilitare._DEBITORULUI(context), 'DEBITORULUI', '_DEBITORULUI == "DEBITORULUI" dacă nu sunt debitori în context');
+
+    context = {
+      debitori: [1]
+    };
+    equal(utilitare._DEBITORULUI(context), 'DEBITORULUI', '_DEBITORULUI == "DEBITORULUI" dacă este un singur debitor în context');
+
+    context = {
+      debitori: [1, 2, 3]
+    };
+    equal(utilitare._DEBITORULUI(context), 'DEBITORILOR', '_DEBITORULUI == "DEBITORILOR" dacă sunt mai mulţi debitori în context');
+  });
+
 })();

@@ -209,6 +209,7 @@
     utilitare: {
       init: function (context) {
         context._DEBITOR = this._DEBITOR(context);
+        context._DEBITORULUI = this._DEBITORULUI(context);
       },
 
       _DEBITOR: function (context) {
@@ -216,6 +217,13 @@
         if (context.debitori.length === 1) return 'DEBITOR';
 
         return 'DEBITORI';
+      },
+
+      _DEBITORULUI: function (context) {
+        if (!context.debitori) return 'DEBITORULUI';
+        if (context.debitori.length === 1) return 'DEBITORULUI';
+
+        return 'DEBITORILOR';
       }
     }
   },
