@@ -1,8 +1,8 @@
-asyncTest('Procedură: verifică referitoare la obiectul urmăririi', function () {
-  /*global UtilitareÎncheiere:false */
+asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
+  /*jshint maxlen:126 */
   'use strict';
 
-  var app = this.app, încheiere;
+  var app = this.app;
 
   app.ProceduriRecente.$.find('.item:first-child').click();
 
@@ -13,33 +13,31 @@ asyncTest('Procedură: verifică referitoare la obiectul urmăririi', function (
 
     $obiectul.find('#caracter').val('nonpecuniar').change();
 
-    var $buton = $obiectul.find('#obiect~.buton[data-formular]');
+    var $buton = $obiectul.find('select#obiect~.buton[data-formular]'),
+        $select = $obiectul.find('select#obiect'),
+        meta;
 
+    ok($select.există(), 'avem select');
     ok($buton.există(), 'avem butonaş');
+
+    $select.val('schimbul forţat');
     $buton.click();
-    ok($buton.data('formular'), '…la click, se setează corespunzător [data-formular] pe el');
-
-    var meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
-
+    equal($buton.data('formular'), 'încheiere-de-schimb-forţat', '…la click, se setează corespunzător [data-formular] pe el');
+    meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
     ok(meta, '…se iniţiază meta pentru încheiere');
+    // cleanup
+    meta.tab.close();
+    delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
 
-    app.$(meta).one('iniţializat', function () {
-      ok(true, 's-a iniţializat');
+    $select.val('evacuarea');
+    $buton.click();
+    equal($buton.data('formular'), 'încheiere-de-evacuare', '…la click, se setează corespunzător [data-formular] pe el');
+    meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
+    ok(meta, '…se iniţiază meta pentru încheiere');
+    // cleanup
+    meta.tab.close();
+    delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
 
-      var $încheiere = app.$(this.tab.document);
-
-      UtilitareÎncheiere.verificăSecţiuni($încheiere,
-        ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
-
-      // TODO de adăugat secţiunile corespunzătoare, poate de generalizat verificarea secţiunilor
-      // pentru toate încheierile din acest loc
-
-      app.FormularProcedură.$.find('.închide').click();
-      app.$(app.FormularProcedură.$).one('închidere', function () {
-        ok(true, 'închis formularul de procedură');
-
-        start();
-      });
-    });
+    start();
   });
 });

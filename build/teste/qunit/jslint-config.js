@@ -24,6 +24,7 @@
     'integrare/formulare-încheieri/încheiere-de-intentare.js',
     'integrare/formulare-încheieri/borderou-de-calcul.js',
     'integrare/formulare-încheieri/încheierile-referitoare-la-obiectul-urmăririi.js',
+    'integrare/formulare-încheieri/încheiere-de-evacuare.js',
 
     'integrare/căutare-procedură.js',
 

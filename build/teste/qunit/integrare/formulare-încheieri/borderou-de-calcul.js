@@ -1,4 +1,4 @@
-asyncTest('Procedură: verifică borderou de calcul', function () {
+asyncTest('Borderou de calcul', function () {
   /*global UtilitareÎncheiere:false */
   /*jshint maxlen:135 */
   'use strict';

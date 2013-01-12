@@ -1,4 +1,4 @@
-asyncTest('Procedură: verifică încheiere de intentare', function () {
+asyncTest('Încheiere de intentare', function () {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
