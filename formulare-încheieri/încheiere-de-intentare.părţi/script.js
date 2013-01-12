@@ -1,9 +1,9 @@
 window.init = function (context) {
   'use strict';
 
-  var total = context.opener.FormularProcedură.$.find('#total').val();
+  var total = context.app.FormularProcedură.$.find('#total').val();
 
-  context.totalDatorie = context.opener.accounting.formatNumber(total, 2, ' ', '.');
+  context.totalDatorie = context.app.accounting.formatNumber(total, 2, ' ', '.');
 
   var conciliere = context.procedură.cheltuieli.itemi.taxaB11;
 

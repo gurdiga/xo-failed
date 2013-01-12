@@ -28,31 +28,32 @@
         }
       };
 
-      var $ = context.opener.$,
+      var app = context.app,
+          $ = app.$,
           id, $item, tip,
           cost, achitat, costPerItem;
 
       for (id in context.procedură.cheltuieli.itemi) {
         tip = id.substr(0, 4) === 'taxa' ? 'taxe' : 'speze';
-        $item = context.opener.Cheltuieli.$.find('#' + id);
+        $item = app.Cheltuieli.$.find('#' + id);
 
         număr[tip]++;
         achitat = $item.find('.achitare :checkbox').is(':checked');
 
         if (tip === 'taxe') {
           if ($item.find('.subformular:has(.document)').există()) {
-            costPerItem = $item.find('input.cost-per-item').suma() * context.opener.UC;
+            costPerItem = $item.find('input.cost-per-item').suma() * app.UC;
             cost = 0;
 
             $item.find('.subformular .document').each(function () {
               cost += $(this).find('.cantitate').suma() * costPerItem;
             });
           } else {
-            cost = $item.find('input.cost').suma() * context.opener.UC;
+            cost = $item.find('input.cost').suma() * app.UC;
           }
 
           if ($item.is('#taxaA6') && $item.find('#din-arhivă').is(':checked')) {
-            cost += context.opener.UC;
+            cost += app.UC;
           }
         } else {
           cost = 0;
@@ -82,6 +83,7 @@
     // --------------------------------------------------
     pregăteşteRechiziteleBancare: function (context) {
       /*jshint maxcomplexity:7 */
+      var app = context.app;
       var proprietăţi = [
         'nume', 'codul-fiscal',
         'cont-taxe-speze', 'cont-onorarii',
@@ -91,10 +93,10 @@
 
       for (i = 0; i < l; i++) {
         if (context.executor[proprietăţi[i]]) continue;
-        context.executor[proprietăţi[i]] = context.opener.Profil.cîmpNecompletat;
+        context.executor[proprietăţi[i]] = app.Profil.cîmpNecompletat;
       }
 
-      var banca = opener.Bănci.cautăDupăSufix(context.executor['banca-taxe-speze']), cod;
+      var banca = app.Bănci.cautăDupăSufix(context.executor['banca-taxe-speze']), cod;
 
       for (cod in banca) {
         if (!banca.hasOwnProperty(cod)) break;
@@ -102,7 +104,7 @@
         context.executor['cod-bancă-taxe-speze'] = cod;
       }
 
-      banca = opener.Bănci.cautăDupăSufix(context.executor['banca-onorarii']);
+      banca = app.Bănci.cautăDupăSufix(context.executor['banca-onorarii']);
 
       for (cod in banca) {
         if (!banca.hasOwnProperty(cod)) break;

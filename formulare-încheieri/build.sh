@@ -11,7 +11,7 @@ function verifică {
 }
 
 cd formulare-încheieri
-rm *.html
+rm -f *.html
 
 for formular in *.părţi; do
   for parte in $formular/*.html; do

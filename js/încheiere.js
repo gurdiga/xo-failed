@@ -40,7 +40,7 @@
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!opener || !Încheieri.deschise[Încheiere.pagina] || !FormularProcedură.$.is(':visible')) {
+      if (!app || !Încheieri.deschise[Încheiere.pagina] || !FormularProcedură.$.is(':visible')) {
         window.close();
         return;
       }
@@ -60,7 +60,7 @@
           };
 
       var context = {
-        opener: opener,
+        app: app,
         procedură: procedură,
         executor: JSON.parse(JSON.stringify(Profil.date)),
         login: Utilizator.login,
@@ -288,6 +288,6 @@
   window.Încheiere = Încheiere;
 
   // the check for opener is for qHint
-  if (opener) window.onload = Încheiere.init;
+  if (app) window.onload = Încheiere.init;
 
 })(window, document, window.opener);

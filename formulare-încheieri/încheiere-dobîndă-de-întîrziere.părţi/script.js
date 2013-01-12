@@ -3,6 +3,6 @@ window.init = function (context) {
 
   var $întîrziere = context.buton.closest('.subsecţiune.întîrziere');
 
-  context.întîrziere = opener.Subsecţiuni.întîrzieri.colectează($întîrziere);
+  context.întîrziere = context.app.Subsecţiuni.întîrzieri.colectează($întîrziere);
   context.întîrziere.dobînda = $întîrziere.find('.sumă.dobîndă').val();
 };

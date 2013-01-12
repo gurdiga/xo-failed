@@ -71,7 +71,6 @@
     setTimeout: false,
     clearTimeout: false,
     setInterval: false,
-    opener: false,
     history: false
   };
 
