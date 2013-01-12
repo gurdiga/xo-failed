@@ -6,7 +6,7 @@
 </section>
 
 <section>
-  <header><%= debitori.length == 1 ? 'Debitorul' : 'Debitori' %></header>
+  <header><%= text('Debitorul sau Debitorii', procedură.debitori) %></header>
   <div class="conţinut">
     <% if (debitori.length > 1) { %>
       <ul>
