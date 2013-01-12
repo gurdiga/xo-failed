@@ -20,26 +20,26 @@
     var context = {};
 
     utilitare.init(context);
-    ok(context.DEBITOR, '…defineşte DEBITOR în context');
+    ok(context._DEBITOR, '…defineşte _DEBITOR în context');
   });
 
 
-  test('Încheiere.utilitare.DEBITOR', function () {
+  test('Încheiere.utilitare._DEBITOR', function () {
     var utilitare = window.Încheiere.utilitare;
 
     var context = {};
 
-    equal(utilitare.DEBITOR(context), 'DEBITOR', 'DEBITOR == "DEBITOR" dacă nu sunt debitori în context');
+    equal(utilitare._DEBITOR(context), 'DEBITOR', '_DEBITOR == "DEBITOR" dacă nu sunt debitori în context');
 
     context = {
       debitori: [1]
     };
-    equal(utilitare.DEBITOR(context), 'DEBITOR', 'DEBITOR == "DEBITOR" dacă este un singur debitor în context');
+    equal(utilitare._DEBITOR(context), 'DEBITOR', '_DEBITOR == "DEBITOR" dacă este un singur debitor în context');
 
     context = {
       debitori: [1, 2, 3]
     };
-    equal(utilitare.DEBITOR(context), 'DEBITORI', 'DEBITOR == "DEBITORI" dacă sunt mai mulţi debitori în context');
+    equal(utilitare._DEBITOR(context), 'DEBITORI', '_DEBITOR == "DEBITORI" dacă sunt mai mulţi debitori în context');
   });
 
 })();

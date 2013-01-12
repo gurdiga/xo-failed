@@ -208,10 +208,10 @@
 
     utilitare: {
       init: function (context) {
-        context.DEBITOR = this.DEBITOR(context);
+        context._DEBITOR = this._DEBITOR(context);
       },
 
-      DEBITOR: function (context) {
+      _DEBITOR: function (context) {
         if (!context.debitori) return 'DEBITOR';
         if (context.debitori.length === 1) return 'DEBITOR';
 
