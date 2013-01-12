@@ -75,6 +75,8 @@
       // cod specific pentru fiecare încheiere
       if ($.isFunction(window.init)) window.init(context);
 
+      Încheiere.utilitare.init(context);
+
       return context;
     },
 
@@ -202,6 +204,19 @@
     închide: function () {
       delete Încheieri.deschise[Încheiere.pagina];
       window.close();
+    },
+
+    utilitare: {
+      init: function (context) {
+        context.DEBITOR = this.DEBITOR(context);
+      },
+
+      DEBITOR: function (context) {
+        if (!context.debitori) return 'DEBITOR';
+        if (context.debitori.length === 1) return 'DEBITOR';
+
+        return 'DEBITORI';
+      }
     }
   },
 
@@ -214,6 +229,8 @@
         .on('click', Încheiere.închide);
     }
   },
+
+  // --------------------------------------------------
 
   BaraDeInstrumente = {
     init: function () {
@@ -284,6 +301,8 @@
       $cîmp.html($opţiune.html());
     }
   };
+
+  // --------------------------------------------------
 
   window.Încheiere = Încheiere;
 
