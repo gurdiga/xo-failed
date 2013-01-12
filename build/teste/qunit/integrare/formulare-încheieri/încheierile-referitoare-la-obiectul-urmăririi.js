@@ -29,7 +29,7 @@ asyncTest('Procedură: verifică referitoare la obiectul urmăririi', function (
       var $încheiere = app.$(this.tab.document);
 
       UtilitareÎncheiere.verificăSecţiuni($încheiere,
-        ['Procedura', 'Creditorul', 'Debitorul', 'Executorul']);
+        ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
       // TODO de adăugat secţiunile corespunzătoare, poate de generalizat verificarea secţiunilor
       // pentru toate încheierile din acest loc

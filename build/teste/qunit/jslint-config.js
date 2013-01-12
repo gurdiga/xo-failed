@@ -7,7 +7,6 @@
     '/js/action.js',
     '/js/încheiere.js',
     '/js/indexer.js',
-    'integrare/utilitare-încheiere.js',
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',
     'integrare/init.js',
@@ -17,15 +16,19 @@
     'integrare/verificare-valori-implicite.js',
     'integrare/verificare-cîmpuri-şi-onorariu.js',
     'integrare/salvare-procedură.js',
-    'integrare/verifică-încheiere-de-intentare.js',
-    'integrare/verifică-borderou-de-calcul.js',
-    'integrare/verifică-încheierile-referitoare-la-obiectul-urmăririi.js',
+
+    'integrare/formulare-încheieri/utilitare.js',
+    'integrare/formulare-încheieri/încheiere-de-intentare.js',
+    'integrare/formulare-încheieri/borderou-de-calcul.js',
+    'integrare/formulare-încheieri/încheierile-referitoare-la-obiectul-urmăririi.js',
+
     'integrare/căutare-procedură.js',
+
     '/formulare/borderou-de-calcul.părţi/script.js',
     '/formulare/încheiere-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare/încheiere-de-intentare.părţi/script.js',
     '/formulare/anexă-dobîndă-de-întîrziere.părţi/script.js',
-    '/formulare/încheiere-de-evacuare-nonpecuniar.părţi/script.js'
+    '/formulare/încheiere-de-evacuare.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

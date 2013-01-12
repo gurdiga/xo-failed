@@ -11,17 +11,16 @@
 <? require 'părţile.html' ?>
 
         <ul class="opţiuni mod-iniţiere">
-          <li>cererea creditorului urmăritor <%= nume(procedură.creditor) %> cu privire la
-            intentarea procedurii de executare în baza documentului executoriu</li>
+          <li>cererea CREDITORULUI cu privire la intentarea procedurii de executare în baza documentului executoriu</li>
           <li>din oficiu documentul executoriu</li>
         </ul>
 
         <section>
           <header>Chestiunea</header>
           <div class="conţinut editabil" spellcheck="false">
-            <p>Examinînd <span class="cu-opţiuni" data-opţiuni="mod-iniţiere">cererea creditorului urmăritor
-            <%= nume(procedură.creditor) %> cu privire la intentarea procedurii de executare în baza
-            documentului executoriu</span> <%= procedură['document-executoriu']['numărul-de'] %> din
+            <p>Examinînd <span class="cu-opţiuni" data-opţiuni="mod-iniţiere">cererea CREDITORULUI
+            cu privire la intentarea procedurii de executare în baza documentului executoriu</span>
+            <%= procedură['document-executoriu']['numărul-de'] %> din
             <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
             judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
             prin care s-a dispus încasarea în beneficiul CREDITORULUI de la <%= debitori.length == 1 ? 'DEBITOR' : 'DEBITORI' %>
