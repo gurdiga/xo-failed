@@ -20,45 +20,17 @@
     var context = {};
 
     utilitare.init(context);
-    ok(context._DEBITOR, '…defineşte _DEBITOR în context');
+    ok(context.text, 'publică funcţia text în context');
   });
 
 
-  test('Încheiere.utilitare._DEBITOR', function () {
+  test('Încheiere.utilitare.text', function () {
+    // TODO de testat publicarea în context a funcţiei
+
     var utilitare = window.Încheiere.utilitare;
 
-    var context = {};
-
-    equal(utilitare._DEBITOR(context), 'DEBITOR', '_DEBITOR == "DEBITOR" dacă nu sunt debitori în context');
-
-    context = {
-      debitori: [1]
-    };
-    equal(utilitare._DEBITOR(context), 'DEBITOR', '_DEBITOR == "DEBITOR" dacă este un singur debitor în context');
-
-    context = {
-      debitori: [1, 2, 3]
-    };
-    equal(utilitare._DEBITOR(context), 'DEBITORI', '_DEBITOR == "DEBITORI" dacă sunt mai mulţi debitori în context');
-  });
-
-
-  test('Încheiere.utilitare._DEBITORULUI', function () {
-    var utilitare = window.Încheiere.utilitare;
-
-    var context = {};
-
-    equal(utilitare._DEBITORULUI(context), 'DEBITORULUI', '_DEBITORULUI == "DEBITORULUI" dacă nu sunt debitori în context');
-
-    context = {
-      debitori: [1]
-    };
-    equal(utilitare._DEBITORULUI(context), 'DEBITORULUI', '_DEBITORULUI == "DEBITORULUI" dacă este un singur debitor în context');
-
-    context = {
-      debitori: [1, 2, 3]
-    };
-    equal(utilitare._DEBITORULUI(context), 'DEBITORILOR', '_DEBITORULUI == "DEBITORILOR" dacă sunt mai mulţi debitori în context');
+    equal(utilitare.text('PRIMA sau A DOUA', [1]), 'PRIMA', 'întoarce prima opţiune dacă e un singur item');
+    equal(utilitare.text('PRIMA sau A DOUA', [1, 2]), 'A DOUA', 'întoarce a doua opţiune dacă e sunt mai mulţi itemi');
   });
 
 })();

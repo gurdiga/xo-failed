@@ -208,22 +208,13 @@
 
     utilitare: {
       init: function (context) {
-        context._DEBITOR = this._DEBITOR(context);
-        context._DEBITORULUI = this._DEBITORULUI(context);
+        context.text = this.text;
       },
 
-      _DEBITOR: function (context) {
-        if (!context.debitori) return 'DEBITOR';
-        if (context.debitori.length === 1) return 'DEBITOR';
+      text: function (opţiuni, itemi) {
+        opţiuni = opţiuni.split(' sau ');
 
-        return 'DEBITORI';
-      },
-
-      _DEBITORULUI: function (context) {
-        if (!context.debitori) return 'DEBITORULUI';
-        if (context.debitori.length === 1) return 'DEBITORULUI';
-
-        return 'DEBITORILOR';
+        return opţiuni[itemi.length - 1];
       }
     }
   },
