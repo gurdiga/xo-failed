@@ -24,11 +24,11 @@
 
     'integrare/căutare-procedură.js',
 
-    '/formulare/borderou-de-calcul.părţi/script.js',
-    '/formulare/încheiere-dobîndă-de-întîrziere.părţi/script.js',
-    '/formulare/încheiere-de-intentare.părţi/script.js',
-    '/formulare/anexă-dobîndă-de-întîrziere.părţi/script.js',
-    '/formulare/încheiere-de-evacuare.părţi/script.js'
+    '/formulare-încheieri/borderou-de-calcul.părţi/script.js',
+    '/formulare-încheieri/încheiere-dobîndă-de-întîrziere.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-intentare.părţi/script.js',
+    '/formulare-încheieri/anexă-dobîndă-de-întîrziere.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-evacuare.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

@@ -2,7 +2,7 @@ files="
   index.html
   css/*.css
   js/*.js
-  formulare/*.html
+  formulare-încheieri/*.html
   bnm/*.js
 "
 

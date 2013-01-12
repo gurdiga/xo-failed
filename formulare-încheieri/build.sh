@@ -10,21 +10,21 @@ function verifică {
   fi
 }
 
-cd formulare
+cd formulare-încheieri
 rm *.html
 
 for formular in *.părţi; do
   for parte in $formular/*.html; do
     tidy -quiet -errors -utf8 -xml < $parte;
-    verifică formulare/$parte
+    verifică formulare-încheieri/$parte
   done;
 
   DESTINATIE=${formular/.părţi/.html}
   php $formular/conţinut.html > $DESTINATIE
-  verifică formulare/$DESTINATIE
+  verifică formulare-încheieri/$DESTINATIE
 
   tidy -quiet -errors -utf8 -xml < $DESTINATIE && echo -n "."
-  verifică formulare/$formular
+  verifică formulare-încheieri/$formular
 
   BASENAME=${formular/.părţi/}
   ln -sf $DESTINATIE "$BASENAME-P.html"

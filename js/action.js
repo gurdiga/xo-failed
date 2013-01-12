@@ -2791,9 +2791,9 @@
         var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val() || '',
             sufix = FormularProcedură.tip() + caracter;
 
-        return '/formulare/' + formular + '-' + sufix + '.html';
+        return '/formulare-încheieri/' + formular + '-' + sufix + '.html';
       } else {
-        return '/formulare/' + formular + '.html';
+        return '/formulare-încheieri/' + formular + '.html';
       }
     },
 

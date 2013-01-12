@@ -6,4 +6,4 @@ date
 .git.log
 build/teste/server/log
 nginx.vhost.conf
-formulare/*.html
+formulare-încheieri/*.html

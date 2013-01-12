@@ -20,8 +20,8 @@ lint-bash:
 
 .PHONY: formulare
 formulare:
-	echo -n "Compilez formulare"
-	formulare/build.sh
+	echo -n "Compilez formulare încheieri"
+	formulare-încheieri/build.sh
 	echo ""
 
 test: lint
@@ -48,4 +48,4 @@ stage: lint test push
 	ssh -p59922 nati@stage.executori.org 'cd /var/www/stage.executori.org && make build'
 
 what:
-	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare/*.părţi || true
+	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare-încheieri/*.părţi || true

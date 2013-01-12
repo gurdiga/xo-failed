@@ -100,7 +100,8 @@
       var pagina = Încheiere.cale();
 
       $.put(pagina, Încheiere.conţinut(), function () {
-        if (location.pathname.substr(0, 11) === '/formulare/') { // e o încheiere nouă încă nesalvată
+        if (decodeURI(location.pathname).substr(0, 21) === '/formulare-încheieri/') {
+          // e o încheiere nouă încă nesalvată
           Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
           delete Încheieri.deschise[Încheiere.pagina];
           Încheiere.pagina = pagina;
