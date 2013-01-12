@@ -5,6 +5,11 @@ asyncTest('Procedură: căutare', function () {
       $secţiune = app.$('#căutare'),
       numărComplet = app.Utilizator.login + app.ProceduriRecente.numărulUltimei();
 
+  if (app.FormularProcedură.$.is(':visible')) {
+    app.FormularProcedură.$.find('.închide').click();
+    ok(false, 'formularul de procedură nu este închis');
+  }
+
   ok($secţiune.există(), 'avem secţiune de căutare');
   $secţiune.find('input').val(numărComplet).trigger('input');
 
