@@ -18,6 +18,7 @@
     'integrare/localizare-cîmpuri-şi-secţiuni.js',
     'integrare/verificare-valori-implicite.js',
     'integrare/verificare-cîmpuri-şi-onorariu.js',
+    'integrare/verificare-obiectul-urmăririi.js',
     'integrare/salvare-procedură.js',
 
     'integrare/formulare-încheieri/utilitare.js',

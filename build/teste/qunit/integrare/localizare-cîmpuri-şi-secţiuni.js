@@ -1,4 +1,4 @@
-asyncTest('Procedură: localizare cîmpuri şi secţiuni', function () {
+test('Procedură: localizare cîmpuri şi secţiuni', function () {
   'use strict';
 
   ok(this.$dataIntentării.există(), 'găsit #data-intentării');
@@ -6,6 +6,4 @@ asyncTest('Procedură: localizare cîmpuri şi secţiuni', function () {
   ok(this.$debitor.există(), 'găsit .debitor');
   ok(this.$de.există(), 'găsit #document-executoriu');
   ok(this.$obiectulUrmăririi, 'găsit FormularProcedură.$obiectulUrmăririi');
-
-  start();
 });
