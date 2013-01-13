@@ -2031,8 +2031,7 @@
       this.insereazăButon();
 
       $(document)
-        .on('click', '.dată+.ui-icon-calendar', this.afişează)
-        .on('focus', '.dată', this.seteazăMasca);
+        .on('click', '.dată+.ui-icon-calendar', this.afişează);
     },
 
     insereazăButon: function () {
@@ -2074,10 +2073,6 @@
 
         cîmp.datepicker('show');
       }
-    },
-
-    seteazăMasca: function () {
-      $(this).mask('99.99.9999');
     }
   },
 
