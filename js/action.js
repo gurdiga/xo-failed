@@ -2016,7 +2016,8 @@
       changeMonth: true,
       changeYear: true,
       yearRange: 'c-60:c+10',
-      onSelect: function () { Calendar.închide(this); }
+      onSelect: function () { Calendar.închide(this); },
+      beforeShow: function () { Calendar.veziDacăMaiECeva(this); }
     },
 
     închide: function (el) {
@@ -2025,6 +2026,16 @@
       if (el.data('id')) el.attr('id', el.data('id'));
 
       el.datepicker('destroy').focus().trigger('input');
+
+      if (el.data('ceva')) el.val(el.val() + el.data('ceva'))
+    },
+
+    veziDacăMaiECeva: function(input) {
+      var valoarea = input.value;
+
+      if (valoarea.length == 10) return; // este introdusă doar data
+
+      $(input).data('ceva', valoarea.substr(10));
     },
 
     init: function () {
