@@ -222,11 +222,11 @@
       $subformular = item.nextAll();
       $subformular.find(SubsecţiuniDinamice.selector).trigger('change');
 
-      if (!FormularProcedură.sePopulează && !FormularProcedură.seIniţializează) {
-        $subformular
-          .find(':input:not(' + SubsecţiuniDinamice.selector + ')').first().focus().end().end()
-          .find('.adaugă-cîmp-personalizat.implicit').click();
-      }
+      if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
+
+      $subformular
+        .find(':input:not(' + SubsecţiuniDinamice.selector + ')').first().focus().end().end()
+        .find('.adaugă-cîmp-personalizat.implicit').click();
     },
 
     parseazăIncluderile: function (html) {

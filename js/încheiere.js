@@ -36,7 +36,7 @@
       Opţiuni.init();
 
       app.$(window).trigger('iniţializat');
-      app.$(Încheieri.deschise[Încheiere.pagina]).trigger('iniţializat');
+      app.$(Încheieri.deschise[Încheiere.pagina]).trigger('iniţializat'); // pentru testabilitate
     },
 
     verificăDacăFormularulEDeschis: function () {
