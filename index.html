@@ -1003,18 +1003,28 @@
         </li>
 
         <li>
-          <label for="data-evacuării">Data evacuării</label>
-          <input type="text" id="data-evacuării" class="dată"/>
-        </li>
-
-        <li>
-          <label for="ora-evacuării">Ora evacuării</label>
-          <input type="text" id="ora-evacuării"/>
-        </li>
-
-        <li>
           <label for="se-acordă-alt-spaţiu">Se acordă alt spaţiu</label>
           <input id="se-acordă-alt-spaţiu" type="checkbox"/>
+        </li>
+
+        <li>
+          <label for="data-şi-ora-evacuării">Data şi ora evacuării</label>
+          <input type="text" id="data-şi-ora-evacuării" class="dată"/>
+        </li>
+
+        <li class="container-buton">
+          <button class="adaugă-cîmp-personalizat semiascuns"
+            title="Adaugă cîmp de amînare evacuare"
+            data-şablon="cîmpul-pentru-data-şi-ora-amînării-evacuării"
+            data-etichetă="Amînat pînă la">+</button>
+        </li>
+      </ul>
+
+
+      <ul class="cîmpul-pentru-data-şi-ora-amînării-evacuării">
+        <li class="personalizat eliminabil de tot">
+          <textarea class="etichetă amînare" title="Etichetă editabilă"></textarea>
+          <input type="text" placeholder="Data şi ora" class="dată amînare"/>
         </li>
       </ul>
 

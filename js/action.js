@@ -227,12 +227,6 @@
           .find(':input:not(' + SubsecţiuniDinamice.selector + ')').first().focus().end().end()
           .find('.adaugă-cîmp-personalizat.implicit').click();
       }
-
-      try {
-        $subformular.effect('highlight', {}, 1200, function () { $(this).clearQueue(); });
-      } catch (ex) {
-      // "Uncaught TypeError: Cannot read property '0' of undefined" jquery-ui.min.js:5
-      }
     },
 
     parseazăIncluderile: function (html) {
@@ -629,6 +623,10 @@
         if (/^#formular/.test(location.hash)) FormularProcedură.deschide();
         else if (FormularProcedură.$.is(':visible')) FormularProcedură.închide();
       });
+
+      this.$obiectulUrmăririi.on('adăugat-cîmp-personalizabil', function (e, li) {
+        $(li).find('input').focus();
+      });
     },
 
     tip: function () {
@@ -759,6 +757,7 @@
         ].join(',');
 
         $secţiune.find(cîmpuri).each(function () {
+          /*jshint maxcomplexity:5 */
           var $input = $(this),
               $label = $input.prev();
 
@@ -766,8 +765,10 @@
             if (!$label.val() && !$input.val()) return;
             if (!date.subformular) date.subformular = {};
 
-            date.subformular[$label.val()] = parseFloat($input.val());
+            date.subformular[$label.val()] = $input.is('.sumă') ? $input.suma() : $input.val();
           } else {
+            if ($input.is('.dată.amînare')) return; // avem colecteazăAmînăriEvacuare() special pentru asta
+
             date[$input.attr('id')] = $input.val1();
           }
         });
@@ -788,6 +789,8 @@
           obiectulUrmăririi['sume'] = colecteazăSumeÎnValută($secţiune);
           obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
           obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
+        } else {
+          obiectulUrmăririi['amînări-evacuare'] = colecteazăAmînăriEvacuare($secţiune);
         }
 
         return obiectulUrmăririi;
@@ -827,6 +830,19 @@
               };
             }).get()
           };
+        }).get();
+      }
+
+      // ------------------------------------------
+      function colecteazăAmînăriEvacuare($secţiune) {
+        return $secţiune.find('.dată.amînare').map(function () {
+          var $input = $(this),
+              $label = $input.prev(),
+              amînăre = {};
+
+          amînăre[$label.val()] = $input.val();
+
+          return amînăre;
         }).get();
       }
 
@@ -1087,6 +1103,7 @@
         populeazăSume($secţiune, secţiune['sume']);
         populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
         populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
+        populeazăAmînăriEvacuare($secţiune, secţiune['amînări-evacuare']);
       }
 
       // ------------------------------------------
@@ -1164,6 +1181,30 @@
             $bun.find('.valuta').val(bun.valuta).trigger('input');
 
             if (primul) primul = false;
+          }
+        }
+      }
+
+      // ------------------------------------------
+      function populeazăAmînăriEvacuare($secţiune, amînări) {
+        /*jshint maxcomplexity:5*/
+        if (!amînări || amînări.length === 0) return;
+        if ($secţiune.find('#obiect').val() !== 'evacuarea') return;
+
+        var $containerButon = $secţiune.find('li:has(#data-şi-ora-evacuării)').next('.container-buton'),
+            $butonDeAdăugare = $containerButon.find('button.adaugă-cîmp-personalizat'),
+            i = 0, amînare, etichetă, $amînare;
+
+        for (; i < amînări.length; i++) {
+          $butonDeAdăugare.click();
+          amînare = amînări[i];
+
+          for (etichetă in amînare) {
+            // hack! :)
+            // aici întotdeauna va fi doar un item
+            $amînare = $butonDeAdăugare.parent().prev();
+            $amînare.find('.etichetă').val(etichetă);
+            $amînare.find('.dată').val(amînare[etichetă]);
           }
         }
       }
@@ -2027,13 +2068,15 @@
 
       el.datepicker('destroy').focus().trigger('input');
 
-      if (el.data('ceva')) el.val(el.val() + el.data('ceva'))
+      if (el.data('ceva')) el.val(el.val() + el.data('ceva'));
     },
 
-    veziDacăMaiECeva: function(input) {
+    // dacă în cîmpul pentru dată mai este ceva, de exemplu ora, memorizează
+    // pentru a repopula după ce se selectează ceva din calendar
+    veziDacăMaiECeva: function (input) {
       var valoarea = input.value;
 
-      if (valoarea.length == 10) return; // este introdusă doar data
+      if (valoarea.length === 10) return; // este introdusă doar data
 
       $(input).data('ceva', valoarea.substr(10));
     },
@@ -2128,6 +2171,8 @@
             $(this).find('.etichetă')
               .focus()
               .select();
+
+            li.closest('fieldset').trigger('adăugat-cîmp-personalizabil', [this]);
           });
     }
   },
