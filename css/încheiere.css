@@ -271,3 +271,12 @@ table#rechizite-bancare thead th {
 table#rechizite-bancare th:first-child {
   padding: 0 1em;
 }
+
+.atenţionare {
+  background-color: silver;
+}
+
+address {
+  white-space: pre;
+  padding-left: 2em;
+}

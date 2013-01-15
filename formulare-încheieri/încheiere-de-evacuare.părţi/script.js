@@ -3,7 +3,17 @@
   'use strict';
 
   window.init = function (context) {
+    var amînări = context.procedură['obiectul-urmăririi']['amînări-evacuare'];
 
+    context.amînată = amînări.length > 0;
+
+    if (context.amînată) {
+      var ultimaAmînare = amînări[amînări.length - 1];
+
+      for (var etichetă in ultimaAmînare) {
+        context.ultimaAmînare = ultimaAmînare[etichetă];
+      }
+    }
   };
 })();
 // ]]>

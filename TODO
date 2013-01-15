@@ -30,12 +30,14 @@
 ÎMBUNĂTĂŢIRI DUPĂ LANSARE
  
 Chestii tehnice
+  - microtemplating: escape html tags in valorile injectate
+  - de şters /build/qunit de pe stage/prod
   - de extins build
     - configurare nginx parte globală /etc/
   - timeout session from JS and logout?
   - de verificat versiunea browserului?
   - bootable tonido flash
-  - rollback deploy?
+  - rollback deploy? deploy stage then switch doc_roots rename?
   - try a Centos VM deploy?
   - Materiale
   - arhivare proceduri

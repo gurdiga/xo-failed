@@ -60,20 +60,21 @@
           <header>Dispoziţia</header>
           <div class="conţinut editabil" spellcheck="false">
             <ol>
-              <li>A încasa în beneficiul <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>) de la
+              <li><p>A încasa în beneficiul <%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>) de la
               <%= debitori %> dobînda de întîrziere rezultată din întîrzierea executării documentului executoriu nr.
               <%= procedură['document-executoriu']['numărul-de'] %> din <%= procedură['document-executoriu']['data-hotărîrii'] %>
               emis de judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %> în sumă de
               <%= întîrziere.dobînda %> MDL calculată din data rămînerii definitive a hotărîrii judecătoreşti
-              pînă la data emiterii prezentei încheieri.</li>
+              pînă la data emiterii prezentei încheieri.</p></li>
 
-              <li>A aplica sechestru pe mijloacele băneşti aflate în conturile <%= debitori %> în limita sumei
-              de <%= întîrziere.dobînda %> MDL.</li>
+              <li><p>A aplica sechestru pe mijloacele băneşti aflate în conturile <%= debitori %> în limita sumei
+              de <%= întîrziere.dobînda %> MDL.</p></li>
 
-              <li>Încheierea dată reprezintă un titlu executoriu.</li>
+              <li><p>Încheierea dată reprezintă un titlu executoriu.</p></li>
 
-              <li>Încheierea este executorie din momentul emiterii şi poate fi contestată în termen de 10 zile
-              de la data comunicării în Judecătoria <%= executor['instanţa-teritorială'] %>.</li>
+              <li>
+<? require 'despre-contestare.html' ?>
+              </li>
             </ol>
           </div>
         </section>

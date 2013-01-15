@@ -76,6 +76,7 @@
       if ($.isFunction(window.init)) window.init(context);
 
       Încheiere.utilitare.init(context);
+      Încheiere.date = context; // pentru testabilitate
 
       return context;
     },
@@ -209,12 +210,27 @@
     utilitare: {
       init: function (context) {
         context.text = this.text;
+
+        if ('QUnit' in window) return; // testare
+
+        $(document).on('click', '.atenţionare', this.selecteazăAtenţionare);
       },
 
       text: function (opţiuni, itemi) {
         opţiuni = opţiuni.split(' sau ');
 
         return opţiuni[itemi.length - 1];
+      },
+
+      selecteazăAtenţionare: function () {
+        var range = document.createRange();
+
+        range.selectNode(this);
+
+        var sel = window.getSelection();
+
+        sel.removeAllRanges();
+        sel.addRange(range);
       }
     }
   },
