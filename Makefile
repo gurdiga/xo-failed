@@ -43,9 +43,14 @@ deploy: stage
 	echo '---- Deploying production ----'
 	ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make pull && make build'
 
+rollback:
+	echo TODO
+	false
+
 stage: lint test push
 	echo '---- Deploying stage ----'
 	ssh -p59922 nati@stage.executori.org 'cd /var/www/stage.executori.org && make pull && make build'
+	#ssh -p59922 nati@executori.org 'bash -s' NGINX < ./build/stage.sh
 
 what:
 	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare-încheieri/*.părţi || true
