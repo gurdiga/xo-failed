@@ -277,6 +277,6 @@ table#rechizite-bancare th:first-child {
 }
 
 address {
-  white-space: pre;
+  white-space: pre-line;
   padding-left: 2em;
 }
