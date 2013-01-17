@@ -767,7 +767,7 @@
 
             date.subformular[$label.val()] = $input.is('.sumă') ? $input.suma() : $input.val();
           } else {
-            if ($input.is('.dată.amînare')) return; // avem colecteazăAmînăriEvacuare() special pentru asta
+            if ($input.is('.dată.amînare')) return; // avem colecteazăAmînări() special pentru asta
 
             date[$input.attr('id')] = $input.val1();
           }
@@ -790,7 +790,7 @@
           obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
           obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
         } else {
-          obiectulUrmăririi['amînări-evacuare'] = colecteazăAmînăriEvacuare($secţiune);
+          obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune); // pot fi amînări de evacuare sau instalare
         }
 
         return obiectulUrmăririi;
@@ -834,7 +834,7 @@
       }
 
       // ------------------------------------------
-      function colecteazăAmînăriEvacuare($secţiune) {
+      function colecteazăAmînări($secţiune) {
         return $secţiune.find('.dată.amînare').map(function () {
           var $input = $(this),
               $label = $input.prev(),
@@ -1103,7 +1103,7 @@
         populeazăSume($secţiune, secţiune['sume']);
         populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
         populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
-        populeazăAmînăriEvacuare($secţiune, secţiune['amînări-evacuare']);
+        populeazăAmînări($secţiune, secţiune['amînări']);
       }
 
       // ------------------------------------------
@@ -1186,14 +1186,15 @@
       }
 
       // ------------------------------------------
-      function populeazăAmînăriEvacuare($secţiune, amînări) {
+      function populeazăAmînări($secţiune, amînări) {
         /*jshint maxcomplexity:5*/
         if (!amînări || amînări.length === 0) return;
-        if ($secţiune.find('#obiect').val() !== 'evacuarea') return;
 
-        var $containerButon = $secţiune.find('li:has(#data-şi-ora-evacuării)').next('.container-buton'),
-            $butonDeAdăugare = $containerButon.find('button.adaugă-cîmp-personalizat'),
-            i = 0, amînare, etichetă, $amînare;
+        var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.amînare');
+
+        if (!$butonDeAdăugare.există()) return;
+
+        var i = 0, amînare, etichetă, $amînare;
 
         for (; i < amînări.length; i++) {
           $butonDeAdăugare.click();

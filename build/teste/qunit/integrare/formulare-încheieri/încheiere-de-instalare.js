@@ -1,17 +1,17 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Încheiere de evacuare', function () {
+asyncTest('Încheiere de instalare', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:134 */
+  /*jshint maxlen:129 */
   'use strict';
 
   var app = this.app,
       $secţiune = app.FormularProcedură.$obiectulUrmăririi;
 
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('evacuarea').change();
+  $secţiune.find('#obiect').val('instalarea').change();
 
   // adăugăm o amînare
-  var $dataEvacuării = $secţiune.find('li:has(#data-şi-ora-evacuării)'),
+  var $dataEvacuării = $secţiune.find('li:has(#data-şi-ora-instalării)'),
       $container = $dataEvacuării.next('.container-buton'),
       $butonDeAdăugare = $container.find('button.adaugă-cîmp-personalizat');
 
@@ -34,7 +34,7 @@ asyncTest('Încheiere de evacuare', function () {
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        subtitlu = 'de numire a datei evacuării forţate',
+        subtitlu = 'cu privire la instalarea în spaţiul locativ',
         date = this.tab.Încheiere.date;
 
     ok(date.amînată, 'context: setat amînată');
@@ -46,13 +46,18 @@ asyncTest('Încheiere de evacuare', function () {
     ok($paragrafDespreAmînare.există(), 'avem paragraf despre amînare');
     ok($paragrafDespreAmînare.find('span.atenţionare').există(), '…cu atenţionare să se introducă cauza');
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
-    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['din-încăperea'].trim(), 'avem adresa');
+    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['în-încăperea'].trim(), 'avem adresa');
 
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
     setTimeout(function () { // pentru observabilitate
-      start();
+      app.FormularProcedură.$.find('.închide').click();
+      app.$(app.FormularProcedură.$).one('închidere', function () {
+        ok(true, 'închis formularul de procedură');
+
+        start();
+      });
     }, 500);
   });
 });

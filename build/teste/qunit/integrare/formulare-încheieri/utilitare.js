@@ -16,6 +16,7 @@
 
         ok($secţiuneProcedură.există(), 'avem titlul pentru secţiunea ' + secţiune);
         ok($secţiuneProcedură.next('.conţinut').există(), 'avem conţinutul secţiunea ' + secţiune);
+        ok($secţiuneProcedură.next('.conţinut').text().trim() !== '', '…cu ceva text');
 
         if (UtilitareÎncheiere.verificăriStandard[secţiune]) {
           UtilitareÎncheiere.verificăriStandard[secţiune]($încheiere);
@@ -24,6 +25,9 @@
 
       ok($încheiere.find('#semnătura').există(), 'avem loc pentru semnătură');
       ok($încheiere.find('#ştampila').există(), 'avem loc pentru ştampila');
+
+      ok($încheiere.find('button.închide').există(), 'avem buton de închidere');
+      ok($încheiere.find('.bara-de-instrumente.pentru.încheiere').există(), 'avem bară de instrumente');
     },
 
     verificăriStandard: { // per secţiune
