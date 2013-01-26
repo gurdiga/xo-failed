@@ -17,10 +17,12 @@ mkdir -p releases
 RELEASE=releases/`date +'%Y%m%d%H%M%S'`
 git clone git@bitbucket.org:gurdiga/executori.git --depth 0 $RELEASE
 
+unlink stage
 ln -s $RELEASE stage
+cp -r data/bnm stage/date/
 cd $RELEASE
 
-export SERVER_NAME="executori.org"
+export SERVER_NAME="stage.executori.org"
 export ENV=stage
 make build
 
