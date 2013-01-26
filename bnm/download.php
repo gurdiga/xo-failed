@@ -32,5 +32,5 @@ foreach ($simple_xml->Valute as $valuta) {
 file_put_contents($js, 'var RateBNM = ' . json_encode($array) . ';');
 syslog(LOG_DEBUG, "Înregistrat JS: $js " . filesize($js) . " bytes");
 
-unlink('current.js');
+if (file_exists('current.js')) unlink('current.js');
 symlink($js, 'current.js');
