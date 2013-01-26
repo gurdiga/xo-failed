@@ -1,25 +1,23 @@
 <?
 
-$root = dirname(__FILE__);
+$root = $argv[1];
 
 ini_set('display_errors', 1);
-ini_set('error_log', "$root/" . basename(__FILE__, '.php') . '.log');
 date_default_timezone_set('Europe/Chisinau');
-error_log('Start');
+openlog($_SERVER['HTTP_HOST'], LOG_ODELAY, LOG_LOCAL0);
+syslog(LOG_DEBUG, 'Start');
 
 $data = date('d.m.Y');
 $url = "http://bnm.md/md/official_exchange_rates?get_xml=1&date=$data";
 
-chdir("$root/../date/bnm/");
+chdir($root);
 $dir = date('Y/m/');
 $js = $dir . date('d') . '.js';
-
-if (file_exists($js)) exit;
 
 if (!is_dir($dir)) mkdir($dir, 0755, true);
 
 $xml = file_get_contents($url);
-error_log('Descărcat ' . strlen($xml) . ' bytes');
+syslog(LOG_DEBUG, 'Descărcat ' . strlen($xml) . ' bytes');
 
 $array = array();
 $simple_xml = simplexml_load_string($xml);
@@ -32,7 +30,7 @@ foreach ($simple_xml->Valute as $valuta) {
 };
 
 file_put_contents($js, 'var RateBNM = ' . json_encode($array) . ';');
-error_log("Înregistrat JS: $js " . filesize($js) . " bytes");
+syslog(LOG_DEBUG, "Înregistrat JS: $js " . filesize($js) . " bytes");
 
 unlink('current.js');
 symlink($js, 'current.js');
