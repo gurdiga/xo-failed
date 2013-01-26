@@ -12,8 +12,10 @@
 
   Action = {
     init: function () {
-      BNM.init();
       Utilizator.init();
+
+      if (Utilizator.autentificat) BNM.init();
+
       HashController.init();
 
       Valute.populeazăListe();
