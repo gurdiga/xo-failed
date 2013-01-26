@@ -1,5 +1,5 @@
+# SERVER_NAME trebuie să fie definit în mediu
 DOCUMENT_ROOT=`readlink -f $DIR/../../..`
-SERVER_NAME=`basename $DOCUMENT_ROOT`
 LOGIN='000'
 PASSWORD='Verificarea!'
 TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
