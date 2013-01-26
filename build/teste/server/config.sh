@@ -1,3 +1,7 @@
+if [ -f ./build/env.sh ]; then
+  . ./build/env.sh
+fi
+
 # SERVER_NAME trebuie să fie definit în mediu
 DOCUMENT_ROOT=`readlink -f $DIR/../../..`
 LOGIN='000'

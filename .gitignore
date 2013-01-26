@@ -1,5 +1,6 @@
 date
 .git.log
 build/teste/server/log
+build/env.sh
 nginx.vhost.conf
 formulare-încheieri/*.html
