@@ -1,8 +1,6 @@
 echo 'Configurez nginx...'
 
-SERVER_NAME=${SERVER_NAME-$(basename `pwd`)}
-ENV=${ENV-stage}
-echo $SERVER_NAME
+# SERVER_NAME şi ENV se ia din mediu
 
 cp nginx.vhost.conf.template nginx.vhost.conf
 sed -i \
