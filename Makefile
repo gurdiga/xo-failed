@@ -40,9 +40,8 @@ pull:
 build: lint-bash lint-html lint-php formulare
 	build/start.sh
 
-deploy: stage
-	echo '---- Deploying production ----'
-	ssh -p59922 nati@executori.org 'cd /var/www/executori.org && make pull && make build'
+deploy: push
+	ssh -p59922 nati@executori.org 'bash -s' < ./build/stage.sh
 
 rollback:
 	echo TODO
