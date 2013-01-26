@@ -2,7 +2,7 @@
 
 set -e
 
-ROOT=/var/www/testing.executori.org
+ROOT=/var/www/stage.executori.org
 sudo mkdir -p $ROOT
 
 cd $ROOT
@@ -17,7 +17,10 @@ mkdir -p releases
 RELEASE=releases/`date +'%Y%m%d%H%M%S'`
 git clone git@bitbucket.org:gurdiga/executori.git --depth 0 $RELEASE
 
-unlink stage
+if [ -f stage ]; then
+  unlink stage
+fi
+
 ln -s $RELEASE stage
 cp -r data/bnm stage/date/
 cd $RELEASE
