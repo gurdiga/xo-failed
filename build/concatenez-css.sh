@@ -2,6 +2,7 @@ echo -n 'Concatenez CSS.'
 
 TIMESTAMP=`date +'%F-%H-%m-%M'`
 
+rm css/style-*.css*
 cat \
   css/jquery-ui-1.9.2.custom.min.css \
   css/shared.css \

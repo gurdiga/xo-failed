@@ -31,6 +31,7 @@ minifică "js/action.js"
 minifică "js/încheiere.js"
 
 # concatenează lib.js cu action.js
+rm js/action-*.js*
 cat \
   js/lib/jquery-1.8.js \
   lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js \
