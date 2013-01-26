@@ -5,7 +5,6 @@ files="
   css/*.css
   js/*.js
   formulare-încheieri/*.html
-  bnm/*.js
 "
 
 for file in $files; do
