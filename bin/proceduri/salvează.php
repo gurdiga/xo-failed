@@ -29,7 +29,6 @@ function curăţă_încheierile_salvate($procedură, $număr) {
   array_walk_recursive($procedură, function($value, $key) use (&$înregistrate) {
     if ($key === 'încheiere' || $key === 'anexa') {
       $înregistrate[] = unicode_basename($value) . '.gz';
-      error_log(print_r($înregistrate, true));
     }
   });
 
