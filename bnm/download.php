@@ -10,7 +10,7 @@ error_log('Start');
 $data = date('d.m.Y');
 $url = "http://bnm.md/md/official_exchange_rates?get_xml=1&date=$data";
 
-$dir = "$root/" . date('Y/m/');
+$dir = "$root/../date/bnm/" . date('Y/m/');
 $js = $dir . date('d') . '.js';
 
 if (file_exists($js)) exit;
@@ -33,6 +33,6 @@ foreach ($simple_xml->Valute as $valuta) {
 file_put_contents($js, 'var RateBNM = ' . json_encode($array) . ';');
 error_log("Înregistrat JS: $js " . filesize($js) . " bytes");
 
-$current = "$root/current.js";
+$current = "$root/../date/bnm/current.js";
 unlink($current);
 symlink($js, $current);

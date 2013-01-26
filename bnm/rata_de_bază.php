@@ -3,7 +3,7 @@
 $root = dirname(__FILE__);
 
 ini_set('display_errors', 1);
-ini_set('error_log', "$root/rata_de_bază.log");
+ini_set('error_log', "$root/" . basename(__FILE__, '.php') . '.log');
 date_default_timezone_set('Europe/Chisinau');
 error_log('Start');
 
@@ -25,12 +25,12 @@ $data = date_parse_from_format('d.m.Y', $data);
 $data = date('Y-m-d', mktime(0, 0, 0, $data['month'], $data['day'], $data['year']));
 error_log("Data: $data");
 
-$json = "$root/rata_de_bază.json";
+$json = "$root/../date/bnm/rata_de_bază.json";
 $rate = json_decode(file_get_contents($json), true);
 $rate[$data] = $valoarea;
 file_put_contents($json, json_encode($rate));
 error_log('Înregistrat JSON: ' . filesize($json) . ' bytes');
 
-$js = "$root/rata_de_bază.js";
+$js = "$root/../date/bnm/rata_de_bază.js";
 file_put_contents($js, 'var RateDeBază = ' . json_encode($rate) . ';');
 error_log('Înregistrat JS: ' . filesize($js) . ' bytes');

@@ -52,8 +52,8 @@
 
   BNM = {
     init: function () {
-      $.get('/bnm/current.js');
-      $.get('/bnm/rata_de_bază.js');
+      $.get('/date/bnm/current.js');
+      $.get('/date/bnm/rata_de_bază.js');
     }
   },
 
