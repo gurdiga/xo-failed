@@ -8,17 +8,20 @@ sudo mkdir -p $ROOT
 cd $ROOT
 sudo chown `whoami`:`whoami` . 
 
-mkdir -p data
-git clone ssh://git@bitbucket.org/gurdiga/data.executori.git --depth 0 data
+if [ ! -d data ]; then
+  mkdir -p data
+  git clone git@bitbucket.org:gurdiga/data.executori.org.git --depth 1 data
+fi
 
 mkdir -p releases
 RELEASE=releases/`date +'%Y%m%d%H%M%S'`
-git clone ssh://git@bitbucket.org/gurdiga/executori.git --depth 0 $RELEASE
+git clone git@bitbucket.org:gurdiga/executori.git --depth 0 $RELEASE
 
 ln -s $RELEASE stage
 cd $RELEASE
 
 export SERVER_NAME="executori.org"
+export ENV=stage
 make build
 
 # TODO

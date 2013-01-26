@@ -35,7 +35,7 @@ server {
 
   add_header X-Frame-Options SAMEORIGIN;
 
-  root /var/www/$host;
+  root /var/www/$host/%%ENV%%;
 
   include conf.d/locations/favicon.conf;
 
