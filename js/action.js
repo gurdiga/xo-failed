@@ -14,10 +14,10 @@
     init: function () {
       Utilizator.init();
 
-      if (Utilizator.autentificat) BNM.init();
+      if (!Utilizator.autentificat) return;
 
+      BNM.init();
       HashController.init();
-
       Valute.populeazăListe();
       SubsecţiuniDinamice.init();
       CîmpuriTextarea.autodimensionează();
@@ -36,11 +36,8 @@
       Secţiuni.init();
       ListeMeniu.init();
       ButoaneProceduri.init();
-
-      if (Utilizator.autentificat) {
-        BaraDeSus.init();
-        Căutare.init();
-      }
+      BaraDeSus.init();
+      Căutare.init();
 
       $(window).trigger('hashchange');
     },
