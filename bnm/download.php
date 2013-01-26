@@ -5,7 +5,7 @@ $root = $argv[1];
 ini_set('display_errors', 1);
 date_default_timezone_set('Europe/Chisinau');
 openlog($_SERVER['HTTP_HOST'], LOG_ODELAY, LOG_LOCAL0);
-syslog(LOG_DEBUG, 'Start');
+syslog(LOG_DEBUG, 'Start ' . __FILE__);
 
 $data = date('d.m.Y');
 $url = "http://bnm.md/md/official_exchange_rates?get_xml=1&date=$data";

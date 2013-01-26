@@ -1,7 +1,3 @@
-bnm/
-!bnm/*.php
-!bnm/*.json
-!bnm/rata_de_bază.js.bak
 date
 .git.log
 build/teste/server/log
