@@ -9,6 +9,6 @@ sed -i \
   nginx.vhost.conf
 
 # nu restarta dacă NORESTART e definit în mediu
-if [ ! -z "$NORESTART" ]; then
+if [ -z "$NORESTART" ]; then
   sudo /etc/init.d/nginx reload
 fi
