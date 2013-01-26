@@ -36,7 +36,7 @@ pull:
 	git reset --hard origin/master
 	git gc
 
-build: lint
+build:
 	build/start.sh
 
 deploy: stage
