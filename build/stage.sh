@@ -43,11 +43,10 @@ fi
 STAGE_NGINX_CONF_D=/etc/nginx/conf.d/stage.executori.org
 sudo ln -f -s -T $ROOT/stage/nginx.conf.d $STAGE_NGINX_CONF_D
 cd stage
-echo SERVER_NAME=$SERVER_NAME ROOT=$ROOT ENV=stage build/start.sh
-SERVER_NAME=$SERVER_NAME ROOT=$ROOT ENV=stage build/start.sh
+SERVER_NAME=stage.executori.org ROOT=$ROOT ENV=stage build/start.sh
 sudo unlink $STAGE_NGINX_CONF_D
 
-SERVER_NAME=$SERVER_NAME ROOT=$ROOT ENV=prod NORESTART=1 build/configurez-nginx.sh
+SERVER_NAME=executori.org ROOT=$ROOT ENV=prod NORESTART=1 build/configurez-nginx.sh
 sudo ln -f -s -T $ROOT/prod/nginx.conf.d /etc/nginx/conf.d/executori.org
 
 cd ..
