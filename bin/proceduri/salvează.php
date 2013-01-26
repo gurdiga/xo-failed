@@ -20,17 +20,22 @@ function curăţă_încheierile_salvate($procedură, $număr) {
   global $login, $doc_root;
 
   $procedură = json_decode($procedură, true);
-  $curente = array();
+  $înregistrate = array();
 
-  array_walk_recursive($procedură, function($value, $key) use (&$curente) {
+  function unicode_basename($path) {
+    return preg_replace('|.*/|', '', $path);
+  }
+
+  array_walk_recursive($procedură, function($value, $key) use (&$înregistrate) {
     if ($key === 'încheiere' || $key === 'anexa') {
-      $curente[] = basename($value) . '.gz';
+      $înregistrate[] = unicode_basename($value) . '.gz';
+      error_log(print_r($înregistrate, true));
     }
   });
 
   $cale_încheieri = "$doc_root/date/$login/proceduri/$număr/încheieri";
-  $existente = glob("$cale_încheieri/*.html");
-  $expirate = array_diff($existente, $curente);
+  $existente = array_map('unicode_basename', glob("$cale_încheieri/*.html.gz"));
+  $expirate = array_diff($existente, $înregistrate);
 
   array_walk($expirate, function($expirată) use ($cale_încheieri) {
     if ($expirată === '.' || $expirată == '..') return;
