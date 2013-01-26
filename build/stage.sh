@@ -1,17 +1,23 @@
 #!/bin/bash
 
-TIMESTAMP=`date +'%Y%m%d%H%M%S'`
-RELEASE=executori.org.$TIMESTAMP
-STAGE=stage.executori.org
+set -e
 
-cd /var/www
-mkdir $RELEASE
+ROOT=/var/www/testing.executori.org
+sudo mkdir -p $ROOT
+
+cd $ROOT
+sudo chown `whoami`:`whoami` . 
+mkdir -p data
+mkdir -p bnm #TODO: de pus datele de la BNM similar cu date
+mkdir -p releases
+
+RELEASE=releases/`date +'%Y%m%d%H%M%S'`
 git clone ssh://git@bitbucket.org/gurdiga/executori.git --depth 0 $RELEASE
 
-unlink $STAGE
-ln -s $RELEASE $STAGE
-cd $STAGE
-make build
+ln -s $RELEASE stage
+cd $RELEASE
+
+SERVER_NAME="executori.org" make build
 
 # TODO: De curăţat /css şi /js înainte de concatenare
 
