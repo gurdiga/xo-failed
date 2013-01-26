@@ -41,7 +41,7 @@ fi
 STAGE_NGINX_CONF_D=/etc/nginx/conf.d/stage.executori.org
 sudo ln -f -s -T $ROOT/stage/nginx.conf.d $STAGE_NGINX_CONF_D
 cd stage
-SERVER_NAME=stage.executori.org ROOT=$ROOT/stage build/start.sh
+SERVER_NAME=stage.executori.org ROOT=$ROOT/stage make build
 sudo unlink $STAGE_NGINX_CONF_D
 
 SERVER_NAME=executori.org ROOT=$ROOT/prod NORESTART=1 build/configurez-nginx.sh
