@@ -1887,7 +1887,7 @@
 
     încarcă: function (callback) {
       if ($.isEmptyObject(this.lista)) {
-        $.get('/bnm/bănci.js', function () {
+        $.get('/date/bnm/bănci.js', function () {
           Bănci.initCîmpuri();
 
           callback();
