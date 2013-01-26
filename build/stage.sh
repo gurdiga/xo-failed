@@ -2,7 +2,9 @@
 
 set -e
 
-ROOT=/var/www/stage.executori.org
+SERVER_NAME="executori.org"
+ROOT=/var/www/$SERVER_NAME
+
 sudo mkdir -p $ROOT
 
 cd $ROOT
@@ -21,34 +23,33 @@ fi
 RELEASE=releases/`date +'%Y%m%d%H%M%S'`
 git clone git@bitbucket.org:gurdiga/executori.git --depth 0 $RELEASE
 
-if [ -L stage ]; then
-  unlink stage
-fi
-
-ln -s $RELEASE stage
+ln -f -s -T $RELEASE stage
 
 if [ ! -d data ]; then
   git clone git@bitbucket.org:gurdiga/data.executori.org.git --depth 1 data
 
   sudo chown -R www-data:`whoami` data 
-  ls -la data
   sudo su - www-data -c "php $ROOT/stage/bnm/download.php $ROOT/data/bnm"
-
-  ln -s ../../data stage/date
 fi
 
-export SERVER_NAME="stage.executori.org"
-export ENV=stage
+ln -f -s -T ../../data stage/date
+
+if [ ! -f /etc/nginx/conf.d/executori.org/rest.conf ]; then # initial reinstall
+  if [ -L /etc/nginx/conf.d/executori.org ]; then
+    sudo unlink /etc/nginx/conf.d/executori.org
+  fi
+fi
+
+STAGE_NGINX_CONF_D=/etc/nginx/conf.d/stage.executori.org
+sudo ln -f -s -T $ROOT/stage/nginx.conf.d $STAGE_NGINX_CONF_D
 cd stage
-make build
+SERVER_NAME=$SERVER_NAME ROOT=$ROOT ENV=stage build/start.sh
+sudo unlink $STAGE_NGINX_CONF_D
 
-exit
+SERVER_NAME=$SERVER_NAME ROOT=$ROOT ENV=prod NORESTART=1 build/configurez-nginx.sh
+sudo ln -f -s -T $ROOT/prod/nginx.conf.d /etc/nginx/conf.d/executori.org
 
-ln -s $RELEASE prod
-rm -rf prod/date
-ln -s data prod/date
-# TODO
-# ln -s /mnt/flash/date/data.executori.org $STAGE/date
-
-# TODO: enable when stable
-#./build/configurez-nginx.sh executori.org
+cd ..
+unlink stage
+ln -f -s -T $RELEASE prod
+sudo /etc/init.d/nginx reload
