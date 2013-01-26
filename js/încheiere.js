@@ -99,11 +99,15 @@
         '</html>';
     },
 
+    nouă: function () {
+      return decodeURI(location.pathname).substr(0, 21) === '/formulare-încheieri/';
+    },
+
     trimite: function () {
       var pagina = Încheiere.cale();
 
       $.put(pagina, Încheiere.conţinut(), function () {
-        if (decodeURI(location.pathname).substr(0, 21) === '/formulare-încheieri/') {
+        if (Încheiere.nouă()) {
           // e o încheiere nouă încă nesalvată
           Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
           delete Încheieri.deschise[Încheiere.pagina];
@@ -156,10 +160,14 @@
     },
 
     cale: function () {
-      var director = '/date/' + Utilizator.login + '/proceduri/' + FormularProcedură.număr() + '/încheieri/',
-          fişier = Încheiere.formular + '-' + (new Date()).getTime() + '.html';
+      if (Încheiere.nouă()) {
+        var director = '/date/' + Utilizator.login + '/proceduri/' + FormularProcedură.număr() + '/încheieri/',
+            fişier = Încheiere.formular + '-' + (new Date()).getTime() + '.html';
 
-      return director + fişier;
+        return director + fişier;
+      } else {
+        return location.pathname;
+      }
     },
 
     imprimă: function () {
