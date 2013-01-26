@@ -37,7 +37,7 @@ pull:
 	git gc
 
 .PHONY: build
-build:
+build: lint-bash lint-html lint-php formulare
 	build/start.sh
 
 deploy: stage

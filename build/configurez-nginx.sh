@@ -1,13 +1,11 @@
 echo 'Configurez nginx...'
 
-# SERVER_NAME şi ENV se ia din mediu
+# SERVER_NAME şi ROOT se ia din mediu
 
-cp nginx.vhost.conf.template nginx.vhost.conf
-sed -i \
+sed \
   -e "s|%%SERVER_NAME%%|$SERVER_NAME|g" \
   -e "s|%%ROOT%%|$ROOT|g" \
-  -e "s|%%ENV%%|$ENV|g" \
-  nginx.vhost.conf
+  nginx.vhost.conf.template > nginx.vhost.conf
 
 # nu restarta dacă NORESTART e definit în mediu
 if [ -z "$NORESTART" ]; then

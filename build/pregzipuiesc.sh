@@ -1,3 +1,5 @@
+echo -n 'Pregzipuiesc cod'
+
 files="
   index.html
   css/*.css
@@ -5,8 +7,6 @@ files="
   formulare-încheieri/*.html
   bnm/*.js
 "
-
-echo -n 'Pregzipuiesc cod'
 
 for file in $files; do
   echo -n '.'
