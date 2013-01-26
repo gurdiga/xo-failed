@@ -25,12 +25,13 @@ $data = date_parse_from_format('d.m.Y', $data);
 $data = date('Y-m-d', mktime(0, 0, 0, $data['month'], $data['day'], $data['year']));
 error_log("Data: $data");
 
-$json = "$root/../date/bnm/rata_de_bază.json";
+chdir("$root/../date/bnm");
+$json = "rata_de_bază.json";
 $rate = json_decode(file_get_contents($json), true);
 $rate[$data] = $valoarea;
 file_put_contents($json, json_encode($rate));
 error_log('Înregistrat JSON: ' . filesize($json) . ' bytes');
 
-$js = "$root/../date/bnm/rata_de_bază.js";
+$js = "rata_de_bază.js";
 file_put_contents($js, 'var RateDeBază = ' . json_encode($rate) . ';');
 error_log('Înregistrat JS: ' . filesize($js) . ' bytes');
