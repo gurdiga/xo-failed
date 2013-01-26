@@ -36,6 +36,7 @@ pull:
 	git reset --hard origin/master
 	git gc
 
+.PHONY: build
 build:
 	build/start.sh
 
