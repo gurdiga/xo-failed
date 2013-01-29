@@ -1,0 +1,113 @@
+<? $titlu = 'Încheiere de schimb forţat' ?>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
+
+        <hgroup>
+          <h1>Încheiere</h1>
+          <h2>cu privire la schimbul forţat al locuinţelor</h2>
+        </hgroup>
+
+<? require 'procedura.html' ?>
+<? require 'părţile.html' ?>
+
+        <section>
+          <header>Chestiunea</header>
+          <div class="conţinut" spellcheck="false">
+            <p>Examinînd cererea CREDITORULUI urmăritor cu privire la stabilirea datei schimbului forţat de locuinţă,</p>
+            <p>am stabilit</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Motivele</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <p>La data de <%= procedură['data-intentării'] %> a fost intentată procedura de executare
+            a documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din
+            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de judecătoria
+            <%= procedură['document-executoriu']['instanţa-de-judecată'] %> prin care s-a dispus
+            schimbul forţat din încăperea de la adresa:</p>
+
+            <address><%= procedură['obiectul-urmăririi']['încăperea-pentru-creditor'] %></address>
+
+            <p>în încăperea:</p>
+
+            <address><%= procedură['obiectul-urmăririi']['încăperea-pentru-debitor'] %></address>
+
+            <% if (amînată) { %>
+              <p>Schimbul forţat în cadrul acestei proceduri a fost amînată pînă la <%= ultimaAmînare %> din cauza
+              <span class="atenţionare">INTRODUCEŢI CAUZA AMÎNĂRII</span>.</p>
+            <% } %>
+
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 14-16, 22, 66, 150 al Codului de executare RM, dispun</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Dispoziţia</header>
+          <div class="conţinut" spellcheck="false">
+
+            <ol>
+              <li>
+                <p>A propune DEBITORULUI de a executa benevol documentul executoriu
+                în termen de 15 zile urmînd ca în acest termen să să se mute din încăperea
+                de la adresa:</p>
+
+                <address><%= procedură['obiectul-urmăririi']['încăperea-pentru-creditor'] %></address>
+
+                <p>în încăperea de la adresa:</p>
+
+                <address><%= procedură['obiectul-urmăririi']['încăperea-pentru-debitor'] %></address>
+
+                <p>pentru permiterea accesului CREDITORULUI în aceasta şi în folosirea nestingherită a ei.</p>
+              </li>
+
+              <li>
+                <p>În cazul în care pînă la expirarea termenului fixat,
+                <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> nu
+                <%= text('va sau vor', procedură.debitori) %> executa benevol documentul executoriu,
+                se numeşte schimbul forţat pe data de
+
+                <% if (amînată) { %>
+                  <%= ultimaAmînare %>.
+                <% } else { %>
+                  <%= procedură['obiectul-urmăririi']['data-şi-ora-schimbului-forţat'] %>.
+                <% } %>
+
+                </p>
+              </li>
+
+              <li>
+                <p>Se înştiinţează <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> că neprezentarea
+                <%= text('lui sau lor', procedură.debitori) %> nu va împiedica executarea documentului executoriu.</p>
+
+                <p>Dacă persoanele ce urmează a fi supuse strămutării/schimbului forţat de locuinţă se vor
+                ascunde ori nu vor permite executorului judecătoresc să intre în încăperea pe care o ocupă,
+                sau vor comite alte acte ce vor împiedica executarea documentului executoriu, evacuarea  se
+                va face prin pătrundere forţată în încăpere.</p>
+              </li>
+
+              <li>
+                <p>Se explică <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> că după schimb,
+                acesta este obligat de a nu crea CREDITORULUI obstacole la accesul în încăpere şi la folosirea ei.
+                În caz contrar, <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> îi
+                <%= text('va sau vor', procedură.debitori) %> fi aplicate sancţiunile prevăzute de legislaţie.</p>
+              </li>
+
+              <li>
+                <p>A anunţa organele de poliţie să delege un colaborator al organelor de poliţie care să
+                asigure ordinea publică în cadrul procesului de schimb.</p>
+              </li>
+
+              <li>
+                <p>Se propune CREDITORULUI că asigure la data strămutării/schimbului forţat 2 martori asistenţi,
+                hamali şi specialişti în deschidere forţată a încăperilor, sau să avanseze aceste cheltuieli
+                executorului pentru a le contracta personal.</p>
+              </li>
+            </ol>
+
+<? require 'despre-contestare.html' ?>
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>

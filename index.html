@@ -1067,6 +1067,26 @@
           <label for="încăperea-pentru-debitor" class="textarea">Încăperea pentru debitor</label>
           <textarea id="încăperea-pentru-debitor"></textarea>
         </li>
+
+        <li>
+          <label for="data-şi-ora-schimbului">Data şi ora schimbului</label>
+          <input type="text" id="data-şi-ora-schimbului" class="dată"/>
+        </li>
+
+        <li class="container-buton">
+          <button class="adaugă-cîmp-personalizat amînare semiascuns"
+            title="Adaugă cîmp de amînare a schimbului"
+            data-şablon="cîmpul-pentru-data-şi-ora-amînării-schimbului"
+            data-etichetă="Amînat pînă la">+</button>
+        </li>
+      </ul>
+
+
+      <ul class="cîmpul-pentru-data-şi-ora-amînării-schimbului">
+        <li class="personalizat eliminabil de tot">
+          <textarea class="etichetă amînare" title="Etichetă editabilă"></textarea>
+          <input type="text" placeholder="Data şi ora" class="dată amînare"/>
+        </li>
       </ul>
 
 

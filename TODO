@@ -1,8 +1,4 @@
 - Încheieri
-  - widget pentru content opţional în încheieri (ex: încheiere de evacuare)?
-  - nonpecuniar de evacuare
-  - de testat script.js din încheiere?
-  - rm -rf build/teste/qunit on prod and stage
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?

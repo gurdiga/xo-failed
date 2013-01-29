@@ -1,18 +1,20 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Încheiere de instalare', function () {
+asyncTest('Încheiere de schimb forţat', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:129 */
   'use strict';
 
   var app = this.app,
       $secţiune = app.FormularProcedură.$obiectulUrmăririi;
 
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('instalarea').change();
+  $secţiune.find('#obiect').val('schimbul forţat').change();
+
+  ok($secţiune.find('#încăperea-pentru-creditor').există(), 'avem “Încăperea pentru creditor”');
+  ok($secţiune.find('#încăperea-pentru-debitor').există(), 'avem “Încăperea pentru debitor”');
 
   // adăugăm o amînare
-  var $dataEvacuării = $secţiune.find('li:has(#data-şi-ora-instalării)'),
-      $container = $dataEvacuării.next('.container-buton'),
+  var $dataSchimbului = $secţiune.find('li:has(#data-şi-ora-schimbului)'),
+      $container = $dataSchimbului.next('.container-buton'),
       $butonDeAdăugare = $container.find('button.adaugă-cîmp-personalizat');
 
   ok($butonDeAdăugare.există(), 'avem buton de adăugare amînare');
@@ -34,8 +36,10 @@ asyncTest('Încheiere de instalare', function () {
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        subtitlu = 'cu privire la instalarea în spaţiul locativ',
+        subtitlu = 'cu privire la schimbul forţat al locuinţelor',
         date = this.tab.Încheiere.date;
+
+    ok(true, 'iniţializat încheierea');
 
     ok(date.amînată, 'context: setat amînată');
     equal(date.ultimaAmînare, dataAmînării, 'context: setat ultimaAmînare');
@@ -46,13 +50,18 @@ asyncTest('Încheiere de instalare', function () {
     ok($paragrafDespreAmînare.există(), 'avem paragraf despre amînare');
     ok($paragrafDespreAmînare.find('span.atenţionare').există(), '…cu atenţionare să se introducă cauza');
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
-    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['în-încăperea'].trim(), 'avem adresa');
+    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'].trim(), 'avem adresa pentru creditor');
+    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'].trim(), 'avem adresa pentru debitor');
 
+    console.log($încheiere, app.Utilizator.login + app.FormularProcedură.număr());
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
-    setTimeout(function () { // pentru observabilitate
+    app.FormularProcedură.$.find('.închide').click();
+    app.$(app.FormularProcedură.$).one('închidere', function () {
+      ok(true, 'închis formularul de procedură');
+
       start();
-    }, 500);
+    });
   });
 });
