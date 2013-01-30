@@ -67,11 +67,13 @@
                 <%= text('va sau vor', procedură.debitori) %> executa benevol documentul executoriu,
                 se numeşte schimbul forţat pe data de
 
+                <span class="împreună">
                 <% if (amînată) { %>
                   <%= ultimaAmînare %>.
                 <% } else { %>
                   <%= procedură['obiectul-urmăririi']['data-şi-ora-schimbului'] %>.
                 <% } %>
+                </span>
 
                 </p>
               </li>
