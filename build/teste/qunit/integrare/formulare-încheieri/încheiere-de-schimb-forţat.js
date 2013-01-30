@@ -1,7 +1,7 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de schimb forţat', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:143 */
+  /*jshint maxlen:148 */
   'use strict';
 
   var app = this.app,
@@ -51,6 +51,10 @@ asyncTest('Încheiere de schimb forţat', function () {
     ok($paragrafDespreAmînare.există(), 'avem paragraf despre amînare');
     ok($paragrafDespreAmînare.find('span.atenţionare').există(), '…cu atenţionare să se introducă cauza');
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
+
+    var $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut');
+
+    ok($secţiuneaDispoziţia.contents(':contains("' + dataAmînării + '")').există(), 'data este în secţiunea “Dispoziţia”');
     equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'], 'avem adresa pentru creditor');
     equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'], 'avem adresa pentru debitor');
 
