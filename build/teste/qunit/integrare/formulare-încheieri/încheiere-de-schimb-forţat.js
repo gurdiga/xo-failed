@@ -1,6 +1,7 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de schimb forţat', function () {
   /*global UtilitareÎncheiere:false */
+  /*jshint maxlen:143 */
   'use strict';
 
   var app = this.app,
@@ -50,10 +51,9 @@ asyncTest('Încheiere de schimb forţat', function () {
     ok($paragrafDespreAmînare.există(), 'avem paragraf despre amînare');
     ok($paragrafDespreAmînare.find('span.atenţionare').există(), '…cu atenţionare să se introducă cauza');
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
-    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'].trim(), 'avem adresa pentru creditor');
-    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'].trim(), 'avem adresa pentru debitor');
+    equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'], 'avem adresa pentru creditor');
+    equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'], 'avem adresa pentru debitor');
 
-    console.log($încheiere, app.Utilizator.login + app.FormularProcedură.număr());
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 

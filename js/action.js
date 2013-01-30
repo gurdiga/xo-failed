@@ -2036,7 +2036,7 @@
           întîrziere = Subsecţiuni.întîrzieri.colectează(secţiune),
           dobînda = DobîndaDeÎntîrziere.calculează(întîrziere).dobînda;
 
-      secţiune.find('.dobîndă').val(dobînda.toFixed(2));
+      secţiune.find('.dobîndă').val(dobînda);
     }
   },
 
@@ -2423,7 +2423,7 @@
       }
 
       return {
-        dobînda: parseFloat(dobînda.toFixed(2)),
+        dobînda: dobînda.toFixed(2),
         detalii: detalii
       };
     }
