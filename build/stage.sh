@@ -47,6 +47,8 @@ sudo unlink $STAGE_NGINX_CONF_D
 SERVER_NAME=executori.org ROOT=$ROOT/prod NORESTART=1 build/configurez-nginx.sh
 sudo ln -f -s -T $ROOT/prod/nginx.conf.d /etc/nginx/conf.d/executori.org
 
+rm -rf build/teste .git*
+
 cd ..
 unlink stage
 ln -f -s -T $RELEASE prod

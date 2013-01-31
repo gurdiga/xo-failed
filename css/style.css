@@ -1130,6 +1130,8 @@ select#obiect~.buton[data-formular] {
 
 .ui-icon-calendar {
   margin-left: -1em;
+  vertical-align: top;
+  margin-top: 5px;
 }
 
 .titlu .buton[data-formular] {

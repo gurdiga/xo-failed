@@ -28,6 +28,7 @@
     'integrare/formulare-încheieri/încheiere-de-evacuare.js',
     'integrare/formulare-încheieri/încheiere-de-instalare.js',
     'integrare/formulare-încheieri/încheiere-de-schimb-forţat.js',
+    'integrare/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.js',
 
     'integrare/căutare-procedură.js',
 
@@ -37,7 +38,8 @@
     '/formulare-încheieri/anexă-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare-încheieri/încheiere-de-evacuare.părţi/script.js',
     '/formulare-încheieri/încheiere-de-instalare.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-schimb-forţat.părţi/script.js'
+    '/formulare-încheieri/încheiere-de-schimb-forţat.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

@@ -1,0 +1,70 @@
+<? $titlu = 'Somaţie de stabilire a domiciluilui copilului' ?>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
+
+        <hgroup>
+          <h1>Somaţie</h1>
+          <h2>
+            cu privire la executarea documentului executoriu de<br/>
+            stabilire a domiciliului copilului minor
+          </h2>
+        </hgroup>
+
+<? require 'procedura.html' ?>
+<? require 'părţile.html' ?>
+
+        <section>
+          <div class="conţinut pe-toată-foaia" spellcheck="false">
+            <p>Examinînd cererea CREDITORULUI cu privire la stabilirea domiciliului copilului minor,
+            am stabilit</p>
+
+            <p>
+<? require 'început-secţiune-motive.html' ?>
+            stabilirea domiciliului copilului minor <%= procedură['obiectul-urmăririi']['numele-copilului'] %>
+            născut la data de <%= procedură['obiectul-urmăririi']['data-naşterii-copilului'] %> cu CREDITORUL.</p>
+
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 152, 154 al Codului de executare
+            RM, dispun:</p>
+
+            <ol>
+              <li>
+                <p>Se propune <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+                de a executa benevol documentul executoriu în termen de 10 zile, urmînd ca în
+                acest termen să transmită CREDITORULUI copilul minor
+                <%= procedură['obiectul-urmăririi']['numele-copilului'] %> născut la data de
+                <%= procedură['obiectul-urmăririi']['data-naşterii-copilului'] %></p>
+              </li>
+
+              <li>
+                <p>Se obligă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> ca în
+                interiorul acestui termen să anunţe din timp executorul judecătoresc despre data,
+                ora şi locul executării documentului executoriu la numărul de telefon
+                <%= executor.telefon %> sau prin corespondenţă la adresa executorului judecătoresc.</p>
+              </li>
+
+              <li>
+                <p>Dacă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> nu
+                <%= text('va sau vor', procedură.debitori) %> executa obligaţia stabilită la punctul 2,
+                acesta urmează să execute documentul executoriu în biroul executorului judecătoresc la
+                <span class="împreună"><%= procedură['obiectul-urmăririi']['data-prezentării-debitorului'] %></span>
+                în prezenţa CREDITORULUI şi a reprezentanţilor autorităţii tutelare, fapt despre care aceştia
+                au fost somaţi în modul corespunzător.</p>
+              </li>
+
+              <li>
+                <p>În caz dacă la expirarea datei şi orei stabilite, DEBITORUL nu va executa benevol
+                documentul executoriu, acestuia i se vor aplica măsurile stabilite de art. 152 al Codului
+                de executare.</p>
+              </li>
+
+              <li>
+                <p>Prezenta somaţie se expediază părţilor procedurii de executare şi autorităţii tutelare
+                pentru executare.</p>
+              </li>
+            </ol>
+
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>

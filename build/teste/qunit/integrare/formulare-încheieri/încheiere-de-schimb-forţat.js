@@ -61,11 +61,8 @@ asyncTest('Încheiere de schimb forţat', function () {
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
-    app.FormularProcedură.$.find('.închide').click();
-    app.$(app.FormularProcedură.$).one('închidere', function () {
-      ok(true, 'închis formularul de procedură');
-
+    setTimeout(function () {
       start();
-    });
+    }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
 });
