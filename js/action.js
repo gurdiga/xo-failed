@@ -1763,6 +1763,7 @@
         .on('click', '.dialog+button', this.afişeazăDialog)
         .on('ascundere', '.dialog', this.deselecteazăButonul)
         .on('afişare', '.dialog', this.selecteazăButonul)
+        .on('afişare', '.dialog', this.focuseazăPrimulCîmp)
         .on('click', '.dialog button.închide', this.închideDialog)
         .on('keyup', '.dialog :input', function (e) {
           if (e.keyCode === 27) $(this).closest('.dialog').ascunde();
@@ -1792,11 +1793,12 @@
         dialog.ascunde();
       } else {
         BaraDeSus.$.find('.dialog:visible').not(this).ascunde();
-
-        dialog.afişează(function () {
-          $(this).find('input:not([readonly]):first').focus();
-        });
+        dialog.afişează();
       }
+    },
+
+    focuseazăPrimulCîmp: function () {
+      $(this).find('input:not([readonly]):first').focus();
     },
 
     închideDialog: function () {
@@ -1833,8 +1835,7 @@
       $.getJSON(Profil.url, function (date) {
         Profil.date = date;
         Profil.reseteazăDialog();
-
-        $(Profil.$).trigger('încărcat');
+        Profil.$.trigger('încărcat');
       });
     },
 
@@ -1842,15 +1843,16 @@
       function cîmp(selector) { return Profil.$.find(selector).val(); }
 
       Profil.date = {
-        'nume': cîmp('#nume-executor'),
-        'adresa': cîmp('#adresa-executor'),
-        'codul-fiscal': cîmp('#codul-fiscal'),
-        'instanţa-teritorială': cîmp('#instanţa-teritorială'),
+        'nume': cîmp('#nume'),
+        'adresă': cîmp('#adresă'),
+        'telefon': cîmp('#telefon'),
+        'cod-fiscal': cîmp('#cod-fiscal'),
+        'instanţă-teritorială': cîmp('#instanţă-teritorială'),
         'email': cîmp('#email'),
         'cont-taxe-speze': cîmp('#cont-taxe-speze'),
-        'banca-taxe-speze': cîmp('#banca-taxe-speze'),
+        'bancă-taxe-speze': cîmp('#bancă-taxe-speze'),
         'cont-onorarii': cîmp('#cont-onorarii'),
-        'banca-onorarii': cîmp('#banca-onorarii')
+        'bancă-onorarii': cîmp('#bancă-onorarii')
       };
 
       $.put(Profil.url, JSON.stringify(Profil.date), function () {
@@ -1863,17 +1865,18 @@
     reseteazăDialog: function () {
       function cîmp(selector, valoare) { Profil.$.find(selector).val(valoare); }
 
-      cîmp('#nume-executor', Profil.date['nume']);
-      cîmp('#adresa-executor', Profil.date['adresa']);
-      cîmp('#codul-fiscal', Profil.date['codul-fiscal']);
-      cîmp('#instanţa-teritorială', Profil.date['instanţa-teritorială']);
+      cîmp('#nume', Profil.date['nume']);
+      cîmp('#adresă', Profil.date['adresă']);
+      cîmp('#telefon', Profil.date['telefon']);
+      cîmp('#cod-fiscal', Profil.date['cod-fiscal']);
+      cîmp('#instanţă-teritorială', Profil.date['instanţă-teritorială']);
       cîmp('#email', Profil.date['email']);
       cîmp('#cont-taxe-speze', Profil.date['cont-taxe-speze']);
-      cîmp('#banca-taxe-speze', Profil.date['banca-taxe-speze']);
-      Bănci.setează(Profil.date['banca-taxe-speze'], Profil.$.find('#banca-taxe-speze'));
+      cîmp('#bancă-taxe-speze', Profil.date['bancă-taxe-speze']);
+      Bănci.setează(Profil.date['bancă-taxe-speze'], Profil.$.find('#bancă-taxe-speze'));
       cîmp('#cont-onorarii', Profil.date['cont-onorarii']);
-      cîmp('#banca-onorarii', Profil.date['banca-onorarii']);
-      Bănci.setează(Profil.date['banca-onorarii'], Profil.$.find('#banca-onorarii'));
+      cîmp('#bancă-onorarii', Profil.date['bancă-onorarii']);
+      Bănci.setează(Profil.date['bancă-onorarii'], Profil.$.find('#bancă-onorarii'));
     }
   },
 
@@ -2942,13 +2945,17 @@
   // --------------------------------------------------
 
   $.fn.ascunde = function () {
-    return this.stop(true, true).fadeOut().trigger('ascundere');
+    return this.stop(true, true).fadeOut(function () {
+      $(this).trigger('ascundere');
+    });
   };
 
   // --------------------------------------------------
 
-  $.fn.afişează = function (callback) {
-    return this.delay(200).fadeIn(callback).trigger('afişare');
+  $.fn.afişează = function () {
+    return this.delay(200).fadeIn(function () {
+      $(this).trigger('afişare');
+    });
   };
 
   // --------------------------------------------------

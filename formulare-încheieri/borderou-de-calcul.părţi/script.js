@@ -85,7 +85,7 @@
       /*jshint maxcomplexity:7 */
       var app = context.app;
       var proprietăţi = [
-        'nume', 'codul-fiscal',
+        'nume', 'cod-fiscal',
         'cont-taxe-speze', 'cont-onorarii',
         'denumire-bancă-taxe-speze', 'denumire-bancă-onorarii',
         'cod-bancă-taxe-speze', 'cod-bancă-onorarii'
@@ -96,7 +96,7 @@
         context.executor[proprietăţi[i]] = app.Profil.cîmpNecompletat;
       }
 
-      var banca = app.Bănci.cautăDupăSufix(context.executor['banca-taxe-speze']), cod;
+      var banca = app.Bănci.cautăDupăSufix(context.executor['bancă-taxe-speze']), cod;
 
       for (cod in banca) {
         if (!banca.hasOwnProperty(cod)) break;
@@ -104,7 +104,7 @@
         context.executor['cod-bancă-taxe-speze'] = cod;
       }
 
-      banca = app.Bănci.cautăDupăSufix(context.executor['banca-onorarii']);
+      banca = app.Bănci.cautăDupăSufix(context.executor['bancă-onorarii']);
 
       for (cod in banca) {
         if (!banca.hasOwnProperty(cod)) break;

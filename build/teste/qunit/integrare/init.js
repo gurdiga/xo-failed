@@ -19,7 +19,7 @@
           'data-naşterii': '10.10.1970'
         }],
         'document-executoriu': {
-          'instanţa-de-judecată': app.Profil.date['instanţa-teritorială'],
+          'instanţa-de-judecată': app.Profil.date['instanţă-teritorială'],
           'numărul-de': '1234B/53',
           'data-hotărîrii': '06.06.2006',
           'dispozitivul': 'Cras a pharetra enim. In non lectus nulla,' +
