@@ -12,7 +12,7 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
   $buton.click();
 
-  setTimeout(function () { // aşteptăm animaţia
+  $dialog.one('afişare', function () {
     ok($dialog.is(':visible'), 'la click se afişează dialogul');
 
     verificăŞiCompleteazăCîmpurile($dialog);
@@ -20,8 +20,8 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
     setTimeout(function () { // aşteptăm o leacă să fie urmăribil testul
       verificăRaportul($dialog);
-    }, 500);
-  }, 200);
+    }, app.PAUZĂ_DE_OBSERVABILITATE);
+  });
 
   // ------------------------
   function verificăŞiCompleteazăCîmpurile($dialog) {

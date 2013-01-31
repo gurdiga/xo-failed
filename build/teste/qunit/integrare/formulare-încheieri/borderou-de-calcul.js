@@ -43,8 +43,8 @@ asyncTest('Borderou de calcul', function () {
             app.FormularProcedură.$.find('.închide').click();
 
             start();
-          }, 500);
-        }, 500);
+          }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZĂ_DE_OBSERVABILITATE);
       });
     }, 500);
   });

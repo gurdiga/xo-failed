@@ -53,6 +53,6 @@ asyncTest('Încheiere de evacuare', function () {
 
     setTimeout(function () { // pentru observabilitate
       start();
-    }, 500);
+    }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
 });

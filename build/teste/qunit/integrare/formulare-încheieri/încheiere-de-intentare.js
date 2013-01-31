@@ -117,7 +117,7 @@ asyncTest('Încheiere de intentare', function () {
 
           verificăImprimarea(cale);
         });
-      }, 500);
+      }, app.PAUZĂ_DE_OBSERVABILITATE);
     });
   }
 

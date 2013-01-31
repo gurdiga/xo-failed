@@ -53,6 +53,6 @@ asyncTest('Încheiere de instalare', function () {
 
     setTimeout(function () { // pentru observabilitate
       start();
-    }, 500);
+    }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
 });
