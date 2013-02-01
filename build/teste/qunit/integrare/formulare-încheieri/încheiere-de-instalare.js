@@ -46,6 +46,7 @@ asyncTest('Încheiere de instalare', function () {
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
     equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['în-încăperea'].trim(), 'avem adresa');
 
+    UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la instalarea în spaţiul locativ');
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);

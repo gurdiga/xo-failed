@@ -35,6 +35,7 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
         date = this.tab.Încheiere.date,
         subtitlu = 'cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor';
 
+    UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, subtitlu);
     UtilitareÎncheiere.verificăSecţiuni($încheiere, ['Procedura', 'Creditorul', 'Debitorul', 'Executorul']);
 

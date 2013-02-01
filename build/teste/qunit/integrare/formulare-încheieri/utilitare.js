@@ -1,7 +1,17 @@
 (function () {
+  /*jshint maxlen:131 */
   'use strict';
 
   var UtilitareÎncheiere = {
+    verificăŞoaptăButon: function ($încheiere, $butonPentruÎncheiere) {
+      var titlu = $încheiere.find('h1').text(),
+          utilitare = $încheiere[0].defaultView.Încheiere.utilitare,
+          subtitlu = utilitare.normalizeazăSpaţii($încheiere.find('h1+h2').text()),
+          şoaptăCorespunzătoare = 'Formează ' + titlu + ' ' + subtitlu;
+
+      equal($butonPentruÎncheiere.attr('title'), şoaptăCorespunzătoare, 'şoapta pe butonul de încheiere corespunde cu titlul ei');
+    },
+
     verificăSubtitlu: function ($încheiere, subtitluCorect) {
       var utilitare = $încheiere[0].defaultView.Încheiere.utilitare,
           subtitluDeFacto = utilitare.normalizeazăSpaţii($încheiere.find('h1+h2').text());

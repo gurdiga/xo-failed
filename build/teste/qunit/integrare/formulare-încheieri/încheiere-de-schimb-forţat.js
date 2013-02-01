@@ -56,6 +56,7 @@ asyncTest('Încheiere de schimb forţat', function () {
     equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'], 'avem adresa pentru creditor');
     equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'], 'avem adresa pentru debitor');
 
+    UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la schimbul forţat al locuinţelor');
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);

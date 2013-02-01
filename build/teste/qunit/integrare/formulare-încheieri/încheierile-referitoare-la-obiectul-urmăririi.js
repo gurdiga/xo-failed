@@ -1,5 +1,5 @@
 asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
-  /*jshint maxlen:126 */
+  /*jshint maxlen:141 */
   'use strict';
 
   var app = this.app;
@@ -23,16 +23,16 @@ asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
     app.openOriginal = app.open;
     app.open = function () { return 'tab stub'; };
 
-    $select.val('schimbul forţat');
+    $select.val('schimbul forţat').change();
+    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-schimb-forţat', 'e setat corespunzător [data-formular] pe el');
     $butonPentruÎncheiere.click();
-    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-schimb-forţat', '…la click, se setează corespunzător [data-formular] pe el');
     meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
     delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
 
-    $select.val('evacuarea');
+    $select.val('evacuarea').change();
+    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-evacuare', 'e setat corespunzător [data-formular] pe el');
     $butonPentruÎncheiere.click();
-    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-evacuare', '…la click, se setează corespunzător [data-formular] pe el');
     meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
     delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];

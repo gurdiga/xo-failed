@@ -28,6 +28,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
         date = this.tab.Încheiere.date,
         subtitlu = 'cu privire la executarea de către debitor a unor acte nelegate de remiterea unor sume sau bunuri';
 
+    UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, subtitlu);
     UtilitareÎncheiere.verificăSecţiuni($încheiere, ['Procedura', 'Creditorul', 'Debitorul', 'Executorul']);
 

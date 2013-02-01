@@ -226,6 +226,8 @@
       $subformular
         .find(':input:not(' + SubsecţiuniDinamice.selector + ')').first().focus().end().end()
         .find('.adaugă-cîmp-personalizat.implicit').click();
+
+      $select.trigger('inserat-subsecţiune');
     },
 
     parseazăIncluderile: function (html) {
@@ -2816,6 +2818,8 @@
       FormularProcedură.$
         .on('închidere', this.închide)
         .on('salvat', this.activează);
+
+      FormularProcedură.$.on('change', '#obiect', this.ajustează);
     },
 
     activează: function () {
@@ -2838,6 +2842,15 @@
       }
     },
 
+    ajustează: function () {
+      var $opţiune = $(this).find('option:selected'),
+          $buton = $(this).siblings('.ui-icon-document.buton');
+
+      $buton
+        .data('formular', $opţiune.data('formular-încheiere'))
+        .attr('title', $opţiune.data('şoaptă-buton'));
+    },
+
     formular: function (buton) {
       var formular = buton.data('formular');
 
@@ -2856,11 +2869,6 @@
           formular = buton.data('formular'),
           dinamic = buton.data('dinamic'),
           pagina;
-
-      if (buton.siblings('#obiect').există()) { // obiectul urmăririi
-        formular = buton.siblings('#obiect').find('option:selected').data('formular-încheiere');
-        buton.data('formular', formular);
-      }
 
       if (buton.is('[dezactivat]')) return;
       if (!dinamic && buton.is('.salvat')) {
