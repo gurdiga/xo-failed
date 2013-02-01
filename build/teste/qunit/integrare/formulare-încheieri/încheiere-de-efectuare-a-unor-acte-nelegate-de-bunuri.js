@@ -15,12 +15,12 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
   ok($secţiune.find('#acte').există(), 'avem cîmp pentru acte');
   $secţiune.find('#acte').val(acte);
 
-  var $buton = $secţiune.find('#obiect~.buton[data-formular]');
+  var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-  ok($buton.există(), 'găsit butonaşul pentru încheiere');
-  $buton.click();
+  ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+  $butonPentruÎncheiere.click();
 
-  var formular = app.ButoanePentruÎncheieri.formular($buton),
+  var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
       meta = app.Încheieri.deschise[formular];
 
   app.$(meta).one('iniţializat', function () {

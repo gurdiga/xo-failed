@@ -14,28 +14,28 @@ asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
     $secţiune.find('#caracter').val('nonpecuniar').change();
 
     var $select = $secţiune.find('select#obiect'),
-        $buton = $secţiune.find('select#obiect~.buton[data-formular]'),
+        $butonPentruÎncheiere = $secţiune.find('select#obiect~.buton[data-formular]'),
         meta;
 
     ok($select.există(), 'avem select');
-    ok($buton.există(), 'avem butonaş');
+    ok($butonPentruÎncheiere.există(), 'avem butonaş');
 
     app.openOriginal = app.open;
     app.open = function () { return 'tab stub'; };
 
     $select.val('schimbul forţat');
-    $buton.click();
-    equal($buton.data('formular'), 'încheiere-de-schimb-forţat', '…la click, se setează corespunzător [data-formular] pe el');
-    meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
+    $butonPentruÎncheiere.click();
+    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-schimb-forţat', '…la click, se setează corespunzător [data-formular] pe el');
+    meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
-    delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
+    delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
 
     $select.val('evacuarea');
-    $buton.click();
-    equal($buton.data('formular'), 'încheiere-de-evacuare', '…la click, se setează corespunzător [data-formular] pe el');
-    meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
+    $butonPentruÎncheiere.click();
+    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-evacuare', '…la click, se setează corespunzător [data-formular] pe el');
+    meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
-    delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($buton)];
+    delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
 
     app.open = app.openOriginal;
     start();

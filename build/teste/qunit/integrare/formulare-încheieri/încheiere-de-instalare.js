@@ -24,12 +24,12 @@ asyncTest('Încheiere de instalare', function () {
   ok($amînare.există(), 's-a adăugat cîmp pentru amînare');
   $amînare.find('.dată').val(dataAmînării);
 
-  var $buton = $secţiune.find('#obiect~.buton[data-formular]');
+  var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-  ok($buton.există(), 'găsit butonaşul pentru încheiere');
-  $buton.click();
+  ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+  $butonPentruÎncheiere.click();
 
-  var formular = app.ButoanePentruÎncheieri.formular($buton),
+  var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
       meta = app.Încheieri.deschise[formular];
 
   app.$(meta).one('iniţializat', function () {

@@ -22,12 +22,12 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
   $secţiune.find('#data-naşterii-copilului').val(dataNaşteriiCopilului);
   $secţiune.find('#data-prezentării-debitorului').val(dataPrezentăriiDebitorului);
 
-  var $buton = $secţiune.find('#obiect~.buton[data-formular]');
+  var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-  ok($buton.există(), 'găsit butonaşul pentru încheiere');
-  $buton.click();
+  ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+  $butonPentruÎncheiere.click();
 
-  var formular = app.ButoanePentruÎncheieri.formular($buton),
+  var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
       meta = app.Încheieri.deschise[formular];
 
   app.$(meta).one('iniţializat', function () {
