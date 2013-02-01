@@ -37,14 +37,12 @@ asyncTest('Încheiere de schimb forţat', function () {
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        subtitlu = 'cu privire la schimbul forţat al locuinţelor',
         date = this.tab.Încheiere.date;
 
     ok(true, 'iniţializat încheierea');
 
     ok(date.amînată, 'context: setat amînată');
     equal(date.ultimaAmînare, dataAmînării, 'context: setat ultimaAmînare');
-    equal($încheiere.find('h1+h2').text(), subtitlu, 'subtitlul e “' + subtitlu + '”');
 
     var $paragrafDespreAmînare = $încheiere.find('p:contains("a fost amînată pînă la")');
 
@@ -58,6 +56,7 @@ asyncTest('Încheiere de schimb forţat', function () {
     equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'], 'avem adresa pentru creditor');
     equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'], 'avem adresa pentru debitor');
 
+    UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la schimbul forţat al locuinţelor');
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 

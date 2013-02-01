@@ -25,6 +25,7 @@ asyncTest('Încheiere de intentare', function () {
       ok($încheiere.find('.închide').există(), 'avem buton de închidere');
       ok($încheiere.find('body').is('[spellcheck=false]'), 'dezavtivat verificarea gramaticii pentru Firefox');
 
+      UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la intentarea procedurii de executare');
       UtilitareÎncheiere.verificăSecţiuni($încheiere,
           ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 

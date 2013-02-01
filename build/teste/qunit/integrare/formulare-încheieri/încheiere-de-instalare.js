@@ -34,12 +34,10 @@ asyncTest('Încheiere de instalare', function () {
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        subtitlu = 'cu privire la instalarea în spaţiul locativ',
         date = this.tab.Încheiere.date;
 
     ok(date.amînată, 'context: setat amînată');
     equal(date.ultimaAmînare, dataAmînării, 'context: setat ultimaAmînare');
-    equal($încheiere.find('h1+h2').text(), subtitlu, 'subtitlul e “' + subtitlu + '”');
 
     var $paragrafDespreAmînare = $încheiere.find('p:contains("a fost amînată pînă la")');
 
@@ -48,6 +46,7 @@ asyncTest('Încheiere de instalare', function () {
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
     equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['în-încăperea'].trim(), 'avem adresa');
 
+    UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la instalarea în spaţiul locativ');
     UtilitareÎncheiere.verificăSecţiuni($încheiere,
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
