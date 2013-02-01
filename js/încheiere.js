@@ -218,6 +218,7 @@
     utilitare: {
       init: function (context) {
         context.text = this.text;
+        context.normalizeazăSpaţii = this.normalizeazăSpaţii;
 
         if ('QUnit' in window) return; // testare
 
@@ -239,6 +240,13 @@
 
         sel.removeAllRanges();
         sel.addRange(range);
+      },
+
+      normalizeazăSpaţii: function (text) {
+        return text
+          .replace(/^\s+/mg, '')
+          .replace(/\s+$/mg, '')
+          .replace(/\s+/mg, ' ');
       }
     }
   },

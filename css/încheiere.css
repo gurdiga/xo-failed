@@ -281,7 +281,16 @@ table#rechizite-bancare th:first-child {
   background-color: silver;
 }
 
+blockquote,
 address {
   white-space: pre-line;
+}
+
+address {
   padding-left: 2em;
+}
+
+.conţinut.pe-toată-foaia blockquote {
+  margin: 0;
+  padding-left: 3em;
 }

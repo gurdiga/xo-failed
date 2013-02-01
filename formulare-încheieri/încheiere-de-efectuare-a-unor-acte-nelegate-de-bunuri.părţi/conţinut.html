@@ -1,0 +1,63 @@
+<? $titlu = 'Somaţie de stabilire a domiciluilui copilului' ?>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
+
+        <hgroup>
+          <h1>Somaţie</h1>
+          <h2>cu privire la executarea de către debitor a unor acte<br/>
+          nelegate de remiterea unor sume sau bunuri</h2>
+        </hgroup>
+
+<? require 'procedura.html' ?>
+<? require 'părţile.html' ?>
+
+        <section>
+          <div class="conţinut pe-toată-foaia editabil" spellcheck="false">
+            <p>Examinînd cererea CREDITORULUI cu privire la stabilirea domiciliului copilului minor,
+            am stabilit</p>
+
+            <p>
+<? require 'început-secţiune-motive.html' ?>
+            efectuarea de către <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> a
+            următoarelor acte:
+            </p>
+
+            <blockquote class="acte"><%= procedură['obiectul-urmăririi']['acte'] %></blockquote>
+
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 152 al Codului de
+            executare RM, dispun</p>
+
+            <ol>
+              <li>
+                <p>Se propune <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+                de a executa benevol documentul executoriu în termen de 10 zile, urmînd ca în
+                acest termen să-şi execute obligaţia de efectuare a următoarelor acte:</p>
+
+                <blockquote class="acte"><%= procedură['obiectul-urmăririi']['acte'] %></blockquote>
+              </li>
+
+              <li>
+                <p>În cazul în care debitorul nu va efectua în termen actele menţionate şi dacă
+                e posibilă efectuarea acestora de CREDITOR, acesta e în drept să efectueze actele
+                respective sub controlul executorului judecătoresc.</p>
+              </li>
+
+              <li>
+                <p>Dacă efectuarea acestor acte este imposibilă, iar
+                <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> va refuza executarea
+                documentului executoriu, executorul judecătoresc va încheia un proces-verbal şi
+                va înainta un demers instanţei de judecată care a adoptat hotărîrea, pentru a
+                stabili modul de executare a acesteia şi de aplicare a sancţiunii faţă de
+                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>.</p>
+              </li>
+
+              <li>
+                <p>Prezenta somaţie se expediază părţilor pentru executare.</p>
+              </li>
+            </ol>
+
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>

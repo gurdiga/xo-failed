@@ -29,6 +29,7 @@
     'integrare/formulare-încheieri/încheiere-de-instalare.js',
     'integrare/formulare-încheieri/încheiere-de-schimb-forţat.js',
     'integrare/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.js',
+    'integrare/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-nelegate-de-bunuri.js',
 
     'integrare/căutare-procedură.js',
 
@@ -39,7 +40,8 @@
     '/formulare-încheieri/încheiere-de-evacuare.părţi/script.js',
     '/formulare-încheieri/încheiere-de-instalare.părţi/script.js',
     '/formulare-încheieri/încheiere-de-schimb-forţat.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.părţi/script.js'
+    '/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-nelegate-de-bunuri.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

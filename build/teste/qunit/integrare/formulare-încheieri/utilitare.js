@@ -2,6 +2,13 @@
   'use strict';
 
   var UtilitareÎncheiere = {
+    verificăSubtitlu: function ($încheiere, subtitluCorect) {
+      var utilitare = $încheiere[0].defaultView.Încheiere.utilitare,
+          subtitluDeFacto = utilitare.normalizeazăSpaţii($încheiere.find('h1+h2').text());
+
+      equal(subtitluDeFacto, subtitluCorect, 'subtitlul corespunde');
+    },
+
     verificăSecţiuni: function ($încheiere, secţiuni) {
       ok($încheiere.find('article hgroup h1').există(), 'avem h1');
       ok($încheiere.find('article hgroup h2').există(), 'avem h2');

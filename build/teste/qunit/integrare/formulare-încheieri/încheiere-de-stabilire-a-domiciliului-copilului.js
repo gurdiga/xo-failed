@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Încheiere de stabilire a domiciliului copilului', function () {
+asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
   /*global UtilitareÎncheiere:false */
   /*jshint maxlen:162 */
   'use strict';
@@ -32,23 +32,22 @@ asyncTest('Încheiere de stabilire a domiciliului copilului', function () {
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        subtitlu = 'cu privire la schimbul forţat al locuinţelor',
-        date = this.tab.Încheiere.date;
+        date = this.tab.Încheiere.date,
+        subtitlu = 'cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor';
 
+    UtilitareÎncheiere.verificăSubtitlu($încheiere, subtitlu);
     UtilitareÎncheiere.verificăSecţiuni($încheiere, ['Procedura', 'Creditorul', 'Debitorul', 'Executorul']);
 
     var $conţinut = $încheiere.find('section .conţinut.pe-toată-foaia');
 
+    ok($conţinut.există(), 'avem secţiunea atotcuprinzătoare');
     ok($conţinut.find('p:contains("' + numeleCopilului + '")').există(), 'e menţionat numele copilului');
     ok($conţinut.find('p:contains("' + dataNaşteriiCopilului + '")').există(), 'e menţionată data naşterii copilului');
     ok($conţinut.find('p:contains("' + date.executor.telefon + '")').există(), 'e menţionat telefonul executorului');
     ok($conţinut.find('p:contains("' + dataPrezentăriiDebitorului + '")').există(), 'e menţionată data prezentării debitorului în oficiu');
 
-    app.FormularProcedură.$.find('.închide').click();
-    app.$(app.FormularProcedură.$).one('închidere', function () {
-      ok(true, 'închis formularul de procedură');
-
+    setTimeout(function () {
       start();
-    });
+    }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
 });
