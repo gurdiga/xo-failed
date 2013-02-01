@@ -13,8 +13,9 @@
 
         <section>
           <div class="conţinut pe-toată-foaia editabil" spellcheck="false">
-            <p>Examinînd cererea CREDITORULUI cu privire la stabilirea domiciliului copilului minor,
-            am stabilit</p>
+            <p>Examinînd cererea CREDITORULUI cu privire la somarea
+            <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> de a
+            efectua acte nelegate de remiterea unor sume sau bunuri, am stabilit</p>
 
             <p>
 <? require 'început-secţiune-motive.html' ?>
@@ -31,9 +32,7 @@
               <li>
                 <p>Se propune <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
                 de a executa benevol documentul executoriu în termen de 10 zile, urmînd ca în
-                acest termen să-şi execute obligaţia de efectuare a următoarelor acte:</p>
-
-                <blockquote class="acte"><%= procedură['obiectul-urmăririi']['acte'] %></blockquote>
+                acest termen să-şi execute obligaţia de efectuare a actelor menţionate.</p>
               </li>
 
               <li>

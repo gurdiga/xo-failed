@@ -35,8 +35,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
     var $conţinut = $încheiere.find('section .conţinut.pe-toată-foaia');
 
     ok($conţinut.există(), 'avem secţiunea atotcuprinzătoare');
-    equal($conţinut.find('.acte:first').text(), acte, 'se menţionează actele');
-    equal($conţinut.find('.acte').length, 2, '…de două ori');
+    equal($conţinut.find('.acte').text(), acte, 'se menţionează actele');
 
     app.FormularProcedură.$.find('.închide').click();
     app.$(app.FormularProcedură.$).one('închidere', function () {
