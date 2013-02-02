@@ -2,10 +2,17 @@ echo 'Configurez nginx...'
 
 # SERVER_NAME şi ROOT se ia din mediu
 
-sed \
-  -e "s|%%SERVER_NAME%%|$SERVER_NAME|g" \
-  -e "s|%%ROOT%%|$ROOT|g" \
-  nginx.vhost.conf.template > nginx.vhost.conf
+if [ -z "$SERVER_NAME" ]; then
+  echo "Eroare: variabila SERVER_NAME nu e setată."
+  exit 1
+fi
+
+if [ -z "$ROOT" ]; then
+  echo "Eroare: variabila ROOT nu e setată."
+  exit 1
+fi
+
+php -n -d include_path=nginx.conf.d nginx.vhost.conf.template > nginx.vhost.conf
 
 # nu restarta dacă NORESTART e definit în mediu
 if [ -z "$NORESTART" ]; then
