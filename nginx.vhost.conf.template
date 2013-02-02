@@ -39,6 +39,10 @@ server {
   error_page 404 /erori/404.html;
   error_page 401 /erori/401.html;
 
+  location = /register {
+    return 200;
+  }
+
   location = /login {
 <? require 'auth.conf' ?>
 

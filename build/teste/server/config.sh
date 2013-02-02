@@ -9,7 +9,8 @@ PASSWORD='Verificarea!'
 TMP_FILE="/tmp/$(date +%m%d%y%H%M%S)"
 DATE="$DOCUMENT_ROOT/date/$LOGIN"
 
-CURL_DEFAULT_ARGS="--insecure --user $LOGIN:$PASSWORD --fail --silent --show-error"
+CURL_DEFAULT_ARGS_ANON="--insecure --fail --silent --show-error"
+CURL_DEFAULT_ARGS="$CURL_DEFAULT_ARGS_ANON --user $LOGIN:$PASSWORD"
 
 
 RED="\e[00;31m"
