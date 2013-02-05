@@ -20,7 +20,7 @@ function register_user($login, $password) {
 		$old_content = '';
 	}
 
-	file_put_contents(HTUSERS, "$old_content\n$login:$hash");
+	file_put_contents(HTUSERS, "$old_content$login:$hash\n");
 }
 
 # --------------------------------------------------

@@ -62,3 +62,5 @@ Chestii tehnice
 
 - Dev
  - SASS + :autocmd BufWritePost *.sass !compile_sas.sh <afile>
+
+- put htusers.php on github

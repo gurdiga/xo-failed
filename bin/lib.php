@@ -1,6 +1,6 @@
 <?
 
-$login = $_SERVER['PHP_AUTH_USER'];
+if (isset($_SERVER['PHP_AUTH_USER'])) $login = $_SERVER['PHP_AUTH_USER'];
 $doc_root = $_SERVER['DOCUMENT_ROOT'];
 $calea = $doc_root . urldecode($_SERVER['REQUEST_URI']);
 $conţinut = file_get_contents('php://input');

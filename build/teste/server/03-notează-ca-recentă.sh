@@ -7,7 +7,6 @@ RASPUNS=$TMP_FILE
 curl $CURL_DEFAULT_ARGS \
   --request PUT \
   --data $NUMAR \
-  --silent \
   --output $RASPUNS \
   https://$SERVER_NAME/$JSON
 

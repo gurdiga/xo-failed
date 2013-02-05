@@ -3,7 +3,6 @@ echo 'Autentificarea...'
 curl \
   $CURL_DEFAULT_ARGS \
   --include \
-  --silent \
   --output $TMP_FILE \
   https://$SERVER_NAME/login
 

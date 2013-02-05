@@ -40,7 +40,8 @@ server {
   error_page 401 /erori/401.html;
 
   location = /register {
-    return 200;
+<? require 'fastcgi.conf' ?>
+<? require 'rest.conf' ?>
   }
 
   location = /login {
@@ -95,10 +96,7 @@ server {
     location ~ /date/\d+/.* {
       more_set_headers 'Content-Type: application/json; charset=utf-8';
 
-      include fastcgi_params;
-      fastcgi_intercept_errors on;
-      fastcgi_param SCRIPT_FILENAME $document_root/bin/router.php;
-      fastcgi_keep_conn on;
+<? require 'fastcgi.conf' ?>
 <? require 'rest.conf' ?>
 
       set $permission_tuple "$remote_user:$request_uri";

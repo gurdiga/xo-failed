@@ -11,7 +11,8 @@ $rute = array(
   'PUT/date/\d+/proceduri/recente\.json' => 'proceduri/notează-ca-recentă.php',
   'DELETE/date/\d+/proceduri/[PS]?-\d+/' => 'proceduri/şterge.php',
   'PUT/date/\d+/proceduri/[PS]?-\d+/încheieri/.+\.html' => 'încheieri/salvează.php',
-  'PUT/date/\d+/profil\.json' => 'salvează-profil.php'
+  'PUT/date/\d+/profil\.json' => 'salvează-profil.php',
+  'PUT/register' => 'utilizatori/înregistrează.php'
 );
 
 $găsit_script = false;
