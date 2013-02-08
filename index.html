@@ -137,7 +137,7 @@
             </ul>
 
             <ul class="subsecţiune">
-              <li class="titlu">cont pentru cauţiuni, taxe şi speze</li>
+              <li class="titlu neselectabil">cont pentru cauţiuni, taxe şi speze</li>
 
               <li>
                 <label for="cont-taxe-speze">Numărul contului</label>
@@ -154,7 +154,7 @@
             </ul>
 
             <ul class="subsecţiune">
-              <li class="titlu">cont pentru onorarii</li>
+              <li class="titlu neselectabil">cont pentru onorarii</li>
 
               <li>
                 <label for="cont-onorarii">Numărul contului</label>
@@ -287,8 +287,8 @@
               </div>
             </fieldset>
 
-            <button class="adaugă persoană semiascuns" title="Adaugă persoană terță">
-              +<span class="legend label">Persoană terță</span>
+            <button class="adaugă semiascuns">
+              +persoană terţă<span class="legend label">Persoană terță</span>
             </button>
           </div>
 
@@ -315,7 +315,7 @@
               </div>
             </fieldset>
 
-            <button class="adaugă persoană semiascuns" title="Adaugă debitor">+</button>
+            <button class="adaugă semiascuns">+debitor</button>
           </div>
 
           <div class="coloană stînga">
@@ -447,8 +447,8 @@
                   </li>
                 </ul>
 
-                <div id="adaugă-subsecţiune" class="listă">
-                  <span class="titlu">Adaugă subsecţiune</span>
+                <div id="adaugă-subsecţiune" class="listă neselectabilă">
+                  <span class="titlu semiascuns">subsecţiune</span>
 
                   <ul class="itemi cu umbră">
                     <li class="încasare">încasare</li>
@@ -501,7 +501,7 @@
 
               <ul id="categorii-taxe-şi-speze">
                 <li class="listă">
-                  <span class="titlu">Adaugă taxă de gestiune a procedurilor
+                  <span class="titlu semiascuns">taxă de gestiune a procedurilor
                   de executare şi administrare a documentelor</span>
 
                   <ul class="itemi cu umbră">
@@ -544,7 +544,7 @@
                 </li>
 
                 <li class="listă">
-                  <span class="titlu">Adaugă taxă pentru acţiunile procedurale întreprinse
+                  <span class="titlu semiascuns">taxă pentru acţiunile procedurale întreprinse
                   de executorul judecătoresc</span>
 
                   <ul class="itemi cu umbră">
@@ -642,7 +642,7 @@
                 </li>
 
                 <li class="listă">
-                  <span class="titlu">Adaugă taxă pentru serviciile prestate
+                  <span class="titlu semiascuns">taxă pentru serviciile prestate
                   de executorii judecătoreşti</span>
 
                   <ul class="itemi cu umbră">
@@ -667,7 +667,7 @@
                 </li>
 
                 <li class="listă">
-                  <span class="titlu">Adaugă speză</span>
+                  <span class="titlu semiascuns">speză</span>
 
                   <ol class="itemi cu umbră">
                     <li id="speza1" class="item" data-şablon-subformular="listă cheltuieli">
@@ -790,7 +790,7 @@
       <ul id="destinatari" class="itemi cu umbră">
         <li class="listă">
           <span class="titlu">Registratori independenţi
-            <span class="adaugă-toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
+            <span class="adaugă-toate semiascuns">+toate</span>
           </span>
 
           <ul class="itemi cu umbră">
@@ -810,7 +810,7 @@
 
         <li class="listă">
           <span class="titlu">S.A. care ţin registru acţionarilor de sine stătător
-            <span class="adaugă-toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
+            <span class="adaugă-toate semiascuns">+toate</span>
           </span>
 
           <ul class="itemi cu umbră">
@@ -821,7 +821,7 @@
 
         <li class="listă">
           <span class="titlu">Bănci comerciale
-            <span class="adaugă-toate ui-icon ui-icon-plus semiascuns" title="Adaugă toate"></span>
+            <span class="adaugă-toate semiascuns">+toate</span>
           </span>
 
           <ul class="itemi cu umbră">
@@ -865,13 +865,15 @@
 
         <li>
           <label for="suma-de-bază">Suma de bază</label>
-          <input type="text" id="suma-de-bază" placeholder="Suma" class="sumă"/>
+          <input type="text" id="suma-de-bază" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
 
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat semiascuns" title="Adaugă sumă"
-          data-şablon="cîmpul-personalizat" data-etichetă="Descriere sumă">+</button>
+          <button
+            class="adaugă-cîmp-personalizat semiascuns"
+            data-şablon="cîmpul-personalizat"
+            data-etichetă="Descriere sumă">+sumă</button>
         </li>
 
         <li>
@@ -1040,10 +1042,10 @@
         </li>
 
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat amînare semiascuns"
-            title="Adaugă cîmp de amînare evacuare"
+          <button
+            class="adaugă-cîmp-personalizat amînare semiascuns"
             data-şablon="cîmpul-pentru-data-şi-ora-amînării-evacuării"
-            data-etichetă="Amînat pînă la">+</button>
+            data-etichetă="Amînat pînă la">+amînare</button>
         </li>
       </ul>
 
@@ -1051,7 +1053,7 @@
       <ul class="cîmpul-pentru-data-şi-ora-amînării-evacuării">
         <li class="personalizat eliminabil de tot">
           <textarea class="etichetă amînare" title="Etichetă editabilă"></textarea>
-          <input type="text" placeholder="data şi ora" class="dată amînare"/>
+          <input type="text" placeholder="data şi ora" class="dată amînare autofocus"/>
         </li>
       </ul>
 
@@ -1068,10 +1070,10 @@
         </li>
 
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat amînare semiascuns"
-            title="Adaugă cîmp de amînare instalare"
+          <button
+            class="adaugă-cîmp-personalizat amînare semiascuns"
             data-şablon="cîmpul-pentru-data-şi-ora-amînării-instalării"
-            data-etichetă="Amînat pînă la">+</button>
+            data-etichetă="Amînat pînă la">+amînare</button>
         </li>
       </ul>
 
@@ -1079,7 +1081,7 @@
       <ul class="cîmpul-pentru-data-şi-ora-amînării-instalării">
         <li class="personalizat eliminabil de tot">
           <textarea class="etichetă amînare" title="Etichetă editabilă"></textarea>
-          <input type="text" placeholder="data şi ora" class="dată amînare"/>
+          <input type="text" placeholder="data şi ora" class="dată amînare autofocus"/>
         </li>
       </ul>
 
@@ -1101,10 +1103,10 @@
         </li>
 
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat amînare semiascuns"
-            title="Adaugă cîmp de amînare a schimbului"
+          <button
+            class="adaugă-cîmp-personalizat amînare semiascuns"
             data-şablon="cîmpul-pentru-data-şi-ora-amînării-schimbului"
-            data-etichetă="Amînat pînă la">+</button>
+            data-etichetă="Amînat pînă la">+amînare</button>
         </li>
       </ul>
 
@@ -1112,7 +1114,7 @@
       <ul class="cîmpul-pentru-data-şi-ora-amînării-schimbului">
         <li class="personalizat eliminabil de tot">
           <textarea class="etichetă amînare" title="Etichetă editabilă"></textarea>
-          <input type="text" placeholder="data şi ora" class="dată amînare"/>
+          <input type="text" placeholder="data şi ora" class="dată amînare autofocus"/>
         </li>
       </ul>
 
@@ -1145,32 +1147,40 @@
 
       <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
-          data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
+          <button
+            class="adaugă-cîmp-personalizat implicit semiascuns"
+            data-şablon="cîmpul-personalizat"
+            data-etichetă="Descriere bun">+bun</button>
         </li>
       </ul>
 
 
       <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile">
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
-          data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
+          <button
+            class="adaugă-cîmp-personalizat implicit semiascuns"
+            data-şablon="cîmpul-personalizat"
+            data-etichetă="Descriere bun">+bun</button>
         </li>
       </ul>
 
 
       <ul class="conţinut obiect" title="confiscarea bunurilor">
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
-          data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
+          <button
+            class="adaugă-cîmp-personalizat implicit semiascuns"
+            data-şablon="cîmpul-personalizat"
+            data-etichetă="Descriere bun">+bun</button>
         </li>
       </ul>
 
 
       <ul class="conţinut obiect" title="nimicirea unor bunuri">
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
-          data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
+          <button
+            class="adaugă-cîmp-personalizat implicit semiascuns"
+            data-şablon="cîmpul-personalizat"
+            data-etichetă="Descriere bun">+bun</button>
         </li>
       </ul>
 
@@ -1183,7 +1193,7 @@
 
         <li>
           <label for="salariu-recuperat">Salariu recuperat</label>
-          <input type="text" id="salariu-recuperat" placeholder="Suma" class="sumă"/>
+          <input type="text" id="salariu-recuperat" placeholder="suma" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1211,7 +1221,7 @@
       <ul class="conţinut măsura-de-asigurare" title="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
         <li>
           <label for="valoarea-acţiunii">Valoarea acţiunii</label>
-          <input type="text" id="valoarea-acţiunii" placeholder="Suma" class="sumă"/>
+          <input type="text" id="valoarea-acţiunii" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>
@@ -1228,7 +1238,7 @@
           <input type="text" class="cantitate" value="1"/>
         </li>
 
-        <li><button class="adaugă semiascuns" title="Adaugă document">+</button></li>
+        <li><button class="adaugă semiascuns">+document</button></li>
       </ul>
 
 
@@ -1244,13 +1254,13 @@
         <li class="document eliminabil">
           <textarea class="denumire"></textarea>
 
-          <ul class="destinatari-adăugaţi comprimaţi"></ul>
-          <div class="adaugă-destinatar listă">
-            <span class="titlu">Adaugă destinatari</span>
+          <ul class="destinatari-adăugaţi comprimaţi neselectabili"></ul>
+          <div class="adaugă-destinatar listă neselectabilă">
+            <span class="titlu semiascuns">Adaugă destinatari</span>
           </div>
         </li>
 
-        <li><button class="adaugă semiascuns" title="Adaugă document">+</button></li>
+        <li><button class="adaugă semiascuns">+document</button></li>
       </ul>
 
 
@@ -1282,7 +1292,7 @@
 
         <li class="document eliminabil">
           <textarea class="label denumire"></textarea>
-          <input type="text" placeholder="Suma" class="sumă"/>
+          <input type="text" placeholder="suma" class="sumă"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă contract">+</button></li>
@@ -1310,7 +1320,7 @@
 
         <li class="document eliminabil">
           <textarea class="label descriere"></textarea>
-          <input type="text" placeholder="Suma" class="sumă"/>
+          <input type="text" placeholder="suma" class="sumă"/>
         </li>
 
         <li><button class="adaugă semiascuns" title="Adaugă cîmp">+</button></li>
@@ -1336,7 +1346,7 @@
       <ul class="cîmpul-personalizat">
         <li class="personalizat eliminabil de tot">
           <textarea class="etichetă" title="Etichetă editabilă"></textarea>
-          <input type="text" placeholder="Suma" class="sumă"/>
+          <input type="text" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>
@@ -1350,7 +1360,7 @@
 
       <div id="subsecţiune-încasare">
         <ul class="subsecţiune încasare eliminabil de tot">
-          <li class="titlu">încasare</li>
+          <li class="titlu neselectabil">încasare</li>
 
           <li>
             <label>Genul încasării</label>
@@ -1460,7 +1470,7 @@
       <ul id="cîmpul-pensia-sumă-fixă">
         <li class="cîmp">
           <label>Pensia lunară sumă fixă</label>
-          <input type="text" id="pensia-lunară-suma-fixă" placeholder="Suma" class="sumă"/>
+          <input type="text" id="pensia-lunară-suma-fixă" placeholder="suma" class="sumă"/>
           <b>MDL</b>
         </li>
       </ul>
@@ -1535,7 +1545,7 @@
 
 
       <ul class="subsecţiune întîrziere eliminabil de tot">
-        <li class="titlu">
+        <li class="titlu neselectabil">
           întîrziere
 
           <span
@@ -1576,7 +1586,7 @@
 
 
       <ul class="subsecţiune sechestrare-bunuri eliminabil de tot">
-        <li class="titlu">sechestrare bunuri</li>
+        <li class="titlu neselectabil">sechestrare bunuri</li>
 
         <li>
           <label>Data sechestrării</label>
@@ -1585,13 +1595,15 @@
 
         <li class="personalizat eliminabil">
           <textarea class="etichetă" title="Etichetă editabilă">Descriere bun</textarea>
-          <input type="text" placeholder="Suma" class="sumă"/>
+          <input type="text" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
 
         <li class="container-buton">
-          <button class="adaugă-cîmp-personalizat implicit semiascuns" title="Adaugă bun"
-          data-şablon="cîmpul-personalizat" data-etichetă="Descriere bun">+</button>
+          <button
+            class="adaugă-cîmp-personalizat implicit semiascuns"
+            data-şablon="cîmpul-personalizat"
+            data-etichetă="Descriere bun">+bun</button>
         </li>
 
         <li>

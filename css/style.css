@@ -625,7 +625,12 @@ button.elimină-persoană {
 }
 
 .container-buton {
-  height: 0;
+  height: 5px;
+  opacity: 1;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 .container-buton:last-child {
@@ -639,14 +644,18 @@ button.elimină-persoană {
 
 button.adaugă-cîmp-personalizat,
 button.adaugă {
-  font-size: 1.3em;
-  font-weight: normal;
   padding: 0 .5em .5em;
   border: none;
   line-height: .7em;
   background: transparent;
   top: -.2em;
   position: relative;
+}
+
+.listă .titlu.semiascuns:hover,
+button.adaugă-cîmp-personalizat:hover,
+button.adaugă:hover {
+  text-shadow: 0 0 1px silver;
 }
 
 button.adaugă-cîmp-personalizat {
@@ -659,12 +668,9 @@ button.adaugă-cîmp-personalizat {
   top: 2px;
 }
 
-button.adaugă.persoană {
-  font-weight: bold;
-  padding: .2em .5em;
+fieldset+button.adaugă {
   position: relative;
-  left: .5em;
-  top: -1.6em;
+  top: -1.5em;
 }
 
 button.adaugă .legend.label {
@@ -751,6 +757,7 @@ button.adaugă .legend.label {
   top: -.4em;
   left: -.2em;
   padding: 0 .3em;
+  margin-bottom: 7px;
 }
 
 #cheltuieli .subformular .cantitate {
@@ -769,6 +776,10 @@ input[type="checkbox"]+label {
 
 #categorii-taxe-şi-speze {
   margin: 1em 0 2em 1em;
+}
+
+#categorii-taxe-şi-speze .listă .titlu {
+  font-weight: bold;
 }
 
 #categorii-taxe-şi-speze .listă .itemi {
@@ -830,10 +841,6 @@ input[type="checkbox"]+label {
 
 .destinatari-adăugaţi {
   font-size: small;
-}
-
-.destinatari-adăugaţi {
-  margin: -.3em 0 0 .5em;
   padding: .5em 2.5em .8em;
   cursor: pointer;
   display: inline-block;
@@ -847,6 +854,10 @@ input[type="checkbox"]+label {
   display: inline-block;
   padding-top: 5px;
   vertical-align: top;
+}
+
+#cheltuieli .document .listă.adaugă-destinatar>.titlu {
+  font-weight: bold;
 }
 
 #cheltuieli .document .destinatari {
@@ -897,13 +908,19 @@ input[type="checkbox"]+label {
 }
 
 #destinatari .listă .adaugă-toate {
-  display: none;
-  color: #999;
+  color: black;
+  font-weight: bold;
+  background: white;
   position: absolute;
+  opacity: 0;
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 #destinatari .listă:hover .adaugă-toate {
-  display: inline;
+  opacity: .8;
 }
 
 .destinatari-adăugaţi::before {
@@ -1193,9 +1210,8 @@ select#obiect~.buton[data-formular] {
 fieldset .conţinut .ui-effects-wrapper ul.subsecţiune,
 fieldset .conţinut ul.subsecţiune {
   margin: 1em -4px;
-  border: 1px solid #ddd;
-  border-width: 1px 0 0 4px;
-  border-top-color: #eee;
+  border: 1px solid #eee;
+  border-width: 1px 0 0 1px;
   position: relative;
 }
 
@@ -1205,13 +1221,11 @@ fieldset .conţinut ul.subsecţiune:first-child {
 
 #formular fieldset>.conţinut>ul>.titlu,
 ul.subsecţiune .titlu {
-  color: #bbb;
   font-size: small;
-  margin: -.8em 0 -.3em .35em;
+  margin: -.7em .3em;
   background: white;
   padding: 0 .2em;
-  display: inline-block;
-  position: absolute;
+  color: #ccc;
 }
 
 ul.subsecţiune .titlu button:first-of-type {
@@ -1224,7 +1238,7 @@ ul.subsecţiune .titlu+li {
 
 ul.subsecţiune .elimină {
   left: -.9em;
-  top: -.4em;
+  top: -.3em;
   padding-right: .5em;
   line-height: .8em;
   background: transparent;
@@ -1268,8 +1282,13 @@ input[readonly]:hover+span.ui-icon-locked {
 
 #adaugă-subsecţiune {
   margin-left: 1em;
-  margin-top: 1em;
+  margin-top: .5em;
   display: inline-block;
+}
+
+#adaugă-subsecţiune .titlu {
+  margin-left: .5em;
+  font-weight: bold;
 }
 
 .subsecţiune + #adaugă-subsecţiune {
@@ -1306,7 +1325,7 @@ label.checkbox input {
 
 .listă>.titlu {
   margin-left: 1em;
-  color: #aaa;
+  color: black;
 }
 
 .listă:hover>.titlu {
@@ -1387,4 +1406,16 @@ label.checkbox input {
 
 input::-ms-clear {
   display: none;
+}
+
+.neselectabilă,
+.neselectabile,
+.neselectabil,
+.neselectabili {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -70,7 +70,7 @@
 
   Persoane = {
     init: function () {
-      FormularProcedură.$.on('click', 'button.adaugă.persoană', this.adaugă);
+      FormularProcedură.$.on('click', '#creditor+button.adaugă,.debitor+button.adaugă', this.adaugă);
     },
 
     adaugă: function () {
@@ -609,7 +609,6 @@
 
     init: function () {
       this.$
-        .on('keyup', function (e) { if (e.keyCode === 27) FormularProcedură.închide(); })
         .on('click', 'button.închide', this.închide)
         .on('click', 'button.salvează', this.salveazăSauCrează)
         .on('închidere', this.resetează)
@@ -625,8 +624,8 @@
         else if (FormularProcedură.$.is(':visible')) FormularProcedură.închide();
       });
 
-      this.$obiectulUrmăririi.on('adăugat-cîmp-personalizabil', function (e, li) {
-        $(li).find('input').focus();
+      this.$obiectulUrmăririi.on('adăugat-cîmp-personalizabil', function (e, $li) {
+        $li.find('input.autofocus').focus();
       });
     },
 
@@ -2193,7 +2192,7 @@
               .focus()
               .select();
 
-            li.closest('fieldset').trigger('adăugat-cîmp-personalizabil', [this]);
+            li.closest('fieldset').trigger('adăugat-cîmp-personalizabil', [li.prev('.personalizat')]);
           });
     }
   },
@@ -2786,7 +2785,7 @@
           // ajustează dimensiunea etichetei personalizate
           .show().find('textarea.etichetă').trigger('input').end().hide()
           .show('blind', function () {
-            $(this).find('textarea.etichetă').select();
+            $(this).find('input').first().select();
           });
       },
 
