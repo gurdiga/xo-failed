@@ -49,12 +49,12 @@ asyncTest('Încheiere de intentare', function () {
       var cale = decodeURIComponent(încheiere.location.pathname),
           caleER = new RegExp(
             '^/date/' + app.Utilizator.login + '/proceduri/' +
-            app.FormularProcedură.număr() + '/încheieri/' + $buton.data('formular') + '-\\d{13}\\.html'
+            app.FormularProcedură.număr() + '/încheieri/' + $buton.attr('data-formular') + '-\\d{13}\\.html'
           );
 
       ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
       ok($buton.is('.salvat'), 'marcat butonul din procedură ca salvat');
-      equal($buton.data('pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
+      equal($buton.attr('data-pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
 
       $butonDeSalvare.click();
 
@@ -105,7 +105,7 @@ asyncTest('Încheiere de intentare', function () {
       $încheiere.find('.închide').click();
 
       setTimeout(function () { // pauză pentru observabilitate
-        cale = $buton.data('pagina');
+        cale = $buton.attr('data-pagina');
         $buton.click();
 
         app.$(app.Încheieri.deschise[cale]).one('iniţializat', function () {

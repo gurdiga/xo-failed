@@ -24,14 +24,14 @@ asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
     app.open = function () { return 'tab stub'; };
 
     $select.val('schimbul forţat').change();
-    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-schimb-forţat', 'e setat corespunzător [data-formular] pe el');
+    equal($butonPentruÎncheiere.attr('data-formular'), 'încheiere-de-schimb-forţat', 'e setat corespunzător [data-formular] pe el');
     $butonPentruÎncheiere.click();
     meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
     delete app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
 
     $select.val('evacuarea').change();
-    equal($butonPentruÎncheiere.data('formular'), 'încheiere-de-evacuare', 'e setat corespunzător [data-formular] pe el');
+    equal($butonPentruÎncheiere.attr('data-formular'), 'încheiere-de-evacuare', 'e setat corespunzător [data-formular] pe el');
     $butonPentruÎncheiere.click();
     meta = app.Încheieri.deschise[app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');

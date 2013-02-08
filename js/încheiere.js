@@ -16,7 +16,7 @@
       Încheiere.$ = $(document.body);
       Încheiere.pagina = decodeURIComponent(location.pathname);
       Încheiere.buton = Încheieri.deschise[Încheiere.pagina].buton;
-      Încheiere.formular = Încheiere.buton.data('formular');
+      Încheiere.formular = Încheiere.buton.attr('data-formular');
 
       // nu s-a deschis din calculatorul de dobînzi de întîrziere din bara de sus
       if (Încheiere.buton.parents('#formular').există()) {
@@ -124,7 +124,7 @@
     },
 
     salvează: function () {
-      if (Încheiere.buton.data('dinamic')) {
+      if (Încheiere.buton.attr('data-dinamic')) {
         var $mesaj = Încheiere.$.find('.salvează').next('.mesaj.dinamicitate');
 
         $mesaj.addClass('afişat');
@@ -156,7 +156,7 @@
 
       if (buton.is(':not(.salvat)')) buton.addClass('salvat');
 
-      buton.data('pagina', Încheiere.pagina);
+      buton.attr('data-pagina', Încheiere.pagina);
     },
 
     cale: function () {
@@ -173,7 +173,7 @@
     imprimă: function () {
       var imprimă = window.print; // pentru mockabilitate
 
-      if (Încheiere.buton.data('dinamic') || !Încheiere.modificat()) {
+      if (Încheiere.buton.attr('data-dinamic') || !Încheiere.modificat()) {
         imprimă();
         app.$(window).trigger('imprimat');
       } else {
@@ -187,7 +187,7 @@
     },
 
     regenerează: function () {
-      if (Încheiere.buton.data('dinamic')) {
+      if (Încheiere.buton.attr('data-dinamic')) {
         var $mesaj = Încheiere.$.find('.regenerează').next('.mesaj.dinamicitate');
 
         $mesaj.addClass('afişat');
@@ -303,20 +303,20 @@
 
     afişează: function () {
       var $cîmp = $(this),
-          opţiuni = $cîmp.data('opţiuni'),
+          opţiuni = $cîmp.attr('data-opţiuni'),
           $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni);
 
       $opţiuni
         .appendTo($cîmp)
         .show();
 
-      $cîmp.data('$opţiuni', $opţiuni);
+      $cîmp.attr('data-$opţiuni', $opţiuni);
     },
 
     ascunde: function () {
       var $cîmp = $(this);
 
-      $cîmp.data('$opţiuni')
+      $cîmp.attr('data-$opţiuni')
         .prependTo(document.body)
         .hide();
     },

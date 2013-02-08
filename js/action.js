@@ -288,7 +288,7 @@
         if ($(this).is('.dezactivat')) return;
 
         var item = $(this).clone(),
-            subformular = item.data('şablon-subformular');
+            subformular = item.attr('data-şablon-subformular');
 
         if (subformular) {
           $şabloane.find('.subformular[title="' + subformular + '"]').clone()
@@ -326,7 +326,7 @@
       },
 
       adaugă: function () {
-        var numeŞablon = $(this).closest('.item').data('şablon-subformular'),
+        var numeŞablon = $(this).closest('.item').attr('data-şablon-subformular'),
             şablon = $şabloane.find('.subformular[title="' + numeŞablon + '"] .document').first(),
             $subformular = şablon.clone();
 
@@ -808,8 +808,8 @@
             rata: $întîrziere.find(':radio:checked').val(),
             suma: $întîrziere.find('.sumă.întîrziată').val(),
             dobînda: $întîrziere.find('.sumă.dobîndă').val(),
-            încheiere: $întîrziere.find('.buton[data-formular="încheiere-dobîndă-de-întîrziere"]').data('pagina'),
-            anexa: $întîrziere.find('.buton[data-formular="anexă-dobîndă-de-întîrziere"]').data('pagina')
+            încheiere: $întîrziere.find('.buton[data-formular="încheiere-dobîndă-de-întîrziere"]').attr('data-pagina'),
+            anexa: $întîrziere.find('.buton[data-formular="anexă-dobîndă-de-întîrziere"]').attr('data-pagina')
           };
         }).get();
       }
@@ -946,7 +946,7 @@
 
         var $încheiere = $secţiune.find('.buton[data-formular="borderou-de-calcul"]');
 
-        if ($încheiere.is('.salvat')) cheltuieli['încheiere'] = $încheiere.data('pagina');
+        if ($încheiere.is('.salvat')) cheltuieli['încheiere'] = $încheiere.attr('data-pagina');
 
         return cheltuieli;
       }
@@ -970,7 +970,7 @@
       var butonÎncheiere = FormularProcedură.$.find('#container-data-intentării .buton[data-formular]'),
           încheiere;
 
-      if (butonÎncheiere.is('.salvat')) încheiere = butonÎncheiere.data('pagina');
+      if (butonÎncheiere.is('.salvat')) încheiere = butonÎncheiere.attr('data-pagina');
 
       return {
         'data-intentării': FormularProcedură.$.find('#data-intentării').val(),
@@ -1145,11 +1145,11 @@
           $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
 
           $întîrziere.find('.buton[data-formular="încheiere-dobîndă-de-întîrziere"]')
-            .data('pagina', întîrziere['încheiere'])
+            .attr('data-pagina', întîrziere['încheiere'])
             .toggleClass('salvat', !!întîrziere['încheiere']);
 
           $întîrziere.find('.buton[data-formular="anexă-dobîndă-de-întîrziere"]')
-            .data('pagina', întîrziere['anexa'])
+            .attr('data-pagina', întîrziere['anexa'])
             .toggleClass('salvat', !!întîrziere['anexa']);
         }
       }
@@ -1248,7 +1248,7 @@
         if (încheiere) {
           $secţiune.find('.buton[data-formular="borderou-de-calcul"]')
             .addClass('salvat')
-            .data('pagina', încheiere);
+            .attr('data-pagina', încheiere);
         }
 
         for (var id in procedură.cheltuieli.itemi) {
@@ -1358,7 +1358,7 @@
 
       if (procedură['încheiere']) {
         FormularProcedură.$.find('#container-data-intentării .buton[data-formular]')
-          .data('pagina', procedură['încheiere'])
+          .attr('data-pagina', procedură['încheiere'])
           .addClass('salvat');
       }
 
@@ -2069,11 +2069,11 @@
     închide: function (el) {
       el = $(el);
 
-      if (el.data('id')) el.attr('id', el.data('id'));
+      if (el.attr('data-id')) el.attr('id', el.attr('data-id'));
 
       el.datepicker('destroy').focus().trigger('input');
 
-      if (el.data('ceva')) el.val(el.val() + el.data('ceva'));
+      if (el.attr('data-ceva')) el.val(el.val() + el.attr('data-ceva'));
     },
 
     // dacă în cîmpul pentru dată mai este ceva, de exemplu ora, memorizează
@@ -2083,7 +2083,7 @@
 
       if (valoarea.length === 10) return; // este introdusă doar data
 
-      $(input).data('ceva', valoarea.substr(10));
+      $(input).attr('data-ceva', valoarea.substr(10));
     },
 
     init: function () {
@@ -2108,10 +2108,10 @@
       if (calendar.is(':visible')) {
         cîmp.datepicker('destroy');
       } else {
-        if (!cîmp.data('datepicker')) {
+        if (!cîmp.attr('data-datepicker')) {
           if (cîmp.attr('id')) {
             cîmp
-              .data('id', cîmp.attr('id'))
+              .attr('data-id', cîmp.attr('id'))
               .removeAttr('id');
           }
 
@@ -2161,13 +2161,13 @@
     adaugă: function () {
       var buton = $(this),
           li = buton.closest('li'),
-          şablon = $şabloane.find('.' + buton.data('şablon')).html();
+          şablon = $şabloane.find('.' + buton.attr('data-şablon')).html();
 
       li
         .before(şablon)
         .prev()
           .find('.etichetă')
-            .val(buton.data('etichetă'))
+            .val(buton.attr('data-etichetă'))
             .trigger('input')
           .end()
           .show('blind', function () {
@@ -2322,7 +2322,7 @@
       var $secţiune = FormularProcedură.$obiectulUrmăririi.find('.conţinut');
 
       $secţiune
-        .data('conţinut-iniţial', $secţiune.find('ul:first').remove())
+        .attr('data-conţinut-iniţial', $secţiune.find('ul:first').remove())
         .find('#adaugă-subsecţiune .încasare').click().end()
         .find('.subsecţiune.încasare #genul-încasării').trigger('change');
 
@@ -2335,7 +2335,7 @@
 
       var secţiune = FormularProcedură.$obiectulUrmăririi.find('.conţinut');
 
-      secţiune.prepend(secţiune.data('conţinut-iniţial'));
+      secţiune.prepend(secţiune.attr('data-conţinut-iniţial'));
       secţiune.removeData('conţinut-iniţial');
     }
   },
@@ -2847,12 +2847,12 @@
           $buton = $(this).siblings('.ui-icon-document.buton');
 
       $buton
-        .data('formular', $opţiune.data('formular-încheiere'))
-        .attr('title', $opţiune.data('şoaptă-buton'));
+        .attr('data-formular', $opţiune.attr('data-formular-încheiere'))
+        .attr('title', $opţiune.attr('data-şoaptă-buton'));
     },
 
     formular: function (buton) {
-      var formular = buton.data('formular');
+      var formular = buton.attr('data-formular');
 
       if (FormularProcedură.$.is(':visible')) {
         var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val() || '',
@@ -2866,13 +2866,13 @@
 
     deschide: function () {
       var buton = $(this),
-          formular = buton.data('formular'),
-          dinamic = buton.data('dinamic'),
+          formular = buton.attr('data-formular'),
+          dinamic = buton.attr('data-dinamic'),
           pagina;
 
       if (buton.is('[dezactivat]')) return;
       if (!dinamic && buton.is('.salvat')) {
-        pagina = buton.data('pagina');
+        pagina = buton.attr('data-pagina');
       } else {
         pagina = ButoanePentruÎncheieri.formular(buton);
       }
@@ -2940,7 +2940,7 @@
     },
 
     deschide: function () {
-      location.hash = $(this).data('href');
+      location.hash = $(this).attr('data-href');
     }
   };
 
