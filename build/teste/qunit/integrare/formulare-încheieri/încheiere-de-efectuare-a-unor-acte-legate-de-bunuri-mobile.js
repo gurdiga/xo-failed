@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea unor sume sau bunuri', function () {
+asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', function () {
   /*global UtilitareÎncheiere:false */
   /*jshint maxlen:140 */
   'use strict';
@@ -8,12 +8,9 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
       $secţiune = app.FormularProcedură.$obiectulUrmăririi;
 
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri').change();
+  $secţiune.find('#obiect').val('efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile').change();
 
-  var acte = 'o listă de acte';
-
-  ok($secţiune.find('#acte').există(), 'avem cîmp pentru acte');
-  $secţiune.find('#acte').val(acte);
+  // TODO de adăugat date şi data amînării
 
   var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
@@ -26,21 +23,21 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
         date = this.tab.Încheiere.date,
-        subtitlu = 'cu privire la executarea de către debitor a unor acte nelegate de remiterea unor sume sau bunuri';
+        subtitlu = 'de numire a datei ridicării a unor sume sau bunuri';
 
     UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, subtitlu);
-    UtilitareÎncheiere.verificăSecţiuni($încheiere, ['Procedura', 'Creditorul', 'Debitorul', 'Executorul']);
-
-    var $conţinut = $încheiere.find('section .conţinut.pe-toată-foaia');
-
-    ok($conţinut.există(), 'avem secţiunea atotcuprinzătoare');
-    equal($conţinut.find('.acte').text(), acte, 'se menţionează actele');
+    UtilitareÎncheiere.verificăSecţiuni($încheiere,
+      ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
     setTimeout(function () {
       $încheiere.find('.închide').click();
+      app.FormularProcedură.$.find('.închide').click();
+      app.$(app.FormularProcedură.$).one('închidere', function () {
+        ok(true, 'închis formularul de procedură');
 
-      start();
+        start();
+      });
     }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
 });

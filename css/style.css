@@ -656,6 +656,7 @@ button.adaugă-cîmp-personalizat {
 
 .personalizat .elimină {
   left: -12px;
+  top: 2px;
 }
 
 button.adaugă.persoană {
