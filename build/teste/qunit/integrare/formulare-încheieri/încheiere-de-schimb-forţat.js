@@ -62,6 +62,8 @@ asyncTest('Încheiere de schimb forţat', function () {
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
     setTimeout(function () {
+      $încheiere.find('.închide').click();
+
       start();
     }, app.PAUZĂ_DE_OBSERVABILITATE);
   });

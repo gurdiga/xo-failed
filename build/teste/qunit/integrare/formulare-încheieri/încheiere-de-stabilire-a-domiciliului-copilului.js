@@ -48,6 +48,8 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
     ok($conţinut.find('p:contains("' + dataPrezentăriiDebitorului + '")').există(), 'e menţionată data prezentării debitorului în oficiu');
 
     setTimeout(function () {
+      $încheiere.find('.închide').click();
+
       start();
     }, app.PAUZĂ_DE_OBSERVABILITATE);
   });

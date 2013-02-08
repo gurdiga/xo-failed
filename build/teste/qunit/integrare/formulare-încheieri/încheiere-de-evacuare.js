@@ -52,6 +52,8 @@ asyncTest('Încheiere de evacuare', function () {
       ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
     setTimeout(function () { // pentru observabilitate
+      $încheiere.find('.închide').click();
+
       start();
     }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
