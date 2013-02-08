@@ -310,13 +310,13 @@
         .appendTo($cîmp)
         .show();
 
-      $cîmp.attr('data-$opţiuni', $opţiuni);
+      $cîmp.attr('data-opţiuni', $opţiuni);
     },
 
     ascunde: function () {
       var $cîmp = $(this);
 
-      $cîmp.attr('data-$opţiuni')
+      $cîmp.attr('data-opţiuni')
         .prependTo(document.body)
         .hide();
     },

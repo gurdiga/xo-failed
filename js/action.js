@@ -2855,7 +2855,7 @@
       var formular = buton.attr('data-formular');
 
       if (FormularProcedură.$.is(':visible')) {
-        var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val() || '',
+        var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val(),
             sufix = FormularProcedură.tip() + caracter;
 
         return '/formulare-încheieri/' + formular + '-' + sufix + '.html';
