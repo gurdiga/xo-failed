@@ -58,7 +58,7 @@ fieldset input[type="radio"],
 fieldset input[type="checkbox"] {
   outline-width: medium;
   width: auto;
-  vertical-align: -1px;
+  vertical-align: baseline;
 }
 
 textarea,
@@ -155,7 +155,7 @@ button {
 }
 
 #bara-de-sus h1 {
-  margin: 0;
+  margin: 0 0 0 10px;
   font: bold 2em/1.5em Oswald, sans-serif;
 }
 
@@ -633,6 +633,10 @@ button.elimină-persoană {
   transition: opacity .5s;
 }
 
+.container-buton+.container-buton {
+  margin-top: .8em;
+}
+
 .container-buton:last-child {
   height: 5px;
 }
@@ -659,7 +663,7 @@ button.adaugă:hover {
 }
 
 button.adaugă-cîmp-personalizat {
-  padding: 0 .2em .1em;
+  padding: 0 .2em .1em .3em;
   top: -.5em;
 }
 
@@ -670,7 +674,8 @@ button.adaugă-cîmp-personalizat {
 
 fieldset+button.adaugă {
   position: relative;
-  top: -1.5em;
+  top: -2em;
+  margin-left: 0;
 }
 
 button.adaugă .legend.label {
@@ -1209,7 +1214,7 @@ select#obiect~.buton[data-formular] {
 .dialog ul.subsecţiune,
 fieldset .conţinut .ui-effects-wrapper ul.subsecţiune,
 fieldset .conţinut ul.subsecţiune {
-  margin: 1em -4px;
+  margin: 1em -1px;
   border: 1px solid #eee;
   border-width: 1px 0 0 1px;
   position: relative;
@@ -1222,7 +1227,7 @@ fieldset .conţinut ul.subsecţiune:first-child {
 #formular fieldset>.conţinut>ul>.titlu,
 ul.subsecţiune .titlu {
   font-size: small;
-  margin: -.7em .3em;
+  margin: -.7em 0 -.7em 3em;
   background: white;
   padding: 0 .2em;
   color: #ccc;
@@ -1281,13 +1286,12 @@ input[readonly]:hover+span.ui-icon-locked {
 }
 
 #adaugă-subsecţiune {
-  margin-left: 1em;
-  margin-top: .5em;
+  margin-left: 1.1em;
   display: inline-block;
 }
 
 #adaugă-subsecţiune .titlu {
-  margin-left: .5em;
+  margin-left: .35em;
   font-weight: bold;
 }
 

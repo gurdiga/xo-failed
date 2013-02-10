@@ -24,7 +24,7 @@ test('Formular procedură: obiectul urmăririi', function () {
 
   ok($butonDeAdăugare.există(), 'avem butonaş de adăugat amînări');
   equal($butonDeAdăugare.attr('data-etichetă'), 'Amînat pînă la', '…cu data-etichetă');
-  equal($butonDeAdăugare.attr('data-şablon'), 'cîmpul-pentru-data-şi-ora-amînării-evacuării', '…cu data-şablon');
+  equal($butonDeAdăugare.attr('data-şablon'), 'cîmpul-pentru-data-şi-ora-amînării', '…cu data-şablon');
 
   $butonDeAdăugare.click();
   ok($secţiune.find('.etichetă.amînare').există(), 'la click pe butonul de adăugare se adaugă un cîmp pentru amînare');

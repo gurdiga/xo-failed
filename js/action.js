@@ -790,7 +790,7 @@
           obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
           obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
         } else {
-          obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune); // pot fi amînări de evacuare sau instalare
+          obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
         }
 
         return obiectulUrmăririi;
@@ -1104,7 +1104,6 @@
         populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
         populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
         populeazăAmînări($secţiune, secţiune['amînări']);
-        populeazăSubformular($secţiune, secţiune['subformular']);
       }
 
       // ------------------------------------------
@@ -1208,21 +1207,6 @@
             $amînare.find('.etichetă').val(etichetă);
             $amînare.find('.dată').val(amînare[etichetă]);
           }
-        }
-      }
-
-      // ------------------------------------------
-      function populeazăSubformular($secţiune, subformular) {
-        if (!subformular) return;
-
-        var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat'),
-            $cîmp, item;
-
-        for (item in subformular) {
-          $butonDeAdăugare.click();
-          $cîmp = $butonDeAdăugare.parent().prev('.personalizat');
-          $cîmp.find('.etichetă').val(item);
-          $cîmp.find('input').val(subformular[item]).trigger('change');
         }
       }
 
@@ -2986,7 +2970,7 @@
   $.fn.val1 = function (value) {
     if (typeof value !== 'undefined') {
       if (this.is(':checkbox')) {
-        return this.attr('checked', value === 'true' || value === true);
+        return this.attr('checked', value === true);
       } else {
         return this.val(value);
       }

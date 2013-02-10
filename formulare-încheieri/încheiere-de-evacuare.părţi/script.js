@@ -3,7 +3,15 @@
   'use strict';
 
   window.init = function (context) {
-    var amînări = context.procedură['obiectul-urmăririi']['amînări'];
+    var $secţiune = context.app.FormularProcedură.$obiectulUrmăririi;
+    var amînări = $secţiune.find('.personalizat:has(.dată.amînare)').map(function () {
+      var amînare = {},
+          $li = context.app.$(this);
+
+      amînare[$li.find('.etichetă').val()] = $li.find('.dată.amînare').val();
+
+      return amînare;
+    }).get();
 
     context.amînată = amînări.length > 0;
 
