@@ -1104,6 +1104,7 @@
         populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
         populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
         populeazăAmînări($secţiune, secţiune['amînări']);
+        populeazăBunuri($secţiune, secţiune['subformular']);
       }
 
       // ------------------------------------------
@@ -1207,6 +1208,21 @@
             $amînare.find('.etichetă').val(etichetă);
             $amînare.find('.dată').val(amînare[etichetă]);
           }
+        }
+      }
+
+      // ------------------------------------------
+      function populeazăBunuri($secţiune, subformular) {
+        if (!subformular) return;
+
+        var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun'),
+            $cîmp, item;
+
+        for (item in subformular) {
+          $butonDeAdăugare.click();
+          $cîmp = $butonDeAdăugare.parent().prev('.personalizat');
+          $cîmp.find('.etichetă').val(item);
+          $cîmp.find('input').val(subformular[item]).trigger('change');
         }
       }
 
