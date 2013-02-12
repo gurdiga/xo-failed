@@ -20,7 +20,7 @@
       HashController.init();
       Valute.populeazăListe();
       SubsecţiuniDinamice.init();
-      CîmpuriTextarea.autodimensionează();
+      TextareaElastice.init();
       SelecturiFoarteLate.init();
       Persoane.init();
       Cheltuieli.init();
@@ -139,31 +139,33 @@
 
   // --------------------------------------------------
 
-  CîmpuriTextarea = {
+  TextareaElastice = {
     evenimente: 'keydown keyup input focus mouseup',
 
-    autodimensionează: function () {
+    init: function () {
       FormularProcedură.$
-        .attr('spellcheck', 'false')
-        .on(this.evenimente, 'textarea', function () {
-          var textarea = $(this);
+        .find('textarea').attr('spellcheck', 'false').end()
+        .on(this.evenimente, 'textarea', this.autodimensionează);
+    },
 
-          if (textarea.is(':not(:visible)')) return;
+    autodimensionează: function () {
+      var textarea = $(this);
 
-          var clone = textarea.clone()
-            .css({
-              'padding': 0,
-              'border-width': 0,
-              'visibility': 'hidden',
-              'position': 'absolute',
-              'height': textarea.css('min-height')
-            })
-            .val(textarea.val())
-            .insertBefore(textarea);
+      if (textarea.is(':not(:visible)')) return;
 
-          textarea.css('height', clone[0].scrollHeight);
-          clone.remove();
-        });
+      var clone = textarea.clone()
+        .css({
+          'padding': 0,
+          'border-width': 0,
+          'visibility': 'hidden',
+          'position': 'absolute',
+          'height': textarea.css('min-height')
+        })
+        .val(textarea.val())
+        .insertBefore(textarea);
+
+      textarea.css('height', clone[0].scrollHeight);
+      clone.remove();
     }
   },
 
