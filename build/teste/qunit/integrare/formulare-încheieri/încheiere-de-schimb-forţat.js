@@ -13,6 +13,12 @@ asyncTest('Încheiere de schimb forţat', function () {
   ok($secţiune.find('#încăperea-pentru-creditor').există(), 'avem “Încăperea pentru creditor”');
   ok($secţiune.find('#încăperea-pentru-debitor').există(), 'avem “Încăperea pentru debitor”');
 
+  var adresaPentruCreditor = 'str. Creditorilor 17\nChişinău',
+      adresaPentruDebitor = 'str. Debitorilor 17\nChişinău';
+
+  $secţiune.find('#încăperea-pentru-creditor').val(adresaPentruCreditor);
+  $secţiune.find('#încăperea-pentru-debitor').val(adresaPentruDebitor);
+
   // adăugăm o amînare
   var $dataSchimbului = $secţiune.find('li:has(#data-şi-ora-schimbului)'),
       $container = $dataSchimbului.next('.container-buton'),
@@ -53,8 +59,8 @@ asyncTest('Încheiere de schimb forţat', function () {
     var $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut');
 
     ok($secţiuneaDispoziţia.contents(':contains("' + dataAmînării + '")').există(), 'data este în secţiunea “Dispoziţia”');
-    equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-creditor'], 'avem adresa pentru creditor');
-    equal($încheiere.find('address').text(), date.procedură['obiectul-urmăririi']['încăperea-pentru-debitor'], 'avem adresa pentru debitor');
+    equal($încheiere.find('address').eq(0).text(), adresaPentruCreditor, 'avem adresa pentru creditor');
+    equal($încheiere.find('address').eq(1).text(), adresaPentruDebitor, 'avem adresa pentru debitor');
 
     UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la schimbul forţat al locuinţelor');

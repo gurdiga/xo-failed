@@ -10,6 +10,12 @@ asyncTest('Încheiere de instalare', function () {
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val('instalarea').change();
 
+  ok($secţiune.find('#în-încăperea').există(), 'avem cîmpul “În încăperea”');
+
+  var adresa = 'str. Cutărescu 17\nChişinău';
+
+  $secţiune.find('#în-încăperea').val(adresa);
+
   // adăugăm o amînare
   var $dataEvacuării = $secţiune.find('li:has(#data-şi-ora-instalării)'),
       $container = $dataEvacuării.next('.container-buton'),
@@ -44,7 +50,7 @@ asyncTest('Încheiere de instalare', function () {
     ok($paragrafDespreAmînare.există(), 'avem paragraf despre amînare');
     ok($paragrafDespreAmînare.find('span.atenţionare').există(), '…cu atenţionare să se introducă cauza');
     ok($încheiere.find('section header:contains("Motivele")+.conţinut').is('.editabil'), 'secţiunea “Motivele” este editabilă');
-    equal($încheiere.find('address').text().trim(), date.procedură['obiectul-urmăririi']['în-încăperea'].trim(), 'avem adresa');
+    equal($încheiere.find('address').first().text().trim(), adresa, 'avem adresa');
 
     UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la instalarea în spaţiul locativ');
