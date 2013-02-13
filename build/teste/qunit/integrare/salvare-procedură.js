@@ -48,8 +48,9 @@ asyncTest('Precedură: salvare', function () {
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').next('.valuta').val(), 'MDL', 'salvat valuta suma de bază');
           ok(app.FormularProcedură.$.find('#data-ultimei-modificări span').text().trim() !== '', 'se afişează data ultimei modificări');
 
-          var sumăPersonalizată = context.$obiectulUrmăririi.find('.personalizat .etichetă');
+          var sumăPersonalizată = context.$obiectulUrmăririi.find('.personalizat.sumă .etichetă');
 
+          ok(sumăPersonalizată.există(), 'adăugat cîmp pentru datorie adăugătoare');
           equal(sumăPersonalizată.val(), 'Datorie adăugătoare', 'salvat etichetă personalzată pentru datorie adăugătoare');
           equal(sumăPersonalizată.next('.sumă').val(), sume['Datorie adăugătoare'], 'salvat valoare datorie adăugătoare');
           equal(sumăPersonalizată.next('.sumă').next('.valuta').val(), 'MDL', 'salvat valuta datorie adăugătoare');

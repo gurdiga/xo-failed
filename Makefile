@@ -53,4 +53,4 @@ stage: lint test push
 	#ssh -p59922 nati@executori.org 'bash -s' NGINX < ./build/stage.sh
 
 what:
-	rgrep --color --line-number --exclude=qunit-1.10.0.js --exclude=csslint.js TODO js css bin build formulare-încheieri/*.părţi || true
+	rgrep --color --line-number --exclude=qunit-1*.js --exclude=csslint.js TODO js css bin build formulare-încheieri/*.părţi || true

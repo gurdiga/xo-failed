@@ -871,7 +871,7 @@
 
         <li class="container-buton">
           <button
-            class="adaugă-cîmp-personalizat semiascuns"
+            class="adaugă-cîmp-personalizat sumă semiascuns"
             data-şablon="cîmpul-personalizat"
             data-etichetă="Descriere sumă">+sumă</button>
         </li>
@@ -1051,7 +1051,7 @@
 
 
       <ul class="cîmpul-pentru-data-şi-ora-amînării">
-        <li class="personalizat eliminabil de tot">
+        <li class="amînare personalizat eliminabil de tot">
           <textarea class="etichetă amînare" title="Etichetă editabilă"></textarea>
           <input type="text" placeholder="data şi ora" class="dată amînare autofocus"/>
         </li>
@@ -1130,12 +1130,18 @@
 
 
       <ul class="conţinut obiect" title="efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile">
+        <li>
+          <label for="data-şi-ora-ridicării">Data şi ora ridicării</label>
+          <input type="text" id="data-şi-ora-ridicării" class="dată"/>
+        </li>
+
         <li class="container-buton">
           <button
-            class="adaugă-cîmp-personalizat bun implicit semiascuns"
+            class="adaugă-cîmp-personalizat sumă implicit semiascuns"
             data-şablon="cîmpul-personalizat"
             data-etichetă="Descriere bun">+bun</button>
         </li>
+
         <li class="container-buton">
           <button
             class="adaugă-cîmp-personalizat amînare semiascuns"
@@ -1334,7 +1340,7 @@
 
 
       <ul class="cîmpul-personalizat">
-        <li class="personalizat eliminabil de tot">
+        <li class="sumă personalizat eliminabil de tot">
           <textarea class="etichetă" title="Etichetă editabilă"></textarea>
           <input type="text" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>

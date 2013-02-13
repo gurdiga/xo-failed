@@ -787,8 +787,9 @@
           obiectulUrmăririi = {'încasări': colecteazăÎncasări($secţiune)};
         }
 
+        obiectulUrmăririi['sume'] = colecteazăSumeÎnValută($secţiune);
+
         if (obiectulUrmăririi.caracter === 'pecuniar') {
-          obiectulUrmăririi['sume'] = colecteazăSumeÎnValută($secţiune);
           obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
           obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
         } else {
@@ -1106,7 +1107,6 @@
         populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
         populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
         populeazăAmînări($secţiune, secţiune['amînări']);
-        populeazăBunuri($secţiune, secţiune['subformular']);
       }
 
       // ------------------------------------------
@@ -1214,27 +1214,12 @@
       }
 
       // ------------------------------------------
-      function populeazăBunuri($secţiune, subformular) {
-        if (!subformular) return;
-
-        var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun'),
-            $cîmp, item;
-
-        for (item in subformular) {
-          $butonDeAdăugare.click();
-          $cîmp = $butonDeAdăugare.parent().prev('.personalizat');
-          $cîmp.find('.etichetă').val(item);
-          $cîmp.find('input').val(subformular[item]).trigger('change');
-        }
-      }
-
-      // ------------------------------------------
       function populeazăSume($secţiune, sume) {
         if (!sume) return;
 
         $secţiune = $secţiune.find('ul:first');
 
-        var cîmp, $cîmp, buton = $secţiune.find('.adaugă-cîmp-personalizat');
+        var cîmp, $cîmp, buton = $secţiune.find('.adaugă-cîmp-personalizat.sumă');
 
         for (cîmp in sume) {
           $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');

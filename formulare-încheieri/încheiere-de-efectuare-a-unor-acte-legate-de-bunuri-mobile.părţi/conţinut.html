@@ -22,18 +22,22 @@
           <div class="conţinut editabil" spellcheck="false">
             <p>
 <? require 'început-secţiune-motive.html' ?>
-            remiterea de la DEBITOR către CREDITOR aI următoarelor bunuri:</p>
+            remiterea de la DEBITOR către CREDITOR a următoarelor bunuri:</p>
 
             <ol>
-              <li>itemi</li>
-              <li>itemi</li>
-              <li>itemi</li>
-              <li>itemi</li>
+            <% for (var nume in bunuri) { %>
+              <li><%= nume %> — <%= bunuri[nume].suma %> <%= bunuri[nume].valuta %></li>
+            <% } %>
             </ol>
 
             <p>În termenul acordat, <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
             nu <%= text('a sau au', procedură.debitori) %> executat benevol documentul executoriu.</p>
-            <p>Ridicarea forţată în cadrul acestei proceduri a fost amînată din cauza /........./.</p>
+
+            <% if (amînată) { %>
+              <p>Ridicarea forţată în cadrul acestei proceduri a fost amînată pînă la <%= ultimaAmînare %> din cauza
+              <span class="atenţionare">INTRODUCEŢI CAUZA AMÎNĂRII</span>.</p>
+            <% } %>
+
             <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 155 al Codului de executare RM, dispun</p>
           </div>
         </section>
@@ -43,20 +47,34 @@
           <div class="conţinut editabil" spellcheck="false">
             <ol>
               <li>
-                <p>Se numeşte ridicarea forţată a bunurilor sus menţionate la data de …....... ora … pentru
-                a fi remise CREDITORULUI. Prezenţa DEBITORULUI şi CREDITORULUI este obligatorie.</p>
+                <p>Se numeşte ridicarea forţată a bunurilor sus menţionate la
+
+                <% if (amînată) { %>
+                  <%= ultimaAmînare %>
+                <% } else { %>
+                  <%= procedură['obiectul-urmăririi']['data-şi-ora-ridicării'] %>
+                <% } %>
+
+                pentru a fi remise CREDITORULUI. Prezenţa DEBITORULUI şi CREDITORULUI este obligatorie.</p>
               </li>
 
               <li>
-                <p>Se înştiinţează DEBITORUL că neprezentarea lui nu va împiedica executarea documentului executoriu. Dacă DEBITORUL nu va fi prezent, ori nu va permite pătrunderea în încăpere, executorul judecătoresc va efectua pătrunderea forţată în aceasta.</p>
+                <p>Se înştiinţează DEBITORUL că neprezentarea lui nu va împiedica executarea
+                documentului executoriu. Dacă DEBITORUL nu va fi prezent, ori nu va permite
+                pătrunderea în încăpere, executorul judecătoresc va efectua pătrunderea
+                forţată în aceasta.</p>
               </li>
 
               <li>
-                <p>A anunţa organele de poliţie să delege un colaborator al organelor de poliţie care să asigure ordinea publică în cadrul procesului de remitere a bunurilor.</p>
+                <p>A anunţa organele de poliţie să delege un colaborator al organelor de
+                poliţie care să asigure ordinea publică în cadrul procesului de remitere
+                a bunurilor.</p>
               </li>
 
               <li>
-                <p>Se propune CREDITORULUI să asigure la data evacuării 2 martori asistenţi, hamali, dacă este cazul, transport, specialişti în deschidere forţată a încăperilor, sau să avanseze aceste cheltuieli executorului pentru a le contracta personal.</p>
+                <p>Se propune CREDITORULUI să asigure la data ridicării 2 martori asistenţi,
+                hamali, dacă este cazul, transport, specialişti în deschidere forţată a încăperilor,
+                sau să avanseze aceste cheltuieli executorului pentru a le contracta personal.</p>
               </li>
             </ol>
 
