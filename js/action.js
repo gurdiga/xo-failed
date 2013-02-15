@@ -18,7 +18,7 @@
 
       BNM.init();
       HashController.init();
-      Valute.populeazăListe();
+      Valute.init();
       SubsecţiuniDinamice.init();
       TextareaElastice.init();
       SelecturiFoarteLate.init();
@@ -59,6 +59,10 @@
   // --------------------------------------------------
 
   Valute = {
+    init: function () {
+      this.populeazăListe();
+    },
+
     populeazăListe: function () {
       var şablon = $şabloane.find('.valute').html();
 
@@ -70,33 +74,34 @@
 
   Persoane = {
     init: function () {
-      FormularProcedură.$.on('click', '#creditor+button.adaugă,.debitor+button.adaugă', this.adaugă);
+      FormularProcedură.$.on('click', 'button.adaugă.persoană', this.adaugă);
     },
 
     adaugă: function () {
-      var buton = $(this),
-          fieldset = buton.prev();
+      var $buton = $(this),
+          $persoanaPrecedentă = $buton.prev(),
+          $persoanaAdăugată = $buton.prev().clone();
 
-      fieldset.clone()
-        .addClass('eliminabil de tot')
+      $persoanaAdăugată
         .removeAttr('id') // #creditor
         .find('.conţinut').removeAttr('style').end()
         .find('input,textarea').val('').end()
         .find('legend label').text(function (i, text) {
-          if (buton.find('.legend.label').există()) {
-            $(this).closest('fieldset').addClass('persoană-terţă');
+          if ($buton.is('.persoană.terţă')) {
+            $persoanaAdăugată.addClass('persoană-terţă');
 
-            return buton.find('.legend.label').text();
+            return $buton.find('.legend.label').text();
           } else {
             return text;
           }
         }).end()
         .hide()
-        .insertAfter(fieldset)
+        .insertAfter($persoanaPrecedentă)
+        .find('#gen-persoană').trigger('change').end()
         .show('blind', function () {
-          buton.siblings('fieldset:not(#creditor)').addClass('dispensabilă');
-        })
-        .find('#gen-persoană').trigger('change');
+          $persoanaAdăugată.addClass('dispensabilă eliminabil de tot');
+          FormularProcedură.$.trigger('adăugat-persoană');
+        });
     }
   },
 
@@ -3062,6 +3067,7 @@
   if (top.location.pathname === '/build/teste/qunit/') {
     window.Căutare = Căutare;
     window.Onorariu = Onorariu;
+    window.Persoane = Persoane;
   }
 
 })(window, document, moment);
