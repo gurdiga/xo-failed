@@ -144,7 +144,7 @@
 
     init: function () {
       FormularProcedură.$
-        .find('textarea').attr('spellcheck', 'false').end()
+        .attr('spellcheck', 'false')
         .on(this.evenimente, 'textarea', this.autodimensionează);
     },
 
