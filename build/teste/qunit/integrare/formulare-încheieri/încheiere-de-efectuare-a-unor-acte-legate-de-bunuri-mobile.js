@@ -70,7 +70,7 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
         item;
 
     for (var nume in bunuri) {
-      item = nume + ' ' + bunuri[nume].suma + ' ' + bunuri[nume].valuta;
+      item = nume + ' — ' + bunuri[nume].suma + ' ' + bunuri[nume].valuta;
       ok($listaBunuri.find('li:contains("' + item + '")').există(), 'bunul “' + item + '” şi valoarea lui este menţionat în lista de bunuri');
     }
 
