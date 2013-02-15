@@ -1137,6 +1137,7 @@ select#obiect~.buton[data-formular] {
   position: absolute;
   right: -8px;
   top: 4px;
+  overflow: visible; /* să se vadă bifa */
 }
 
 .ui-icon-calendar {

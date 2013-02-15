@@ -1,10 +1,10 @@
-<? $titlu = 'Încheiere de ridicare a unor sume sau bunuri' ?>
+<? $titlu = 'Încheiere de trimitere a bunurilor imobile' ?>
 <? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
 <? require 'partea-de-sus.html' ?>
 
         <hgroup>
           <h1>Încheiere</h1>
-          <h2>de numire a datei ridicării a unor sume sau bunuri</h2>
+          <h2>de numire a datei transmiterii bunurilor imobile</h2>
         </hgroup>
 
 <? require 'procedura.html' ?>
@@ -13,7 +13,7 @@
         <section>
           <header>Chestiunea</header>
           <div class="conţinut" spellcheck="false">
-            <p>Examinînd cererea CREDITORULUI cu privire la numirea datei ridicării unor sume sau bunuri</p>
+            <p>Examinînd cererea CREDITORULUI cu privire la numirea datei transmiterii bunurilor imobile</p>
           </div>
         </section>
 
@@ -22,8 +22,9 @@
           <div class="conţinut editabil" spellcheck="false">
             <p>
 <? require 'început-secţiune-motive.html' ?>
-            remiterea de la <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
-            către CREDITOR a următoarelor bunuri:</p>
+            transmiterea de la <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+            către CREDITOR a următoarelor bunuri:
+            </p>
 
             <ol>
             <% for (var nume in bunuri) { %>
@@ -35,11 +36,11 @@
             nu <%= text('a sau au', procedură.debitori) %> executat benevol documentul executoriu.</p>
 
             <% if (amînată) { %>
-              <p>Ridicarea forţată în cadrul acestei proceduri a fost amînată pînă la <%= ultimaAmînare %> din cauza
+              <p>Transmiterea forţată în cadrul acestei proceduri a fost amînată pînă la <%= ultimaAmînare %> din cauza
               <span class="atenţionare">INTRODUCEŢI CAUZA AMÎNĂRII</span>.</p>
             <% } %>
 
-            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 155 al Codului de executare RM, dispun</p>
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 147, 155 al Codului de executare RM, dispun</p>
           </div>
         </section>
 
@@ -48,7 +49,7 @@
           <div class="conţinut editabil" spellcheck="false">
             <ol>
               <li>
-                <p>Se numeşte ridicarea forţată a bunurilor sus menţionate la
+                <p>Se numeşte transmiterea forţată a bunurilor sus menţionate la
 
                 <% if (amînată) { %>
                   <%= ultimaAmînare %>
@@ -56,28 +57,31 @@
                   <%= procedură['obiectul-urmăririi']['data-şi-ora-ridicării'] %>
                 <% } %>
 
-                pentru a fi remise CREDITORULUI. Prezenţa
-                <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> şi CREDITORULUI
-                este obligatorie.</p>
+                urmînd ca <%= text('DEBITORUL sau DEBITORILOR', procedură.debitori) %>
+                să fie evacuat din acestea.</p>
               </li>
 
               <li>
-                <p>Se înştiinţează <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
-                că neprezentarea <%= text('lui sau lor', procedură.debitori) %> nu va împiedica
-                executarea documentului executoriu. Dacă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+                <p>Se înştiinţează <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> că
+                neprezentarea <%= text('lui sau lor', procedură.debitori) %> nu va împiedica executarea
+                documentului executoriu. Dacă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
                 nu <%= text('va sau vor', procedură.debitori) %> fi prezent, ori nu
                 <%= text('va sau vor', procedură.debitori) %> permite pătrunderea în încăpere,
                 executorul judecătoresc va efectua pătrunderea forţată în aceasta.</p>
               </li>
 
               <li>
-                <p>A anunţa organele de poliţie să delege un colaborator al organelor de
-                poliţie care să asigure ordinea publică în cadrul procesului de remitere
-                a bunurilor.</p>
+                <p>Se obligă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+                să comunice locul unde pot fi strămutate bunurile.</p>
               </li>
 
               <li>
-                <p>Se propune CREDITORULUI să asigure la data ridicării 2 martori asistenţi,
+                <p>A anunţa organele de poliţie să delege un colaborator al său care să
+                asigure ordinea publică în cadrul procesului de transmitere a bunurilor.</p>
+              </li>
+
+              <li>
+                <p>Se propune CREDITORULUI să asigure la data transmiterii 2 martori asistenţi,
                 hamali, dacă este cazul, transport, specialişti în deschidere forţată a încăperilor,
                 sau să avanseze aceste cheltuieli executorului pentru a le contracta personal.</p>
               </li>

@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', function () {
+asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', function () {
   /*global UtilitareÎncheiere:false */
   /*jshint maxlen:145 maxstatements:31 */
   'use strict';
@@ -8,7 +8,7 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
       $secţiune = app.FormularProcedură.$obiectulUrmăririi;
 
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile').change();
+  $secţiune.find('#obiect').val('efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile').change();
 
   var dataŞiOraRidicării = '02.03.2013 ora 11:00';
 
@@ -23,12 +23,12 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
   equal($butonDeAdăugareBun.text(), '+bun', '…cu textul “+bun”');
 
   var bunuri = {
-    'Bicicletă': {
-      suma: 2500,
-      valuta: 'MDL'
+    'Vilă': {
+      suma: 250000,
+      valuta: 'USD'
     },
-    'Radio FM': {
-      suma: 840,
+    'Garaj': {
+      suma: 3000,
       valuta: 'EUR'
     }
   }, numărDeBunuri = Object.keys(bunuri).length;
@@ -56,7 +56,7 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
         date = this.tab.Încheiere.date,
-        subtitlu = 'de numire a datei ridicării a unor sume sau bunuri';
+        subtitlu = 'de numire a datei transmiterii bunurilor imobile';
 
     ok(app.$.isPlainObject(date.bunuri), 'lista de bunuri e definită în contextul încheierii');
 
@@ -111,7 +111,12 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
           ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), 'este menţionată data şi ora amînării');
           ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraRidicării + '")').există(), 'NU este menţionată data şi ora ridicării');
 
-          start();
+          app.FormularProcedură.$.find('.închide').click();
+          app.$(app.FormularProcedură.$).one('închidere', function () {
+            ok(true, 'închis formularul de procedură');
+
+            start();
+          });
         });
       }, app.PAUZĂ_DE_OBSERVABILITATE);
     }, app.PAUZĂ_DE_OBSERVABILITATE);
