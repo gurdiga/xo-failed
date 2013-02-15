@@ -523,16 +523,8 @@ input.sumă {
   padding: 0;
 }
 
-button.elimină-persoană {
-  border-width: 0;
-  background-color: transparent;
-  font-weight: normal;
-  font-size: 1.5em;
-  display: none;
-  float: right;
-  padding: .5em;
-  line-height: .6em;
-  color: white;
+.eliminabil {
+  position: relative;
 }
 
 .elimină {
@@ -548,10 +540,6 @@ button.elimină-persoană {
   -moz-transition: opacity 1.5s;
   -o-transition: opacity 1.5s;
   transition: opacity 1.5s;
-}
-
-.spre-eliminare {
-  position: relative;
 }
 
 .spre-eliminare .elimină {
