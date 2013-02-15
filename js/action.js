@@ -794,6 +794,12 @@
           obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
         } else {
           obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
+
+          var $butonÎncheiere = $secţiune.find('.buton[data-formular]');
+
+          if ($butonÎncheiere.is('.salvat')) {
+            obiectulUrmăririi['încheiere'] = $butonÎncheiere.data('pagina');
+          }
         }
 
         return obiectulUrmăririi;
@@ -1107,6 +1113,12 @@
         populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
         populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
         populeazăAmînări($secţiune, secţiune['amînări']);
+
+        if (secţiune.încheiere) {
+          $secţiune.find('.buton[data-formular]')
+            .attr('data-pagina', secţiune.încheiere)
+            .addClass('salvat');
+        }
       }
 
       // ------------------------------------------
@@ -2846,7 +2858,7 @@
 
     ajustează: function () {
       var $opţiune = $(this).find('option:selected'),
-          $buton = $(this).siblings('.ui-icon-document.buton');
+          $buton = $(this).siblings('.buton[data-formular]');
 
       $buton
         .attr('data-formular', $opţiune.attr('data-formular-încheiere'))
