@@ -1,6 +1,4 @@
 - Încheieri
-  - efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile
-    - de terminat încheierea (datele sunt gata)
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
@@ -9,6 +7,7 @@
 - Introducerea datelor
   - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
   - index persoane
+  - de mutat tipul în date şi de folosit doar numărul pentru numele fişierelor
 
 - Workers
  - Criptolog
@@ -34,16 +33,12 @@
  
 Chestii tehnice
   - microtemplating: escape html tags in valorile injectate
-  - de şters /build/qunit de pe stage/prod
-  - de extins build
-    - configurare nginx parte globală /etc/
   - timeout session from JS and logout?
   - de verificat versiunea browserului?
   - bootable tonido flash
   - rollback deploy? deploy stage then switch doc_roots rename?
   - try a Centos VM deploy?
   - Materiale
-  - arhivare proceduri
 
 - Performanţă
   - performanţă: YSlow & PageSpeed, about:tracing
