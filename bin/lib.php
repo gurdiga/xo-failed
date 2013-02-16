@@ -4,12 +4,31 @@ if (isset($_SERVER['PHP_AUTH_USER'])) $login = $_SERVER['PHP_AUTH_USER'];
 $doc_root = $_SERVER['DOCUMENT_ROOT'];
 $calea = $doc_root . urldecode($_SERVER['REQUEST_URI']);
 $conţinut = file_get_contents('php://input');
-$development = substr($_SERVER['SERVER_NAME'], 0, 4) == 'dev.';
 
-if (!$development) {
-  set_error_handler(function($no, $message, $file, $line) {
-    stop("Error $no: $message @$file:$line " . $_SERVER['SERVER_NAME']);
-  });
+// ------------------------------
+
+set_error_handler(function($errno, $errstr, $errfile, $errline, $errcontext) {
+  global $conţinut;
+
+  $errfile = str_replace($_SERVER['DOCUMENT_ROOT'] . '/', '', $errfile);
+
+  $mesaj = "500 $errfile:$errline: $errstr";
+  $mesaj .= print_r($errcontext, true);
+  $mesaj .= backtrace();
+  $mesaj .= $conţinut;
+
+  stop($mesaj);
+});
+
+// ------------------------------
+
+function backtrace() {
+  ob_start();
+  debug_print_backtrace();
+  $backtrace = ob_get_contents();
+  ob_end_clean();
+
+  return $backtrace;
 }
 
 // ------------------------------

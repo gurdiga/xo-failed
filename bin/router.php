@@ -22,12 +22,7 @@ foreach ($rute as $re=>$script) {
   if (preg_match("|^$re$|", $pereche)) {
     $găsit_script = true;
 
-    try {
-      require "./$script";
-    } catch (Exception $e) {
-      stop("500 $pereche: $script\n{$e->getMessage()} {$e->getTraceAsString()}");
-    }
-
+    require "./$script";
     break;
   }
 }
