@@ -109,24 +109,25 @@
 
   HashController = {
     init: function () {
-      $(window)
-        .on('hashchange', function () {
-          if (location.hash && !(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
-          if (!Utilizator.autentificat) {
-            location.hash = '';
-            return;
-          }
-
-          $(document.body).addClass('autentificat');
-
-          var pagina = HashController.pagină();
-
-          if (Action[pagina]) Action[pagina]();
-        });
+      $(window).on('hashchange', function () { HashController.acţionează(location, document.body); });
     },
 
-    hash: function () {
-      var hash = location.hash;
+    acţionează: function (location, body) {
+      if (location.hash && !(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
+      if (!Utilizator.autentificat) {
+        location.hash = '';
+        return;
+      }
+
+      $(body).addClass('autentificat');
+
+      var pagina = HashController.pagină();
+
+      if (Action[pagina]) Action[pagina]();
+    },
+
+    hash: function (hash) {
+      hash = hash || location.hash;
 
       if (hash === '' || hash === '#') hash = '#index';
 
@@ -3068,6 +3069,7 @@
     window.Căutare = Căutare;
     window.Onorariu = Onorariu;
     window.Persoane = Persoane;
+    window.HashController = HashController;
   }
 
 })(window, document, moment);

@@ -9,7 +9,8 @@
     '/js/indexer.js',
 
     'unit/încheiere.js',
-    'unit/action.js',
+    'unit/action-persoane.js',
+    'unit/action-hash-controller.js',
 
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',
