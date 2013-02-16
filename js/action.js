@@ -3070,6 +3070,7 @@
     window.Onorariu = Onorariu;
     window.Persoane = Persoane;
     window.HashController = HashController;
+    window.TextareaElastice = TextareaElastice;
   }
 
 })(window, document, moment);

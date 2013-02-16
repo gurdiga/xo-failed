@@ -11,6 +11,7 @@
     'unit/încheiere.js',
     'unit/action-persoane.js',
     'unit/action-hash-controller.js',
+    'unit/action-textarea-elastice.js',
 
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',
