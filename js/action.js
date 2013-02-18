@@ -3071,6 +3071,7 @@
     window.Persoane = Persoane;
     window.HashController = HashController;
     window.TextareaElastice = TextareaElastice;
+    window.SelecturiFoarteLate = SelecturiFoarteLate;
   }
 
 })(window, document, moment);
