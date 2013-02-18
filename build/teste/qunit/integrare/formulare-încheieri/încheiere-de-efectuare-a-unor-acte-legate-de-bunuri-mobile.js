@@ -1,7 +1,7 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:145 maxstatements:31 */
+  /*jshint maxlen:151 maxstatements:31 */
   'use strict';
 
   var app = this.app,
@@ -76,9 +76,9 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
 
     var $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil');
 
-    ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraRidicării + '")').există(), 'e menţionată data şi ora ridicării');
+    ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraRidicării + '")').există(), 'e menţionată data şi ora ridicării în secţiunea “Dispoziţia”');
     ok(!$secţiuneaDispoziţia.find('p:contains("Ridicarea forţată în cadrul acestei proceduri a fost amînată pînă la")').există(),
-        'NU se menţionează amînare dacă nu avem amînări în procedură');
+        'în secţiunea “Dispoziţia” NU se menţionează amînare dacă nu avem amînări în procedură');
 
     setTimeout(function () {
       $încheiere.find('.închide').click();

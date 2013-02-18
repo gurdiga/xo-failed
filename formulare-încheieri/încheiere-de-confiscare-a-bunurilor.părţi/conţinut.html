@@ -1,0 +1,96 @@
+<? $titlu = 'Încheiere de numire a datei confiscării bunurilor' ?>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
+
+        <hgroup>
+          <h1>Încheiere</h1>
+          <h2>de numire a datei confiscării bunurilor</h2>
+        </hgroup>
+
+<? require 'procedura.html' ?>
+<? require 'părţile.html' ?>
+
+        <section>
+          <header>Chestiunea</header>
+          <div class="conţinut" spellcheck="false">
+            <p>Examinînd cererea CREDITORULUI cu privire la numirea datei confiscării bunurilor</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Motivele</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <p>
+<? require 'început-secţiune-motive.html' ?>
+            confiscarea de la <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+            către CREDITOR a următoarelor bunuri:</p>
+
+            <ol>
+            <% for (var nume in bunuri) { %>
+              <li><%= nume %> — <%= bunuri[nume].suma %> <%= bunuri[nume].valuta %></li>
+            <% } %>
+            </ol>
+
+            <p>În termenul acordat, <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+            nu <%= text('a sau au', procedură.debitori) %> executat benevol documentul executoriu.</p>
+
+            <% if (amînată) { %>
+              <p>Transmiterea forţată în cadrul acestei proceduri a fost amînată pînă la <%= ultimaAmînare %> din cauza
+              <span class="atenţionare">INTRODUCEŢI CAUZA AMÎNĂRII</span>.</p>
+            <% } %>
+
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 147, 155 al Codului de executare RM, dispun</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Dispoziţia</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <ol>
+              <li>
+                <p>Se numeşte confiscarea bunurilor sus menţionate la
+
+                <% if (amînată) { %>
+                  <%= ultimaAmînare %>
+                <% } else { %>
+                  <%= procedură['obiectul-urmăririi']['data-şi-ora-confiscării'] %>
+                <% } %>
+                </p>
+
+                <p>În caz dacă se efectuează confiscarea bunurilor imobile, <%= text('DEBITORUL sau DEBITORILOR', procedură.debitori) %>
+                se va evacua din acestea.</p>
+              </li>
+
+              <li>
+                <p>Se înştiinţează <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> că
+                neprezentarea <%= text('lui sau lor', procedură.debitori) %> nu va împiedica executarea
+                documentului executoriu. Dacă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+                nu <%= text('va sau vor', procedură.debitori) %> fi prezent, ori nu
+                <%= text('va sau vor', procedură.debitori) %> permite pătrunderea în încăpere,
+                executorul judecătoresc va efectua pătrunderea forţată în aceasta.</p>
+              </li>
+
+              <li>
+                <p>În cazul în care se efectuează confiscarea bunurilor imobile,
+                <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> se obligă să
+                comunice locul unde pot fi strămutate bunurile din încăpere.</p>
+              </li>
+
+              <li>
+                <p>A anunţa organele de poliţie să delege un colaborator al său care să
+                asigure ordinea publică în cadrul procesului de transmitere a bunurilor.</p>
+              </li>
+
+              <li>
+                <p>Se propune CREDITORULUI să asigure la data transmiterii 2 martori asistenţi,
+                hamali, dacă este cazul, transport, specialişti în deschidere forţată a încăperilor,
+                sau să avanseze aceste cheltuieli executorului pentru a le contracta personal.</p>
+              </li>
+            </ol>
+
+<? require 'despre-contestare.html' ?>
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>

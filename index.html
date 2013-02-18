@@ -913,7 +913,10 @@
               data-formular-încheiere="încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile"
               data-şoaptă-buton="Formează Încheiere de numire a datei transmiterii bunurilor imobile">
               efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile</option>
-            <option data-formular-încheiere="încheiere-de-confiscare-a-bunurilor" class="scurtă">confiscarea bunurilor</option>
+            <option class="scurtă"
+              data-formular-încheiere="încheiere-de-confiscare-a-bunurilor"
+              data-şoaptă-buton="Formează Încheiere de numire a datei confiscării bunurilor">
+              confiscarea bunurilor</option>
             <option data-formular-încheiere="încheiere-de-nimicire-a-bunurilor" class="scurtă">nimicirea unor bunuri</option>
             <option data-formular-încheiere="încheiere-de-restabilire-la-locul-de-muncă" class="scurtă">restabilirea la locul de muncă</option>
             <option data-formular-încheiere="încheiere-de-aplicare-a-asigurare-a-acţiunii">aplicarea măsurilor de asigurare a acţiunii</option>
@@ -1177,11 +1180,23 @@
 
 
       <ul class="conţinut obiect" title="confiscarea bunurilor">
+        <li>
+          <label for="data-şi-ora-confiscării">Data şi ora confiscării</label>
+          <input type="text" id="data-şi-ora-confiscării" class="dată"/>
+        </li>
+
         <li class="container-buton">
           <button
-            class="adaugă-cîmp-personalizat implicit semiascuns"
+            class="adaugă-cîmp-personalizat sumă implicit semiascuns"
             data-şablon="cîmpul-personalizat"
             data-etichetă="Descriere bun">+bun</button>
+        </li>
+
+        <li class="container-buton">
+          <button
+            class="adaugă-cîmp-personalizat amînare semiascuns"
+            data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+            data-etichetă="Amînat pînă la">+amînare</button>
         </li>
       </ul>
 

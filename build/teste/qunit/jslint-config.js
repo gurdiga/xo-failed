@@ -35,6 +35,7 @@
     'integrare/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-nelegate-de-bunuri.js',
     'integrare/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-mobile.js',
     'integrare/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile.js',
+    'integrare/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.js',
 
     'integrare/căutare-procedură.js',
 
@@ -48,7 +49,8 @@
     '/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.părţi/script.js',
     '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-nelegate-de-bunuri.părţi/script.js',
     '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-mobile.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile.părţi/script.js'
+    '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {
