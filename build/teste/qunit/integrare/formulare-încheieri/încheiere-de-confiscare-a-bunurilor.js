@@ -16,9 +16,8 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
   $secţiune.find('#data-şi-ora-confiscării').val(dataŞiOraConfiscării);
 
   var $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.sumă'),
-      $cîmpBun, nume, i = 0;
+      $cîmpBun, nume;
 
-  ok($secţiune.find('.sumă.personalizat').există(), 'un cîmp pentru bunuri se adaugă implicit');
   ok($butonDeAdăugareBun.există(), 'avem buton pentru adăugare bunuri');
   equal($butonDeAdăugareBun.text(), '+bun', '…cu textul “+bun”');
 
@@ -34,13 +33,12 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
   }, numărDeBunuri = Object.keys(bunuri).length;
 
   for (nume in bunuri) {
+    $butonDeAdăugareBun.click();
+
     $cîmpBun = $butonDeAdăugareBun.parent().prev('.personalizat');
     $cîmpBun.find('.etichetă').val(nume);
     $cîmpBun.find('.sumă').val(bunuri[nume].suma);
     $cîmpBun.find('.valuta').val(bunuri[nume].valuta);
-
-    i++;
-    if (i < numărDeBunuri) $butonDeAdăugareBun.click();
   }
 
   equal($secţiune.find('.sumă.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
@@ -104,19 +102,16 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
               $secţiuneaMotivele = $încheiere.find('section header:contains("Motivele")+.conţinut.editabil'),
               $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil');
 
-          ok(date.amînată, 'avem flag care marchează amînarea ridicării');
-          equal(date.ultimaAmînare, dataŞiOraAmînării, 'avem data şi ora amînării');
+          ok(true, 'cînd executarea este amînată…');
+          ok(date.amînată, '…avem flag care marchează amînarea ridicării');
+          equal(date.ultimaAmînare, dataŞiOraAmînării, '…avem data şi ora amînării');
 
-          ok($secţiuneaMotivele.find('p:contains("' + dataŞiOraAmînării + '")').există(), 'este menţionată data şi ora amînării');
-          ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), 'este menţionată data şi ora amînării');
-          ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraConfiscării + '")').există(), 'NU este menţionată data şi ora ridicării');
+          ok($secţiuneaMotivele.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
+          ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
+          ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraConfiscării + '")').există(), '…NU este menţionată data şi ora ridicării');
 
-          app.FormularProcedură.$.find('.închide').click();
-          app.$(app.FormularProcedură.$).one('închidere', function () {
-            ok(true, 'închis formularul de procedură');
-
-            start();
-          });
+          $încheiere.find('.închide').click();
+          start();
         });
       }, app.PAUZĂ_DE_OBSERVABILITATE);
     }, app.PAUZĂ_DE_OBSERVABILITATE);

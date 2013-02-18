@@ -37,7 +37,7 @@ Chestii tehnice
   - timeout session from JS and logout?
   - de verificat versiunea browserului?
   - bootable tonido flash
-  - rollback deploy? deploy stage then switch doc_roots rename?
+  - rollback deploy? deploy stage then switch doc_roots rename? have a REVISION=SHA parameter?
   - try a Centos VM deploy?
   - Materiale
 

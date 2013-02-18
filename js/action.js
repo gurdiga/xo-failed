@@ -2548,7 +2548,7 @@
         fizică: function () { return 100 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); },
         juridică: function () { return 100 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); }
       },
-      'nimicirea unor bunuri': {
+      'nimicirea bunurilor': {
         fizică: function () { return 100 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); },
         juridică: function () { return 100 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); }
       },
