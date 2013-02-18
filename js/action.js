@@ -186,23 +186,21 @@
     },
 
     afişeazăŞoaptă: function () {
-      var select = $(this);
+      var $select = $(this);
 
-      select.next('.şoaptă').remove();
+      $select.next('.şoaptă').remove();
 
-      if (select.find('option:selected').is('.scurtă')) return;
+      if ($select.find('option:selected').is('.scurtă')) return;
 
       $('<p>')
-        .insertAfter(select)
-        .text(select.find('option:selected').text())
+        .insertAfter($select)
+        .text($select.find('option:selected').text())
         .addClass('şoaptă');
     },
 
     afişeazăŞoaptePentruSelecturileUrmătoare: function () {
       $(this).closest('li')
-        .nextAll().find('select.foarte.lat')
-          .not(function () {return $(this).next().is('.şoaptă'); })
-          .trigger('change');
+        .nextAll().find('select.foarte.lat').trigger('change');
     }
   },
 
