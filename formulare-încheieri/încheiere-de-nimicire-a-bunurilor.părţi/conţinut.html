@@ -22,14 +22,15 @@
           <div class="conţinut editabil" spellcheck="false">
             <p>
 <? require 'început-secţiune-motive.html' ?>
-            nimicirea de la <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
-            către CREDITOR a următoarelor bunuri:</p>
+            nimicirea a următoarelor bunuri:</p>
 
             <ol>
             <% for (var nume in bunuri) { %>
               <li><%= nume %> — <%= bunuri[nume].suma %> <%= bunuri[nume].valuta %></li>
             <% } %>
             </ol>
+
+            <p>ce aparţin <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>.</p>
 
             <p>În termenul acordat, <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
             nu <%= text('a sau au', procedură.debitori) %> executat benevol documentul executoriu.</p>
@@ -56,13 +57,6 @@
                   <%= procedură['obiectul-urmăririi']['data-şi-ora-nimicirii'] %>
                 <% } %>
                 </p>
-
-                <p>la adresa:</p>
-
-                <address class="atenţionare">
-                 INTRODUCEŢI<br/>
-                 ADRESA
-                </address>
               </li>
 
               <li>
