@@ -1553,7 +1553,7 @@
     notează: function (număr) {
       if (ProceduriRecente.numărulUltimei() === număr) return;
 
-      $.put(ProceduriRecente.url(), număr, ProceduriRecente.afişează);
+      $.put(ProceduriRecente.url(), JSON.stringify(număr), ProceduriRecente.afişează);
     },
 
     numărulUltimei: function () {
