@@ -3,12 +3,13 @@
 (function (window, document, moment) {
   'use strict';
 
+  window.$şabloane = $('#şabloane');
+
   var UC = 20, // valoarea unităţii convenţionale în MDL
       RE_FORMATUL_DATEI = /(\d{2})\.(\d{2})\.(\d{4})/,
       FORMATUL_DATEI = 'DD.MM.YYYY',
 
   location = window.location,
-  $şabloane = $('#şabloane'),
 
   Action = {
     init: function () {
@@ -64,7 +65,7 @@
     },
 
     populeazăListe: function () {
-      var şablon = $şabloane.find('.valute').html();
+      var şablon = window.$şabloane.find('.valute').html();
 
       $('ul .valuta').html(şablon);
     }
@@ -217,7 +218,7 @@
     inserează: function () {
       var $select = $(this),
           selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
-          şablon = SubsecţiuniDinamice.parseazăIncluderile($şabloane.find(selectorŞablon).html()),
+          şablon = SubsecţiuniDinamice.parseazăIncluderile(window.$şabloane.find(selectorŞablon).html()),
           item = $select.closest('li'),
           $subformular;
 
@@ -240,7 +241,7 @@
       if (!html) return html;
 
       return html.replace(/<!-- include (.*?) -->/g, function (match, selector) {
-        return $şabloane.find(selector).html();
+        return window.$şabloane.find(selector).html();
       });
     }
   },
@@ -297,12 +298,12 @@
             subformular = item.attr('data-şablon-subformular');
 
         if (subformular) {
-          $şabloane.find('.subformular[title="' + subformular + '"]').clone()
+          window.$şabloane.find('.subformular[title="' + subformular + '"]').clone()
             .removeAttr('title')
             .appendTo(item);
         }
 
-        var bifăAchitare = $şabloane.find('.achitare').clone(),
+        var bifăAchitare = window.$şabloane.find('.achitare').clone(),
             random = 'achitat' + (new Date()).getTime();
 
         bifăAchitare
@@ -333,7 +334,7 @@
 
       adaugă: function () {
         var numeŞablon = $(this).closest('.item').attr('data-şablon-subformular'),
-            şablon = $şabloane.find('.subformular[title="' + numeŞablon + '"] .document').first(),
+            şablon = window.$şabloane.find('.subformular[title="' + numeŞablon + '"] .document').first(),
             $subformular = şablon.clone();
 
         $subformular
@@ -408,7 +409,7 @@
   // --------------------------------------------------
 
   Destinatari = {
-    $: $şabloane.find('#destinatari'),
+    $: window.$şabloane.find('#destinatari'),
     adăugaţiDeja: $(),
 
     init: function () {
@@ -497,7 +498,7 @@
   // --------------------------------------------------
 
   ButonDeEliminare = {
-    $: $şabloane.find('.elimină'),
+    $: window.$şabloane.find('.elimină'),
     eliminabilPrecedent: $(),
 
     init: function () {
@@ -2179,7 +2180,7 @@
     adaugă: function () {
       var buton = $(this),
           li = buton.closest('li'),
-          şablon = $şabloane.find('.' + buton.attr('data-şablon')).html();
+          şablon = window.$şabloane.find('.' + buton.attr('data-şablon')).html();
 
       li
         .before(şablon)
@@ -2695,7 +2696,7 @@
       },
 
       adaugăSubsecţiune: function () {
-        var $încasare = $($şabloane.find('#subsecţiune-încasare').html());
+        var $încasare = $(window.$şabloane.find('#subsecţiune-încasare').html());
 
         $încasare
           .hide()
@@ -2722,7 +2723,7 @@
       adaugăSubsecţiune: function () {
         var $secţiune = $(this).closest('.conţinut'), $subsecţiune;
 
-        $subsecţiune = $şabloane.find('.subsecţiune.întîrziere').clone()
+        $subsecţiune = window.$şabloane.find('.subsecţiune.întîrziere').clone()
           .find(':radio').attr('name', function (i, name) {
             return name + $secţiune.find('.subsecţiune.întîrziere').length;
           }).end()
@@ -2782,7 +2783,7 @@
       },
 
       adaugăSubsecţiune: function () {
-        $şabloane.find('.subsecţiune.sechestrare-bunuri').clone()
+        window.$şabloane.find('.subsecţiune.sechestrare-bunuri').clone()
           .hide()
           .insertBefore($(this).closest('#adaugă-subsecţiune'))
           // ajustează dimensiunea etichetei personalizate
@@ -3057,7 +3058,6 @@
   window.Încheieri = Încheieri;
   window.Subsecţiuni = Subsecţiuni;
   window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
-  window.$şabloane = $şabloane;
   window.Cheltuieli = Cheltuieli;
   window.FORMATUL_DATEI = FORMATUL_DATEI;
   window.UC = UC;
@@ -3070,6 +3070,7 @@
     window.HashController = HashController;
     window.TextareaElastice = TextareaElastice;
     window.SelecturiFoarteLate = SelecturiFoarteLate;
+    window.SubsecţiuniDinamice = SubsecţiuniDinamice;
   }
 
 })(window, document, moment);
