@@ -235,6 +235,7 @@
         var range = document.createRange();
 
         range.selectNode(this);
+        this.removeAttribute('class');
 
         var sel = window.getSelection();
 

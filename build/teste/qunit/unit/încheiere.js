@@ -40,10 +40,12 @@
     ok($.isFunction(utilitare.selecteazăAtenţionare), 'este definită');
 
     span.innerText = 'text to select';
+    span.className = 'atenţionare';
     document.body.appendChild(span);
     utilitare.selecteazăAtenţionare.call(span);
 
     equal(document.getSelection().getRangeAt(0).toString(), span.innerText, 'selectează elementul');
+    ok(!span.className, 'elimină clasa “atenţionare”');
     document.body.removeChild(span);
   });
 
