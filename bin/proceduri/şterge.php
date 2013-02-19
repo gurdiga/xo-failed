@@ -29,6 +29,7 @@ function elimină_din_recente($număr) {
   $lista = array_filter($lista, function($item) use ($număr) {
     return $item != $număr;
   });
+  $lista = array_values($lista);
 
   înscrie_fişier($fişier, json_encode($lista));
 }
