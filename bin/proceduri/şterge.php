@@ -1,6 +1,6 @@
 <?
 
-if (!$_SERVER['SERVER_NAME'] == 'executori.org') stop('Nu ştergem proceduri în producţie.');
+if ($_SERVER['SERVER_NAME'] == 'executori.org') stop('Nu ştergem proceduri în producţie.');
 
 $cale = $doc_root . $_SERVER['REQUEST_URI'];
 $număr = basename($cale);
