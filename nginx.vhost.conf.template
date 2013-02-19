@@ -104,7 +104,7 @@ server {
         return 403;
       }
 
-      location ~ /date/\d+/proceduri/[SP]?-\d+/încheieri/.+\.html$ {
+      location ~ /date/\d+/proceduri/\d+/încheieri/.+\.html$ {
         more_set_headers 'Content-Type: text/html; charset=utf-8';
 <? require 'rest.conf' ?>
       }

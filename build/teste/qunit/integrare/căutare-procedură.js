@@ -1,32 +1,35 @@
 asyncTest('Procedură: căutare', function () {
   'use strict';
 
-  var app = this.app,
-      $secţiune = app.$('#căutare'),
-      numărComplet = app.Utilizator.login + app.ProceduriRecente.numărulUltimei();
+  var app = this.app;
 
-  if (app.FormularProcedură.$.is(':visible')) {
-    app.FormularProcedură.$.find('.închide').click();
-    ok(false, 'formularul de procedură nu este închis');
-  }
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură este deschis');
 
-  ok($secţiune.există(), 'avem secţiune de căutare');
-  $secţiune.find('input').val(numărComplet).trigger('input');
+  app.FormularProcedură.$.find('.închide').click();
+  app.$(app.FormularProcedură.$).one('închidere', function () {
+    ok(true, 'închis formularul de procedură');
 
-  setTimeout(function () { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
-    var rezultate = $secţiune.find('#rezultate .item');
+    var $secţiune = app.$('#căutare'),
+        număr = app.ProceduriRecente.numărulUltimei();
 
-    ok(rezultate.există(), 'găsit procedura');
-    rezultate.first().click();
+    ok($secţiune.există(), 'avem secţiune de căutare');
+    $secţiune.find('input').val(număr).trigger('input');
 
-    app.$(app.FormularProcedură.$).one('populat', function () {
-      ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
-      app.FormularProcedură.$.find('.închide').click();
-      $secţiune.find('input').val('').trigger('input');
+    setTimeout(function () { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
+      var rezultate = $secţiune.find('#rezultate .item');
 
-      ştergeProceduraCreată();
-    });
-  }, app.Căutare.pauză + app.PAUZĂ_DE_OBSERVABILITATE);
+      ok(rezultate.există(), 'găsit procedura');
+      rezultate.first().click();
+
+      app.$(app.FormularProcedură.$).one('populat', function () {
+        ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
+        app.FormularProcedură.$.find('.închide').click();
+        $secţiune.find('input').val('').trigger('input');
+
+        ştergeProceduraCreată();
+      });
+    }, app.Căutare.pauză + app.PAUZĂ_DE_OBSERVABILITATE);
+  });
 
   // ------------------------
   function ştergeProceduraCreată() {

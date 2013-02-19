@@ -109,12 +109,7 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
           ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
           ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraNimicirii + '")').există(), '…NU este menţionată data şi ora ridicării');
 
-          app.FormularProcedură.$.find('.închide').click();
-          app.$(app.FormularProcedură.$).one('închidere', function () {
-            ok(true, 'închis formularul de procedură');
-
-            start();
-          });
+          start();
         });
       }, app.PAUZĂ_DE_OBSERVABILITATE);
     }, app.PAUZĂ_DE_OBSERVABILITATE);

@@ -1,6 +1,6 @@
 echo 'Şterge procedura...'
 
-DESTINATIA="date/$LOGIN/proceduri/-1/"
+DESTINATIA="date/$LOGIN/proceduri/1/"
 
 curl $CURL_DEFAULT_ARGS \
   --request DELETE \

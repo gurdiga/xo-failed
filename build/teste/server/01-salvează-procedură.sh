@@ -2,7 +2,7 @@ echo 'Salvează procedura...'
 
 SURSA="$DIR/fixturi/procedură.json"
 INDEX="$DIR/fixturi/index.json.gz"
-DESTINATIA="date/$LOGIN/proceduri/-1/date.json"
+DESTINATIA="date/$LOGIN/proceduri/1/date.json"
 
 curl $CURL_DEFAULT_ARGS \
   --request PUT \
@@ -36,7 +36,7 @@ verifică 'Content-Encoding este gzip'
 zcat "$DOCUMENT_ROOT/$DESTINATIA.gz" | /usr/bin/diff $SURSA -
 verifică 'datele salvate corespund cu cele trimise'
 
-zgrep '^\[-1' $DOCUMENT_ROOT/date/$LOGIN/proceduri/recente.json.gz > /dev/null
+zgrep '^\[1' $DOCUMENT_ROOT/date/$LOGIN/proceduri/recente.json.gz > /dev/null
 verifică 'procedura e marcată ca recent deschisă'
 
 diff $DOCUMENT_ROOT/date/$LOGIN/proceduri/index.json.gz $INDEX > /dev/null

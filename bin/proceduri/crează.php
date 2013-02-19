@@ -1,7 +1,7 @@
 <?
 
 $procedură = json_decode($conţinut, true);
-$număr = $procedură['tip'] . '-' . următorul_număr();
+$număr = următorul_număr();
 $director = "$doc_root/date/$login/proceduri/$număr";
 $date = "$director/date.json";
 

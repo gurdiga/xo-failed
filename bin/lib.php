@@ -146,8 +146,9 @@ function reindexează_proceduri() {
 
   foreach ($fişiere as $fişier) {
     $procedură = json_decode(citeşte_fişier(str_replace('.gz', '', $fişier)), true);
-    $număr = $login . basename(dirname($fişier));
+    $număr = basename(dirname($fişier));
     $index[''][$număr] = array(
+      'tip' => $procedură['tip'],
       'data-hotărîrii' => $procedură['document-executoriu']['data-hotărîrii'],
       'creditor' => persoană($procedură['creditor']),
       'persoane-terţe' => array_map('persoană', $procedură['persoane-terţe']),
@@ -155,7 +156,8 @@ function reindexează_proceduri() {
     );
 
     foreach ($cîmpuri as $cîmp) {
-      colectează($număr, $număr, $index);
+      $număr_complet = "$login{$procedură['tip']}-$număr";
+      colectează($număr_complet, $număr, $index);
       colectează($procedură['creditor'][$cîmp], $număr, $index);
 
       foreach ($procedură['persoane-terţe'] as $persoană_terţă)

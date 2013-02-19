@@ -114,7 +114,10 @@
     },
 
     acţionează: function (location, body) {
-      if (location.hash && !(/^#formular(\?[SP]?(\-\d+)?)?$/).test(location.hash)) location.hash = '';
+      var hashValid = (/^#formular\?([SP]|\d+)?$/).test(location.hash);
+
+      if (location.hash && !hashValid) location.hash = '';
+
       if (!Utilizator.autentificat) {
         location.hash = '';
         return;
@@ -637,7 +640,9 @@
     },
 
     tip: function () {
-      return HashController.date().match(/^[SP]?/)[0];
+      return FormularProcedură.seCreazăProcedurăNouă() ?
+        HashController.date() :
+        FormularProcedură.$.find('#tip').text();
     },
 
     baraDeInstrumente: {
@@ -706,7 +711,6 @@
 
       TotalCheltuieli.calculează();
       Onorariu.calculează();
-      FormularProcedură.seteazăTitlu();
 
       $.fx.off = false;
 
@@ -735,18 +739,32 @@
     },
 
     seDeschideProcedurăSalvată: function () {
-      return HashController.pagină() === '#formular' && /^[SP]?-\d+$/.test(HashController.date());
+      return HashController.pagină() === '#formular' && /^\d+$/.test(HashController.date());
     },
 
-    seteazăTitlu: function () {
-      var literă = FormularProcedură.tip(),
-          href = '#formular' + (literă ? '?' + literă : ''),
-          descriereProcedură = $('#crează-procedură').find('li[data-href="' + href + '"]').text(),
-          număr = FormularProcedură.seCreazăProcedurăNouă() ? '' : Utilizator.login + HashController.date();
+    seteazăTitlu: function (procedură) {
+      var descriere, prefix, tip, afişeazăTireu, număr;
 
-      FormularProcedură.$
-        .find('#descriere').text(descriereProcedură).end()
-        .find('#număr').text(număr).end();
+      if (FormularProcedură.seCreazăProcedurăNouă()) {
+        descriere = $('#crează-procedură').find('li[data-href="' + location.hash + '"]').text();
+        prefix = '';
+        tip = '';
+        afişeazăTireu = false;
+        număr = '';
+      } else {
+        descriere = $('#crează-procedură').find('li[data-href="#formular?' + procedură['tip'] + '"]').text();
+        prefix = Utilizator.login;
+        tip = procedură['tip'];
+        afişeazăTireu = true;
+        număr = HashController.date();
+      }
+
+      FormularProcedură.$.find('h1')
+        .find('#descriere').text(descriere).end()
+        .find('#prefix').text(prefix).end()
+        .find('#tip').text(tip).end()
+        .find('#număr').text(număr).end()
+        .find('#tireu').toggle(afişeazăTireu).end();
     },
 
     colectează: function () {
@@ -1000,7 +1018,7 @@
     },
 
     număr: function () {
-      var re = /^#formular\?([SP]?-\d+)/;
+      var re = /^#formular\?(\d+)/;
 
       if (re.test(location.hash)) {
         return location.hash.match(re)[1];
@@ -1008,23 +1026,21 @@
     },
 
     salveazăSauCrează: function () {
-      var număr = FormularProcedură.număr();
-
-      if (număr) {
-        număr = număr.match(/[SP]?-\d+/)[0];
-        FormularProcedură.salvează(număr);
-      } else {
+      if (FormularProcedură.seCreazăProcedurăNouă()) {
         FormularProcedură.crează();
+      } else {
+        FormularProcedură.salvează();
       }
     },
 
-    salvează: function (număr) {
+    salvează: function () {
       if (FormularProcedură.seTrimite) return;
 
-      var procedură = FormularProcedură.colectează(),
+      var număr = FormularProcedură.număr(),
+          procedură = FormularProcedură.colectează(),
           cale = '/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json';
 
-      if (!FormularProcedură.saSchimbat(procedură, număr)) {
+      if (!FormularProcedură.suntSchimbări(procedură, număr)) {
         FormularProcedură.$.trigger('salvat-deja', [procedură]);
         return;
       }
@@ -1056,12 +1072,12 @@
       $.put(cale, JSON.stringify(procedură), function (cale) {
         FormularProcedură.seTrimite = false;
 
-        var număr = cale.match(/([SP]?-\d+)\/date.json$/)[1],
-            adresaNouă = location.href + '?' + număr;
+        var număr = cale.match(/(\d+)\/date.json$/)[1],
+            adresaNouă = '#formular?' + număr;
 
         history.replaceState(null, null, adresaNouă);
 
-        FormularProcedură.seteazăTitlu();
+        FormularProcedură.seteazăTitlu(procedură);
         FormularProcedură.$.trigger('salvat', [procedură, număr]);
         FormularProcedură.puneÎnCache(procedură, număr);
         Căutare.încarcăIndexFărăCache();
@@ -1075,7 +1091,7 @@
       FormularProcedură.cache[număr] = JSON.stringify(copieProcedură);
     },
 
-    saSchimbat: function (procedură, număr) {
+    suntSchimbări: function (procedură, număr) {
       var copieProcedură = $.extend(true, {}, procedură);
 
       delete copieProcedură['data-ultimei-modificări'];
@@ -1089,6 +1105,7 @@
         .success(function (procedură) {
           ProceduriRecente.notează(număr);
           FormularProcedură.populează(procedură);
+          FormularProcedură.seteazăTitlu(procedură);
           FormularProcedură.puneÎnCache(procedură, număr);
         })
         .error(FormularProcedură.închide);
@@ -1427,8 +1444,10 @@
         .end();
     },
 
-    închide: function () {
+    închide: function (xhr, status) {
       FormularProcedură.$.trigger('înainte-de-închidere');
+
+      if (status) window.console.error('Eroare la încărcare:', arguments);
 
       location.hash = '';
 
@@ -1459,7 +1478,6 @@
       } else {
         FormularProcedură.resetează();
         FormularProcedură.iniţializează();
-        FormularProcedură.$.trigger('iniţializat');
       }
     },
 
@@ -1470,6 +1488,8 @@
       FormularProcedură.$
         .find('#data-ultimei-modificări').hide().end()
         .find('#creditor #gen-persoană, .debitor #gen-persoană').trigger('change');
+
+      FormularProcedură.seteazăTitlu({tip: HashController.date()});
 
       if (FormularProcedură.seCreazăProcedurăNouă()) {
         Cheltuieli.$.find('#taxaA1').click();
@@ -1501,6 +1521,7 @@
 
       $.fx.off = false;
       FormularProcedură.seIniţializează = false;
+      FormularProcedură.$.trigger('iniţializat');
     }
   },
 
@@ -1532,18 +1553,8 @@
     afişează: function (proceduri) {
       if (proceduri.length === 0 || !Căutare.index) return;
 
-      var lista = {};
-
-      ProceduriRecente.lista = [];
-
-      $.each(proceduri, function () {
-        var număr = Utilizator.login + this.toString();
-
-        lista[număr] = Căutare.index[''][număr];
-        ProceduriRecente.lista.push(număr.replace(Utilizator.login, ''));
-      });
-
-      ProceduriRecente.$.html(ListăProceduri.formatează(lista));
+      ProceduriRecente.lista = proceduri;
+      ProceduriRecente.$.html(ListăProceduri.formatează(proceduri));
 
       ProceduriRecente.încărcat = true;
       $(document).trigger('încărcat-proceduri-recente');
@@ -1646,19 +1657,18 @@
           laÎnceputDeCuvînt: [],
           oriunde: [],
           unificate: function () {
-            var unice = {},
-                index = Căutare.index,
-                date = index[''],
+            var unice = [],
                 toate = this.laÎnceputDeRînd
                   .concat(this.laÎnceputDeCuvînt)
-                  .concat(this.oriunde);
+                  .concat(this.oriunde),
+                număr,
+                i, j, l = toate.length;
 
-            toate.forEach(function (i) {
-              $.each(index[i], colectează);
-            });
-
-            function colectează(_, număr) {
-              if (!unice[număr]) unice[număr] = date[număr];
+            for (i = 0; i < l; i++) {
+              for (j = 0; j < toate[i].length; j++) {
+                număr = toate[i][j];
+                if (unice.indexOf(număr) === -1) unice.push(număr);
+              }
             }
 
             return unice;
@@ -1672,9 +1682,9 @@
         var index = Căutare.index, item;
 
         for (item in index) {
-          if (laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(item);
-          else if (laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(item);
-          else if (oriunde.test(item)) rezultate.oriunde.push(item);
+          if (laÎnceputDeRînd.test(item)) rezultate.laÎnceputDeRînd.push(index[item]);
+          else if (laÎnceputDeCuvînt.test(item)) rezultate.laÎnceputDeCuvînt.push(index[item]);
+          else if (oriunde.test(item)) rezultate.oriunde.push(index[item]);
         }
 
         Căutare.anulează();
@@ -1752,13 +1762,15 @@
 
       var rezultate = '';
 
-      for (var număr in proceduri) {
-        var procedură = evidenţiază(proceduri[număr]),
+      for (var i = 0; i < proceduri.length; i++) {
+        var număr = proceduri[i],
+            procedură = evidenţiază(Căutare.index[''][număr]),
             creditor = persoană(procedură['creditor']),
             persoaneTerţe = $.map(procedură['persoane-terţe'], persoană).join(''),
             debitori = $.map(procedură['debitori'], persoană).join(''),
-            href = '#formular?' + număr.replace(Utilizator.login, '');
+            href = '#formular?' + număr;
 
+        număr = Utilizator.login + procedură['tip'] + '-' + număr;
         rezultate +=
           '<li class="item" data-href="' + href + '">' +
             '<div class="număr">' +
@@ -2160,10 +2172,10 @@
     init: function () {
       FormularProcedură.$
         .on('click', 'button.adaugă-cîmp-personalizat', this.adaugă)
-        .on('focus', '.etichetă', function (e) {
+        .on('focus', '.etichetă', function () {
           $(this).parent().addClass('focusat');
         })
-        .on('blur', '.etichetă', function (e) {
+        .on('blur', '.etichetă', function () {
           $(this).parent().removeClass('focusat');
         })
         .on('keydown', '.etichetă', function (e) {
@@ -3048,29 +3060,32 @@
 
   // --------------------------------------------------
 
-  if (!('QUnit' in window)) Action.init();
+  $.extend(window, {
+    Profil: Profil,
+    FormularProcedură: FormularProcedură,
+    ProceduriRecente: ProceduriRecente,
+    Utilizator: Utilizator,
+    ButoanePentruÎncheieri: ButoanePentruÎncheieri,
+    Încheieri: Încheieri,
+    Subsecţiuni: Subsecţiuni,
+    DobîndaDeÎntîrziere: DobîndaDeÎntîrziere,
+    Cheltuieli: Cheltuieli,
+    FORMATUL_DATEI: FORMATUL_DATEI,
+    UC: UC,
+    Bănci: Bănci
+  });
 
-  window.Profil = Profil;
-  window.FormularProcedură = FormularProcedură;
-  window.ProceduriRecente = ProceduriRecente;
-  window.Utilizator = Utilizator;
-  window.ButoanePentruÎncheieri = ButoanePentruÎncheieri;
-  window.Încheieri = Încheieri;
-  window.Subsecţiuni = Subsecţiuni;
-  window.DobîndaDeÎntîrziere = DobîndaDeÎntîrziere;
-  window.Cheltuieli = Cheltuieli;
-  window.FORMATUL_DATEI = FORMATUL_DATEI;
-  window.UC = UC;
-  window.Bănci = Bănci;
-
-  if (top.location.pathname === '/build/teste/qunit/') {
-    window.Căutare = Căutare;
-    window.Onorariu = Onorariu;
-    window.Persoane = Persoane;
-    window.HashController = HashController;
-    window.TextareaElastice = TextareaElastice;
-    window.SelecturiFoarteLate = SelecturiFoarteLate;
-    window.SubsecţiuniDinamice = SubsecţiuniDinamice;
+  if ('QUnit' in top) {
+    $.extend(window, {
+      Căutare: Căutare,
+      Onorariu: Onorariu,
+      Persoane: Persoane,
+      HashController: HashController,
+      TextareaElastice: TextareaElastice,
+      SelecturiFoarteLate: SelecturiFoarteLate,
+      SubsecţiuniDinamice: SubsecţiuniDinamice
+    });
   }
 
+  Action.init();
 })(window, document, moment);
