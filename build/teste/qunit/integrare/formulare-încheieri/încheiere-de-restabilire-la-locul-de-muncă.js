@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Somaţie de restabilirea salariatului la locul de muncă', function () {
+asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function () {
   /*global UtilitareÎncheiere:false */
   /*jshint maxlen:140 */
   'use strict';
@@ -26,7 +26,7 @@ asyncTest('Somaţie de restabilirea salariatului la locul de muncă', function (
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
         date = this.tab.Încheiere.date,
-        subtitlu = 'de restabilirea salariatului la locul de muncă';
+        subtitlu = 'de restabilire a salariatului la locul de muncă';
 
     UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
     UtilitareÎncheiere.verificăSubtitlu($încheiere, subtitlu);
