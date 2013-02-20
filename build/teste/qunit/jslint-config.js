@@ -38,6 +38,7 @@
     'integrare/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile.js',
     'integrare/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.js',
     'integrare/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.js',
+    'integrare/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.js',
 
     'integrare/căutare-procedură.js',
 
@@ -53,7 +54,8 @@
     '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-mobile.părţi/script.js',
     '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile.părţi/script.js',
     '/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.părţi/script.js'
+    '/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

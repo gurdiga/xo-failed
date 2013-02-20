@@ -1,0 +1,63 @@
+<? $titlu = 'Somaţie de restabilirea salariatului la locul de muncă' ?>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
+
+        <hgroup>
+          <h1>Somaţie</h1>
+          <h2>de restabilirea salariatului la locul de muncă</h2>
+        </hgroup>
+
+<? require 'procedura.html' ?>
+<? require 'părţile.html' ?>
+
+        <section>
+          <div class="conţinut pe-toată-foaia editabil" spellcheck="false">
+            <p>Examinînd chestiunea cu privire la somarea
+            <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+            de al restabili pe CREDITOR la locul de muncă, am constatat.</p>
+
+            <p>
+<? require 'început-secţiune-motive.html' ?>
+            restabilirea la locul de muncă a CREDITORULUI în calitate de
+            <%= procedură['obiectul-urmăririi']['funcţie'] %>.</p>
+
+            <p><%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+            i-a mai fost stabilit un termen de executare însă acesta nu s-a
+            conformat şi nu a executat hotărîrea de restabilire.</p>
+
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 22, 66, 152,
+            153 al Codului de executare RM,</p>
+
+            <ol>
+              <li>
+                <p>Se propune <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+                de a executa imediat documentul executoriu menţionat, să emită ordinul de restabilire
+                în muncă a CREDITORULUI şi să permită accesul acestuia la locul de muncă în calitate
+                de <%= procedură['obiectul-urmăririi']['funcţie'] %>.</p>
+              </li>
+
+              <li>
+                <p>Se obligă <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> să prezinte
+                executorului judecătoresc o copie a ordinului de restabilire la muncă certificat în
+                modul stabilit.</p>
+              </li>
+
+              <li>
+                <p>În cazul în care <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+                nu va executa hotărîrea judecătorească privind restabilirea salariatului la locul de
+                muncă, executorul va constata acest fapt într-un procesul-verbal, pe care-l va
+                expedia instanţei de judecată, pentru aplicarea persoanei cu funcţie de răspundere
+                sau, după caz, membrilor organului colegial, obligaţi să execute hotărîrea, sancţiunea
+                prevăzută de Codul contravenţional RM.</p>
+              </li>
+
+              <li>
+                <p>Prezenta somaţie se expediază părţilor pentru executare.</p>
+              </li>
+            </ol>
+
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>
