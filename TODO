@@ -5,15 +5,13 @@
     în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
 
 - Introducerea datelor
-  - mută butoanele de adăugare persoană în bara titlu la secţiune lîngă butonul de colapsare
-  - index persoane
-  - de mutat tipul în date şi de folosit doar numărul pentru numele fişierelor
+  - index persoane pentru autocompletare?
   - validare procedură/recente la salvare?
 
 - Workers
- - Criptolog
- - Arhivator
- - Index
+ - Crypter
+ - Archiver
+ - Search
 
 - Admin
   - înregistrare utilizator
