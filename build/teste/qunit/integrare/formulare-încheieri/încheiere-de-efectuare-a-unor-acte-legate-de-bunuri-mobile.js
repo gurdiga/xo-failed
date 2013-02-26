@@ -5,10 +5,13 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri', func
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   var dataŞiOraRidicării = '02.03.2013 ora 11:00';
 

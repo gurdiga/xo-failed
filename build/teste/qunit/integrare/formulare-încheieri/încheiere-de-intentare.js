@@ -6,6 +6,7 @@ asyncTest('Încheiere de intentare', function () {
       $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
       formular = app.ButoanePentruÎncheieri.formular($buton);
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   ok($buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
   $buton.click();
 

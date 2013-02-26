@@ -5,10 +5,13 @@ asyncTest('Încheiere de evacuare', function () {
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'evacuarea';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('evacuarea').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   ok($secţiune.find('#din-încăperea').există(), 'avem cîmpul “Din încăperea”');
 

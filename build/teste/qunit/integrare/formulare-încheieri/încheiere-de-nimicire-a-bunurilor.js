@@ -5,10 +5,13 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'nimicirea bunurilor';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('nimicirea bunurilor').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   var dataŞiOraNimicirii = '02.03.2013 ora 11:00';
 

@@ -5,10 +5,13 @@ asyncTest('Încheiere de schimb forţat', function () {
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'schimbul forţat';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('schimbul forţat').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   ok($secţiune.find('#încăperea-pentru-creditor').există(), 'avem “Încăperea pentru creditor”');
   ok($secţiune.find('#încăperea-pentru-debitor').există(), 'avem “Încăperea pentru debitor”');

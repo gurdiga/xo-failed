@@ -5,10 +5,13 @@ asyncTest('Încheiere de instalare', function () {
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'instalarea';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('instalarea').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   ok($secţiune.find('#în-încăperea').există(), 'avem cîmpul “În încăperea”');
 

@@ -5,10 +5,13 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'stabilirea domiciliului copilului';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('stabilirea domiciliului copilului').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   ok($secţiune.find('#numele-copilului').există(), 'avem cîmp pentru numele copilului');
   ok($secţiune.find('#data-naşterii-copilului').există(), 'avem cîmp pentru data naşterii copilului');

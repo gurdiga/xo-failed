@@ -5,10 +5,13 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
   'use strict';
 
   var app = this.app,
-      $secţiune = app.FormularProcedură.$obiectulUrmăririi;
+      $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+      obiect = 'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri';
 
+  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
-  $secţiune.find('#obiect').val('efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri').change();
+  $secţiune.find('#obiect').val(obiect).change();
+  equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
 
   var acte = 'o listă de acte';
 
