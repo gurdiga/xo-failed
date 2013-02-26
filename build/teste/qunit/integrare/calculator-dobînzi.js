@@ -8,6 +8,8 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
       $dialog = $buton.prev('.dialog'),
       calcule;
 
+  app.$.fx.off = true;
+
   ok($buton.există(), 'avem buton');
 
   $buton.click();
@@ -120,6 +122,7 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
         setTimeout(function () { // aşteptăm o leacă să fie urmăribil testul
           $dialog.find('.închide').click();
+          app.$.fx.off = false;
 
           start();
         }, 500);

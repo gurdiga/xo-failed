@@ -5,6 +5,7 @@ asyncTest('Borderou de calcul', function () {
 
   var app = this.app, încheiere;
 
+  app.$.fx.off = true;
   app.Profil.date['cod-fiscal'] = ''; // pentru verificare ulterioară
   app.ProceduriRecente.$.find('.item:first-child').click();
 
