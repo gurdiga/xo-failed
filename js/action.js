@@ -789,7 +789,6 @@
           if ($input.is('.dată.amînare')) return; // avem colecteazăAmînări() special pentru asta
 
           if ($label.is('.etichetă')) {
-            if (!$label.val() && !$input.val()) return;
             if (!date.subformular) date.subformular = {};
 
             date.subformular[$label.val()] = $input.is('.sumă') ? $input.suma() : $input.val();
