@@ -38,8 +38,7 @@
   test('TextareaElastice.autodimensionează', function () {
     ok(app.TextareaElastice.autodimensionează, 'există');
 
-    var textarea = $('<textarea></textarea>').appendTo(app.document.body),
-        înălţimeIniţială = '72px';
+    var textarea = $('<textarea></textarea>').appendTo(app.document.body);
 
     textarea.val('');
     equal(textarea.height(), 72, 'înălţimea iniţială, fără text, e 72px');

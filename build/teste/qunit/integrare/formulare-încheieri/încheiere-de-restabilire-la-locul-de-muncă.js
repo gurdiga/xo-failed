@@ -25,7 +25,6 @@ asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function 
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        date = this.tab.Încheiere.date,
         subtitlu = 'de restabilire a salariatului la locul de muncă';
 
     UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);

@@ -106,8 +106,12 @@
   module('JSHint');
 
   for (i = 0, l = SCRIPTS.length; i < l; i ++) {
+    var JSHINT_OPTIONS_CLONE = {};
+
+    for (var option in JSHINT_OPTIONS) JSHINT_OPTIONS_CLONE[option] = JSHINT_OPTIONS[option];
+
     script = SCRIPTS[i];
-    jsHintTest(script, script + '?' + (new Date()).getTime(), JSHINT_OPTIONS, JSHINT_GLOBALS);
+    jsHintTest(script, script + '?' + (new Date()).getTime(), JSHINT_OPTIONS_CLONE, JSHINT_GLOBALS);
   }
 
 })();

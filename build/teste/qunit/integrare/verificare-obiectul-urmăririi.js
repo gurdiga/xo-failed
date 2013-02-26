@@ -2,8 +2,7 @@ test('Formular procedură: obiectul urmăririi', function () {
   /*jshint maxlen:141 */
   'use strict';
 
-  var app = this.app,
-      $secţiune = this.$obiectulUrmăririi,
+  var $secţiune = this.$obiectulUrmăririi,
       caracterIniţial = $secţiune.find('#caracter').val();
 
   equal($secţiune.find('#caracter').val(), 'pecuniar', 'Iniţial caracterul este “pecuniar”');

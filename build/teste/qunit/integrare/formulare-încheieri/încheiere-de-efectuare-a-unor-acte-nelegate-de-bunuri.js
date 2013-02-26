@@ -25,7 +25,6 @@ asyncTest('Somaţie cu privire la efectuarea unor acte nelegate de remiterea uno
 
   app.$(meta).one('iniţializat', function () {
     var $încheiere = app.$(this.tab.document),
-        date = this.tab.Încheiere.date,
         subtitlu = 'cu privire la executarea de către debitor a unor acte nelegate de remiterea unor sume sau bunuri';
 
     UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);

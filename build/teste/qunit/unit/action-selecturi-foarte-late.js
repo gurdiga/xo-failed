@@ -20,8 +20,8 @@
     app.SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoare = function () { afişatŞoaptePentruSelecturileUrmătoare = true; };
     app.FormularProcedură.$ = $('<div/>');
 
-    var $selectFoarteLat = $('<select class="foarte lat"></select>').appendTo(app.FormularProcedură.$),
-        $selectCareSchimbăFormularul = $('<select class="care schimbă formularul"></select>').appendTo(app.FormularProcedură.$);
+    $('<select class="foarte lat"></select>').appendTo(app.FormularProcedură.$);
+    $('<select class="care schimbă formularul"></select>').appendTo(app.FormularProcedură.$);
 
     // act & verify
     app.SelecturiFoarteLate.init();

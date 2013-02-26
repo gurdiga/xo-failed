@@ -103,7 +103,6 @@ asyncTest('Borderou de calcul', function () {
         $taxe = $secţiuni.eq(0),
         $taxeItemi = $taxe.next('tbody'),
         $primaTaxă = $taxeItemi.children('tr').eq(0),
-        $aDouaTaxă = $taxeItemi.children('tr').eq(1),
         $totalTaxeAchitat = $taxeItemi.children('tr').eq(2),
         $totalTaxeRămasDeAchitat = $taxeItemi.children('tr').eq(3),
         taxaDeIntentare = app.Cheltuieli.$.find('.adăugate #taxaA1 p').contents(':not(.uc)').text().trim(),

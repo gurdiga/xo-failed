@@ -37,8 +37,7 @@ asyncTest('Încheiere de intentare', function () {
   function verificăSalvareaÎncheierii(încheiere) {
     var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
         $încheiere = încheiere.Încheiere.$,
-        $butonDeSalvare = $încheiere.find('.salvează'),
-        formular = app.ButoanePentruÎncheieri.formular($buton);
+        $butonDeSalvare = $încheiere.find('.salvează');
 
     $butonDeSalvare.click();
 
@@ -111,7 +110,7 @@ asyncTest('Încheiere de intentare', function () {
         app.$(app.Încheieri.deschise[cale]).one('iniţializat', function () {
           încheiere = app.Încheieri.deschise[cale].tab;
 
-          var $incheiere = încheiere.Încheiere.$,
+          var $încheiere = încheiere.Încheiere.$,
               $secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
 
           ok($secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările s-au salvat');
