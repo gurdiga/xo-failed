@@ -2909,7 +2909,7 @@
       }
 
       Încheieri.deschise[pagina] = {
-        tab: window.open(pagina, formular, '', true),
+        tab: window.open(pagina, formular, 'left=300,width=1000,height=1000'),
         buton: buton
       };
 
