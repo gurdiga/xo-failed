@@ -2977,6 +2977,12 @@
 
   // --------------------------------------------------
 
+  $.expr[':'].focused = function (element) {
+    return element === element.ownerDocument.activeElement;
+  };
+
+  // --------------------------------------------------
+
   $.fn.există = function () {
     return this.length > 0;
   };
