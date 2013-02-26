@@ -810,7 +810,7 @@
           obiectulUrmăririi = {'încasări': colecteazăÎncasări($secţiune)};
         }
 
-        obiectulUrmăririi['sume'] = colecteazăSumeÎnValută($secţiune);
+        obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
 
         if (obiectulUrmăririi.caracter === 'pecuniar') {
           obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
@@ -892,7 +892,7 @@
       }
 
       // ------------------------------------------
-      function colecteazăSumeÎnValută($secţiune) {
+      function colecteazăSume($secţiune) {
         var sume = {};
 
         $secţiune.find('ul:not(.subsecţiune) .sumă+.valuta').each(function () {
