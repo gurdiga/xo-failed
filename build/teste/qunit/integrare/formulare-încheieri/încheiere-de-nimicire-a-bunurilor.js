@@ -112,6 +112,7 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
           ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
           ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraNimicirii + '")').există(), '…NU este menţionată data şi ora ridicării');
 
+          $încheiere.find('.închide').click();
           start();
         });
       }, app.PAUZĂ_DE_OBSERVABILITATE);
