@@ -39,6 +39,7 @@
     'integrare/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.js',
     'integrare/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.js',
     'integrare/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.js',
+    'integrare/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.js',
 
     'integrare/căutare-procedură.js',
 
@@ -55,7 +56,8 @@
     '/formulare-încheieri/încheiere-de-efectuare-a-unor-acte-legate-de-bunuri-imobile.părţi/script.js',
     '/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.părţi/script.js',
     '/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.părţi/script.js'
+    '/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.părţi/script.js',
+    '/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {
@@ -106,12 +108,8 @@
   module('JSHint');
 
   for (i = 0, l = SCRIPTS.length; i < l; i ++) {
-    var JSHINT_OPTIONS_CLONE = {};
-
-    for (var option in JSHINT_OPTIONS) JSHINT_OPTIONS_CLONE[option] = JSHINT_OPTIONS[option];
-
     script = SCRIPTS[i];
-    jsHintTest(script, script + '?' + (new Date()).getTime(), JSHINT_OPTIONS_CLONE, JSHINT_GLOBALS);
+    jsHintTest(script, script + '?' + (new Date()).getTime(), JSHINT_OPTIONS, JSHINT_GLOBALS);
   }
 
 })();
