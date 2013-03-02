@@ -50,7 +50,8 @@
     verificăriStandard: { // per secţiune
       'Procedura': function ($încheiere) {
         var app = $încheiere[0].defaultView.opener,
-            numărComplet = app.Utilizator.login + app.FormularProcedură.număr(),
+            date = $încheiere[0].defaultView.Încheiere.date,
+            numărComplet = app.Utilizator.login + date.procedură['tip'] + '-' + app.FormularProcedură.număr(),
             $secţiuneProcedură = $încheiere.find('section header:contains("Procedura")'),
             $secţiuneProcedurăConţinut = $secţiuneProcedură.next('.conţinut');
 

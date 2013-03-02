@@ -66,8 +66,9 @@
               </li>
 
               <li>
-                <p>A intenta procedura de executare <%= login %>
-                <%= procedură['număr'] %> din <%= procedură['data-intentării'] %>.</p>
+                <p>A intenta procedura de executare
+                <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
+                din <%= procedură['data-intentării'] %>..</p>
               </li>
 
               <% if (cuSpecificare) { %>

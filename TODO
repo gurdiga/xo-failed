@@ -1,7 +1,8 @@
 - bug la adăugare destinatar
 - Încheieri
 - DRY logica colectare/populare? Cum?
-- patch QUnit to show non-english characters nicer
+- de testat colectarea/popularea?
+- patch QUnit to unpercent non-english
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
