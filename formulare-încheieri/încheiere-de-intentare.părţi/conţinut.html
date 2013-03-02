@@ -55,22 +55,33 @@
           <header>Dispoziţia</header>
           <div class="conţinut editabil" spellcheck="false">
             <ol>
-              <li>a primi spre executare documentul executoriu numărul
-              <%= procedură['document-executoriu']['numărul-de'] %> din
-              <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
-              judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %></li>
+              <li>
+                <p>A primi spre executare documentul executoriu numărul
+                <%= procedură['document-executoriu']['numărul-de'] %> din
+                <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
+                judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>.</p>
+              </li>
 
-              <li>a intenta procedura de executare <%= login %>
-              <%= procedură['număr'] %> din <%= procedură['data-intentării'] %></li>
+              <li>
+                <p>A intenta procedura de executare <%= login %>
+                <%= procedură['număr'] %> din <%= procedură['data-intentării'] %>.</p>
+              </li>
 
               <% if (conciliere) { %>
-              <li>a stabili concilierea părţilor la data de <%= conciliere.data %> ora
-              <%= conciliere.ora %></li>
+              <li>
+                <p>A stabili concilierea părţilor la data de <%= conciliere.data %> ora
+                <%= conciliere.ora %>.</p>
+              </li>
               <% } %>
 
-              <li>a propune <%= debitori %> de a executa benevol documentul
-              executoriu în termen de 15 zile</li>
-              <li>a expedia prezenta încheiere părţilor pentru informare</li>
+              <li>
+                <p>A propune <%= debitori %> de a executa benevol documentul
+                executoriu în termen de 15 zile.</p>
+              </li>
+
+              <li>
+                <p>A expedia prezenta încheiere părţilor pentru informare.</p>
+              </li>
             </ol>
 
             <p>Încheierea este executorie din momentul emiterii şi poate fi contestată doar de

@@ -1,7 +1,8 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
+/*global UtilitareÎncheiere*/
+/*jshint maxlen:187 maxstatements:80*/
 test('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: butoane de adăugare cîmpuri', function () {
   'use strict';
-  /*jshint maxlen:140 maxstatements:80*/
 
   var app = this.app,
       $secţiune = app.FormularProcedură.$obiectulUrmăririi,
@@ -165,21 +166,57 @@ asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: val
         equal($valoare.val(), item.suma, '…cu suma corespunzătoare');
         equal($valuta.val(), item.valuta, '…cu valuta corespunzătoare');
 
-        // TODO: de testat formarea încheierii
+        var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-        $valoareaAcţiunii
-          .trigger('mousemove')
-          .find('.elimină').focus().click();
+        ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+        $butonPentruÎncheiere.click();
 
-        setTimeout(function () {
-          ok(!$secţiune.find('.personalizat.valoarea-acţiunii').există(), 'eliminat cîmp valoarea acţiunii');
+        var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
+            meta = app.Încheieri.deschise[formular];
 
-          start();
-        }, 500);
-      });
-    });
+        app.$(meta).one('iniţializat', function () {
+          var $încheiere = app.$(this.tab.document),
+              date = this.tab.Încheiere.date,
+              subtitlu = 'de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii';
+
+          equal(date.cuSpecificare, false, 'context: cuSpecificare == false');
+          equal(date.fărăSpecificare, true, 'context: fărăSpecificare == true');
+          ok(!date.bunuriSechestrate, 'context: nu avem bunuriSechestrate');
+          ok(!date.sumeSechestrate, 'context: nu avem sumeSechestrate');
+          ok($.isPlainObject(date.valoareaAcţiunii), 'context: valoareaAcţiuniii e obiect');
+          equal(date.valoareaAcţiunii.suma, item.suma, 'context: valoareaAcţiunii.suma are valoarea corespunzătoare');
+          equal(date.valoareaAcţiunii.valuta, item.valuta, 'context: valoareaAcţiunii.valuta are valoarea corespunzătoare');
+
+          UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
+          UtilitareÎncheiere.verificăSubtitlu($încheiere, subtitlu);
+          UtilitareÎncheiere.verificăSecţiuni($încheiere,
+            ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia',  'Executorul']);
+
+          var $secţiuneaChectiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut.editabil'),
+              $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil'),
+              text = item.suma + ' ' + item.valuta;
+
+          ok($secţiuneaChectiunea.find('p:contains("' + text + '")').există(),
+            'valoarea acţiunii (' + text + ') este menţionată în secţiunea “Chestiunea”');
+          equal($secţiuneaDispoziţia.find('li').length, 10, 'în secţiunea “Dispoziţia” sunt enumerate 10 puncte');
+
+          $încheiere.find('.închide').click();
+
+          $valoareaAcţiunii
+            .trigger('mousemove')
+            .find('.elimină').focus().click();
+
+          setTimeout(function () { // slideUp?
+            ok(!$secţiune.find('.personalizat.valoarea-acţiunii').există(), 'eliminat cîmp valoarea acţiunii');
+
+            start();
+          }, 550);
+        }); // one iniţializat
+      }); // one populat
+    }); // one închis
+
     $formular.find('button.închide').click();
-  });
+  }); // one salvat
 
 });
 
@@ -246,21 +283,56 @@ asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: col
         equal($valoare.val(), bun.suma, '…cu suma corespunzătoare');
         equal($valuta.val(), bun.valuta, '…cu valuta corespunzătoare');
 
-        // TODO: de testat formarea încheierii
+        var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-        $cîmpBun
-          .trigger('mousemove')
-          .find('.elimină').focus().click();
+        ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+        $butonPentruÎncheiere.click();
 
-        setTimeout(function () {
-          ok(!$secţiune.find('.personalizat.bunul-sechestrat').există(), 'eliminat cîmp bun');
+        var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
+            meta = app.Încheieri.deschise[formular];
 
-          start();
-        }, 500);
-      });
-    });
+        app.$(meta).one('iniţializat', function () {
+          var $încheiere = app.$(this.tab.document),
+              date = this.tab.Încheiere.date;
+
+          ok(date.cuSpecificare, 'context: cuSpecificare == true');
+          ok(!date.fărăSpecificare, 'context: fărăSpecificare == false');
+          equal(date.sumeSechestrate.length, 0, 'context: avem 0 sumeSechestrate');
+          equal(date.bunuriSechestrate.length, 1, 'context: avem un număr corespunzător de bunuriSechestrate');
+          ok($.isArray(date.bunuriSechestrate), 'context: bunuriSechestrate e array');
+          equal(date.bunuriSechestrate[0].descrierea, bun.descrierea, 'context: bunul are descrierea corespunzătoare');
+          equal(date.bunuriSechestrate[0].suma, bun.suma, 'context: bunul are suma corespunzătoare');
+          equal(date.bunuriSechestrate[0].valuta, bun.valuta, 'context: bunul are valuta corespunzătoare');
+
+          UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
+          UtilitareÎncheiere.verificăSecţiuni($încheiere,
+            ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia',  'Executorul']);
+
+          var $secţiuneaChectiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut.editabil'),
+              $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil'),
+              text = bun.descrierea + ' — ' + bun.suma + ' ' + bun.valuta;
+
+          ok($secţiuneaChectiunea.find('p:contains("' + text + '")').există(),
+            'bunul (' + text + ') este menţionat în secţiunea “Chestiunea”');
+          equal($secţiuneaDispoziţia.find('li').length, 4, 'în secţiunea “Dispoziţia” sunt enumerate 4 puncte');
+
+          $încheiere.find('.închide').click();
+
+          $cîmpBun
+            .trigger('mousemove')
+            .find('.elimină').focus().click();
+
+          setTimeout(function () { // slideUp?
+            ok(!$secţiune.find('.personalizat.bunul-sechestrat').există(), 'eliminat cîmp pentru bunul sechestrat');
+
+            start();
+          }, 550);
+        }); // one iniţializat
+      }); // one populat
+    }); // one închis
+
     $formular.find('button.închide').click();
-  });
+  }); // one salvat
 
 });
 
@@ -324,17 +396,51 @@ asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: sum
         equal($valoare.val(), sume[0].suma, '…cu suma corespunzătoare');
         equal($valuta.val(), sume[0].valuta, '…cu valuta corespunzătoare');
 
-        // TODO: de testat formarea încheierii
+        var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-        $cîmpSumă
-          .trigger('mousemove')
-          .find('.elimină').focus().click();
+        ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+        $butonPentruÎncheiere.click();
 
-        setTimeout(function () {
-          ok(!$secţiune.find('.personalizat.bunul-sechestrat').există(), 'eliminat cîmp bun');
+        var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
+            meta = app.Încheieri.deschise[formular];
 
-          start();
-        }, 500);
+        app.$(meta).one('iniţializat', function () {
+          var $încheiere = app.$(this.tab.document),
+              date = this.tab.Încheiere.date;
+
+          ok(date.cuSpecificare, 'context: cuSpecificare == true');
+          ok(!date.fărăSpecificare, 'context: fărăSpecificare == false');
+          equal(date.sumeSechestrate.length, 1, 'context: avem 0 sumeSechestrate');
+          equal(date.bunuriSechestrate.length, 0, 'context: avem un număr corespunzător de sumeSechestrate');
+          ok($.isArray(date.sumeSechestrate), 'context: sumeSechestrate e array');
+          equal(date.sumeSechestrate[0].descrierea, sumă.descrierea, 'context: suma are descrierea corespunzătoare');
+          equal(date.sumeSechestrate[0].suma, sumă.suma, 'context: suma are suma corespunzătoare');
+          equal(date.sumeSechestrate[0].valuta, sumă.valuta, 'context: suma are valuta corespunzătoare');
+
+          UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
+          UtilitareÎncheiere.verificăSecţiuni($încheiere,
+            ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia',  'Executorul']);
+
+          var $secţiuneaChectiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut.editabil'),
+              $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil'),
+              text = sumă.descrierea + ' — ' + sumă.suma + ' ' + sumă.valuta;
+
+          ok($secţiuneaChectiunea.find('p:contains("' + text + '")').există(),
+            'bunul (' + text + ') este menţionat în secţiunea “Chestiunea”');
+          equal($secţiuneaDispoziţia.find('li').length, 7, 'în secţiunea “Dispoziţia” sunt enumerate 7 puncte');
+
+          $încheiere.find('.închide').click();
+
+          $cîmpSumă
+            .trigger('mousemove')
+            .find('.elimină').focus().click();
+
+          setTimeout(function () { // slideUp?
+            ok(!$secţiune.find('.personalizat.suma-sechestrată').există(), 'eliminat cîmp pentru suma sechestrată');
+
+            start();
+          }, 550);
+        }); // one iniţializat
       });
     });
     $formular.find('button.închide').click();

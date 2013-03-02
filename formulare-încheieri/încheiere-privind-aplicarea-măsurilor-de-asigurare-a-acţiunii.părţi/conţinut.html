@@ -12,22 +12,30 @@
 
         <section>
           <header>Chestiunea</header>
-          <div class="conţinut" spellcheck="false">
+          <div class="conţinut editabil" spellcheck="false">
             <p>Examinînd cererea CREDITORULUI cu privire la intentarea procedurii de executare
             privind aplicarea măsurilor de asigurare prin aplicarea sechestrului
 
-            <% if (introdusValoareaAcţiunii) { %>
-              pe bunurile mobile şi imobile în limita sumei de <%= valoareaAcţiunii.suma %> <%= valoareaAcţiunii.valuta %>.
-            <% } else { %>
+            <% if (cuSpecificare) { %>
               pe următoarele bunuri:
+            <% } else { %>
+              pe bunurile mobile şi imobile în limita sumei de <%= valoareaAcţiunii.suma %> <%= valoareaAcţiunii.valuta %>.
             <% } %>
 
             </p>
 
-            <% if (introdusBunuri) { %>
+            <% if (cuSpecificare) { %>
             <ol>
-              <% for (var denumire in bunuri) { %>
-              <li><%= denumire %> — <%= bunuri[denumire].suma %> <%= bunuri[denumire].valuta %></li>
+              <% for (var i = 0; i < bunuriSechestrate.length; i++) { %>
+              <li>
+                <p><%= bunuriSechestrate[i].descrierea %> — <%= bunuriSechestrate[i].suma %> <%= bunuriSechestrate[i].valuta %></p>
+              </li>
+              <% } %>
+
+              <% for (var i = 0; i < sumeSechestrate.length; i++) { %>
+              <li>
+                <p><%= sumeSechestrate[i].descrierea %> — <%= sumeSechestrate[i].suma %> <%= sumeSechestrate[i].valuta %></p>
+              </li>
               <% } %>
             </ol>
             <% } %>
@@ -37,6 +45,112 @@
         <section>
           <header>Motivele</header>
           <div class="conţinut editabil" spellcheck="false">
-            <p>
-<? require 'început-secţiune-motive.html' ?>
+            <p>Documentul executoriu a fost înaintat spre executare în termen de
+            persoana împuternicită conform legii, respectîndu-se competenţa teritorială şi
+            cuprinsul acestuia corespunde cerinţelor legislaţiei în vigoare.</p>
 
+            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 11, 14-16, 22,
+            27, 60, 62, 63 (1) lit. a), 66, 88 al Codului de executare RM, dispun:</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Dispoziţia</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <ol>
+              <li>
+                <p>A primi spre executare documentul executoriu numărul
+                <%= procedură['document-executoriu']['numărul-de'] %> din
+                <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
+                judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>.</p>
+              </li>
+
+              <li>
+                <p>A intenta procedura de executare <%= login %>
+                <%= procedură['număr'] %> din <%= procedură['data-intentării'] %>.</p>
+              </li>
+
+              <% if (cuSpecificare) { %>
+              <li>
+                <p>A aplica sechestru pe bunurile sus menţionate.</p>
+              </li>
+              <% } %>
+
+              <% if (fărăSpecificare || (cuSpecificare && sumeSechestrate.length > 0)) { %>
+              <li>
+                <p>A obliga băncile comerciale să comunice executorului judecătoresc despre
+                existenţa conturilor deschise pe numele
+                <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> a soldurilor
+                din acestea şi să aplice sechestru pe mijloacele băneşti disponibile în acestea
+                în limita valorii acţiunii inclusiv şi pe mijloacele băneşti care vor
+                transferate în viitor dacă soldul acestora nu este suficient pentru acoperirea
+                valorii acţiunii.</p>
+              </li>
+
+              <li>
+                <p>A obliga băncile comerciale să informeze executorul judecătoresc despre
+                deschiderea în viitor a unor conturi bancare de către
+                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru
+                asupra mijloacelor băneşti transferate în aceste conturi în limita valorii acţiunii.</p>
+              </li>
+
+              <li>
+                <p>A obliga Inspectoratul Fiscal de Stat să informeze executorul judecătoresc despre
+                deschiderea în viitor a unor conturi bancare de către
+                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi despre impozitele achitate
+                de acesta.</p>
+              </li>
+              <% } %>
+
+              <% if (fărăSpecificare) { %>
+              <li>
+                <p>A obliga participanţii profesionişti care deţin informaţia privind deţinătorii de
+                valori mobiliare să prezinte executorului judecătoresc informaţia despre valorile
+                mobiliare de care dispune <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+                şi să interzică orice act de dispoziţie cu acestea. Se permite înregistrarea valorilor
+                mobiliare pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+                cu aplicarea interdicţiei de înstrăinare pe acestea.</p>
+              </li>
+
+              <li>
+                <p>A obliga Î.S. “CRIS Registru” să prezinte executorului judecătoresc informaţia despre
+                mijloacele de transport deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+                şi să aplice interdicţia de înstrăinare pe acestea. Se permite înregistrarea mijloacelor
+                de transport pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu
+                aplicarea interdicţiei de înstrăinare pe acestea.</p>
+              </li>
+
+              <li>
+                <p>A obliga Î.S. “Cadastru” să prezinte informaţia despre bunurile imobile deţinute de
+                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru pe acestea.
+                Se permite înregistrarea bunurilor imobile pe numele
+                <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu aplicarea interdicţiei
+                de înstrăinare pe acestea.</p>
+              </li>
+
+              <li>
+                <p>A obliga Î.S. “Camera Înregistrării de Stat” să prezinte executorului judecătoresc
+                informaţia despre cotele-părţi deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+                în capitalul social al societăţilor comerciale şi cooperative şi dacă
+                <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> este înregistrat ca întreprinzător
+                individual. A interzice înregistrarea înstrăinării oricăror cote-părţi deţinute de
+                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>, inclusiv şi cele dobîndite ulterior
+                pronunţării încheierii date.</p>
+              </li>
+              <% } %>
+
+              <li>
+                <p>Despre măsurile întreprinse şi informaţia solicitată, autorităţile vizate urmează să
+                comunice executorului judecătoresc în modul şi în termenele stabilite de legislaţia în vigoare.</p>
+              </li>
+            </ol>
+
+            <p>Încheierea este executorie din momentul emiterii şi poate fi contestată doar de
+            <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> în partea intentării procedurii
+            de executare în temeiul prevăzut de art. 61 lit. b) şi e) al Codului de executare RM în
+            termen de 10 zile de la data comunicării în Judecătoria <%= executor['instanţă-teritorială'] %>.</p>
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>
