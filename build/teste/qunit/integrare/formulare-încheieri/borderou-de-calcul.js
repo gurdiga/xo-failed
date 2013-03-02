@@ -14,40 +14,38 @@ asyncTest('Borderou de calcul', function () {
     adaugăOSpeză();
     marcheazăPrimaTaxăAchitată();
 
-    setTimeout(function () { // aşteptăm o leacă să se termine animaţia
-      var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
-          $butonÎncheiere = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]'),
-          formular = app.ButoanePentruÎncheieri.formular($butonÎncheiere);
+    var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
+        $butonÎncheiere = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]'),
+        formular = app.ButoanePentruÎncheieri.formular($butonÎncheiere);
 
-      ok($butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
-      $butonÎncheiere.click();
+    ok($butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
+    $butonÎncheiere.click();
 
-      încheiere = app.Încheieri.deschise[formular].tab;
+    încheiere = app.Încheieri.deschise[formular].tab;
 
-      app.$(încheiere).one('iniţializat', function () {
-        ok(true, 'iniţializat borderoul de calcul');
+    app.$(încheiere).one('iniţializat', function () {
+      ok(true, 'iniţializat borderoul de calcul');
 
-        var $încheiere = app.$(încheiere.document);
-        var procedura = app.FormularProcedură.colectează();
+      var $încheiere = app.$(încheiere.document);
 
-        equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
-        ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
+      equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
+      ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
 
-        verificăStructura($încheiere);
-        verificăTabelul($încheiere);
-        verificăRechiziteleBancare($încheiere);
+      verificăStructura($încheiere);
+      verificăTabelul($încheiere);
+      verificăRechiziteleBancare($încheiere);
 
-        setTimeout(function () { // aşteptăm o leacă să se vadă borderoul
-          încheiere.Încheiere.$.find('.închide').click();
+      setTimeout(function () { // aşteptăm o leacă să se vadă borderoul
+        încheiere.Încheiere.$.find('.închide').click();
 
-          setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
-            app.FormularProcedură.$.find('.închide').click();
+        setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
+          app.FormularProcedură.$.find('.închide').click();
+          app.$.fx.off = false;
 
-            start();
-          }, app.PAUZĂ_DE_OBSERVABILITATE);
+          start();
         }, app.PAUZĂ_DE_OBSERVABILITATE);
-      });
-    }, 500);
+      }, app.PAUZĂ_DE_OBSERVABILITATE);
+    });
   });
 
   // --------------------------------------------------

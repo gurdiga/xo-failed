@@ -8,16 +8,18 @@ asyncTest('Precedură: salvare', function () {
       $cheltuieli = app.Cheltuieli.$,
       $taxaA1 = $cheltuieli.find('.adăugate #taxaA1'),
       dataAchităriiTaxeiA1 = app.moment().format(app.FORMATUL_DATEI),
+      $formular = app.FormularProcedură.$,
       numărulProceduriiNouCreate;
 
   $taxaA1.find('.achitare :checkbox').attr('checked', true);
   $taxaA1.find('.achitare .dată').val(dataAchităriiTaxeiA1);
 
-  app.FormularProcedură.$.find('.bara-de-instrumente .salvează').click();
-  app.FormularProcedură.$.one('salvat', function (e, procedură, număr) {
+  $formular.find('.bara-de-instrumente .salvează').click();
+  $formular.one('salvat', function (e, procedură, număr) {
     numărulProceduriiNouCreate = număr;
 
-    app.$(app.FormularProcedură.$).one('închidere', function () {
+    $formular.find('.închide').click();
+    app.$($formular).one('închidere', function () {
       app.$(app.document).one('încărcat-proceduri-recente', function () {
         var proceduraCreată = '.item[data-href="#formular?' + numărulProceduriiNouCreate + '"]',
             $proceduraCreată = app.ProceduriRecente.$.find(proceduraCreată);
@@ -26,8 +28,7 @@ asyncTest('Precedură: salvare', function () {
         ok($proceduraCreată.is(':first-child'), 'pe prima poziţie');
 
         $proceduraCreată.click();
-
-        app.FormularProcedură.$.one('populat', function () {
+        $formular.one('populat', function () {
           var creditor = dateProcedură['creditor'],
               debitor = dateProcedură['debitori'][0],
               de = dateProcedură['document-executoriu'],
@@ -46,7 +47,7 @@ asyncTest('Precedură: salvare', function () {
           equal(context.$de.find('#data-rămînerii-definitive').val(), de['data-rămînerii-definitive'], 'salvat data rămînerii definitive DE');
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').val(), sume['Suma de bază'], 'salvat valoare suma de bază');
           equal(context.$obiectulUrmăririi.find('#suma-de-bază').next('.valuta').val(), 'MDL', 'salvat valuta suma de bază');
-          ok(app.FormularProcedură.$.find('#data-ultimei-modificări span').text().trim() !== '', 'se afişează data ultimei modificări');
+          ok($formular.find('#data-ultimei-modificări span').text().trim() !== '', 'se afişează data ultimei modificări');
 
           var sumăPersonalizată = context.$obiectulUrmăririi.find('.personalizat.sumă .etichetă');
 
@@ -57,13 +58,12 @@ asyncTest('Precedură: salvare', function () {
 
           verificăSecţiuneaCheltuieli();
 
-          setTimeout(function () { // aşteptăm o leacă înainte de a deschide încheierea de intentare
+          setTimeout(function () {
             start();
-          }, 500);
+          }, app.PAUZĂ_DE_OBSERVABILITATE);
         });
       });
     });
-    app.FormularProcedură.$.find('.închide').click();
   });
 
   function verificăSecţiuneaCheltuieli() {
@@ -73,4 +73,3 @@ asyncTest('Precedură: salvare', function () {
     equal($taxaA1.find('.achitare .dată').val(), dataAchităriiTaxeiA1, '…avem data achitării');
   }
 });
-

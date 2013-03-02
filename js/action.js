@@ -550,7 +550,7 @@
           .trigger('eliminare')
           .slideUp(function () {
             eliminabil.remove();
-            TotalCheltuieli.calculează();
+            TotalCheltuieli.calculează(); // de mutat asta în locul corespunzător
           });
       } else {
         eliminabil
@@ -561,7 +561,7 @@
               .trigger('eliminare');
 
             $(this).remove();
-            TotalCheltuieli.calculează();
+            TotalCheltuieli.calculează(); // de mutat asta în locul corespunzător
           });
       }
     }
@@ -635,6 +635,8 @@
       });
 
       this.$obiectulUrmăririi.on('adăugat-cîmp-personalizabil', function (e, $li) {
+        if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
+
         $li.find('input.autofocus').focus();
       });
     },
@@ -802,21 +804,53 @@
 
       // ------------------------------------------
       function colecteazăObiectulUrmăririi() {
-        var $secţiune = FormularProcedură.$obiectulUrmăririi,
-            obiectulUrmăririi = colectează($secţiune);
-
-        if (FormularProcedură.pensieDeÎntreţinere()) {
-          obiectulUrmăririi = {'încasări': colecteazăÎncasări($secţiune)};
+        function colecteazăMăsurileDeAsigurareAAcţiunii() {
+          if ($secţiune.find('.personalizat.valoarea-acţiunii').există()) {
+            obiectulUrmăririi['valoarea-acţiunii'] = colecteazăValoareaAcţiunii();
+          } else {
+            obiectulUrmăririi['bunuri-sechestrate'] = colecteazăBunuriSechestrate();
+            obiectulUrmăririi['sume-sechestrate'] = colecteazăSumeSechestrate();
+          }
         }
 
-        obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
+        // ------------------------------------------
+        function colecteazăValoareaAcţiunii() {
+          var $valoareaAcţiunii = $secţiune.find('.personalizat.valoarea-acţiunii');
 
-        if (obiectulUrmăririi.caracter === 'pecuniar') {
-          obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
-          obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
-        } else {
-          obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
+          return {
+            suma: $valoareaAcţiunii.find('.sumă').val(),
+            valuta: $valoareaAcţiunii.find('.valuta').val()
+          };
+        }
 
+        // ------------------------------------------
+        function colecteazăBunuriSechestrate() {
+          return $secţiune.find('.bunul-sechestrat').map(function () {
+            var $item = $(this);
+
+            return {
+              descrierea: $item.find('.etichetă').val(),
+              suma: $item.find('.sumă').val(),
+              valuta: $item.find('.valuta').val()
+            };
+          }).get();
+        }
+
+        // ------------------------------------------
+        function colecteazăSumeSechestrate() {
+          return $secţiune.find('.suma-sechestrată').map(function () {
+            var $item = $(this);
+
+            return {
+              descrierea: $item.find('.etichetă').val(),
+              suma: $item.find('.sumă').val(),
+              valuta: $item.find('.valuta').val()
+            };
+          }).get();
+        }
+
+        // ------------------------------------------
+        function colecteazăÎncheiere() {
           var $butonÎncheiere = $secţiune.find('.buton[data-formular]');
 
           if ($butonÎncheiere.is('.salvat')) {
@@ -824,11 +858,35 @@
           }
         }
 
+        // ------------------------------------------
+        var $secţiune = FormularProcedură.$obiectulUrmăririi,
+            obiectulUrmăririi;
+
+        if (FormularProcedură.pensieDeÎntreţinere()) {
+          obiectulUrmăririi = {'încasări': colecteazăSubsecţiuniÎncasare($secţiune)};
+        } else {
+          obiectulUrmăririi = colectează($secţiune);
+        }
+
+        if ($secţiune.find('#obiect').val() === 'aplicarea măsurilor de asigurare a acţiunii') {
+          colecteazăMăsurileDeAsigurareAAcţiunii();
+        } else {
+          obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
+        }
+
+        if (obiectulUrmăririi.caracter === 'pecuniar') {
+          obiectulUrmăririi['întîrzieri'] = colecteazăSubsecţiuniÎntîrziere($secţiune);
+          obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSubsecţiuniSechestrare($secţiune);
+        } else {
+          obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
+          colecteazăÎncheiere();
+        }
+
         return obiectulUrmăririi;
       }
 
       // ------------------------------------------
-      function colecteazăÎntîrzieri($secţiune) {
+      function colecteazăSubsecţiuniÎntîrziere($secţiune) {
         return $secţiune.find('.subsecţiune.întîrziere').map(function () {
           var $întîrziere = $(this);
 
@@ -845,7 +903,7 @@
       }
 
       // ------------------------------------------
-      function colecteazăSechestrăriBunuri($secţiune) {
+      function colecteazăSubsecţiuniSechestrare($secţiune) {
         return $secţiune.find('.subsecţiune.sechestrare-bunuri').map(function () {
           var $sechestrare = $(this);
 
@@ -878,7 +936,7 @@
       }
 
       // ------------------------------------------
-      function colecteazăÎncasări($secţiune) {
+      function colecteazăSubsecţiuniÎncasare($secţiune) {
         return $secţiune.find('.subsecţiune.încasare').map(function () {
           var date = {};
 
@@ -1125,19 +1183,80 @@
 
       // ------------------------------------------
       function populeazăObiectulUrmăririi() {
+        function populeazăMăsurileDeAsigurareAAcţiunii() {
+          if (obiectulUrmăririi['valoarea-acţiunii']) {
+            populeazăValoareaAcţiunii();
+          } else {
+            populeazăBunuriSechestrate();
+            populeazăSumeSechestrate();
+          }
+        }
+
+        // ------------------------------------------
+        function populeazăValoareaAcţiunii() {
+          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.valoarea-acţiunii'),
+              $cîmpul;
+
+          $butonDeAdăugare.click();
+          $cîmpul = $butonDeAdăugare.parent().prev('.valoarea-acţiunii');
+          $cîmpul.find('.sumă').val(obiectulUrmăririi['valoarea-acţiunii']['suma']);
+          $cîmpul.find('.valuta').val(obiectulUrmăririi['valoarea-acţiunii']['valuta']);
+        }
+
+        // ------------------------------------------
+        function populeazăBunuriSechestrate() {
+          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-sechestrat'),
+              bunuri = obiectulUrmăririi['bunuri-sechestrate'],
+              $cîmpul, bun;
+
+          for (var i = 0; i < bunuri.length; i++) {
+            bun = bunuri[i];
+
+            $butonDeAdăugare.click();
+            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-sechestrat');
+            $cîmpul.find('.etichetă').val(bun['descrierea']);
+            $cîmpul.find('.sumă').val(bun['suma']);
+            $cîmpul.find('.valuta').val(bun['valuta']);
+          }
+        }
+
+        // ------------------------------------------
+        function populeazăSumeSechestrate() {
+          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.sumă-sechestrată'),
+              sume = obiectulUrmăririi['sume-sechestrate'],
+              $cîmpul, sumă;
+
+          for (var i = 0; i < sume.length; i++) {
+            sumă = sume[i];
+
+            $butonDeAdăugare.click();
+            $cîmpul = $butonDeAdăugare.parent().prev('.suma-sechestrată');
+            $cîmpul.find('.etichetă').val(sumă['descrierea']);
+            $cîmpul.find('.sumă').val(sumă['suma']);
+            $cîmpul.find('.valuta').val(sumă['valuta']);
+          }
+        }
+
+        // ------------------------------------------
         var $secţiune = FormularProcedură.$obiectulUrmăririi,
-            secţiune = procedură['obiectul-urmăririi'];
+            obiectulUrmăririi = procedură['obiectul-urmăririi'];
 
-        populeazăSecţiune($secţiune, secţiune);
-        populeazăPensieÎntreţinere($secţiune, secţiune['încasări']);
-        populeazăSume($secţiune, secţiune['sume']);
-        populeazăÎntîrzieri($secţiune, secţiune['întîrzieri']);
-        populeazăSechestrăriBunuri($secţiune, secţiune['sechestrări-bunuri']);
-        populeazăAmînări($secţiune, secţiune['amînări']);
+        populeazăSecţiune($secţiune, obiectulUrmăririi);
+        populeazăPensieÎntreţinere($secţiune, obiectulUrmăririi['încasări']);
 
-        if (secţiune.încheiere) {
+        if ($secţiune.find('#obiect').val() === 'aplicarea măsurilor de asigurare a acţiunii') {
+          populeazăMăsurileDeAsigurareAAcţiunii();
+        } else {
+          populeazăSume($secţiune, obiectulUrmăririi['sume']);
+        }
+
+        populeazăÎntîrzieri($secţiune, obiectulUrmăririi['întîrzieri']);
+        populeazăSechestrăriBunuri($secţiune, obiectulUrmăririi['sechestrări-bunuri']);
+        populeazăAmînări($secţiune, obiectulUrmăririi['amînări']);
+
+        if (obiectulUrmăririi['încheiere']) {
           $secţiune.find('.buton[data-formular]')
-            .attr('data-pagina', secţiune.încheiere)
+            .attr('data-pagina', obiectulUrmăririi['încheiere'])
             .addClass('salvat');
         }
       }
@@ -1455,7 +1574,7 @@
         .stop(true, true)
         .find('.bara-de-instrumente').fadeOut().end()
         .animate({'top': $(window).height()}, function () {
-          $(this).hide();
+          $(this).hide().trigger('închis');
         })
         .trigger('închidere');
     },
@@ -2850,6 +2969,7 @@
         .on('salvat', this.activează);
 
       FormularProcedură.$.on('change', '#obiect', this.ajustează);
+      MăsuriDeAsigurare.init();
     },
 
     activează: function () {
@@ -2913,6 +3033,60 @@
       };
 
       $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);
+    }
+  },
+
+  // --------------------------------------------------
+
+  MăsuriDeAsigurare = {
+    init: function () {
+      FormularProcedură.$obiectulUrmăririi
+        .on('click', '.adaugă-cîmp-personalizat', this.ascundeButonaşeDeAdăugare)
+        .on('eliminare', '.suma-sechestrată,.bunul-sechestrat', this.reafişeazăButonaşeDeAdăugareValoareAcţiune)
+        .on('eliminare', '.valoarea-acţiunii', this.reafişeazăToateButonaşele);
+    },
+
+    ascundeButonaşeDeAdăugare: function () {
+      var $buton = $(this);
+
+      if ($buton.is('.valoarea-acţiunii')) {
+        FormularProcedură.$obiectulUrmăririi
+          .find('.container-buton:has(button.bun-sechestrat,button.valoarea-acţiunii,button.sumă-sechestrată)')
+            .addClass('ascuns')
+            .hide('blind');
+      } else if ($buton.is('.bun-sechestrat') || $buton.is('.sumă-sechestrată')) {
+        FormularProcedură.$obiectulUrmăririi
+          .find('.container-buton:has(button.valoarea-acţiunii)')
+            .addClass('ascuns')
+            .hide('blind');
+      }
+    },
+
+    reafişeazăButonaşeDeAdăugareValoareAcţiune: function () {
+      var $secţiune = FormularProcedură.$obiectulUrmăririi;
+      var bunuriŞiSume = [
+        'li.personalizat.bunul-sechestrat',
+        'li.personalizat.suma-sechestrată'
+      ].join();
+
+      if ($secţiune.find(bunuriŞiSume).length === 1) { // se elimină ultimul bun sau sumă
+        $secţiune.find('.container-buton:has(button.valoarea-acţiunii)')
+          .removeClass('ascuns')
+          .show('blind');
+      }
+    },
+
+    reafişeazăToateButonaşele: function () {
+      var $secţiune = FormularProcedură.$obiectulUrmăririi;
+      var butoaneDeAdăugare = [
+        '.container-buton:has(button.bun-sechestrat)',
+        '.container-buton:has(button.sumă-sechestrată)',
+        '.container-buton:has(button.valoarea-acţiunii)'
+      ].join();
+
+      $secţiune.find(butoaneDeAdăugare)
+        .removeClass('ascuns')
+        .show('blind');
     }
   },
 

@@ -621,17 +621,21 @@ input.sumă {
   transition: opacity .5s;
 }
 
+.container-buton.ascuns {
+  opacity: 0;
+}
+
 .container-buton+.container-buton {
   margin-top: .8em;
 }
 
 .container-buton:last-child {
-  height: 5px;
+  height: 3px;
 }
 
 .personalizat.focusat+.container-buton,
 .personalizat:hover+.container-buton {
-  opacity: 0;
+  opacity: .2;
 }
 
 button.adaugă-cîmp-personalizat,
@@ -869,6 +873,7 @@ input[type="checkbox"]+label {
 
 #destinatari .listă .titlu {
   white-space: nowrap;
+  display: block;
 }
 
 #destinatari .listă .itemi {
@@ -913,7 +918,7 @@ input[type="checkbox"]+label {
 }
 
 #destinatari .listă:hover .adaugă-toate {
-  opacity: .8;
+  opacity: 1;
 }
 
 .destinatari-adăugaţi::before {

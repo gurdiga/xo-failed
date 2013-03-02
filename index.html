@@ -925,7 +925,10 @@
               data-formular-încheiere="încheiere-de-restabilire-la-locul-de-muncă"
               data-şoaptă-buton="Formează Somaţie de restabilire a salariatului la locul de muncă">
               restabilirea la locul de muncă</option>
-            <option data-formular-încheiere="încheiere-de-aplicare-a-asigurare-a-acţiunii">aplicarea măsurilor de asigurare a acţiunii</option>
+            <option
+              data-formular-încheiere="încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii"
+              data-şoaptă-buton="Formează Încheiere de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii">
+              aplicarea măsurilor de asigurare a acţiunii</option>
           </select>
           <span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Formare document"></span>
         </li>
@@ -1250,8 +1253,6 @@
             <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
             <option>interzicerea debitorului de a săvîrşi anumite acte</option>
             <option>interzicerea altor persoane de a săvîrşi anumite acte în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
-            <option>suspendarea vînzării bunurilor sechestrate în cazul intentării unei acţiuni de ridicare a sechestrului de pe ele (radierea din actul  de inventar)</option>
-            <option>suspendarea urmăririi, întemeiate pe un document executoriu, contestat de către debitor pe cale judiciară</option>
           </select>
         </li>
 
@@ -1263,9 +1264,51 @@
 
 
       <ul class="conţinut măsura-de-asigurare" title="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
-        <li>
-          <label for="valoarea-acţiunii">Valoarea acţiunii</label>
-          <input type="text" id="valoarea-acţiunii" placeholder="suma" class="sumă"/>
+        <li class="container-buton">
+          <button
+            class="adaugă-cîmp-personalizat valoarea-acţiunii semiascuns"
+            data-şablon="cîmpul-pentru-valoarea-acţiunii"
+            data-etichetă="Valoarea acţiunii">+valoarea acţiunii</button>
+        </li>
+
+        <li class="container-buton">
+          <button
+            class="adaugă-cîmp-personalizat bun-sechestrat semiascuns"
+            data-şablon="cîmpul-pentru-bunul-sechestrat"
+            data-etichetă="Descriere bun">+bun sechestrat</button>
+        </li>
+
+        <li class="container-buton">
+          <button
+            class="adaugă-cîmp-personalizat sumă-sechestrată semiascuns"
+            data-şablon="cîmpul-pentru-suma-sechestrată"
+            data-etichetă="Descriere sumă">+sumă sechestrată</button>
+        </li>
+      </ul>
+
+
+      <ul class="cîmpul-pentru-valoarea-acţiunii">
+        <li class="valoarea-acţiunii personalizat eliminabil de tot">
+          <textarea class="etichetă"></textarea>
+          <input type="text" placeholder="suma" class="sumă autofocus"/>
+          <select class="valuta"></select>
+        </li>
+      </ul>
+
+
+      <ul class="cîmpul-pentru-bunul-sechestrat">
+        <li class="bunul-sechestrat personalizat eliminabil de tot">
+          <textarea class="etichetă"></textarea>
+          <input type="text" placeholder="valoarea" class="sumă"/>
+          <select class="valuta"></select>
+        </li>
+      </ul>
+
+
+      <ul class="cîmpul-pentru-suma-sechestrată">
+        <li class="suma-sechestrată personalizat eliminabil de tot">
+          <textarea class="etichetă"></textarea>
+          <input type="text" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>
         </li>
       </ul>

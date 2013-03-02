@@ -1,4 +1,7 @@
+- bug la adăugare destinatar
 - Încheieri
+- DRY logica colectare/populare? Cum?
+- patch QUnit to show non-english characters nicer
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
@@ -10,6 +13,7 @@
 
 - Workers
  - Crypter
+   - https://code.google.com/p/crypto-js/ + teste
  - Archiver
  - Search
 
