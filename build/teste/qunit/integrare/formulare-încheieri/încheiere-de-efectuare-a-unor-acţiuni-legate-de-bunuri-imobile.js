@@ -6,7 +6,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
 
   var app = this.app,
       $secţiune = app.FormularProcedură.$obiectulUrmăririi,
-      obiect = 'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile';
+      obiect = 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile';
 
   ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();

@@ -2664,15 +2664,15 @@
       'instalarea': {fizică: 200 * UC, juridică: 200 * UC},
       'schimbul forţat': {fizică: 200 * UC, juridică: 200 * UC},
       'stabilirea domiciliului copilului': {fizică: 200 * UC, juridică: 200 * UC},
-      'efectuarea de către debitor a unor acte obligatorii, nelegate de remiterea unor sume sau bunuri': {
+      'efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri': {
         fizică: 200 * UC,
         juridică: 200 * UC
       },
-      'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri mobile': {
+      'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile': {
         fizică: function () { return 100 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); },
         juridică: function () { return 200 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); }
       },
-      'efectuarea de către debitor a unor acte obligatorii, legate de remiterea unor bunuri imobile': {
+      'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile': {
         fizică: function () { return 100 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); },
         juridică: function () { return 200 * UC + 0.01 * FormularProcedură.$obiectulUrmăririi.find('.sumă').suma(); }
       },
