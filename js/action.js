@@ -198,6 +198,8 @@
 
       $('<p>')
         .insertAfter($select)
+        .hide()
+        .slideDown()
         .text($select.find('option:selected').text())
         .addClass('şoaptă');
     },
@@ -226,7 +228,7 @@
           $subformular;
 
       item.nextAll().remove();
-      item.after(şablon);
+      item.after(şablon).hide().slideDown();
 
       $subformular = item.nextAll();
       $subformular.find(SubsecţiuniDinamice.selector).trigger('change');
@@ -2319,7 +2321,8 @@
             .val(buton.attr('data-etichetă'))
             .trigger('input')
           .end()
-          .show('blind', function () {
+          .hide()
+          .slideDown(function () {
             if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
 
             $(this).find('.etichetă')
