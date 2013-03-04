@@ -79,12 +79,12 @@ textarea {
 }
 
 input[type="text"] {
-  background-position: 0 -2px;
+  background-position: 0 -4px;
 }
 
 textarea.lat {
   width: 25em;
-  margin: 0 0 0 .7em;
+  margin: 0 0 0 1em;
 }
 
 fieldset>.conţinut {
@@ -96,7 +96,7 @@ input,
 fieldset select {
   margin: 0;
   vertical-align: top;
-  padding: 5px 4px 2px;
+  padding: 4px;
   color: black;
   font-weight: bold;
 }
@@ -108,7 +108,7 @@ label.textarea {
 fieldset ul select {
   width: 14.7em;
   padding: 0;
-  margin-top: 3px;
+  margin-top: 1px;
 }
 
 fieldset ul>li>textarea {
@@ -417,7 +417,7 @@ fieldset label {
 #cheltuieli .adăugate .subformular .stînga,
 .etichetă,
 fieldset label {
-  padding: 5px 0 0 6px;
+  padding: 3px 0 3px 6px;
 }
 
 #formular fieldset legend {
@@ -428,10 +428,10 @@ fieldset label {
 .etichetă {
   background-image: none;
   font-weight: normal;
-  padding: .3em 0 .2em 3px;
+  padding: 3px 0 3px 3px;
   min-height: 1em;
   line-height: normal!important;
-  margin:  1px 0 0 3px;
+  margin:  0 0 0 3px;
   vertical-align: top;
 }
 
@@ -594,8 +594,8 @@ input.sumă {
 .subformular textarea {
   height: 3ex;
   min-height: 3ex;
-  padding: 0 .3em;
-  background-position: 0 -4px;
+  padding: 3px 3px 0;
+  background-position: 0 -1px;
 }
 
 .subformular .denumire,
@@ -603,6 +603,7 @@ input.sumă {
   width: 16em;
   min-width: 0;
   max-width: none;
+  margin-top: -2px;
 }
 
 #cheltuieli .subformular .valoare,
@@ -1141,14 +1142,12 @@ button.cu.opţiuni:after {
 select#obiect~.buton[data-formular] {
   position: absolute;
   right: -8px;
-  top: 4px;
+  top: 2px;
   overflow: visible; /* să se vadă bifa */
 }
 
 .ui-icon-calendar {
   margin-left: -1em;
-  vertical-align: top;
-  margin-top: 5px;
 }
 
 .titlu .buton[data-formular] {
@@ -1264,7 +1263,7 @@ input+span.ui-icon-locked {
 input[readonly]+span.ui-icon-locked {
   position: absolute;
   z-index: 2;
-  margin: .5em 0 0 -1.2em;
+  margin: 3px 0 0 -1.2em;
   display: inline-block;
   opacity: 0;
   -webkit-transition: opacity .5s;
