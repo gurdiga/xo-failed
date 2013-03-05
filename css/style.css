@@ -50,8 +50,8 @@ textarea {
 }
 
 textarea.note {
-  min-height: 0;
-  height: 24px;
+  min-height: 48px;
+  height: 48px;
 }
 
 fieldset input[type="radio"],
