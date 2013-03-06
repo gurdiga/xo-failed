@@ -3,6 +3,7 @@
   - la TAB pe lista de proceduri emulează tasta jos
   - DRY logica colectare/populare? Cum?
 
+- colectează amînări doar cînd există butonul de adăugare amînări
 - bug la adăugare destinatar
 - patch QUnit to unpercent non-english
 
