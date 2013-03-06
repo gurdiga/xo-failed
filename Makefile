@@ -40,7 +40,7 @@ pull:
 build: lint-bash lint-html lint-php formulare
 	build/start.sh
 
-deploy: push
+deploy:
 	ssh -p59922 nati@executori.org 'bash -s' < ./build/stage.sh
 
 rollback:
