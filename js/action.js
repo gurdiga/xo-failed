@@ -806,6 +806,7 @@
 
       // ------------------------------------------
       function colecteazăObiectulUrmăririi() {
+        /*jshint maxcomplexity:8*/ // TODO: fix this?
         function colecteazăMăsurileDeAsigurareAAcţiunii() {
           if ($secţiune.find('.personalizat.valoarea-acţiunii').există()) {
             obiectulUrmăririi['valoarea-acţiunii'] = colecteazăValoareaAcţiunii();
@@ -852,6 +853,19 @@
         }
 
         // ------------------------------------------
+        function colecteazăBunuriConfiscate() {
+          return $secţiune.find('.bunul-confiscat').map(function () {
+            var $item = $(this);
+
+            return {
+              descrierea: $item.find('.etichetă').val(),
+              suma: $item.find('.sumă').val(),
+              valuta: $item.find('.valuta').val()
+            };
+          }).get();
+        }
+
+        // ------------------------------------------
         function colecteazăÎncheiere() {
           var $butonÎncheiere = $secţiune.find('.buton[data-formular]');
 
@@ -862,6 +876,7 @@
 
         // ------------------------------------------
         var $secţiune = FormularProcedură.$obiectulUrmăririi,
+            $obiectulUrmăririi = $secţiune.find('#obiect'),
             obiectulUrmăririi;
 
         if (FormularProcedură.pensieDeÎntreţinere()) {
@@ -870,8 +885,10 @@
           obiectulUrmăririi = colectează($secţiune);
         }
 
-        if ($secţiune.find('#obiect').val() === 'aplicarea măsurilor de asigurare a acţiunii') {
+        if ($obiectulUrmăririi.val() === 'aplicarea măsurilor de asigurare a acţiunii') {
           colecteazăMăsurileDeAsigurareAAcţiunii();
+        } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
+          obiectulUrmăririi['bunuri-confiscate'] = colecteazăBunuriConfiscate();
         } else {
           obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
         }
@@ -1223,6 +1240,23 @@
         }
 
         // ------------------------------------------
+        function populeazăBunuriConfiscate() {
+          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-confiscat'),
+              bunuri = obiectulUrmăririi['bunuri-confiscate'],
+              $cîmpul, bun;
+
+          for (var i = 0; i < bunuri.length; i++) {
+            bun = bunuri[i];
+
+            $butonDeAdăugare.click();
+            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-confiscat');
+            $cîmpul.find('.etichetă').val(bun['descrierea']);
+            $cîmpul.find('.sumă').val(bun['suma']);
+            $cîmpul.find('.valuta').val(bun['valuta']);
+          }
+        }
+
+        // ------------------------------------------
         function populeazăSumeSechestrate() {
           var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.sumă-sechestrată'),
               sume = obiectulUrmăririi['sume-sechestrate'],
@@ -1248,6 +1282,8 @@
 
         if ($secţiune.find('#obiect').val() === 'aplicarea măsurilor de asigurare a acţiunii') {
           populeazăMăsurileDeAsigurareAAcţiunii();
+        } else if ($secţiune.find('#obiect').val() === 'confiscarea bunurilor') {
+          populeazăBunuriConfiscate();
         } else {
           populeazăSume($secţiune, obiectulUrmăririi['sume']);
         }
