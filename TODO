@@ -1,9 +1,10 @@
-- bug la adăugare destinatar
 - Încheieri
-- DRY logica colectare/populare? Cum?
-- de testat colectarea/popularea?
+  - de testat colectarea/popularea?
+  - la TAB pe lista de proceduri emulează tasta jos
+  - DRY logica colectare/populare? Cum?
+
+- bug la adăugare destinatar
 - patch QUnit to unpercent non-english
-- la TAB pe lista de proceduri emulează tasta jos
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?

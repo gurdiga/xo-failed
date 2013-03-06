@@ -74,8 +74,6 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
       $formular.one('populat', function () {
         ok(true, 'redeschis şi populat');
 
-        // TODO: verifică poopularea
-
         var $cîmpuriBunuriConfiscate = $secţiune.find('.bunul-confiscat');
 
         equal($cîmpuriBunuriConfiscate.length, numărDeBunuri, 'populare: numărul bunurilor corespunde');
