@@ -867,6 +867,19 @@
         }
 
         // ------------------------------------------
+        function colecteazăBunuriNimicite() {
+          return $secţiune.find('.bunul-nimicit').map(function () {
+            var $item = $(this);
+
+            return {
+              descrierea: $item.find('.etichetă').val(),
+              suma: $item.find('.sumă').val(),
+              valuta: $item.find('.valuta').val()
+            };
+          }).get();
+        }
+
+        // ------------------------------------------
         function colecteazăSumeSechestrate() {
           return $secţiune.find('.suma-sechestrată').map(function () {
             var $item = $(this);
@@ -918,6 +931,8 @@
           obiectulUrmăririi['bunuri-ridicate'] = colecteazăBunuriRidicate();
         } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
           obiectulUrmăririi['bunuri-transmise'] = colecteazăBunuriTransmise();
+        } else if ($obiectulUrmăririi.val() === 'nimicirea bunurilor') {
+          obiectulUrmăririi['bunuri-nimicite'] = colecteazăBunuriNimicite();
         } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
           obiectulUrmăririi['bunuri-confiscate'] = colecteazăBunuriConfiscate();
         } else {
@@ -1306,6 +1321,23 @@
         }
 
         // ------------------------------------------
+        function populeazăBunuriNimicite() {
+          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-nimicit'),
+              bunuri = obiectulUrmăririi['bunuri-nimicite'],
+              $cîmpul, bun;
+
+          for (var i = 0; i < bunuri.length; i++) {
+            bun = bunuri[i];
+
+            $butonDeAdăugare.click();
+            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-nimicit');
+            $cîmpul.find('.etichetă').val(bun['descrierea']);
+            $cîmpul.find('.sumă').val(bun['suma']);
+            $cîmpul.find('.valuta').val(bun['valuta']);
+          }
+        }
+
+        // ------------------------------------------
         function populeazăBunuriConfiscate() {
           var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-confiscat'),
               bunuri = obiectulUrmăririi['bunuri-confiscate'],
@@ -1354,6 +1386,8 @@
           populeazăBunuriTransmise();
         } else if ($secţiune.find('#obiect').val() === 'confiscarea bunurilor') {
           populeazăBunuriConfiscate();
+        } else if ($secţiune.find('#obiect').val() === 'nimicirea bunurilor') {
+          populeazăBunuriNimicite();
         } else {
           populeazăSume($secţiune, obiectulUrmăririi['sume']);
         }

@@ -25,8 +25,8 @@
             nimicirea a următoarelor bunuri:</p>
 
             <ol>
-            <% for (var nume in bunuri) { %>
-              <li><%= nume %> — <%= bunuri[nume].suma %> <%= bunuri[nume].valuta %></li>
+            <% for (var i = 0; i < bunuri.length; i++) { var bun = bunuri[i]; %>
+              <li><%= bun.descrierea %> — <%= bun.suma %> <%= bun.valuta %></li>
             <% } %>
             </ol>
 

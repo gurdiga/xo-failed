@@ -23,7 +23,7 @@
       }
     }
 
-    context.bunuri = context.procedură['obiectul-urmăririi']['sume'];
+    context.bunuri = context.procedură['obiectul-urmăririi']['bunuri-nimicite'];
   };
 })();
 // ]]>
