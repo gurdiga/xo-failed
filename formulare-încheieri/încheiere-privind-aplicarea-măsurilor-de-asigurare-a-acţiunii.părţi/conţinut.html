@@ -27,26 +27,42 @@
 
             <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni') { %>
               interzicerea <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> de a săvîrşi următoarele acţiuni
+            <% } else if (variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuniţiuni') { %>
+              interzicerea <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> de a săvîrşi următoarele acţiuni
             <% } %>
 
             </p>
 
             <% if (variaţie === 'aplicarea sechestrului' && cuSpecificare) { %>
               <ol>
-                <% for (var i = 0; i < bunuriSechestrate.length; i++) { %>
-                <li>
-                  <p><%= bunuriSechestrate[i].descrierea %> — <%= bunuriSechestrate[i].suma %> <%= bunuriSechestrate[i].valuta %></p>
-                </li>
+                <% for (var i = 0; i < bunuriSechestrate.length; i++) { var bun = bunuriSechestrate[i]; %>
+                  <li>
+                    <p><%= bun.descrierea %><%= bun.suma ? ' — ' + bun.suma + ' ' + bun.valuta : '' %></p>
+                  </li>
                 <% } %>
 
                 <% for (var i = 0; i < sumeSechestrate.length; i++) { %>
-                <li>
-                  <p><%= sumeSechestrate[i].descrierea %> — <%= sumeSechestrate[i].suma %> <%= sumeSechestrate[i].valuta %></p>
-                </li>
+                  <li>
+                    <p><%= sumeSechestrate[i].descrierea %> — <%= sumeSechestrate[i].suma %> <%= sumeSechestrate[i].valuta %></p>
+                  </li>
                 <% } %>
               </ol>
             <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni') { %>
               <blockquote><%= acţiuni %></blockquote>
+            <% } else if (variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') { %>
+              <blockquote><%= acţiuni %></blockquote>
+
+              <% if (bunuriÎnLitigiu.length > 0) { %>
+                <p>în privinţa următoarelor bunuri:</p>
+
+                <ol>
+                  <% for (var i = 0; i < bunuriÎnLitigiu.length; i++) { var bun = bunuriÎnLitigiu[i]; %>
+                  <li>
+                    <p><%= bun.descrierea %><%= bun.suma ? ' — ' + bun.suma + ' ' + bun.valuta : '' %></p>
+                  </li>
+                  <% } %>
+                </ol>
+              <% } %>
             <% } %>
 
             <p>am stabilit:</p>
@@ -83,84 +99,85 @@
               </li>
 
               <% if (variaţie === 'aplicarea sechestrului' && cuSpecificare) { %>
-              <li>
-                <p>A aplica sechestru pe bunurile sus menţionate.</p>
-              </li>
-              <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni') { %>
-              <li>
-                <p>A interzice <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
-                săvîrşirea acţiunilor menţionate.</p>
-              </li>
-              <% } %>
-
-              <% if (fărăSpecificare || (cuSpecificare && sumeSechestrate.length > 0)) { %>
-              <li>
-                <p>A obliga băncile comerciale să comunice executorului judecătoresc despre
-                existenţa conturilor deschise pe numele
-                <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> a soldurilor
-                din acestea şi să aplice sechestru pe mijloacele băneşti disponibile în acestea
-                în limita valorii acţiunii inclusiv şi pe mijloacele băneşti care vor
-                transferate în viitor dacă soldul acestora nu este suficient pentru acoperirea
-                valorii acţiunii.</p>
-              </li>
-
-              <li>
-                <p>A obliga băncile comerciale să informeze executorul judecătoresc despre
-                deschiderea în viitor a unor conturi bancare de către
-                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru
-                asupra mijloacelor băneşti transferate în aceste conturi în limita valorii acţiunii.</p>
-              </li>
-
-              <li>
-                <p>A obliga Inspectoratul Fiscal de Stat să informeze executorul judecătoresc despre
-                deschiderea în viitor a unor conturi bancare de către
-                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi despre impozitele achitate
-                de acesta.</p>
-              </li>
-              <% } %>
-
-              <% if (fărăSpecificare) { %>
-              <li>
-                <p>A obliga participanţii profesionişti care deţin informaţia privind deţinătorii de
-                valori mobiliare să prezinte executorului judecătoresc informaţia despre valorile
-                mobiliare de care dispune <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
-                şi să interzică orice act de dispoziţie cu acestea. Se permite înregistrarea valorilor
-                mobiliare pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
-                cu aplicarea interdicţiei de înstrăinare pe acestea.</p>
-              </li>
-
-              <li>
-                <p>A obliga Î.S. “CRIS Registru” să prezinte executorului judecătoresc informaţia despre
-                mijloacele de transport deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
-                şi să aplice interdicţia de înstrăinare pe acestea. Se permite înregistrarea mijloacelor
-                de transport pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu
-                aplicarea interdicţiei de înstrăinare pe acestea.</p>
-              </li>
-
-              <li>
-                <p>A obliga Î.S. “Cadastru” să prezinte informaţia despre bunurile imobile deţinute de
-                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru pe acestea.
-                Se permite înregistrarea bunurilor imobile pe numele
-                <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu aplicarea interdicţiei
-                de înstrăinare pe acestea.</p>
-              </li>
-
-              <li>
-                <p>A obliga Î.S. “Camera Înregistrării de Stat” să prezinte executorului judecătoresc
-                informaţia despre cotele-părţi deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
-                în capitalul social al societăţilor comerciale şi cooperative şi dacă
-                <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> este înregistrat ca întreprinzător
-                individual. A interzice înregistrarea înstrăinării oricăror cote-părţi deţinute de
-                <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>, inclusiv şi cele dobîndite ulterior
-                pronunţării încheierii date.</p>
-              </li>
+                <li>
+                  <p>A aplica sechestru pe bunurile sus menţionate.</p>
+                </li>
+              <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni' ||
+                  variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') { %>
+                <li>
+                  <p>A interzice <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+                  săvîrşirea acţiunilor menţionate.</p>
+                </li>
               <% } %>
 
               <% if (variaţie === 'aplicarea sechestrului') { %>
-              <li>
-                <p>Despre măsurile întreprinse şi informaţia solicitată, autorităţile vizate urmează să
-                comunice executorului judecătoresc în modul şi în termenele stabilite de legislaţia în vigoare.</p>
-              </li>
+                <% if (fărăSpecificare || (cuSpecificare && sumeSechestrate.length > 0)) { %>
+                <li>
+                  <p>A obliga băncile comerciale să comunice executorului judecătoresc despre
+                  existenţa conturilor deschise pe numele
+                  <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> a soldurilor
+                  din acestea şi să aplice sechestru pe mijloacele băneşti disponibile în acestea
+                  în limita valorii acţiunii inclusiv şi pe mijloacele băneşti care vor
+                  transferate în viitor dacă soldul acestora nu este suficient pentru acoperirea
+                  valorii acţiunii.</p>
+                </li>
+
+                <li>
+                  <p>A obliga băncile comerciale să informeze executorul judecătoresc despre
+                  deschiderea în viitor a unor conturi bancare de către
+                  <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru
+                  asupra mijloacelor băneşti transferate în aceste conturi în limita valorii acţiunii.</p>
+                </li>
+
+                <li>
+                  <p>A obliga Inspectoratul Fiscal de Stat să informeze executorul judecătoresc despre
+                  deschiderea în viitor a unor conturi bancare de către
+                  <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi despre impozitele achitate
+                  de acesta.</p>
+                </li>
+                <% } %>
+
+                <% if (fărăSpecificare) { %>
+                <li>
+                  <p>A obliga participanţii profesionişti care deţin informaţia privind deţinătorii de
+                  valori mobiliare să prezinte executorului judecătoresc informaţia despre valorile
+                  mobiliare de care dispune <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
+                  şi să interzică orice act de dispoziţie cu acestea. Se permite înregistrarea valorilor
+                  mobiliare pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
+                  cu aplicarea interdicţiei de înstrăinare pe acestea.</p>
+                </li>
+
+                <li>
+                  <p>A obliga Î.S. “CRIS Registru” să prezinte executorului judecătoresc informaţia despre
+                  mijloacele de transport deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+                  şi să aplice interdicţia de înstrăinare pe acestea. Se permite înregistrarea mijloacelor
+                  de transport pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu
+                  aplicarea interdicţiei de înstrăinare pe acestea.</p>
+                </li>
+
+                <li>
+                  <p>A obliga Î.S. “Cadastru” să prezinte informaţia despre bunurile imobile deţinute de
+                  <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru pe acestea.
+                  Se permite înregistrarea bunurilor imobile pe numele
+                  <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu aplicarea interdicţiei
+                  de înstrăinare pe acestea.</p>
+                </li>
+
+                <li>
+                  <p>A obliga Î.S. “Camera Înregistrării de Stat” să prezinte executorului judecătoresc
+                  informaţia despre cotele-părţi deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+                  în capitalul social al societăţilor comerciale şi cooperative şi dacă
+                  <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %> este înregistrat ca întreprinzător
+                  individual. A interzice înregistrarea înstrăinării oricăror cote-părţi deţinute de
+                  <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>, inclusiv şi cele dobîndite ulterior
+                  pronunţării încheierii date.</p>
+                </li>
+                <% } %>
+
+                <li>
+                  <p>Despre măsurile întreprinse şi informaţia solicitată, autorităţile vizate urmează să
+                  comunice executorului judecătoresc în modul şi în termenele stabilite de legislaţia în vigoare.</p>
+                </li>
               <% } %>
 
             </ol>

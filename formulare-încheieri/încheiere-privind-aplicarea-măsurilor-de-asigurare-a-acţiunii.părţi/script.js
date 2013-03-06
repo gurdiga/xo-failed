@@ -12,16 +12,22 @@
 
     context.variaţie = variaţii[context.app.FormularProcedură.$obiectulUrmăririi.find('#măsura-de-asigurare').val()];
 
-    context.valoareaAcţiunii = context.procedură['obiectul-urmăririi']['valoarea-acţiunii'];
-    context.cuSpecificare = !context.valoareaAcţiunii;
-    context.fărăSpecificare = !context.cuSpecificare;
+    if (context.variaţie === 'aplicarea sechestrului') {
+      context.valoareaAcţiunii = context.procedură['obiectul-urmăririi']['valoarea-acţiunii'];
+      context.cuSpecificare = !context.valoareaAcţiunii;
+      context.fărăSpecificare = !context.cuSpecificare;
 
-    if (context.cuSpecificare) {
-      context.bunuriSechestrate = context.procedură['obiectul-urmăririi']['bunuri-sechestrate'];
-      context.sumeSechestrate = context.procedură['obiectul-urmăririi']['sume-sechestrate'];
+      if (context.cuSpecificare) {
+        context.bunuriSechestrate = context.procedură['obiectul-urmăririi']['bunuri-sechestrate'];
+        context.sumeSechestrate = context.procedură['obiectul-urmăririi']['sume-sechestrate'];
+      }
+    } else {
+      context.acţiuni = context.procedură['obiectul-urmăririi']['acţiuni'];
+
+      if (context.variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') {
+        context.bunuriÎnLitigiu = context.procedură['obiectul-urmăririi']['bunuri-în-litigiu'];
+      }
     }
-
-    context.acţiuni = context.procedură['obiectul-urmăririi']['acţiuni'];
   };
 
 })();

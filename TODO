@@ -5,6 +5,7 @@
 
 - colectează amînări doar cînd există butonul de adăugare amînări
 - bug la adăugare destinatar
+- de afişat mesaj informativ la început cînd nu există proceduri recente
 - patch QUnit to unpercent non-english
 
 - Căutare

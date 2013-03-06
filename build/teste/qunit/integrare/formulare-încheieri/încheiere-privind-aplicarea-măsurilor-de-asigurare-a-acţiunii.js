@@ -534,11 +534,133 @@
 
   // ------------------------------------------
 
-  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: interzicerea debitorului de a săvîrşi anumite acţiuni', function () {
-    // TODO
-    ok(true);
+  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: interzicerea altor persoane de a săvîrşi anumite acţiuni', function () {
+    var app = this.app,
+        $formular = app.FormularProcedură.$,
+        $secţiune = app.FormularProcedură.$obiectulUrmăririi,
+        obiectulUrmăririi = 'aplicarea măsurilor de asigurare a acţiunii',
+        măsuraDeAsigurare = 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
+          ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el';
 
-    start();
+    app.$.fx.off = true;
+
+    var $obiectulUrmăririi = $secţiune.find('#obiect');
+
+    ok($obiectulUrmăririi.există(), 'avem cîmp pentru obiectul urmăririi');
+    $obiectulUrmăririi.val(obiectulUrmăririi).trigger('change');
+    equal($obiectulUrmăririi.val(), obiectulUrmăririi, 'setat obiectul urmăririi corespunzător');
+
+    var $măsuraDeAsigurare = $secţiune.find('#măsura-de-asigurare');
+
+    ok($măsuraDeAsigurare.există(), 'avem cîmp pentru măsura de asigurare');
+    $măsuraDeAsigurare.val(măsuraDeAsigurare).trigger('change');
+    equal($măsuraDeAsigurare.val(), măsuraDeAsigurare, 'setat măsura de asigurare corespunzător');
+
+    var $acţiuni = $secţiune.find('textarea#acţiuni.lat'),
+        acţiuni = 'Plecarea peste hotare.\n' +
+          'Perfectarea permisului de conducere.';
+
+    ok($acţiuni.există(), 'avem textarea lat pentru acţiuni');
+    equal($acţiuni.val(), '', '…necompletat');
+    $acţiuni.val(acţiuni);
+
+    var $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.bun-în-litigiu');
+
+    ok($butonDeAdăugareBun.există(), 'avem buton de adăugare bunuri');
+    equal($butonDeAdăugareBun.text(), '+bun', '…cu textul corespunzător');
+    $butonDeAdăugareBun.click();
+
+    var $cîmpBun = $secţiune.find('.personalizat.bunul-în-litigiu'),
+        $descriere = $cîmpBun.find('.etichetă'), descriere = 'Descriere bun',
+        $valoare = $cîmpBun.find('.sumă'),
+        $valuta = $cîmpBun.find('.valuta');
+
+    ok($cîmpBun.există(), 'la clic pe “+bun” se adaugă un cîmp corespunzător');
+    equal($descriere.val(), descriere, 'descrierea implicit e “' + descriere + '”');
+    equal($valoare.val(), '', 'valoarea implicit e necompletă');
+    equal($valoare.attr('placeholder'), 'valoarea', 'cîmpul pentru valoare are şoapta “valoarea”');
+    equal($valuta.val(), 'MDL', 'valuta implicit este “MDL”');
+
+    var bun = {
+      descrierea: 'Automobil Audi Q7',
+      suma: 35000,
+      valuta: 'EUR'
+    };
+
+    $descriere.val(bun.descrierea);
+    $valoare.val(bun.suma);
+    $valuta.val(bun.valuta);
+
+    var procedură = app.FormularProcedură.colectează(),
+        bunuriColectate = procedură['obiectul-urmăririi']['bunuri-în-litigiu'];
+
+    equal(procedură['obiectul-urmăririi']['măsura-de-asigurare'], măsuraDeAsigurare, 'măsura de asigurare se colectează corespunzător');
+    equal(procedură['obiectul-urmăririi']['acţiuni'], acţiuni, 'acţiunile se colectează corespunzător');
+
+    ok(bunuriColectate, 's-au colectat bunurile în litigiu');
+    equal(bunuriColectate.length, 1, '…corespunzător un bun');
+    equal(bunuriColectate[0].descrierea, bun.descrierea, '…cu descrierea corespunzătoare');
+    equal(bunuriColectate[0].suma, bun.suma, '…cu suma corespunzătoare');
+    equal(bunuriColectate[0].valuta, bun.valuta, '…cu valuta corespunzătoare');
+
+    equal($valuta.val(), bun.valuta, 'valuta se setează corespunzător'); // verific pentru că e select
+
+    // TODO de adăugat persoane terţe
+
+    var $butonDeSalvare = $formular.find('.bara-de-instrumente .salvează');
+
+    ok($butonDeSalvare.există(), 'avem buton de salvare');
+    $butonDeSalvare.click();
+
+    $formular.one('salvat', function () {
+      $formular.one('închis', function () {
+        app.ProceduriRecente.$.find('.item:first').click();
+        $formular.one('populat', function () {
+          equal($măsuraDeAsigurare.val(), măsuraDeAsigurare, 'populat măsura de asigurare corespunzător');
+          equal($acţiuni.val(), acţiuni, 'populat acţiuni corespunzător');
+
+          var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
+
+          ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+          $butonPentruÎncheiere.click();
+
+          var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
+              meta = app.Încheieri.deschise[formular];
+
+          app.$(meta).one('iniţializat', function () {
+            var $încheiere = app.$(this.tab.document),
+                date = this.tab.Încheiere.date;
+
+            equal(date.variaţie, 'interzicerea altor persoane de a săvîrşi anumite acţiuni',
+              'context: variaţie == “interzicerea altor persoane de a săvîrşi anumite acţiuni”');
+            equal(date.acţiuni, acţiuni, 'context: acţiuni e setat corespunzător');
+            ok(date.bunuriÎnLitigiu, 'context: avem bunuri');
+            ok(app.$.isArray(date.bunuriÎnLitigiu), '…array');
+            equal(date.bunuriÎnLitigiu.length, 1, '…într-un număr corespunzător');
+            equal(JSON.stringify(date.bunuriÎnLitigiu), JSON.stringify(bunuriColectate), '…corespund cu cele colectate');
+
+            var $secţiuneaChectiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut.editabil'),
+                $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil'),
+                textBun = bun.descrierea + ' — ' + bun.suma + ' ' + bun.valuta;
+
+            equal($secţiuneaChectiunea.find('blockquote').text(), acţiuni, 'acţiunile sunt menţionate în secţiunea “Chestiunea”');
+            equal(date.normalizeazăSpaţii($secţiuneaChectiunea.find('li').text()), textBun, 'bunurile sunt menţionate în secţiunea “Chestiunea”');
+            equal(date.normalizeazăSpaţii($secţiuneaDispoziţia.find('li').eq(2).text()), 'A interzice DEBITORULUI săvîrşirea acţiunilor menţionate.',
+              'în secţiunea “Dispoziţia” se face referinţă la acţiunile menţionate în secţiunea “Chestiunea”');
+            equal($secţiuneaDispoziţia.find('li').length, 3, 'secţiunea “Dispoziţia” enumeră 3 puncte');
+
+            app.$.fx.off = false;
+
+            setTimeout(function () {
+              $încheiere.find('.închide').click();
+
+              start();
+            }, app.PAUZĂ_DE_OBSERVABILITATE);
+          });
+        });
+      });
+      $formular.find('button.închide').click();
+    });
   });
 
 })();
