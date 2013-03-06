@@ -20,7 +20,6 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
   $secţiune.find('#data-şi-ora-ridicării').val(dataŞiOraRidicării);
 
   var $butonDeAdăugareBun, $cîmpBun;
-
   var bunuri = {
     'Vilă': {
       suma: 250000,
