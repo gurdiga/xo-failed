@@ -556,6 +556,32 @@
     $măsuraDeAsigurare.val(măsuraDeAsigurare).trigger('change');
     equal($măsuraDeAsigurare.val(), măsuraDeAsigurare, 'setat măsura de asigurare corespunzător');
 
+    var $butonDeAdăugarePersoană = $formular.find('.adaugă.persoană.terţă');
+
+    ok($butonDeAdăugarePersoană.există(), 'găsit butonul de adăugare persoană terţă');
+    $butonDeAdăugarePersoană.click();
+
+    var $persoanăTerţă = $formular.find('.persoană-terţă');
+    var persoanăTerţă = {
+      'gen-persoană': 'fizică',
+      'nume': 'Philipe DOLORES',
+      'idnp': '222333444555'
+    };
+
+    ok($persoanăTerţă.există(), 'adăugat persoană terţă');
+    ok($persoanăTerţă.find('#gen-persoană').există(), 'avem cîmp pentru gen persoană');
+    equal($persoanăTerţă.find('#gen-persoană').val(), 'juridică', '…implicit necompletat');
+    $persoanăTerţă.find('#gen-persoană').val(persoanăTerţă['gen-persoană']).trigger('change');
+    equal($persoanăTerţă.find('#gen-persoană').val(), persoanăTerţă['gen-persoană'], 'setat genul persoană corespunzător');
+
+    ok($persoanăTerţă.find('#nume').există(), 'găsit cîmp pentru nume');
+    equal($persoanăTerţă.find('#nume').val(), '', '…implicit necompletat');
+    $persoanăTerţă.find('#nume').val(persoanăTerţă['nume']);
+
+    ok($persoanăTerţă.find('#idnp').există(), 'găsit cîmp pentru IDNP');
+    equal($persoanăTerţă.find('#idnp').val(), '', '…implicit necompletat');
+    $persoanăTerţă.find('#idnp').val(persoanăTerţă['idnp']);
+
     var $acţiuni = $secţiune.find('textarea#acţiuni.lat'),
         acţiuni = 'Plecarea peste hotare.\n' +
           'Perfectarea permisului de conducere.';
@@ -603,9 +629,14 @@
     equal(bunuriColectate[0].suma, bun.suma, '…cu suma corespunzătoare');
     equal(bunuriColectate[0].valuta, bun.valuta, '…cu valuta corespunzătoare');
 
-    equal($valuta.val(), bun.valuta, 'valuta se setează corespunzător'); // verific pentru că e select
+    var persoaneTerţeColectate = procedură['persoane-terţe'];
 
-    // TODO de adăugat persoane terţe
+    equal(persoaneTerţeColectate.length, 1, 'colectat un număr corespunzător de persoane terţe');
+    equal(persoaneTerţeColectate[0]['gen-persoană'], persoanăTerţă['gen-persoană'], '…genul de persoană corespunde');
+    equal(persoaneTerţeColectate[0]['nume'], persoanăTerţă['nume'], '…numele corespunde');
+    equal(persoaneTerţeColectate[0]['idnp'], persoanăTerţă['idnp'], '…IDNP-ul corespunde');
+
+    equal($valuta.val(), bun.valuta, 'valuta se setează corespunzător'); // verific pentru că e select
 
     var $butonDeSalvare = $formular.find('.bara-de-instrumente .salvează');
 
@@ -641,13 +672,19 @@
 
             var $secţiuneaChectiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut.editabil'),
                 $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil'),
-                textBun = bun.descrierea + ' — ' + bun.suma + ' ' + bun.valuta;
+                textBun = bun.descrierea + ' — ' + bun.suma + ' ' + bun.valuta,
+                textPersoană = persoanăTerţă.nume + ' (' + persoanăTerţă.idnp + ')';
 
             equal($secţiuneaChectiunea.find('blockquote').text(), acţiuni, 'acţiunile sunt menţionate în secţiunea “Chestiunea”');
-            equal(date.normalizeazăSpaţii($secţiuneaChectiunea.find('li').text()), textBun, 'bunurile sunt menţionate în secţiunea “Chestiunea”');
+            equal(date.normalizeazăSpaţii($secţiuneaChectiunea.find('#bunuri li').text()), textBun,
+              'bunurile sunt menţionate în secţiunea “Chestiunea”');
+            equal(date.normalizeazăSpaţii($secţiuneaChectiunea.find('#persoane li').text()), textPersoană,
+              'persoanele terţe sunt menţionate în secţiunea “Chestiunea”');
             equal(date.normalizeazăSpaţii($secţiuneaDispoziţia.find('li').eq(2).text()), 'A interzice DEBITORULUI săvîrşirea acţiunilor menţionate.',
               'în secţiunea “Dispoziţia” se face referinţă la acţiunile menţionate în secţiunea “Chestiunea”');
             equal($secţiuneaDispoziţia.find('li').length, 3, 'secţiunea “Dispoziţia” enumeră 3 puncte');
+
+            // TODO: de verificat menţionarea persoanelor terţe
 
             app.$.fx.off = false;
 

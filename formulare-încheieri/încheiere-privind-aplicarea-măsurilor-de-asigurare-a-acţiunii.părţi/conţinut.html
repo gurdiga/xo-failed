@@ -27,14 +27,30 @@
 
             <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni') { %>
               interzicerea <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> de a săvîrşi următoarele acţiuni
-            <% } else if (variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuniţiuni') { %>
-              interzicerea <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> de a săvîrşi următoarele acţiuni
+            <% } else if (variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') { %>
+              interzicerea:
             <% } %>
 
             </p>
 
+            <% if (variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') { %>
+              <ol id="persoane">
+              <% if (procedură['persoane-terţe'].length === 0) { %>
+                <li><p><span class="atenţionare">INTRODUCEŢI PERSOANELE TERŢE</span></p></li>
+              <% } else { %>
+                <% for (var i = 0; i < procedură['persoane-terţe'].length; i++) { var persoană = procedură['persoane-terţe'][i]; %>
+                <li><p><%= persoană.nume %><%= persoană.idnp ? ' (' + persoană.idnp + ')' : '' %></p></li>
+                <% } %>
+              <% } %>
+              </ol>
+
+              <p> de a săvîrşi următoarele acţiuni (anumite acte în privinţa obiectului în litigiu, inclusiv
+              transmiterea de bunuri către <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> sau
+              îndeplinirea unor alte obligaţii faţă de el)</p>
+            <% } %>
+
             <% if (variaţie === 'aplicarea sechestrului' && cuSpecificare) { %>
-              <ol>
+              <ol id="bunuri">
                 <% for (var i = 0; i < bunuriSechestrate.length; i++) { var bun = bunuriSechestrate[i]; %>
                   <li>
                     <p><%= bun.descrierea %><%= bun.suma ? ' — ' + bun.suma + ' ' + bun.valuta : '' %></p>
@@ -55,7 +71,7 @@
               <% if (bunuriÎnLitigiu.length > 0) { %>
                 <p>în privinţa următoarelor bunuri:</p>
 
-                <ol>
+                <ol id="bunuri">
                   <% for (var i = 0; i < bunuriÎnLitigiu.length; i++) { var bun = bunuriÎnLitigiu[i]; %>
                   <li>
                     <p><%= bun.descrierea %><%= bun.suma ? ' — ' + bun.suma + ' ' + bun.valuta : '' %></p>
