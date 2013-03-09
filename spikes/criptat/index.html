@@ -1,0 +1,26 @@
+<script src="/js/lib/jquery-1.8.js"></script>
+<script>
+  $.ajaxSetup({
+    dataFilter: function (data, dataType) {
+      return 'DECRIPTARE[[' + data + ']]';
+    },
+    beforeSend: function (xhr, settings) {
+      if (settings.type == 'PUT') {
+        settings.data = 'CRIPTARE[[' + settings.data + ']]';
+        console.log('sending', settings.data);
+      }
+    }
+  });
+
+  $(document).ready(function () {
+    $.get('data.txt', function (data) {
+        console.log('primit', data);
+    });
+
+    $.ajax({
+      url: 'data.txt',
+      data: 'data',
+      type: 'put'
+    });
+  });
+</script>
