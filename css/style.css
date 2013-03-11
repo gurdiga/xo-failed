@@ -789,7 +789,7 @@ input[type="checkbox"]+label {
 #categorii-taxe-şi-speze .listă .item.dezactivat:hover {
   color: #555;
   text-decoration: line-through;
-  cursor: text;
+  cursor: not-allowed;
 }
 
 .cu.umbră {
@@ -891,7 +891,7 @@ input[type="checkbox"]+label {
 #destinatari .listă .itemi li.dezactivat,
 #destinatari .listă .itemi li.dezactivat:hover {
   text-decoration: line-through;
-  cursor: text;
+  cursor: not-allowed;
   color: #555;
 }
 
