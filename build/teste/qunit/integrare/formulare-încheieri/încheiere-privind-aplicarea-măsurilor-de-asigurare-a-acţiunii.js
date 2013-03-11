@@ -673,18 +673,16 @@
             var $secţiuneaChectiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut.editabil'),
                 $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil'),
                 textBun = bun.descrierea + ' — ' + bun.suma + ' ' + bun.valuta,
-                textPersoană = persoanăTerţă.nume + ' (' + persoanăTerţă.idnp + ')';
+                textPersoană = persoanăTerţă.nume + ' (IDNP ' + persoanăTerţă.idnp + ')';
 
             equal($secţiuneaChectiunea.find('blockquote').text(), acţiuni, 'acţiunile sunt menţionate în secţiunea “Chestiunea”');
             equal(date.normalizeazăSpaţii($secţiuneaChectiunea.find('#bunuri li').text()), textBun,
               'bunurile sunt menţionate în secţiunea “Chestiunea”');
             equal(date.normalizeazăSpaţii($secţiuneaChectiunea.find('#persoane li').text()), textPersoană,
               'persoanele terţe sunt menţionate în secţiunea “Chestiunea”');
-            equal(date.normalizeazăSpaţii($secţiuneaDispoziţia.find('li').eq(2).text()), 'A interzice DEBITORULUI săvîrşirea acţiunilor menţionate.',
+            equal(date.normalizeazăSpaţii($secţiuneaDispoziţia.find('li').eq(2).text()), 'A interzice PERSOANELOR TERŢE săvîrşirea acţiunilor menţionate.',
               'în secţiunea “Dispoziţia” se face referinţă la acţiunile menţionate în secţiunea “Chestiunea”');
             equal($secţiuneaDispoziţia.find('li').length, 3, 'secţiunea “Dispoziţia” enumeră 3 puncte');
-
-            // TODO: de verificat menţionarea persoanelor terţe
 
             app.$.fx.off = false;
 

@@ -39,13 +39,17 @@
                 <li><p><span class="atenţionare">INTRODUCEŢI PERSOANELE TERŢE</span></p></li>
               <% } else { %>
                 <% for (var i = 0; i < procedură['persoane-terţe'].length; i++) { var persoană = procedură['persoane-terţe'][i]; %>
-                <li><p><%= persoană.nume %><%= persoană.idnp ? ' (' + persoană.idnp + ')' : '' %></p></li>
+                  <% if (persoană['gen-persoană'] === 'fizică') { %>
+                    <li><p><%= persoană.nume %><%= persoană.idnp ? ' (IDNP ' + persoană.idnp + ')' : '' %></p></li>
+                  <% } else { %>
+                    <li><p><%= persoană.denumire %><%= persoană.idno ? ' (IDNO ' + persoană.idno + ')' : '' %></p></li>
+                  <% } %>
                 <% } %>
               <% } %>
               </ol>
 
-              <p> de a săvîrşi următoarele acţiuni (anumite acte în privinţa obiectului în litigiu, inclusiv
-              transmiterea de bunuri către <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> sau
+              <p>în continuare PERSOANE TERŢE, de a săvîrşi următoarele acţiuni (anumite acte în privinţa obiectului în
+              litigiu, inclusiv transmiterea de bunuri către <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> sau
               îndeplinirea unor alte obligaţii faţă de el)</p>
             <% } %>
 
@@ -118,11 +122,14 @@
                 <li>
                   <p>A aplica sechestru pe bunurile sus menţionate.</p>
                 </li>
-              <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni' ||
-                  variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') { %>
+              <% } else if (variaţie === 'interzicerea debitorului de a săvîrşi anumite acţiuni') { %>
                 <li>
                   <p>A interzice <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
                   săvîrşirea acţiunilor menţionate.</p>
+                </li>
+              <% } else if (variaţie === 'interzicerea altor persoane de a săvîrşi anumite acţiuni') { %>
+                <li>
+                  <p>A interzice PERSOANELOR TERŢE săvîrşirea acţiunilor menţionate.</p>
                 </li>
               <% } %>
 
