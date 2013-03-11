@@ -169,7 +169,6 @@ button {
 #bara-de-sus .instrumente>button {
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
   transition: opacity .5s;
   opacity: .3;
   border: none;
@@ -211,7 +210,6 @@ button {
   width: 420px;
   -webkit-transition: background-color 1s;
   -moz-transition: background-color 1s;
-  -o-transition: background-color 1s;
   transition: background-color 1s;
   font: bold 1.3em/1.4em Arial, sans-serif;
   padding: .3em;
@@ -244,7 +242,6 @@ button {
   background-color: white;
   -webkit-transition: background-color .5s, border-color .5s, color .5s;
   -moz-transition: background-color .5s, border-color .5s, color .5s;
-  -o-transition: background-color .5s, border-color .5s, color .5s;
   transition: background-color .5s, border-color .5s, color .5s;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   margin-top: -355px;
@@ -255,7 +252,6 @@ button {
   -webkit-transform: rotate(-2deg);
   -moz-transform: rotate(-2deg);
   -ms-transform: rotate(-2deg);
-  -o-transform: rotate(-2deg);
   transform: rotate(-2deg);
 }
 
@@ -263,7 +259,6 @@ button {
   -webkit-transform: rotate(1deg);
   -moz-transform: rotate(1deg);
   -ms-transform: rotate(1deg);
-  -o-transform: rotate(1deg);
   transform: rotate(1deg);
 }
 
@@ -271,7 +266,6 @@ button {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
   -ms-transform: rotate(2deg);
-  -o-transform: rotate(2deg);
   transform: rotate(2deg);
 }
 
@@ -279,7 +273,6 @@ button {
   -webkit-transform: rotate(-1deg);
   -moz-transform: rotate(-1deg);
   -ms-transform: rotate(-1deg);
-  -o-transform: rotate(-1deg);
   transform: rotate(-1deg);
 }
 
@@ -352,7 +345,6 @@ button {
   color: #777;
   -webkit-transition: color .5s;
   -moz-transition: color .5s;
-  -o-transition: color .5s;
   transition: color .5s;
 }
 
@@ -618,7 +610,6 @@ input.sumă {
   opacity: 1;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
   transition: opacity .5s;
 }
 
@@ -726,7 +717,6 @@ button.adaugă .legend.label {
   padding-left: .5em;
   -webkit-transition: border-color .75s;
   -moz-transition: border-color .75s;
-  -o-transition: border-color .75s;
   transition: border-color .75s;
 }
 
@@ -913,7 +903,6 @@ input[type="checkbox"]+label {
   opacity: 0;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
   transition: opacity .5s;
 }
 
@@ -1267,7 +1256,6 @@ input[readonly]+span.ui-icon-locked {
   opacity: 0;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
-  -o-transition: opacity .5s;
   transition: opacity .5s;
 }
 
