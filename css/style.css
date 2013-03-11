@@ -1392,6 +1392,11 @@ input::-ms-clear {
   display: none;
 }
 
+label,
+#categorii-taxe-şi-speze,
+#adaugă-subsecţiune,
+.subsecţiune .titlu,
+.destinatari-adăugaţi,
 .neselectabilă,
 .neselectabile,
 .neselectabil,
