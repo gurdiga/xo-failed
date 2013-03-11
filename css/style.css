@@ -673,6 +673,10 @@ button.adaugă .legend.label {
   padding: 0;
 }
 
+#cheltuieli .subformular.achitare input {
+  vertical-align: 1px;
+}
+
 #cheltuieli .subformular.achitare label {
   color: black;
   font-style: normal;
@@ -745,10 +749,10 @@ button.adaugă .legend.label {
 
 #cheltuieli .adăugate .subformular .adaugă {
   position: relative;
-  top: -.4em;
+  top: -.5em;
   left: -.2em;
   padding: 0 .3em;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 
 #cheltuieli .subformular .cantitate {
