@@ -24,7 +24,12 @@ function minifică() {
     -e 's/\\u015e/Ş/g' \
   > $SURSA
 
-  rm $SURSA.original
+  if [ $? -eq 0 ]; then
+    rm $SURSA.original
+  else
+    echo "[\033[0;33m\]N-am putut minifica $SURSA.\[\033[0;37m\]"
+    mv $SURSA.original $SURSA
+  fi
 }
 
 minifică "js/action.js"
