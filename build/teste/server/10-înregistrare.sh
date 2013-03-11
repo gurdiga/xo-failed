@@ -33,7 +33,7 @@ sudo chown --reference $DOCUMENT_ROOT/.htusers.bak $DOCUMENT_ROOT/.htusers
 sudo chmod --reference $DOCUMENT_ROOT/.htusers.bak $DOCUMENT_ROOT/.htusers
 sudo rm $DOCUMENT_ROOT/.htusers.bak
 
-grep "^$LOGIN_DE_TEST:" $DOCUMENT_ROOT/.htusers &> /dev/null 
+grep "^$LOGIN_DE_TEST:" $DOCUMENT_ROOT/.htusers &> /dev/null
 test $? -eq 1 # grep a întors 1: nu a găsit ce a căutat
 verifică "eliminat login $LOGIN_DE_TEST"
 

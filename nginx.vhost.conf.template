@@ -25,6 +25,7 @@ server {
 <? require 'ssl.conf' ?>
 
   add_header X-Frame-Options SAMEORIGIN;
+  add_header Cache-Control must-revalidate;
 
   root <?= $_ENV['ROOT'] ?>;
 
