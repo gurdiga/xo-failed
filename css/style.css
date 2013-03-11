@@ -584,8 +584,8 @@ input.sumă {
 }
 
 .subformular textarea {
-  height: 3ex;
-  min-height: 3ex;
+  height: 24px;
+  min-height: 24px;
   padding: 3px 3px 0;
   background-position: 0 -1px;
 }
@@ -642,8 +642,12 @@ button.adaugă {
 
 .listă .titlu.semiascuns:hover,
 button.adaugă-cîmp-personalizat:hover,
-button.adaugă:hover {
+button.adaugă:hover,
+.listă .titlu.semiascuns:focus,
+button.adaugă-cîmp-personalizat:focus,
+button.adaugă:focus {
   text-shadow: 0 0 1px silver;
+  color: blue;
 }
 
 button.adaugă-cîmp-personalizat {
@@ -829,6 +833,7 @@ input[type="checkbox"]+label {
 .destinatari-adăugaţi {
   font-size: small;
   padding: .5em 2.5em .8em;
+  margin-left: 1em;
   cursor: pointer;
   display: inline-block;
   position: absolute;

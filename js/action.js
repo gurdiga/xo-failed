@@ -485,6 +485,7 @@
         .addClass('eliminabil de tot')
         .appendTo(Destinatari.adăugaţiDeja);
 
+      Destinatari.actualizeazăNumăr(destinatar.parent());
       $(this).addClass('dezactivat').hide().show();
 
       if (destinatar.is('.persoană.terţă')) {
@@ -498,6 +499,14 @@
       }
 
       TotalCheltuieli.calculează();
+    },
+
+    actualizeazăNumăr: function ($lista) {
+      // hack pentru actualizarea numărului de itemi generat din CSS
+      $lista.toggleClass('comprimaţi');
+      setTimeout(function () {
+        $lista.toggleClass('comprimaţi');
+      }, 1);
     }
   },
 
@@ -1623,7 +1632,7 @@
               $itemSubformular = $subformular.find('li.eliminabil:last');
               $cîmp = $itemSubformular.find(':input');
 
-              if (this.document) {
+              if (this.document !== undefined) {
                 $cîmp.val(this.document).trigger('input');
                 Destinatari.adăugaţiDeja = $cîmp.next('.destinatari-adăugaţi');
 
@@ -1642,6 +1651,8 @@
                       .appendTo(Destinatari.adăugaţiDeja);
                   });
                 }
+
+                Destinatari.actualizeazăNumăr($cîmp.next('.destinatari-adăugaţi'));
               } else {
                 if (this instanceof String) {
                   $subformular.find('#' + nume).val1(valoare);
