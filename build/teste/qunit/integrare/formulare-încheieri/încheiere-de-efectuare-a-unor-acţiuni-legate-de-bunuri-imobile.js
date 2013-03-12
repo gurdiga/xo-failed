@@ -32,7 +32,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
   }, numărDeBunuri = Object.keys(bunuri).length;
 
   (function adaugăBunuri() {
-    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.bun-transmis');
+    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-transmise');
 
     ok($butonDeAdăugareBun.există(), 'avem buton pentru adăugare bunuri');
     equal($butonDeAdăugareBun.text(), '+bun', '…cu textul “+bun”');
@@ -45,7 +45,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
       $cîmpBun.find('.valuta').val(bunuri[nume].valuta);
     }
 
-    equal($secţiune.find('.bunul-transmis.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
+    equal($secţiune.find('.bunuri-transmise.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
   })();
 
 
@@ -74,7 +74,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
       $formular.one('populat', function () {
         ok(true, 'redeschis şi populat');
 
-        var $cîmpuriBunuri = $secţiune.find('.bunul-transmis');
+        var $cîmpuriBunuri = $secţiune.find('.bunuri-transmise');
 
         equal($cîmpuriBunuri.length, numărDeBunuri, 'populare: numărul bunurilor corespunde');
 
