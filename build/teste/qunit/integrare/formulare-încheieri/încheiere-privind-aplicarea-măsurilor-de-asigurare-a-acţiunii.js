@@ -23,7 +23,7 @@
     equal($secţiune.find('#măsura-de-asigurare').val(), primaMăsură, 'măsura implicită e “' + primaMăsură + '”');
 
     var $butonDeAdăugareValoareaAcţiunii = $secţiune.find('.adaugă-cîmp-personalizat.valoarea-acţiunii'),
-        $butonDeAdăugareBunSechestrat = $secţiune.find('.adaugă-cîmp-personalizat.bun-sechestrat'),
+        $butonDeAdăugareBunSechestrat = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-sechestrate'),
         $butonDeAdăugareSumăSechestrată = $secţiune.find('.adaugă-cîmp-personalizat.pentru-sume-sechestrate');
 
     ok($butonDeAdăugareValoareaAcţiunii.există(), 'avem buton pentru adăugare “Valoarea acţiunii”');
@@ -62,7 +62,7 @@
 
     $butonDeAdăugareBunSechestrat.click();
 
-    var $cîmpBun = $secţiune.find('.personalizat.bunul-sechestrat');
+    var $cîmpBun = $secţiune.find('.personalizat.bunuri-sechestrate');
 
     ok($cîmpBun.există(), 'butonul “+bun sechestrat” adaugă cîmp corespunzător');
     equal($cîmpBun.find('.etichetă').val(), 'Descriere bun', '…eticheta are textul corespunzător');
@@ -74,7 +74,7 @@
     var eliminatBunSechestrat = false;
 
     app.FormularProcedură.$obiectulUrmăririi
-      .one('eliminare', '.bunul-sechestrat', function () { eliminatBunSechestrat = true; });
+      .one('eliminare', '.bunuri-sechestrate', function () { eliminatBunSechestrat = true; });
 
     $cîmpBun
       .trigger('mousemove') // să aişăm butonul de eliminare
@@ -226,11 +226,11 @@
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
-        $butonDeAdăugareBunSechestrat = $secţiune.find('.adaugă-cîmp-personalizat.bun-sechestrat');
+        $butonDeAdăugareBunSechestrat = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-sechestrate');
 
     $butonDeAdăugareBunSechestrat.click();
 
-    var $cîmpBun = $secţiune.find('.personalizat.bunul-sechestrat'),
+    var $cîmpBun = $secţiune.find('.personalizat.bunuri-sechestrate'),
         $descriere = $cîmpBun.find('.etichetă'), descriere = 'Descriere bun',
         $valoare = $cîmpBun.find('.sumă'),
         $valuta = $cîmpBun.find('.valuta');
@@ -269,7 +269,7 @@
         $formular.one('populat', function () {
           ok(true, 'redeschis şi populat');
 
-          var $cîmpBun = $secţiune.find('.personalizat.bunul-sechestrat'),
+          var $cîmpBun = $secţiune.find('.personalizat.bunuri-sechestrate'),
               $descriere = $cîmpBun.find('.etichetă'),
               $valoare = $cîmpBun.find('.sumă'),
               $valuta = $cîmpBun.find('.valuta');
@@ -322,7 +322,7 @@
               .find('.elimină').focus().click();
 
             setTimeout(function () { // slideUp?
-              ok(!$secţiune.find('.personalizat.bunul-sechestrat').există(), 'eliminat cîmp pentru bunul sechestrat');
+              ok(!$secţiune.find('.personalizat.bunuri-sechestrate').există(), 'eliminat cîmp pentru bunul sechestrat');
 
               start();
             }, 550);
