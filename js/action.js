@@ -883,7 +883,7 @@
         } else if ($obiectulUrmăririi.val() === 'nimicirea bunurilor') {
           obiectulUrmăririi['bunuri-nimicite'] = colecteazăSumePersonalizateÎnValută('.bunul-nimicit');
         } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
-          obiectulUrmăririi['bunuri-confiscate'] = colecteazăSumePersonalizateÎnValută('.bunul-confiscat');
+          obiectulUrmăririi['bunuri-confiscate'] = colecteazăSumePersonalizateÎnValută('.bunuri-confiscate');
         } else {
           obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
         }
@@ -1250,7 +1250,7 @@
 
         // ------------------------------------------
         function populeazăBunuriConfiscate() {
-          populeazăSumePersonalizateÎnValută('bunuri-confiscate', 'bun-confiscat', 'bunul-confiscat');
+          populeazăSumePersonalizateÎnValută('bunuri-confiscate', 'pentru-bunuri-confiscate', 'bunuri-confiscate');
         }
 
         // ------------------------------------------

@@ -33,7 +33,7 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
 
 
   (function adaugăBunuri() {
-    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.bun-confiscat');
+    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-confiscate');
 
     ok($butonDeAdăugareBun.există(), 'avem buton pentru adăugare bunuri');
     equal($butonDeAdăugareBun.text(), '+bun confiscat', '…cu textul “+bun confiscat”');
@@ -47,7 +47,7 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
       $cîmpBun.find('.valuta').val(bunuri[nume].valuta);
     }
 
-    equal($secţiune.find('.bunul-confiscat.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
+    equal($secţiune.find('.bunuri-confiscate.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
   })();
 
   var procedură = app.FormularProcedură.colectează(),
@@ -74,7 +74,7 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
       $formular.one('populat', function () {
         ok(true, 'redeschis şi populat');
 
-        var $cîmpuriBunuriConfiscate = $secţiune.find('.bunul-confiscat');
+        var $cîmpuriBunuriConfiscate = $secţiune.find('.bunuri-confiscate');
 
         equal($cîmpuriBunuriConfiscate.length, numărDeBunuri, 'populare: numărul bunurilor corespunde');
 
