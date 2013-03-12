@@ -823,7 +823,7 @@
           } else {
             if ($secţiune.find('#măsura-de-asigurare').val() === 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
                 ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el') {
-              obiectulUrmăririi['bunuri-în-litigiu'] = colecteazăSumePersonalizateÎnValută('.bunul-în-litigiu');
+              obiectulUrmăririi['bunuri-în-litigiu'] = colecteazăSumePersonalizateÎnValută('.bunuri-în-litigiu');
             } else {
               obiectulUrmăririi['bunuri-sechestrate'] = colecteazăSumePersonalizateÎnValută('.bunuri-sechestrate');
               obiectulUrmăririi['sume-sechestrate'] = colecteazăSumePersonalizateÎnValută('.sume-sechestrate');
@@ -1235,7 +1235,7 @@
 
         // ------------------------------------------
         function populeazăBunuriÎnLitigiu() {
-          populeazăSumePersonalizateÎnValută('bunuri-în-litigiu', 'bun-în-litigiu', 'bunul-în-litigiu');
+          populeazăSumePersonalizateÎnValută('bunuri-în-litigiu', 'pentru-bunuri-în-litigiu', 'bunuri-în-litigiu');
         }
 
         // ------------------------------------------

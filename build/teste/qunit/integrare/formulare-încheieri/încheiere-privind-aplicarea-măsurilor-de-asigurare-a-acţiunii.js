@@ -590,13 +590,13 @@
     equal($acţiuni.val(), '', '…necompletat');
     $acţiuni.val(acţiuni);
 
-    var $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.bun-în-litigiu');
+    var $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-în-litigiu');
 
     ok($butonDeAdăugareBun.există(), 'avem buton de adăugare bunuri');
     equal($butonDeAdăugareBun.text(), '+bun', '…cu textul corespunzător');
     $butonDeAdăugareBun.click();
 
-    var $cîmpBun = $secţiune.find('.personalizat.bunul-în-litigiu'),
+    var $cîmpBun = $secţiune.find('.personalizat.bunuri-în-litigiu'),
         $descriere = $cîmpBun.find('.etichetă'), descriere = 'Descriere bun',
         $valoare = $cîmpBun.find('.sumă'),
         $valuta = $cîmpBun.find('.valuta');
