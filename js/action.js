@@ -823,10 +823,10 @@
           } else {
             if ($secţiune.find('#măsura-de-asigurare').val() === 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
                 ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el') {
-              obiectulUrmăririi['bunuri-în-litigiu'] = colecteazăBunuriÎnLitigiu();
+              obiectulUrmăririi['bunuri-în-litigiu'] = colecteazăSumeÎnValută('.bunul-în-litigiu');
             } else {
-              obiectulUrmăririi['bunuri-sechestrate'] = colecteazăBunuriSechestrate();
-              obiectulUrmăririi['sume-sechestrate'] = colecteazăSumeSechestrate();
+              obiectulUrmăririi['bunuri-sechestrate'] = colecteazăSumeÎnValută('.bunul-sechestrat');
+              obiectulUrmăririi['sume-sechestrate'] = colecteazăSumeÎnValută('.suma-sechestrată');
             }
           }
         }
@@ -842,86 +842,8 @@
         }
 
         // ------------------------------------------
-        function colecteazăBunuriSechestrate() {
-          return $secţiune.find('.bunul-sechestrat').map(function () {
-            var $item = $(this);
-
-            return {
-              descrierea: $item.find('.etichetă').val(),
-              suma: $item.find('.sumă').val(),
-              valuta: $item.find('.valuta').val()
-            };
-          }).get();
-        }
-
-        // ------------------------------------------
-        function colecteazăBunuriRidicate() {
-          return $secţiune.find('.bunul-ridicat').map(function () {
-            var $item = $(this);
-
-            return {
-              descrierea: $item.find('.etichetă').val(),
-              suma: $item.find('.sumă').val(),
-              valuta: $item.find('.valuta').val()
-            };
-          }).get();
-        }
-
-        // ------------------------------------------
-        function colecteazăBunuriÎnLitigiu() {
-          return $secţiune.find('.bunul-în-litigiu').map(function () {
-            var $item = $(this);
-
-            return {
-              descrierea: $item.find('.etichetă').val(),
-              suma: $item.find('.sumă').val(),
-              valuta: $item.find('.valuta').val()
-            };
-          }).get();
-        }
-
-        // ------------------------------------------
-        function colecteazăBunuriTransmise() {
-          return $secţiune.find('.bunul-transmis').map(function () {
-            var $item = $(this);
-
-            return {
-              descrierea: $item.find('.etichetă').val(),
-              suma: $item.find('.sumă').val(),
-              valuta: $item.find('.valuta').val()
-            };
-          }).get();
-        }
-
-        // ------------------------------------------
-        function colecteazăBunuriNimicite() {
-          return $secţiune.find('.bunul-nimicit').map(function () {
-            var $item = $(this);
-
-            return {
-              descrierea: $item.find('.etichetă').val(),
-              suma: $item.find('.sumă').val(),
-              valuta: $item.find('.valuta').val()
-            };
-          }).get();
-        }
-
-        // ------------------------------------------
-        function colecteazăSumeSechestrate() {
-          return $secţiune.find('.suma-sechestrată').map(function () {
-            var $item = $(this);
-
-            return {
-              descrierea: $item.find('.etichetă').val(),
-              suma: $item.find('.sumă').val(),
-              valuta: $item.find('.valuta').val()
-            };
-          }).get();
-        }
-
-        // ------------------------------------------
-        function colecteazăBunuriConfiscate() {
-          return $secţiune.find('.bunul-confiscat').map(function () {
+        function colecteazăSumeÎnValută(selector) {
+          return $secţiune.find(selector).map(function () {
             var $item = $(this);
 
             return {
@@ -955,13 +877,13 @@
         if ($obiectulUrmăririi.val() === 'aplicarea măsurilor de asigurare a acţiunii') {
           colecteazăMăsurileDeAsigurareAAcţiunii();
         } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile') {
-          obiectulUrmăririi['bunuri-ridicate'] = colecteazăBunuriRidicate();
+          obiectulUrmăririi['bunuri-ridicate'] = colecteazăSumeÎnValută('.bunul-ridicat');
         } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
-          obiectulUrmăririi['bunuri-transmise'] = colecteazăBunuriTransmise();
+          obiectulUrmăririi['bunuri-transmise'] = colecteazăSumeÎnValută('.bunul-transmis');
         } else if ($obiectulUrmăririi.val() === 'nimicirea bunurilor') {
-          obiectulUrmăririi['bunuri-nimicite'] = colecteazăBunuriNimicite();
+          obiectulUrmăririi['bunuri-nimicite'] = colecteazăSumeÎnValută('.bunul-nimicit');
         } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
-          obiectulUrmăririi['bunuri-confiscate'] = colecteazăBunuriConfiscate();
+          obiectulUrmăririi['bunuri-confiscate'] = colecteazăSumeÎnValută('.bunul-confiscat');
         } else {
           obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
         }
