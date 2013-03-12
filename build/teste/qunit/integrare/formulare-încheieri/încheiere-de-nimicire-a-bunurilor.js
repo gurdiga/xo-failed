@@ -33,7 +33,7 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
   }, numărDeBunuri = Object.keys(bunuri).length;
 
   (function adaugăBunuri() {
-    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.bun-nimicit');
+    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-nimicite');
 
     ok($butonDeAdăugareBun.există(), 'avem buton pentru adăugare bunuri');
     equal($butonDeAdăugareBun.text(), '+bun', '…cu textul “+bun”');
@@ -46,7 +46,7 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
       $cîmpBun.find('.valuta').val(bunuri[nume].valuta);
     }
 
-    equal($secţiune.find('.bunul-nimicit.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
+    equal($secţiune.find('.bunuri-nimicite.personalizat').length, numărDeBunuri, 'avem cîmpuri pentru toate bunurile');
   })();
 
 
@@ -75,7 +75,7 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
       $formular.one('populat', function () {
         ok(true, 'redeschis şi populat');
 
-        var $cîmpuriBunuriNimicite = $secţiune.find('.bunul-nimicit');
+        var $cîmpuriBunuriNimicite = $secţiune.find('.bunuri-nimicite');
 
         equal($cîmpuriBunuriNimicite.length, numărDeBunuri, 'populare: numărul bunurilor corespunde');
 
