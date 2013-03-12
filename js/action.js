@@ -877,7 +877,7 @@
         if ($obiectulUrmăririi.val() === 'aplicarea măsurilor de asigurare a acţiunii') {
           colecteazăMăsurileDeAsigurareAAcţiunii();
         } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile') {
-          obiectulUrmăririi['bunuri-ridicate'] = colecteazăSumePersonalizateÎnValută('.bunul-ridicat');
+          obiectulUrmăririi['bunuri-ridicate'] = colecteazăSumePersonalizateÎnValută('.bunuri-ridicate');
         } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
           obiectulUrmăririi['bunuri-transmise'] = colecteazăSumePersonalizateÎnValută('.bunul-transmis');
         } else if ($obiectulUrmăririi.val() === 'nimicirea bunurilor') {
@@ -1230,7 +1230,7 @@
 
         // ------------------------------------------
         function populeazăBunuriRidicate() {
-          populeazăSumePersonalizateÎnValută('bunuri-ridicate', 'bun-ridicat', 'bunul-ridicat');
+          populeazăSumePersonalizateÎnValută('bunuri-ridicate', 'pentru-bunuri-ridicate', 'bunuri-ridicate');
         }
 
         // ------------------------------------------
