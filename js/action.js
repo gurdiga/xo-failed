@@ -1225,117 +1225,50 @@
 
         // ------------------------------------------
         function populeazăBunuriSechestrate() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-sechestrat'),
-              bunuri = obiectulUrmăririi['bunuri-sechestrate'],
-              $cîmpul, bun;
-
-          for (var i = 0; i < bunuri.length; i++) {
-            bun = bunuri[i];
-
-            $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-sechestrat');
-            $cîmpul.find('.etichetă').val(bun['descrierea']);
-            $cîmpul.find('.sumă').val(bun['suma']);
-            $cîmpul.find('.valuta').val(bun['valuta']);
-          }
+          populeazăSumePersonalizateÎnValută('bunuri-sechestrate', 'bun-sechestrat', 'bunul-sechestrat');
         }
 
         // ------------------------------------------
         function populeazăBunuriRidicate() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-ridicat'),
-              bunuri = obiectulUrmăririi['bunuri-ridicate'],
-              $cîmpul, bun;
-
-          for (var i = 0; i < bunuri.length; i++) {
-            bun = bunuri[i];
-
-            $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-ridicat');
-            $cîmpul.find('.etichetă').val(bun['descrierea']);
-            $cîmpul.find('.sumă').val(bun['suma']);
-            $cîmpul.find('.valuta').val(bun['valuta']);
-          }
+          populeazăSumePersonalizateÎnValută('bunuri-ridicate', 'bun-ridicat', 'bunul-ridicat');
         }
 
         // ------------------------------------------
         function populeazăBunuriÎnLitigiu() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-în-litigiu'),
-              bunuri = obiectulUrmăririi['bunuri-în-litigiu'],
-              $cîmpul, bun;
-
-          for (var i = 0; i < bunuri.length; i++) {
-            bun = bunuri[i];
-
-            $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-în-litigiu');
-            $cîmpul.find('.etichetă').val(bun['descrierea']);
-            $cîmpul.find('.sumă').val(bun['suma']);
-            $cîmpul.find('.valuta').val(bun['valuta']);
-          }
+          populeazăSumePersonalizateÎnValută('bunuri-în-litigiu', 'bun-în-litigiu', 'bunul-în-litigiu');
         }
 
         // ------------------------------------------
         function populeazăBunuriTransmise() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-transmis'),
-              bunuri = obiectulUrmăririi['bunuri-transmise'],
-              $cîmpul, bun;
-
-          for (var i = 0; i < bunuri.length; i++) {
-            bun = bunuri[i];
-
-            $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-transmis');
-            $cîmpul.find('.etichetă').val(bun['descrierea']);
-            $cîmpul.find('.sumă').val(bun['suma']);
-            $cîmpul.find('.valuta').val(bun['valuta']);
-          }
+          populeazăSumePersonalizateÎnValută('bunuri-transmise', 'bun-transmis', 'bunul-transmis');
         }
 
         // ------------------------------------------
         function populeazăBunuriNimicite() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-nimicit'),
-              bunuri = obiectulUrmăririi['bunuri-nimicite'],
-              $cîmpul, bun;
-
-          for (var i = 0; i < bunuri.length; i++) {
-            bun = bunuri[i];
-
-            $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-nimicit');
-            $cîmpul.find('.etichetă').val(bun['descrierea']);
-            $cîmpul.find('.sumă').val(bun['suma']);
-            $cîmpul.find('.valuta').val(bun['valuta']);
-          }
+          populeazăSumePersonalizateÎnValută('bunuri-nimicite', 'bun-nimicit', 'bunul-nimicit');
         }
 
         // ------------------------------------------
         function populeazăBunuriConfiscate() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.bun-confiscat'),
-              bunuri = obiectulUrmăririi['bunuri-confiscate'],
-              $cîmpul, bun;
-
-          for (var i = 0; i < bunuri.length; i++) {
-            bun = bunuri[i];
-
-            $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.bunul-confiscat');
-            $cîmpul.find('.etichetă').val(bun['descrierea']);
-            $cîmpul.find('.sumă').val(bun['suma']);
-            $cîmpul.find('.valuta').val(bun['valuta']);
-          }
+          populeazăSumePersonalizateÎnValută('bunuri-confiscate', 'bun-confiscat', 'bunul-confiscat');
         }
 
         // ------------------------------------------
         function populeazăSumeSechestrate() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.sumă-sechestrată'),
-              sume = obiectulUrmăririi['sume-sechestrate'],
+          populeazăSumePersonalizateÎnValută('sume-sechestrate', 'sumă-sechestrată', 'suma-sechestrată');
+        }
+
+        // ------------------------------------------
+        function populeazăSumePersonalizateÎnValută(colecţie, clasăButonDeAdăugare, clasăCîmpPersonalizat) {
+          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.' + clasăButonDeAdăugare),
+              sume = obiectulUrmăririi[colecţie],
               $cîmpul, sumă;
 
           for (var i = 0; i < sume.length; i++) {
             sumă = sume[i];
 
             $butonDeAdăugare.click();
-            $cîmpul = $butonDeAdăugare.parent().prev('.suma-sechestrată');
+            $cîmpul = $butonDeAdăugare.parent().prev('.' + clasăCîmpPersonalizat);
             $cîmpul.find('.etichetă').val(sumă['descrierea']);
             $cîmpul.find('.sumă').val(sumă['suma']);
             $cîmpul.find('.valuta').val(sumă['valuta']);
