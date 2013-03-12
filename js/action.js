@@ -826,7 +826,7 @@
               obiectulUrmăririi['bunuri-în-litigiu'] = colecteazăSumeÎnValută('.bunul-în-litigiu');
             } else {
               obiectulUrmăririi['bunuri-sechestrate'] = colecteazăSumeÎnValută('.bunul-sechestrat');
-              obiectulUrmăririi['sume-sechestrate'] = colecteazăSumeÎnValută('.suma-sechestrată');
+              obiectulUrmăririi['sume-sechestrate'] = colecteazăSumeÎnValută('.sume-sechestrate');
             }
           }
         }
@@ -843,7 +843,7 @@
 
         // ------------------------------------------
         function colecteazăSumeÎnValută(selector) {
-          return $secţiune.find(selector).map(function () {
+          return $secţiune.find('.personalizat' + selector).map(function () {
             var $item = $(this);
 
             return {
@@ -1255,7 +1255,7 @@
 
         // ------------------------------------------
         function populeazăSumeSechestrate() {
-          populeazăSumePersonalizateÎnValută('sume-sechestrate', 'sumă-sechestrată', 'suma-sechestrată');
+          populeazăSumePersonalizateÎnValută('sume-sechestrate', 'pentru-sume-sechestrate', 'sume-sechestrate');
         }
 
         // ------------------------------------------
@@ -3094,8 +3094,8 @@
     init: function () {
       FormularProcedură.$obiectulUrmăririi
         .on('click', '.adaugă-cîmp-personalizat', this.ascundeButonaşeDeAdăugare)
-        .on('eliminare', '.suma-sechestrată,.bunul-sechestrat', this.reafişeazăButonaşeDeAdăugareValoareAcţiune)
-        .on('eliminare', '.valoarea-acţiunii', this.reafişeazăToateButonaşele);
+        .on('eliminare', '.personalizat.sume-sechestrate, .personalizat.bunul-sechestrat', this.reafişeazăButonaşeDeAdăugareValoareAcţiune)
+        .on('eliminare', '.personalizat.valoarea-acţiunii', this.reafişeazăToateButonaşele);
     },
 
     ascundeButonaşeDeAdăugare: function () {
@@ -3103,10 +3103,10 @@
 
       if ($buton.is('.valoarea-acţiunii')) {
         FormularProcedură.$obiectulUrmăririi
-          .find('.container-buton:has(button.bun-sechestrat,button.valoarea-acţiunii,button.sumă-sechestrată)')
+          .find('.container-buton:has(button.bun-sechestrat,button.valoarea-acţiunii,button.pentru-sume-sechestrate)')
             .addClass('ascuns')
             .hide('blind');
-      } else if ($buton.is('.bun-sechestrat') || $buton.is('.sumă-sechestrată')) {
+      } else if ($buton.is('.bun-sechestrat') || $buton.is('.pentru-sume-sechestrate')) {
         FormularProcedură.$obiectulUrmăririi
           .find('.container-buton:has(button.valoarea-acţiunii)')
             .addClass('ascuns')
@@ -3118,7 +3118,7 @@
       var $secţiune = FormularProcedură.$obiectulUrmăririi;
       var bunuriŞiSume = [
         'li.personalizat.bunul-sechestrat',
-        'li.personalizat.suma-sechestrată'
+        'li.personalizat.sume-sechestrate'
       ].join();
 
       if ($secţiune.find(bunuriŞiSume).length === 1) { // se elimină ultimul bun sau sumă
@@ -3132,7 +3132,7 @@
       var $secţiune = FormularProcedură.$obiectulUrmăririi;
       var butoaneDeAdăugare = [
         '.container-buton:has(button.bun-sechestrat)',
-        '.container-buton:has(button.sumă-sechestrată)',
+        '.container-buton:has(button.pentru-sume-sechestrate)',
         '.container-buton:has(button.valoarea-acţiunii)'
       ].join();
 

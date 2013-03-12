@@ -24,7 +24,7 @@
 
     var $butonDeAdăugareValoareaAcţiunii = $secţiune.find('.adaugă-cîmp-personalizat.valoarea-acţiunii'),
         $butonDeAdăugareBunSechestrat = $secţiune.find('.adaugă-cîmp-personalizat.bun-sechestrat'),
-        $butonDeAdăugareSumăSechestrată = $secţiune.find('.adaugă-cîmp-personalizat.sumă-sechestrată');
+        $butonDeAdăugareSumăSechestrată = $secţiune.find('.adaugă-cîmp-personalizat.pentru-sume-sechestrate');
 
     ok($butonDeAdăugareValoareaAcţiunii.există(), 'avem buton pentru adăugare “Valoarea acţiunii”');
     equal($butonDeAdăugareValoareaAcţiunii.text(), '+valoarea acţiunii', '…cu textul “+valoarea acţiunii”');
@@ -86,7 +86,7 @@
 
     $butonDeAdăugareSumăSechestrată.click();
 
-    var $cîmpSumă = $secţiune.find('.personalizat.suma-sechestrată');
+    var $cîmpSumă = $secţiune.find('.personalizat.sume-sechestrate');
 
     ok($cîmpSumă.există(), 'butonul “+sumă sechestrată” adaugă cîmp corespunzător');
     equal($cîmpSumă.find('.etichetă').val(), 'Descriere sumă', '…eticheta are textul corespunzător');
@@ -98,7 +98,7 @@
     var eliminatSumăSechestrată = false;
 
     app.FormularProcedură.$obiectulUrmăririi
-      .one('eliminare', '.suma-sechestrată', function () { eliminatSumăSechestrată = true; });
+      .one('eliminare', '.sume-sechestrate', function () { eliminatSumăSechestrată = true; });
 
     $cîmpSumă
       .trigger('mousemove') // să aişăm butonul de eliminare
@@ -341,11 +341,11 @@
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
-        $butonDeAdăugareSumăSechestrată = $secţiune.find('.adaugă-cîmp-personalizat.sumă-sechestrată');
+        $butonDeAdăugareSumăSechestrată = $secţiune.find('.adaugă-cîmp-personalizat.pentru-sume-sechestrate');
 
     $butonDeAdăugareSumăSechestrată.click();
 
-    var $cîmpSumă = $secţiune.find('.personalizat.suma-sechestrată'),
+    var $cîmpSumă = $secţiune.find('.personalizat.sume-sechestrate'),
         $descriere = $cîmpSumă.find('.etichetă'), descriere = 'Descriere sumă',
         $valoare = $cîmpSumă.find('.sumă'),
         $valuta = $cîmpSumă.find('.valuta');
@@ -381,7 +381,7 @@
       $formular.one('închis', function () {
         app.ProceduriRecente.$.find('.item:first').click();
         $formular.one('populat', function () {
-          var $cîmpSumă = $secţiune.find('.personalizat.suma-sechestrată'),
+          var $cîmpSumă = $secţiune.find('.personalizat.sume-sechestrate'),
               $descriere = $cîmpSumă.find('.etichetă'),
               $valoare = $cîmpSumă.find('.sumă'),
               $valuta = $cîmpSumă.find('.valuta');
@@ -434,7 +434,7 @@
               .find('.elimină').focus().click();
 
             setTimeout(function () { // slideUp?
-              ok(!$secţiune.find('.personalizat.suma-sechestrată').există(), 'eliminat cîmp pentru suma sechestrată');
+              ok(!$secţiune.find('.personalizat.sume-sechestrate').există(), 'eliminat cîmp pentru suma sechestrată');
 
               start();
             }, 550);
