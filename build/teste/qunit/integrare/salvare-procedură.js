@@ -67,7 +67,7 @@ asyncTest('Precedură: salvare', function () {
   });
 
   function verificăSecţiuneaCheltuieli() {
-    equal($cheltuieli.find('#total-taxe-şi-speze').val(), '20.00', 'avem totalul pe taxe şi speze');
+    equal($cheltuieli.find('#total-taxe-şi-speze').val(), app.UC * (1 + 3), 'avem totalul pe taxe şi speze');
     ok($taxaA1.există(), 'avem taxa de intentare şi formare a procedurii de executare');
     ok($taxaA1.find('.achitare :checkbox').is(':checked'), '…e bifată achitată');
     equal($taxaA1.find('.achitare .dată').val(), dataAchităriiTaxeiA1, '…avem data achitării');

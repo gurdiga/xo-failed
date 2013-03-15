@@ -3,10 +3,9 @@
   - bug widget opţiuni în încheiere: după prima selectare, nu mai apar opţiunile la hover
   - http://jsfiddle.net/leaverou/zwvNY/
 
-- DRY logica colectare/populare? Cum?
+- dacă adaugi cheltuiala 2.1, o ştergi, şi o adaugi din nou, nu-i poţi adăuga destinatori
 - la TAB pe lista de proceduri emulează tasta jos
 - colectează amînări doar cînd există butonul de adăugare amînări
-- bug la adăugare destinatar
 - de afişat mesaj informativ la început cînd nu există proceduri recente
 - patch QUnit to unpercent non-english
 

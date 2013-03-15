@@ -9,8 +9,8 @@ asyncTest('FormularProcedură. verifică valori implicite', function () {
       'pentru procedura de orgin general debitorul e implicit persoană fizică');
   equal(this.$obiectulUrmăririi.find('#caracter').val(), 'pecuniar',
        'pentru procedura de ordin general caracterul implicit este pcuniar');
-  equal(app.FormularProcedură.$.find('#total-taxe-şi-speze').suma(), app.UC,
-      'cheltuieli: total implicit taxe şi speze == taxa de intentare');
+  equal(app.FormularProcedură.$.find('#total-taxe-şi-speze').suma(), app.UC * (1 + 3),
+      'cheltuieli: total implicit taxe şi speze == taxa de intentare + taxa de arhivare');
   ok(app.FormularProcedură.$.find('#cheltuieli .adăugate #taxaA1').există(),
       'cheltuieli: taxa de intentare este adăugată implicit');
 

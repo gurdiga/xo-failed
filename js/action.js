@@ -1628,7 +1628,7 @@
       FormularProcedură.seteazăTitlu({tip: HashController.date()});
 
       if (FormularProcedură.seCreazăProcedurăNouă()) {
-        Cheltuieli.$.find('#taxaA1').click();
+        Cheltuieli.$.find('#taxaA1, #taxaA2').click();
 
         var caracterProcedură = FormularProcedură.$obiectulUrmăririi.find('#caracter'),
             genCreditor = FormularProcedură.$.find('#creditor #gen-persoană');
