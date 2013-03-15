@@ -256,7 +256,7 @@
 
   Cheltuieli = {
     $: $('#cheltuieli'),
-    adăugate: $('#cheltuieli .adăugate'),
+    $adăugate: $('#cheltuieli .adăugate'),
 
     init: function () {
       this.categorii.init();
@@ -279,7 +279,7 @@
       },
 
       marcheazăItemiAdăugaţiDeja: function () {
-        var itemiUniciAdăugaţiDeja = Cheltuieli.adăugate.children('.item.unic'),
+        var itemiUniciAdăugaţiDeja = Cheltuieli.$adăugate.children('.item.unic'),
             itemi = $(this).find('.listă ol').children();
 
         itemi
@@ -320,12 +320,12 @@
           .append(bifăAchitare)
           .addClass('eliminabil de tot')
           .hide()
-          .appendTo(Cheltuieli.adăugate)
+          .appendTo(Cheltuieli.$adăugate)
           .show('blind');
 
         if (!FormularProcedură.sePopulează) item.find('textarea').focus();
 
-        Cheltuieli.adăugate.trigger('recalculare');
+        Cheltuieli.$adăugate.trigger('recalculare');
 
         $(this).closest('.itemi').fadeOut();
 
@@ -335,7 +335,7 @@
 
     subformulare: {
       init: function () {
-        Cheltuieli.adăugate.on('click', 'button.adaugă', this.adaugă);
+        Cheltuieli.$adăugate.on('click', 'button.adaugă', this.adaugă);
       },
 
       adaugă: function () {
@@ -356,7 +356,7 @@
 
     destinatariDocumenteAdresabile: {
       init: function () {
-        Cheltuieli.adăugate
+        Cheltuieli.$adăugate
           .on('click', '.destinatari-adăugaţi', this.ascundeSauAfişează)
           .on('eliminare', '.destinatari-adăugaţi .eliminabil', this.ascundeListaDacăNuMaiSunt)
           .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează)
@@ -395,7 +395,7 @@
 
     achitare: {
       init: function () {
-        Cheltuieli.adăugate.on('click', '.subformular.achitare :checkbox', this.setează);
+        Cheltuieli.$adăugate.on('click', '.subformular.achitare :checkbox', this.setează);
       },
 
       setează: function () {
@@ -425,7 +425,7 @@
 
     butonDeAdăugare: {
       init: function () {
-        Cheltuieli.adăugate
+        Cheltuieli.$adăugate
           .on('mouseenter', '.adaugă-destinatar', this.afişeazăCategoriile);
       },
 
@@ -985,7 +985,7 @@
         var $secţiune = Cheltuieli.$,
             itemi = {};
 
-        Cheltuieli.adăugate.find('>.item').each(function () {
+        Cheltuieli.$adăugate.find('>.item').each(function () {
           var $item = $(this),
               item = {};
 
@@ -1425,7 +1425,7 @@
           $lista.find('#' + id).click();
 
           var item = procedură.cheltuieli.itemi[id],
-              $item = Cheltuieli.adăugate.find('#' + id),
+              $item = Cheltuieli.$adăugate.find('#' + id),
               $subformular = $item.find('.subformular'),
               $adaugă = $subformular.find('button.adaugă'),
               titluri = {};
@@ -2728,12 +2728,12 @@
 
       var evenimente = 'keyup update paste mouseup click';
 
-      Cheltuieli.adăugate.on(evenimente, cîmpuriRelevante, this.calculează);
+      Cheltuieli.$adăugate.on(evenimente, cîmpuriRelevante, this.calculează);
     },
 
     calculează: function () {
       var total = 0,
-          lista = Cheltuieli.adăugate;
+          lista = Cheltuieli.$adăugate;
 
       total += lista.find('input.valoare, input.sumă').suma();
       total += lista.find('input.cost').suma() * UC;
