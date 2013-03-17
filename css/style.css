@@ -24,6 +24,10 @@ textarea:focus {
   border-radius: 2px;
 }
 
+#conţinut .coloană#căutare {
+  display: none;
+}
+
 #căutare input:focus {
   border-color: white;
 }
@@ -312,8 +316,24 @@ button {
   vertical-align: top;
 }
 
+#căutare .şoaptă,
 #proceduri-recente {
   margin-top: 2em;
+}
+
+.autentificat #conţinut>.coloană#ghid-început {
+  display: none;
+  font-size: 18px;
+  margin-top: 50px;
+  padding-left: 100px;
+  color: #999;
+  width: 20em;
+  text-shadow: 2px 2px 5px rgba(200, 200, 200, .6);
+}
+
+#ghid-început #săgeţica {
+  text-align: right;
+  font-size: 4em;
 }
 
 #crează-procedură {

@@ -1694,6 +1694,8 @@
 
       ProceduriRecente.lista = proceduri;
       ProceduriRecente.$.html(ListăProceduri.formatează(proceduri));
+      Căutare.$.show();
+      GhidÎnceput.$.hide();
 
       ProceduriRecente.încărcat = true;
       $(document).trigger('încărcat-proceduri-recente');
@@ -1845,7 +1847,9 @@
     },
 
     încarcăIndex: function () {
-      $.getJSON(Căutare.adresăIndex, Căutare.seteazăIndex);
+      $.getJSON(Căutare.adresăIndex)
+        .success(Căutare.seteazăIndex)
+        .error(GhidÎnceput.afişează);
     },
 
     seteazăIndex: function (data) {
@@ -1859,6 +1863,19 @@
       }
 
       $(document).trigger('actualizat-index');
+    }
+  },
+
+  // --------------------------------------------------
+
+  GhidÎnceput = {
+    $: $('#ghid-început'),
+
+    afişează: function (xhr, statusText, errorMessage) {
+      if (errorMessage === 'Not Found') {
+        Căutare.$.hide();
+        GhidÎnceput.$.show();
+      }
     }
   },
 
