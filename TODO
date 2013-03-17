@@ -1,4 +1,5 @@
 - Încheieri
+  - de redenumit Cheltuieli în ceva de genul operaţiuni?
   - pentru cea mai recentă încheiere, nu se afişează persoanele terţe juridice, şi nici adresa
   - bug widget opţiuni în încheiere: după prima selectare, nu mai apar opţiunile la hover
   - http://jsfiddle.net/leaverou/zwvNY/
@@ -7,7 +8,7 @@
 - la TAB pe lista de proceduri emulează tasta jos
 - colectează amînări doar cînd există butonul de adăugare amînări
 - de afişat mesaj informativ la început cînd nu există proceduri recente
-- patch QUnit to unpercent non-english
+- look for a font that stays nicely hinted when rotated on Windows in Firefox and Chrome. tipekit? steal it?
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
@@ -40,14 +41,17 @@
 
 ÎMBUNĂTĂŢIRI DUPĂ LANSARE
  
+- have a App-Version HTTP header injected into nginx.vhost.conf upon reconfiguration upon deploy then have a
+  jQuery AJAX filter that looks at it (have a ping bg thingy?)
+- de verificat versiunea browserului?
+
 Chestii tehnice
+  - try a Centos VM deploy to prepare for Amazon deploy?
+  - patch QUnit to unpercent non-english
   - microtemplating: escape html tags in valorile injectate
   - timeout session from JS and logout?
-  - de verificat versiunea browserului?
   - bootable tonido flash
   - rollback deploy? deploy stage then switch doc_roots rename? have a REVISION=SHA parameter?
-  - try a Centos VM deploy?
-  - Materiale
 
 - Performanţă
   - performanţă: YSlow & PageSpeed, about:tracing
