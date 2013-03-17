@@ -304,7 +304,7 @@
 
     afişează: function () {
       var $cîmp = $(this),
-          opţiuni = $cîmp.attr('data-opţiuni'),
+          opţiuni = $cîmp.data('opţiuni'),
           $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni);
 
       $opţiuni
@@ -317,7 +317,7 @@
     ascunde: function () {
       var $cîmp = $(this);
 
-      $cîmp.attr('data-opţiuni')
+      $cîmp.data('opţiuni')
         .prependTo(document.body)
         .hide();
     },
