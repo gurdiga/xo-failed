@@ -2,21 +2,10 @@
   - de redenumit Cheltuieli în ceva de genul operaţiuni?
 
 - de mutat aplicaţia în alt fişier HTML
-- look for a font that stays nicely hinted when rotated on Windows in Firefox and Chrome. tipekit? steal it?
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
     în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
-
-- Introducerea datelor
-  - index persoane pentru autocompletare?
-  - validare procedură/recente la salvare?
-
-- Workers
- - Crypter
-   - https://code.google.com/p/crypto-js/ + teste
- - Archiver
- - Search
 
 - Admin
   - înregistrare utilizator
@@ -34,6 +23,10 @@
 ----------------------------------------------------------------------------------------------------
 
 ÎMBUNĂTĂŢIRI DUPĂ LANSARE
+
+- Introducerea datelor
+  - index persoane pentru autocompletare?
+  - validare procedură/recente la salvare?
  
 - have a App-Version HTTP header injected into nginx.vhost.conf upon reconfiguration upon deploy then have a
   jQuery AJAX filter that looks at it (have a ping bg thingy?)
