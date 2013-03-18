@@ -28,6 +28,7 @@
 
     'integrare/formulare-încheieri/utilitare.js',
     'integrare/formulare-încheieri/încheiere-de-intentare.js',
+    'integrare/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.js',
     'integrare/formulare-încheieri/borderou-de-calcul.js',
     'integrare/formulare-încheieri/încheierile-referitoare-la-obiectul-urmăririi.js',
     'integrare/formulare-încheieri/încheiere-de-evacuare.js',
@@ -47,6 +48,7 @@
     '/formulare-încheieri/borderou-de-calcul.părţi/script.js',
     '/formulare-încheieri/încheiere-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare-încheieri/încheiere-de-intentare.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js',
     '/formulare-încheieri/anexă-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare-încheieri/încheiere-de-evacuare.părţi/script.js',
     '/formulare-încheieri/încheiere-de-instalare.părţi/script.js',
