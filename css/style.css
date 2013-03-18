@@ -22,6 +22,8 @@ button:focus,
 textarea:focus {
   box-shadow: 0 0 3px 2px #b5d5ff;
   border-radius: 2px;
+  position: relative; /* pentru a preveni tăierea parţială a box-shadow de către cîmpurile succesive */
+  z-index: 1;
 }
 
 #conţinut .coloană#căutare {
