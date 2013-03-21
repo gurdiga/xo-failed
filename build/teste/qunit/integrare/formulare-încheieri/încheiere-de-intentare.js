@@ -3,7 +3,7 @@ asyncTest('Încheiere de intentare', function () {
   'use strict';
 
   var app = this.app,
-      $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
+      $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular="încheiere-de-intentare"]'),
       formular = app.ButoanePentruÎncheieri.formular($buton);
 
   ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
@@ -36,7 +36,7 @@ asyncTest('Încheiere de intentare', function () {
 
   // ------------------------
   function verificăSalvareaÎncheierii(încheiere) {
-    var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
+    var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular="încheiere-de-intentare"]'),
         $încheiere = încheiere.Încheiere.$,
         $butonDeSalvare = $încheiere.find('.salvează');
 
@@ -91,7 +91,7 @@ asyncTest('Încheiere de intentare', function () {
 
   // ------------------------
   function verificăEditabilitate() {
-    var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular]'),
+    var $buton = app.FormularProcedură.$.find('#data-intentării').siblings('[data-formular="încheiere-de-intentare"]'),
         $încheiere = încheiere.Încheiere.$,
         cale = decodeURIComponent(încheiere.location.pathname),
         $secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
@@ -141,7 +141,7 @@ asyncTest('Încheiere de intentare', function () {
           ok(true, '…şi pe urmă imprimă');
 
           $încheiere.find('.închide').click();
-          equal(app.Încheieri.deschise[cale], undefined, 'tabul încheierii s-a închis');
+          equal(app.Încheieri.deschise[cale], undefined, 'fereastra încheierii s-a închis');
 
           app.FormularProcedură.$.find('.închide').click();
 

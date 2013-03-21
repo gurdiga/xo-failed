@@ -9,56 +9,17 @@ asyncTest('Borderou de calcul', function () {
   app.Profil.date['cod-fiscal'] = ''; // pentru verificare ulterioară
   app.ProceduriRecente.$.find('.item:first-child').click();
 
-  app.$(app.FormularProcedură.$).one('populat', function () {
-    adaugăTaxaA6();
-    adaugăOSpeză();
-    marcheazăPrimaTaxăAchitată();
 
-    var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
-        $butonÎncheiere = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]'),
-        formular = app.ButoanePentruÎncheieri.formular($butonÎncheiere);
-
-    ok($butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
-    $butonÎncheiere.click();
-
-    încheiere = app.Încheieri.deschise[formular].tab;
-
-    app.$(încheiere).one('iniţializat', function () {
-      ok(true, 'iniţializat borderoul de calcul');
-
-      var $încheiere = app.$(încheiere.document);
-
-      equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
-      ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
-
-      verificăStructura($încheiere);
-      verificăTabelul($încheiere);
-      verificăRechiziteleBancare($încheiere);
-
-      setTimeout(function () { // aşteptăm o leacă să se vadă borderoul
-        încheiere.Încheiere.$.find('.închide').click();
-
-        setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
-          app.FormularProcedură.$.find('.închide').click();
-          app.$.fx.off = false;
-
-          start();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
-      }, app.PAUZĂ_DE_OBSERVABILITATE);
-    });
-  });
-
-  // --------------------------------------------------
-  function adaugăTaxaA6() {
+  (function adaugăTaxaA6() {
     app.Cheltuieli.$.find('#categorii-taxe-şi-speze').find('#taxaA6').click();
 
     var $taxa = app.Cheltuieli.$.find('.adăugate #taxaA6');
 
     $taxa.find('#din-arhivă').attr('checked', true);
-  }
+  })();
 
-  // --------------------------------------------------
-  function adaugăOSpeză() {
+
+  (function adaugăOSpeză() {
     app.Cheltuieli.$.find('#categorii-taxe-şi-speze').find('#speza1').click();
 
     var $speza = app.Cheltuieli.$.find('.adăugate #speza1');
@@ -72,12 +33,47 @@ asyncTest('Borderou de calcul', function () {
 
     $itemi.eq(1).find('.descriere').val('Taxi');
     $itemi.eq(1).find('.sumă').val('55');
-  }
+  })();
 
-  // --------------------------------------------------
-  function marcheazăPrimaTaxăAchitată() {
+
+  (function marcheazăPrimaTaxăAchitată() {
     app.Cheltuieli.$.find('.adăugate #taxaA1 :checkbox').attr('checked', true);
-  }
+  })();
+
+
+  var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
+      $butonÎncheiere = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]'),
+      formular = app.ButoanePentruÎncheieri.formular($butonÎncheiere);
+
+  ok($butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
+  $butonÎncheiere.click();
+
+  încheiere = app.Încheieri.deschise[formular].tab;
+
+  app.$(încheiere).one('iniţializat', function () {
+    ok(true, 'iniţializat borderoul de calcul');
+
+    var $încheiere = app.$(încheiere.document);
+
+    equal(încheiere.document.title, 'Borderou de calcul', 'avem <title>');
+    ok($încheiere.find('h1:contains("Borderou de calcul")').există(), 'avem titlu');
+
+    verificăStructura($încheiere);
+    verificăTabelul($încheiere);
+    verificăRechiziteleBancare($încheiere);
+
+    setTimeout(function () { // aşteptăm o leacă să se vadă borderoul
+      încheiere.Încheiere.$.find('.închide').click();
+
+      setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
+        app.FormularProcedură.$.find('.închide').click();
+        app.$.fx.off = false;
+
+        start();
+      }, app.PAUZĂ_DE_OBSERVABILITATE);
+    }, app.PAUZĂ_DE_OBSERVABILITATE);
+  });
+
 
   // --------------------------------------------------
   function verificăStructura($încheiere) {

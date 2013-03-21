@@ -1072,7 +1072,7 @@
 
       // ==========================================
 
-      var butonÎncheiere = FormularProcedură.$.find('#container-data-intentării .buton[data-formular]'),
+      var butonÎncheiere = FormularProcedură.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]'),
           încheiere;
 
       if (butonÎncheiere.is('.salvat')) încheiere = butonÎncheiere.attr('data-pagina');
@@ -1532,7 +1532,7 @@
       FormularProcedură.$.find('#data-intentării').val(procedură['data-intentării']);
 
       if (procedură['încheiere']) {
-        FormularProcedură.$.find('#container-data-intentării .buton[data-formular]')
+        FormularProcedură.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]')
           .attr('data-pagina', procedură['încheiere'])
           .addClass('salvat');
       }
