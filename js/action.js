@@ -2524,7 +2524,7 @@
       var $secţiune = FormularProcedură.$obiectulUrmăririi.find('.conţinut');
 
       $secţiune
-        .attr('data-conţinut-iniţial', $secţiune.find('ul:first').remove())
+        .data('conţinut-iniţial', $secţiune.find('ul:first').remove())
         .find('#adaugă-subsecţiune .încasare').click().end()
         .find('.subsecţiune.încasare #genul-încasării').trigger('change');
 
@@ -2537,7 +2537,7 @@
 
       var secţiune = FormularProcedură.$obiectulUrmăririi.find('.conţinut');
 
-      secţiune.prepend(secţiune.attr('data-conţinut-iniţial'));
+      secţiune.prepend(secţiune.data('conţinut-iniţial'));
       secţiune.removeData('conţinut-iniţial');
     }
   },
