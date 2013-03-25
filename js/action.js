@@ -1690,7 +1690,10 @@
     },
 
     afişează: function (proceduri) {
-      if (proceduri.length === 0 || !Căutare.index) return;
+      if (proceduri.length === 0 || !Căutare.index) {
+        if (proceduri.length === 0) GhidÎnceput.$.show()
+        return;
+      }
 
       ProceduriRecente.lista = proceduri;
       ProceduriRecente.$.html(ListăProceduri.formatează(proceduri));
