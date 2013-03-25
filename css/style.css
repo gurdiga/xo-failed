@@ -1172,6 +1172,10 @@ select#obiect~.buton[data-formular] {
 
 .ui-icon-calendar {
   margin-left: -1em;
+
+  /* pentru ca să fie vizibil la focusarea cîmpului asociat */
+  position: relative;
+  z-index: 1;
 }
 
 .titlu .buton[data-formular] {
@@ -1366,7 +1370,9 @@ label.checkbox input {
   content: '▾';
   padding-left: .3em;
   text-decoration: none;
-  display: inline-block; /* ca să nu moştenească text-decoration: underline */
+
+  /* pentru ca să nu moştenească text-decoration: underline */
+  display: inline-block;
 }
 
 .listă>.itemi {
