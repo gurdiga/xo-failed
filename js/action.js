@@ -665,11 +665,21 @@
     baraDeInstrumente: {
       init: function () {
         FormularProcedură.$.find('.bara-de-instrumente')
+          .on('focus', 'button', this.afişează)
+          .on('blur', 'button', this.semiascunde)
           .on('click', '.spre-secţiuni', FormularProcedură.focusează)
           .on('click', '.spre-secţiuni+.opţiuni li', FormularProcedură.focuseazăSecţiunea);
 
         FormularProcedură.$.on('salvat', this.anunţăSalvarea);
         FormularProcedură.$.on('salvat-deja', this.anunţăSalvatDeja);
+      },
+
+      afişează: function () {
+        $(this).parent().addClass('focusat');
+      },
+
+      semiascunde: function () {
+        $(this).parent().removeClass('focusat');
       },
 
       anunţăSalvarea: function () {
@@ -1691,7 +1701,8 @@
 
     afişează: function (proceduri) {
       if (proceduri.length === 0 || !Căutare.index) {
-        if (proceduri.length === 0) GhidÎnceput.$.show()
+        if (proceduri.length === 0) GhidÎnceput.$.show();
+
         return;
       }
 

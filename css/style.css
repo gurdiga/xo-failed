@@ -1119,7 +1119,7 @@ button.cu.opţiuni:after {
 
 #profil.dialog input.sufix-cod-bancă {
   width: 2em;
-  padding: 2px 0 0 3px;
+  padding: 2px 0 2px 3px;
   background-position: 0 -2px;
   margin-left: -3px;
   vertical-align: 0;
@@ -1244,10 +1244,13 @@ fieldset .conţinut ul.subsecţiune:first-child {
 #formular fieldset>.conţinut>ul>.titlu,
 ul.subsecţiune .titlu {
   font-size: small;
-  margin: -.7em 0 -.7em 3em;
+  margin: -.7em 0 -.4em 3em;
   background: white;
   padding: 0 .2em;
   color: #ccc;
+  /* pentru a menţine titlul subsecţiunii deasupra cîmpurilor în profil */
+  position: relative;
+  z-index: 0;
 }
 
 ul.subsecţiune .titlu button:first-of-type {
