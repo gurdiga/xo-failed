@@ -3,33 +3,28 @@ asyncTest('Procedură: căutare', function () {
 
   var app = this.app;
 
-  ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură este deschis');
+  ok(app.FormularProcedură.$.is(':not(:visible)'), 'formularul de procedură este închis');
 
-  app.FormularProcedură.$.find('.închide').click();
-  app.$(app.FormularProcedură.$).one('închidere', function () {
-    ok(true, 'închis formularul de procedură');
+  var $secţiune = app.$('#căutare'),
+      număr = app.ProceduriRecente.numărulUltimei();
 
-    var $secţiune = app.$('#căutare'),
-        număr = app.ProceduriRecente.numărulUltimei();
+  ok($secţiune.există(), 'avem secţiune de căutare');
+  $secţiune.find('input').val(număr).trigger('input');
 
-    ok($secţiune.există(), 'avem secţiune de căutare');
-    $secţiune.find('input').val(număr).trigger('input');
+  setTimeout(function () { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
+    var rezultate = $secţiune.find('#rezultate .item');
 
-    setTimeout(function () { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
-      var rezultate = $secţiune.find('#rezultate .item');
+    ok(rezultate.există(), 'găsit procedura');
+    rezultate.first().click();
 
-      ok(rezultate.există(), 'găsit procedura');
-      rezultate.first().click();
+    app.$(app.FormularProcedură.$).one('populat', function () {
+      ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
+      app.FormularProcedură.$.find('.închide').click();
+      $secţiune.find('input').val('').trigger('input');
 
-      app.$(app.FormularProcedură.$).one('populat', function () {
-        ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
-        app.FormularProcedură.$.find('.închide').click();
-        $secţiune.find('input').val('').trigger('input');
-
-        ştergeProceduraCreată();
-      });
-    }, app.Căutare.pauză + app.PAUZĂ_DE_OBSERVABILITATE);
-  });
+      ştergeProceduraCreată();
+    });
+  }, app.Căutare.pauză + app.PAUZĂ_DE_OBSERVABILITATE);
 
   // ------------------------
   function ştergeProceduraCreată() {

@@ -328,7 +328,7 @@ button {
   display: none;
   font-size: 18px;
   margin-top: 50px;
-  padding-left: 100px;
+  padding-left: 150px;
   color: #aaa;
   width: 20em;
 }
@@ -402,7 +402,7 @@ h3 {
   margin: 0 auto;
   min-height: 610px;
   position: relative;
-  padding-bottom: 100px;
+  padding-bottom: 150px;
 }
 
 .coloană {
@@ -597,12 +597,6 @@ input.sumă {
   color: #555;
   padding: 0 .3em;
   border-bottom: 1px solid silver;
-}
-
-#cheltuieli .destinatari-adăugaţi .persoană.terţă input {
-  background-position: 0 -8px;
-  padding: 0;
-  margin-left: .3em;
 }
 
 .subformular textarea {
@@ -852,7 +846,7 @@ input[type="checkbox"]+label {
 
 .destinatari-adăugaţi {
   font-size: small;
-  padding: .5em 2.5em .8em;
+  padding: .8em 2.5em;
   margin-left: .5em;
   cursor: pointer;
   display: inline-block;
@@ -907,6 +901,7 @@ input[type="checkbox"]+label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left: 8px;
 }
 
 .destinatari-adăugaţi>li:hover,
@@ -914,11 +909,21 @@ input[type="checkbox"]+label {
   overflow: visible;
 }
 
+.destinatari-adăugaţi>li.persoană.terţă {
+  overflow: visible; /* ca să se vadă cîmpul în întregime */
+}
+
 #destinatari .listă .itemi li.dezactivat,
 #destinatari .listă .itemi li.dezactivat:hover {
-  text-decoration: line-through;
+  text-decoration: none;
   cursor: not-allowed;
   color: #555;
+}
+
+#destinatari .listă .itemi li.dezactivat::before {
+  content: "✓";
+  position: absolute;
+  margin-left: -20px;
 }
 
 #destinatari .listă .adaugă-toate {
@@ -926,6 +931,7 @@ input[type="checkbox"]+label {
   font-weight: bold;
   background: white;
   position: absolute;
+  margin-top: 1px;
   opacity: 0;
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
@@ -934,6 +940,10 @@ input[type="checkbox"]+label {
 
 #destinatari .listă:hover .adaugă-toate {
   opacity: 1;
+}
+
+#destinatari .listă .adaugă-toate:hover {
+  color: blue;
 }
 
 .destinatari-adăugaţi::before {
@@ -983,9 +993,10 @@ input[type="checkbox"]+label {
 }
 
 .destinatari-adăugaţi>li {
-  list-style: inside circle;
+  list-style: inside disc;
   counter-increment: destinatari;
   cursor: text;
+  padding-left: 2px !important; /* important vs. .subformular .eliminabil */
 }
 
 .destinatari-adăugaţi .elimină {
@@ -1012,8 +1023,8 @@ input[type="checkbox"]+label {
 }
 
 .destinatari-adăugaţi .persoană.terţă input {
-  margin: 0;
-  padding: .1em .3em;
+  margin: -4px 3px;
+  background-position: 0 -5px;
 }
 
 button.cu.opţiuni {

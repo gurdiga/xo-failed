@@ -359,16 +359,7 @@
         Cheltuieli.$adăugate
           .on('click', '.destinatari-adăugaţi', this.ascundeSauAfişează)
           .on('eliminare', '.destinatari-adăugaţi .eliminabil', this.ascundeListaDacăNuMaiSunt)
-          .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează)
-          .on('keydown focusout', '.destinatari-adăugaţi .persoană.terţă input', this.ascundeLaEnterSauEsc);
-      },
-
-      ascundeLaEnterSauEsc: function (e) {
-        if (e.keyCode === 13 || e.keyCode === 27 || e.type === 'focusout') {
-          e.preventDefault();
-          e.stopPropagation();
-          Destinatari.$adăugaţiDeja.click();
-        }
+          .on('eliminare', '.destinatari-adăugaţi .eliminabil', TotalCheltuieli.calculează);
       },
 
       ascundeSauAfişează: function (e) {
@@ -488,24 +479,23 @@
         .addClass('eliminabil de tot')
         .appendTo(Destinatari.$adăugaţiDeja);
 
-      Destinatari.actualizeazăNumăr(destinatar.parent());
-      $(this).addClass('dezactivat').hide().show();
+      $(this).addClass('dezactivat').hide().show(); /* hide-show e pentru actualizarea cursorului */
 
       if (destinatar.is('.persoană.terţă')) {
         Destinatari.$adăugaţiDeja.click();
         destinatar.append('<input/>');
 
         if (!FormularProcedură.sePopulează && !FormularProcedură.seIniţializează) {
-          destinatar.find('input').focus();
           Destinatari.$.hide();
+          destinatar.find('input').focus();
         }
       }
 
       TotalCheltuieli.calculează();
+      Destinatari.actualizeazăNumăr(Destinatari.$adăugaţiDeja);
     },
 
     actualizeazăNumăr: function ($lista) {
-      // hack pentru actualizarea numărului de itemi generat din CSS
       $lista.toggleClass('comprimaţi');
       setTimeout(function () {
         $lista.toggleClass('comprimaţi');
@@ -1470,10 +1460,11 @@
               if (this.document !== undefined) {
                 $cîmp.val(this.document).trigger('input');
                 Destinatari.$adăugaţiDeja = $cîmp.next('.destinatari-adăugaţi');
+                $cîmp.siblings('.adaugă-destinatar').trigger('mouseenter');
 
                 if (this.destinatari) {
                   $.each(this.destinatari, function () {
-                    Destinatari.$.find('li:not(.listă):contains("' + this + '")').click();
+                    Destinatari.$.find('.listă>.itemi>li:contains("' + this + '")').click();
                   });
                 }
 
@@ -1487,6 +1478,7 @@
                   });
                 }
 
+                $cîmp.siblings('.adaugă-destinatar').trigger('mouseleave');
                 Destinatari.actualizeazăNumăr($cîmp.next('.destinatari-adăugaţi'));
               } else {
                 if (this instanceof String) {
@@ -2337,6 +2329,10 @@
   },
 
   // --------------------------------------------------
+
+  // TODO:
+  //  - de asigurat o valoare (cea default?) pentru etichete personalizate
+  //  - de incrementat cînd mai este altul cu acelaşi nume
 
   EticheteEditabile = {
     init: function () {
@@ -3315,7 +3311,8 @@
       HashController: HashController,
       TextareaElastice: TextareaElastice,
       SelecturiFoarteLate: SelecturiFoarteLate,
-      SubsecţiuniDinamice: SubsecţiuniDinamice
+      SubsecţiuniDinamice: SubsecţiuniDinamice,
+      Destinatari: Destinatari
     });
   }
 

@@ -24,6 +24,7 @@
     'integrare/verificare-cîmpuri-şi-onorariu.js',
     'integrare/verificare-obiectul-urmăririi.js',
     'integrare/cheltuieli.js',
+    'integrare/cheltuieli-populare.js',
     'integrare/salvare-procedură.js',
 
     'integrare/formulare-încheieri/utilitare.js',
@@ -94,6 +95,7 @@
     test: false,
     asyncTest: false,
     equal: false,
+    deepEqual: false,
     ok: false,
     jsHintTest: false,
     document: false,

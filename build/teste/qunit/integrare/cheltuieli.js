@@ -1,12 +1,13 @@
-test('Formular procedură: cheltuieli', function () {
+asyncTest('Formular procedură: cheltuieli', function () {
   /*jshint maxlen:125*/
   'use strict';
 
-  this.app.$.fx.off = true;
-
-  var $cheltuieliAdăugate = this.app.Cheltuieli.$adăugate,
-      $categorii = this.app.Cheltuieli.categorii.$,
+  var app = this.app,
+      $cheltuieliAdăugate = app.Cheltuieli.$adăugate,
+      $categorii = app.Cheltuieli.categorii.$,
       cheltuieliAdăugate = $cheltuieliAdăugate.find('>.item').map(function () { return this.id; }).get();
+
+  app.$.fx.off = true;
 
   equal(cheltuieliAdăugate.length, 2, 'implicit sunt adăugate 2 cheltuieli');
   equal(cheltuieliAdăugate.join(), 'taxaA1,taxaA2', '…: taxa de intentare şi cea de arhivare');
@@ -57,5 +58,16 @@ test('Formular procedură: cheltuieli', function () {
     ok(!$cheltuieliAdăugate.find('#taxaB1').există(), 'eliminat taxaB1');
   })();
 
-  this.app.$.fx.off = false;
+  app.$.fx.off = false;
+
+  var $formular = app.FormularProcedură.$;
+
+  $formular.find('.închide').click();
+  $formular.one('închidere', function () {
+    ok(true, 'închis formularul');
+
+    app.$.fx.off = false;
+    start();
+  });
+  $formular.find('.închide').click();
 });

@@ -101,15 +101,12 @@
       .one('eliminare', '.sume-sechestrate', function () { eliminatSumăSechestrată = true; });
 
     $cîmpSumă
-      .trigger('mousemove') // să aişăm butonul de eliminare
+      .trigger('mousemove') // să afişăm butonul de eliminare
       .find('.elimină').click();
     ok(eliminatSumăSechestrată, 'la click pe butonul de eliminare a cîmpului bunului sechestrat adăugat, el se elimină');
     ok($butonDeAdăugareValoareaAcţiunii.parent().is(':not(.ascuns)'), '…butonul pentru “+valoarea acţiunii” se reafişează');
     ok($butonDeAdăugareBunSechestrat.parent().is(':not(.ascuns)'), '…butonul “+bun sechestrat” se reafişează');
     ok($butonDeAdăugareSumăSechestrată.parent().is(':not(.ascuns)'), '…butonul “+sumă sechestrată” se reafişează');
-
-    // TODO: cîmpuri personalizate -- de asigurat o valoare (cea default?) pentru etichete personalizate
-    // TODO: cîmpuri personalizate -- de incrementat cînd mai este altul cu acelaşi nume
 
     app.$.fx.off = false;
   });
@@ -688,8 +685,12 @@
 
             setTimeout(function () {
               $încheiere.find('.închide').click();
+              $formular.find('button.închide').click();
 
-              start();
+              $formular.one('închidere', function () {
+                ok(true, 'închis formularul de procedură');
+                start();
+              });
             }, app.PAUZĂ_DE_OBSERVABILITATE);
           });
         });
