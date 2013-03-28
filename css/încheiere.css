@@ -85,6 +85,8 @@ table#borderou-de-calcul thead td,
 p {
   max-width: 45em;
   text-align: justify;
+  orphans: 5;
+  widows: 5;
 }
 
 p.titlu {
