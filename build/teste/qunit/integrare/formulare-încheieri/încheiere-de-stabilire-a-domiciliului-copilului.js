@@ -9,6 +9,7 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
       $secţiune = app.FormularProcedură.$obiectulUrmăririi,
       obiect = 'stabilirea domiciliului copilului';
 
+  equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
@@ -32,7 +33,6 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
   $numeleCopilului.val(numeleCopilului);
   $dataNaşteriiCopilului.val(dataNaşteriiCopilului);
   $dataPrezentăriiDebitorului.val(dataPrezentăriiDebitorului);
-
 
   var procedură = app.FormularProcedură.colectează();
 
@@ -65,8 +65,9 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {
-          var $încheiere = app.$(this.tab.document),
-              date = this.tab.Încheiere.date,
+          var încheiere = this.tab,
+              $încheiere = app.$(încheiere.document),
+              date = încheiere.Încheiere.date,
               subtitlu = 'cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor';
 
           UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
@@ -82,9 +83,13 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
           ok($conţinut.find('p:contains("' + dataPrezentăriiDebitorului + '")').există(), 'e menţionată data prezentării debitorului în oficiu');
 
           setTimeout(function () {
-            $încheiere.find('.închide').click();
+            app.$(încheiere).one('închis', function () {
+              equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
 
-            start();
+              start();
+            });
+
+            $încheiere.find('.închide').click();
           }, app.PAUZĂ_DE_OBSERVABILITATE);
         });
       }); // one populat

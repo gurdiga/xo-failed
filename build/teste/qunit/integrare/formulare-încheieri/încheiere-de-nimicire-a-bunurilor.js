@@ -1,7 +1,7 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:157 */
+  /*jshint maxlen:159 */
   'use strict';
 
   var app = this.app,
@@ -9,6 +9,7 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
       $secţiune = app.FormularProcedură.$obiectulUrmăririi,
       obiect = 'nimicirea bunurilor';
 
+  equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
@@ -95,7 +96,8 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {
-          var $încheiere = app.$(this.tab.document),
+          var încheiere = this.tab,
+              $încheiere = app.$(încheiere.document),
               date = this.tab.Încheiere.date,
               subtitlu = 'de numire a datei nimicirii bunurilor';
 
@@ -122,41 +124,50 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
               'în secţiunea “Dispoziţia” NU se menţionează amînare dacă nu avem amînări în procedură');
 
           setTimeout(function () {
+            app.$(încheiere).one('închis', function () {
+              equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
+
+              var $butonDeAdăugareAmînare = $secţiune.find('.adaugă-cîmp-personalizat.amînare');
+
+              ok($butonDeAdăugareAmînare.există(), 'avem buton de adăugare amînări');
+              $butonDeAdăugareAmînare.click();
+
+              setTimeout(function () {
+                var $cîmpPentruAmînare = $butonDeAdăugareAmînare.parent().prev('.amînare.personalizat'),
+                    dataŞiOraAmînării = '03.03.2013 ora 11:00';
+
+                ok($cîmpPentruAmînare.există(), '…care adaugă un cîmp pentru amînare, personalizabil');
+                $cîmpPentruAmînare.find('.dată').val(dataŞiOraAmînării);
+
+                $butonPentruÎncheiere.click();
+                meta = app.Încheieri.deschise[formular];
+
+                app.$(meta).one('iniţializat', function () {
+                  var încheiere = this.tab,
+                      $încheiere = app.$(încheiere.document),
+                      date = încheiere.Încheiere.date,
+                      $secţiuneaMotivele = $încheiere.find('section header:contains("Motivele")+.conţinut.editabil'),
+                      $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil');
+
+                  ok(true, 'cînd executarea este amînată…');
+                  ok(date.amînată, '…în date avem flag care marchează amînarea ridicării');
+                  equal(date.ultimaAmînare, dataŞiOraAmînării, '…avem data şi ora amînării');
+
+                  ok($secţiuneaMotivele.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
+                  ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
+                  ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraNimicirii + '")').există(), '…NU este menţionată data şi ora ridicării');
+
+                  app.$(încheiere).one('închis', function () {
+                    equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
+                    start();
+                  });
+
+                  $încheiere.find('.închide').click();
+                });
+              }, app.PAUZĂ_DE_OBSERVABILITATE);
+            });
+
             $încheiere.find('.închide').click();
-
-            var $butonDeAdăugareAmînare = $secţiune.find('.adaugă-cîmp-personalizat.amînare');
-
-            ok($butonDeAdăugareAmînare.există(), 'avem buton de adăugare amînări');
-            $butonDeAdăugareAmînare.click();
-
-            setTimeout(function () {
-              var $cîmpPentruAmînare = $butonDeAdăugareAmînare.parent().prev('.amînare.personalizat'),
-                  dataŞiOraAmînării = '03.03.2013 ora 11:00';
-
-              ok($cîmpPentruAmînare.există(), '…care adaugă un cîmp pentru amînare, personalizabil');
-              $cîmpPentruAmînare.find('.dată').val(dataŞiOraAmînării);
-
-              $butonPentruÎncheiere.click();
-              meta = app.Încheieri.deschise[formular];
-
-              app.$(meta).one('iniţializat', function () {
-                var $încheiere = app.$(this.tab.document),
-                    date = this.tab.Încheiere.date,
-                    $secţiuneaMotivele = $încheiere.find('section header:contains("Motivele")+.conţinut.editabil'),
-                    $secţiuneaDispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut.editabil');
-
-                ok(true, 'cînd executarea este amînată…');
-                ok(date.amînată, '…în date avem flag care marchează amînarea ridicării');
-                equal(date.ultimaAmînare, dataŞiOraAmînării, '…avem data şi ora amînării');
-
-                ok($secţiuneaMotivele.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
-                ok($secţiuneaDispoziţia.find('p:contains("' + dataŞiOraAmînării + '")').există(), '…este menţionată data şi ora amînării');
-                ok(!$secţiuneaDispoziţia.find('p:contains("' + dataŞiOraNimicirii + '")').există(), '…NU este menţionată data şi ora ridicării');
-
-                $încheiere.find('.închide').click();
-                start();
-              });
-            }, app.PAUZĂ_DE_OBSERVABILITATE);
           }, app.PAUZĂ_DE_OBSERVABILITATE);
         });
       }); // one populat

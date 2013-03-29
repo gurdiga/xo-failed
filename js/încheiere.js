@@ -35,8 +35,13 @@
       Încheiere.$.find('.editabil').attr('contenteditable', true);
       Opţiuni.init();
 
-      app.$(window).trigger('iniţializat');
-      app.$(Încheieri.deschise[Încheiere.pagina]).trigger('iniţializat'); // pentru testabilitate
+      app.$(Încheieri.deschise[Încheiere.pagina]).trigger('iniţializat', [window]); // pentru testabilitate
+      app.$(window)
+        .trigger('iniţializat')
+        .on('unload', function () {
+          delete Încheieri.deschise[Încheiere.pagina];
+          app.$(window).trigger('închis');
+        });
     },
 
     verificăDacăFormularulEDeschis: function () {
@@ -211,7 +216,6 @@
     },
 
     închide: function () {
-      delete Încheieri.deschise[Încheiere.pagina];
       window.close();
     },
 

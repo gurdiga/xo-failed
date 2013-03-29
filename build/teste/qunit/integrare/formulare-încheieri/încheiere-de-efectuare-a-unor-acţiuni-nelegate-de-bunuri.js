@@ -9,6 +9,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
       $secţiune = app.FormularProcedură.$obiectulUrmăririi,
       obiect = 'efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri';
 
+  equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
@@ -25,12 +26,13 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
 
   equal(acţiuniColectate, acţiuni, 'colectare: acţiunile corespund');
 
-
   $formular.find('.bara-de-instrumente .salvează').click();
   $formular.one('salvat', function () {
     ok(true, 'salvat');
+
     $formular.one('închis', function () {
       app.ProceduriRecente.$.find('.item:first').click();
+
       $formular.one('populat', function () {
         ok(true, 'redeschis şi populat');
 
@@ -45,7 +47,8 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {
-          var $încheiere = app.$(this.tab.document),
+          var încheiere = this.tab,
+              $încheiere = app.$(încheiere.document),
               subtitlu = 'cu privire la executarea de către debitor a unor acţiuni nelegate de remiterea unor sume sau bunuri';
 
           UtilitareÎncheiere.verificăŞoaptăButon($încheiere, $butonPentruÎncheiere);
@@ -58,9 +61,14 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
           equal($conţinut.find('.acţiuni').text(), acţiuni, 'se menţionează acţiunile');
 
           setTimeout(function () {
+            app.$(încheiere).one('închis', function () {
+              equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
+
+              start();
+            });
+
             $încheiere.find('.închide').click();
 
-            start();
           }, app.PAUZĂ_DE_OBSERVABILITATE);
         });
       }); // one populat

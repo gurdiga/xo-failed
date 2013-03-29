@@ -11,6 +11,7 @@ asyncTest('Încheiere de intentare', function () {
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
 
   app.ProceduriRecente.$.find('.item:first-child').click();
+
   $formular.one('populat', function () {
     ok(true, 'deschis formularul');
     ok($buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
@@ -109,23 +110,25 @@ asyncTest('Încheiere de intentare', function () {
       app.$(încheiere).one('salvat', function () {
         ok(true, 'salvat după editarea unei secţiuni editabile');
 
+        app.$(încheiere).one('închis', function () {
+          setTimeout(function () { // pauză pentru observabilitate
+            cale = $buton.attr('data-pagina');
+            $buton.click();
+
+            app.$(app.Încheieri.deschise[cale]).one('iniţializat', function () {
+              încheiere = app.Încheieri.deschise[cale].tab;
+
+              var $încheiere = încheiere.Încheiere.$,
+                  $secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
+
+              ok($secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările s-au salvat');
+
+              verificăImprimarea(cale);
+            });
+          }, app.PAUZĂ_DE_OBSERVABILITATE);
+        });
+
         $încheiere.find('.închide').click();
-
-        setTimeout(function () { // pauză pentru observabilitate
-          cale = $buton.attr('data-pagina');
-          $buton.click();
-
-          app.$(app.Încheieri.deschise[cale]).one('iniţializat', function () {
-            încheiere = app.Încheieri.deschise[cale].tab;
-
-            var $încheiere = încheiere.Încheiere.$,
-                $secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
-
-            ok($secţiuneEditabilă.find('b.adăugat:contains("schimbare")').există(), 'modificările s-au salvat');
-
-            verificăImprimarea(cale);
-          });
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
       });
     }
 
@@ -148,11 +151,15 @@ asyncTest('Încheiere de intentare', function () {
             ok(true, '…şi pe urmă imprimă');
 
             $încheiere.find('.închide').click();
-            equal(app.Încheieri.deschise[cale], undefined, 'fereastra încheierii s-a închis');
 
-            $formular.find('.închide').click();
+            app.$(încheiere).one('închis', function () {
+              equal(app.Încheieri.deschise[cale], undefined, 'fereastra încheierii s-a închis');
+              equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
 
-            start();
+              $formular.find('.închide').click();
+
+              start();
+            });
           });
         });
         $butonDeImprimare.click();
