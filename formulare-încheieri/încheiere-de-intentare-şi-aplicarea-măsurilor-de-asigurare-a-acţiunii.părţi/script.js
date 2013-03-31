@@ -1,9 +1,27 @@
 window.init = function (context) {
+  /*jshint maxlen:130 */
   'use strict';
 
-  var total = context.app.FormularProcedură.$.find('#total').val();
+  var app = context.app,
+      total = app.FormularProcedură.$.find('#total').val(),
+      $destinatari = app.Cheltuieli.$.find('.adăugate #taxaB1 .document .destinatari-adăugaţi');
 
-  context.totalDatorie = context.app.accounting.formatNumber(total, 2, ' ', '.');
+  context.clauze = {
+    '.registru': 'ÎS “CRIS Registru”',
+    '.cadastru': 'ÎS “Cadastru”',
+    '.cîs': 'Camera Înregistrării de Stat',
+    '.îfs': 'Inspectoratul Fiscal Principal de Stat',
+    '.cnas': 'Casa Naţională de Asigurări Sociale',
+    '.deţinători-info-despre-valori': 'participanţii profesionişti care deţin informaţia privind deţinătorii de valori mobiliare',
+    '.bănci': 'băncile comerciale'
+  };
+  context.afişeazăClauza = {};
+
+  for (var clauză in context.clauze) {
+    context.afişeazăClauza[clauză] = $destinatari.find(clauză).există();
+  }
+
+  context.totalDatorie = app.accounting.formatNumber(total, 2, ' ', '.');
 
   var conciliere = context.procedură.cheltuieli.itemi.taxaB11;
 

@@ -80,7 +80,8 @@
                 executoriu în termen de 15 zile.</p>
               </li>
 
-              <li>
+              <% if (afişeazăClauza['.bănci']) { %>
+              <li class="clauze-referitoare-la bănci">
                 <p>A obliga băncile comerciale să comunice executorului judecătoresc despre
                 existenţa conturilor deschise pe numele
                 <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> a soldurilor
@@ -90,22 +91,25 @@
                 pentru acoperirea valorii acţiunii.</p>
               </li>
 
-              <li>
+              <li class="clauze-referitoare-la-bănci">
                 <p>A obliga băncile comerciale să informeze executorul judecătoresc despre
                 deschiderea în viitor a unor conturi bancare de către
                 <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice sechestru
-                asupra mijloacelor băneşti transferate în aceste conturi în limita valorii
-                acţiunii.</p>
+                asupra mijloacelor băneşti transferate în aceste conturi în limita datoriei.</p>
               </li>
+              <% } %>
 
-              <li>
+              <% if (afişeazăClauza['.îfs']) { %>
+              <li class="clauze-referitoare-la îfs">
                 <p>A obliga Inspectoratul Fiscal de Stat să informeze executorul judecătoresc
                 despre deschiderea în viitor a unor conturi bancare de către
                 <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi despre impozitele
                 achitate de acesta.</p>
               </li>
+              <% } %>
 
-              <li>
+              <% if (afişeazăClauza['.deţinători-info-despre-valori']) { %>
+              <li class="clauze-referitoare-la deţinători-info-despre-valori">
                 <p>A obliga participanţii profesionişti care deţin informaţia privind
                 deţinătorii de valori mobiliare să prezinte executorului judecătoresc
                 informaţia despre valorile mobiliare de care dispune
@@ -114,8 +118,10 @@
                 mobiliare pe numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
                 cu aplicarea interdicţiei de înstrăinare pe acestea.</p>
               </li>
+              <% } %>
 
-              <li>
+              <% if (afişeazăClauza['.registru']) { %>
+              <li class="clauze-referitoare-la registru">
                 <p>A obliga Î.S. “CRIS Registru” să prezinte executorului judecătoresc
                 informaţia despre mijloacele de transport deţinute de
                 <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să aplice interdicţia
@@ -123,32 +129,40 @@
                 numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu
                 aplicarea interdicţiei de înstrăinare pe acestea.</p>
               </li>
+              <% } %>
 
               <% if (procedură.debitori[0]['gen-persoană'] === 'fizică') { %>
-              <li>
+              <% if (afişeazăClauza['.registru']) { %>
+              <li class="clauze-referitoare-la registru">
                 <p>A obliga Î.S. “CRIS Registru” să refuze
                 <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> în eliberarea
                 paşaportului şi a documentului de călătorie sau prelungirea termenului de
                 valabilitate al acestora.</p>
               </li>
+              <% } %>
 
-              <li>
+              <% if (afişeazăClauza['.cnas']) { %>
+              <li class="clauze-referitoare-la cnas">
                 <p>A obliga Casa Naţională de Asigurări Sociale să prezinte executorului
                 judecătoresc informaţia despre veniturile obţinute de
                 <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
                 din contul bugetului asigurărilor sociale.</p>
               </li>
               <% } %>
+              <% } %>
 
-              <li>
+              <% if (afişeazăClauza['.cadastru']) { %>
+              <li class="clauze-referitoare-la cadastru">
                 <p>A obliga Î.S. “Cadastru” să prezinte informaţia despre bunurile imobile
                 deţinute de <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> şi să
                 aplice sechestru pe acestea. Se permite înregistrarea bunurilor imobile pe
                 numele <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> cu
                 aplicarea interdicţiei de înstrăinare pe acestea.</p>
               </li>
+              <% } %>
 
-              <li>
+              <% if (afişeazăClauza['.cîs']) { %>
+              <li class="clauze-referitoare-la cîs">
                 <p>A obliga Î.S. “Camera Înregistrării de Stat” să prezinte executorului
                 judecătoresc informaţia despre cotele-părţi deţinute de
                 <%= text('DEBITOR sau DEBITORI', procedură.debitori) %> în capitalul social
@@ -158,6 +172,7 @@
                 <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>, inclusiv şi cele
                 dobîndite ulterior pronunţării încheierii date.</p>
               </li>
+              <% } %>
 
               <li>
                 <p>Încheierea se expediază pentru informare şi executare. Despre măsurile
