@@ -1395,6 +1395,10 @@ label.checkbox input {
   z-index: 1;
 }
 
+.listă.îngustă>.itemi {
+  white-space: nowrap;
+}
+
 .listă:hover>.titlu,
 .listă:hover>.titlu::before,
 .listă>.titlu+.itemi>li:hover,
