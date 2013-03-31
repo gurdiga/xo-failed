@@ -22,6 +22,8 @@ asyncTest('Profil', function () {
       $butonProfil = app.$('#bara-de-sus button.profil'),
       $dialog = $butonProfil.prev('.dialog');
 
+  app.$.fx.off = true;
+
   ok($butonProfil.există(), 'avem buton pentru profil');
   ok($butonProfil.is(':visible'), 'butonul este visibil');
 
@@ -41,31 +43,32 @@ asyncTest('Profil', function () {
     ok($butonDeSalvare.există(), 'dialogul are buton de salvare');
     ok($butonDeÎnchidere.există(), 'dialogul are buton de închidere');
 
-    $butonDeSalvare.click();
-
-    app.Profil.$.one('salvat', function () {
+    app.Profil.$.one('ascundere', function () {
       ok(true, 'trimis datele pe server');
 
-      app.Profil.$.one('ascundere', function () {
+      app.Profil.$.one('salvat', function () {
         ok($dialog.is(':not(:visible)'), 'închis dialogul la salvare');
-
-        $butonProfil.click();
 
         $dialog.one('afişare', function () {
           ok(true, 'redeschis dialogul');
           equal(JSON.stringify(app.Profil.date), JSON.stringify(profil), 'datele încărcate corespund');
-
           verificăRepopulareaDialogului();
-          $butonDeÎnchidere.click();
 
           $dialog.one('ascundere', function () {
             ok($dialog.is(':not(:visible)'), 'închis dialogul cu butonul de închidere');
 
+            app.$.fx.off = false;
             start();
           });
+
+          $butonDeÎnchidere.click();
         });
+
+        $butonProfil.click();
       });
     });
+
+    $butonDeSalvare.click();
   });
 
 
