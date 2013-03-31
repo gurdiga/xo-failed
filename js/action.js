@@ -35,6 +35,7 @@
       Sume.init();
       ÎncasarePensie.init();
       ButoanePentruÎncheieri.init();
+      Încheieri.init();
       Secţiuni.init();
       ListeMeniu.init();
       ButoaneProceduri.init();
@@ -2994,6 +2995,10 @@
   Încheieri = {
     deschise: {},
 
+    init: function () {
+      setInterval(this.curăţaReferinţeLaFerestreleÎnchise, 5 * 1000);
+    },
+
     închide: function () {
       var nume, încheiere;
 
@@ -3001,6 +3006,16 @@
         încheiere = Încheieri.deschise[nume];
 
         if (încheiere && încheiere.tab) încheiere.tab.close();
+      }
+    },
+
+    curăţaReferinţeLaFerestreleÎnchise: function () {
+      var încheiere, fereastră;
+
+      for (încheiere in Încheieri.deschise) {
+        fereastră = Încheieri.deschise[încheiere].tab;
+
+        if (fereastră.closed) delete Încheieri.deschise[încheiere];
       }
     }
   },
