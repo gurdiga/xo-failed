@@ -9,7 +9,6 @@ asyncTest('Încheiere de instalare', function () {
       $secţiune = app.FormularProcedură.$obiectulUrmăririi,
       obiect = 'instalarea';
 
-  equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
@@ -41,6 +40,7 @@ asyncTest('Încheiere de instalare', function () {
 
   ok($amînare.există(), 's-a adăugat cîmp pentru amînare');
   $amînare.find('.dată').val(dataAmînării);
+
 
   var procedură = app.FormularProcedură.colectează();
 
@@ -75,9 +75,8 @@ asyncTest('Încheiere de instalare', function () {
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {
-          var încheiere = this.tab,
-              $încheiere = app.$(încheiere.document),
-              date = încheiere.Încheiere.date;
+          var $încheiere = app.$(this.tab.document),
+              date = this.tab.Încheiere.date;
 
           ok(date.amînată, 'context: setat amînată');
           equal(date.ultimaAmînare, dataAmînării, 'context: setat ultimaAmînare');
@@ -95,13 +94,9 @@ asyncTest('Încheiere de instalare', function () {
             ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
           setTimeout(function () { // pentru observabilitate
-            app.$(încheiere).one('închis', function () {
-              equal(Object.keys(app.Încheieri.deschise).length, 0, 'nu sunt încheieri deschise');
-
-              start();
-            });
-
             $încheiere.find('.închide').click();
+
+            start();
           }, app.PAUZĂ_DE_OBSERVABILITATE);
         });
       }); // one populat

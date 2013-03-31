@@ -63,16 +63,14 @@ asyncTest('Borderou de calcul', function () {
     verificăRechiziteleBancare($încheiere);
 
     setTimeout(function () { // aşteptăm o leacă să se vadă borderoul
-      app.$(încheiere).one('închis', function () {
-        setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
-          app.FormularProcedură.$.find('.închide').click();
-          app.$.fx.off = false;
+      încheiere.Încheiere.$.find('.închide').click();
 
-          start();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
-      });
+      setTimeout(function () { // mai aşteptăm o leacă să se vadă formularul de procedură după închiderea borderoului
+        app.FormularProcedură.$.find('.închide').click();
+        app.$.fx.off = false;
 
-      $încheiere.find('.închide').click();
+        start();
+      }, app.PAUZĂ_DE_OBSERVABILITATE);
     }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
 

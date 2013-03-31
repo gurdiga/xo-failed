@@ -40,7 +40,7 @@
 
       this.app = app;
       this.dateProcedură = dateProcedură;
-      this.app.PAUZĂ_DE_OBSERVABILITATE = 0;
+      this.app.PAUZĂ_DE_OBSERVABILITATE = 500;
 
       this.$dataIntentării = app.FormularProcedură.$.find('#data-intentării'),
       this.$creditor = app.FormularProcedură.$.find('#creditor'),
