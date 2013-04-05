@@ -325,11 +325,18 @@ button {
 }
 
 .autentificat #conţinut>.coloană#ghid-început {
+  background: #ffc;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  padding: 2em 3em;
   display: none;
-  font-size: 18px;
+  font: italic 20px serif;
   margin-top: 50px;
-  padding-left: 150px;
-  color: #aaa;
   width: 20em;
 }
 
