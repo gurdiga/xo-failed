@@ -1,6 +1,7 @@
 - Încheieri
-  - cum salvez încheierea de intentare şi asigurare a măsurilor?
-  - cum curăţ încheierile vechi dacă nu am acces la datele din procedură să văd care sunt actuale?
+  - pus lista încheierilor salvate în procedură['încheieri'][]
+  - mutat TOATE butonaşele în secţiunea “Încheieri” + ajustat clasele pe #formular (sau poate pe #încheieri?)
+    + ajustat corespunzător vizibilitate încheierilor din CSS după ID care este numele formularului de încheiere
 
 - de mutat aplicaţia în alt fişier HTML
 - <noscript>, unsupported browsers?

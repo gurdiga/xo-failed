@@ -658,8 +658,7 @@
         FormularProcedură.$.find('.bara-de-instrumente')
           .on('focus', 'button', this.afişează)
           .on('blur', 'button', this.semiascunde)
-          .on('click', '.spre-secţiuni', FormularProcedură.focusează)
-          .on('click', '.spre-secţiuni+.opţiuni li', FormularProcedură.focuseazăSecţiunea);
+          .on('click', '.spre-secţiuni', FormularProcedură.focusează);
 
         FormularProcedură.$.on('salvat', this.anunţăSalvarea);
         FormularProcedură.$.on('salvat-deja', this.anunţăSalvatDeja);
@@ -690,24 +689,6 @@
           $mesaj.removeClass('afişat');
         }, 1000);
       }
-    },
-
-    focuseazăSecţiunea: function () {
-      var secţiune = $(this).text().substr(2),
-          $titluSecţiune = FormularProcedură.$.find('legend label:contains("' + secţiune + '")'),
-          $opţiuni = $(this).closest('.opţiuni'),
-          top = $titluSecţiune.offset().top;
-
-      if ($(document).scrollTop() === top) {
-        $('html,body')
-          .animate({scrollTop: $(document).scrollTop() + 25}, 50)
-          .animate({scrollTop: $(document).scrollTop() - 25}, 50);
-      }
-
-      $('html,body').animate({scrollTop: top}, 750);
-      $opţiuni.css('height', 0);
-      setTimeout(function () { $opţiuni.removeAttr('style'); }, 800);
-      $titluSecţiune.closest('fieldset').find('.conţinut :input:not([readonly]):first').focus();
     },
 
     eliminăAmendaDupăCaz: function () {
@@ -2333,7 +2314,7 @@
 
   // TODO:
   //  - de asigurat o valoare (cea default?) pentru etichete personalizate
-  //  - de incrementat cînd mai este altul cu acelaşi nume
+  //  - de incrementat cînd mai este altul cu acelaşi nume? sau de stocat în array vs. hash?
 
   EticheteEditabile = {
     init: function () {
@@ -2997,6 +2978,8 @@
 
     init: function () {
       setInterval(this.curăţaReferinţeLaFerestreleÎnchise, 5 * 1000);
+      FormularProcedură.$
+        .on('change', '#caracter', this.ajusteazăLista); // TODO de completat selectorul
     },
 
     închide: function () {
@@ -3017,6 +3000,10 @@
 
         if (fereastră.closed) delete Încheieri.deschise[încheiere];
       }
+    },
+
+    ajusteazăLista: function () {
+      // TODO adaugă class corespunzător la #încheieri
     }
   },
 

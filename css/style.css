@@ -1435,22 +1435,9 @@ label.checkbox input {
   padding: .1em 0 .2em;
 }
 
-#materiale #încheieri .data-şi-ora-salvării {
-  font-size: .9em;
-  margin-left: .5em;
-  color: #ccc;
-}
-
-#materiale #încheieri li:hover .data-şi-ora-salvării {
-  color: #aaa;
-}
-
+::-moz-placeholder,
+::-ms-input-placeholder,
 ::-webkit-input-placeholder {
-  color: #bbb;
-  font-weight: normal;
-}
-
-::-moz-placeholder {
   color: #bbb;
   font-weight: normal;
 }
@@ -1474,4 +1461,9 @@ label,
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+#încheieri a {
+  font-size: small;
+  color: blue;
 }

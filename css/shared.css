@@ -63,10 +63,6 @@ button.închide:focus {
   opacity: 1;
 }
 
-.bara-de-instrumente .spre-secţiuni {
-  cursor: pointer;
-}
-
 .bara-de-instrumente>button {
   height: 48px;
   width: 48px;
@@ -155,7 +151,7 @@ button.închide:focus {
   position: absolute;
   white-space: nowrap;
   right: 0;
-  margin: 0;
+  margin: -48px 48px 0 0;
   line-height: 2em;
   opacity: 0;
   -webkit-transition: opacity .75s;
@@ -170,21 +166,5 @@ button.închide:focus {
 .bara-de-instrumente button+.opţiuni:hover,
 .bara-de-instrumente button:hover+.opţiuni {
   height: auto;
-  opacity: 1;
-}
-
-.bara-de-instrumente button+.opţiuni li {
-  -webkit-transition: opacity .75s;
-  -moz-transition: opacity .75s;
-  -o-transition: opacity .75s;
-  transition: opacity .75s;
-  color: white;
-  background-color: black;
-  opacity: .8;
-  padding: 0 1em;
-  cursor: pointer;
-}
-
-.bara-de-instrumente button+.opţiuni li:hover {
   opacity: 1;
 }
