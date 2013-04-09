@@ -1295,7 +1295,7 @@
           $întîrziere = $secţiune.find('.subsecţiune.întîrziere:last');
           $întîrziere.find('.început.perioadă').val(întîrziere['începutPerioadă']);
           $întîrziere.find('.sfîrşit.perioadă').val(întîrziere['sfîrşitPerioadă']);
-          $întîrziere.find(':radio[value="' + întîrziere['rata'] + '"]').attr('checked', true);
+          $întîrziere.find(':radio[value="' + întîrziere['rata'] + '"]').prop('checked', true);
           $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
           $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
 
@@ -1420,7 +1420,7 @@
           });
 
           if (item.achitat === true) {
-            $item.find('.subformular.achitare :checkbox').attr('checked', true).trigger('change');
+            $item.find('.subformular.achitare :checkbox').prop('checked', true).trigger('change');
             $item.addClass('achitat');
           }
 
@@ -1545,7 +1545,7 @@
         .find('#cheltuieli')
           .find('.adăugate').empty().end()
           .find(':input:not([type="hidden"])').val('').end()
-          .find('#părţile-au-ajuns-la-conciliere').attr('checked', false).end()
+          .find('#părţile-au-ajuns-la-conciliere').prop('checked', false).end()
         .end()
         .find('#creditor').find(':input').val('').end().end()
         .find('.persoană-terţă').remove().end()
@@ -2207,7 +2207,7 @@
       CalculatorDobîndaÎntîrziere.$
         .find('input:text').val('').end()
         .find('#art619-1').removeAttr('checked').end()
-        .find('#art619-2').attr('checked', 'checked').end()
+        .find('#art619-2').prop('checked', 'checked').end()
         .find('#sume .item:not(.prima)').remove();
     },
 
@@ -3232,7 +3232,7 @@
   $.fn.val1 = function (value) {
     if (typeof value !== 'undefined') {
       if (this.is(':checkbox')) {
-        return this.attr('checked', value === true);
+        return this.prop('checked', value === true);
       } else {
         return this.val(value);
       }

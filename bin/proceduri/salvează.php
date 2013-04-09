@@ -41,3 +41,6 @@ function curăţă_încheierile_salvate($procedură, $număr) {
     unlink("$cale_încheieri/$expirată");
   });
 }
+
+# avem nevoie de "" aici pentru că jQuery aşteaptă JSON în response.body
+?>""

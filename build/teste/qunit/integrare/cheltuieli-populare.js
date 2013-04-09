@@ -40,14 +40,10 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
     ok($taxaA1.find('.achitare .dată').există(), 'găsit cîmp pentur data achitării');
     equal($taxaA1.find('.achitare .dată').val(), '', '…necompletat iniţial');
 
-    // emulare comportament normal
-    // .click() aparent nu e suficient pentru că handler-ul vede :checkbox-ul ca :not(:checked)
-    $taxaA1.find('.achitare :checkbox').attr('checked', true).click();
+    $taxaA1.find('.achitare :checkbox').click();
     ok($taxaA1.is('.achitat'), 'la bifare marcat item vizual achitat');
     equal($taxaA1.find('.achitare .dată').val(), app.moment().format(app.FORMATUL_DATEI),
       '…completat cîmpul pentru data achitării cu data de azi');
-    // …emulare comportament normal
-    $taxaA1.find('.achitare :checkbox').attr('checked', true);
 
     dateColectate = app.FormularProcedură.colectează();
     ok(dateColectate.cheltuieli.itemi, 'avem itemi în cheltuielile colectate');

@@ -11,7 +11,7 @@ asyncTest('Precedură: salvare', function () {
       $formular = app.FormularProcedură.$,
       numărulProceduriiNouCreate;
 
-  $taxaA1.find('.achitare :checkbox').attr('checked', true);
+  $taxaA1.find('.achitare :checkbox').prop('checked', true);
   $taxaA1.find('.achitare .dată').val(dataAchităriiTaxeiA1);
 
   $formular.find('.bara-de-instrumente .salvează').click();

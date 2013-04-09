@@ -15,7 +15,7 @@ asyncTest('Borderou de calcul', function () {
 
     var $taxa = app.Cheltuieli.$.find('.adăugate #taxaA6');
 
-    $taxa.find('#din-arhivă').attr('checked', true);
+    $taxa.find('#din-arhivă').prop('checked', true);
   })();
 
 
@@ -37,7 +37,7 @@ asyncTest('Borderou de calcul', function () {
 
 
   (function marcheazăPrimaTaxăAchitată() {
-    app.Cheltuieli.$.find('.adăugate #taxaA1 :checkbox').attr('checked', true);
+    app.Cheltuieli.$.find('.adăugate #taxaA1 :checkbox').prop('checked', true);
   })();
 
 
@@ -102,8 +102,8 @@ asyncTest('Borderou de calcul', function () {
         $totalTaxeAchitat = $taxeItemi.children('tr').eq(3),
         $totalTaxeRămasDeAchitat = $taxeItemi.children('tr').eq(4),
         $cheltuieli = app.Cheltuieli.$,
-        taxaDeIntentare = $cheltuieli.find('.adăugate #taxaA1 p').contents(':not(.uc)').text().trim(),
-        taxaDeArhivare = $cheltuieli.find('.adăugate #taxaA2 p').contents(':not(.uc)').text().trim(),
+        taxaDeIntentare = $cheltuieli.find('.adăugate #taxaA1 p').find('.uc').remove().end().contents().text().trim(),
+        taxaDeArhivare = $cheltuieli.find('.adăugate #taxaA2 p').find('.uc').remove().end().contents().text().trim(),
         dataAchităriiTaxeiDeIntentare = $cheltuieli.find('.adăugate #taxaA1 .achitare .dată').val();
 
     equal($taxe.find('th').text(), 'Taxe', 'prima secţiune e Taxe');

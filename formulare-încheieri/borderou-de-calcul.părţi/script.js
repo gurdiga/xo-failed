@@ -65,7 +65,7 @@
 
         context[tip] = context[tip] || {};
         context[tip][număr[tip]] = {
-          descriere: $item.find('p').contents(':not(.uc)').text().trim(),
+          descriere: $item.find('p').clone().find('.uc').remove().end().text().trim(),
           cost: cost,
           achitat: achitat,
           dataAchitării: achitat ? $item.find('.achitare .dată').val() : '—'
