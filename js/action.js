@@ -3007,6 +3007,19 @@
       // TODO adaugă class corespunzător la #încheieri
     },
 
+    formular: function (buton) {
+      var formular = buton.attr('data-formular');
+
+      if (FormularProcedură.$.is(':visible')) {
+        var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val(),
+            sufix = FormularProcedură.tip() + caracter;
+
+        return '/formulare-încheieri/' + formular + '-' + sufix + '.html';
+      } else {
+        return '/formulare-încheieri/' + formular + '.html';
+      }
+    },
+
     butonaşe: {
       init: function () {
         // aici
@@ -3051,19 +3064,6 @@
           .attr('title', $opţiune.attr('data-şoaptă-buton'));
       },
 
-      formular: function (buton) {
-        var formular = buton.attr('data-formular');
-
-        if (FormularProcedură.$.is(':visible')) {
-          var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val(),
-              sufix = FormularProcedură.tip() + caracter;
-
-          return '/formulare-încheieri/' + formular + '-' + sufix + '.html';
-        } else {
-          return '/formulare-încheieri/' + formular + '.html';
-        }
-      },
-
       deschide: function () {
         var buton = $(this),
             formular = buton.attr('data-formular'),
@@ -3074,7 +3074,7 @@
         if (!dinamic && buton.is('.salvat')) {
           pagina = buton.attr('data-pagina');
         } else {
-          pagina = Încheieri.butonaşe.formular(buton);
+          pagina = Încheieri.formular(buton);
         }
 
         Încheieri.deschise[pagina] = {

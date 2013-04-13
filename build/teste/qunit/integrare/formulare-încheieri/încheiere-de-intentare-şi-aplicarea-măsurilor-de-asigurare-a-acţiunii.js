@@ -15,7 +15,7 @@ asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a 
   $formular.one('populat', function () {
     $buton = $formular.find('#data-intentării')
       .siblings('[data-formular="încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii"]');
-    formular = app.Încheieri.butonaşe.formular($buton);
+    formular = app.Încheieri.formular($buton);
 
     ok($buton.există(), 'avem butonaş de formare a încheierii');
     ok($buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');

@@ -26,16 +26,16 @@ asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
     $select.val('schimbul forţat').change();
     equal($butonPentruÎncheiere.attr('data-formular'), 'încheiere-de-schimb-forţat', 'e setat corespunzător [data-formular] pe el');
     $butonPentruÎncheiere.click();
-    meta = app.Încheieri.deschise[app.Încheieri.butonaşe.formular($butonPentruÎncheiere)];
+    meta = app.Încheieri.deschise[app.Încheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
-    delete app.Încheieri.deschise[app.Încheieri.butonaşe.formular($butonPentruÎncheiere)];
+    delete app.Încheieri.deschise[app.Încheieri.formular($butonPentruÎncheiere)];
 
     $select.val('evacuarea').change();
     equal($butonPentruÎncheiere.attr('data-formular'), 'încheiere-de-evacuare', 'e setat corespunzător [data-formular] pe el');
     $butonPentruÎncheiere.click();
-    meta = app.Încheieri.deschise[app.Încheieri.butonaşe.formular($butonPentruÎncheiere)];
+    meta = app.Încheieri.deschise[app.Încheieri.formular($butonPentruÎncheiere)];
     ok(meta, '…se iniţiază meta pentru încheiere');
-    delete app.Încheieri.deschise[app.Încheieri.butonaşe.formular($butonPentruÎncheiere)];
+    delete app.Încheieri.deschise[app.Încheieri.formular($butonPentruÎncheiere)];
 
     app.open = app.openOriginal;
     start();

@@ -89,7 +89,7 @@ asyncTest('Încheiere de numire a datei confiscării bunurilor', function () {
         ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
         $butonPentruÎncheiere.click();
 
-        var formular = app.Încheieri.butonaşe.formular($butonPentruÎncheiere),
+        var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {

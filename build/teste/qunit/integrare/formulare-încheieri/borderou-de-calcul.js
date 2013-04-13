@@ -43,7 +43,7 @@ asyncTest('Borderou de calcul', function () {
 
   var cîmpTotalTaxeŞiSpeze = app.Cheltuieli.$.find('#total-taxe-şi-speze'),
       $butonÎncheiere = cîmpTotalTaxeŞiSpeze.siblings('.buton[data-formular="borderou-de-calcul"]'),
-      formular = app.Încheieri.butonaşe.formular($butonÎncheiere);
+      formular = app.Încheieri.formular($butonÎncheiere);
 
   ok($butonÎncheiere.există(), 'avem buton pentru borderoul de calcul');
   $butonÎncheiere.click();

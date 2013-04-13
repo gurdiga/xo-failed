@@ -41,7 +41,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
         ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
         $butonPentruÎncheiere.click();
 
-        var formular = app.Încheieri.butonaşe.formular($butonPentruÎncheiere),
+        var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {
