@@ -3020,11 +3020,32 @@
       }
     },
 
+    deschide: function () {
+      var buton = $(this),
+          formular = buton.attr('data-formular'),
+          dinamic = buton.attr('data-dinamic'),
+          pagina;
+
+      if (buton.is('[dezactivat]')) return;
+      if (!dinamic && buton.is('.salvat')) {
+        pagina = buton.attr('data-pagina');
+      } else {
+        pagina = Încheieri.formular(buton);
+      }
+
+      Încheieri.deschise[pagina] = {
+        tab: window.open(pagina, formular, 'left=100,width=1000,height=1000'),
+        buton: buton
+      };
+
+      $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);
+    },
+
     butonaşe: {
       init: function () {
         // aici
         $(document)
-          .on('click', '.buton[data-formular]', this.deschide)
+          .on('click', '.buton[data-formular]', Încheieri.deschide)
           .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
 
         FormularProcedură.$
@@ -3062,27 +3083,6 @@
         $buton
           .attr('data-formular', $opţiune.attr('data-formular-încheiere'))
           .attr('title', $opţiune.attr('data-şoaptă-buton'));
-      },
-
-      deschide: function () {
-        var buton = $(this),
-            formular = buton.attr('data-formular'),
-            dinamic = buton.attr('data-dinamic'),
-            pagina;
-
-        if (buton.is('[dezactivat]')) return;
-        if (!dinamic && buton.is('.salvat')) {
-          pagina = buton.attr('data-pagina');
-        } else {
-          pagina = Încheieri.formular(buton);
-        }
-
-        Încheieri.deschise[pagina] = {
-          tab: window.open(pagina, formular, 'left=100,width=1000,height=1000'),
-          buton: buton
-        };
-
-        $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);
       }
     }
   },
