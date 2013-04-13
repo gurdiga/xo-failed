@@ -1584,6 +1584,8 @@
     },
 
     deschide: function () {
+      BaraDeSus.$.find('.dialog:visible').ascunde();
+
       $.fx.off = true;
       FormularProcedură.$.trigger('înainte-de-deschidere');
       $.fx.off = false;
@@ -3043,7 +3045,7 @@
 
     butonaşe: {
       init: function () {
-        // aici
+        // TODO: aici
         $(document)
           .on('click', '.buton[data-formular]', Încheieri.deschide)
           .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
