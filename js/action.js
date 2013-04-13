@@ -3049,7 +3049,7 @@
           .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
 
         FormularProcedură.$
-          .on('închidere', this.închide)
+          .on('închidere', Încheieri.închide)
           .on('salvat', this.activează);
 
         FormularProcedură.$.on('change', '#obiect', this.ajustează);
