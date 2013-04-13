@@ -16,7 +16,7 @@ asyncTest('Încheiere de intentare', function () {
     ok($buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
     $buton.click();
 
-    var formular = app.ButoanePentruÎncheieri.formular($buton),
+    var formular = app.Încheieri.butonaşe.formular($buton),
         meta = app.Încheieri.deschise[formular];
 
     app.$(meta).one('iniţializat', function () {
@@ -70,7 +70,7 @@ asyncTest('Încheiere de intentare', function () {
 
           var $butonDeRegenerare = $încheiere.find('.regenerează'),
               încheiereaSalvată = încheiere.Încheiere.pagina,
-              formular = app.ButoanePentruÎncheieri.formular(încheiere.Încheiere.buton);
+              formular = app.Încheieri.butonaşe.formular(încheiere.Încheiere.buton);
 
           $butonDeRegenerare.click();
           ok(!app.Încheieri.deschise[încheiereaSalvată], 'încheierea precedent salvată este deregistrată');

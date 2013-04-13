@@ -1463,7 +1463,19 @@ label,
   user-select: none;
 }
 
+#încheieri {
+  padding-left: 2em;
+  list-style: disc inside;
+}
+
 #încheieri a {
   font-size: small;
-  color: blue;
+  text-decoration: none;
+  color: #555;
+}
+
+#încheieri .salvate::before {
+  content: '✓';
+  margin: .75em -2em;
+  position: absolute;
 }

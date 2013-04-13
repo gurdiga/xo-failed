@@ -78,7 +78,7 @@ asyncTest('Încheiere de schimb forţat', function () {
         ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
         $butonPentruÎncheiere.click();
 
-        var formular = app.ButoanePentruÎncheieri.formular($butonPentruÎncheiere),
+        var formular = app.Încheieri.butonaşe.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
         app.$(meta).one('iniţializat', function () {

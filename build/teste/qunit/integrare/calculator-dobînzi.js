@@ -79,7 +79,7 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
   function verificăRaportul($dialog) {
     /*jshint maxlen:144 */
     var $buton = $dialog.find('.ui-icon-document.buton'),
-        formular = app.ButoanePentruÎncheieri.formular($buton),
+        formular = app.Încheieri.butonaşe.formular($buton),
         tab;
 
     $buton.click();

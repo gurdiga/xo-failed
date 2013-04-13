@@ -34,7 +34,6 @@
       ProceduriRecente.init();
       Sume.init();
       ÎncasarePensie.init();
-      ButoanePentruÎncheieri.init();
       Încheieri.init();
       Secţiuni.init();
       ListeMeniu.init();
@@ -2977,6 +2976,8 @@
     deschise: {},
 
     init: function () {
+      this.butonaşe.init();
+
       setInterval(this.curăţaReferinţeLaFerestreleÎnchise, 5 * 1000);
       FormularProcedură.$
         .on('change', '#caracter', this.ajusteazăLista); // TODO de completat selectorul
@@ -3004,86 +3005,85 @@
 
     ajusteazăLista: function () {
       // TODO adaugă class corespunzător la #încheieri
-    }
-  },
-
-  // --------------------------------------------------
-
-  ButoanePentruÎncheieri = {
-    init: function () {
-      $(document)
-        .on('click', '.buton[data-formular]', this.deschide)
-        .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
-
-      FormularProcedură.$
-        .on('închidere', this.închide)
-        .on('salvat', this.activează);
-
-      FormularProcedură.$.on('change', '#obiect', this.ajustează);
-      MăsuriDeAsigurare.init();
     },
 
-    activează: function () {
-      FormularProcedură.$.find('.buton[data-formular]').removeAttr('dezactivat');
-    },
+    butonaşe: {
+      init: function () {
+        // aici
+        $(document)
+          .on('click', '.buton[data-formular]', this.deschide)
+          .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
 
-    seteazăŞoaptă: function () {
-      var $buton = $(this);
+        FormularProcedură.$
+          .on('închidere', this.închide)
+          .on('salvat', this.activează);
 
-      if ($buton.is('[dezactivat]')) {
-        if (!$buton.attr('şoaptă-activ')) {
-          $buton
-            .attr('şoaptă-activ', $buton.attr('title'))
-            .attr('title', $buton.attr('title') + ' (mai întîi trebuie salvată procedura)');
+        FormularProcedură.$.on('change', '#obiect', this.ajustează);
+        MăsuriDeAsigurare.init();
+      },
+
+      activează: function () {
+        FormularProcedură.$.find('.buton[data-formular]').removeAttr('dezactivat');
+      },
+
+      seteazăŞoaptă: function () {
+        var $buton = $(this);
+
+        if ($buton.is('[dezactivat]')) {
+          if (!$buton.attr('şoaptă-activ')) {
+            $buton
+              .attr('şoaptă-activ', $buton.attr('title'))
+              .attr('title', $buton.attr('title') + ' (mai întîi trebuie salvată procedura)');
+          }
+        } else {
+          if ($buton.attr('şoaptă-activ')) {
+            $buton.attr('title', $buton.attr('şoaptă-activ'));
+          }
         }
-      } else {
-        if ($buton.attr('şoaptă-activ')) {
-          $buton.attr('title', $buton.attr('şoaptă-activ'));
+      },
+
+      ajustează: function () {
+        var $opţiune = $(this).find('option:selected'),
+            $buton = $(this).siblings('.buton[data-formular]');
+
+        $buton
+          .attr('data-formular', $opţiune.attr('data-formular-încheiere'))
+          .attr('title', $opţiune.attr('data-şoaptă-buton'));
+      },
+
+      formular: function (buton) {
+        var formular = buton.attr('data-formular');
+
+        if (FormularProcedură.$.is(':visible')) {
+          var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val(),
+              sufix = FormularProcedură.tip() + caracter;
+
+          return '/formulare-încheieri/' + formular + '-' + sufix + '.html';
+        } else {
+          return '/formulare-încheieri/' + formular + '.html';
         }
+      },
+
+      deschide: function () {
+        var buton = $(this),
+            formular = buton.attr('data-formular'),
+            dinamic = buton.attr('data-dinamic'),
+            pagina;
+
+        if (buton.is('[dezactivat]')) return;
+        if (!dinamic && buton.is('.salvat')) {
+          pagina = buton.attr('data-pagina');
+        } else {
+          pagina = Încheieri.butonaşe.formular(buton);
+        }
+
+        Încheieri.deschise[pagina] = {
+          tab: window.open(pagina, formular, 'left=100,width=1000,height=1000'),
+          buton: buton
+        };
+
+        $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);
       }
-    },
-
-    ajustează: function () {
-      var $opţiune = $(this).find('option:selected'),
-          $buton = $(this).siblings('.buton[data-formular]');
-
-      $buton
-        .attr('data-formular', $opţiune.attr('data-formular-încheiere'))
-        .attr('title', $opţiune.attr('data-şoaptă-buton'));
-    },
-
-    formular: function (buton) {
-      var formular = buton.attr('data-formular');
-
-      if (FormularProcedură.$.is(':visible')) {
-        var caracter = FormularProcedură.$obiectulUrmăririi.find('#caracter').val(),
-            sufix = FormularProcedură.tip() + caracter;
-
-        return '/formulare-încheieri/' + formular + '-' + sufix + '.html';
-      } else {
-        return '/formulare-încheieri/' + formular + '.html';
-      }
-    },
-
-    deschide: function () {
-      var buton = $(this),
-          formular = buton.attr('data-formular'),
-          dinamic = buton.attr('data-dinamic'),
-          pagina;
-
-      if (buton.is('[dezactivat]')) return;
-      if (!dinamic && buton.is('.salvat')) {
-        pagina = buton.attr('data-pagina');
-      } else {
-        pagina = ButoanePentruÎncheieri.formular(buton);
-      }
-
-      Încheieri.deschise[pagina] = {
-        tab: window.open(pagina, formular, 'left=100,width=1000,height=1000'),
-        buton: buton
-      };
-
-      $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);
     }
   },
 
@@ -3295,7 +3295,6 @@
     FormularProcedură: FormularProcedură,
     ProceduriRecente: ProceduriRecente,
     Utilizator: Utilizator,
-    ButoanePentruÎncheieri: ButoanePentruÎncheieri,
     Încheieri: Încheieri,
     Subsecţiuni: Subsecţiuni,
     DobîndaDeÎntîrziere: DobîndaDeÎntîrziere,
