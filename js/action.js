@@ -3052,9 +3052,9 @@
 
         FormularProcedură.$
           .on('închidere', Încheieri.închide)
-          .on('salvat', this.activează);
+          .on('salvat', Încheieri.butonaşe.activează);
 
-        FormularProcedură.$.on('change', '#obiect', this.ajustează);
+        FormularProcedură.$.on('change', '#obiect', Încheieri.butonaşe.ajustează);
         MăsuriDeAsigurare.init();
       },
 
