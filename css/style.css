@@ -421,9 +421,11 @@ h3 {
   clear: left;
 }
 
-fieldset {
+#formular>.conţinut>fieldset,
+#formular>.conţinut>.coloană>fieldset {
   border: none;
-  margin-bottom: 30px;
+  margin: 0 70px 30px 0;
+  padding: 5px 0;
 }
 
 #container-data-intentării label,
@@ -441,7 +443,8 @@ fieldset label {
   padding: 3px 0 3px 6px;
 }
 
-#formular fieldset legend {
+.coloană>fieldset>legend,
+#formular>.conţinut>fieldset>legend {
   background: #333;
   width: 100%;
 }
@@ -539,7 +542,7 @@ input.sumă {
   margin: -.5em 0 0;
 }
 
-#formular fieldset {
+#formular>fieldset {
   margin: 0 70px 30px 0;
   padding: 0;
 }
@@ -787,7 +790,7 @@ input[type="checkbox"]+label {
 }
 
 #categorii-taxe-şi-speze {
-  margin: 1em 0 2em 1em;
+  margin: 1em 0 0 1em;
 }
 
 #categorii-taxe-şi-speze .listă .titlu {
@@ -1099,11 +1102,6 @@ button.cu.opţiuni:after {
   background-color: transparent;
 }
 
-.dialog>ul:nth-child(2) {
-  clear: left;
-  margin-top: 2.5em;
-}
-
 #profil.dialog li label {
   width: 9em;
 }
@@ -1167,7 +1165,7 @@ button.cu.opţiuni:after {
   cursor: pointer;
 }
 
-#profil.dialog input.sufix-cod-bancă ~ p {
+#profil.dialog p.denumirea-băncii {
   margin: 0 0 0 10.05em;
   font-weight: bold;
   white-space: normal;
@@ -1250,50 +1248,49 @@ select#obiect~.buton[data-formular] {
   color: black;
 }
 
-.dialog ul.subsecţiune,
-fieldset .conţinut .ui-effects-wrapper ul.subsecţiune,
-fieldset .conţinut ul.subsecţiune {
-  margin: 1em -1px;
+.dialog .subsecţiune,
+fieldset .conţinut .ui-effects-wrapper .subsecţiune,
+fieldset .conţinut .subsecţiune {
   border: 1px solid #eee;
   border-width: 1px 0 0 1px;
   position: relative;
-}
-
-fieldset .conţinut ul.subsecţiune:first-child {
-  margin-top: .8em;
+  margin: 10px 0 0 -1px;
+  padding: 0;
 }
 
 #formular fieldset>.conţinut>ul>.titlu,
-ul.subsecţiune .titlu {
+.subsecţiune legend {
   font-size: small;
-  margin: -.7em 0 -.4em 3em;
   background: white;
   padding: 0 .2em;
+  margin-left: 3px;
   color: #ccc;
   /* pentru a menţine titlul subsecţiunii deasupra cîmpurilor în profil */
   position: relative;
   z-index: 0;
 }
 
-ul.subsecţiune .titlu button:first-of-type {
+.subsecţiune legend button:first-of-type {
   margin-left: .5em;
 }
 
-ul.subsecţiune .titlu+li {
+.subsecţiune ul {
+  margin: 0;
+}
+
+.subsecţiune li {
   margin-top: .2em;
 }
 
-ul.subsecţiune .elimină {
-  left: -.9em;
-  top: -.3em;
+.subsecţiune .elimină {
   padding-right: .5em;
   line-height: .8em;
   background: transparent;
 }
 
-ul.subsecţiune .personalizat .elimină {
+.subsecţiune .personalizat .elimină {
   left: -12px;
-  top: 6px;
+  top: 5px;
   padding-right: .5em;
   line-height: .8em;
   background: transparent;
@@ -1337,7 +1334,7 @@ input[readonly]:hover+span.ui-icon-locked {
 }
 
 .subsecţiune + #adaugă-subsecţiune {
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 label.checkbox {
@@ -1418,23 +1415,6 @@ label.checkbox input {
   text-decoration: none;
 }
 
-#materiale .subsecţiune {
-  margin-left: .5em;
-  padding-left: .5em;
-}
-
-#materiale .subsecţiune .titlu {
-  padding: 0 .2em;
-}
-
-#materiale .subsecţiune .titlu+li {
-  padding: .5em 0 .2em;
-}
-
-#materiale .subsecţiune li {
-  padding: .1em 0 .2em;
-}
-
 ::-moz-placeholder,
 ::-ms-input-placeholder,
 ::-webkit-input-placeholder {
@@ -1449,7 +1429,7 @@ input::-ms-clear {
 label,
 #categorii-taxe-şi-speze,
 #adaugă-subsecţiune,
-.subsecţiune .titlu,
+.subsecţiune legend,
 .destinatari-adăugaţi,
 .neselectabilă,
 .neselectabile,

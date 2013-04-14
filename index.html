@@ -136,39 +136,43 @@
               </li>
             </ul>
 
-            <ul class="subsecţiune">
-              <li class="titlu">cont pentru cauţiuni, taxe şi speze</li>
+            <fieldset class="subsecţiune">
+              <legend>cont pentru cauţiuni, taxe şi speze</legend>
 
-              <li>
-                <label for="cont-taxe-speze">Numărul contului</label>
-                <input id="cont-taxe-speze" type="text"/>
-              </li>
+              <ul>
+                <li>
+                  <label for="cont-taxe-speze">Numărul contului</label>
+                  <input id="cont-taxe-speze" type="text"/>
+                </li>
 
-              <li>
-                <label for="bancă-taxe-speze">Banca</label>
-                <span class="şoaptă-cod-bancă">XXXXMD2X</span>
-                <input type="text" id="bancă-taxe-speze" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
-                <p></p>
-              </li>
+                <li>
+                  <label for="bancă-taxe-speze">Banca</label>
+                  <span class="şoaptă-cod-bancă">XXXXMD2X</span>
+                  <input type="text" id="bancă-taxe-speze" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
+                  <p class="denumirea-băncii"></p>
+                </li>
+              </ul>
 
-            </ul>
+            </fieldset>
 
-            <ul class="subsecţiune">
-              <li class="titlu">cont pentru onorarii</li>
+            <fieldset class="subsecţiune">
+              <legend>cont pentru onorarii</legend>
 
-              <li>
-                <label for="cont-onorarii">Numărul contului</label>
-                <input id="cont-onorarii" type="text"/>
-              </li>
+              <ul>
+                <li>
+                  <label for="cont-onorarii">Numărul contului</label>
+                  <input id="cont-onorarii" type="text"/>
+                </li>
 
-              <li>
-                <label for="bancă-onorarii">Banca</label>
-                <span class="şoaptă-cod-bancă">XXXXMD2X</span>
-                <input type="text" id="bancă-onorarii" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
-                <p></p>
-              </li>
+                <li>
+                  <label for="bancă-onorarii">Banca</label>
+                  <span class="şoaptă-cod-bancă">XXXXMD2X</span>
+                  <input type="text" id="bancă-onorarii" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
+                  <p class="denumirea-băncii"></p>
+                </li>
+              </ul>
 
-            </ul>
+            </fieldset>
 
             <button class="închide semiascuns" title="Închide">×</button>
           </fieldset>
@@ -1513,17 +1517,20 @@
 
 
       <div id="subsecţiune-încasare">
-        <ul class="subsecţiune încasare eliminabil de tot">
-          <li class="titlu">încasare</li>
+        <fieldset class="subsecţiune încasare eliminabil de tot">
+          <legend>încasare</legend>
 
-          <li>
-            <label>Genul încasării</label>
-            <select id="genul-încasării" class="care schimbă formularul">
-              <option>periodică</option>
-              <option>restantă</option>
-            </select>
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <label>Genul încasării</label>
+              <select id="genul-încasării" class="care schimbă formularul">
+                <option>periodică</option>
+                <option>restantă</option>
+              </select>
+            </li>
+          </ul>
+
+        </fieldset>
       </div>
 
 
@@ -1698,8 +1705,8 @@
       </ul>
 
 
-      <ul class="subsecţiune întîrziere eliminabil de tot">
-        <li class="titlu">
+      <fieldset class="subsecţiune întîrziere eliminabil de tot">
+        <legend>
           întîrziere
 
           <span
@@ -1710,63 +1717,69 @@
               class="ui-icon ui-icon-document buton semiascuns"
               title="Anexă cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu"
               data-formular="anexă-dobîndă-de-întîrziere" data-dinamic="da"></span>
-        </li>
+        </legend>
 
-        <li>
-          <label>Perioada de întîrziere</label>
-          <input type="text" class="dată început perioadă"/> &ndash; <input type="text" class="dată sfîrşit perioadă"/>
-        </li>
+        <ul>
+          <li>
+            <label>Perioada de întîrziere</label>
+            <input type="text" class="dată început perioadă"/> &ndash; <input type="text" class="dată sfîrşit perioadă"/>
+          </li>
 
-        <li>
-          <label>Rata aplicată</label>
+          <li>
+            <label>Rata aplicată</label>
 
-          <label class="checkbox"><input name="rată-întîrziere" type="radio" value="5"/>5%</label>
-          <label class="checkbox"><input name="rată-întîrziere" type="radio" value="9" checked="checked"/>9%</label>
-        </li>
+            <label class="checkbox"><input name="rată-întîrziere" type="radio" value="5"/>5%</label>
+            <label class="checkbox"><input name="rată-întîrziere" type="radio" value="9" checked="checked"/>9%</label>
+          </li>
 
-        <li>
-          <label>Suma întîrziată</label>
-          <input type="text" class="sumă întîrziată"/>
-          <b>MDL</b>
-        </li>
+          <li>
+            <label>Suma întîrziată</label>
+            <input type="text" class="sumă întîrziată"/>
+            <b>MDL</b>
+          </li>
 
-        <li>
-          <label>Dobînda calculată</label>
-          <input type="text" class="sumă dobîndă calculat" readonly="readonly"/>
-          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-          <b>MDL</b>
-        </li>
-      </ul>
+          <li>
+            <label>Dobînda calculată</label>
+            <input type="text" class="sumă dobîndă calculat" readonly="readonly"/>
+            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+            <b>MDL</b>
+          </li>
+        </ul>
+
+      </fieldset>
 
 
-      <ul class="subsecţiune sechestrare-bunuri eliminabil de tot">
-        <li class="titlu">sechestrare bunuri</li>
+      <fieldset class="subsecţiune sechestrare-bunuri eliminabil de tot">
+        <legend>sechestrare bunuri</legend>
 
-        <li>
-          <label>Data sechestrării</label>
-          <input type="text" class="dată"/>
-        </li>
+        <ul>
+          <li>
+            <label>Data sechestrării</label>
+            <input type="text" class="dată"/>
+          </li>
 
-        <li class="personalizat eliminabil">
-          <textarea class="etichetă" title="Etichetă editabilă">Descriere bun</textarea>
-          <input type="text" placeholder="suma" class="sumă"/>
-          <select class="valuta"></select>
-        </li>
+          <li class="personalizat eliminabil">
+            <textarea class="etichetă" title="Etichetă editabilă">Descriere bun</textarea>
+            <input type="text" placeholder="suma" class="sumă"/>
+            <select class="valuta"></select>
+          </li>
 
-        <li class="container-buton">
-          <button
-            class="adaugă-cîmp-personalizat implicit semiascuns"
-            data-şablon="cîmpul-personalizat"
-            data-etichetă="Descriere bun">+bun</button>
-        </li>
+          <li class="container-buton">
+            <button
+              class="adaugă-cîmp-personalizat implicit semiascuns"
+              data-şablon="cîmpul-personalizat"
+              data-etichetă="Descriere bun">+bun</button>
+          </li>
 
-        <li>
-          <label>Total</label>
-          <input type="text" class="sumă total calculat" readonly="readonly"/>
-          <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-          <b>MDL</b>
-        </li>
-      </ul>
+          <li>
+            <label>Total</label>
+            <input type="text" class="sumă total calculat" readonly="readonly"/>
+            <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+            <b>MDL</b>
+          </li>
+        </ul>
+
+      </fieldset>
 
 
       <div class="bara-de-instrumente pentru încheiere">
