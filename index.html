@@ -756,8 +756,10 @@
             </legend>
 
             <div class="conţinut">
-              <ul id="încheieri">
-                <li><a href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
+              <ul id="lista-încheieri" class="încheieri">
+                <li class="ico document"><a class="salvată" href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
+                <li class="ico document"><a href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
+                <li class="ico document"><a href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
               </ul>
             </div>
           </fieldset>
@@ -1709,15 +1711,6 @@
       <fieldset class="subsecţiune întîrziere eliminabil de tot">
         <legend>
           întîrziere
-
-          <span
-              class="ui-icon ui-icon-document buton semiascuns"
-              data-formular="încheiere-dobîndă-de-întîrziere"
-              title="Formează Încheiere cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu"></span>
-          <span
-              class="ui-icon ui-icon-document buton semiascuns"
-              title="Anexă cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu"
-              data-formular="anexă-dobîndă-de-întîrziere" data-dinamic="da"></span>
         </legend>
 
         <ul>
@@ -1744,6 +1737,17 @@
             <input type="text" class="sumă dobîndă calculat" readonly="readonly"/>
             <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
+          </li>
+
+          <li>
+            <ul class="încheieri contextuale">
+              <li class="ico document semiascuns"><a
+                  href="/formulare-încheieri/încheiere-dobîndă-de-întîrziere.html"
+                  title="Formează Încheiere cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu">formează încheiere</a></li>
+              <li class="ico document semiascuns"><a dinamic class="salvată"
+                title="Anexă cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu"
+                href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html">formează anexă</a></li>
+            </ul>
           </li>
         </ul>
 
@@ -1777,6 +1781,12 @@
             <input type="text" class="sumă total calculat" readonly="readonly"/>
             <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
             <b>MDL</b>
+          </li>
+
+          <li>
+            <ul class="încheieri">
+              <li class="ico document semiascuns"><a href="#">formează încheiere</a></li>
+            </ul>
           </li>
         </ul>
 

@@ -1452,19 +1452,39 @@ label,
   user-select: none;
 }
 
-#încheieri {
-  padding-left: 2em;
-  list-style: disc inside;
-}
-
-#încheieri a {
+ul.încheieri {
   font-size: small;
-  text-decoration: none;
-  color: #555;
+  margin-left: 13px !important;
+  padding: 1px 0 5px 0;
 }
 
-#încheieri .salvate::before {
+ul.încheieri li::before {
+  font-size: 13px;
+  vertical-align: 1px;
+  padding-right: 3px;
+}
+
+ul.încheieri li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul.încheieri li:hover::before,
+ul.încheieri li a:hover {
+  color: blue;
+  text-shadow: 0 0 1px silver;
+}
+
+ul.încheieri li a:hover {
+  text-decoration: underline;
+}
+
+ul.încheieri a.salvată::before {
   content: '✓';
-  margin: .75em -2em;
+  margin: -1px -25px;
   position: absolute;
+}
+
+#lista-încheieri li {
+  color: #555;
 }
