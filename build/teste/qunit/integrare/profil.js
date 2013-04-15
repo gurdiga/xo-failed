@@ -32,12 +32,12 @@ asyncTest('Profil', function () {
   $dialog.one('afişare', function () {
     ok($dialog.există(), 'avem dialog');
     ok($dialog.is(':visible'), 'afişat dialogul');
-    ok($dialog.find('legend label:contains("Profil")').există(), 'dialogul are titlu');
+    ok($dialog.find('h2:contains("Profil")').există(), 'dialogul are titlu');
 
     verificăPrezenţaCîmpurilor();
     populeazăCîmpuri();
 
-    var $butonDeSalvare = $dialog.find('legend button.salvează.semiascuns'),
+    var $butonDeSalvare = $dialog.find('.bara-de-instrumente button.salvează'),
         $butonDeÎnchidere = $dialog.find('button.închide');
 
     ok($butonDeSalvare.există(), 'dialogul are buton de salvare');
@@ -83,13 +83,13 @@ asyncTest('Profil', function () {
     ok($dialog.find('#instanţă-teritorială').există(), 'dialogul are cîmp pentru instanţa teritorială');
     ok($dialog.find('#email').există(), 'dialogul are cîmp pentru email');
 
-    var subsecţiuneContCauţiune = $dialog.find('.subsecţiune .titlu:contains("cont pentru cauţiuni, taxe şi speze")');
+    var subsecţiuneContCauţiune = $dialog.find('.subsecţiune legend:contains("cont pentru cauţiuni, taxe şi speze")');
 
     ok(subsecţiuneContCauţiune.există(), 'are subsecţiune cont pentru cauţiuni, taxe şi speze');
     ok(subsecţiuneContCauţiune.find('#cont-taxe-speze'), '...cu cîmp pentru numărul contului');
     ok(subsecţiuneContCauţiune.find('#bancă-taxe-speze'), '...cu cîmp pentru numărul băncii');
 
-    var subsecţiuneContPentruOnorarii = $dialog.find('.subsecţiune .titlu:contains("cont pentru onorarii")');
+    var subsecţiuneContPentruOnorarii = $dialog.find('.subsecţiune legend:contains("cont pentru onorarii")');
 
     ok(subsecţiuneContPentruOnorarii.există(), 'are subsecţiune cont pentru cauţiuni, taxe şi speze');
     ok(subsecţiuneContPentruOnorarii.find('#cont-onorarii'), '...cu cîmp pentru numărul contului');

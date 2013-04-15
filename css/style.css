@@ -396,12 +396,21 @@ li[data-href] {
   cursor: pointer;
 }
 
+h1, h2, h3 {
+  font-family: Oswald, sans-serif;
+  line-height: 1.5em;
+}
+
 h1 {
-  font: bold 2em/1.5em Oswald, sans-serif;
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
 }
 
 h3 {
-  font: bold 1.2em/1.5em Oswald, sans-serif;
+  font-size: 1.2em;
 }
 
 #conţinut {
@@ -1075,31 +1084,35 @@ button.cu.opţiuni:after {
 .dialog {
   display: none;
   position: absolute;
-  padding: .5em 1.5em;
+  padding: 20px 40px;
   z-index: 1;
   top: 20px;
   right: 0;
+}
+
+.dialog .bara-de-instrumente {
+  width: 30px;
+  top: 0;
+}
+
+.dialog .bara-de-instrumente>button {
+  font-size: 27px;
+  height: 30px;
+  width: 30px;
 }
 
 .dialog button.închide {
   font-size: 1.5em;
 }
 
-.dialog legend {
-  position: absolute;
-}
-
-.dialog legend label {
+.dialog h2 {
   color: #333;
   width: auto;
+  margin: 0 0 0 6px;
 }
 
-.dialog legend button.ui-icon {
-  display: inline-block;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  background-color: transparent;
+.dialog ul {
+  margin: 0;
 }
 
 #profil.dialog li label {

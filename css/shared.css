@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Ico';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Ico'), local('Ico'), url('data:font/woff;base64,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') format('woff');
+}
+
+.ico {
+  font-family: Ico;
+}
+
+/* TODO http://thenounproject.com/using-symbols/#digital-attribution */
+.ico.imprimă::before { content: "\f100"; } /* Unknown Designer, The Noun Project */
+.ico.regenerează::before { content: "\f101"; } /* Dmitry Baranovskiy, from The Noun Project */
+.ico.salvează::before { content: "\f102"; } /* Thomas Uebe, from The Noun Project */
+
 body {
   font: 14px Arial, sans-serif;
 }
@@ -16,7 +32,7 @@ textarea {
   font-size: 1.7em;
   font-weight: normal;
   position: absolute;
-  right: 0;
+  left: 0;
   top: 2px;
   padding: .1em;
   line-height: .6em;
@@ -46,48 +62,42 @@ button.închide:focus {
 }
 
 .bara-de-instrumente {
-  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
   padding: 0;
-  position: fixed;
-  right: 30px;
-  top: 120px;
-  -webkit-transition: opacity .75s;
-  -moz-transition: opacity .75s;
-  -o-transition: opacity .75s;
-  transition: opacity .75s;
-  opacity: .1;
-}
-
-.bara-de-instrumente.focusat,
-.bara-de-instrumente:hover {
-  opacity: 1;
+  position: absolute;
+  right: 5px;
+  top: 1px;
 }
 
 .bara-de-instrumente>button {
+  display: block;
   height: 48px;
   width: 48px;
+  margin-top: 5px;
   padding: 0;
   border: none;
-  background-color: black;
-  -webkit-transition: opacity .75s;
-  -moz-transition: opacity .75s;
-  -o-transition: opacity .75s;
-  transition: opacity .75s;
-  opacity: .8;
-  display: block;
+  font-size: 40px;
+  font-weight: normal;
+  color: white;
+  text-shadow: 0 -1px 1px rgba(150, 150, 150, .8);
+  box-shadow: 0 1px 1px rgba(150, 150, 150, .8);
+  -webkit-transition: all .25s;
+  -moz-transition: all .25s;
+  -o-transition: all .25s;
+  transition: all .25s;
+  background: #eee;
 }
 
 .bara-de-instrumente>button:hover {
-  opacity: .9;
+  background: #ddd;
 }
 
 .bara-de-instrumente>button~.mesaj {
   position: absolute;
-  background: white;
   padding: .5em 1em;
-  right: 0;
   margin-top: -.3em;
+  right: 0;
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+  background: white;
   color: #333;
   -webkit-transition: opacity .75s;
   -moz-transition: opacity .75s;
@@ -95,6 +105,7 @@ button.închide:focus {
   transition: opacity .75s;
   opacity: 0;
   font-family: sans-serif;
+  z-index: -1;
 }
 
 .mesaj.dinamicitate {
@@ -104,39 +115,6 @@ button.închide:focus {
 .bara-de-instrumente>button~.mesaj.afişat {
   opacity: 1;
   z-index: 1;
-}
-
-.bara-de-instrumente>button.salvează {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCQpHDl7uAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAEJSURBVFjD7ZetDsIwFEbPCMnmKIpJkCheYygkwYFiEh4DB4/AY8wh9wg46sARFKkCQwh/HYOuQEK/qabLTu/97u1ar3zAqkrgAA7gAA7wTGX9VAgofGDH/sF8gGDzfgQCiWSNRDJ6+EYPydQkAp0GdIAxADFo8AYetIiIEKdRzMy2ycPMRBVSRTGN/+wDnRJ2kKMDXgAEVC9GKSkAlVwAT3eqELnXCNBk9aMmJwRPnrm5B5OMbMdFmFynZrdMu7b7YHFVpLcbXwGABMHBZgRT/PO/7V6+OWCZYXKAMgf0qWjWr8wjqBHhoU4fu1eb8Nt7kae/QoVXychKhWL7egTu6OgADuAAHwQcAbNkL6DGQJSyAAAAAElFTkSuQmCC');
-}
-
-.bara-de-instrumente>button.salvează+.bifă {
-  position: absolute;
-  color: white;
-  margin: -48px 0 0 0;
-  height: 0;
-  overflow: hidden;
-  width: 18px;
-  padding-left: 30px;
-  cursor: text;
-  opacity: 0;
-}
-
-#formular.salvat .bara-de-instrumente>button.salvează+.bifă {
-  height: 48px;
-  -webkit-transition: opacity .75s;
-  -moz-transition: opacity .75s;
-  -o-transition: opacity .75s;
-  transition: opacity .75s;
-  opacity: 1;
-}
-
-.bara-de-instrumente>button.regenerează {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IArs4c6QAAAL1QTFRFAAAAhISERERExMTEJCQkpKSkZGRk5OTkFBQUlJSUVFRU1NTUNDQ0tLS0dHR09PT0DAwMjIyMTExMzMzMLCwsrKysbGxs7OzsHBwcnJycXFxc3NzcPDw8vLy8fHx8/Pz8BAQEhYWFRUVFxcXFJSUlpaWlZWVl5eXlFRUVlZWVVVVV1dXVNTU1tbW1dXV19fX1DQ0NjY2NTU1Nzc3NLS0tra2tbW1t7e3tHR0dnZ2dXV1d3d3dPT09vb29fX19/xcDJQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wJHAczJp3eCuoAAAEYSURBVEjH7ZTbboJAEIa1aACFuhptNWB/UVDaKDTWQwLR93+szpJadZMd8MI75gZm+D92ModtzB60Rg3UwFMB4Qw6flwZ2O5TSFu8iipAaODfVl/lwPxYSHOvVzyDMmAtszkNZC6OLYkmD8QrIM0u3tAjYssC8qcvV9ciIueAMenPt4EdBZYMsATe70vZBqYMsAcmStHoCKEHfoBM6TkBLT1ANZorZaR2+DqgY1MTXKVVdMJOB4gNfe2t7weFQpY2JTFV9bME8JgqiZGiFybQ54dvGFlK50MWSFIYV+JMepuf1oAk5t+8hS453e+SfYjkTJufyVuwKN5apRv3gRsz4go77bgXeZ5VvDXGB9s1oqZf36018EzgF2CTHcK2a+ieAAAAAElFTkSuQmCC');
-}
-
-.bara-de-instrumente>button.imprimă {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAAXNSR0IArs4c6QAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AYbCCAsCD9KMwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAF1SURBVFjD7ZcxSwMxFMd/kcKd09lJnbzNc7JubuKkfgBBJ+n3EKRTO7o5OoludtTJ0bGOdRQEHQTbyR4UnoPpYdv0os0VBPOyhLy797vkvX+SUyVhpjYHHuABHuABNivZHtggyfW3aLsBdjnJ9R+6AgTo0TX6IkL3JQLoUuFjbDTmtigAvBvGnlySvMaB7m0BEQ3SkScCFCFwREUnu2mMpMwn2h5XBL8qx2b2STPSQfpfldwDFIHWgaBGdJCCJVcWwCN1UlZ40KFSgmy1QxJAqLHoooMqm7yybvDMc06ZS8RNaDGRQcUDRDR9kiUTVL4lEwvUAlAT+uP175TkmOjbbL5sWSc6BmCH3jSADncoBMUq8cgM6mxnZQptvendTyRIfjuWvjwPjVxIP2tvsm9536pklZODDjWuXbcKAYSyltZw+AZnxRw4C7RQGqZ01XRocFrErUIBIUuG28ZLMdeWGx0o1TvRoP/T40j5fzQP8AAP+AOAT5blfsUc50WMAAAAAElFTkSuQmCC');
 }
 
 .bara-de-instrumente>button.ui-icon.colorat-invers {
