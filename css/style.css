@@ -525,7 +525,7 @@ input.sumă {
 }
 
 #formular h1 {
-  margin: 40px 0 20px;
+  margin: 20px 70px 20px 0;
   font-size: 3em;
 }
 
@@ -537,13 +537,9 @@ input.sumă {
 #formular #data-ultimei-modificări {
   color: silver;
   font-size: small;
-  margin: 4em 0 -4em .5em;
-  border-top: 1px solid #EEE;
-  width: 850px;
-}
-
-#formular #container-data-intentării {
-  margin-top: -2em;
+  margin: 30px 70px 0 0;
+  border-top: 1px solid #eee;
+  padding: 3px;
 }
 
 #formular #data {
