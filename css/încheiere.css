@@ -297,3 +297,9 @@ address {
   margin: 0;
   padding-left: 3em;
 }
+
+.bara-de-instrumente.pentru.încheiere>button {
+  height: 35px;
+  width: 35px;
+  font-size: 28px;
+}
