@@ -717,8 +717,16 @@ button.adaugă .legend.label {
   padding: 0;
 }
 
-#formular #cheltuieli {
+#cheltuieli {
   clear: left;
+}
+
+#părţile-au-ajuns-la-conciliere {
+  margin-left: 5px;
+}
+
+#părţile-au-ajuns-la-conciliere + p.şoaptă {
+  margin-bottom: 10px;
 }
 
 #cheltuieli .adăugate {
