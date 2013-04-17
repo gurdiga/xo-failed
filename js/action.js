@@ -3022,6 +3022,18 @@
       }
     },
 
+    deschide2: function (e) {
+      e.preventDefault();
+
+      var pagina = $(this).attr('href');
+
+      Încheieri.deschise[pagina] = {
+        tab: window.open(pagina, pagina, 'left=100,width=1000,height=1000')
+      };
+
+      $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);
+    },
+
     deschide: function () {
       var buton = $(this),
           formular = buton.attr('data-formular'),
@@ -3047,6 +3059,7 @@
       init: function () {
         // TODO: aici
         $(document)
+          .on('click', '.încheieri a', Încheieri.deschide2)
           .on('click', '.buton[data-formular]', Încheieri.deschide)
           .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
 

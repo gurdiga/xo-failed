@@ -1462,17 +1462,17 @@ label,
 
 ul.încheieri {
   font-size: small;
-  margin-left: 13px !important;
   padding: 1px 0 5px 0;
 }
 
 ul.încheieri li::before {
   font-size: 13px;
   vertical-align: 1px;
+  padding-right: 3px;
 }
 
-ul.încheieri.contextuale li::before {
-  padding-right: 3px;
+ul.încheieri.contextuale.borderou-de-calcul {
+  margin-left: 13em;
 }
 
 ul.încheieri li a {
@@ -1498,4 +1498,9 @@ ul.încheieri a.salvată::before {
 
 #lista-încheieri li {
   color: #555;
+}
+
+ul.încheieri,
+#lista-încheieri li {
+  margin-left: 14px;
 }

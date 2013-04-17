@@ -1,3 +1,4 @@
+- chestii-clickabile:hover { color: blue }
 - refa încheiere.js: elimină dependenţa între buton şi context
 - de migrat spre icon font
   - butoane mari
@@ -37,8 +38,9 @@
 ----------------------------------------------------------------------------------------------------
 BIBI
 
+- corectat denumirile încheieirilor (Tolea?)
 - lejerizează afişarea/ascunderea mesajelor de la butoane (salvare, regenerare, imprimare)
-- ncer tooltips?
+- nicer tooltips?
 
 ----------------------------------------------------------------------------------------------------
 

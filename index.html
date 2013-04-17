@@ -206,6 +206,7 @@
                 <input type="text" class="sumă dobîndă" readonly="readonly"/>
                 <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                 <b>MDL</b>
+                <!-- TODO: adăugat #din-calculator la link-ul încheierii -->
                 <span
                     class="ui-icon ui-icon-document buton semiascuns"
                     data-formular="anexă-dobîndă-de-întîrziere"
@@ -267,15 +268,6 @@
           <p id="container-data-intentării">
             <label for="data-intentării">Data intentării</label>
             <input type="text" id="data-intentării" class="dată intentării"/>
-
-            <span
-                class="ui-icon ui-icon-document buton semiascuns"
-                data-formular="încheiere-de-intentare"
-                title="Formează Încheiere cu privire la intentarea procedurii de executare"></span>
-            <span
-                class="ui-icon ui-icon-document buton semiascuns"
-                data-formular="încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii"
-                title="Formează Încheiere de intentare a procedurii de executare şi de asigurare a executării documentului executoriu"></span>
           </p>
 
           <div class="coloană stînga">
@@ -504,10 +496,12 @@
                   <input type="text" id="total-taxe-şi-speze" class="sumă calculat" readonly="readonly"/>
                   <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                   <b>MDL</b>
-                  <span
-                      class="ui-icon ui-icon-document buton semiascuns"
-                      title="Formează Borderou de calcul al cheltuielilor de executare"
-                      data-formular="borderou-de-calcul"></span>
+                </li>
+
+                <li>
+                  <ul class="încheieri contextuale borderou-de-calcul">
+                    <li class="ico document semiascuns"><a href="/formulare-încheieri/borderou-de-calcul.html">formează borderou de calcul</a></li>
+                  </ul>
 
                   <ul class="adăugate"></ul>
                 </li>
@@ -757,9 +751,9 @@
 
             <div class="conţinut">
               <ul id="lista-încheieri" class="încheieri">
-                <li class="ico document"><a class="salvată" href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
-                <li class="ico document"><a href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
-                <li class="ico document"><a href="formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
+                <li class="ico document"><a href="/formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
+                <li class="ico document"><a href="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html">cu privire la intentarea procedurii de executare şi asigurarea executării documentului executoriu</a></li>
+                <li class="ico document"><a href="/formulare-încheieri/borderou-de-calcul.html">formează borderou de calcul</a></li>
               </ul>
             </div>
           </fieldset>
@@ -1784,7 +1778,7 @@
           </li>
 
           <li>
-            <ul class="încheieri">
+            <ul class="încheieri contextuale">
               <li class="ico document semiascuns"><a href="#">formează încheiere</a></li>
             </ul>
           </li>

@@ -16,10 +16,9 @@
       Încheiere.$ = $(document.body);
       Încheiere.pagina = decodeURIComponent(location.pathname);
       Încheiere.buton = Încheieri.deschise[Încheiere.pagina].buton;
-      Încheiere.formular = Încheiere.buton.attr('data-formular');
 
       // nu s-a deschis din calculatorul de dobînzi de întîrziere din bara de sus
-      if (Încheiere.buton.parents('#formular').există()) {
+      if (location.hash !== '#din-calculator') {
         setInterval(Încheiere.verificăDacăFormularulEDeschis, 500);
       }
 
@@ -161,10 +160,9 @@
 
     cale: function () {
       if (Încheiere.nouă()) {
-        var director = '/date/' + Utilizator.login + '/proceduri/' + FormularProcedură.număr() + '/încheieri/',
-            fişier = Încheiere.formular + '-' + (new Date()).getTime() + '.html';
-
-        return director + fişier;
+        return '/date/' + Utilizator.login + '/proceduri/' +
+          FormularProcedură.număr() + '/încheieri/' +
+          Încheiere.pagina.split('/formulare-încheieri/')[1];
       } else {
         return location.pathname;
       }
