@@ -51,10 +51,8 @@
       "');}return p.join('');");
   }
 
-  this.compile = function(data, document) {
-    var template = document.querySelector('body>script[type="text/micro-template"]');
-
-    document.body.innerHTML = compile(template.innerHTML)(data);
+  this.compile = function(data, template) {
+    return compile(template.innerHTML)(data);
   };
 })();
 

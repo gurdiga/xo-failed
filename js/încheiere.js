@@ -46,7 +46,10 @@
     },
 
     compilează: function () {
-      app.compile(Încheiere.context(), document);
+      var date = Încheiere.context(),
+          template = Încheiere.$.find('script[type="text/micro-template"]')[0];
+
+      document.body.innerHTML = app.compile(date, template);
     },
 
     context: function () {
