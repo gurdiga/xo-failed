@@ -58,6 +58,7 @@ button.închide:focus {
 .semiascuns:focus,
 .semiascuns:hover {
   opacity: 1;
+  color: blue;
 }
 
 .ui-icon.colorat-invers {
