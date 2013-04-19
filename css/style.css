@@ -10,7 +10,6 @@
 body {
   margin: 0;
   padding: 0 2em;
-  background-image: url('/imagini/fundal.png');
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;

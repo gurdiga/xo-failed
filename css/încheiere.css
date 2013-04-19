@@ -98,10 +98,6 @@ p.titlu {
 }
 
 @media screen {
-  html {
-    background-image: url('/imagini/fundal.png');
-  }
-
   body {
     position: relative;
     margin: 1em auto 6em;
