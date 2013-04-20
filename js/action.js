@@ -793,8 +793,8 @@
           this.$ = FormularProcedură.$obiectulUrmăririi;
         },
 
-        colectează: function ($secţiune) {
-          return $secţiune.find('.subsecţiune.întîrziere').map(function () {
+        colectează: function () {
+          return this.$.find('.subsecţiune.întîrziere').map(function () {
             var $întîrziere = $(this);
 
             return {
@@ -808,10 +808,11 @@
           }).get();
         },
 
-        populează: function (întîrzieri, $secţiune) {
+        populează: function (întîrzieri) {
           if (!întîrzieri) return;
 
           var întîrziere, $întîrziere,
+              $secţiune = this.$,
               $buton = $secţiune.find('#adaugă-subsecţiune .întîrziere');
 
           for (var i = 0; i < întîrzieri.length; i++) {
@@ -829,10 +830,73 @@
           }
         },
 
-        resetează: function ($secţiune) {
-          $secţiune = $secţiune || this.$;
+        resetează: function () {
+          this.$.find('.subsecţiune.întîrziere').remove();
+        }
+      },
 
-          $secţiune.find('.subsecţiune.întîrziere').remove();
+      'sechestrări-bunuri': {
+        $: null,
+
+        init: function () {
+          this.$ = FormularProcedură.$obiectulUrmăririi;
+        },
+
+        colectează: function () {
+          return this.$.find('.subsecţiune.sechestrare-bunuri').map(function () {
+            var $sechestrare = $(this);
+
+            return {
+              data: $sechestrare.find('.dată').val(),
+              bunuri: $sechestrare.find('.personalizat').map(function () {
+                var cîmp = $(this);
+
+                return {
+                  descriere: cîmp.find('.etichetă').val(),
+                  sumă: cîmp.find('.sumă').val(),
+                  valuta: cîmp.find('.valuta').val()
+                };
+              }).get(),
+              încheieri: FormularProcedură.secţiuni['încheieri'].colectează($sechestrare.find('.încheieri a'))
+            };
+          }).get();
+        },
+
+        populează: function (sechestrări) {
+          /*jshint maxcomplexity:6*/ // TODO split?
+          if (!sechestrări) return;
+
+          var sechestrare, $sechestrare, bun, $bun, primul = true,
+              $secţiune = this.$,
+              buton = $secţiune.find('#adaugă-subsecţiune .sechestrare-bunuri');
+
+          for (var i = 0; i < sechestrări.length; i++) {
+            buton.click();
+
+            sechestrare = sechestrări[i];
+            $sechestrare = $secţiune.find('.subsecţiune.sechestrare-bunuri:last'),
+
+            $sechestrare.find('.dată').val(sechestrare.data);
+            primul = true;
+
+            for (var j = 0; j < sechestrare.bunuri.length; j++) {
+              bun = sechestrare.bunuri[j];
+
+              if (!primul) $sechestrare.find('.adaugă-cîmp-personalizat').click();
+
+              $bun = $sechestrare.find('.personalizat:last');
+              $bun.find('.etichetă').val(bun.descriere);
+              $bun.find('.sumă').val(bun.sumă);
+              $bun.find('.valuta').val(bun.valuta).trigger('input');
+
+              if (primul) primul = false;
+            }
+          }
+        },
+
+        resetează: function () {
+          this.$.find('.subsecţiune.sechestrare-bunuri').remove();
+
         }
       },
 
@@ -982,35 +1046,14 @@
         }
 
         if (obiectulUrmăririi.caracter === 'pecuniar') {
-          obiectulUrmăririi['întîrzieri'] = FormularProcedură.secţiuni['întîrzieri'].colectează($secţiune);
-          obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
+          obiectulUrmăririi['întîrzieri'] = FormularProcedură.secţiuni['întîrzieri'].colectează();
+          obiectulUrmăririi['sechestrări-bunuri'] = FormularProcedură.secţiuni['sechestrări-bunuri'].colectează();
         } else {
           obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
           colecteazăÎncheiere();
         }
 
         return obiectulUrmăririi;
-      }
-
-      // ------------------------------------------
-      function colecteazăSechestrăriBunuri($secţiune) {
-        return $secţiune.find('.subsecţiune.sechestrare-bunuri').map(function () {
-          var $sechestrare = $(this);
-
-          return {
-            data: $sechestrare.find('.dată').val(),
-            bunuri: $sechestrare.find('.personalizat').map(function () {
-              var cîmp = $(this);
-
-              return {
-                descriere: cîmp.find('.etichetă').val(),
-                sumă: cîmp.find('.sumă').val(),
-                valuta: cîmp.find('.valuta').val()
-              };
-            }).get(),
-            încheieri: FormularProcedură.secţiuni['încheieri'].colectează($sechestrare.find('.încheieri a'))
-          };
-        }).get();
       }
 
       // ------------------------------------------
@@ -1344,8 +1387,8 @@
           populeazăSume($secţiune, obiectulUrmăririi['sume']);
         }
 
-        FormularProcedură.secţiuni['întîrzieri'].populează(obiectulUrmăririi['întîrzieri'], $secţiune);
-        populeazăSechestrăriBunuri($secţiune, obiectulUrmăririi['sechestrări-bunuri']);
+        FormularProcedură.secţiuni['întîrzieri'].populează(obiectulUrmăririi['întîrzieri']);
+        FormularProcedură.secţiuni['sechestrări-bunuri'].populează(obiectulUrmăririi['sechestrări-bunuri']);
         populeazăAmînări($secţiune, obiectulUrmăririi['amînări']);
 
         if (obiectulUrmăririi['încheiere']) {
@@ -1371,38 +1414,6 @@
           $încasare.find('#venitul').trigger('input');
 
           if (prima) prima = false;
-        }
-      }
-
-      // ------------------------------------------
-      function populeazăSechestrăriBunuri($secţiune, sechestrări) {
-        /*jshint maxcomplexity:6*/
-        if (!sechestrări) return;
-
-        var sechestrare, $sechestrare, bun, $bun, primul = true,
-            buton = $secţiune.find('#adaugă-subsecţiune .sechestrare-bunuri');
-
-        for (var i = 0; i < sechestrări.length; i++) {
-          buton.click();
-
-          sechestrare = sechestrări[i];
-          $sechestrare = $secţiune.find('.subsecţiune.sechestrare-bunuri:last'),
-
-          $sechestrare.find('.dată').val(sechestrare.data);
-          primul = true;
-
-          for (var j = 0; j < sechestrare.bunuri.length; j++) {
-            bun = sechestrare.bunuri[j];
-
-            if (!primul) $sechestrare.find('.adaugă-cîmp-personalizat').click();
-
-            $bun = $sechestrare.find('.personalizat:last');
-            $bun.find('.etichetă').val(bun.descriere);
-            $bun.find('.sumă').val(bun.sumă);
-            $bun.find('.valuta').val(bun.valuta).trigger('input');
-
-            if (primul) primul = false;
-          }
         }
       }
 
@@ -1633,6 +1644,7 @@
         .end();
 
       FormularProcedură.secţiuni['încheieri'].resetează();
+      FormularProcedură.secţiuni['sechestrări-bunuri'].resetează();
       FormularProcedură.secţiuni['întîrzieri'].resetează();
     },
 
