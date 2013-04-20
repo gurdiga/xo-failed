@@ -786,6 +786,52 @@
         }
       },
 
+      'sume': {
+        $: null,
+
+        init: function () {
+          this.$ = FormularProcedură.$obiectulUrmăririi;
+        },
+
+        colectează: function () {
+          var sume = {};
+
+          this.$.find('ul:not(.subsecţiune) .sumă+.valuta').each(function () {
+            var cîmp = $(this).prev(),
+                etichetă = cîmp.prev(),
+                denumire = etichetă[etichetă.is('label') ? 'text' : 'val']();
+
+            sume[denumire] = {
+              suma: cîmp.val(),
+              valuta: cîmp.next('.valuta').val()
+            };
+          });
+
+          return sume;
+        },
+
+        populează: function (sume) {
+          if (!sume) return;
+
+          var $secţiune = this.$.find('ul:first'),
+              buton = $secţiune.find('.adaugă-cîmp-personalizat.sumă'),
+              cîmp, $cîmp;
+
+          for (cîmp in sume) {
+            $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
+
+            if (!$cîmp.există()) {
+              buton.click();
+              $cîmp = $secţiune.find('.etichetă+.sumă').last();
+              $cîmp.prev().val(cîmp).trigger('input');
+            }
+
+            $cîmp.val(sume[cîmp].suma);
+            $cîmp.next('.valuta').val(sume[cîmp].valuta);
+          }
+        }
+      },
+
       'sume-personalizate': {
         $: null,
 
@@ -1094,7 +1140,7 @@
         } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
           obiectulUrmăririi['bunuri-confiscate'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-confiscate');
         } else {
-          obiectulUrmăririi['sume'] = colecteazăSume($secţiune);
+          obiectulUrmăririi['sume'] = FormularProcedură.secţiuni['sume'].colectează();
         }
 
         if (obiectulUrmăririi.caracter === 'pecuniar') {
@@ -1132,24 +1178,6 @@
 
           return date;
         }).get();
-      }
-
-      // ------------------------------------------
-      function colecteazăSume($secţiune) {
-        var sume = {};
-
-        $secţiune.find('ul:not(.subsecţiune) .sumă+.valuta').each(function () {
-          var cîmp = $(this).prev(),
-              etichetă = cîmp.prev(),
-              denumire = etichetă[etichetă.is('label') ? 'text' : 'val']();
-
-          sume[denumire] = {
-            suma: cîmp.val(),
-            valuta: cîmp.next('.valuta').val()
-          };
-        });
-
-        return sume;
       }
 
       // ------------------------------------------
@@ -1406,7 +1434,7 @@
         } else if ($secţiune.find('#obiect').val() === 'nimicirea bunurilor') {
           FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-nimicite', obiectulUrmăririi);
         } else {
-          populeazăSume($secţiune, obiectulUrmăririi['sume']);
+          FormularProcedură.secţiuni['sume'].populează(obiectulUrmăririi['sume']);
         }
 
         FormularProcedură.secţiuni['întîrzieri'].populează(obiectulUrmăririi['întîrzieri']);
@@ -1461,28 +1489,6 @@
             $amînare.find('.etichetă').val(etichetă);
             $amînare.find('.dată').val(amînare[etichetă]);
           }
-        }
-      }
-
-      // ------------------------------------------
-      function populeazăSume($secţiune, sume) {
-        if (!sume) return;
-
-        $secţiune = $secţiune.find('ul:first');
-
-        var cîmp, $cîmp, buton = $secţiune.find('.adaugă-cîmp-personalizat.sumă');
-
-        for (cîmp in sume) {
-          $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
-
-          if (!$cîmp.există()) {
-            buton.click();
-            $cîmp = $secţiune.find('.etichetă+.sumă').last();
-            $cîmp.prev().val(cîmp).trigger('input');
-          }
-
-          $cîmp.val(sume[cîmp].suma);
-          $cîmp.next('.valuta').val(sume[cîmp].valuta);
         }
       }
 
