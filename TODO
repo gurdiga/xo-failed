@@ -1,4 +1,5 @@
 - refa cole/popu
+- de eliminat jshint maxcomplexity
 - de migrat spre icon font
   - butoane mari
   - butoane de expandare/colapsare secţiuni

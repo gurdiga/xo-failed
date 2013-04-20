@@ -786,6 +786,54 @@
         }
       },
 
+      'amînări': {
+        $: null,
+
+        init: function () {
+          this.$ = FormularProcedură.$obiectulUrmăririi;
+        },
+
+        colectează: function () {
+          return this.$.find('.dată.amînare').map(function () {
+            var $input = $(this),
+                $label = $input.prev(),
+                amînăre = {};
+
+            amînăre[$label.val()] = $input.val();
+
+            return amînăre;
+          }).get();
+        },
+
+        populează: function (amînări) {
+          /*jshint maxcomplexity:5*/
+          if (!amînări || amînări.length === 0) return;
+
+          var $butonDeAdăugare = this.$.find('button.adaugă-cîmp-personalizat.amînare');
+
+          if (!$butonDeAdăugare.există()) return;
+
+          var i = 0, amînare, etichetă, $amînare;
+
+          for (; i < amînări.length; i++) {
+            $butonDeAdăugare.click();
+            amînare = amînări[i];
+
+            for (etichetă in amînare) {
+              // hack! :)
+              // aici întotdeauna va fi doar un item
+              $amînare = $butonDeAdăugare.parent().prev();
+              $amînare.find('.etichetă').val(etichetă);
+              $amînare.find('.dată').val(amînare[etichetă]);
+            }
+          }
+        },
+
+        resetează: function () {
+          this.$.find('.dată.amînare').remove();
+        }
+      },
+
       'sume': {
         $: null,
 
@@ -1078,7 +1126,7 @@
           var $input = $(this),
               $label = $input.prev();
 
-          if ($input.is('.dată.amînare')) return; // avem colecteazăAmînări() special pentru asta
+          if ($input.is('.dată.amînare')) return; // avem subrutină specială pentru asta
 
           if ($label.is('.etichetă')) {
             if (!date.subformular) date.subformular = {};
@@ -1147,24 +1195,11 @@
           obiectulUrmăririi['întîrzieri'] = FormularProcedură.secţiuni['întîrzieri'].colectează();
           obiectulUrmăririi['sechestrări-bunuri'] = FormularProcedură.secţiuni['sechestrări-bunuri'].colectează();
         } else {
-          obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
+          obiectulUrmăririi['amînări'] = FormularProcedură.secţiuni['amînări'].colectează();
           colecteazăÎncheiere();
         }
 
         return obiectulUrmăririi;
-      }
-
-      // ------------------------------------------
-      function colecteazăAmînări($secţiune) {
-        return $secţiune.find('.dată.amînare').map(function () {
-          var $input = $(this),
-              $label = $input.prev(),
-              amînăre = {};
-
-          amînăre[$label.val()] = $input.val();
-
-          return amînăre;
-        }).get();
       }
 
       // ------------------------------------------
@@ -1439,7 +1474,7 @@
 
         FormularProcedură.secţiuni['întîrzieri'].populează(obiectulUrmăririi['întîrzieri']);
         FormularProcedură.secţiuni['sechestrări-bunuri'].populează(obiectulUrmăririi['sechestrări-bunuri']);
-        populeazăAmînări($secţiune, obiectulUrmăririi['amînări']);
+        FormularProcedură.secţiuni['amînări'].populează(obiectulUrmăririi['amînări']);
 
         if (obiectulUrmăririi['încheiere']) {
           $secţiune.find('.buton[data-formular]')
@@ -1464,31 +1499,6 @@
           $încasare.find('#venitul').trigger('input');
 
           if (prima) prima = false;
-        }
-      }
-
-      // ------------------------------------------
-      function populeazăAmînări($secţiune, amînări) {
-        /*jshint maxcomplexity:5*/
-        if (!amînări || amînări.length === 0) return;
-
-        var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.amînare');
-
-        if (!$butonDeAdăugare.există()) return;
-
-        var i = 0, amînare, etichetă, $amînare;
-
-        for (; i < amînări.length; i++) {
-          $butonDeAdăugare.click();
-          amînare = amînări[i];
-
-          for (etichetă in amînare) {
-            // hack! :)
-            // aici întotdeauna va fi doar un item
-            $amînare = $butonDeAdăugare.parent().prev();
-            $amînare.find('.etichetă').val(etichetă);
-            $amînare.find('.dată').val(amînare[etichetă]);
-          }
         }
       }
 
