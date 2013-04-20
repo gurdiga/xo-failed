@@ -767,6 +767,16 @@
         .find('#tireu').toggle(afişeazăTireu).end();
     },
 
+    colecteazăSecţiune: function (nume, arg) {
+      this.secţiuni[nume].colectează(arg);
+      // TODO + privatizare secţiuni?
+    },
+
+    populeazăSecţiune: function (nume, date, arg) {
+      this.secţiuni[nume].populează(date, arg);
+      // TODO + privatizare secţiuni?
+    },
+
     // TODO
     secţiuni: {
       init: function () {
@@ -825,12 +835,116 @@
 
       'obiectul-urmăririi': {
         colectează: function () {
+          /*jshint maxcomplexity:8*/ // TODO: fix this?
+          var $secţiune = FormularProcedură.$obiectulUrmăririi,
+              $obiectulUrmăririi = $secţiune.find('#obiect'),
+              obiectulUrmăririi;
+
+          if (FormularProcedură.pensieDeÎntreţinere()) {
+            obiectulUrmăririi = {'încasări': FormularProcedură.secţiuni['pensie-de-întreţinere'].colectează()};
+          } else {
+            obiectulUrmăririi = FormularProcedură.secţiuni['generică'].colectează($secţiune);
+          }
+
+          if ($obiectulUrmăririi.val() === 'aplicarea măsurilor de asigurare a acţiunii') {
+            FormularProcedură.secţiuni['măsuri-de-asigurare'].colectează(obiectulUrmăririi);
+          } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile') {
+            obiectulUrmăririi['bunuri-ridicate'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-ridicate');
+          } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
+            obiectulUrmăririi['bunuri-transmise'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-transmise');
+          } else if ($obiectulUrmăririi.val() === 'nimicirea bunurilor') {
+            obiectulUrmăririi['bunuri-nimicite'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-nimicite');
+          } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
+            obiectulUrmăririi['bunuri-confiscate'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-confiscate');
+          } else {
+            obiectulUrmăririi['sume'] = FormularProcedură.secţiuni['sume'].colectează();
+          }
+
+          if (obiectulUrmăririi.caracter === 'pecuniar') {
+            obiectulUrmăririi['întîrzieri'] = FormularProcedură.secţiuni['întîrzieri'].colectează();
+            obiectulUrmăririi['sechestrări-bunuri'] = FormularProcedură.secţiuni['sechestrări-bunuri'].colectează();
+          } else {
+            obiectulUrmăririi['amînări'] = FormularProcedură.secţiuni['amînări'].colectează();
+            obiectulUrmăririi['încheiere'] = $secţiune.find('.încheieri a').data('pagina'); // TODO?
+          }
+
+          return obiectulUrmăririi;
         },
 
-        populează: function () {
+        populează: function (obiectulUrmăririi) {
+          /*jshint maxcomplexity:8*/
+          var $secţiune = FormularProcedură.$obiectulUrmăririi;
+
+          FormularProcedură.secţiuni['generică'].populează($secţiune, obiectulUrmăririi);
+          FormularProcedură.secţiuni['pensie-de-întreţinere'].populează(obiectulUrmăririi['încasări']);
+
+          if ($secţiune.find('#obiect').val() === 'aplicarea măsurilor de asigurare a acţiunii') {
+            FormularProcedură.secţiuni['măsuri-de-asigurare'].populează(obiectulUrmăririi);
+          } else if ($secţiune.find('#obiect').val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile') {
+            FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-ridicate', obiectulUrmăririi);
+          } else if ($secţiune.find('#obiect').val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
+            FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-transmise', obiectulUrmăririi);
+          } else if ($secţiune.find('#obiect').val() === 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
+              ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el') {
+            FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-în-litigiu', obiectulUrmăririi);
+          } else if ($secţiune.find('#obiect').val() === 'confiscarea bunurilor') {
+            FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-confiscate', obiectulUrmăririi);
+          } else if ($secţiune.find('#obiect').val() === 'nimicirea bunurilor') {
+            FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-nimicite', obiectulUrmăririi);
+          } else {
+            FormularProcedură.secţiuni['sume'].populează(obiectulUrmăririi['sume']);
+          }
+
+          FormularProcedură.secţiuni['întîrzieri'].populează(obiectulUrmăririi['întîrzieri']);
+          FormularProcedură.secţiuni['sechestrări-bunuri'].populează(obiectulUrmăririi['sechestrări-bunuri']);
+          FormularProcedură.secţiuni['amînări'].populează(obiectulUrmăririi['amînări']);
+
+          if (obiectulUrmăririi['încheiere']) {
+            $secţiune.find('.buton[data-formular]')
+              .attr('data-pagina', obiectulUrmăririi['încheiere'])
+              .addClass('salvat');
+          }
         },
 
         resetează: function () {
+        }
+      },
+
+      'pensie-de-întreţinere': {
+        $: null,
+
+        init: function () {
+          this.$ = FormularProcedură.$obiectulUrmăririi;
+        },
+
+        colectează: function () {
+          return this.$.find('.subsecţiune.încasare').map(function () {
+            var date = {};
+
+            $(this).find(':input:not([readonly])').each(function () {
+              date[this.id] = $.trim($(this).val());
+            });
+
+            return date;
+          }).get();
+        },
+
+        populează: function (încasări) {
+          /*jshint maxcomplexity:5*/
+          if (!încasări) return;
+
+          var $încasare, i, prima = true,
+              buton = this.$.find('#adaugă-subsecţiune .încasare');
+
+          for (i = 0; i < încasări.length; i++) {
+            if (!prima) buton.click();
+
+            $încasare = this.$.find('.subsecţiune.încasare:last');
+            FormularProcedură.secţiuni['generică'].populează($încasare, încasări[i]);
+            $încasare.find('#venitul').trigger('input');
+
+            if (prima) prima = false;
+          }
         }
       },
 
@@ -917,32 +1031,6 @@
 
         resetează: function () {
           this.$.find('.dată.amînare').remove();
-        }
-      },
-
-      'încasări': {
-        $: null,
-
-        init: function () {
-          this.$ = FormularProcedură.$obiectulUrmăririi;
-        },
-
-        colectează: function () {
-          return this.$.find('.subsecţiune.încasare').map(function () {
-            var date = {};
-
-            $(this).find(':input:not([readonly])').each(function () {
-              date[this.id] = $.trim($(this).val());
-            });
-
-            return date;
-          }).get();
-        },
-
-        populează: function () {
-        },
-
-        resetează: function () {
         }
       },
 
@@ -1385,44 +1473,6 @@
     },
 
     colectează: function () {
-      function colecteazăObiectulUrmăririi() {
-        /*jshint maxcomplexity:8*/ // TODO: fix this?
-        var $secţiune = FormularProcedură.$obiectulUrmăririi,
-            $obiectulUrmăririi = $secţiune.find('#obiect'),
-            obiectulUrmăririi;
-
-        if (FormularProcedură.pensieDeÎntreţinere()) {
-          obiectulUrmăririi = {'încasări': FormularProcedură.secţiuni['încasări'].colectează()};
-        } else {
-          obiectulUrmăririi = FormularProcedură.secţiuni['generică'].colectează($secţiune);
-        }
-
-        if ($obiectulUrmăririi.val() === 'aplicarea măsurilor de asigurare a acţiunii') {
-          FormularProcedură.secţiuni['măsuri-de-asigurare'].colectează(obiectulUrmăririi);
-        } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile') {
-          obiectulUrmăririi['bunuri-ridicate'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-ridicate');
-        } else if ($obiectulUrmăririi.val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
-          obiectulUrmăririi['bunuri-transmise'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-transmise');
-        } else if ($obiectulUrmăririi.val() === 'nimicirea bunurilor') {
-          obiectulUrmăririi['bunuri-nimicite'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-nimicite');
-        } else if ($obiectulUrmăririi.val() === 'confiscarea bunurilor') {
-          obiectulUrmăririi['bunuri-confiscate'] = FormularProcedură.secţiuni['sume-personalizate'].colectează('.bunuri-confiscate');
-        } else {
-          obiectulUrmăririi['sume'] = FormularProcedură.secţiuni['sume'].colectează();
-        }
-
-        if (obiectulUrmăririi.caracter === 'pecuniar') {
-          obiectulUrmăririi['întîrzieri'] = FormularProcedură.secţiuni['întîrzieri'].colectează();
-          obiectulUrmăririi['sechestrări-bunuri'] = FormularProcedură.secţiuni['sechestrări-bunuri'].colectează();
-        } else {
-          obiectulUrmăririi['amînări'] = FormularProcedură.secţiuni['amînări'].colectează();
-          obiectulUrmăririi['încheiere'] = $secţiune.find('.încheieri a').data('pagina'); // TODO?
-        }
-
-        return obiectulUrmăririi;
-      }
-
-      // ------------------------------------------
       function colecteazăPersoaneTerţe() {
         return FormularProcedură.$.find('.persoană-terţă').map(function () {
           return FormularProcedură.secţiuni['generică'].colectează(this);
@@ -1446,7 +1496,7 @@
       return {
         'data-intentării': FormularProcedură.$.find('#data-intentării').val(),
         'document-executoriu': FormularProcedură.secţiuni['generică'].colectează('#document-executoriu'),
-        'obiectul-urmăririi': colecteazăObiectulUrmăririi(),
+        'obiectul-urmăririi': FormularProcedură.secţiuni['obiectul-urmăririi'].colectează(),
         'cheltuieli': FormularProcedură.secţiuni['cheltuieli'].colectează(),
         'creditor': FormularProcedură.secţiuni['generică'].colectează('#creditor'),
         'persoane-terţe': colecteazăPersoaneTerţe(),
@@ -1556,61 +1606,6 @@
     populează: function (procedură) {
       /*jshint maxcomplexity:8*/
       // ------------------------------------------
-      function populeazăObiectulUrmăririi() {
-        var $secţiune = FormularProcedură.$obiectulUrmăririi,
-            obiectulUrmăririi = procedură['obiectul-urmăririi'];
-
-        FormularProcedură.secţiuni['generică'].populează($secţiune, obiectulUrmăririi);
-        populeazăPensieÎntreţinere($secţiune, obiectulUrmăririi['încasări']);
-
-        if ($secţiune.find('#obiect').val() === 'aplicarea măsurilor de asigurare a acţiunii') {
-          FormularProcedură.secţiuni['măsuri-de-asigurare'].populează(obiectulUrmăririi);
-        } else if ($secţiune.find('#obiect').val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile') {
-          FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-ridicate', obiectulUrmăririi);
-        } else if ($secţiune.find('#obiect').val() === 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile') {
-          FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-transmise', obiectulUrmăririi);
-        } else if ($secţiune.find('#obiect').val() === 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
-            ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el') {
-          FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-în-litigiu', obiectulUrmăririi);
-        } else if ($secţiune.find('#obiect').val() === 'confiscarea bunurilor') {
-          FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-confiscate', obiectulUrmăririi);
-        } else if ($secţiune.find('#obiect').val() === 'nimicirea bunurilor') {
-          FormularProcedură.secţiuni['sume-personalizate'].populează('bunuri-nimicite', obiectulUrmăririi);
-        } else {
-          FormularProcedură.secţiuni['sume'].populează(obiectulUrmăririi['sume']);
-        }
-
-        FormularProcedură.secţiuni['întîrzieri'].populează(obiectulUrmăririi['întîrzieri']);
-        FormularProcedură.secţiuni['sechestrări-bunuri'].populează(obiectulUrmăririi['sechestrări-bunuri']);
-        FormularProcedură.secţiuni['amînări'].populează(obiectulUrmăririi['amînări']);
-
-        if (obiectulUrmăririi['încheiere']) {
-          $secţiune.find('.buton[data-formular]')
-            .attr('data-pagina', obiectulUrmăririi['încheiere'])
-            .addClass('salvat');
-        }
-      }
-
-      // ------------------------------------------
-      function populeazăPensieÎntreţinere($secţiune, încasări) {
-        /*jshint maxcomplexity:5*/
-        if (!încasări) return;
-
-        var $încasare, i, prima = true,
-            buton = $secţiune.find('#adaugă-subsecţiune .încasare');
-
-        for (i = 0; i < încasări.length; i++) {
-          if (!prima) buton.click();
-
-          $încasare = $secţiune.find('.subsecţiune.încasare:last');
-          FormularProcedură.secţiuni['generică'].populează($încasare, încasări[i]);
-          $încasare.find('#venitul').trigger('input');
-
-          if (prima) prima = false;
-        }
-      }
-
-      // ------------------------------------------
       function populeazăPersoaneleTerţe() {
         var $adaugă = FormularProcedură.$.find('#creditor+button.adaugă'), $secţiune;
 
@@ -1658,7 +1653,7 @@
       FormularProcedură.$.find('.buton[data-formular]').removeAttr('dezactivat');
 
       FormularProcedură.secţiuni['generică'].populează('#document-executoriu', procedură['document-executoriu']);
-      populeazăObiectulUrmăririi();
+      FormularProcedură.secţiuni['obiectul-urmăririi'].populează(procedură['obiectul-urmăririi']);
       FormularProcedură.secţiuni['cheltuieli'].populează(procedură.cheltuieli);
       FormularProcedură.secţiuni['generică'].populează('#creditor', procedură['creditor']);
       populeazăPersoaneleTerţe();
