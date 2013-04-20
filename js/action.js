@@ -701,6 +701,7 @@
         .parent().show();
     },
 
+    // TODO un nume mai descriptiv?
     calculează: function () {
       FormularProcedură.deschis = true;
 
@@ -762,6 +763,33 @@
         .find('#tip').text(tip).end()
         .find('#număr').text(număr).end()
         .find('#tireu').toggle(afişeazăTireu).end();
+    },
+
+    // TODO
+    secţiuni: {
+      'obiectul-urmăririi': {
+        colectează: function () {
+        },
+
+        populează: function () {
+        }
+      },
+
+      'încheieri': {
+        $: $('#încheieri'),
+
+        colectează: function () {
+          return this.$.find('a').map(function () {
+            return this.getAttribute('href');
+          }).get();
+        },
+
+        populează: function (încheieri) {
+          return $.each(încheieri, function () {
+            // TODO cum populăm???
+          });
+        }
+      }
     },
 
     colectează: function () {
@@ -839,7 +867,7 @@
 
         // ------------------------------------------
         function colecteazăÎncheiere() {
-          var $butonÎncheiere = $secţiune.find('.buton[data-formular]');
+          var $butonÎncheiere = $secţiune.find('.încheieri a');
 
           if ($butonÎncheiere.is('.salvat')) {
             obiectulUrmăririi['încheiere'] = $butonÎncheiere.data('pagina');
@@ -852,7 +880,7 @@
             obiectulUrmăririi;
 
         if (FormularProcedură.pensieDeÎntreţinere()) {
-          obiectulUrmăririi = {'încasări': colecteazăSubsecţiuniÎncasare($secţiune)};
+          obiectulUrmăririi = {'încasări': colecteazăÎncasări($secţiune)};
         } else {
           obiectulUrmăririi = colectează($secţiune);
         }
@@ -872,8 +900,8 @@
         }
 
         if (obiectulUrmăririi.caracter === 'pecuniar') {
-          obiectulUrmăririi['întîrzieri'] = colecteazăSubsecţiuniÎntîrziere($secţiune);
-          obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSubsecţiuniSechestrare($secţiune);
+          obiectulUrmăririi['întîrzieri'] = colecteazăÎntîrzieri($secţiune);
+          obiectulUrmăririi['sechestrări-bunuri'] = colecteazăSechestrăriBunuri($secţiune);
         } else {
           obiectulUrmăririi['amînări'] = colecteazăAmînări($secţiune);
           colecteazăÎncheiere();
@@ -883,7 +911,7 @@
       }
 
       // ------------------------------------------
-      function colecteazăSubsecţiuniÎntîrziere($secţiune) {
+      function colecteazăÎntîrzieri($secţiune) {
         return $secţiune.find('.subsecţiune.întîrziere').map(function () {
           var $întîrziere = $(this);
 
@@ -893,14 +921,14 @@
             rata: $întîrziere.find(':radio:checked').val(),
             suma: $întîrziere.find('.sumă.întîrziată').val(),
             dobînda: $întîrziere.find('.sumă.dobîndă').val(),
-            încheiere: $întîrziere.find('.buton[data-formular="încheiere-dobîndă-de-întîrziere"]').attr('data-pagina'),
-            anexa: $întîrziere.find('.buton[data-formular="anexă-dobîndă-de-întîrziere"]').attr('data-pagina')
+            încheiere: $întîrziere.find('.încheieri a:not([anexă])').attr('href'),
+            anexa: $întîrziere.find('.încheieri a[anexă]').attr('href')
           };
         }).get();
       }
 
       // ------------------------------------------
-      function colecteazăSubsecţiuniSechestrare($secţiune) {
+      function colecteazăSechestrăriBunuri($secţiune) {
         return $secţiune.find('.subsecţiune.sechestrare-bunuri').map(function () {
           var $sechestrare = $(this);
 
@@ -914,7 +942,8 @@
                 sumă: cîmp.find('.sumă').val(),
                 valuta: cîmp.find('.valuta').val()
               };
-            }).get()
+            }).get(),
+            încheiere: $sechestrare.find('.încheieri a').attr('href')
           };
         }).get();
       }
@@ -933,7 +962,7 @@
       }
 
       // ------------------------------------------
-      function colecteazăSubsecţiuniÎncasare($secţiune) {
+      function colecteazăÎncasări($secţiune) {
         return $secţiune.find('.subsecţiune.încasare').map(function () {
           var date = {};
 
@@ -1067,7 +1096,8 @@
         'debitori': colecteazăDebitori(),
         'tip': FormularProcedură.tip(),
         'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm'),
-        'încheiere': încheiere
+        'încheiere': încheiere,
+        'încheieri': FormularProcedură.secţiuni['încheieri'].colectează()
       };
     },
 
@@ -1284,12 +1314,12 @@
         if (!întîrzieri) return;
 
         var întîrziere, $întîrziere,
-            buton = $secţiune.find('#adaugă-subsecţiune .întîrziere');
+            $buton = $secţiune.find('#adaugă-subsecţiune .întîrziere');
 
         for (var i = 0; i < întîrzieri.length; i++) {
           întîrziere = întîrzieri[i];
 
-          buton.click();
+          $buton.click();
           $întîrziere = $secţiune.find('.subsecţiune.întîrziere:last');
           $întîrziere.find('.început.perioadă').val(întîrziere['începutPerioadă']);
           $întîrziere.find('.sfîrşit.perioadă').val(întîrziere['sfîrşitPerioadă']);
@@ -1297,13 +1327,17 @@
           $întîrziere.find('.sumă.întîrziată').val(întîrziere['suma']);
           $întîrziere.find('.sumă.dobîndă').val(întîrziere['dobînda']);
 
-          $întîrziere.find('.buton[data-formular="încheiere-dobîndă-de-întîrziere"]')
-            .attr('data-pagina', întîrziere['încheiere'])
-            .toggleClass('salvat', !!întîrziere['încheiere']);
+          if (întîrziere['încheiere']) {
+            $întîrziere.find('.încheieri a:not([anexă])')
+              .attr('href', întîrziere['încheiere'])
+              .toggleClass('salvat', întîrziere['încheiere'].substr(0, 6) === '/date/');
+          }
 
-          $întîrziere.find('.buton[data-formular="anexă-dobîndă-de-întîrziere"]')
-            .attr('data-pagina', întîrziere['anexa'])
-            .toggleClass('salvat', !!întîrziere['anexa']);
+          if (întîrziere['anexa']) {
+            $întîrziere.find('.încheieri a[anexă]')
+              .attr('href', întîrziere['anexa'])
+              .toggleClass('salvat', întîrziere['anexa'].substr(0, 6) === '/date/');
+          }
         }
       }
 
@@ -3024,10 +3058,12 @@
     deschide2: function (e) {
       e.preventDefault();
 
-      var pagina = $(this).attr('href');
+      var $buton = $(this),
+          pagina = $buton.attr('href');
 
       Încheieri.deschise[pagina] = {
-        tab: window.open(pagina, pagina, 'left=100,width=1000,height=1000')
+        tab: window.open(pagina, pagina, 'left=100,width=1000,height=1000'),
+        buton: $buton
       };
 
       $(Încheieri.deschise[pagina].tab).on('salvat', FormularProcedură.salveazăSauCrează);

@@ -184,7 +184,7 @@ ol {
 section:hover .cu-opţiuni,
 .cu-opţiuni:hover {
   cursor: pointer;
-  outline: 1px solid silver;
+  background-color: #ddd;
 }
 
 .cu-opţiuni:hover::before {

@@ -1,5 +1,4 @@
-- chestii-clickabile:hover { color: blue }
-- refa încheiere.js: elimină dependenţa între buton şi context
+- salvare/populare încheieri
 - de migrat spre icon font
   - butoane mari
   - butoane de expandare/colapsare secţiuni
@@ -11,12 +10,12 @@
   - mutat TOATE butonaşele în secţiunea “Încheieri” + ajustat clasele pe #formular (sau poate pe #încheieri?)
     + ajustat corespunzător vizibilitate încheierilor din CSS după ID care este numele formularului de încheiere
 
-- corectat în hăş #formular cu #procedura
+- corectat în hăş #formular cu #procedura?
 
 - înainte de a transmite cu AJAX păstrează datele în localStorage
 - de mutat aplicaţia în alt fişier HTML
 - <noscript>, unsupported browsers?
-- blank slate video
+- blank slate video/screenshot/help?
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?

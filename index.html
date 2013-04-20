@@ -206,12 +206,16 @@
                 <input type="text" class="sumă dobîndă" readonly="readonly"/>
                 <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                 <b>MDL</b>
-                <!-- TODO: adăugat #din-calculator la link-ul încheierii -->
-                <span
-                    class="ui-icon ui-icon-document buton semiascuns"
-                    data-formular="anexă-dobîndă-de-întîrziere"
-                    data-dinamic="da"
-                    title="Formează Anexă cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu"></span>
+              </li>
+
+              <li>
+                <ul class="încheieri contextuale">
+                    <!-- TODO: adăugat #din-calculator la link-ul încheierii -->
+                  <li class="ico document semiascuns"><a dinamică
+                        href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
+                        >anexă detalii calculele</a>
+                  </li>
+                </ul>
               </li>
             </ul>
 
@@ -500,7 +504,9 @@
 
                 <li>
                   <ul class="încheieri contextuale borderou-de-calcul">
-                    <li class="ico document semiascuns"><a href="/formulare-încheieri/borderou-de-calcul.html">formează borderou de calcul</a></li>
+                    <li class="ico document semiascuns"><a dinamică
+                        href="/formulare-încheieri/borderou-de-calcul.html"
+                        >formează borderoul de calcul</a></li>
                   </ul>
 
                   <ul class="adăugate"></ul>
@@ -740,7 +746,7 @@
           </fieldset>
 
 
-          <fieldset>
+          <fieldset id="încheieri">
             <legend>
               <label>Încheieri</label>
 
@@ -750,10 +756,26 @@
             </legend>
 
             <div class="conţinut">
-              <ul id="lista-încheieri" class="încheieri">
-                <li class="ico document"><a href="/formulare-încheieri/încheiere-de-intentare.html">cu privire la intentarea procedurii de executare</a></li>
-                <li class="ico document"><a href="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html">cu privire la intentarea procedurii de executare şi asigurarea executării documentului executoriu</a></li>
-                <li class="ico document"><a href="/formulare-încheieri/borderou-de-calcul.html">formează borderou de calcul</a></li>
+              <ul class="încheieri grup">
+
+                <li class="ico document"><a
+                    href="/formulare-încheieri/încheiere-de-intentare.html"
+                    formular="/formulare-încheieri/încheiere-de-intentare.html"
+                    >cu privire la intentarea procedurii de executare</a></li>
+
+                <li class="ico document"><a
+                    href="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
+                    formular="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
+                    >cu privire la intentarea procedurii de executare şi asigurarea executării documentului executoriu</a></li>
+
+              </ul>
+              <ul class="încheieri">
+
+                <li class="ico document"><a dinamică
+                    href="/formulare-încheieri/borderou-de-calcul.html"
+                    formular="/formulare-încheieri/borderou-de-calcul.html"
+                    >borderoul de calcul</a></li>
+
               </ul>
             </div>
           </fieldset>
@@ -1735,12 +1757,17 @@
 
           <li>
             <ul class="încheieri contextuale">
+
               <li class="ico document semiascuns"><a
                   href="/formulare-încheieri/încheiere-dobîndă-de-întîrziere.html"
-                  title="Formează Încheiere cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu">formează încheiere</a></li>
-              <li class="ico document semiascuns"><a dinamic class="salvată"
-                title="Anexă cu privire la calcularea dobînzilor de întîrziere rezultate din întîrzierea executării documentului executoriu"
-                href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html">formează anexă</a></li>
+                  formular="/formulare-încheieri/încheiere-dobîndă-de-întîrziere.html"
+                  >formează încheiere</a></li>
+
+              <li class="ico document semiascuns"><a anexă dinamică
+                  href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html"
+                  formular="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html"
+                  >formează anexă</a></li>
+
             </ul>
           </li>
         </ul>
@@ -1779,7 +1806,11 @@
 
           <li>
             <ul class="încheieri contextuale">
-              <li class="ico document semiascuns"><a href="#">formează încheiere</a></li>
+              <!-- TODO: de corectat href aici -->
+              <li class="ico document semiascuns"><a
+                  href="#"
+                  formular="#"
+                  >formează încheiere</a></li>
             </ul>
           </li>
         </ul>

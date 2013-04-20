@@ -1470,6 +1470,10 @@ ul.încheieri li::before {
   padding-right: 3px;
 }
 
+ul.încheieri.contextuale {
+  margin-left: 13px;
+}
+
 ul.încheieri.contextuale.borderou-de-calcul {
   margin-left: 13em;
 }
@@ -1489,17 +1493,38 @@ ul.încheieri li a:hover {
   text-decoration: underline;
 }
 
-ul.încheieri a.salvată::before {
+ul.încheieri a.salvat::before {
   content: '✓';
-  margin: -1px -25px;
+  margin: -1px -24px;
   position: absolute;
 }
 
-#lista-încheieri li {
-  color: #555;
+#încheieri .conţinut {
+  padding-top: 5px;
 }
 
-ul.încheieri,
-#lista-încheieri li {
-  margin-left: 14px;
+#încheieri ul.încheieri {
+  margin: 0 0 0 14px;
+  padding: 0;
+}
+
+#încheieri ul.încheieri li {
+  color: #555;
+  background-color: white;
+  padding-left: 2px;
+}
+
+#încheieri ul.încheieri.grup {
+  margin: 1ex 0 1ex 11px;
+  padding-left: 3px;
+  border: 1px solid silver;
+  overflow: visible;
+}
+
+#încheieri ul.încheieri.grup li {
+  margin: -1ex -1px 1.2ex;
+}
+
+#încheieri ul.încheieri.grup li:last-child {
+  margin-bottom: -1ex;
 }

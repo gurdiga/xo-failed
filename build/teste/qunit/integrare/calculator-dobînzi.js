@@ -56,7 +56,7 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
     ok($dobînda.next('.ui-icon-locked').există(), '…marcat readonly cu iconiţă');
     equal($dobînda.siblings('b').text(), 'MDL', '…cu eticheta MDL');
     equal($dobînda.val(), '', '…necompletat');
-    ok($dobînda.siblings('.ui-icon-document.buton').există(), '…cu iconiţă pentru detalii calcul');
+    ok($dialog.find('.încheieri.contextuale a[dinamică]').există(), '…cu buton pentru detalii calcul');
 
     $început.val('04.09.2009');
     $sfîrşit.val('14.06.2012');
@@ -76,17 +76,18 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
   // ------------------------
   function verificăRaportul($dialog) {
-    /*jshint maxlen:144 */
-    var $buton = $dialog.find('.ui-icon-document.buton'),
-        formular = app.Încheieri.formular($buton),
-        tab;
+    var $buton = $dialog.find('.încheieri.contextuale a[dinamică]'),
+        tab, meta;
+
+    ok($buton.is('[dinamică]'), 'anexa e marcată dinamică');
 
     $buton.click();
-    ok($buton.attr('data-dinamic'), 'raportul e marcat dinamic');
-    tab = app.Încheieri.deschise[formular].tab;
+    meta = app.Încheieri.deschise[$buton.attr('href')];
 
-    app.$(tab).one('iniţializat', function () {
+    app.$(meta).one('iniţializat', function () {
       ok(true, 'iniţializat raportul cu detaliile calculului');
+
+      tab = meta.tab;
 
       setTimeout(function () { // aşteptăm să ne asigurăm că nu se închide
         var $secţiune = tab.Încheiere.$.find('section:first .conţinut'),

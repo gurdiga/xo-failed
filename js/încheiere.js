@@ -4,18 +4,19 @@
   var $, FormularProcedură, Încheieri, Utilizator, Profil;
 
   var Încheiere = {
-    formular: '',
-
     init: function () {
-      $ = app.$;
+      // TODO: split this method?
+      $ = app.$; // TODO de eliminat app.$ din alte părţi în acest script
+
       FormularProcedură = app.FormularProcedură;
       Încheieri = app.Încheieri;
       Utilizator = app.Utilizator;
       Profil = app.Profil;
 
       Încheiere.$ = $(document.body);
-      Încheiere.pagina = decodeURIComponent(location.pathname);
+      Încheiere.pagina = decodeURIComponent(location.pathname + location.hash);
       Încheiere.buton = Încheieri.deschise[Încheiere.pagina].buton;
+      Încheiere.dinamică = Încheiere.buton.is('[dinamică]');
 
       // nu s-a deschis din calculatorul de dobînzi de întîrziere din bara de sus
       if (location.hash !== '#din-calculator') {
@@ -39,9 +40,8 @@
     },
 
     verificăDacăFormularulEDeschis: function () {
-      if (!app || !Încheieri.deschise[Încheiere.pagina] || !FormularProcedură.$.is(':visible')) {
+      if (!app || !Încheieri.deschise[Încheiere.pagina] || FormularProcedură.$.is(':not(:visible)')) {
         window.close();
-        return;
       }
     },
 
@@ -126,7 +126,7 @@
     },
 
     salvează: function () {
-      if (Încheiere.buton.attr('data-dinamic')) {
+      if (Încheiere.dinamică) {
         var $mesaj = Încheiere.$.find('.salvează').next('.mesaj.dinamicitate');
 
         $mesaj.addClass('afişat');
@@ -154,18 +154,16 @@
     },
 
     marcheazăButonul: function () {
-      var buton = Încheiere.buton;
-
-      if (buton.is(':not(.salvat)')) buton.addClass('salvat');
-
-      buton.attr('data-pagina', Încheiere.pagina);
+      Încheiere.buton
+        .addClass('salvat')
+        .attr('href', Încheiere.pagina);
     },
 
     cale: function () {
       if (Încheiere.nouă()) {
         return '/date/' + Utilizator.login + '/proceduri/' +
           FormularProcedură.număr() + '/încheieri/' +
-          Încheiere.pagina.split('/formulare-încheieri/')[1];
+          new Date().getTime() + '.html';
       } else {
         return location.pathname;
       }
@@ -174,7 +172,7 @@
     imprimă: function () {
       var imprimă = window.print; // pentru mockabilitate
 
-      if (Încheiere.buton.attr('data-dinamic') || !Încheiere.modificat()) {
+      if (Încheiere.dinamică || !Încheiere.modificat()) {
         imprimă();
         app.$(window).trigger('imprimat');
       } else {
@@ -188,7 +186,7 @@
     },
 
     regenerează: function () {
-      if (Încheiere.buton.attr('data-dinamic')) {
+      if (Încheiere.dinamică) {
         var $mesaj = Încheiere.$.find('.regenerează').next('.mesaj.dinamicitate');
 
         $mesaj.addClass('afişat');
@@ -201,9 +199,10 @@
       }
 
       delete Încheieri.deschise[Încheiere.pagina];
+
       Încheiere.buton
         .removeClass('salvat')
-        .removeData('pagina')
+        .attr('href', function () { return this.getAttribute('formular'); })
         .click();
     },
 
@@ -266,8 +265,16 @@
   // --------------------------------------------------
 
   BaraDeInstrumente = {
+    $: null,
+
     init: function () {
-      app.$şabloane.find('.bara-de-instrumente.pentru.încheiere').clone()
+      this.$ = app.$şabloane.find('.bara-de-instrumente.pentru.încheiere').clone();
+
+      if (Încheiere.dinamică) {
+        this.$.children().remove(':not(.imprimă)');
+      }
+
+      this.$
         .appendTo(Încheiere.$)
         .on('click', '.salvează', Încheiere.salvează)
         .on('click', '.imprimă', Încheiere.imprimă)

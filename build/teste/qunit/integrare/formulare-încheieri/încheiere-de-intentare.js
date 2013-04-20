@@ -4,7 +4,7 @@ asyncTest('Încheiere de intentare', function () {
 
   var app = this.app,
       $formular = app.FormularProcedură.$,
-      $buton = $formular.find('#data-intentării').siblings('[data-formular="încheiere-de-intentare"]'),
+      $buton = $formular.find('#încheieri a[href="/formulare-încheieri/încheiere-de-intentare.html"]'),
       încheiere;
 
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
@@ -12,10 +12,10 @@ asyncTest('Încheiere de intentare', function () {
   app.ProceduriRecente.$.find('.item:first-child').click();
   $formular.one('populat', function () {
     ok(true, 'deschis formularul');
-    ok($buton.is(':not([dezactivat])'), 'butonul de formare a încheierii e activ');
+    ok($buton.există(), 'găsit butonul de formare a încheierii');
     $buton.click();
 
-    var formular = app.Încheieri.formular($buton),
+    var formular = $buton.attr('href'),
         meta = app.Încheieri.deschise[formular];
 
     app.$(meta).one('iniţializat', function () {
@@ -42,8 +42,7 @@ asyncTest('Încheiere de intentare', function () {
 
     // ------------------------
     function verificăSalvareaÎncheierii(încheiere) {
-      var $buton = $formular.find('#data-intentării').siblings('[data-formular="încheiere-de-intentare"]'),
-          $încheiere = încheiere.Încheiere.$,
+      var $încheiere = încheiere.Încheiere.$,
           $butonDeSalvare = $încheiere.find('.salvează');
 
       $butonDeSalvare.click();
@@ -55,12 +54,13 @@ asyncTest('Încheiere de intentare', function () {
         var cale = decodeURIComponent(încheiere.location.pathname),
             caleER = new RegExp(
               '^/date/' + app.Utilizator.login + '/proceduri/' +
-              app.FormularProcedură.număr() + '/încheieri/' + $buton.attr('data-formular') + '-\\d{13}\\.html'
+              app.FormularProcedură.număr() + '/încheieri/' +
+              '\\d{13}\\.html'
             );
 
         ok(caleER.test(cale), 'adresa[' + cale + '] corespunde cu masca: ' + caleER.source);
         ok($buton.is('.salvat'), 'marcat butonul din procedură ca salvat');
-        equal($buton.attr('data-pagina'), încheiere.Încheiere.pagina, 'setat data-pagina pe butonul din procedură');
+        equal($buton.attr('href'), încheiere.Încheiere.pagina, 'setat href pe butonul din formularul de procedură');
 
         $butonDeSalvare.click();
 
@@ -69,7 +69,7 @@ asyncTest('Încheiere de intentare', function () {
 
           var $butonDeRegenerare = $încheiere.find('.regenerează'),
               încheiereaSalvată = încheiere.Încheiere.pagina,
-              formular = app.Încheieri.formular(încheiere.Încheiere.buton);
+              formular = încheiere.Încheiere.buton.attr('formular');
 
           $butonDeRegenerare.click();
           ok(!app.Încheieri.deschise[încheiereaSalvată], 'încheierea precedent salvată este deregistrată');
@@ -97,7 +97,7 @@ asyncTest('Încheiere de intentare', function () {
 
     // ------------------------
     function verificăEditabilitate() {
-      var $buton = $formular.find('#data-intentării').siblings('[data-formular="încheiere-de-intentare"]'),
+      var $buton = $formular.find('#încheieri a[formular="/formulare-încheieri/încheiere-de-intentare.html"]'),
           $încheiere = încheiere.Încheiere.$,
           cale = decodeURIComponent(încheiere.location.pathname),
           $secţiuneEditabilă = $încheiere.find('div.conţinut.editabil[contenteditable="true"]').first();
@@ -111,7 +111,7 @@ asyncTest('Încheiere de intentare', function () {
         $încheiere.find('.închide').click();
 
         setTimeout(function () { // pauză pentru observabilitate
-          cale = $buton.attr('data-pagina');
+          cale = $buton.attr('href');
           $buton.click();
 
           app.$(app.Încheieri.deschise[cale]).one('iniţializat', function () {
