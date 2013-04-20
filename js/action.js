@@ -900,6 +900,37 @@
         }
       },
 
+      'valoarea-acţiunii': {
+        $: null,
+
+        init: function () {
+          this.$ = FormularProcedură.$obiectulUrmăririi;
+        },
+
+        colectează: function () {
+          var $valoareaAcţiunii = this.$.find('.personalizat.valoarea-acţiunii');
+
+          return {
+            suma: $valoareaAcţiunii.find('.sumă').val(),
+            valuta: $valoareaAcţiunii.find('.valuta').val()
+          };
+        },
+
+        populează: function (valoareaAcţiunii) {
+          var $butonDeAdăugare = this.$.find('button.adaugă-cîmp-personalizat.valoarea-acţiunii'),
+              $cîmpul;
+
+          $butonDeAdăugare.click();
+          $cîmpul = $butonDeAdăugare.parent().prev('.valoarea-acţiunii');
+          $cîmpul.find('.sumă').val(valoareaAcţiunii['suma']);
+          $cîmpul.find('.valuta').val(valoareaAcţiunii['valuta']);
+        },
+
+        resetează: function () {
+          this.$.find('.personalizat.valoarea-acţiunii').remove();
+        }
+      },
+
       'încheieri': {
         $: $('#încheieri a'),
 
@@ -976,7 +1007,7 @@
         /*jshint maxcomplexity:8*/ // TODO: fix this?
         function colecteazăMăsurileDeAsigurareAAcţiunii() {
           if ($secţiune.find('.personalizat.valoarea-acţiunii').există()) {
-            obiectulUrmăririi['valoarea-acţiunii'] = colecteazăValoareaAcţiunii();
+            obiectulUrmăririi['valoarea-acţiunii'] = FormularProcedură.secţiuni['valoarea-acţiunii'].colectează();
           } else {
             if ($secţiune.find('#măsura-de-asigurare').val() === 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
                 ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el') {
@@ -986,16 +1017,6 @@
               obiectulUrmăririi['sume-sechestrate'] = colecteazăSumePersonalizateÎnValută('.sume-sechestrate');
             }
           }
-        }
-
-        // ------------------------------------------
-        function colecteazăValoareaAcţiunii() {
-          var $valoareaAcţiunii = $secţiune.find('.personalizat.valoarea-acţiunii');
-
-          return {
-            suma: $valoareaAcţiunii.find('.sumă').val(),
-            valuta: $valoareaAcţiunii.find('.valuta').val()
-          };
         }
 
         // ------------------------------------------
@@ -1321,7 +1342,7 @@
       function populeazăObiectulUrmăririi() {
         function populeazăMăsurileDeAsigurareAAcţiunii() {
           if (obiectulUrmăririi['valoarea-acţiunii']) {
-            populeazăValoareaAcţiunii();
+            FormularProcedură.secţiuni['valoarea-acţiunii'].populează(obiectulUrmăririi['valoarea-acţiunii']);
           } else {
             if (obiectulUrmăririi['măsura-de-asigurare'] === 'interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu,' +
                 ' inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el') {
@@ -1334,23 +1355,14 @@
         }
 
         // ------------------------------------------
-        function populeazăValoareaAcţiunii() {
-          var $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.valoarea-acţiunii'),
-              $cîmpul;
-
-          $butonDeAdăugare.click();
-          $cîmpul = $butonDeAdăugare.parent().prev('.valoarea-acţiunii');
-          $cîmpul.find('.sumă').val(obiectulUrmăririi['valoarea-acţiunii']['suma']);
-          $cîmpul.find('.valuta').val(obiectulUrmăririi['valoarea-acţiunii']['valuta']);
-        }
-
-        // ------------------------------------------
         function populeazăSumePersonalizateÎnValută(colecţie) {
           var clasăButonDeAdăugare = 'pentru-' + colecţie,
               clasăCîmpPersonalizat = colecţie,
               $butonDeAdăugare = $secţiune.find('button.adaugă-cîmp-personalizat.' + clasăButonDeAdăugare),
               sume = obiectulUrmăririi[colecţie],
               $cîmpul, sumă;
+
+          if (!sume) return;
 
           for (var i = 0; i < sume.length; i++) {
             sumă = sume[i];
