@@ -1,7 +1,6 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de schimb forţat', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:148 */
   'use strict';
 
   var app = this.app,

@@ -1,7 +1,6 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de numire a datei nimicirii bunurilor', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:157 */
   'use strict';
 
   var app = this.app,

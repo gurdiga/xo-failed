@@ -1,5 +1,4 @@
 (function () {
-  /*jshint maxlen:131 */
   'use strict';
 
   var UtilitareÎncheiere = {

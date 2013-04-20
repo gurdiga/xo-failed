@@ -1,6 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 /*global UtilitareÎncheiere*/
-/*jshint maxlen:187 maxstatements:80*/
 (function () {
   'use strict';
 

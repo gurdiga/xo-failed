@@ -1,6 +1,5 @@
 asyncTest('Încheiere de intentare', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:121 */
   'use strict';
 
   var app = this.app,

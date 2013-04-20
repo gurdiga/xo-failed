@@ -1,5 +1,4 @@
 asyncTest('Formular procedură: cheltuieli (populare)', function () {
-  /*jshint maxlen:139*/
   'use strict';
 
   var app = this.app,
@@ -76,7 +75,6 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
 
   // ------------------------------------------------
   function adaugăTaxaB1() {
-    /*jshint maxstatements:100*/
     $categoriiCheltuieli.find('#taxaB1').click();
 
     var $taxaB1 = $cheltuieliAdăugate.find('#taxaB1'),

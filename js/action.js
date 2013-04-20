@@ -1,7 +1,6 @@
 /*global top:false moment:false RateDeBază:false RateBNM:false*/
 
 (function (window, document, moment) {
-  /*jshint maxlen:160 */
   'use strict';
 
   window.$şabloane = $('#şabloane');
@@ -2526,7 +2525,7 @@
   DobîndaDeÎntîrziere = {
     // test: '04.09.2009', '14.06.2012', 9, 363761.50 === 162227.68
     calculează: function (întîrziere) {
-      /*jshint maxstatements:32 maxcomplexity:11*/
+      /*jshint maxcomplexity:11*/
 
       // ----
       function zileÎntre(data1, data2) {

@@ -1,7 +1,6 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:162 */
   'use strict';
 
   var app = this.app,

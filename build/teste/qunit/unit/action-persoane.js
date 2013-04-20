@@ -1,5 +1,4 @@
 (function () {
-  /*jshint maxlen:140 */
   'use strict';
 
   var app = window.frames['app'];

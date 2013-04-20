@@ -1,5 +1,4 @@
 asyncTest('Procedură: verificare prezenţă cîmpuri şi calcul onorariu', function () {
-  /*jshint maxlen:170*/
   'use strict';
 
   var dateProcedură = this.dateProcedură,

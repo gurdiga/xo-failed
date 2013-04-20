@@ -81,9 +81,7 @@
     trailing: true,
     maxparams: 3,
     maxdepth: 4,
-    maxstatements: 30,
     maxcomplexity: 4,
-    maxlen: 120,
     sub: true
   };
 

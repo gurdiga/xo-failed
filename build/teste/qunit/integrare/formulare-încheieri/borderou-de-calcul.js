@@ -1,6 +1,5 @@
 asyncTest('Borderou de calcul', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:143 */
   'use strict';
 
   var app = this.app, încheiere;

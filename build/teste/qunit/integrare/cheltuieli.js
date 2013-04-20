@@ -1,5 +1,4 @@
 asyncTest('Formular procedură: cheltuieli', function () {
-  /*jshint maxlen:125*/
   'use strict';
 
   var app = this.app,

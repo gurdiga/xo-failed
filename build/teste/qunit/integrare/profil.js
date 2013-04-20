@@ -1,5 +1,4 @@
 asyncTest('Profil', function () {
-  /*jshint maxlen:126 */
   'use strict';
 
   var profil = {

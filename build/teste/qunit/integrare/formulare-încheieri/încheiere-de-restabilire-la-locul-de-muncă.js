@@ -1,7 +1,6 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:140 */
   'use strict';
 
   var app = this.app,

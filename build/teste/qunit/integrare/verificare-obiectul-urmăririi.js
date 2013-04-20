@@ -1,5 +1,4 @@
 test('Formular procedură: obiectul urmăririi', function () {
-  /*jshint maxlen:141 */
   'use strict';
 
   var $secţiune = this.$obiectulUrmăririi,

@@ -1,5 +1,4 @@
 asyncTest('Precedură: salvare', function () {
-  /*jshint maxlen:142*/
   'use strict';
 
   var app = this.app,

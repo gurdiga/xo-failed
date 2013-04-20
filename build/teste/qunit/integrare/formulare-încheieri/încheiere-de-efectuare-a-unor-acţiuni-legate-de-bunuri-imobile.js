@@ -1,7 +1,6 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', function () {
   /*global UtilitareÎncheiere:false */
-  /*jshint maxlen:169 maxstatements:31 */
   'use strict';
 
   var app = this.app,

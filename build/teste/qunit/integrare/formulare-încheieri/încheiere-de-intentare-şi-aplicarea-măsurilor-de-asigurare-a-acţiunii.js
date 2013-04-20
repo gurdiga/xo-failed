@@ -1,4 +1,3 @@
-/*jshint maxlen:164 */
 /*global UtilitareÎncheiere:false */
 asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a executării documentului executoriu', function () {
   'use strict';

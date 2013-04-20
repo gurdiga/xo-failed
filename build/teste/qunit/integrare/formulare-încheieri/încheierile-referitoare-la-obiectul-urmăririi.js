@@ -1,5 +1,4 @@
 asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
-  /*jshint maxlen:141 */
   'use strict';
 
   var app = this.app;
