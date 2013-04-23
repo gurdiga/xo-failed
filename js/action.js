@@ -1536,23 +1536,23 @@
     },
 
     colectează: function () {
-      var butonÎncheiere = FormularProcedură.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]'),
+      var butonÎncheiere = this.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]'),
           încheiere;
 
       if (butonÎncheiere.is('.salvat')) încheiere = butonÎncheiere.attr('data-pagina');
 
       return {
-        'data-intentării': FormularProcedură.$.find('#data-intentării').val(),
-        'document-executoriu': FormularProcedură.secţiuni['generică'].colectează('#document-executoriu'),
-        'obiectul-urmăririi': FormularProcedură.secţiuni['obiectul-urmăririi'].colectează(),
-        'cheltuieli': FormularProcedură.secţiuni['cheltuieli'].colectează(),
-        'creditor': FormularProcedură.secţiuni['generică'].colectează('#creditor'),
-        'persoane-terţe': FormularProcedură.secţiuni['persoane-terţe'].colectează(),
-        'debitori': FormularProcedură.secţiuni['debitori'].colectează(),
-        'tip': FormularProcedură.tip(),
+        'data-intentării': this.$.find('#data-intentării').val(),
+        'document-executoriu': this.secţiuni['generică'].colectează('#document-executoriu'),
+        'obiectul-urmăririi': this.secţiuni['obiectul-urmăririi'].colectează(),
+        'cheltuieli': this.secţiuni['cheltuieli'].colectează(),
+        'creditor': this.secţiuni['generică'].colectează('#creditor'),
+        'persoane-terţe': this.secţiuni['persoane-terţe'].colectează(),
+        'debitori': this.secţiuni['debitori'].colectează(),
+        'tip': this.tip(),
         'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm'),
         'încheiere': încheiere,
-        'încheieri': FormularProcedură.secţiuni['încheieri'].colectează()
+        'încheieri': this.secţiuni['încheieri'].colectează()
       };
     },
 
@@ -1654,29 +1654,29 @@
     populează: function (procedură) {
       /*jshint maxcomplexity:8*/
       $.fx.off = true;
-      FormularProcedură.sePopulează = true;
+      this.sePopulează = true;
 
-      FormularProcedură.$.find('#data-intentării').val(procedură['data-intentării']);
+      this.$.find('#data-intentării').val(procedură['data-intentării']);
 
       if (procedură['încheiere']) {
-        FormularProcedură.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]')
+        this.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]')
           .attr('data-pagina', procedură['încheiere'])
           .addClass('salvat');
       }
 
-      FormularProcedură.$.find('.buton[data-formular]').removeAttr('dezactivat');
+      this.$.find('.buton[data-formular]').removeAttr('dezactivat');
 
-      FormularProcedură.secţiuni['generică'].populează('#document-executoriu', procedură['document-executoriu']);
-      FormularProcedură.secţiuni['obiectul-urmăririi'].populează(procedură['obiectul-urmăririi']);
-      FormularProcedură.secţiuni['cheltuieli'].populează(procedură.cheltuieli);
-      FormularProcedură.secţiuni['generică'].populează('#creditor', procedură['creditor']);
-      FormularProcedură.secţiuni['persoane-terţe'].populează(procedură['persoane-terţe']);
-      FormularProcedură.secţiuni['debitori'].populează(procedură['debitori']);
+      this.secţiuni['generică'].populează('#document-executoriu', procedură['document-executoriu']);
+      this.secţiuni['obiectul-urmăririi'].populează(procedură['obiectul-urmăririi']);
+      this.secţiuni['cheltuieli'].populează(procedură.cheltuieli);
+      this.secţiuni['generică'].populează('#creditor', procedură['creditor']);
+      this.secţiuni['persoane-terţe'].populează(procedură['persoane-terţe']);
+      this.secţiuni['debitori'].populează(procedură['debitori']);
       this.secţiuni['încheieri'].populează(procedură['încheieri']);
 
       $.fx.off = false;
-      FormularProcedură.sePopulează = false;
-      FormularProcedură.$.trigger('populat', [procedură]);
+      this.sePopulează = false;
+      this.$.trigger('populat', [procedură]);
     },
 
     resetează: function () {
