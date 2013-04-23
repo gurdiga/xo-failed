@@ -767,16 +767,6 @@
         .find('#tireu').toggle(afişeazăTireu).end();
     },
 
-    colecteazăSecţiune: function (nume, arg) {
-      this.secţiuni[nume].colectează(arg);
-      // TODO + privatizare secţiuni?
-    },
-
-    populeazăSecţiune: function (nume, date, arg) {
-      this.secţiuni[nume].populează(date, arg);
-      // TODO + privatizare secţiuni?
-    },
-
     // TODO
     secţiuni: {
       init: function () {
@@ -1531,16 +1521,15 @@
 
         resetează: function () {
           Cheltuieli.$adăugate.children().remove();
+          Cheltuieli.categorii.$.find('.dezactivat').removeClass('dezactivat');
+          Cheltuieli.$
+            .find(':input:not([type="hidden"])').val('').end()
+            .find('#părţile-au-ajuns-la-conciliere').prop('checked', false);
         }
       }
     },
 
     colectează: function () {
-      var butonÎncheiere = this.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]'),
-          încheiere;
-
-      if (butonÎncheiere.is('.salvat')) încheiere = butonÎncheiere.attr('data-pagina');
-
       return {
         'data-intentării': this.$.find('#data-intentării').val(),
         'document-executoriu': this.secţiuni['generică'].colectează('#document-executoriu'),
@@ -1551,7 +1540,6 @@
         'debitori': this.secţiuni['debitori'].colectează(),
         'tip': this.tip(),
         'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm'),
-        'încheiere': încheiere,
         'încheieri': this.secţiuni['încheieri'].colectează()
       };
     },
@@ -1652,20 +1640,10 @@
     },
 
     populează: function (procedură) {
-      /*jshint maxcomplexity:8*/
       $.fx.off = true;
       this.sePopulează = true;
 
       this.$.find('#data-intentării').val(procedură['data-intentării']);
-
-      if (procedură['încheiere']) {
-        this.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]')
-          .attr('data-pagina', procedură['încheiere'])
-          .addClass('salvat');
-      }
-
-      this.$.find('.buton[data-formular]').removeAttr('dezactivat');
-
       this.secţiuni['generică'].populează('#document-executoriu', procedură['document-executoriu']);
       this.secţiuni['obiectul-urmăririi'].populează(procedură['obiectul-urmăririi']);
       this.secţiuni['cheltuieli'].populează(procedură.cheltuieli);
@@ -1686,27 +1664,14 @@
           .find(':input').val('').end()
           .find('select').val(function () { return $(this).find('option:first').val(); }).end()
         .end()
-        .find('#cheltuieli')
-          .find('.adăugate').empty().end()
-          .find(':input:not([type="hidden"])').val('').end()
-          .find('#părţile-au-ajuns-la-conciliere').prop('checked', false).end()
-        .end()
         .find('#creditor').find(':input').val('').end().end()
-        .find('fieldset .conţinut').removeAttr('style').end()
-
-        .find('.buton[data-formular]')
-          .removeClass('salvat')
-          .attr('dezactivat', 'da')
-        .end()
-
-        .find('#categorii-taxe-şi-speze')
-          .find('.dezactivat').removeClass('dezactivat').end()
-        .end();
+        .find('fieldset .conţinut').removeAttr('style').end();
 
       FormularProcedură.secţiuni['persoane-terţe'].resetează();
       FormularProcedură.secţiuni['încheieri'].resetează();
       FormularProcedură.secţiuni['sechestrări-bunuri'].resetează();
       FormularProcedură.secţiuni['întîrzieri'].resetează();
+      FormularProcedură.secţiuni['cheltuieli'].resetează();
     },
 
     închide: function (xhr, status) {
@@ -1922,7 +1887,7 @@
       }
 
       Căutare.înAşteptare = setTimeout(function () {
-        /*jshint maxcomplexity:6*/
+        /*jshint maxcomplexity:5*/
         Căutare.seÎndeplineşte = true;
 
         var rezultate = {
