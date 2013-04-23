@@ -833,6 +833,65 @@
         }
       },
 
+      'persoane-terţe': {
+        colectează: function () {
+          return FormularProcedură.$.find('.persoană-terţă').map(function () {
+            return FormularProcedură.secţiuni['generică'].colectează(this);
+          }).get();
+        },
+
+        populează: function (persoaneTerţe) {
+          if (persoaneTerţe.length === 0) return;
+
+          var $butonDeAdăugare = FormularProcedură.$.find('#creditor+button.adaugă'),
+              $secţiune;
+
+          $.each(persoaneTerţe, function () {
+            $butonDeAdăugare.click();
+
+            $secţiune = FormularProcedură.$.find('.persoană-terţă:last');
+            FormularProcedură.secţiuni['generică'].populează($secţiune, this);
+          });
+        },
+
+        resetează: function () {
+          FormularProcedură.$.find('.persoană-terţă').remove();
+        }
+      },
+
+      'debitori': {
+        colectează: function () {
+          return FormularProcedură.$.find('.debitor').map(function () {
+            return FormularProcedură.secţiuni['generică'].colectează(this);
+          }).get();
+        },
+
+        populează: function (debitori) {
+          var $secţiune,
+              prima = true,
+              $butonDeAdăugare = FormularProcedură.$.find('.debitor+button.adaugă');
+
+          $.each(debitori, function () {
+            if (prima) {
+              prima = false;
+            } else {
+              $butonDeAdăugare.click();
+            }
+
+            $secţiune = FormularProcedură.$.find('.debitor:last');
+            FormularProcedură.secţiuni['generică'].populează($secţiune, this);
+          });
+        },
+
+        resetează: function () {
+          FormularProcedură.$
+            .find('.debitor')
+              .not(':first').remove().end()
+              .find('input,textarea').val('').end()
+              .first().removeClass('dispensabilă').end();
+        }
+      },
+
       'obiectul-urmăririi': {
         colectează: function () {
           /*jshint maxcomplexity:8*/ // TODO: fix this?
@@ -934,16 +993,18 @@
           if (!încasări) return;
 
           var $încasare, i, prima = true,
-              buton = this.$.find('#adaugă-subsecţiune .încasare');
+              $butonDeAdăugare = this.$.find('#adaugă-subsecţiune .încasare');
 
           for (i = 0; i < încasări.length; i++) {
-            if (!prima) buton.click();
+            if (prima) {
+              prima = false;
+            } else {
+              $butonDeAdăugare.click();
+            }
 
             $încasare = this.$.find('.subsecţiune.încasare:last');
             FormularProcedură.secţiuni['generică'].populează($încasare, încasări[i]);
             $încasare.find('#venitul').trigger('input');
-
-            if (prima) prima = false;
           }
         }
       },
@@ -1062,14 +1123,14 @@
           if (!sume) return;
 
           var $secţiune = this.$.find('ul:first'),
-              buton = $secţiune.find('.adaugă-cîmp-personalizat.sumă'),
+              $butonDeAdăugare = $secţiune.find('.adaugă-cîmp-personalizat.sumă'),
               cîmp, $cîmp;
 
           for (cîmp in sume) {
             $cîmp = $secţiune.find('label:contains(' + cîmp + ')+.sumă');
 
             if (!$cîmp.există()) {
-              buton.click();
+              $butonDeAdăugare.click();
               $cîmp = $secţiune.find('.etichetă+.sumă').last();
               $cîmp.prev().val(cîmp).trigger('input');
             }
@@ -1151,12 +1212,12 @@
 
           var întîrziere, $întîrziere,
               $secţiune = this.$,
-              $buton = $secţiune.find('#adaugă-subsecţiune .întîrziere');
+              $butonDeAdăugare = $secţiune.find('#adaugă-subsecţiune .întîrziere');
 
           for (var i = 0; i < întîrzieri.length; i++) {
             întîrziere = întîrzieri[i];
 
-            $buton.click();
+            $butonDeAdăugare.click();
             $întîrziere = $secţiune.find('.subsecţiune.întîrziere:last');
             $întîrziere.find('.început.perioadă').val(întîrziere['începutPerioadă']);
             $întîrziere.find('.sfîrşit.perioadă').val(întîrziere['sfîrşitPerioadă']);
@@ -1206,10 +1267,10 @@
 
           var sechestrare, $sechestrare, bun, $bun, primul = true,
               $secţiune = this.$,
-              buton = $secţiune.find('#adaugă-subsecţiune .sechestrare-bunuri');
+              $butonDeAdăugare = $secţiune.find('#adaugă-subsecţiune .sechestrare-bunuri');
 
           for (var i = 0; i < sechestrări.length; i++) {
-            buton.click();
+            $butonDeAdăugare.click();
 
             sechestrare = sechestrări[i];
             $sechestrare = $secţiune.find('.subsecţiune.sechestrare-bunuri:last'),
@@ -1220,14 +1281,16 @@
             for (var j = 0; j < sechestrare.bunuri.length; j++) {
               bun = sechestrare.bunuri[j];
 
-              if (!primul) $sechestrare.find('.adaugă-cîmp-personalizat').click();
+              if (primul) {
+                primul = false;
+              } else {
+                $sechestrare.find('.adaugă-cîmp-personalizat').click();
+              }
 
               $bun = $sechestrare.find('.personalizat:last');
               $bun.find('.etichetă').val(bun.descriere);
               $bun.find('.sumă').val(bun.sumă);
               $bun.find('.valuta').val(bun.valuta).trigger('input');
-
-              if (primul) primul = false;
             }
           }
         },
@@ -1473,21 +1536,6 @@
     },
 
     colectează: function () {
-      function colecteazăPersoaneTerţe() {
-        return FormularProcedură.$.find('.persoană-terţă').map(function () {
-          return FormularProcedură.secţiuni['generică'].colectează(this);
-        }).get();
-      }
-
-      // ------------------------------------------
-      function colecteazăDebitori() {
-        return FormularProcedură.$.find('.debitor').map(function () {
-          return FormularProcedură.secţiuni['generică'].colectează(this);
-        }).get();
-      }
-
-      // ==========================================
-
       var butonÎncheiere = FormularProcedură.$.find('#container-data-intentării .buton[data-formular="încheiere-de-intentare"]'),
           încheiere;
 
@@ -1499,8 +1547,8 @@
         'obiectul-urmăririi': FormularProcedură.secţiuni['obiectul-urmăririi'].colectează(),
         'cheltuieli': FormularProcedură.secţiuni['cheltuieli'].colectează(),
         'creditor': FormularProcedură.secţiuni['generică'].colectează('#creditor'),
-        'persoane-terţe': colecteazăPersoaneTerţe(),
-        'debitori': colecteazăDebitori(),
+        'persoane-terţe': FormularProcedură.secţiuni['persoane-terţe'].colectează(),
+        'debitori': FormularProcedură.secţiuni['debitori'].colectează(),
         'tip': FormularProcedură.tip(),
         'data-ultimei-modificări': moment().format('DD.MM.YYYY HH:mm'),
         'încheiere': încheiere,
@@ -1605,40 +1653,6 @@
 
     populează: function (procedură) {
       /*jshint maxcomplexity:8*/
-      // ------------------------------------------
-      function populeazăPersoaneleTerţe() {
-        var $adaugă = FormularProcedură.$.find('#creditor+button.adaugă'), $secţiune;
-
-        if (procedură['persoane-terţe']) {
-          $.each(procedură['persoane-terţe'], function () {
-            $adaugă.click();
-
-            $secţiune = FormularProcedură.$.find('.persoană-terţă:last');
-            FormularProcedură.secţiuni['generică'].populează($secţiune, this);
-          });
-        }
-      }
-
-      // ------------------------------------------
-      function populeazăDebitori() {
-        var $secţiune,
-            prima = true,
-            $adaugă = FormularProcedură.$.find('.debitor+button.adaugă');
-
-        $.each(procedură['debitori'], function () {
-          if (prima) {
-            prima = false;
-          } else {
-            $adaugă.click();
-          }
-
-          $secţiune = FormularProcedură.$.find('.debitor:last');
-          FormularProcedură.secţiuni['generică'].populează($secţiune, this);
-        });
-      }
-
-
-      // ------------------------------------------
       $.fx.off = true;
       FormularProcedură.sePopulează = true;
 
@@ -1656,8 +1670,8 @@
       FormularProcedură.secţiuni['obiectul-urmăririi'].populează(procedură['obiectul-urmăririi']);
       FormularProcedură.secţiuni['cheltuieli'].populează(procedură.cheltuieli);
       FormularProcedură.secţiuni['generică'].populează('#creditor', procedură['creditor']);
-      populeazăPersoaneleTerţe();
-      populeazăDebitori();
+      FormularProcedură.secţiuni['persoane-terţe'].populează(procedură['persoane-terţe']);
+      FormularProcedură.secţiuni['debitori'].populează(procedură['debitori']);
       this.secţiuni['încheieri'].populează(procedură['încheieri']);
 
       $.fx.off = false;
@@ -1678,13 +1692,6 @@
           .find('#părţile-au-ajuns-la-conciliere').prop('checked', false).end()
         .end()
         .find('#creditor').find(':input').val('').end().end()
-        .find('.persoană-terţă').remove().end()
-        .find('.debitor')
-          .find('input,textarea').val('').end()
-          .not(':first').remove().end()
-          .first().removeClass('dispensabilă').end()
-        .end()
-
         .find('fieldset .conţinut').removeAttr('style').end()
 
         .find('.buton[data-formular]')
@@ -1696,6 +1703,7 @@
           .find('.dezactivat').removeClass('dezactivat').end()
         .end();
 
+      FormularProcedură.secţiuni['persoane-terţe'].resetează();
       FormularProcedură.secţiuni['încheieri'].resetează();
       FormularProcedură.secţiuni['sechestrări-bunuri'].resetează();
       FormularProcedură.secţiuni['întîrzieri'].resetează();
