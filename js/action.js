@@ -818,8 +818,8 @@
           }
         },
 
-        resetează: function ($secţiune) {
-          return $secţiune;
+        resetează: function (selector) {
+          return $(selector).find(':input').val('');
         }
       },
 
@@ -874,11 +874,10 @@
         },
 
         resetează: function () {
-          FormularProcedură.$
-            .find('.debitor')
-              .not(':first').remove().end()
-              .find('input,textarea').val('').end()
-              .first().removeClass('dispensabilă').end();
+          FormularProcedură.$.find('.debitor')
+            .not(':first').remove().end()
+            .find('input,textarea').val('').end()
+            .first().removeClass('dispensabilă').end();
         }
       },
 
@@ -1664,9 +1663,10 @@
           .find(':input').val('').end()
           .find('select').val(function () { return $(this).find('option:first').val(); }).end()
         .end()
-        .find('#creditor').find(':input').val('').end().end()
         .find('fieldset .conţinut').removeAttr('style').end();
 
+      FormularProcedură.secţiuni['generică'].resetează('#creditor');
+      FormularProcedură.secţiuni['debitori'].resetează();
       FormularProcedură.secţiuni['persoane-terţe'].resetează();
       FormularProcedură.secţiuni['încheieri'].resetează();
       FormularProcedură.secţiuni['sechestrări-bunuri'].resetează();
