@@ -27,7 +27,7 @@ function curăţă_încheierile_salvate($procedură, $număr) {
   }
 
   array_walk_recursive($procedură, function($value, $key) use (&$înregistrate) {
-    if ($key === 'încheiere' || $key === 'anexa') {
+    if (substr($key, 0, 22) === '/formulare-încheieri/') {
       $înregistrate[] = unicode_basename($value) . '.gz';
     }
   });
