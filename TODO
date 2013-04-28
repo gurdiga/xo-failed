@@ -1,4 +1,15 @@
-- de continuat cu butoanele de încheieri
+De adăugat la încheieri atribute în funcţie de criteriul de afişare. De exemplu:
+
+<a
+  href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
+  formular="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
+  caracter="pecuniar"
+  obiectul="aplicarea măsurilor de asigurare a acţiunii"
+  măsura-de-asigurare="aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">…</a>
+
+Dacă atributul respectiv lipseşte, valoarea cîmpului respectiv nu e relevantă.
+Dacă include mai multe valori, opţiunile se vor separa prin “|”.
+
 - de eliminat jshint maxcomplexity
 - de migrat spre icon font
   - butoane mari

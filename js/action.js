@@ -216,21 +216,20 @@
     selector: 'select.care.schimbă.formularul',
 
     init: function () {
-      FormularProcedură.$
-        .on('change', this.selector, this.inserează);
+      FormularProcedură.$.on('change', this.selector, this.inserează);
     },
 
     inserează: function () {
       var $select = $(this),
           selectorŞablon = '.' + $select.attr('id') + '.conţinut[title="' + $select.val() + '"]',
           şablon = SubsecţiuniDinamice.parseazăIncluderile(window.$şabloane.find(selectorŞablon).html()),
-          item = $select.closest('li'),
+          $item = $select.closest('li'),
           $subformular;
 
-      item.nextAll().remove();
-      item.after(şablon).hide().slideDown();
+      $item.nextAll().remove();
+      $item.after(şablon).hide().slideDown();
 
-      $subformular = item.nextAll();
+      $subformular = $item.nextAll();
       $subformular.find(SubsecţiuniDinamice.selector).trigger('change');
 
       if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
@@ -767,7 +766,6 @@
         .find('#tireu').toggle(afişeazăTireu).end();
     },
 
-    // TODO
     secţiuni: {
       init: function () {
         for (var secţiune in this) {
@@ -883,7 +881,7 @@
 
       'obiectul-urmăririi': {
         colectează: function () {
-          /*jshint maxcomplexity:8*/ // TODO: fix this?
+          /*jshint maxcomplexity:8*/
           var $secţiune = FormularProcedură.$obiectulUrmăririi,
               $obiectulUrmăririi = $secţiune.find('#obiect'),
               obiectulUrmăririi;
@@ -1251,7 +1249,7 @@
         },
 
         populează: function (sechestrări) {
-          /*jshint maxcomplexity:6*/ // TODO split?
+          /*jshint maxcomplexity:6*/
           if (!sechestrări) return;
 
           var sechestrare, $sechestrare, bun, $bun, primul = true,
@@ -1330,7 +1328,12 @@
           $secţiune = $secţiune || this.$;
 
           $secţiune.each(function () {
-            încheieri[this.getAttribute('formular')] = this.getAttribute('href');
+            var formular = this.getAttribute('formular'),
+                încheiere = this.getAttribute('href');
+
+            if (formular === încheiere) return true;
+
+            încheieri[formular] = încheiere;
           });
 
           return încheieri;
@@ -1341,19 +1344,23 @@
 
           return $secţiune.each(function () {
             if (!încheieri) return;
-            if (!încheieri[this.getAttribute('formular')]) return;
 
-            this.setAttribute('href', încheieri[this.getAttribute('formular')]);
+            var $încheiere = $(this),
+                formular = $încheiere.attr('formular');
 
-            if (this.getAttribute('href') !== this.getAttribute('formular')) {
-              this.className = 'salvat';
+            if (!încheieri[formular]) return;
+
+            $încheiere.attr('href', încheieri[formular]);
+
+            if ($încheiere.attr('href') !== formular) {
+              $încheiere.addClass('salvat');
             }
           });
         },
 
         resetează: function () {
           this.$.each(function () {
-            this.removeAttribute('class');
+            $(this).removeClass('salvat');
           });
         }
       },
@@ -3093,14 +3100,15 @@
   // --------------------------------------------------
 
   Încheieri = {
+    $: null,
     deschise: {},
 
     init: function () {
+      this.$ = FormularProcedură.$.find('#încheieri');
       this.butonaşe.init();
 
       setInterval(this.curăţaReferinţeLaFerestreleÎnchise, 5 * 1000);
-      FormularProcedură.$
-        .on('change', '#caracter', this.ajusteazăLista); // TODO de completat selectorul
+      FormularProcedură.$.on('change', '#caracter, #obiect, #măsura-de-asigurare', this.ajusteazăLista);
     },
 
     închide: function () {
@@ -3124,7 +3132,46 @@
     },
 
     ajusteazăLista: function () {
-      // TODO adaugă class corespunzător la #încheieri
+      /*
+       * La "change" pe un select.care.schimbă.formularul se declanşează "change"
+       * pe eventualele select.care.schimbă.formularul care s-au inserat, recursiv.
+       *
+       * Pentru evitarea reajustării multiple a listei de încheieri ca rezultat
+       * al acestei recursivităţi, se folosim un timeout.
+       * */
+      if (Încheieri.timeoutAjustareListă) return;
+
+      Încheieri.timeoutAjustareListă = setTimeout(function () {
+        var $secţiune = FormularProcedură.$obiectulUrmăririi,
+            caracter = $secţiune.find('#caracter').val(),
+            obiect = $secţiune.find('#obiect').val(),
+            măsurăDeAsigurare = $secţiune.find('#măsura-de-asigurare').val();
+
+        var filtru = {
+          'caracter': caracter,
+          'obiect': obiect,
+          'măsura-de-asigurare': măsurăDeAsigurare
+        };
+
+        Încheieri.$.find('li').show().find('a').each(function () {
+          /*jshint maxcomplexity:5*/
+          var item, valoare;
+
+          for (item in filtru) {
+            if (!filtru[item]) continue;
+            if (!this.hasAttribute(item)) continue;
+
+            valoare = filtru[item];
+
+            if (this.getAttribute(item).split('|').indexOf(valoare) === -1) {
+              $(this.parentNode).hide();
+              return true; // return true is like "continue" for jQuery each loop
+            }
+          }
+        });
+
+        delete Încheieri.timeoutAjustareListă;
+      }, 500);
     },
 
     formular: function (buton) {
@@ -3177,7 +3224,7 @@
 
     butonaşe: {
       init: function () {
-        // TODO: aici
+        // TODO: aici de eliminat Încheieri.deschide în favoarea la Încheieri.deschide2?
         $(document)
           .on('click', '.încheieri a', Încheieri.deschide2)
           .on('click', '.buton[data-formular]', Încheieri.deschide)

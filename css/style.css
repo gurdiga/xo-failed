@@ -1474,6 +1474,10 @@ ul.încheieri.contextuale {
   margin-left: 13px;
 }
 
+ul.încheieri.contextuale a.salvat::after {
+  left: 1px;
+}
+
 ul.încheieri.contextuale.borderou-de-calcul {
   margin-left: 13em;
 }
@@ -1481,6 +1485,11 @@ ul.încheieri.contextuale.borderou-de-calcul {
 ul.încheieri li a {
   text-decoration: none;
   color: inherit;
+}
+
+ul.încheieri li a:before {
+  padding-right: 3px;
+  vertical-align: 1px;
 }
 
 ul.încheieri li:hover::before,
@@ -1493,10 +1502,11 @@ ul.încheieri li a:hover {
   text-decoration: underline;
 }
 
-ul.încheieri a.salvat::before {
+ul.încheieri a.salvat::after {
   content: '✓';
-  margin: -1px -24px;
   position: absolute;
+  left: -12px;
+  margin-top: -1px;
 }
 
 #încheieri .conţinut {
@@ -1506,12 +1516,13 @@ ul.încheieri a.salvat::before {
 #încheieri ul.încheieri {
   margin: 0 0 0 14px;
   padding: 0;
+  font-size: inherit;
 }
 
-#încheieri ul.încheieri li {
+#încheieri li {
   color: #555;
   background-color: white;
-  padding-left: 2px;
+  padding: 4px 0 0 2px;
 }
 
 #încheieri ul.încheieri.grup {
