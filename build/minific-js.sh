@@ -38,7 +38,7 @@ minifică "js/încheiere.js"
 # concatenează lib.js cu action.js
 rm -f js/action-*.js*
 cat \
-  js/lib/jquery-1.8.js \
+  js/lib/jquery-2.0.0.js \
   lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js \
   js/lib.js \
   js/action.js \
@@ -46,7 +46,7 @@ cat \
 mv js/one.js js/action-$TIMESTAMP.js
 
 grep --fixed-strings --invert-match \
-  -e '<script defer src="/js/lib/jquery-1.8.js"></script>' \
+  -e '<script defer src="/js/lib/jquery-2.0.0.js"></script>' \
   -e '<script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>' \
   -e '<script defer src="/js/lib.js"></script>' \
   index.html > index.html.1
