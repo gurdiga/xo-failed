@@ -1573,18 +1573,22 @@
 
       FormularProcedură.seTrimite = true;
 
-      $.put(cale, JSON.stringify(procedură), function (_, status) {
-        FormularProcedură.seTrimite = false;
+      $.put(cale, JSON.stringify(procedură))
+        .done(function (_, status) {
+          FormularProcedură.seTrimite = false;
 
-        if (status === 'notmodified') {
-          FormularProcedură.$.trigger('salvat-deja', [procedură]);
-          return;
-        }
+          if (status === 'notmodified') {
+            FormularProcedură.$.trigger('salvat-deja', [procedură]);
+            return;
+          }
 
-        FormularProcedură.$.trigger('salvat', [procedură, număr]);
-        FormularProcedură.puneÎnCache(procedură, număr);
-        Căutare.încarcăIndexFărăCache();
-      });
+          FormularProcedură.$.trigger('salvat', [procedură, număr]);
+          FormularProcedură.puneÎnCache(procedură, număr);
+          Căutare.încarcăIndexFărăCache();
+        })
+        .fail(function () {
+          FormularProcedură.seTrimite = false;
+        });
     },
 
     crează: function () {
@@ -1595,19 +1599,23 @@
 
       FormularProcedură.seTrimite = true;
 
-      $.put(cale, JSON.stringify(procedură), function (cale) {
-        FormularProcedură.seTrimite = false;
+      $.put(cale, JSON.stringify(procedură))
+        .done(function (cale) {
+          FormularProcedură.seTrimite = false;
 
-        var număr = cale.match(/(\d+)\/date.json$/)[1],
-            adresaNouă = '#formular?' + număr;
+          var număr = cale.match(/(\d+)\/date.json$/)[1],
+              adresaNouă = '#formular?' + număr;
 
-        history.replaceState(null, null, adresaNouă);
+          history.replaceState(null, null, adresaNouă);
 
-        FormularProcedură.seteazăTitlu(procedură);
-        FormularProcedură.$.trigger('salvat', [procedură, număr]);
-        FormularProcedură.puneÎnCache(procedură, număr);
-        Căutare.încarcăIndexFărăCache();
-      });
+          FormularProcedură.seteazăTitlu(procedură);
+          FormularProcedură.$.trigger('salvat', [procedură, număr]);
+          FormularProcedură.puneÎnCache(procedură, număr);
+          Căutare.încarcăIndexFărăCache();
+        })
+        .fail(function () {
+          FormularProcedură.seTrimite = false;
+        });
     },
 
     puneÎnCache: function (procedură, număr) {
@@ -1628,13 +1636,13 @@
       var număr = HashController.date();
 
       $.getJSON('/date/' + Utilizator.login + '/proceduri/' + număr + '/date.json')
-        .success(function (procedură) {
+        .done(function (procedură) {
           ProceduriRecente.notează(număr);
           FormularProcedură.populează(procedură);
           FormularProcedură.seteazăTitlu(procedură);
           FormularProcedură.puneÎnCache(procedură, număr);
         })
-        .error(FormularProcedură.închide);
+        .fail(FormularProcedură.închide);
 
     },
 
@@ -1801,7 +1809,8 @@
     notează: function (număr) {
       if (ProceduriRecente.numărulUltimei() === număr) return;
 
-      $.put(ProceduriRecente.url(), JSON.stringify(număr), ProceduriRecente.afişează);
+      $.put(ProceduriRecente.url(), JSON.stringify(număr))
+        .done(ProceduriRecente.afişează);
     },
 
     numărulUltimei: function () {
@@ -1945,8 +1954,8 @@
 
     încarcăIndex: function () {
       $.getJSON(Căutare.adresăIndex)
-        .success(Căutare.seteazăIndex)
-        .error(GhidÎnceput.afişează);
+        .done(Căutare.seteazăIndex)
+        .fail(GhidÎnceput.afişează);
     },
 
     seteazăIndex: function (data) {
@@ -2141,11 +2150,12 @@
         'bancă-onorarii': cîmp('#bancă-onorarii')
       };
 
-      $.put(Profil.url, JSON.stringify(Profil.date), function () {
-        Profil.$
-          .find('button.închide').click().end()
-          .trigger('salvat');
-      });
+      $.put(Profil.url, JSON.stringify(Profil.date))
+        .done(function () {
+          Profil.$
+            .find('button.închide').click().end()
+            .trigger('salvat');
+        });
     },
 
     reseteazăDialog: function () {
@@ -3374,12 +3384,11 @@
 
   // --------------------------------------------------
 
-  $.put = function (url, data, successCallback) {
+  $.put = function (url, data) {
     return $.ajax({
       type: 'PUT',
       url: url,
-      data: data,
-      success: successCallback
+      data: data
     });
   };
 

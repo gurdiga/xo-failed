@@ -108,21 +108,22 @@
     trimite: function () {
       var pagina = Încheiere.cale();
 
-      $.put(pagina, Încheiere.conţinut(), function () {
-        if (Încheiere.nouă()) {
-          // e o încheiere nouă încă nesalvată
-          Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
-          delete Încheieri.deschise[Încheiere.pagina];
-          Încheiere.pagina = pagina;
-          history.replaceState(null, null, pagina);
-        }
+      $.put(pagina, Încheiere.conţinut())
+        .done(function () {
+          if (Încheiere.nouă()) {
+            // e o încheiere nouă încă nesalvată
+            Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
+            delete Încheieri.deschise[Încheiere.pagina];
+            Încheiere.pagina = pagina;
+            history.replaceState(null, null, pagina);
+          }
 
-        Încheiere.conţinutIniţial = Încheiere.conţinut();
-        Încheiere.marcheazăButonul();
-        BaraDeInstrumente.anunţăSalvarea();
+          Încheiere.conţinutIniţial = Încheiere.conţinut();
+          Încheiere.marcheazăButonul();
+          BaraDeInstrumente.anunţăSalvarea();
 
-        app.$(window).trigger('salvat');
-      });
+          app.$(window).trigger('salvat');
+        });
     },
 
     salvează: function () {
