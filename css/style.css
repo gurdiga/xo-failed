@@ -209,7 +209,7 @@ button {
 }
 
 #căutare input {
-  background: transparent;
+  background: white;
   border: 1px solid #ddd;
   border-top-color: #bbb;
   margin: 0;
@@ -222,7 +222,6 @@ button {
 }
 
 #căutare input:focus {
-  background: white;
 }
 
 #căutare .şoaptă#găsite,

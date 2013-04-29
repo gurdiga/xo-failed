@@ -300,11 +300,13 @@ address {
   font-size: 26px;
 }
 
-.editabil:focus {
-  box-shadow: 0 0 3px 2px #b5d5ff;
-  outline-width: 0;
-}
+@media screen {
+  .editabil:focus {
+    box-shadow: 0 0 3px 2px #b5d5ff;
+    outline-width: 0;
+  }
 
-.editabil:hover {
-  outline: 1px solid #b5d5ff;
+  .editabil:hover {
+    outline: 1px solid #b5d5ff;
+  }
 }
