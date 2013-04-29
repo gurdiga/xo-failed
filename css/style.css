@@ -475,12 +475,11 @@ fieldset label {
   background: #eee;
 }
 
-fieldset legend label {
+fieldset.secţiune legend {
+  cursor: pointer;
   font: bold 1.4em/1.5em DisplayType, sans-serif;
-  margin: 3px;
-  padding: 0;
+  padding: 3px 0 3px 7px;
   color: white;
-  width: auto;
 }
 
 .butoane-per-secţiune {

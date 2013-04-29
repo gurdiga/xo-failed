@@ -3327,7 +3327,7 @@
 
   Secţiuni = {
     init: function () {
-      FormularProcedură.$.on('click', 'fieldset button.desfăşoară', this.desfăşoară);
+      FormularProcedură.$.on('click', 'fieldset.secţiune legend', this.desfăşoară);
     },
 
     desfăşoară: function () {
@@ -3342,12 +3342,14 @@
         set = fieldset;
       }
 
-      set.find('.conţinut').toggle('blind', function () {
-        var conţinut = $(this),
-            titlu = conţinut.is(':visible') ? 'Colapsează' : 'Desfăşoară';
+      set.find('.conţinut')
+        .toggle('blind', function () {
+          var conţinut = $(this),
+              titlu = conţinut.is(':visible') ? 'Colapsează' : 'Desfăşoară';
 
-        conţinut.closest('fieldset').find('button.desfăşoară').attr('title', titlu);
-      });
+          conţinut.closest('fieldset').find('button.desfăşoară').attr('title', titlu);
+        }).end()
+        .toggleClass('desfăşurată comprimată');
     }
   },
 
