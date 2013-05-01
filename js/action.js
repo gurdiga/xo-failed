@@ -87,7 +87,7 @@
         .removeAttr('id') // #creditor
         .find('.conţinut').removeAttr('style').end()
         .find('input,textarea').val('').end()
-        .find('legend label').text(function (i, text) {
+        .find('legend').text(function (i, text) {
           if ($buton.is('.persoană.terţă')) {
             $persoanaAdăugată.addClass('persoană-terţă');
 

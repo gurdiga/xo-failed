@@ -221,9 +221,6 @@ button {
   padding: .3em;
 }
 
-#căutare input:focus {
-}
-
 #căutare .şoaptă#găsite,
 #căutare .şoaptă#nimic {
   display: none;

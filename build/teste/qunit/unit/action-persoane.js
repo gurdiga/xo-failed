@@ -51,7 +51,7 @@
     ok(!$persoanaAdăugată.find('.conţinut').attr('style'), 'şters style de pe .conţinut');
     equal($persoanaAdăugată.find('input').val(), '', 'curăţat valoare din input');
     equal($persoanaAdăugată.find('textarea').val(), '', 'curăţat valoare din textarea');
-    equal($persoanaAdăugată.find('legend label').text(), $butonDeAdăugare.find('.legend.label').text(), 'se actualizează titlul secţiunii');
+    equal($persoanaAdăugată.find('legend').text(), $butonDeAdăugare.find('.legend.label').text(), 'se actualizează titlul secţiunii');
     ok(declanşatEvenimentChange, 'generat eveniment artificial “change” pe select#gen-persoană');
     ok($persoanaAdăugată.is('.eliminabil.de.tot.dispensabilă'), '…adăugat clase “eliminabil de tot dispensabilă”');
 
@@ -95,7 +95,7 @@
     ok(!$persoanaAdăugată.find('.conţinut').attr('style'), 'şters style de pe .conţinut');
     equal($persoanaAdăugată.find('input').val(), '', 'curăţat valoare din input');
     equal($persoanaAdăugată.find('textarea').val(), '', 'curăţat valoare din textarea');
-    equal($persoanaAdăugată.find('legend label').text(), titluSecţiunePersoană, 'se păstrează titlul secţiunii');
+    equal($persoanaAdăugată.find('legend').text(), titluSecţiunePersoană, 'se păstrează titlul secţiunii');
     ok(declanşatEvenimentChange, 'generat eveniment artificial “change” pe select#gen-persoană');
     ok($persoanaAdăugată.is('.eliminabil.de.tot.dispensabilă'), '…adăugat clase “eliminabil de tot dispensabilă”');
 
