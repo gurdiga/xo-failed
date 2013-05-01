@@ -472,11 +472,35 @@ fieldset label {
   background: #eee;
 }
 
+fieldset.secţiune {
+  position: relative;
+}
+
 fieldset.secţiune legend {
   cursor: pointer;
   font: bold 1.4em/1.5em DisplayType, sans-serif;
   padding: 3px 0 3px 7px;
   color: white;
+}
+
+fieldset.secţiune legend::after {
+  font: normal 12px serif;
+  content: '▼';
+  position: absolute;
+  right: 0;
+  top: 11px;
+  color: gray;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
+
+fieldset.secţiune.comprimată legend::after {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .butoane-per-secţiune {

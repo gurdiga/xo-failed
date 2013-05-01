@@ -3342,14 +3342,11 @@
         set = fieldset;
       }
 
-      set.find('.conţinut')
-        .toggle('blind', function () {
-          var conţinut = $(this),
-              titlu = conţinut.is(':visible') ? 'Colapsează' : 'Desfăşoară';
-
-          conţinut.closest('fieldset').find('button.desfăşoară').attr('title', titlu);
-        }).end()
-        .toggleClass('desfăşurată comprimată');
+      set
+        .toggleClass('desfăşurată comprimată')
+        .find('.conţinut').animate({
+          height: ['toggle', 'swing']
+        }, 500);
     }
   },
 
