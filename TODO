@@ -1,14 +1,14 @@
 - de adăugat iconiţe ::after pentru fieldset.secţiuni legend
 - de migrat spre icon font
   - butoane mari
-  - butoane de expandare/colapsare secţiuni
-  - iconiţe profil şi calculator
-  - iconiţă calendar?
-  - iconiţă read-only lock
+  - alt font optimizat pentru dimensiuni mici:
+    - iconiţe profil şi calculator
+    - iconiţă calendar?
+    - iconiţă read-only lock
+    - iconiţă document pentru butonaşele de încheieri
+
 - Încheieri
-  - pus lista încheierilor salvate în procedură['încheieri'][]
-  - mutat TOATE butonaşele în secţiunea “Încheieri” + ajustat clasele pe #formular (sau poate pe #încheieri?)
-    + ajustat corespunzător vizibilitate încheierilor din CSS după ID care este numele formularului de încheiere
+  - de adăugat următoarele încheieri (vezi lista din GDocs)
 
 - corectat în hăş #formular cu #procedura?
 
@@ -59,7 +59,7 @@ Chestii tehnice
   - microtemplating: escape html tags in valorile injectate
   - timeout session from JS and logout?
   - bootable tonido flash
-  - rollback deploy? deploy stage then switch doc_roots rename? have a REVISION=SHA parameter?
+  - rollback deploy? deploy stage then switch doc_roots rename? have an optional REVISION=SHA parameter?
 
 - Performanţă
   - performanţă: YSlow & PageSpeed, about:tracing

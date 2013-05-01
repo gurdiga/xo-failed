@@ -947,6 +947,7 @@ input[type="checkbox"]+label {
 }
 
 #destinatari .listă .adaugă-toate {
+  cursor: pointer;
   color: black;
   font-weight: bold;
   background: white;
@@ -1372,8 +1373,7 @@ label.checkbox input {
   text-indent: 0; /* altfel ✓ nu se vede */
 }
 
-#destinatari .listă .itemi li,
-.listă {
+.listă .itemi li {
   font-size: small;
   cursor: pointer;
   color: #555;
@@ -1382,9 +1382,10 @@ label.checkbox input {
 .listă>.titlu {
   margin-left: 1em;
   color: black;
+  cursor: default;
 }
 
-.listă:hover>.titlu {
+.listă>.titlu:hover {
   text-decoration: underline;
 }
 
@@ -1417,8 +1418,8 @@ label.checkbox input {
   white-space: nowrap;
 }
 
-.listă:hover>.titlu,
-.listă:hover>.titlu::before,
+.listă>.titlu:hover,
+.listă>.titlu::before:hover,
 .listă>.titlu+.itemi>li:hover,
 #destinatari .listă .itemi li:hover {
   text-decoration: underline;

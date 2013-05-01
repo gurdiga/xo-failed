@@ -3358,12 +3358,12 @@
   ListeMeniu = {
     init: function () {
       FormularProcedură.$
-        .on('mouseenter', '.listă', this.afişează)
+        .on('mouseenter', '.listă .titlu', this.afişează)
         .on('mouseleave', '.listă', this.ascunde);
     },
 
     afişează: function () {
-      $(this).children('.itemi').afişează();
+      $(this).parent().children('.itemi').afişează();
     },
 
     ascunde: function () {
