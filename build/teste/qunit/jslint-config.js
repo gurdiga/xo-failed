@@ -25,6 +25,7 @@
     'integrare/verificare-obiectul-urmăririi.js',
     'integrare/cheltuieli.js',
     'integrare/cheltuieli-populare.js',
+    'integrare/lista-încheieri.js',
     'integrare/salvare-procedură.js',
 
     'integrare/formulare-încheieri/utilitare.js',
@@ -43,6 +44,7 @@
     'integrare/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.js',
     'integrare/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.js',
     'integrare/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.js',
+    'integrare/formulare-încheieri/încheiere-de-continuare.js',
 
     'integrare/căutare-procedură.js',
 
@@ -61,7 +63,8 @@
     '/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.părţi/script.js',
     '/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.părţi/script.js',
     '/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.părţi/script.js',
-    '/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js'
+    '/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-continuare.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

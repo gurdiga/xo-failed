@@ -1,4 +1,8 @@
-- de adăugat iconiţe ::after pentru fieldset.secţiuni legend
+- Încheieri
+  - de adăugat următoarele încheieri (vezi lista din GDocs)
+  - scrisoarea de însoţire
+
+- bibi teste server: ""
 - de migrat spre icon font
   - butoane mari
   - alt font optimizat pentru dimensiuni mici:
@@ -6,9 +10,6 @@
     - iconiţă calendar?
     - iconiţă read-only lock
     - iconiţă document pentru butonaşele de încheieri
-
-- Încheieri
-  - de adăugat următoarele încheieri (vezi lista din GDocs)
 
 - corectat în hăş #formular cu #procedura?
 
