@@ -16,8 +16,8 @@
 body {
   width: 18cm;
   padding: 0 1.5cm;
-  font-size: 14px;
-  font-family: Georgia, serif;
+  font-size: 17px;
+  font-family: 'Times New Roman', serif;
 }
 
 .calcule {
@@ -39,7 +39,7 @@ ul.calcule span {
 td, th,
 .calcule li.total,
 ul.calcule span {
-  padding: .2em .6em;
+  padding: .1em .6em;
 }
 
 ul.calcule span:nth-child(1) {
@@ -59,7 +59,7 @@ ul.calcule span:nth-child(4) {
 }
 
 ul.calcule span:nth-child(5) {
-  width: 6em;
+  width: 4em;
 }
 
 table#borderou-de-calcul thead th,
@@ -79,7 +79,7 @@ table#borderou-de-calcul thead td,
   text-align: right;
   font-weight: bold;
   display: block;
-  width: 30.7em; /* (1.2 + 8 + 4 + 5.5 + 6) + (5*2*.6) */
+  width: 28.5em;
 }
 
 p {
