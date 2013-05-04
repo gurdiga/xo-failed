@@ -33,7 +33,7 @@ asyncTest('Încheiere de continuare', function () {
 
       var $chestiunea = $încheiere.find('section header:contains("Chestiunea")+.conţinut'),
           $dispoziţia = $încheiere.find('section header:contains("Dispoziţia")+.conţinut'),
-          frazaCheie = "În termenul acordat potrivit legii, DEBITORUL nu a executat benevol documentul executoriu sus menţionat.";
+          frazaCheie = 'În termenul acordat potrivit legii, DEBITORUL nu a executat benevol documentul executoriu sus menţionat.';
 
       ok($chestiunea.find('p:contains("' + frazaCheie + '")').există(), 'avem fraza cheie încsecţiunea “Chestiunea”');
       equal($dispoziţia.find('li').length, 3, 'în secţiunea “Dispoziţia” avem enumerate 3 puncte');

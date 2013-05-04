@@ -1542,7 +1542,7 @@ ul.încheieri a.salvat::after {
 #încheieri li {
   color: #555;
   background-color: white;
-  padding: 4px 0 0 2px;
+  margin: 4px 0 0 2px;
 }
 
 #încheieri ul.încheieri.grup {
@@ -1558,4 +1558,10 @@ ul.încheieri a.salvat::after {
 
 #încheieri ul.încheieri.grup li:last-child {
   margin-bottom: -1ex;
+}
+
+.scrisoare-de-însoţire {
+  font-size: 90%;
+  margin: 0 0 7px 14px;
+  color: #999;
 }
