@@ -129,7 +129,6 @@ fieldset ul select.valuta {
 button {
   padding: .3em .6em;
   font-weight: bold;
-  font-size: small;
 }
 
 #căutare .şoaptă,
@@ -683,10 +682,13 @@ button.adaugă-cîmp-personalizat,
 button.adaugă {
   padding: 0 .5em .5em;
   border: none;
-  line-height: .7em;
   background: transparent;
   top: -.2em;
   position: relative;
+}
+
+button.adaugă-cîmp-personalizat {
+  line-height: .7em;
 }
 
 .listă .titlu.semiascuns:hover,
@@ -1510,6 +1512,10 @@ ul.încheieri li a {
 ul.încheieri li a:before {
   padding-right: 3px;
   vertical-align: 1px;
+}
+
+ul.încheieri li:hover::before {
+  text-decoration: none;
 }
 
 ul.încheieri li:hover::before,
