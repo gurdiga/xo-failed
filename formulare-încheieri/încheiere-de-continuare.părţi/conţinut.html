@@ -13,16 +13,21 @@
         <section>
           <header>Chestiunea</header>
           <div class="conţinut editabil" spellcheck="false">
-<? require 'început-secţiune-motive.html' ?>
-
-            <p>În termenul acordat potrivit legii, <%= text('DEBITORUL sau DEBITORII', procedură.debitori)
-            %> nu a executat benevol documentul executoriu sus menţionat.</p>
+            <p>La data de <%= procedură['data-intentării'] %> a fost intentată procedura de executare
+            a documentului executoriu <%= procedură['document-executoriu']['numărul-de'] %> din
+            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de judecătoria
+            <%= procedură['document-executoriu']['instanţa-de-judecată'] %> fiindu-i acordat
+            <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %> un termen de 15
+            zile de a executa benevol documentul executoriu.</p>
           </div>
         </section>
 
         <section>
           <header>Motivele</header>
           <div class="conţinut editabil" spellcheck="false">
+            <p>În termenul acordat potrivit legii, <%= text('DEBITORUL sau DEBITORII', procedură.debitori)
+            %> nu a executat benevol documentul executoriu sus menţionat.</p>
+
             <p>În baza celor expuse şi în conformitate cu art. 8, 10, 22, 60 alin. (3¹), 65,
             66 al Codului de executare RM, dispun:</p>
           </div>
