@@ -74,6 +74,10 @@
         })
       };
 
+      if (Încheiere.buton.is('.scrisoare-de-însoţire')) {
+        context.titlulÎncheierii = context.buton.siblings('a').text();
+      }
+
       // cod specific pentru fiecare încheiere
       if ($.isFunction(window.init)) window.init(context);
 

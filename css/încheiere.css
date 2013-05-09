@@ -310,3 +310,15 @@ address {
     outline: 1px solid #b5d5ff;
   }
 }
+
+.scrisoare-de-însoţire {
+  padding: 2em;
+  height: 12cm;
+}
+
+@media print {
+  /* cîte 2 pe pagină */
+  .scrisoare-de-însoţire:nth-child(2n+0) {
+    page-break-after: always;
+  }
+}

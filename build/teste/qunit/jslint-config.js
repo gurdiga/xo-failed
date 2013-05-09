@@ -45,6 +45,7 @@
     'integrare/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.js',
     'integrare/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.js',
     'integrare/formulare-încheieri/încheiere-de-continuare.js',
+    'integrare/formulare-încheieri/scrisoare-de-însoţire.js',
 
     'integrare/căutare-procedură.js',
 
@@ -64,7 +65,8 @@
     '/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.părţi/script.js',
     '/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.părţi/script.js',
     '/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-continuare.părţi/script.js'
+    '/formulare-încheieri/încheiere-de-continuare.părţi/script.js',
+    '/formulare-încheieri/scrisoare-de-însoţire.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

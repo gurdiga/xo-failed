@@ -1509,6 +1509,10 @@ ul.încheieri li a {
   color: inherit;
 }
 
+ul.încheieri li a.scrisoare-de-însoţire {
+  color: #999;
+}
+
 ul.încheieri li a:before {
   padding-right: 3px;
   vertical-align: 1px;
@@ -1567,7 +1571,9 @@ ul.încheieri a.salvat::after {
 }
 
 .scrisoare-de-însoţire {
+  display: inline-block;
   font-size: 90%;
-  margin: 0 0 7px 14px;
-  color: #999;
+  margin: 0 0 0 14px;
+  position: relative;
+  top: -3px;
 }
