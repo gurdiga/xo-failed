@@ -7,7 +7,7 @@ asyncTest('Încheiere de continuare', function () {
       $buton = $formular.find('#încheieri a[href="/formulare-încheieri/încheiere-de-continuare.html"]');
 
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
-  ok($buton.next().is('.scrisoare-de-însoţire'), 'avem linkuleţ pentru scrisoarea de însoţire');
+  ok($buton.next('br').next().is('.scrisoare-de-însoţire'), 'avem linkuleţ pentru scrisoarea de însoţire');
 
   app.ProceduriRecente.$.find('.item:first-child').click();
   $formular.one('populat', function () {

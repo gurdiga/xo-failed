@@ -3,10 +3,6 @@
 @import url(/css/jquery-ui-1.9.2.custom.min.css);
 @import url(/css/shared.css) screen;
 
-@page {
-  /*size: A4;*/
-}
-
 @media print {
   .editabil:focus {
     outline-width: 0;
@@ -312,13 +308,25 @@ address {
 }
 
 .scrisoare-de-însoţire {
-  padding: 2em;
-  height: 12cm;
+  padding-top: 2cm;
+  height: 13cm;
+}
+
+.scrisoare-de-însoţire .intro {
+  padding: 0 0 1cm 7cm;
+}
+
+.scrisoare-de-însoţire .executor {
+  margin-top: 2em;
 }
 
 @media print {
   /* cîte 2 pe pagină */
   .scrisoare-de-însoţire:nth-child(2n+0) {
     page-break-after: always;
+  }
+
+  body {
+    margin: 0;
   }
 }

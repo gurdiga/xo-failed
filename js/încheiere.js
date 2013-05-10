@@ -59,6 +59,9 @@
           },
           id = function (persoană) {
             return persoană['gen-persoană'] === 'fizică' ? ('IDNP ' + persoană['idnp']) : ('IDNO ' + persoană['idno']);
+          },
+          adresă = function (persoană) {
+            return persoană['gen-persoană'] === 'fizică' ? persoană['domiciliu'] : persoană['sediu'];
           };
 
       var context = {
@@ -69,6 +72,7 @@
         buton: Încheiere.buton,
         nume: nume,
         id: id,
+        adresă: adresă,
         debitori: procedură.debitori.map(function (debitor) {
           return nume(debitor) + ' (' + id(debitor) + ')';
         })

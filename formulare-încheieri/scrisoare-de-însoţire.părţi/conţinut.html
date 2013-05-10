@@ -1,59 +1,63 @@
-<? $titlu = 'Încheiere de intentare' ?>
+<? $titlu = 'Scrisoare de însoţire' ?>
 <? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
 <? require 'partea-de-sus.html' ?>
 
     <div class="scrisoare-de-însoţire">
-      <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
-      <p class="numărul-procedurii"><%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %></p>
+      <div class="intro">
+        <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
 
-      <table id="părţile-vizate">
-        <tr>
-          <th>Creditor:</th>
-          <td><%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>)</td>
-        </tr>
+        <p>Creditor:</p>
+        <address>
+          <b><%= nume(procedură.creditor) %></b><br/>
+          <%= id(procedură.creditor) %><br/>
+          <%= adresă(procedură.creditor) %>
+        </address>
+      </div>
 
-        <tr>
-          <th>Debitor:</th>
-          <td><%= debitori[i] %></td>
-        </tr>
-      </table>
-
-      <p>Executorul judecătoresc <%= executor.nume %> vă expediază pentru
-      informare încheierea cu privire la <%= titlulÎncheierii %>
+      <p>Se expediază pentru informare <%= titlulÎncheierii %>
       numărul <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
       din <%= moment().format(app.FORMATUL_DATEI) %>.</p>
+
+      <p>Anexe:</p>
+      <ul>
+        <li><%= titlulÎncheierii %></li>
+        <li>Borderoul de calcul al cheltuielilor de executare</li>
+      </ul>
+
+      <p class="executor">Executor judecătoresc <%= executor.nume %>.</p>
 
     </div>
 
     <% if (debitori.length > 0) { %>
-
       <% for (var i = 0; i < debitori.length; i++) { %>
         <div class="scrisoare-de-însoţire">
-          <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
-          <p class="numărul-procedurii"><%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %></p>
+          <div class="intro">
+            <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
 
-          <table id="părţile-vizate">
-            <tr>
-              <th>Creditor:</th>
-              <td><%= nume(procedură.creditor) %> (<%= id(procedură.creditor) %>)</td>
-            </tr>
+            <p>Debitor:</p>
+            <address>
+              <b><%= nume(procedură.debitori[i]) %></b><br/>
+              <%= id(procedură.debitori[i]) %><br/>
+              <%= adresă(procedură.debitori[i]) %>
+            </address>
+          </div>
 
-            <tr>
-              <th>Debitor:</th>
-              <td><%= debitori[i] %></td>
-            </tr>
-          </table>
-
-          <p>Executorul judecătoresc <%= executor.nume %> vă expediază pentru
-          informare şi executare încheierea cu privire la <%= titlulÎncheierii %>
+          <p>Se expediază pentru informare şi executare <%= titlulÎncheierii %>
           numărul <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
           din <%= moment().format(app.FORMATUL_DATEI) %>.</p>
 
+          <p>Anexe:</p>
+          <ul>
+            <li><%= titlulÎncheierii %></li>
+            <li>Borderoul de calcul al cheltuielilor de executare</li>
+          </ul>
+
+          <p class="executor">Executor judecătoresc <%= executor.nume %>.</p>
+
         </div>
       <% } %>
-
     <% } else { %>
-      <p>Nu aţi introdus debitorul în formularul de procedură.</p>
+      <p>Nu aţi introdus nici un debitor în formularul de procedură.</p>
     <% } %>
 
 <? require 'partea-de-jos.html' ?>

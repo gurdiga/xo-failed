@@ -7,6 +7,7 @@ asyncTest('Scrisoarea de însoţire', function () {
       $buton = $formular.find('#încheieri a[href="/formulare-încheieri/scrisoare-de-însoţire.html"]').first();
 
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
+  ok($buton.există(), 'avem butonaş pentru scrisoarea de însoţire');
 
   start();
 });
