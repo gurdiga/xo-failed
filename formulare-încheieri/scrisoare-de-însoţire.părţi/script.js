@@ -1,5 +1,5 @@
 window.init = function (context) {
-  /*jshint maxcomplexity:7*/
+  /*jshint maxcomplexity:8 maxdepth:5*/
   'use strict';
 
   var destinatari = context.buton.attr('destinatari').split(' '),
