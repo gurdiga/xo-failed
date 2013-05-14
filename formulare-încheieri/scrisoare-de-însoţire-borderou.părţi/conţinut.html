@@ -1,0 +1,121 @@
+<? $titlu = 'Scrisoare de însoţire' ?>
+<? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
+<? require 'partea-de-sus.html' ?>
+
+    <% if (pentru['creditor']) { %>
+      <div class="scrisoare-de-însoţire">
+        <div class="intro">
+          <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
+
+          <p>Creditor:</p>
+          <p>
+            <b><%= nume(procedură.creditor) %></b><br/>
+            <%= id(procedură.creditor) %><br/>
+            <%= adresă(procedură.creditor) %>
+          </p>
+        </div>
+
+        <p>Se expediază borderoul de calcul din <%= moment().format(app.FORMATUL_DATEI) %>
+        pentru efectuarea actelor de executare în procedura numărul
+        <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %></p>
+
+        <p>Anexe:</p>
+        <ul>
+          <li>Borderoul de calcul al cheltuielilor de executare</li>
+        </ul>
+
+        <p class="executor">Executor judecătoresc <%= executor.nume %>.</p>
+
+      </div>
+    <% } %>
+
+
+    <% if (debitori.length > 0) { %>
+      <% for (var i = 0; i < debitori.length; i++) { %>
+        <div class="scrisoare-de-însoţire">
+          <div class="intro">
+            <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
+
+            <p>Debitor:</p>
+            <p>
+              <b><%= nume(debitori[i]) %></b><br/>
+              <%= id(debitori[i]) %><br/>
+              <%= adresă(debitori[i]) %>
+            </p>
+          </div>
+
+          <p>Se expediază borderoul de calcul din <%= moment().format(app.FORMATUL_DATEI) %>
+          pentru efectuarea actelor de executare în procedura numărul
+          <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %></p>
+
+          <p>Anexe:</p>
+          <ul>
+            <li>Borderoul de calcul al cheltuielilor de executare</li>
+          </ul>
+
+          <p class="executor">Executor judecătoresc <%= executor.nume %>.</p>
+
+        </div>
+      <% } %>
+    <% } else { %>
+      <p>Nu aţi introdus nici un debitor în formularul de procedură.</p>
+    <% } %>
+
+
+    <% if (persoaneTerţe.length > 0) { %>
+      <% for (var i = 0; i < persoaneTerţe.length; i++) { %>
+        <div class="scrisoare-de-însoţire">
+          <div class="intro">
+            <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
+
+            <p>Persoană terţă:</p>
+            <p>
+              <b><%= nume(persoaneTerţe[i]) %></b><br/>
+              <%= id(persoaneTerţe[i]) %><br/>
+              <%= adresă(persoaneTerţe[i]) %>
+            </p>
+          </div>
+
+          <p>Se expediază pentru informare şi executare <%= titlulÎncheierii %>
+          numărul <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
+          din <%= moment().format(app.FORMATUL_DATEI) %>.</p>
+
+          <p>Anexe:</p>
+          <ul>
+            <li><%= titlulÎncheierii %></li>
+          </ul>
+
+          <p class="executor">Executor judecătoresc <%= executor.nume %>.</p>
+
+        </div>
+      <% } %>
+    <% } %>
+
+
+    <% if (alţiDestinatari.length > 0) { %>
+      <% for (var i = 0; i < alţiDestinatari.length; i++) { %>
+        <div class="scrisoare-de-însoţire">
+          <div class="intro">
+            <p class="data-adoptării"><%= moment().format(app.FORMATUL_DATEI) %></p>
+
+            <p>
+              <%= alţiDestinatari[i] %>
+            </p>
+          </div>
+
+          <p>Se expediază pentru informare şi executare <%= titlulÎncheierii %>
+          numărul <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
+          din <%= moment().format(app.FORMATUL_DATEI) %>.</p>
+
+          <p>Anexe:</p>
+          <ul>
+            <li><%= titlulÎncheierii %></li>
+          </ul>
+
+          <p class="executor">Executor judecătoresc <%= executor.nume %>.</p>
+
+        </div>
+      <% } %>
+    <% } %>
+
+<? require 'partea-de-jos.html' ?>

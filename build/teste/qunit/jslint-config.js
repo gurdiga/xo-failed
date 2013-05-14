@@ -66,7 +66,8 @@
     '/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.părţi/script.js',
     '/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js',
     '/formulare-încheieri/încheiere-de-continuare.părţi/script.js',
-    '/formulare-încheieri/scrisoare-de-însoţire.părţi/script.js'
+    '/formulare-încheieri/scrisoare-de-însoţire.părţi/script.js',
+    '/formulare-încheieri/scrisoare-de-însoţire-borderou.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {
