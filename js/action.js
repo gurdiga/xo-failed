@@ -3498,4 +3498,6 @@
   }
 
   Action.init();
+
+  if ('QUnit' in top) top.QUnit.start();
 })(window, document, moment);
