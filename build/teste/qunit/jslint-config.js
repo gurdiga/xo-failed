@@ -13,6 +13,7 @@
     'unit/action-hash-controller.js',
     'unit/action-textarea-elastice.js',
     'unit/action-selecturi-foarte-late.js',
+    'unit/storage-buffer.js',
 
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',

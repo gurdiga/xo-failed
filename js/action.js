@@ -3378,6 +3378,18 @@
     deschide: function () {
       location.hash = $(this).attr('data-href');
     }
+  },
+
+  // --------------------------------------------------
+
+  AjaxBuffer = {
+    put: function (url, data) {
+      window.localStorage.setItem(url, JSON.stringify(data));
+    },
+
+    get: function (url) {
+      return JSON.parse(window.localStorage.getItem(url));
+    }
   };
 
   // --------------------------------------------------
@@ -3493,7 +3505,8 @@
       TextareaElastice: TextareaElastice,
       SelecturiFoarteLate: SelecturiFoarteLate,
       SubsecţiuniDinamice: SubsecţiuniDinamice,
-      Destinatari: Destinatari
+      Destinatari: Destinatari,
+      AjaxBuffer: AjaxBuffer
     });
   }
 
