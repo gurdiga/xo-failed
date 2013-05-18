@@ -46,6 +46,7 @@
     'integrare/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.js',
     'integrare/formulare-încheieri/încheiere-de-continuare.js',
     'integrare/formulare-încheieri/scrisoare-de-însoţire.js',
+    'integrare/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.js',
 
     'integrare/căutare-procedură.js',
 
@@ -67,7 +68,8 @@
     '/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js',
     '/formulare-încheieri/încheiere-de-continuare.părţi/script.js',
     '/formulare-încheieri/scrisoare-de-însoţire.părţi/script.js',
-    '/formulare-încheieri/scrisoare-de-însoţire-borderou.părţi/script.js'
+    '/formulare-încheieri/scrisoare-de-însoţire-borderou.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

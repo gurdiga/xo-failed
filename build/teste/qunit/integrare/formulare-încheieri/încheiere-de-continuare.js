@@ -26,8 +26,6 @@ asyncTest('Încheiere de continuare', function () {
 
       var $încheiere = app.$(încheiere.document);
 
-      ok(true, 'iniţializat încheiere');
-
       UtilitareÎncheiere.verificăSubtitlu($încheiere, 'cu privire la continuarea procedurii de executare');
       UtilitareÎncheiere.verificăSecţiuni($încheiere,
           ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
