@@ -1,6 +1,7 @@
 - Încheieri
 
-- bibi teste server: ""
+- de adaptat salvarea pentru criptare?
+
 - de migrat spre icon font
   - butoane mari
   - alt font optimizat pentru dimensiuni mici:
@@ -9,9 +10,6 @@
     - iconiţă read-only lock
     - iconiţă document pentru butonaşele de încheieri
 
-- corectat în hăş #formular cu #procedura?
-
-- înainte de a transmite cu AJAX păstrează datele în localStorage
 - de mutat aplicaţia în alt fişier HTML
 - <noscript>, unsupported browsers?
 - blank slate video/screenshot/help?
