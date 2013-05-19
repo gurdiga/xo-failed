@@ -58,8 +58,7 @@ asyncTest('Încheiere de asigurare a executării documentului executoriu', funct
   // ----------------------------------------
   function închideTot() {
     return $.Deferred(function (D) {
-      $formular.find('.închide').click();
-      $formular.one('închidere', function () {
+      $formular.one('închis', function () {
         ok(true, 'inchis formularul de procedură');
         app.$.fx.off = false;
 

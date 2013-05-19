@@ -236,7 +236,7 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
     $formular.one('salvat', function () {
       ok(true, 'salvat');
 
-      $formular.one('închidere', function () {
+      $formular.one('închis', function () {
         ok(true, 'închis formularul');
 
         app.$.fx.off = false;

@@ -256,7 +256,7 @@ asyncTest('Scrisoarea de însoţire', function () {
     return $.Deferred(function (D) {
       $scrisori.find('.închide').click();
 
-      $formular.one('închidere', function () {
+      $formular.one('închis', function () {
         ok(true, 'inchis formularul de procedură');
         app.$.fx.off = false;
 

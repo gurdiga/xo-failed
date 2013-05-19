@@ -7,6 +7,8 @@ asyncTest('Încheiere de intentare', function () {
       $buton = $formular.find('#încheieri a[href="/formulare-încheieri/încheiere-de-intentare.html"]'),
       încheiere;
 
+  app.$.fx.off = true;
+
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
 
   app.ProceduriRecente.$.find('.item:first-child').click();
@@ -150,8 +152,10 @@ asyncTest('Încheiere de intentare', function () {
             equal(app.Încheieri.deschise[cale], undefined, 'fereastra încheierii s-a închis');
 
             $formular.find('.închide').click();
-
-            start();
+            $formular.one('închis', function () {
+              app.$.fx.off = false;
+              start();
+            });
           });
         });
         $butonDeImprimare.click();

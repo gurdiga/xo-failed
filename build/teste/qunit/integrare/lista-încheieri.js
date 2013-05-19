@@ -38,7 +38,7 @@ asyncTest('Formular procedură: lista de încheieri', function () {
 
   // ------------------------------------------------
   function închideFormularul() {
-    $formular.one('închidere', function () {
+    $formular.one('închis', function () {
       ok(true, 'închis formularul');
 
       app.$.fx.off = false;

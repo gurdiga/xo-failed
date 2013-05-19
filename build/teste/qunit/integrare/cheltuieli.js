@@ -57,8 +57,6 @@ asyncTest('Formular procedură: cheltuieli', function () {
     ok(!$cheltuieliAdăugate.find('#taxaB1').există(), 'eliminat taxaB1');
   })();
 
-  app.$.fx.off = false;
-
   var $formular = app.FormularProcedură.$;
 
   $formular.find('.închide').click();

@@ -51,10 +51,12 @@ asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a 
       }
 
       $încheiere.find('.închide').click();
-      app.FormularProcedură.$.find('.închide').click();
-      app.$.fx.off = false;
 
-      start();
+      $formular.one('închis', function () {
+        app.$.fx.off = false;
+        start();
+      });
+      $formular.find('.închide').click();
     });
   });
 

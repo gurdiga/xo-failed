@@ -1674,13 +1674,11 @@
     resetează: function () {
       FormularProcedură.$
         .find('#data-intentării').val('').end()
-        .find('#document-executoriu')
-          .find(':input').val('').end()
-          .find('select').val(function () { return $(this).find('option:first').val(); }).end()
-        .end()
+        // pentru cazul cînd unele secţiuni sunt închise
         .find('fieldset .conţinut').removeAttr('style').end();
 
       FormularProcedură.secţiuni['generică'].resetează('#creditor');
+      FormularProcedură.secţiuni['generică'].resetează('#document-executoriu');
       FormularProcedură.secţiuni['debitori'].resetează();
       FormularProcedură.secţiuni['persoane-terţe'].resetează();
       FormularProcedură.secţiuni['încheieri'].resetează();
@@ -1698,7 +1696,6 @@
 
       FormularProcedură.focusează();
       FormularProcedură.$
-        .stop(true, true)
         .find('.bara-de-instrumente').fadeOut().end()
         .animate({'top': $(window).height()}, function () {
           $(this).hide().trigger('închis');
@@ -1718,7 +1715,7 @@
         .find('.bara-de-instrumente').fadeIn('slow').end()
         .css('top', $(window).height())
         .show()
-        .animate({'top': '40px'}, 'fast');
+        .animate({'top': '40px'}, 'slow');
 
       if (FormularProcedură.seDeschideProcedurăSalvată()) {
         FormularProcedură.încarcă();

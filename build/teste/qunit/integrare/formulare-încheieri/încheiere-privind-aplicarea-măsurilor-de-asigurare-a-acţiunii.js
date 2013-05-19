@@ -680,16 +680,15 @@
               'în secţiunea “Dispoziţia” se face referinţă la acţiunile menţionate în secţiunea “Chestiunea”');
             equal($secţiuneaDispoziţia.find('li').length, 3, 'secţiunea “Dispoziţia” enumeră 3 puncte');
 
-            app.$.fx.off = false;
-
             setTimeout(function () {
               $încheiere.find('.închide').click();
-              $formular.find('button.închide').click();
 
-              $formular.one('închidere', function () {
+              $formular.one('închis', function () {
                 ok(true, 'închis formularul de procedură');
+                app.$.fx.off = false;
                 start();
               });
+              $formular.find('button.închide').click();
             }, app.PAUZĂ_DE_OBSERVABILITATE);
           });
         });
