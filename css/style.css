@@ -236,7 +236,6 @@ button {
 
 .listă-proceduri .item {
   cursor: pointer;
-  color: #555;
   padding: 5px 6px 3px;
   vertical-align: top;
   border: 1px solid #bbb;
@@ -436,7 +435,6 @@ h3 {
 fieldset label {
   display: inline-block;
   width: 11em;
-  color: #555;
 }
 
 #container-data-intentării label,
@@ -626,7 +624,6 @@ input.sumă {
 
 .subformular label {
   font-style: italic;
-  color: #555;
   padding: 0 .3em;
   border-bottom: 1px solid silver;
 }
@@ -687,6 +684,13 @@ button.adaugă {
   position: relative;
 }
 
+#adaugă-subsecţiune .titlu,
+#categorii-taxe-şi-speze .listă .titlu,
+button.adaugă-cîmp-personalizat,
+button.adaugă {
+  font-size: 13px;
+}
+
 button.adaugă-cîmp-personalizat {
   line-height: .7em;
 }
@@ -714,6 +718,7 @@ fieldset+button.adaugă {
   position: relative;
   top: -2em;
   margin-left: 0;
+  font-size: 14px;
 }
 
 button.adaugă .legend.label {
@@ -750,16 +755,12 @@ button.adaugă .legend.label {
 }
 
 #cheltuieli .adăugate {
-  margin: 0 2em 0 11.25em;
+  margin: 0 2em 0 13em;
 }
 
 #cheltuieli .adăugate p,
 #categorii-taxe-şi-speze .item p {
   margin: 0;
-}
-
-#cheltuieli .item.achitat {
-  border-left-color: white;
 }
 
 #cheltuieli .item .la .dată {
@@ -780,23 +781,22 @@ button.adaugă .legend.label {
 #cheltuieli .adăugate>.ui-effects-wrapper>li,
 #cheltuieli .adăugate>li {
   margin-top: .4em;
-  border-left: 4px solid #ddd;
-  padding-left: .5em;
-  -webkit-transition: border-color .75s;
-  -moz-transition: border-color .75s;
-  transition: border-color .75s;
+  list-style-type: disc;
+}
+
+#cheltuieli .adăugate>li:hover {
+  list-style-type: none;
 }
 
 #cheltuieli .adăugate>li>.elimină {
-  top: -3px;
-  left: -18px;
+  top: -2px;
+  left: -19px;
   width: 20px;
   background-color: transparent;
 }
 
 #cheltuieli .adăugate .subformular .şoaptă {
   display: block;
-  color: #555;
   margin-left: 1em;
 }
 
@@ -823,7 +823,11 @@ input[type="checkbox"]+label {
 }
 
 #categorii-taxe-şi-speze {
-  margin: 1em 0 0 1em;
+  margin: 0 0 0 12em;
+}
+
+#categorii-taxe-şi-speze>li {
+  margin: 0;
 }
 
 #categorii-taxe-şi-speze .listă .titlu {
@@ -1222,6 +1226,7 @@ select#obiect~.buton[data-formular] {
   right: -8px;
   top: 2px;
   overflow: visible; /* să se vadă bifa */
+  display: none; /* de eliminat butonaşele acestea de tot? */
 }
 
 .ui-icon-calendar {
@@ -1399,7 +1404,6 @@ label.checkbox input {
 .listă .itemi li {
   font-size: small;
   cursor: pointer;
-  color: #555;
 }
 
 .listă>.titlu {
@@ -1550,7 +1554,6 @@ ul.încheieri a.salvat::after {
 }
 
 #încheieri li {
-  color: #555;
   background-color: white;
   margin: 4px 0 0 2px;
 }
@@ -1576,4 +1579,16 @@ ul.încheieri a.salvat::after {
   margin: 0 0 0 14px;
   position: relative;
   top: -3px;
+}
+
+.listă .itemi li,
+#container-data-intentării label,
+.etichetă,
+fieldset label,
+.listă-proceduri .item,
+.subformular label,
+#cheltuieli .adăugate p,
+#cheltuieli .adăugate .subformular .şoaptă,
+#încheieri li {
+  color: #555;
 }
