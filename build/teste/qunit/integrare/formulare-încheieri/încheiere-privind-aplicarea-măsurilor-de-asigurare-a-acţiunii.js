@@ -1,12 +1,12 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 /*global UtilitareÎncheiere*/
-(function () {
+(function() {
   'use strict';
 
   var primaMăsură = 'aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane';
 
 
-  test('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: butoane de adăugare cîmpuri', function () {
+  test('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: butoane de adăugare cîmpuri', function() {
     var app = this.app,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
         obiect = 'aplicarea măsurilor de asigurare a acţiunii';
@@ -48,7 +48,7 @@
     var eliminatValoareaAcţiunii = false;
 
     app.FormularProcedură.$obiectulUrmăririi
-      .one('eliminare', '.valoarea-acţiunii', function () { eliminatValoareaAcţiunii = true; });
+      .one('eliminare', '.valoarea-acţiunii', function() { eliminatValoareaAcţiunii = true; });
 
     $valoareaAcţiunii
       .trigger('mousemove') // să aişăm butonul de eliminare
@@ -73,7 +73,7 @@
     var eliminatBunSechestrat = false;
 
     app.FormularProcedură.$obiectulUrmăririi
-      .one('eliminare', '.bunuri-sechestrate', function () { eliminatBunSechestrat = true; });
+      .one('eliminare', '.bunuri-sechestrate', function() { eliminatBunSechestrat = true; });
 
     $cîmpBun
       .trigger('mousemove') // să aişăm butonul de eliminare
@@ -97,7 +97,7 @@
     var eliminatSumăSechestrată = false;
 
     app.FormularProcedură.$obiectulUrmăririi
-      .one('eliminare', '.sume-sechestrate', function () { eliminatSumăSechestrată = true; });
+      .one('eliminare', '.sume-sechestrate', function() { eliminatSumăSechestrată = true; });
 
     $cîmpSumă
       .trigger('mousemove') // să afişăm butonul de eliminare
@@ -112,7 +112,7 @@
 
   // ------------------------------------------
 
-  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: valoarea acţiunii', function () {
+  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: valoarea acţiunii', function() {
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
@@ -142,11 +142,11 @@
     equal(item.valuta, valuta, '…valuta');
 
     $formular.find('.bara-de-instrumente .salvează').click();
-    $formular.one('salvat', function () {
+    $formular.one('salvat', function() {
       ok(true, 'salvat');
-      $formular.one('închis', function () {
+      $formular.one('închis', function() {
         app.ProceduriRecente.$.find('.item:first').click();
-        $formular.one('populat', function () {
+        $formular.one('populat', function() {
           ok(true, 'redeschis şi populat');
 
           var $valoareaAcţiunii = $secţiune.find('.personalizat.valoarea-acţiunii'),
@@ -169,7 +169,7 @@
           var formular = app.Încheieri.formular($butonPentruÎncheiere),
               meta = app.Încheieri.deschise[formular];
 
-          app.$(meta).one('iniţializat', function () {
+          app.$(meta).one('iniţializat', function() {
             var $încheiere = app.$(this.tab.document),
                 date = this.tab.Încheiere.date,
                 subtitlu = 'de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii';
@@ -202,7 +202,7 @@
               .trigger('mousemove')
               .find('.elimină').focus().click();
 
-            setTimeout(function () { // slideUp?
+            setTimeout(function() { // slideUp?
               ok(!$secţiune.find('.personalizat.valoarea-acţiunii').există(), 'eliminat cîmp valoarea acţiunii');
 
               start();
@@ -218,7 +218,7 @@
 
   // ------------------------------------------
 
-  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: colectarea: bunuri sechestrate', function () {
+  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: colectarea: bunuri sechestrate', function() {
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
@@ -258,11 +258,11 @@
     equal(bunuri[0].valuta, bun.valuta, '…cu valuta corespunzătoare');
 
     $formular.find('.bara-de-instrumente .salvează').click();
-    $formular.one('salvat', function () {
+    $formular.one('salvat', function() {
       ok(true, 'salvat');
-      $formular.one('închis', function () {
+      $formular.one('închis', function() {
         app.ProceduriRecente.$.find('.item:first').click();
-        $formular.one('populat', function () {
+        $formular.one('populat', function() {
           ok(true, 'redeschis şi populat');
 
           var $cîmpBun = $secţiune.find('.personalizat.bunuri-sechestrate'),
@@ -285,7 +285,7 @@
           var formular = app.Încheieri.formular($butonPentruÎncheiere),
               meta = app.Încheieri.deschise[formular];
 
-          app.$(meta).one('iniţializat', function () {
+          app.$(meta).one('iniţializat', function() {
             var $încheiere = app.$(this.tab.document),
                 date = this.tab.Încheiere.date;
 
@@ -317,7 +317,7 @@
               .trigger('mousemove')
               .find('.elimină').focus().click();
 
-            setTimeout(function () { // slideUp?
+            setTimeout(function() { // slideUp?
               ok(!$secţiune.find('.personalizat.bunuri-sechestrate').există(), 'eliminat cîmp pentru bunul sechestrat');
 
               start();
@@ -333,7 +333,7 @@
 
   // ------------------------------------------
 
-  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: sume sechestrate', function () {
+  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: sume sechestrate', function() {
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
@@ -373,10 +373,10 @@
     equal(sume[0].valuta, sumă.valuta, '…cu valuta corespunzătoare');
 
     $formular.find('.bara-de-instrumente .salvează').click();
-    $formular.one('salvat', function () {
-      $formular.one('închis', function () {
+    $formular.one('salvat', function() {
+      $formular.one('închis', function() {
         app.ProceduriRecente.$.find('.item:first').click();
-        $formular.one('populat', function () {
+        $formular.one('populat', function() {
           var $cîmpSumă = $secţiune.find('.personalizat.sume-sechestrate'),
               $descriere = $cîmpSumă.find('.etichetă'),
               $valoare = $cîmpSumă.find('.sumă'),
@@ -397,7 +397,7 @@
           var formular = app.Încheieri.formular($butonPentruÎncheiere),
               meta = app.Încheieri.deschise[formular];
 
-          app.$(meta).one('iniţializat', function () {
+          app.$(meta).one('iniţializat', function() {
             var $încheiere = app.$(this.tab.document),
                 date = this.tab.Încheiere.date;
 
@@ -429,7 +429,7 @@
               .trigger('mousemove')
               .find('.elimină').focus().click();
 
-            setTimeout(function () { // slideUp?
+            setTimeout(function() { // slideUp?
               ok(!$secţiune.find('.personalizat.sume-sechestrate').există(), 'eliminat cîmp pentru suma sechestrată');
 
               start();
@@ -444,7 +444,7 @@
 
   // ------------------------------------------
 
-  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: interzicerea debitorului de a săvîrşi anumite acţiuni', function () {
+  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: interzicerea debitorului de a săvîrşi anumite acţiuni', function() {
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
@@ -483,10 +483,10 @@
     ok($butonDeSalvare.există(), 'avem buton de salvare');
     $butonDeSalvare.click();
 
-    $formular.one('salvat', function () {
-      $formular.one('închis', function () {
+    $formular.one('salvat', function() {
+      $formular.one('închis', function() {
         app.ProceduriRecente.$.find('.item:first').click();
-        $formular.one('populat', function () {
+        $formular.one('populat', function() {
           equal($măsuraDeAsigurare.val(), măsuraDeAsigurare, 'populat măsura de asigurare corespunzător');
           equal($acţiuni.val(), acţiuni, 'populat acţiuni corespunzător');
 
@@ -498,7 +498,7 @@
           var formular = app.Încheieri.formular($butonPentruÎncheiere),
               meta = app.Încheieri.deschise[formular];
 
-          app.$(meta).one('iniţializat', function () {
+          app.$(meta).one('iniţializat', function() {
             var $încheiere = app.$(this.tab.document),
                 date = this.tab.Încheiere.date;
 
@@ -516,7 +516,7 @@
 
             app.$.fx.off = false;
 
-            setTimeout(function () {
+            setTimeout(function() {
               $încheiere.find('.închide').click();
 
               start();
@@ -530,7 +530,7 @@
 
   // ------------------------------------------
 
-  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: interzicerea altor persoane de a săvîrşi anumite acţiuni', function () {
+  asyncTest('Încheiere privind aplicarea măsurilor de asigurare a acţiunii: interzicerea altor persoane de a săvîrşi anumite acţiuni', function() {
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
@@ -639,10 +639,10 @@
     ok($butonDeSalvare.există(), 'avem buton de salvare');
     $butonDeSalvare.click();
 
-    $formular.one('salvat', function () {
-      $formular.one('închis', function () {
+    $formular.one('salvat', function() {
+      $formular.one('închis', function() {
         app.ProceduriRecente.$.find('.item:first').click();
-        $formular.one('populat', function () {
+        $formular.one('populat', function() {
           equal($măsuraDeAsigurare.val(), măsuraDeAsigurare, 'populat măsura de asigurare corespunzător');
           equal($acţiuni.val(), acţiuni, 'populat acţiuni corespunzător');
 
@@ -654,7 +654,7 @@
           var formular = app.Încheieri.formular($butonPentruÎncheiere),
               meta = app.Încheieri.deschise[formular];
 
-          app.$(meta).one('iniţializat', function () {
+          app.$(meta).one('iniţializat', function() {
             var $încheiere = app.$(this.tab.document),
                 date = this.tab.Încheiere.date;
 
@@ -680,10 +680,10 @@
               'în secţiunea “Dispoziţia” se face referinţă la acţiunile menţionate în secţiunea “Chestiunea”');
             equal($secţiuneaDispoziţia.find('li').length, 3, 'secţiunea “Dispoziţia” enumeră 3 puncte');
 
-            setTimeout(function () {
+            setTimeout(function() {
               $încheiere.find('.închide').click();
 
-              $formular.one('închis', function () {
+              $formular.one('închis', function() {
                 ok(true, 'închis formularul de procedură');
                 app.$.fx.off = false;
                 start();

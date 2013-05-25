@@ -1,4 +1,4 @@
-asyncTest('Precedură: salvare', function () {
+asyncTest('Precedură: salvare', function() {
   'use strict';
 
   var app = this.app,
@@ -14,12 +14,12 @@ asyncTest('Precedură: salvare', function () {
   $taxaA1.find('.achitare .dată').val(dataAchităriiTaxeiA1);
 
   $formular.find('.bara-de-instrumente .salvează').click();
-  $formular.one('salvat', function (e, procedură, număr) {
+  $formular.one('salvat', function(e, procedură, număr) {
     numărulProceduriiNouCreate = număr;
 
     $formular.find('.închide').click();
-    app.$($formular).one('închidere', function () {
-      app.$(app.document).one('încărcat-proceduri-recente', function () {
+    app.$($formular).one('închidere', function() {
+      app.$(app.document).one('încărcat-proceduri-recente', function() {
         var proceduraCreată = '.item[data-href="#formular?' + numărulProceduriiNouCreate + '"]',
             $proceduraCreată = app.ProceduriRecente.$.find(proceduraCreată);
 
@@ -27,7 +27,7 @@ asyncTest('Precedură: salvare', function () {
         ok($proceduraCreată.is(':first-child'), 'pe prima poziţie');
 
         $proceduraCreată.click();
-        $formular.one('populat', function () {
+        $formular.one('populat', function() {
           var creditor = dateProcedură['creditor'],
               debitor = dateProcedură['debitori'][0],
               de = dateProcedură['document-executoriu'],
@@ -57,7 +57,7 @@ asyncTest('Precedură: salvare', function () {
 
           verificăSecţiuneaCheltuieli();
 
-          setTimeout(function () {
+          setTimeout(function() {
             start();
           }, app.PAUZĂ_DE_OBSERVABILITATE);
         });

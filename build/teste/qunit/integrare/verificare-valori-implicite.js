@@ -1,4 +1,4 @@
-asyncTest('Formular procedură: verifică valori implicite', function () {
+asyncTest('Formular procedură: verifică valori implicite', function() {
   'use strict';
 
   var app = this.app;

@@ -1,8 +1,8 @@
-(function () {
+(function() {
   'use strict';
 
   var UtilitareÎncheiere = {
-    verificăŞoaptăButon: function ($încheiere, $butonPentruÎncheiere) {
+    verificăŞoaptăButon: function($încheiere, $butonPentruÎncheiere) {
       var titlu = $încheiere.find('h1').text(),
           utilitare = $încheiere[0].defaultView.Încheiere.utilitare,
           subtitlu = utilitare.normalizeazăSpaţii($încheiere.find('h1+h2').text()),
@@ -11,14 +11,14 @@
       equal($butonPentruÎncheiere.attr('title'), şoaptăCorespunzătoare, 'şoapta pe butonul de încheiere corespunde cu titlul ei');
     },
 
-    verificăSubtitlu: function ($încheiere, subtitluCorect) {
+    verificăSubtitlu: function($încheiere, subtitluCorect) {
       var utilitare = $încheiere[0].defaultView.Încheiere.utilitare,
           subtitluDeFacto = utilitare.normalizeazăSpaţii($încheiere.find('h1+h2').text());
 
       equal(subtitluDeFacto, subtitluCorect, 'subtitlul corespunde');
     },
 
-    verificăSecţiuni: function ($încheiere, secţiuni) {
+    verificăSecţiuni: function($încheiere, secţiuni) {
       ok($încheiere.find('article hgroup h1').există(), 'avem h1');
       ok($încheiere.find('article hgroup h2').există(), 'avem h2');
 
@@ -47,7 +47,7 @@
     },
 
     verificăriStandard: { // per secţiune
-      'Procedura': function ($încheiere) {
+      'Procedura': function($încheiere) {
         var app = $încheiere[0].defaultView.opener,
             date = $încheiere[0].defaultView.Încheiere.date,
             numărComplet = app.Utilizator.login + date.procedură['tip'] + '-' + app.FormularProcedură.număr(),

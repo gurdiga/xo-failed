@@ -1,10 +1,10 @@
-(function () {
+(function() {
   'use strict';
 
   module('Unit: /js/încheiere.js');
 
 
-  test('Încheiere.utilitare', function () {
+  test('Încheiere.utilitare', function() {
     var utilitare = window.Încheiere.utilitare;
 
     ok(utilitare, 'acem Încheiere.utilitare');
@@ -14,7 +14,7 @@
   });
 
 
-  test('Încheiere.utilitare.init', function () {
+  test('Încheiere.utilitare.init', function() {
     var utilitare = window.Încheiere.utilitare;
 
     var context = {};
@@ -25,7 +25,7 @@
   });
 
 
-  test('Încheiere.utilitare.text', function () {
+  test('Încheiere.utilitare.text', function() {
     var utilitare = window.Încheiere.utilitare;
 
     equal(utilitare.text('PRIMA sau A DOUA', [1]), 'PRIMA', 'întoarce prima opţiune dacă e un singur item');
@@ -33,7 +33,7 @@
   });
 
 
-  test('Încheiere.utilitare.selecteazăAtenţionare', function () {
+  test('Încheiere.utilitare.selecteazăAtenţionare', function() {
     var utilitare = window.Încheiere.utilitare,
         span = document.createElement('span');
 
@@ -50,7 +50,7 @@
   });
 
 
-  test('Încheiere.utilitare.normalizeazăSpaţii', function () {
+  test('Încheiere.utilitare.normalizeazăSpaţii', function() {
     /*jshint quotmark:false */
     var utilitare = window.Încheiere.utilitare,
         text = "   Un text luat cu $.fn.text()\n    \t  care trebuie normalizat.\n    ",

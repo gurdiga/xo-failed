@@ -1,10 +1,10 @@
-(function () {
+(function() {
   'use strict';
 
   var app = window.frames['app'];
 
 
-  test('SelecturiFoarteLate.init', function () {
+  test('SelecturiFoarteLate.init', function() {
     // stub
     app.SelecturiFoarteLate.afişeazăŞoaptăOriginal = app.SelecturiFoarteLate.afişeazăŞoaptă;
     app.SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoareOriginal =
@@ -15,8 +15,8 @@
     var afişatŞoapte = false,
         afişatŞoaptePentruSelecturileUrmătoare = false;
 
-    app.SelecturiFoarteLate.afişeazăŞoaptă = function () { afişatŞoapte = true; };
-    app.SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoare = function () { afişatŞoaptePentruSelecturileUrmătoare = true; };
+    app.SelecturiFoarteLate.afişeazăŞoaptă = function() { afişatŞoapte = true; };
+    app.SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoare = function() { afişatŞoaptePentruSelecturileUrmătoare = true; };
     app.FormularProcedură.$ = $('<div/>');
 
     $('<select class="foarte lat"></select>').appendTo(app.FormularProcedură.$);
@@ -43,7 +43,7 @@
   });
 
 
-  test('SelecturiFoarteLate.afişeazăŞoaptă', function () {
+  test('SelecturiFoarteLate.afişeazăŞoaptă', function() {
     var $container = app.$('<div/>');
     var $select = app.$(
       '<select>' +
@@ -69,7 +69,7 @@
   });
 
 
-  test('SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoare', function () {
+  test('SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoare', function() {
     var $secţiune = app.$(
       '<div class="conţinut">' +
         '<ul>' +
@@ -87,7 +87,7 @@
         $selectFoarteLat = $secţiune.find('select.foarte.lat'),
         generatEvenmentChange = false;
 
-    $selectFoarteLat.one('change', function () { generatEvenmentChange = true; });
+    $selectFoarteLat.one('change', function() { generatEvenmentChange = true; });
     app.SelecturiFoarteLate.afişeazăŞoaptePentruSelecturileUrmătoare.call($selectCareSchimbăFormularul[0]);
     ok(generatEvenmentChange, 'generează evenimentul change din cîmpurile de mai jos (pentru a le afişa şoaptele)');
   });

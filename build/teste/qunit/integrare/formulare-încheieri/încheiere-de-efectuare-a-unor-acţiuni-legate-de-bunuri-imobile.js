@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', function () {
+asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -66,11 +66,11 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
 
 
   $formular.find('.bara-de-instrumente .salvează').click();
-  $formular.one('salvat', function () {
+  $formular.one('salvat', function() {
     ok(true, 'salvat');
-    $formular.one('închis', function () {
+    $formular.one('închis', function() {
       app.ProceduriRecente.$.find('.item:first').click();
-      $formular.one('populat', function () {
+      $formular.one('populat', function() {
         ok(true, 'redeschis şi populat');
 
         var $cîmpuriBunuri = $secţiune.find('.bunuri-transmise');
@@ -92,7 +92,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
         var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
-        app.$(meta).one('iniţializat', function () {
+        app.$(meta).one('iniţializat', function() {
           var $încheiere = app.$(this.tab.document),
               date = this.tab.Încheiere.date,
               subtitlu = 'de numire a datei transmiterii bunurilor imobile';
@@ -119,7 +119,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
           ok(!$secţiuneaDispoziţia.find('p:contains("Ridicarea forţată în cadrul acestei proceduri a fost amînată pînă la")').există(),
               'NU se menţionează amînare dacă nu avem amînări în procedură');
 
-          setTimeout(function () {
+          setTimeout(function() {
             $încheiere.find('.închide').click();
 
             var $butonDeAdăugareAmînare = $secţiune.find('.adaugă-cîmp-personalizat.amînare');
@@ -127,7 +127,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
             ok($butonDeAdăugareAmînare.există(), 'avem buton de adăugare amînări');
             $butonDeAdăugareAmînare.click();
 
-            setTimeout(function () {
+            setTimeout(function() {
               var $cîmpPentruAmînare = $butonDeAdăugareAmînare.parent().prev('.amînare.personalizat'),
                   dataŞiOraAmînării = '03.03.2013 ora 11:00';
 
@@ -137,7 +137,7 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
               $butonPentruÎncheiere.click();
               meta = app.Încheieri.deschise[formular];
 
-              app.$(meta).one('iniţializat', function () {
+              app.$(meta).one('iniţializat', function() {
                 var $încheiere = app.$(this.tab.document),
                     date = this.tab.Încheiere.date,
                     $secţiuneaMotivele = $încheiere.find('section header:contains("Motivele")+.conţinut.editabil'),

@@ -1,10 +1,10 @@
-asyncTest('Formular procedură: cheltuieli', function () {
+asyncTest('Formular procedură: cheltuieli', function() {
   'use strict';
 
   var app = this.app,
       $cheltuieliAdăugate = app.Cheltuieli.$adăugate,
       $categorii = app.Cheltuieli.categorii.$,
-      cheltuieliAdăugate = $cheltuieliAdăugate.find('>.item').map(function () { return this.id; }).get();
+      cheltuieliAdăugate = $cheltuieliAdăugate.find('>.item').map(function() { return this.id; }).get();
 
   app.$.fx.off = true;
 
@@ -60,7 +60,7 @@ asyncTest('Formular procedură: cheltuieli', function () {
   var $formular = app.FormularProcedură.$;
 
   $formular.find('.închide').click();
-  $formular.one('închidere', function () {
+  $formular.one('închidere', function() {
     ok(true, 'închis formularul');
 
     app.$.fx.off = false;

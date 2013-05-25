@@ -1,4 +1,4 @@
-asyncTest('Procedură: căutare', function () {
+asyncTest('Procedură: căutare', function() {
   'use strict';
 
   var app = this.app;
@@ -11,13 +11,13 @@ asyncTest('Procedură: căutare', function () {
   ok($secţiune.există(), 'avem secţiune de căutare');
   $secţiune.find('input').val(număr).trigger('input');
 
-  setTimeout(function () { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
+  setTimeout(function() { // aşteptăm o leacă după afişarea rezultatelor să fie testul urmăribil
     var rezultate = $secţiune.find('#rezultate .item');
 
     ok(rezultate.există(), 'găsit procedura');
     rezultate.first().click();
 
-    app.$(app.FormularProcedură.$).one('populat', function () {
+    app.$(app.FormularProcedură.$).one('populat', function() {
       ok(true, 'click pe itemi din lista de rezultate ale căutării deschide procedura');
       app.FormularProcedură.$.find('.închide').click();
       $secţiune.find('input').val('').trigger('input');
@@ -30,11 +30,11 @@ asyncTest('Procedură: căutare', function () {
   function ştergeProceduraCreată() {
     // aşteptăm o leacă să se termine alte eventuale request-uri
     // pentru a evita 500 la PUT
-    setTimeout(function () {
+    setTimeout(function() {
       $.ajax({
         url: '/date/' + app.Utilizator.login + '/proceduri/' + app.ProceduriRecente.numărulUltimei() + '/',
         type: 'DELETE',
-        success: function () {
+        success: function() {
           ok(true, 'şters procedura de test');
 
           app.ProceduriRecente.încarcăFărăCache();

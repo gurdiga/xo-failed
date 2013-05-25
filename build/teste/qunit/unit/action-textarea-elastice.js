@@ -1,20 +1,20 @@
-(function () {
+(function() {
   'use strict';
 
   var app = window.frames['app'];
 
-  test('TextareaElastice.evenimente', function () {
+  test('TextareaElastice.evenimente', function() {
     equal(app.TextareaElastice.evenimente, 'keydown keyup input focus mouseup', 'avem evenimente');
   });
 
 
-  test('TextareaElastice.init', function () {
+  test('TextareaElastice.init', function() {
     // stub
     app.TextareaElastice.autodimensioneazăOriginal = app.TextareaElastice.autodimensionează;
 
     var autodimensionat = false;
 
-    app.TextareaElastice.autodimensionează = function () { autodimensionat = true; };
+    app.TextareaElastice.autodimensionează = function() { autodimensionat = true; };
 
     app.TextareaElastice.init();
     equal(app.FormularProcedură.$.attr('spellcheck'), 'false', 'dezactivează verificarea gramaticii în formularul de procedură');
@@ -34,7 +34,7 @@
   });
 
 
-  test('TextareaElastice.autodimensionează', function () {
+  test('TextareaElastice.autodimensionează', function() {
     ok(app.TextareaElastice.autodimensionează, 'există');
 
     var textarea = $('<textarea></textarea>').appendTo(app.document.body);

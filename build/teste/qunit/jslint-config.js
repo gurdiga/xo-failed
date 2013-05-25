@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   var SCRIPTS = [
@@ -91,6 +91,7 @@
     maxparams: 3,
     maxdepth: 4,
     maxcomplexity: 4,
+    white: false,
     sub: true
   };
 

@@ -1,4 +1,4 @@
-asyncTest('Încheiere de continuare', function () {
+asyncTest('Încheiere de continuare', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -12,7 +12,7 @@ asyncTest('Încheiere de continuare', function () {
   ok($buton.next('br').next().is('.scrisoare-de-însoţire'), 'avem linkuleţ pentru scrisoarea de însoţire');
 
   app.ProceduriRecente.$.find('.item:first-child').click();
-  $formular.one('populat', function () {
+  $formular.one('populat', function() {
     ok(true, 'deschis formularul');
     ok($buton.există(), 'găsit butonul de formare a încheierii');
     $buton.click();
@@ -21,7 +21,7 @@ asyncTest('Încheiere de continuare', function () {
         meta = app.Încheieri.deschise[formular],
         încheiere;
 
-    app.$(meta).one('iniţializat', function () {
+    app.$(meta).one('iniţializat', function() {
       ok(true, 'deschis tab pentru încheiere');
 
       încheiere = meta.tab;
@@ -41,7 +41,7 @@ asyncTest('Încheiere de continuare', function () {
 
       $încheiere.find('.închide').click();
 
-      $formular.one('închis', function () {
+      $formular.one('închis', function() {
         app.$.fx.off = false;
         start();
       });

@@ -1,10 +1,10 @@
-(function () {
+(function() {
   'use strict';
 
   var random = (new Date()).getTime();
 
   module('Integrare', {
-    setup: function () {
+    setup: function() {
       var app = window.frames['app'];
       var dateProcedură = {
         'data-intentării': app.moment().format(app.FORMATUL_DATEI),

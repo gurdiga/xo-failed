@@ -1,6 +1,6 @@
 module('Bara de sus');
 
-asyncTest('Calculator dobînzi de întîrziere', function () {
+asyncTest('Calculator dobînzi de întîrziere', function() {
   'use strict';
 
   var app = window.frames['app'],
@@ -14,13 +14,13 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
   $buton.click();
 
-  $dialog.one('afişare', function () {
+  $dialog.one('afişare', function() {
     ok($dialog.is(':visible'), 'la click se afişează dialogul');
 
     verificăŞiCompleteazăCîmpurile($dialog);
     verificăDetaliileCalculului($dialog);
 
-    setTimeout(function () { // aşteptăm o leacă să fie urmăribil testul
+    setTimeout(function() { // aşteptăm o leacă să fie urmăribil testul
       verificăRaportul($dialog);
     }, app.PAUZĂ_DE_OBSERVABILITATE);
   });
@@ -84,12 +84,12 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
     $buton.click();
     meta = app.Încheieri.deschise[$buton.attr('href')];
 
-    app.$(meta).one('iniţializat', function () {
+    app.$(meta).one('iniţializat', function() {
       ok(true, 'iniţializat raportul cu detaliile calculului');
 
       tab = meta.tab;
 
-      setTimeout(function () { // aşteptăm să ne asigurăm că nu se închide
+      setTimeout(function() { // aşteptăm să ne asigurăm că nu se închide
         var $secţiune = tab.Încheiere.$.find('section:first .conţinut'),
             $paragraf = $secţiune.find('p').text(),
             $calcule = $secţiune.find('.calcule'),
@@ -120,7 +120,7 @@ asyncTest('Calculator dobînzi de întîrziere', function () {
 
         tab.close();
 
-        setTimeout(function () { // aşteptăm o leacă să fie urmăribil testul
+        setTimeout(function() { // aşteptăm o leacă să fie urmăribil testul
           $dialog.find('.închide').click();
           app.$.fx.off = false;
 

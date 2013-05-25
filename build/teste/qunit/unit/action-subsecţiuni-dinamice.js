@@ -1,10 +1,10 @@
-(function () {
+(function() {
   'use strict';
 
   var app = window.frames['app'];
 
 
-  test('SubsecţiuniDinamice.init', function () {
+  test('SubsecţiuniDinamice.init', function() {
     equal(app.SubsecţiuniDinamice.selector, 'select.care.schimbă.formularul', 'selectorul e definit');
 
     // stub
@@ -22,7 +22,7 @@
 
     var inserat = false;
 
-    app.SubsecţiuniDinamice.inserează = function () { inserat = true; };
+    app.SubsecţiuniDinamice.inserează = function() { inserat = true; };
     app.SubsecţiuniDinamice.init();
 
     app.FormularProcedură.$.find(app.SubsecţiuniDinamice.selector).trigger('change');
@@ -34,7 +34,7 @@
   });
 
 
-  test('SubsecţiuniDinamice.inserează', function () {
+  test('SubsecţiuniDinamice.inserează', function() {
     // stub
     app.$şabloaneOriginal = app.$şabloane;
 

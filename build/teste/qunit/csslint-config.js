@@ -1,5 +1,5 @@
 /*global CSSLint:false*/
-(function () {
+(function() {
   'use strict';
 
   var STYLESHEETS = [
@@ -47,15 +47,15 @@
 
   module('CSSLint');
 
-  $.each(STYLESHEETS, function (_, stylesheet) {
-    asyncTest(stylesheet, function () {
-      $.get(stylesheet + '?' + (new Date()).getTime(), function (code) {
+  $.each(STYLESHEETS, function(_, stylesheet) {
+    asyncTest(stylesheet, function() {
+      $.get(stylesheet + '?' + (new Date()).getTime(), function(code) {
         var results = CSSLint.verify(code, RULES);
 
         if (results.messages.length === 0) {
           ok(true);
         } else {
-          $.each(results.messages, function (_, item) {
+          $.each(results.messages, function(_, item) {
             var message = item.type + ': ' + item.message;
 
             if (item.line) message += ' (line ' + item.line + ', col ' + item.col + ')';

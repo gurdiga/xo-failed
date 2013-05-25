@@ -1,4 +1,4 @@
-test('Formular procedură: obiectul urmăririi', function () {
+test('Formular procedură: obiectul urmăririi', function() {
   'use strict';
 
   var $secţiune = this.$obiectulUrmăririi,

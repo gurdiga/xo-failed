@@ -1,11 +1,11 @@
-asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
+asyncTest('Încheieri referitoare la obiectul urmăririi', function() {
   'use strict';
 
   var app = this.app;
 
   app.ProceduriRecente.$.find('.item:first-child').click();
 
-  app.$(app.FormularProcedură.$).one('populat', function () {
+  app.$(app.FormularProcedură.$).one('populat', function() {
     ok(true, 'deschis formularul de procedură');
 
     var $secţiune = app.FormularProcedură.$obiectulUrmăririi;
@@ -20,7 +20,7 @@ asyncTest('Încheieri referitoare la obiectul urmăririi', function () {
     ok($butonPentruÎncheiere.există(), 'avem butonaş');
 
     app.openOriginal = app.open;
-    app.open = function () { return 'tab stub'; };
+    app.open = function() { return 'tab stub'; };
 
     $select.val('schimbul forţat').change();
     equal($butonPentruÎncheiere.attr('data-formular'), 'încheiere-de-schimb-forţat', 'e setat corespunzător [data-formular] pe el');

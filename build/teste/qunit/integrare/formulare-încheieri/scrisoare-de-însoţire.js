@@ -1,4 +1,4 @@
-asyncTest('Scrisoarea de însoţire', function () {
+asyncTest('Scrisoarea de însoţire', function() {
   'use strict';
 
   var app = this.app,
@@ -9,11 +9,11 @@ asyncTest('Scrisoarea de însoţire', function () {
 
   // ----------------------------------------
   function deschideŞiVerificăFormularulDeProcedură() {
-    return $.Deferred(function (D) {
+    return $.Deferred(function(D) {
       ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
       app.ProceduriRecente.$.find('.item:first-child').click();
 
-      $formular.one('populat', function () {
+      $formular.one('populat', function() {
         ok(true, 'deschis formularul');
 
         $buton = app.Încheieri.$.find('a[href="/formulare-încheieri/scrisoare-de-însoţire.html"]').first();
@@ -31,7 +31,7 @@ asyncTest('Scrisoarea de însoţire', function () {
         var destinatariValizi = ['alţi-destinatari', 'creditor', 'debitori', 'persoane-terţe'],
             destinatariGăsiţi = {};
 
-        $butonaşe.each(function () {
+        $butonaşe.each(function() {
           var destinatari = this.getAttribute('destinatari').split(' '),
               destinatar;
 
@@ -52,14 +52,14 @@ asyncTest('Scrisoarea de însoţire', function () {
 
   // ----------------------------------------
   function verificăCazulCîndEsteDoarCreditorulŞiUnDebitor() {
-    return $.Deferred(function (D) {
+    return $.Deferred(function(D) {
       $formular.find('.secţiune.debitor').not(':first').remove();
       $formular.find('.secţiune.persoană-terţă').remove();
       app.Cheltuieli.$adăugate.find('#taxaB1').remove();
 
       $buton.click();
 
-      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function () {
+      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function() {
         ok(true, 'deschis scrisoare doar petru debitor şi creditor');
         $scrisori = app.$(this.tab.document);
 
@@ -90,7 +90,7 @@ asyncTest('Scrisoarea de însoţire', function () {
         ok($exemplare.eq(1).find('p:contains("' + procedură.debitori[0].nume + '")').există(), '…conţine numele debitorului');
         ok($exemplare.eq(1).find('p:contains("' + procedură.debitori[0].idnp + '")').există(), '…conţine IDNP-ul debitorului');
 
-        setTimeout(function () {
+        setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
         }, app.PAUZĂ_DE_OBSERVABILITATE);
@@ -100,7 +100,7 @@ asyncTest('Scrisoarea de însoţire', function () {
 
   // ----------------------------------------
   function verificăCazulCîndEsteDoarCreditorŞiMaiMulţiDebitori() {
-    return $.Deferred(function (D) {
+    return $.Deferred(function(D) {
       $formular.find('.secţiune.debitor').not(':first').remove();
       $formular.find('.secţiune.persoană-terţă').remove();
       app.Cheltuieli.$adăugate.find('#taxaB1').remove();
@@ -113,7 +113,7 @@ asyncTest('Scrisoarea de însoţire', function () {
 
       $buton.click();
 
-      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function () {
+      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function() {
         ok(true, 'deschis scrisoare doar petru creditor şi mai mulţi debitori');
         $scrisori = app.$(this.tab.document);
 
@@ -134,7 +134,7 @@ asyncTest('Scrisoarea de însoţire', function () {
         ok($exemplare.eq(1).is('.pentru-debitori'), 'a doua este pentru debitor');
         ok($exemplare.eq(2).is('.pentru-debitori'), 'a treia este pentru debitor');
 
-        setTimeout(function () {
+        setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
         }, app.PAUZĂ_DE_OBSERVABILITATE);
@@ -144,7 +144,7 @@ asyncTest('Scrisoarea de însoţire', function () {
 
   // ----------------------------------------
   function verificăCazulCuPersoaneTerţe() {
-    return $.Deferred(function (D) {
+    return $.Deferred(function(D) {
       $formular.find('.secţiune.debitor').not(':first').remove();
       $formular.find('.secţiune.persoană-terţă').remove();
       app.Cheltuieli.$adăugate.find('#taxaB1').remove();
@@ -157,7 +157,7 @@ asyncTest('Scrisoarea de însoţire', function () {
 
       $buton.click();
 
-      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function () {
+      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function() {
         ok(true, 'deschis scrisoare pentru cazul cînd avem creditor, debitor, şi persoană terţă');
         $scrisori = app.$(this.tab.document);
 
@@ -182,7 +182,7 @@ asyncTest('Scrisoarea de însoţire', function () {
         ok($exemplare.eq(2).find('p:contains("nume persoană terţă")').există(), '…conţine numele persoanei terţe');
         ok($exemplare.eq(2).find('p:contains("IDNP persoană terţă")').există(), '…conţine IDNP-ul persoanei terţe');
 
-        setTimeout(function () {
+        setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
         }, app.PAUZĂ_DE_OBSERVABILITATE);
@@ -192,7 +192,7 @@ asyncTest('Scrisoarea de însoţire', function () {
 
   // ----------------------------------------
   function verificăCazulCuDocumenteAdresateAltorInstituţii() {
-    return $.Deferred(function (D) {
+    return $.Deferred(function(D) {
       $formular.find('.secţiune.debitor').not(':first').remove();
       $formular.find('.secţiune.persoană-terţă').remove();
       app.Cheltuieli.$adăugate.find('#taxaB1').remove();
@@ -218,7 +218,7 @@ asyncTest('Scrisoarea de însoţire', function () {
       formular = $buton.attr('href');
       $buton.click();
 
-      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function () {
+      app.$(app.Încheieri.deschise[formular]).one('iniţializat', function() {
         ok(true, 'deschis scrisoare pentru cazul cînd avem creditor, debitor, şi documente adresate unor instituţii');
         $scrisori = app.$(this.tab.document);
 
@@ -243,7 +243,7 @@ asyncTest('Scrisoarea de însoţire', function () {
         ok($exemplare.first().is('.pentru-creditor'), 'prima este pentru creditor');
         ok($exemplare.eq(1).is('.pentru-debitori'), 'a doua este pentru debitor');
 
-        setTimeout(function () {
+        setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
         }, app.PAUZĂ_DE_OBSERVABILITATE);
@@ -253,10 +253,10 @@ asyncTest('Scrisoarea de însoţire', function () {
 
   // ----------------------------------------
   function închideTot() {
-    return $.Deferred(function (D) {
+    return $.Deferred(function(D) {
       $scrisori.find('.închide').click();
 
-      $formular.one('închis', function () {
+      $formular.one('închis', function() {
         ok(true, 'inchis formularul de procedură');
         app.$.fx.off = false;
 

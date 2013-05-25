@@ -1,4 +1,4 @@
-asyncTest('Încheiere de intentare', function () {
+asyncTest('Încheiere de intentare', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -12,7 +12,7 @@ asyncTest('Încheiere de intentare', function () {
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
 
   app.ProceduriRecente.$.find('.item:first-child').click();
-  $formular.one('populat', function () {
+  $formular.one('populat', function() {
     ok(true, 'deschis formularul');
     ok($buton.există(), 'găsit butonul de formare a încheierii');
     $buton.click();
@@ -20,7 +20,7 @@ asyncTest('Încheiere de intentare', function () {
     var formular = $buton.attr('href'),
         meta = app.Încheieri.deschise[formular];
 
-    app.$(meta).one('iniţializat', function () {
+    app.$(meta).one('iniţializat', function() {
       ok(true, 'deschis tab pentru încheiere');
 
       încheiere = meta.tab;
@@ -49,7 +49,7 @@ asyncTest('Încheiere de intentare', function () {
 
       $butonDeSalvare.click();
 
-      app.$(încheiere).one('salvat', function () {
+      app.$(încheiere).one('salvat', function() {
         încheiere = this;
         ok(true, 'salvat încheiere');
 
@@ -66,7 +66,7 @@ asyncTest('Încheiere de intentare', function () {
 
         $butonDeSalvare.click();
 
-        $formular.one('salvat', function () {
+        $formular.one('salvat', function() {
           ok(true, 'salvat şi procedura la salvarea încheierii');
 
           var $butonDeRegenerare = $încheiere.find('.regenerează'),
@@ -77,16 +77,16 @@ asyncTest('Încheiere de intentare', function () {
           ok(!app.Încheieri.deschise[încheiereaSalvată], 'încheierea precedent salvată este deregistrată');
           ok(app.Încheieri.deschise[formular], 'încheierea nou generată nesalvată este înregistrată');
 
-          app.$(app.Încheieri.deschise[formular]).one('iniţializat', function () {
+          app.$(app.Încheieri.deschise[formular]).one('iniţializat', function() {
             ok(true, 'regenerare: reiniţializat');
 
             $butonDeSalvare = încheiere.Încheiere.$.find('.salvează');
             $butonDeSalvare.click();
 
-            app.$(încheiere).one('salvat', function () {
+            app.$(încheiere).one('salvat', function() {
               ok(true, 'regenerare: resalvat');
 
-              $formular.one('salvat', function () {
+              $formular.one('salvat', function() {
                 ok(true, 'regenerare: salvat procedura *după* salvarea încheierii');
 
                 verificăEditabilitate();
@@ -107,16 +107,16 @@ asyncTest('Încheiere de intentare', function () {
       $secţiuneEditabilă.append('<b class="adăugat">schimbare</b>');
       $încheiere.find('.salvează').click();
 
-      app.$(încheiere).one('salvat', function () {
+      app.$(încheiere).one('salvat', function() {
         ok(true, 'salvat după editarea unei secţiuni editabile');
 
         $încheiere.find('.închide').click();
 
-        setTimeout(function () { // pauză pentru observabilitate
+        setTimeout(function() { // pauză pentru observabilitate
           cale = $buton.attr('href');
           $buton.click();
 
-          app.$(app.Încheieri.deschise[cale]).one('iniţializat', function () {
+          app.$(app.Încheieri.deschise[cale]).one('iniţializat', function() {
             încheiere = app.Încheieri.deschise[cale].tab;
 
             var $încheiere = încheiere.Încheiere.$,
@@ -135,24 +135,24 @@ asyncTest('Încheiere de intentare', function () {
       var $încheiere = încheiere.Încheiere.$,
           $butonDeImprimare = $încheiere.find('.imprimă');
 
-      încheiere.print = function () { };
+      încheiere.print = function() { };
 
-      app.$(încheiere).one('imprimat', function () {
+      app.$(încheiere).one('imprimat', function() {
         ok(true, 'click pe butonul de imprimare imprimă imediat dacă încheierea nu e modificată');
 
         $încheiere.find('.editabil').first().append('<b>modificare pentru testarea salvării la imprimare</b>');
 
-        app.$(încheiere).one('salvat', function () { // înainte de imprimare încheierea se salvează
+        app.$(încheiere).one('salvat', function() { // înainte de imprimare încheierea se salvează
           ok(true, 'dacă încheierea e modificată click pe butonul de imprimare mai întîi salvează');
 
-          app.$(încheiere).one('imprimat', function () {
+          app.$(încheiere).one('imprimat', function() {
             ok(true, '…şi pe urmă imprimă');
 
             $încheiere.find('.închide').click();
             equal(app.Încheieri.deschise[cale], undefined, 'fereastra încheierii s-a închis');
 
             $formular.find('.închide').click();
-            $formular.one('închis', function () {
+            $formular.one('închis', function() {
               app.$.fx.off = false;
               start();
             });

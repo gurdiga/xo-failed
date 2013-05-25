@@ -11,10 +11,10 @@
       }
 */
 
-(function () {
+(function() {
   'use strict';
 
-  self.onmessage = function (e) {
+  self.onmessage = function(e) {
     var mesaj = e.data;
 
     for (var comandă in mesaj) {
@@ -27,10 +27,10 @@
   var Indexer = {
     date: {},
 
-    încarcă: function (url) {
+    încarcă: function(url) {
       var req = new XMLHttpRequest();
 
-      req.onreadystatechange = function () {
+      req.onreadystatechange = function() {
         if (req.readyState === 4) {
           Indexer.date = JSON.parse(req.responseText);
         }
@@ -40,7 +40,7 @@
       req.send(null);
     },
 
-    găseşte: function (text) {
+    găseşte: function(text) {
       /*jshint maxcomplexity:6*/
       text = reEscape(text);
 
@@ -55,7 +55,7 @@
         laÎnceputDeRînd: [],
         laÎnceputDeCuvînt: [],
         oriunde: [],
-        unificate: function () {
+        unificate: function() {
           var unice = {},
               toate = this.laÎnceputDeRînd
                 .concat(this.laÎnceputDeCuvînt)

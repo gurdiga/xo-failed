@@ -1,4 +1,4 @@
-asyncTest('Profil', function () {
+asyncTest('Profil', function() {
   'use strict';
 
   var profil = {
@@ -28,7 +28,7 @@ asyncTest('Profil', function () {
 
   $butonProfil.click();
 
-  $dialog.one('afişare', function () {
+  $dialog.one('afişare', function() {
     ok($dialog.există(), 'avem dialog');
     ok($dialog.is(':visible'), 'afişat dialogul');
     ok($dialog.find('h2:contains("Profil")').există(), 'dialogul are titlu');
@@ -42,18 +42,18 @@ asyncTest('Profil', function () {
     ok($butonDeSalvare.există(), 'dialogul are buton de salvare');
     ok($butonDeÎnchidere.există(), 'dialogul are buton de închidere');
 
-    app.Profil.$.one('ascundere', function () {
+    app.Profil.$.one('ascundere', function() {
       ok(true, 'trimis datele pe server');
 
-      app.Profil.$.one('salvat', function () {
+      app.Profil.$.one('salvat', function() {
         ok($dialog.is(':not(:visible)'), 'închis dialogul la salvare');
 
-        $dialog.one('afişare', function () {
+        $dialog.one('afişare', function() {
           ok(true, 'redeschis dialogul');
           equal(JSON.stringify(app.Profil.date), JSON.stringify(profil), 'datele încărcate corespund');
           verificăRepopulareaDialogului();
 
-          $dialog.one('ascundere', function () {
+          $dialog.one('ascundere', function() {
             ok($dialog.is(':not(:visible)'), 'închis dialogul cu butonul de închidere');
 
             app.$.fx.off = false;

@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Încheiere de instalare', function () {
+asyncTest('Încheiere de instalare', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -52,11 +52,11 @@ asyncTest('Încheiere de instalare', function () {
 
 
   $formular.find('.bara-de-instrumente .salvează').click();
-  $formular.one('salvat', function () {
+  $formular.one('salvat', function() {
     ok(true, 'salvat');
-    $formular.one('închis', function () {
+    $formular.one('închis', function() {
       app.ProceduriRecente.$.find('.item:first').click();
-      $formular.one('populat', function () {
+      $formular.one('populat', function() {
         ok(true, 'redeschis şi populat');
 
         equal($secţiune.find('#în-încăperea').val(), adresa, 'popularea: adresa');
@@ -73,7 +73,7 @@ asyncTest('Încheiere de instalare', function () {
         var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
-        app.$(meta).one('iniţializat', function () {
+        app.$(meta).one('iniţializat', function() {
           var $încheiere = app.$(this.tab.document),
               date = this.tab.Încheiere.date;
 
@@ -92,7 +92,7 @@ asyncTest('Încheiere de instalare', function () {
           UtilitareÎncheiere.verificăSecţiuni($încheiere,
             ['Procedura', 'Creditorul', 'Debitorul', 'Chestiunea', 'Motivele', 'Dispoziţia', 'Executorul']);
 
-          setTimeout(function () { // pentru observabilitate
+          setTimeout(function() { // pentru observabilitate
             $încheiere.find('.închide').click();
 
             start();

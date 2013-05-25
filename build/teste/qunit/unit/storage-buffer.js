@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   var app = window.frames['app'];
@@ -6,7 +6,7 @@
 
   module('Unit: AjaxBuffer');
 
-  test('API', function () {
+  test('API', function() {
     var AjaxBuffer = app.AjaxBuffer,
         url = '/some/url',
         data = {some: 'object'};

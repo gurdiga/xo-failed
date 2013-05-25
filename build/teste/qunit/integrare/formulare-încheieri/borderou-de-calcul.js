@@ -1,4 +1,4 @@
-asyncTest('Borderou de calcul', function () {
+asyncTest('Borderou de calcul', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -10,7 +10,7 @@ asyncTest('Borderou de calcul', function () {
 
   ok(app.FormularProcedură.$.is(':not(:visible)'), 'formularul de procedură e închis');
 
-  app.FormularProcedură.$.one('populat', function () {
+  app.FormularProcedură.$.one('populat', function() {
     (function adaugăTaxaA6() {
       $cheltuieli.find('#categorii-taxe-şi-speze').find('#taxaA6').click();
       $cheltuieli.find('.adăugate #taxaA6').find('#din-arhivă').prop('checked', true);
@@ -44,7 +44,7 @@ asyncTest('Borderou de calcul', function () {
     var meta = app.Încheieri.deschise[formular],
         încheiere, $încheiere;
 
-    app.$(meta).one('iniţializat', function () {
+    app.$(meta).one('iniţializat', function() {
       ok(true, 'iniţializat borderoul de calcul');
 
       încheiere = meta.tab;

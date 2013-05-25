@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
+asyncTest('Somaţie de stabilire a domiciliului copilului', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -43,11 +43,11 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
 
 
   $formular.find('.bara-de-instrumente .salvează').click();
-  $formular.one('salvat', function () {
+  $formular.one('salvat', function() {
     ok(true, 'salvat');
-    $formular.one('închis', function () {
+    $formular.one('închis', function() {
       app.ProceduriRecente.$.find('.item:first').click();
-      $formular.one('populat', function () {
+      $formular.one('populat', function() {
         ok(true, 'redeschis şi populat');
 
         equal($numeleCopilului.val(), numeleCopilului, 'populat: numele copilului');
@@ -63,7 +63,7 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
         var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
-        app.$(meta).one('iniţializat', function () {
+        app.$(meta).one('iniţializat', function() {
           var $încheiere = app.$(this.tab.document),
               date = this.tab.Încheiere.date,
               subtitlu = 'cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor';
@@ -80,7 +80,7 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function () {
           ok($conţinut.find('p:contains("' + date.executor.telefon + '")').există(), 'e menţionat telefonul executorului');
           ok($conţinut.find('p:contains("' + dataPrezentăriiDebitorului + '")').există(), 'e menţionată data prezentării debitorului în oficiu');
 
-          setTimeout(function () {
+          setTimeout(function() {
             $încheiere.find('.închide').click();
 
             start();

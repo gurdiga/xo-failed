@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function () {
+asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -33,11 +33,11 @@ asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function 
 
 
   $formular.find('.bara-de-instrumente .salvează').click();
-  $formular.one('salvat', function () {
+  $formular.one('salvat', function() {
     ok(true, 'salvat');
-    $formular.one('închis', function () {
+    $formular.one('închis', function() {
       app.ProceduriRecente.$.find('.item:first').click();
-      $formular.one('populat', function () {
+      $formular.one('populat', function() {
         ok(true, 'redeschis şi populat');
 
         equal($secţiune.find('#funcţie').val(), funcţie, 'popularea: funcţie');
@@ -52,7 +52,7 @@ asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function 
         var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
-        app.$(meta).one('iniţializat', function () {
+        app.$(meta).one('iniţializat', function() {
           var $încheiere = app.$(this.tab.document),
               subtitlu = 'de restabilire a salariatului la locul de muncă';
 
@@ -65,7 +65,7 @@ asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function 
           ok($conţinut.există(), 'avem secţiunea atotcuprinzătoare');
           equal($conţinut.find('p:contains("' + funcţie + '")').length, 2, 'se menţionează funcţia în două rînduri');
 
-          setTimeout(function () {
+          setTimeout(function() {
             $încheiere.find('.închide').click();
 
             start();

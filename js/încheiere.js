@@ -1,10 +1,10 @@
-(function (window, document, app) {
+(function(window, document, app) {
   'use strict';
 
   var $, FormularProcedură, Încheieri, Utilizator, Profil;
 
   var Încheiere = {
-    init: function () {
+    init: function() {
       // TODO: split this method?
       $ = app.$; // TODO de eliminat app.$ din alte părţi în acest script
 
@@ -39,28 +39,28 @@
       app.$(Încheieri.deschise[Încheiere.pagina]).trigger('iniţializat'); // pentru testabilitate
     },
 
-    verificăDacăFormularulEDeschis: function () {
+    verificăDacăFormularulEDeschis: function() {
       if (!app || !Încheieri.deschise[Încheiere.pagina] || FormularProcedură.$.is(':not(:visible)')) {
         window.close();
       }
     },
 
-    compilează: function () {
+    compilează: function() {
       var date = Încheiere.context(),
           template = Încheiere.$.find('script[type="text/micro-template"]')[0];
 
       document.body.innerHTML = app.compile(date, template);
     },
 
-    context: function () {
+    context: function() {
       var procedură = FormularProcedură.colectează(),
-          nume = function (persoană) {
+          nume = function(persoană) {
             return persoană['gen-persoană'] === 'fizică' ? persoană['nume'] : persoană['denumire'];
           },
-          id = function (persoană) {
+          id = function(persoană) {
             return persoană['gen-persoană'] === 'fizică' ? ('IDNP ' + persoană['idnp']) : ('IDNO ' + persoană['idno']);
           },
-          adresă = function (persoană) {
+          adresă = function(persoană) {
             return persoană['gen-persoană'] === 'fizică' ? persoană['domiciliu'] : persoană['sediu'];
           };
 
@@ -73,7 +73,7 @@
         nume: nume,
         id: id,
         adresă: adresă,
-        debitori: procedură.debitori.map(function (debitor) {
+        debitori: procedură.debitori.map(function(debitor) {
           return nume(debitor) + ' (' + id(debitor) + ')';
         })
       };
@@ -91,11 +91,11 @@
       return context;
     },
 
-    compilată: function () {
+    compilată: function() {
       return !Încheiere.$.find('>script').există();
     },
 
-    conţinut: function () {
+    conţinut: function() {
       return '<!doctype html>' +
         '<html>' +
           '<head>' + document.head.innerHTML + '</head>' +
@@ -109,15 +109,15 @@
         '</html>';
     },
 
-    nouă: function () {
+    nouă: function() {
       return decodeURI(location.pathname).substr(0, 21) === '/formulare-încheieri/';
     },
 
-    trimite: function () {
+    trimite: function() {
       var pagina = Încheiere.cale();
 
       $.put(pagina, Încheiere.conţinut())
-        .done(function () {
+        .done(function() {
           if (Încheiere.nouă()) {
             // e o încheiere nouă încă nesalvată
             Încheieri.deschise[pagina] = Încheieri.deschise[Încheiere.pagina];
@@ -134,13 +134,13 @@
         });
     },
 
-    salvează: function () {
+    salvează: function() {
       if (Încheiere.dinamică) {
         var $mesaj = Încheiere.$.find('.salvează').next('.mesaj.dinamicitate');
 
         $mesaj.addClass('afişat');
 
-        setTimeout(function () {
+        setTimeout(function() {
           $mesaj.removeClass('afişat');
         }, 1000);
 
@@ -162,13 +162,13 @@
       }
     },
 
-    marcheazăButonul: function () {
+    marcheazăButonul: function() {
       Încheiere.buton
         .addClass('salvat')
         .attr('href', Încheiere.pagina);
     },
 
-    cale: function () {
+    cale: function() {
       if (Încheiere.nouă()) {
         return '/date/' + Utilizator.login + '/proceduri/' +
           FormularProcedură.număr() + '/încheieri/' +
@@ -178,7 +178,7 @@
       }
     },
 
-    imprimă: function () {
+    imprimă: function() {
       var imprimă = window.print; // pentru mockabilitate
 
       if (Încheiere.dinamică || !Încheiere.modificat()) {
@@ -187,20 +187,20 @@
       } else {
         Încheiere.salvează();
 
-        app.$(window).one('salvat', function () {
+        app.$(window).one('salvat', function() {
           imprimă();
           app.$(window).trigger('imprimat');
         });
       }
     },
 
-    regenerează: function () {
+    regenerează: function() {
       if (Încheiere.dinamică) {
         var $mesaj = Încheiere.$.find('.regenerează').next('.mesaj.dinamicitate');
 
         $mesaj.addClass('afişat');
 
-        setTimeout(function () {
+        setTimeout(function() {
           $mesaj.removeClass('afişat');
         }, 1000);
 
@@ -211,21 +211,21 @@
 
       Încheiere.buton
         .removeClass('salvat')
-        .attr('href', function () { return this.getAttribute('formular'); })
+        .attr('href', function() { return this.getAttribute('formular'); })
         .click();
     },
 
-    modificat: function () {
+    modificat: function() {
       return Încheiere.conţinutIniţial !== Încheiere.conţinut();
     },
 
-    închide: function () {
+    închide: function() {
       delete Încheieri.deschise[Încheiere.pagina];
       window.close();
     },
 
     utilitare: {
-      init: function (context) {
+      init: function(context) {
         context.text = this.text;
         context.normalizeazăSpaţii = this.normalizeazăSpaţii;
 
@@ -234,13 +234,13 @@
         $(document).on('click', '.atenţionare', this.selecteazăAtenţionare);
       },
 
-      text: function (opţiuni, itemi) {
+      text: function(opţiuni, itemi) {
         opţiuni = opţiuni.split(' sau ');
 
         return opţiuni[itemi.length - 1];
       },
 
-      selecteazăAtenţionare: function () {
+      selecteazăAtenţionare: function() {
         var range = document.createRange();
 
         range.selectNode(this);
@@ -252,7 +252,7 @@
         sel.addRange(range);
       },
 
-      normalizeazăSpaţii: function (text) {
+      normalizeazăSpaţii: function(text) {
         return text
           .replace(/^\s+/mg, '')
           .replace(/\s+$/mg, '')
@@ -264,7 +264,7 @@
   // --------------------------------------------------
 
   ButonDeÎnchidere = {
-    init: function () {
+    init: function() {
       FormularProcedură.$.find('button.închide').clone()
         .appendTo(Încheiere.$)
         .on('click', Încheiere.închide);
@@ -276,7 +276,7 @@
   BaraDeInstrumente = {
     $: null,
 
-    init: function () {
+    init: function() {
       this.$ = app.$şabloane.find('.bara-de-instrumente.pentru.încheiere').clone();
 
       if (Încheiere.dinamică) {
@@ -290,20 +290,20 @@
         .on('click', '.regenerează', Încheiere.regenerează);
     },
 
-    anunţăSalvarea: function () {
+    anunţăSalvarea: function() {
       BaraDeInstrumente.afişeazăMesaj('salvat');
     },
 
-    anunţăSalvatDeja: function () {
+    anunţăSalvatDeja: function() {
       BaraDeInstrumente.afişeazăMesaj('salvat-deja');
     },
 
-    afişeazăMesaj: function (mesaj) {
+    afişeazăMesaj: function(mesaj) {
       var $mesaj = Încheiere.$.find('.bara-de-instrumente .salvează~.mesaj.' + mesaj);
 
       $mesaj.addClass('afişat');
 
-      setTimeout(function () {
+      setTimeout(function() {
         $mesaj.removeClass('afişat');
       }, 1000);
     }
@@ -312,14 +312,14 @@
   // --------------------------------------------------
 
   Opţiuni = {
-    init: function () {
+    init: function() {
       $(document.body)
         .on('mouseenter', '.cu-opţiuni', this.afişează)
         .on('mouseleave', '.cu-opţiuni', this.ascunde)
         .on('click', '.opţiuni li', this.inserează);
     },
 
-    afişează: function () {
+    afişează: function() {
       var $cîmp = $(this),
           opţiuni = $cîmp.data('opţiuni'),
           $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni);
@@ -329,7 +329,7 @@
         .show();
     },
 
-    ascunde: function () {
+    ascunde: function() {
       var $cîmp = $(this),
           opţiuni = $cîmp.data('opţiuni'),
           $opţiuni = Încheiere.$.find('.opţiuni.' + opţiuni);
@@ -339,7 +339,7 @@
         .hide();
     },
 
-    inserează: function () {
+    inserează: function() {
       var $opţiune = $(this),
           $cîmp = $opţiune.closest('.cu-opţiuni');
 

@@ -1,4 +1,4 @@
-asyncTest('Formular procedură: lista de încheieri', function () {
+asyncTest('Formular procedură: lista de încheieri', function() {
   'use strict';
 
   var app = this.app,
@@ -9,7 +9,7 @@ asyncTest('Formular procedură: lista de încheieri', function () {
   ok($formular.is(':not(:visible)'), 'formularul e închis');
 
   app.ProceduriRecente.$.find('.item:first-child').click();
-  $formular.one('populat', function () {
+  $formular.one('populat', function() {
     ok(true, 'deschis formularul');
 
     ok($încheieri.există(), 'găsit secţiunea încheieri');
@@ -38,7 +38,7 @@ asyncTest('Formular procedură: lista de încheieri', function () {
 
   // ------------------------------------------------
   function închideFormularul() {
-    $formular.one('închis', function () {
+    $formular.one('închis', function() {
       ok(true, 'închis formularul');
 
       app.$.fx.off = false;

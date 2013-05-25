@@ -1,4 +1,4 @@
-asyncTest('Formular procedură: cheltuieli (populare)', function () {
+asyncTest('Formular procedură: cheltuieli (populare)', function() {
   'use strict';
 
   var app = this.app,
@@ -14,7 +14,7 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
   app.$.fx.off = true;
   ok($formular.is(':not(:visible)'), 'formularul e închis');
 
-  $formular.one('populat', function () {
+  $formular.one('populat', function() {
     ok(true, 'deschis formularul');
 
     adaugăCheltuieli();
@@ -61,10 +61,10 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
     adaugăTaxaB1();
 
     $formular.find('.bara-de-instrumente .salvează').click();
-    $formular.one('salvat', function () {
+    $formular.one('salvat', function() {
       ok(true, 'salvat');
 
-      $formular.one('închidere', function () {
+      $formular.one('închidere', function() {
         ok(true, 'închis formularul');
 
         verificăPopulare();
@@ -178,12 +178,12 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
     equal(documenteColectate.length, 2, '……din 2 itemi');
     ok($.isArray(documenteColectate[0].destinatari), '……primul document are o listă de destinatari');
     equal(documenteColectate[0].destinatari.length, $destinatariAdăugaţi.children().length, '………în număr corespunzător');
-    deepEqual(documenteColectate[0].destinatari, $destinatariAdăugaţi.children().map(function () { return this.innerHTML; }).get(),
+    deepEqual(documenteColectate[0].destinatari, $destinatariAdăugaţi.children().map(function() { return this.innerHTML; }).get(),
       '………corespund în particular');
     deepEqual(documenteColectate[0]['destinatari-persoane-terţe'], [], '……nu are destinatari persoane terţe');
     equal(documenteColectate[0].document, primulDocument, '……denumirea documentului corespunde');
 
-    var părţile = $alDoileaDocument.find('.destinatari-adăugaţi>li:not(.persoană.terţă)').map(function () {
+    var părţile = $alDoileaDocument.find('.destinatari-adăugaţi>li:not(.persoană.terţă)').map(function() {
       return this.innerHTML;
     }).get();
 
@@ -194,7 +194,7 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
 
   // ------------------------------------------------
   function verificăPopulare() {
-    $formular.one('populat', function () {
+    $formular.one('populat', function() {
       ok(true, 'redeschis formularul');
 
       equal($cheltuieliAdăugate.children().length, 3, 's-au repopulat 3 itemi');
@@ -233,10 +233,10 @@ asyncTest('Formular procedură: cheltuieli (populare)', function () {
   // ------------------------------------------------
   function închideFormularul() {
     $formular.find('.bara-de-instrumente .salvează').click();
-    $formular.one('salvat', function () {
+    $formular.one('salvat', function() {
       ok(true, 'salvat');
 
-      $formular.one('închis', function () {
+      $formular.one('închis', function() {
         ok(true, 'închis formularul');
 
         app.$.fx.off = false;

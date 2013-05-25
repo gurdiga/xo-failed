@@ -1,5 +1,5 @@
 /*global UtilitareÎncheiere:false */
-asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a executării documentului executoriu', function () {
+asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a executării documentului executoriu', function() {
   'use strict';
 
   var app = this.app,
@@ -10,7 +10,7 @@ asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a 
 
   ok($formular.is(':not(:visible)'), 'formularul de procedură e închis');
 
-  $formular.one('populat', function () {
+  $formular.one('populat', function() {
     $buton = $formular.find('#încheieri a[formular="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"]');
     formular = $buton.attr('href');
 
@@ -19,7 +19,7 @@ asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a 
 
     var meta = app.Încheieri.deschise[formular];
 
-    app.$(meta).one('iniţializat', function () {
+    app.$(meta).one('iniţializat', function() {
       ok(true, 'deschis tab pentru încheiere');
 
       var încheiere = meta.tab;
@@ -52,7 +52,7 @@ asyncTest('Încheiere de intentare a procedurii de executare şi de asigurare a 
 
       $încheiere.find('.închide').click();
 
-      $formular.one('închis', function () {
+      $formular.one('închis', function() {
         app.$.fx.off = false;
         start();
       });

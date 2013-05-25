@@ -1,4 +1,4 @@
-test('Procedură: localizare cîmpuri şi secţiuni', function () {
+test('Procedură: localizare cîmpuri şi secţiuni', function() {
   'use strict';
 
   ok(this.$dataIntentării.există(), 'găsit #data-intentării');

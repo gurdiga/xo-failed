@@ -1,4 +1,4 @@
-asyncTest('Procedură: iniţializare formular', function () {
+asyncTest('Procedură: iniţializare formular', function() {
   'use strict';
 
   var app = this.app;
@@ -7,7 +7,7 @@ asyncTest('Procedură: iniţializare formular', function () {
   ok(filăProcedurăDeOrdinGeneral.click(), 'găsit filă pentru crearea procedurii de ordin general');
   filăProcedurăDeOrdinGeneral.există();
 
-  app.FormularProcedură.$.one('iniţializat', function () {
+  app.FormularProcedură.$.one('iniţializat', function() {
     ok(true, 'iniţializat formularul');
     ok(app.FormularProcedură.$.is(':visible'), 'afişat formularul');
 

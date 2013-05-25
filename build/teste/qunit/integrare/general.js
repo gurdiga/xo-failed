@@ -1,4 +1,4 @@
-test('General', function () {
+test('General', function() {
   'use strict';
 
   var app = this.app;

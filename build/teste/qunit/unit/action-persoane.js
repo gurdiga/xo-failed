@@ -1,25 +1,25 @@
-(function () {
+(function() {
   'use strict';
 
   var app = window.frames['app'];
 
 
   module('Unit: /js/action.js', {
-    setup: function () {
+    setup: function() {
       app.$.fx.off = true;
     },
-    teardown: function () {
+    teardown: function() {
       app.$.fx.off = false;
     }
   });
 
 
-  test('Persoane', function () {
+  test('Persoane', function() {
     ok('Persoane' in app, 'Persoane e publicat');
   });
 
 
-  test('Persoane.adaugă() pentru creditor/persoană terţă', function () {
+  test('Persoane.adaugă() pentru creditor/persoană terţă', function() {
     var $fixture = app.$(
       '<div>' +
         '<fieldset id="ceva">' +
@@ -37,7 +37,7 @@
     var $butonDeAdăugare = $fixture.find('button'),
         declanşatEvenimentChange = false;
 
-    $fixture.on('change', '#gen-persoană', function () {
+    $fixture.on('change', '#gen-persoană', function() {
       declanşatEvenimentChange = true;
     });
 
@@ -61,7 +61,7 @@
   });
 
 
-  test('Persoane.adaugă() pentru debitori', function () {
+  test('Persoane.adaugă() pentru debitori', function() {
     var $fixture = app.$(
       '<div>' +
         '<fieldset id="ceva">' +
@@ -79,7 +79,7 @@
     var $butonDeAdăugare = $fixture.find('button'),
         declanşatEvenimentChange = false;
 
-    $fixture.on('change', '#gen-persoană', function () {
+    $fixture.on('change', '#gen-persoană', function() {
       declanşatEvenimentChange = true;
     });
 

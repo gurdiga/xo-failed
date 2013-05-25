@@ -1,4 +1,4 @@
-asyncTest('Procedură: verificare prezenţă cîmpuri şi calcul onorariu', function () {
+asyncTest('Procedură: verificare prezenţă cîmpuri şi calcul onorariu', function() {
   'use strict';
 
   var dateProcedură = this.dateProcedură,
@@ -36,7 +36,7 @@ asyncTest('Procedură: verificare prezenţă cîmpuri şi calcul onorariu', func
   ok($cîmpPersonalizat.find('.sumă').val(sume['Datorie adăugătoare']).există(), 'găsit suma în cîmpul personalizat adăugat');
 
   // ------------------------
-  app.$(app.document).one('calculat-onorariul', function () {
+  app.$(app.document).one('calculat-onorariul', function() {
     equal($obiectulUrmăririi.find('#total').suma(), sume['Suma de bază'] + sume['Datorie adăugătoare'], 'totalul e suma sumelor');
 
     var onorariuImplicit = dateProcedură['cheltuieli']['onorariu'];

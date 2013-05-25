@@ -1,5 +1,5 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
-asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea unor sume sau bunuri', function () {
+asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea unor sume sau bunuri', function() {
   /*global UtilitareÎncheiere:false */
   'use strict';
 
@@ -26,11 +26,11 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
 
 
   $formular.find('.bara-de-instrumente .salvează').click();
-  $formular.one('salvat', function () {
+  $formular.one('salvat', function() {
     ok(true, 'salvat');
-    $formular.one('închis', function () {
+    $formular.one('închis', function() {
       app.ProceduriRecente.$.find('.item:first').click();
-      $formular.one('populat', function () {
+      $formular.one('populat', function() {
         ok(true, 'redeschis şi populat');
 
         equal($secţiune.find('#acţiuni').val(), acţiuni, 'populare: acţiunile se populează corespunzător');
@@ -43,7 +43,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
         var formular = app.Încheieri.formular($butonPentruÎncheiere),
             meta = app.Încheieri.deschise[formular];
 
-        app.$(meta).one('iniţializat', function () {
+        app.$(meta).one('iniţializat', function() {
           var $încheiere = app.$(this.tab.document),
               subtitlu = 'cu privire la executarea de către debitor a unor acţiuni nelegate de remiterea unor sume sau bunuri';
 
@@ -56,7 +56,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
           ok($conţinut.există(), 'avem secţiunea atotcuprinzătoare');
           equal($conţinut.find('.acţiuni').text(), acţiuni, 'se menţionează acţiunile');
 
-          setTimeout(function () {
+          setTimeout(function() {
             $încheiere.find('.închide').click();
 
             start();
