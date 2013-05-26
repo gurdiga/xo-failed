@@ -4,6 +4,7 @@
   var SCRIPTS = [
     'jslint-config.js',
     'csslint-config.js',
+    'qunit-extensions.js',
     '/js/action.js',
     '/js/încheiere.js',
     '/js/indexer.js',
