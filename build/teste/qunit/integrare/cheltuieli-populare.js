@@ -78,15 +78,15 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
     $categoriiCheltuieli.find('#taxaB1').click();
 
     var $taxaB1 = $cheltuieliAdăugate.find('#taxaB1'),
-        $document = $taxaB1.find('.document'),
+        $document = $taxaB1.find('.personalizat'),
         $destinatariAdăugaţi = $document.find('.destinatari-adăugaţi'),
         $butonDeAdăugareDestinatari = $document.find('.adaugă-destinatar');
 
     ok($taxaB1.există(), 'adăugat taxa B1');
     ok($document.există(), 'implicit avem un document');
-    ok($document.find('.denumire').există(), '…cu denumire');
-    equal($document.find('.denumire').val(), '', '……necompletată');
-    $document.find('.denumire').val(primulDocument);
+    ok($document.find('.etichetă').există(), '…cu denumire');
+    equal($document.find('.etichetă').val(), '', '……necompletată');
+    $document.find('.etichetă').val(primulDocument);
 
     ok($destinatariAdăugaţi.există(), '…cu lista de destinatari adăugaţi deja');
     ok($destinatariAdăugaţi.is('.comprimaţi'), '……comprimaţi');
@@ -105,7 +105,7 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
     ok($registratoriIndependenţi.next('.itemi'), '…cu itemi');
     equal($registratoriIndependenţi.next('.itemi').children().length, 11, '…11');
 
-    $registratoriIndependenţi.next().children().first().click();
+    $registratoriIndependenţi.next('.itemi').children().first().click();
     equal($destinatariAdăugaţi.children().length, 1,
       'la click pe un item din #destinatari el se adaugă în lista destinatarilor adăugaţi');
     equal($totalTaxeŞiSpeze.val(), 5 * app.UC, '…total cheltuieli = 5UC după adăugarea unui registrator independent');
@@ -116,7 +116,7 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
     equal($totalTaxeŞiSpeze.val(), 5 * app.UC,
       '…total cheltuieli = 5UC chiar şi după adăugarea tuturor registratorilor independenţi');
 
-    var $butonDeAdăugareDocument = $taxaB1.find('.document+li>button.adaugă');
+    var $butonDeAdăugareDocument = $taxaB1.find('button.adaugă-cîmp-personalizat');
 
     ok($butonDeAdăugareDocument.există(), 'avem buton de adăugare document');
     equal($butonDeAdăugareDocument.text(), '+document', '…cu textul “+document”');
@@ -126,9 +126,9 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
 
     var $alDoileaDocument = $taxaB1.find('.document').last();
 
-    ok($alDoileaDocument.find('.denumire').există(), '…are cîmp pentru denumire');
-    equal($alDoileaDocument.find('.denumire').val(), '', '……necompletată');
-    $alDoileaDocument.find('.denumire').val(alDoileaDocument);
+    ok($alDoileaDocument.find('.etichetă').există(), '…are cîmp pentru denumire');
+    equal($alDoileaDocument.find('.etichetă').val(), '', '……necompletată');
+    $alDoileaDocument.find('.etichetă').val(alDoileaDocument);
 
     ok($alDoileaDocument.find('.destinatari-adăugaţi').există(), 'are listă de destinatari');
     equal($alDoileaDocument.find('.destinatari-adăugaţi>li').length, 0, '…cu 0 destinatari implicit');
@@ -216,11 +216,11 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
       equal($taxaB1.attr('id'), 'taxaB1', 'al treilea item e taxaB1');
       ok($taxaB1.find('.achitare :checkbox').is(':not(:checked)'), '…marcată neachitată (debifată)');
       equal($taxaB1.find('.achitare .dată').val(), '', '…data achitării este necompletată corespunzător');
-      equal($taxaB1.find('.subformular .document').length, 2, '…documentele sunt în număr corespunzător');
+      equal($taxaB1.find('.document').length, 2, '…documentele sunt în număr corespunzător');
 
-      var $primulDocument = $taxaB1.find('.subformular .document').eq(0);
+      var $primulDocument = $taxaB1.find('.document').eq(0);
 
-      equal($primulDocument.find('.denumire').val(), primulDocument, '…data achitării este necompletată corespunzător');
+      equal($primulDocument.find('.etichetă').val(), primulDocument, '…denumirea primului document corespunde');
       equal($primulDocument.find('.destinatari-adăugaţi').children().length, 11, '…destinatarii adăugaţi sunt în număr corespunzător');
 
       $taxaB1.remove();

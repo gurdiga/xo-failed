@@ -41,11 +41,11 @@
         achitat = $item.find('.achitare :checkbox').is(':checked');
 
         if (tip === 'taxe') {
-          if ($item.find('.subformular:has(.document)').există()) {
+          if ($item.find('.subsecţiune:has(.personalizat)').există()) {
             costPerItem = $item.find('input.cost-per-item').suma() * app.UC;
             cost = 0;
 
-            $item.find('.subformular .document').each(function () {
+            $item.find('.subsecţiune .personalizat').each(function () {
               cost += $(this).find('.cantitate').suma() * costPerItem;
             });
           } else {
@@ -58,7 +58,7 @@
         } else {
           cost = 0;
 
-          $item.find('.subformular .document').each(function () {
+          $item.find('.subsecţiune .personalizat').each(function () {
             cost += $(this).find('.sumă').suma();
           });
         }

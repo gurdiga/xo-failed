@@ -500,7 +500,7 @@
                       <input type="hidden" class="cost" value="3"/>
                     </li>
 
-                    <li id="taxaA3" class="item" data-şablon-subformular="documente">
+                    <li id="taxaA3" class="item" gen-date="listă" data-şablon-subformular="documente">
                       <p>taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
                       a certificatelor, confirmărilor, a informaţiei scrise despre
                       acţiunile de executare silită întreprinse de către executorul judecătoresc
@@ -533,7 +533,7 @@
                   de executorul judecătoresc</span>
 
                   <ul class="itemi cu umbră">
-                    <li id="taxaB1" class="item" data-şablon-subformular="documente adresabile">
+                    <li id="taxaB1" class="item" gen-date="documente-adresabile" data-şablon-subformular="documente adresabile">
                       <p>taxa pentru întocmirea şi eliberarea sau expedierea pe suport de
                       hîrtie sau în versiune electronică a demersurilor, încheierilor,
                       dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
@@ -576,7 +576,7 @@
                       <input type="hidden" class="cost" value="20"/>
                     </li>
 
-                    <li id="taxaB7" class="item" data-şablon-subformular="participanţi la licitaţie">
+                    <li id="taxaB7" class="item" gen-date="listă" data-şablon-subformular="participanţi la licitaţie">
                       <p>taxa de participare la licitaţie (cu eliberarea biletului de participant)
                       <span class="uc">— 3 u.c.</span> per participant</p>
                     </li>
@@ -587,7 +587,7 @@
                       <input type="hidden" class="cost" value="10"/>
                     </li>
 
-                    <li id="taxaB9" class="item" data-şablon-subformular="documente">
+                    <li id="taxaB9" class="item" gen-date="listă" data-şablon-subformular="documente">
                       <p>taxa pentru pregătirea demersului în instanţa de judecată privind
                       schimbarea modului şi ordinii de executare, explicarea modului de executare,
                       eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
@@ -631,19 +631,19 @@
                   de executorii judecătoreşti</span>
 
                   <ul class="itemi cu umbră">
-                    <li id="taxaC1" class="item" data-şablon-subformular="documente">
+                    <li id="taxaC1" class="item" gen-date="listă" data-şablon-subformular="documente">
                       <p>taxa pentru înmînarea, comunicarea personală a actelor
                       procedurale sau a altor documente
                       <span class="uc">— 5 u.c.</span> per document</p>
                       <input type="hidden" class="cost-per-item" value="5"/>
                     </li>
 
-                    <li id="taxaC2" class="item" data-şablon-subformular="contracte">
+                    <li id="taxaC2" class="item" gen-date="listă" data-şablon-subformular="contracte">
                       <p>taxa pentru întocmirea actului de constatare a faptului,
                       stării de fapt se achită conform contractului</p>
                     </li>
 
-                    <li id="taxaC3" class="item" data-şablon-subformular="contracte">
+                    <li id="taxaC3" class="item" gen-date="listă" data-şablon-subformular="contracte">
                       <p>taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
                       în procesul de executare, precum şi a celor gajate, conform contractului,
                       dar nu mai mult de 75 u.c. lunar</p>
@@ -655,25 +655,25 @@
                   <span class="titlu semiascuns">speză</span>
 
                   <ol class="itemi cu umbră">
-                    <li id="speza1" class="item" data-şablon-subformular="listă cheltuieli">
+                    <li id="speza1" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
                       <p>transportul, păstrarea şi vînzarea bunurilor debitorului</p>
                     </li>
 
-                    <li id="speza2" class="item" data-şablon-subformular="listă cheltuieli">
+                    <li id="speza2" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
                       <p>deschiderea forţată şi închiderea încăperilor, strămutarea
                       sau înlăturarea îngrădirilor</p>
                     </li>
 
-                    <li id="speza3" class="item" data-şablon-subformular="listă cheltuieli">
+                    <li id="speza3" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
                       <p>remunerarea specialiştilor, experţilor, martorilor asistenţi şi
                       altor persoane antrenate în procesul de executare</p>
                     </li>
 
-                    <li id="speza4" class="item" data-şablon-subformular="listă cheltuieli">
+                    <li id="speza4" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
                       <p>Lucrări de evaluare şi/sau expertiză</p>
                     </li>
 
-                    <li id="speza5" class="item" data-şablon-subformular="listă cheltuieli">
+                    <li id="speza5" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli cu data deplasării">
                       <p>deplasările executorului judecătoresc efectuate în cadrul procedurii
                       de executare</p>
                     </li>
@@ -953,6 +953,19 @@
                       >scrisoarea de însoţire</a>
                 </li>
 
+                <li>
+                  <a class="ico document"
+                      href="/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html"
+                      formular="/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html"
+                      >Somaţie cu privire la ieşirea la faţa locului</a><br/>
+
+                  <a class="scrisoare-de-însoţire" dinamică
+                      destinatari="creditor debitori persoane-terţe"
+                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                      >scrisoarea de însoţire</a>
+                </li>
+
               </ul>
             </div>
           </fieldset>
@@ -1071,8 +1084,7 @@
         <li class="container-buton">
           <button
             class="adaugă-cîmp-personalizat sumă semiascuns"
-            data-şablon="cîmpul-personalizat"
-            data-etichetă="Descriere sumă">+sumă</button>
+            data-şablon="cîmpul-personalizat">+sumă</button>
         </li>
 
         <li>
@@ -1563,104 +1575,158 @@
       </ul>
 
 
-      <ul class="subformular" title="documente">
-        <li>
-          <label class="denumire">Denumire</label>
-          <label class="cantitate">Cîte</label>
-        </li>
+      <fieldset class="subsecţiune" title="documente">
+        <legend>documente</legend>
 
-        <li class="document eliminabil">
-          <textarea class="label denumire"></textarea>
-          <input type="text" class="cantitate" value="1"/>
-        </li>
+        <ul>
+          <li class="personalizat eliminabil">
+            <textarea class="etichetă" title="Etichetă editabilă" placeholder="denumirea" nume-cîmp="denumire"></textarea>
+          </li>
 
-        <li><button class="adaugă semiascuns">+document</button></li>
-      </ul>
-
-
-      <div class="subformular" title="bifă “din arhivă”">
-        <input type="checkbox" id="din-arhivă"/>
-        <label for="din-arhivă">din arhivă (+1 u.c.)</label>
-      </div>
+          <li class="container-buton">
+            <button class="adaugă-cîmp-personalizat semiascuns">+document</button>
+          </li>
+        </ul>
+      </fieldset>
 
 
-      <ul class="subformular" title="documente adresabile">
-        <li><label class="denumire">Denumire document</label></li>
+      <fieldset class="subsecţiune" title="bifă “din arhivă”">
+        <legend>informaţii suplimentare</legend>
 
-        <li class="document eliminabil">
-          <textarea class="denumire"></textarea>
-
-          <ul class="destinatari-adăugaţi comprimaţi neselectabili"></ul>
-          <div class="adaugă-destinatar listă neselectabilă">
-            <span class="titlu semiascuns">destinatari</span>
-          </div>
-        </li>
-
-        <li><button class="adaugă semiascuns">+document</button></li>
-      </ul>
+        <input type="checkbox" id="din-arhivă" nume-cîmp="din-arhivă"/>
+        <label for="din-arhivă">din arhivă</label>
+        <span class="şoaptă">+1 u.c.</span>
+      </fieldset>
 
 
-      <div class="subformular" title="data şi ora concilierii">
-        <label class="stînga" for="data-concilierii">Data</label>
-        <input type="text" class="dată" id="data-concilierii"/>
-        <label class="stînga" for="ora-concilierii">Ora</label>
-        <input type="text" id="ora-concilierii"/>
-      </div>
+      <fieldset class="subsecţiune" title="documente adresabile">
+        <legend>documente</legend>
+
+        <ul>
+          <li class="document personalizat eliminabil">
+            <textarea class="etichetă" title="Etichetă editabilă" placeholder="denumirea"></textarea>
+
+            <ul class="destinatari-adăugaţi comprimaţi neselectabili"></ul>
+            <div class="adaugă-destinatar listă neselectabilă">
+              <span class="titlu semiascuns"></span>
+            </div>
+          </li>
+
+          <li class="container-buton">
+            <button class="adaugă-cîmp-personalizat semiascuns" data-şablon="document-adresabil">+document</button>
+          </li>
+        </ul>
+      </fieldset>
 
 
-      <div class="subformular" title="ore lucrate">
+      <fieldset class="subsecţiune" title="data şi ora concilierii">
+        <legend>informaţii suplimentare</legend>
+
+        <label class="stînga" for="data-şi-ora-concilierii">Data şi ora concilierii</label>
+        <input type="text" class="dată" id="data-şi-ora-concilierii"/>
+      </fieldset>
+
+
+      <fieldset class="subsecţiune" title="ore lucrate">
+        <legend>informaţii suplimentare</legend>
+
         <label class="stînga" for="ore-lucrate">Ore lucrate</label>
         <input type="text" class="cantitate" id="ore-lucrate"/>
-      </div>
+      </fieldset>
 
 
-      <div class="subformular" title="bifă “licitaţie repetată”">
+      <fieldset class="subsecţiune" title="bifă “licitaţie repetată”">
+        <legend>informaţii suplimentare</legend>
+
         <input type="checkbox" class="licitaţie repetată" id="licitaţie-repetată"/>
-        <label for="licitaţie-repetată">licitaţie repetată (se aplică coeficientul 0.5)</label>
+        <label for="licitaţie-repetată">licitaţie repetată</label>
+        <span class="şoaptă">se aplică coeficientul 0.5</span>
+      </fieldset>
+
+
+      <fieldset class="subsecţiune" title="contracte">
+        <legend>contracte</legend>
+
+        <ul>
+          <li class="personalizat eliminabil">
+            <textarea class="etichetă" title="Etichetă editabilă" placeholder="denumirea" nume-cîmp="denumirea"></textarea>
+            <input type="text" class="sumă" placeholder="suma" nume-cîmp="suma"/>
+            <span class="mdl">MDL</span>
+          </li>
+
+          <li class="container-buton">
+            <button class="adaugă-cîmp-personalizat semiascuns">+contract</button>
+          </li>
+        </ul>
+      </fieldset>
+
+
+      <fieldset class="subsecţiune" title="participanţi la licitaţie">
+        <legend>participanţi</legend>
+
+        <ul>
+          <li class="personalizat eliminabil">
+            <textarea class="etichetă" title="Etichetă editabilă" placeholder="numele" nume-cîmp="nume"></textarea>
+          </li>
+
+          <li class="container-buton">
+            <button class="adaugă-cîmp-personalizat semiascuns">+participant</button>
+          </li>
+        </ul>
+      </fieldset>
+
+
+      <fieldset class="subsecţiune" title="listă cheltuieli">
+        <legend>listă cheltuieli</legend>
+
+        <ul>
+          <li class="personalizat eliminabil">
+            <textarea class="etichetă" title="Etichetă editabilă" placeholder="descrierea" nume-cîmp="descrierea"></textarea>
+            <input type="text" placeholder="suma" class="sumă" nume-cîmp="suma"/>
+            <span class="mdl">MDL</span>
+          </li>
+
+          <li class="container-buton">
+            <button class="adaugă-cîmp-personalizat semiascuns">+cheltuială</button>
+          </li>
+        </ul>
+      </fieldset>
+
+
+      <div title="listă cheltuieli cu data deplasării">
+        <fieldset class="subsecţiune">
+          <legend>deplasarea</legend>
+
+          <ul>
+            <li class="personalizat">
+              <label>Data şi ora deplasării</label>
+              <input type="text" class="dată" nume-cîmp="data-şi-ora-deplasării"/>
+            </li>
+
+            <li class="personalizat">
+              <input type="checkbox" id="în-afara-circumscripţiei" nume-cîmp="în-afara-circumscripţiei"/>
+              <label for="în-afara-circumscripţiei">în afara circumscripţiei</label>
+              <span class="şoaptă">se adaugă 5 u.c.</span>
+            </li>
+          </ul>
+        </fieldset>
+
+        <fieldset class="subsecţiune">
+          <legend>cheltuieli de deplasare</legend>
+
+          <ul>
+            <li class="personalizat eliminabil">
+              <textarea class="etichetă" placeholder="descrierea" title="Etichetă editabilă" nume-cîmp="descrierea"></textarea>
+              <input type="text" placeholder="suma" class="sumă" nume-cîmp="suma"/>
+              <span class="mdl">MDL</span>
+            </li>
+
+            <li class="container-buton">
+              <button class="adaugă-cîmp-personalizat semiascuns">+item</button>
+            </li>
+          </ul>
+        </fieldset>
       </div>
-
-
-      <ul class="subformular" title="contracte">
-        <li>
-          <label class="denumire">Contractul</label>
-          <label class="sumă">Suma</label>
-        </li>
-
-        <li class="document eliminabil">
-          <textarea class="label denumire"></textarea>
-          <input type="text" placeholder="suma" class="sumă"/>
-        </li>
-
-        <li><button class="adaugă semiascuns" title="Adaugă contract">+</button></li>
-      </ul>
-
-
-      <ul class="subformular" title="participanţi la licitaţie">
-        <li>
-          <label class="descriere">Nume participant</label>
-        </li>
-
-        <li class="document eliminabil">
-          <input type="text" class="descriere"/>
-        </li>
-
-        <li><button class="adaugă semiascuns" title="Adaugă participant">+</button></li>
-      </ul>
-
-
-      <ul class="subformular" title="listă cheltuieli">
-        <li>
-          <label class="descriere">Descriere</label>
-          <label class="sumă">Suma</label>
-        </li>
-
-        <li class="document eliminabil">
-          <textarea class="label descriere"></textarea>
-          <input type="text" placeholder="suma" class="sumă"/>
-        </li>
-
-        <li><button class="adaugă semiascuns" title="Adaugă cîmp">+</button></li>
-      </ul>
 
 
       <div class="elimină semiascuns" title="Elimină">&times;</div>
@@ -1699,9 +1765,21 @@
 
       <ul class="cîmpul-personalizat">
         <li class="sumă personalizat eliminabil de tot">
-          <textarea class="etichetă" title="Etichetă editabilă"></textarea>
+          <textarea class="etichetă" title="Etichetă editabilă" placeholder="descrierea"></textarea>
           <input type="text" placeholder="suma" class="sumă"/>
           <select class="valuta"></select>
+        </li>
+      </ul>
+
+
+      <ul class="document-adresabil">
+        <li class="document personalizat eliminabil">
+          <textarea class="etichetă" title="Etichetă editabilă" placeholder="denumirea"></textarea>
+
+          <ul class="destinatari-adăugaţi comprimaţi neselectabili"></ul>
+          <div class="adaugă-destinatar listă neselectabilă">
+            <span class="titlu semiascuns"></span>
+          </div>
         </li>
       </ul>
 
@@ -2015,5 +2093,6 @@
     <script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
     <script defer src="/js/lib.js"></script>
     <script defer src="/js/action.js"></script>
+
   </body>
 </html>

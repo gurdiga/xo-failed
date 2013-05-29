@@ -22,15 +22,17 @@ asyncTest('Borderou de calcul', function() {
 
       var $speza = $cheltuieli.find('.adăugate #speza1');
 
-      $speza.find('button.adaugă').click();
+      $speza.find('button.adaugă-cîmp-personalizat').click();
 
-      var $itemi = $speza.find('.subformular .document');
+      var $itemi = $speza.find('.subsecţiune .personalizat');
 
-      $itemi.eq(0).find('.descriere').val('Transport de ocazie');
-      $itemi.eq(0).find('.sumă').val('120');
+      equal($itemi.length, 2, 'avem două zpeze');
 
-      $itemi.eq(1).find('.descriere').val('Taxi');
-      $itemi.eq(1).find('.sumă').val('55');
+      ok($itemi.eq(0).find('.etichetă').val('Transport de ocazie').există(), '…setat descrierea pentru prima speză');
+      ok($itemi.eq(0).find('.sumă').val('120').există(), '…setat sumă pentru prima speză');
+
+      ok($itemi.eq(1).find('.etichetă').val('Taxi').există(), '…setat descrierea pentru a doua speză');
+      ok($itemi.eq(1).find('.sumă').val('55').există(), '…setat suma pentru a doua speză');
     })();
 
     $cheltuieli.find('.adăugate #taxaA1 :checkbox').prop('checked', true);
@@ -107,7 +109,7 @@ asyncTest('Borderou de calcul', function() {
           $spezeItemi = $speze.next('tbody'),
           $coloniţePrimaSpeză = $spezeItemi.children().eq(0).children(),
           descriereSpeză = $cheltuieli.find('.adăugate #speza1 p').text().trim(),
-          $costuriItemiSpeză = $cheltuieli.find('.adăugate #speza1 .document .sumă'),
+          $costuriItemiSpeză = $cheltuieli.find('.adăugate #speza1 .personalizat .sumă'),
           $totalSpezeRămasDeAchitat = $spezeItemi.children('tr').eq(1),
           totalCostSpeză = $costuriItemiSpeză.eq(0).suma() + $costuriItemiSpeză.eq(1).suma();
 

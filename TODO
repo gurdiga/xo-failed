@@ -1,3 +1,11 @@
+- de eliminat noţiunea de .subformular din cheltuielile adăugate
+  şi de reutilizat cîmpuri personalizate în locul lor în listele asociate cheltuielilor
+  - inclusiv documente adresate?
+
+- de eliminat spaţiul între function şi ( şi de ajustat JShint
+- de îngustat gama de nuanţe de gri la… 3?
+  - de ajustat culoare placeholder
+
 - Încheieri
 
 - de adaptat salvarea pentru criptare?
