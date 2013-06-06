@@ -13,6 +13,8 @@
 
   Action = {
     init: function() {
+      Action.seteazăOpţiuniAjax();
+
       Utilizator.init();
 
       if (!Utilizator.autentificat) return;
@@ -45,6 +47,25 @@
 
     '#index': function() {
       $('#căutare input').focus();
+    },
+
+    seteazăOpţiuniAjax: function() {
+      $.ajaxSetup({
+        dataFilter: function(data, type) {
+          if (type === 'json') {
+            var tip = StructuriDate.tipPerUrl(this.url);
+
+            if (tip) {
+              data = JSON.parse(data);
+              data = StructuriDate.aplicăSchimbări(tip, data);
+              data = JSON.stringify(data);
+            }
+          }
+
+          return data;
+        }
+      });
+
     }
   },
 
@@ -3425,6 +3446,40 @@
     get: function(url) {
       return JSON.parse(window.localStorage.getItem(url));
     }
+  },
+
+  // --------------------------------------------------
+
+  StructuriDate = {
+    versiuni: {
+      'profil': [],
+      'procedură': [
+        // TODO
+        function(date) {
+          // schimă itemi din hash în array
+          return date;
+        }
+      ]
+    },
+
+    tipPerUrl: function(url) {
+      if (/profil.json$/.test(url)) return 'profil';
+      if (/proceduri\/\d+\/date.json$/.test(url)) return 'procedură';
+    },
+
+    aplicăSchimbări: function(tip, date) {
+      date.versiune = date.versiune || 0;
+
+      this.versiuni[tip].forEach(function(transformare, versiune) {
+        if (versiune < date.versiune) return;
+
+        date = transformare(date);
+      });
+
+      date.versiune = this.versiuni[tip].length;
+
+      return date;
+    }
   };
 
   // --------------------------------------------------
@@ -3541,7 +3596,8 @@
       SelecturiFoarteLate: SelecturiFoarteLate,
       SubsecţiuniDinamice: SubsecţiuniDinamice,
       Destinatari: Destinatari,
-      AjaxBuffer: AjaxBuffer
+      AjaxBuffer: AjaxBuffer,
+      StructuriDate: StructuriDate
     });
   }
 
