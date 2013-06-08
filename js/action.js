@@ -2082,8 +2082,19 @@
 
       for (var i = 0; i < proceduri.length; i++) {
         var număr = proceduri[i],
-            procedură = evidenţiază(Căutare.index[''][număr]),
-            creditor = persoană(procedură['creditor']),
+            procedură = Căutare.index[''][număr];
+
+        // în development, cînd şterg procedurile de pe disc, şi ele rămîn
+        // în lista celor recente, şi aici generează ceva de genul:
+        //
+        //   Uncaught TypeError: Cannot call method 'replace' of undefined
+        //
+        // în producţie n-ar trebui să se întîmple aşa ceva.
+        if (!procedură) continue;
+
+        procedură = evidenţiază(procedură);
+
+        var creditor = persoană(procedură['creditor']),
             persoaneTerţe = $.map(procedură['persoane-terţe'], persoană).join(''),
             debitori = $.map(procedură['debitori'], persoană).join(''),
             href = '#formular?' + număr;
