@@ -45,18 +45,23 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
       '…completat cîmpul pentru data achitării cu data de azi');
 
     dateColectate = app.FormularProcedură.colectează();
+
+    var taxaA1 = app.Cheltuieli.item(dateColectate.cheltuieli.itemi, 'taxaA1');
+
     ok(dateColectate.cheltuieli.itemi, 'avem itemi în cheltuielile colectate');
-    ok(dateColectate.cheltuieli.itemi.taxaA1, '…cu taxaA1');
-    equal(dateColectate.cheltuieli.itemi.taxaA1['achitat'], true, '……marcată achitată');
-    equal(dateColectate.cheltuieli.itemi.taxaA1['data-achitării'], app.moment().format(app.FORMATUL_DATEI),
-      '……data colectată corespunzător');
+    ok(taxaA1, '…cu taxaA1');
+    equal(taxaA1['achitat'], true, '……marcată achitată');
+    equal(taxaA1['data-achitării'], app.moment().format(app.FORMATUL_DATEI), '……data colectată corespunzător');
 
     $categoriiCheltuieli.find('#taxaA2').click();
     dateColectate = app.FormularProcedură.colectează();
     equal($totalTaxeŞiSpeze.val(), 4 * app.UC, 'total cheltuieli = 4UC după adăugarea taxei A2');
-    ok(dateColectate.cheltuieli.itemi.taxaA2, '…colectat taxaA2');
-    equal(dateColectate.cheltuieli.itemi.taxaA2['achitat'], false, '……marcată neachitată');
-    equal(dateColectate.cheltuieli.itemi.taxaA2['data-achitării'], '', '……fără data achitării');
+
+    var taxaA2 = app.Cheltuieli.item(dateColectate.cheltuieli.itemi, 'taxaA2');
+
+    ok(taxaA2, '…colectat taxaA2');
+    equal(taxaA2['achitat'], false, '……marcată neachitată');
+    equal(taxaA2['data-achitării'], '', '……fără data achitării');
 
     adaugăTaxaB1();
 
@@ -168,11 +173,14 @@ asyncTest('Formular procedură: cheltuieli (populare)', function() {
     equal($cîmpPersoanăTerţă.val(), persoanăTerţă, '…setat numele persoanei terţe corespunzător');
 
     dateColectate = app.FormularProcedură.colectează();
-    ok(dateColectate.cheltuieli.itemi.taxaB1, '…colectat taxaB1');
-    equal(dateColectate.cheltuieli.itemi.taxaB1['achitat'], false, '……marcată neachitată');
-    equal(dateColectate.cheltuieli.itemi.taxaB1['data-achitării'], '', '……fără data achitării');
 
-    var documenteColectate = dateColectate.cheltuieli.itemi.taxaB1['subformular'];
+    var taxaB1 = app.Cheltuieli.item(dateColectate.cheltuieli.itemi, 'taxaB1');
+
+    ok(taxaB1, '…colectat taxaB1');
+    equal(taxaB1['achitat'], false, '……marcată neachitată');
+    equal(taxaB1['data-achitării'], '', '……fără data achitării');
+
+    var documenteColectate = taxaB1['subformular'];
 
     ok($.isArray(documenteColectate), '……cu o listă de documente');
     equal(documenteColectate.length, 2, '……din 2 itemi');

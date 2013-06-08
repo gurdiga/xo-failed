@@ -3,7 +3,9 @@ asyncTest('Borderou de calcul', function() {
   'use strict';
 
   var app = this.app,
-      $cheltuieli = app.Cheltuieli.$;
+      $cheltuieli = app.Cheltuieli.$,
+      $cheltuieliAdăugate = app.Cheltuieli.$adăugate,
+      $categorii = app.Cheltuieli.categorii.$;
 
   app.$.fx.off = true;
   app.Profil.date['cod-fiscal'] = ''; // pentru verificare ulterioară
@@ -11,14 +13,18 @@ asyncTest('Borderou de calcul', function() {
   ok(app.FormularProcedură.$.is(':not(:visible)'), 'formularul de procedură e închis');
 
   app.FormularProcedură.$.one('populat', function() {
+    app.Cheltuieli.$adăugate.children(':not(#taxaA1, #taxaA2)').remove();
+
     (function adaugăTaxaA6() {
-      $cheltuieli.find('#categorii-taxe-şi-speze').find('#taxaA6').click();
-      $cheltuieli.find('.adăugate #taxaA6').find('#din-arhivă').prop('checked', true);
+      $categorii.find('#taxaA6').click();
+
+      ok($cheltuieliAdăugate.children('#taxaA6').există(), 'adăugat taxaA6');
+      $cheltuieliAdăugate.children('#taxaA6').find('#din-arhivă').prop('checked', true);
     })();
 
 
-    (function adaugăOSpeză() {
-      $cheltuieli.find('#categorii-taxe-şi-speze').find('#speza1').click();
+    (function adaugăSpeza1() {
+      $categorii.find('#speza1').click();
 
       var $speza = $cheltuieli.find('.adăugate #speza1');
 
@@ -26,13 +32,45 @@ asyncTest('Borderou de calcul', function() {
 
       var $itemi = $speza.find('.subsecţiune .personalizat');
 
-      equal($itemi.length, 2, 'avem două zpeze');
+      equal($itemi.length, 2, 'avem două cheltuieli');
 
       ok($itemi.eq(0).find('.etichetă').val('Transport de ocazie').există(), '…setat descrierea pentru prima speză');
       ok($itemi.eq(0).find('.sumă').val('120').există(), '…setat sumă pentru prima speză');
 
       ok($itemi.eq(1).find('.etichetă').val('Taxi').există(), '…setat descrierea pentru a doua speză');
       ok($itemi.eq(1).find('.sumă').val('55').există(), '…setat suma pentru a doua speză');
+    })();
+
+
+    var speza5 = [{
+      'data-şi-ora-deplasării': '10.10.2010 10:10',
+      'note-deplasare': 'prima deplasare'
+    }, {
+      'data-şi-ora-deplasării': '11.11.2011 11:11',
+      'note-deplasare': 'a doua deplasare'
+    }];
+
+
+    (function adaugăSpeza5() {
+      $categorii.find('#speza5').click();
+
+      var $speza5 = $cheltuieli.find('.adăugate #speza5');
+
+      ok($speza5.există(), 'adăugat un exemplar de speza5');
+      ok($speza5.find('#data-şi-ora-deplasării').val(speza5[0]['data-şi-ora-deplasării']).există(), 'setat data şi ora deplasării');
+      ok($speza5.find('#note-deplasare').val(speza5[0]['note-deplasare']).există(), 'setat descrierea deplasării');
+    })();
+
+
+    (function adaugăÎncăOSpeză5() {
+      $categorii.find('#speza5').click();
+
+      var $speza5 = $cheltuieli.find('.adăugate #speza5').last();
+
+      ok($speza5.există(), 'adăugat încă un exemplar de speza5');
+      ok($speza5.find('#data-şi-ora-deplasării').val(speza5[1]['data-şi-ora-deplasării']).există(), 'setat data şi ora deplasării');
+      ok($speza5.find('#note-deplasare').val(speza5[1]['note-deplasare']).există(), 'setat descrierea deplasării');
+      ok($speza5.find('#în-afara-circumscripţiei').prop('checked', true).există(), 'setat în afara circumscripţiei');
     })();
 
     $cheltuieli.find('.adăugate #taxaA1 :checkbox').prop('checked', true);
@@ -106,18 +144,36 @@ asyncTest('Borderou de calcul', function() {
       equal($coloniţeTotalTaxeRămasDeAchitat.eq(2).text(), app.UC * (1 + 3 + 1), 'totalul cheltuielilor rămase de achitat e calculat corect');
 
       var $speze = $secţiuni.eq(1),
-          $spezeItemi = $speze.next('tbody'),
-          $coloniţePrimaSpeză = $spezeItemi.children().eq(0).children(),
+          $spezeItemi = $speze.next('tbody').children('tr'),
+          $speza1 = $spezeItemi.eq(0).children(),
           descriereSpeză = $cheltuieli.find('.adăugate #speza1 p').text().trim(),
           $costuriItemiSpeză = $cheltuieli.find('.adăugate #speza1 .personalizat .sumă'),
-          $totalSpezeRămasDeAchitat = $spezeItemi.children('tr').eq(1),
-          totalCostSpeză = $costuriItemiSpeză.eq(0).suma() + $costuriItemiSpeză.eq(1).suma();
+          totalCostSpeză = $costuriItemiSpeză.eq(0).suma() + $costuriItemiSpeză.eq(1).suma(),
+          U = încheiere.Încheiere.utilitare;
 
       equal($speze.find('th').text(), 'Speze', 'a doua secţiune e Speze');
-      equal($coloniţePrimaSpeză.eq(0).text(), 1, 'în prima coloniţă e numărul de ordine: 1');
-      equal($coloniţePrimaSpeză.eq(1).text(), descriereSpeză, 'în a doua coloniţă e descrierea: ' + descriereSpeză);
-      equal($coloniţePrimaSpeză.eq(2).text(), totalCostSpeză, 'în a treia coloniţă e suma costurilor itemilor din speză: ' + totalCostSpeză);
-      equal($coloniţePrimaSpeză.eq(3).text(), '—', 'în a patra coloniţă e liniuţă (nu e achitat)');
+      equal($speza1.eq(0).text(), 1, 'în prima coloniţă e numărul de ordine: 1');
+      equal($speza1.eq(1).text(), descriereSpeză, 'în a doua coloniţă e descrierea: ' + descriereSpeză);
+      equal($speza1.eq(2).text(), totalCostSpeză, 'în a treia coloniţă e suma costurilor itemilor din speză: ' + totalCostSpeză);
+      equal($speza1.eq(3).text(), '—', 'în a patra coloniţă e liniuţă (nu e achitat)');
+
+      var $speza5Exemplar1 = $spezeItemi.eq(1).children('td'),
+          descriere = U.normalizeazăSpaţii($speza5Exemplar1.eq(1).text());
+
+      equal($speza5Exemplar1.eq(0).text(), '2', 'în prima coloniţă e numărul de ordine 2');
+      ok(descriere.indexOf(speza5[0]['note-deplasare']) > 0, 'în descrierea itemului se menţionează notele la deplasare: ' + descriere);
+      equal($speza5Exemplar1.eq(2).text(), '300.00', '15 u.c. taxă unică');
+
+      var $speza5Exemplar2 = $spezeItemi.eq(2).children('td');
+
+      descriere = U.normalizeazăSpaţii($speza5Exemplar2.eq(1).text());
+
+      equal($speza5Exemplar2.eq(0).text(), '3', 'în prima coloniţă e numărul de ordine 3');
+      ok(descriere.indexOf(speza5[1]['note-deplasare']) > 0, 'în descrierea itemului se menţionează notele la deplasarea a doua: ' + descriere);
+      equal($speza5Exemplar2.eq(2).text(), '100.00', '5 u.c. — e în afara circumscripţiei');
+
+      var $totalSpezeRămasDeAchitat = $spezeItemi.eq(3);
+
       equal($totalSpezeRămasDeAchitat.find('td').eq(1).text(), 'Total rămas de achitat', 'avem linia cu total speze rămas de achitat');
 
       var $onorariu = $secţiuni.eq(2),

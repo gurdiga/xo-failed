@@ -25,11 +25,10 @@ asyncTest('Somaţie cu privire la ieşirea la faţa locului', function() {
 
         dataŞiOraDeplasării = '10.10.2013 ora 11:00';
         ok(speza5.există(), 'adăugat speza 5');
-        ok(speza5.find('[nume-cîmp="data-şi-ora-deplasării"]').val(dataŞiOraDeplasării).există(), '…completat data şi ora deplasării');
+        ok(speza5.find('#data-şi-ora-deplasării').val(dataŞiOraDeplasării).există(), '…completat data şi ora deplasării');
 
         ok($buton.există(), 'găsit butonaşul pentru încheiere');
-        equal($buton.attr('formular'), '/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html',
-            'formularul corespunde');
+        equal($buton.attr('formular'), '/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html', 'formularul corespunde');
         ok($buton.next('br').next().is('.scrisoare-de-însoţire'), 'găsit butonaţul pentru scrisoarea de însoţire');
 
         D.resolve();

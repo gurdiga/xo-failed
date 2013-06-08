@@ -209,10 +209,10 @@ asyncTest('Scrisoarea de însoţire', function() {
         // scrisoare de însoţire.
         .find('.listă .titlu:contains("Părţile procedurii") .adaugă-toate').click();
 
-      var pentruInstituţii = $taxaB1.find('.destinatari-adăugaţi').children().length - 2; // după cum am zis, părţile nu vor fi incluse
+      var numărDeInstituţii = $taxaB1.find('.destinatari-adăugaţi').children().length - 2; // după cum am zis, părţile nu vor fi incluse
 
       ok($taxaB1.există(), 'adăugat taxa B1');
-      ok(pentruInstituţii > 0, '…cu un document cu destinatari');
+      ok(numărDeInstituţii > 0, '…cu un document cu destinatari');
 
       $buton = app.Încheieri.$.find('a[formular*="încheiere-privind-aplicarea-măsurilor-de-asigurare"]+br+a.scrisoare-de-însoţire');
       formular = $buton.attr('href');
@@ -232,13 +232,13 @@ asyncTest('Scrisoarea de însoţire', function() {
         equal(context.debitori.length, 1, '……1');
         deepEqual(context.persoaneTerţe, [], '…avem array persoaneTerţe == []');
         equal(typeof context.alţiDestinatari, typeof [], '…avem array alţiDestinatari');
-        equal(context.alţiDestinatari.length, pentruInstituţii, '……cu ' + pentruInstituţii + ' itemi');
+        equal(context.alţiDestinatari.length, numărDeInstituţii, '……cu ' + numărDeInstituţii + ' itemi');
 
         var $exemplare = $scrisori.find('.scrisoare-de-însoţire'),
-            totalExemplare = pentruInstituţii + 2;
+            totalExemplare = numărDeInstituţii + 2;
 
         equal($exemplare.length, totalExemplare, 'avem ' + totalExemplare + ' exemplare: cîte una pentru creditor şi debitor, şi ' +
-            pentruInstituţii + ' pentru instituţii');
+            numărDeInstituţii + ' pentru instituţii');
 
         ok($exemplare.first().is('.pentru-creditor'), 'prima este pentru creditor');
         ok($exemplare.eq(1).is('.pentru-debitori'), 'a doua este pentru debitor');

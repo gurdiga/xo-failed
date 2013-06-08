@@ -16,8 +16,10 @@ window.init = function (context) {
   context.alţiDestinatari = [];
 
   if (pentru['alţi-destinatari']) {
-    if ('taxaB1' in context.procedură['cheltuieli'].itemi) {
-      var documenteExpediate = context.procedură['cheltuieli'].itemi['taxaB1'].subformular,
+    var taxaB1 = context.app.Cheltuieli.item(context.procedură.cheltuieli.itemi, 'taxaB1');
+
+    if (taxaB1) {
+      var documenteExpediate = taxaB1.subformular,
           colecţie, i, j;
 
       for (i = 0; i < documenteExpediate.length; i++) {

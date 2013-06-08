@@ -44,6 +44,7 @@
 
   test('StructuriDate.tipPerUrl', function() {
     equal(app.StructuriDate.tipPerUrl('/date/007/profil.json'), 'profil', 'detectat “profil”');
+    equal(app.StructuriDate.tipPerUrl('/date/007/proceduri/'), 'procedură', 'detectat “procedură”');
     equal(app.StructuriDate.tipPerUrl('/date/007/proceduri/5/date.json'), 'procedură', 'detectat “procedură”');
   });
 

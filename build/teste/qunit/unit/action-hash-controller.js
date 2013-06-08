@@ -50,13 +50,23 @@
 
 
   test('HashController.acţionează — utilizator autentificat cu nimic în hash', function() {
+    var apelat = false;
+
+    // stub
+    app.Action['#indexOriginal'] = app.Action['#index'];
+    app.Action['#index'] = function() {
+      apelat = true;
+    };
+
     var location = {hash: ''},
         body = $('<body/>')[0];
 
     app.Utilizator.autentificat = true;
     app.HashController.acţionează(location, body);
 
-    ok(app.$('#căutare input').is(':focus'), 'se focusează cîmpul de căutare');
+    ok(apelat, 'se apelează Action["#index"]');
+
+    app.Action['#index'] = app.Action['#indexOriginal'];
   });
 
 

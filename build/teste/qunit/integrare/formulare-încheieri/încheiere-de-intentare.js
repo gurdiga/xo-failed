@@ -151,11 +151,11 @@ asyncTest('Încheiere de intentare', function() {
             $încheiere.find('.închide').click();
             equal(app.Încheieri.deschise[cale], undefined, 'fereastra încheierii s-a închis');
 
-            $formular.find('.închide').click();
             $formular.one('închis', function() {
               app.$.fx.off = false;
               start();
             });
+            $formular.find('.închide').click();
           });
         });
         $butonDeImprimare.click();

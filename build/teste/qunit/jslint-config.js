@@ -16,6 +16,7 @@
     'unit/action-selecturi-foarte-late.js',
     'unit/storage-buffer.js',
     'unit/action-formular-procedură.js',
+    'unit/action-schimbări-structuri-date.js',
 
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',

@@ -51,6 +51,22 @@
 
     seteazăOpţiuniAjax: function() {
       $.ajaxSetup({
+        beforeSend: function() {
+          var salvareProcedură = /\.json$/.test(this.url),
+              creareProcedură = /\/proceduri\/$/.test(this.url);
+
+          if (this.type === 'PUT' && (salvareProcedură || creareProcedură)) {
+            var tip = StructuriDate.tipPerUrl(this.url);
+
+            if (tip) {
+              var data = JSON.parse(this.data);
+
+              StructuriDate.seteazăVersiune(tip, data);
+              this.data = JSON.stringify(data);
+            }
+          }
+        },
+
         dataFilter: function(data, type) {
           if (type === 'json') {
             var tip = StructuriDate.tipPerUrl(this.url);
@@ -253,7 +269,7 @@
       $subformular = $item.nextAll();
       $subformular.find(SubsecţiuniDinamice.selector).trigger('change');
 
-      if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
+      if (FormularProcedură.seIniţializează) return;
 
       $subformular
         .find(':input:not(' + SubsecţiuniDinamice.selector + ')').first().focus().end().end()
@@ -286,6 +302,13 @@
       Destinatari.init();
       Onorariu.init();
       TotalCheltuieli.init();
+    },
+
+    // întoarce unul dintre procedură.cheltuieli.itemi după id
+    item: function(itemi, id) {
+      for (var i = 0, l = itemi.length; i < l; i++) {
+        if (itemi[i].id === id) return itemi[i].date;
+      }
     },
 
     categorii: {
@@ -327,12 +350,7 @@
             .appendTo($item);
         }
 
-        var bifăAchitare = window.$şabloane.find('.achitare').clone(),
-            random = 'achitat' + (new Date()).getTime();
-
-        bifăAchitare
-          .find(':checkbox').attr('id', random).end()
-          .find('label').attr('for', random);
+        var bifăAchitare = window.$şabloane.find('.achitare').clone();
 
         return $item
           .append(bifăAchitare)
@@ -350,7 +368,7 @@
           .show('blind')
           .find('.etichetă').trigger('input').end();
 
-        if (!FormularProcedură.sePopulează) {
+        if (!FormularProcedură.seIniţializează) {
           $copieItem.find(':input:visible').first().focus();
         }
 
@@ -377,7 +395,7 @@
           .insertBefore($(this).parent())
           .show('blind');
 
-        if (!FormularProcedură.sePopulează) $subformular.find('textarea,input').first().focus();
+        if (!FormularProcedură.seIniţializează) $subformular.find('textarea,input').first().focus();
 
         TotalCheltuieli.calculează();
       }
@@ -514,7 +532,7 @@
         Destinatari.$adăugaţiDeja.click();
         destinatar.append('<input/>');
 
-        if (!FormularProcedură.sePopulează && !FormularProcedură.seIniţializează) {
+        if (!FormularProcedură.seIniţializează) {
           Destinatari.$.hide();
           destinatar.find('input').focus();
         }
@@ -669,7 +687,7 @@
       });
 
       this.$obiectulUrmăririi.on('adăugat-cîmp-personalizabil', function(e, $li) {
-        if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
+        if (FormularProcedură.seIniţializează) return;
 
         $li.find('input.autofocus').focus();
       });
@@ -733,17 +751,10 @@
         .parent().show();
     },
 
-    // TODO un nume mai descriptiv?
     calculează: function() {
       FormularProcedură.deschis = true;
-
-      $.fx.off = true;
-
       TotalCheltuieli.calculează();
       Onorariu.calculează();
-
-      $.fx.off = false;
-
       FormularProcedură.focusează();
     },
 
@@ -1396,9 +1407,6 @@
         }
       },
 
-      /* TODO
-       * de ajustat colectarea/popularea documentelor adresabile la noua structură
-       */
       'cheltuieli': {
         item: {
           'generic': {
@@ -1412,12 +1420,12 @@
                 'data-achitării': $achitare.find('.dată').val()
               };
 
-              $item.find('label+input').each(function() {
+              $item.find('label+:input').each(function() {
                 subformular[this.id] = $(this).val();
               });
 
-              $item.find('input+label').each(function() { // bife
-                if (/^achitat\d{13}$/.test(this.htmlFor)) return; // ignorăm bifa “achitat”
+              $item.find(':input+label').each(function() { // bife
+                if ($(this).is('.achitare label')) return; // ignorăm bifa “achitat”
 
                 var $cîmp = $(this).prev();
 
@@ -1544,12 +1552,15 @@
 
         colectează: function() {
           var $secţiune = Cheltuieli.$,
-              itemi = {};
+              itemi = [];
 
           Cheltuieli.$adăugate.children().each(function() {
-            itemi[this.id] = FormularProcedură.secţiuni['cheltuieli'].
-              item[this.getAttribute('gen-date') || 'generic'].
-              colectează($(this));
+            itemi.push({
+              id: this.id,
+              date: FormularProcedură.secţiuni['cheltuieli'].
+                item[this.getAttribute('gen-date') || 'generic'].
+                colectează($(this))
+            });
           });
 
           var cheltuieli = {
@@ -1568,13 +1579,13 @@
           $secţiune.find('#onorariu').val1(cheltuieli['onorariu']);
           $secţiune.find('#părţile-au-ajuns-la-conciliere').val(cheltuieli['părţile-au-ajuns-la-conciliere']);
 
-          for(var item in cheltuieli.itemi) {
-            selector = '#' + item;
+          cheltuieli.itemi.forEach(function(item) {
+            selector = '#' + item.id;
             Cheltuieli.categorii.$.find(selector).click();
             $item = $secţiune.find(selector);
 
-            FormularProcedură.secţiuni['cheltuieli'].item[$item.attr('gen-date') || 'generic'].populează($item, cheltuieli.itemi[item]);
-          }
+            FormularProcedură.secţiuni['cheltuieli'].item[$item.attr('gen-date') || 'generic'].populează($item, item.date);
+          });
         },
 
         resetează: function() {
@@ -1706,8 +1717,7 @@
     },
 
     populează: function(procedură) {
-      $.fx.off = true;
-      this.sePopulează = true;
+      this.seIniţializează = true;
 
       this.$.find('#data-intentării').val(procedură['data-intentării']);
       this.secţiuni['generică'].populează('#document-executoriu', procedură['document-executoriu']);
@@ -1718,8 +1728,7 @@
       this.secţiuni['debitori'].populează(procedură['debitori']);
       this.secţiuni['încheieri'].populează(procedură['încheieri']);
 
-      $.fx.off = false;
-      this.sePopulează = false;
+      this.seIniţializează = false;
       this.$.trigger('populat', [procedură]);
     },
 
@@ -1758,9 +1767,7 @@
     deschide: function() {
       BaraDeSus.$.find('.dialog:visible').ascunde();
 
-      $.fx.off = true;
       FormularProcedură.$.trigger('înainte-de-deschidere');
-      $.fx.off = false;
 
       FormularProcedură.$
         .stop(true, true)
@@ -1778,7 +1785,6 @@
     },
 
     iniţializează: function() {
-      $.fx.off = true;
       FormularProcedură.seIniţializează = true;
 
       FormularProcedură.$
@@ -1814,8 +1820,6 @@
       }
 
       TotalCheltuieli.calculează();
-
-      $.fx.off = false;
       FormularProcedură.seIniţializează = false;
       FormularProcedură.$.trigger('iniţializat');
     }
@@ -2544,7 +2548,7 @@
           .end()
           .hide()
           .slideDown(function() {
-            if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
+            if (FormularProcedură.seIniţializează) return;
 
             $(this).find('.etichetă')
               .focus()
@@ -2829,7 +2833,7 @@
     },
 
     calculează: function() {
-      if (FormularProcedură.seIniţializează || FormularProcedură.sePopulează) return;
+      if (FormularProcedură.seIniţializează) return;
       if (Onorariu.timerCalculare) return;
 
       Onorariu.timerCalculare = setTimeout(function() {
@@ -2928,7 +2932,8 @@
         'input.cantitate',
         'input#din-arhivă',
         '#taxaB5 .licitaţie.repetată',
-        '#taxaB6 .licitaţie.repetată'
+        '#taxaB6 .licitaţie.repetată',
+        '#speza5 #în-afara-circumscripţiei'
       ].join(',');
 
       var evenimente = 'keyup update paste mouseup click';
@@ -2962,6 +2967,18 @@
       total += lista.find('#taxaB7 .document').length * 3 * UC;
       total += lista.find('#taxaB13 .cantitate').suma() * 5 * UC;
       total += lista.find('#taxaC1 .cantitate').suma() * 5 * UC;
+
+      // https://docs.google.com/document/d/1RCXVMBSJV8YOl-Fd-Cv6ji30_l-UU9jBXBZtwmMIb58/edit#bookmark=id.t8d2ds1n5h81
+      if (lista.find('#speza5').există()) {
+        // deplasările executorului judecătoresc efectuate în cadrul procedurii de
+        // executare – 15 unităţi convenţionale *pentru întreaga procedură de executare*
+        total += lista.find('#speza5 .cost-per-procedură').suma() * UC;
+
+        // În cazul în care deplasarea executorului judecătoresc se face în afara
+        // circumscripţiei judecătoriei unde îşi are sediul biroul său, creditorul
+        // achită suplimentar 5 unităţi convenţionale pentru o deplasare
+        total += lista.find('#speza5 #în-afara-circumscripţiei:checked').length * 5 * UC;
+      }
 
       var documenteExpediate = lista.find('#taxaB1 .document');
 
@@ -3057,11 +3074,9 @@
           .insertBefore($(this).closest('#adaugă-subsecţiune'))
           .show('blind');
 
-        $.fx.off = true;
         $încasare.find('#genul-încasării').trigger('change');
-        $.fx.off = false;
 
-        if (!FormularProcedură.sePopulează) $încasare.find('input').first().focus();
+        if (!FormularProcedură.seIniţializează) $încasare.find('input').first().focus();
 
         $(this).siblings().show();
       }
@@ -3085,13 +3100,13 @@
           .insertBefore($(this).closest('#adaugă-subsecţiune'))
           .show('blind');
 
-        if (!FormularProcedură.seIniţializează && !FormularProcedură.sePopulează) {
+        if (!FormularProcedură.seIniţializează) {
           $subsecţiune.find('.început.perioadă').focus();
         }
       },
 
       calculeazăDobînda: function() {
-        if (FormularProcedură.sePopulează || FormularProcedură.seIniţializează) return;
+        if (FormularProcedură.seIniţializează) return;
 
         var $întîrziere = $(this).closest('.subsecţiune.întîrziere'),
             întîrziere = Subsecţiuni.întîrzieri.colectează($întîrziere),
@@ -3449,6 +3464,7 @@
 
   // --------------------------------------------------
 
+  // TODO?
   AjaxBuffer = {
     put: function(url, data) {
       window.localStorage.setItem(url, JSON.stringify(data));
@@ -3467,7 +3483,17 @@
       'procedură': [
         // TODO
         function(date) {
-          // schimă itemi din hash în array
+          var itemi = [];
+
+          for (var id in date.cheltuieli.itemi) {
+            itemi.push({
+              id: id,
+              date: date.cheltuieli.itemi[id]
+            });
+          }
+
+          date.cheltuieli.itemi = itemi;
+
           return date;
         }
       ]
@@ -3475,7 +3501,12 @@
 
     tipPerUrl: function(url) {
       if (/profil.json$/.test(url)) return 'profil';
+      if (/proceduri\/$/.test(url)) return 'procedură';
       if (/proceduri\/\d+\/date.json$/.test(url)) return 'procedură';
+    },
+
+    seteazăVersiune: function(tip, date) {
+      date.versiune = this.versiuni[tip].length;
     },
 
     aplicăSchimbări: function(tip, date) {
@@ -3599,6 +3630,7 @@
 
   if ('QUnit' in top) {
     $.extend(window, {
+      Action: Action,
       Căutare: Căutare,
       Onorariu: Onorariu,
       Persoane: Persoane,

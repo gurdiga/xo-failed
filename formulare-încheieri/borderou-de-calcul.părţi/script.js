@@ -11,7 +11,7 @@
   var Init = {
     // --------------------------------------------------
     pregăteşteDatelePentruTabel: function (context) {
-      /*jshint loopfunc:true, maxcomplexity:5 */
+      /*jshint loopfunc:true, maxcomplexity:8 */
       var număr = {
         taxe: 0,
         speze: 0
@@ -30,17 +30,20 @@
 
       var app = context.app,
           $ = app.$,
-          id, $item, tip,
-          cost, achitat, costPerItem;
+          itemiPerProcedurăLuaţiDejaÎnCalcul = {},
+          $items = app.Cheltuieli.$adăugate.children(),
+          $item, grup,
+          descriere, cost, achitat, costPerItem, note;
 
-      for (id in context.procedură.cheltuieli.itemi) {
-        tip = id.substr(0, 4) === 'taxa' ? 'taxe' : 'speze';
-        $item = app.Cheltuieli.$.find('#' + id);
+      context.procedură.cheltuieli.itemi.forEach(function(item, i) {
+        grup = item.id.substr(0, 4) === 'taxa' ? 'taxe' : 'speze';
+        $item = $items.eq(i);
 
-        număr[tip]++;
+        număr[grup]++;
         achitat = $item.find('.achitare :checkbox').is(':checked');
+        descriere = $item.find('p').clone().find('.uc').remove().end().text().trim();
 
-        if (tip === 'taxe') {
+        if (grup === 'taxe') {
           if ($item.find('.subsecţiune:has(.personalizat)').există()) {
             costPerItem = $item.find('input.cost-per-item').suma() * app.UC;
             cost = 0;
@@ -55,25 +58,39 @@
           if ($item.is('#taxaA6') && $item.find('#din-arhivă').is(':checked')) {
             cost += app.UC;
           }
-        } else {
+        } else { // speză
           cost = 0;
 
           $item.find('.subsecţiune .personalizat').each(function () {
             cost += $(this).find('.sumă').suma();
           });
+
+          // https://docs.google.com/document/d/1RCXVMBSJV8YOl-Fd-Cv6ji30_l-UU9jBXBZtwmMIb58/edit#bookmark=id.t8d2ds1n5h81
+          if ($item.is('#speza5')) {
+            if (!itemiPerProcedurăLuaţiDejaÎnCalcul['speza5']) {
+              cost = $item.find('.cost-per-procedură').suma() * app.UC;
+              itemiPerProcedurăLuaţiDejaÎnCalcul['speza5'] = true;
+            }
+
+            if ($item.find('#în-afara-circumscripţiei').is(':checked')) cost += 5 * app.UC;
+
+            note = $item.find('#note-deplasare').val().trim();
+
+            if (note) descriere += '<br/>\n' + note;
+          }
         }
 
-        context[tip] = context[tip] || {};
-        context[tip][număr[tip]] = {
-          descriere: $item.find('p').clone().find('.uc').remove().end().text().trim(),
+        context[grup] = context[grup] || {};
+        context[grup][număr[grup]] = {
+          descriere: descriere,
           cost: cost,
           achitat: achitat,
           dataAchitării: achitat ? $item.find('.achitare .dată').val() : '—'
         };
 
-        total[tip] = total[tip] || {};
-        total[tip][achitat ? 'achitat' : 'rămasDeAchitat'] += cost;
-      }
+        total[grup] = total[grup] || {};
+        total[grup][achitat ? 'achitat' : 'rămasDeAchitat'] += cost;
+      });
 
       context.speze = context.speze || false;
       context.total = total;

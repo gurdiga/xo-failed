@@ -160,7 +160,6 @@
   });
 
 
-
   date['documente-adresabile'] = {
     'selector': '#taxaB1',
     'date': {
@@ -269,7 +268,7 @@
     '#speza2': '{"achitat":false,"data-achitării":"","subformular":[{"descrierea":"","suma":""}]}',
     '#speza3': '{"achitat":false,"data-achitării":"","subformular":[{"descrierea":"","suma":""}]}',
     '#speza4': '{"achitat":false,"data-achitării":"","subformular":[{"descrierea":"","suma":""}]}',
-    '#speza5': '{"achitat":false,"data-achitării":"","subformular":[{"data-şi-ora-deplasării":""},{"în-afara-circumscripţiei":false},{"descrierea":"","suma":""}]}',
+    '#speza5': '{"achitat":false,"data-achitării":"","subformular":{"data-şi-ora-deplasării":"","note-deplasare":"","în-afara-circumscripţiei":false}}',
     '#speza6': '{"achitat":false,"data-achitării":""}',
     '#speza7': '{"achitat":false,"data-achitării":""}',
     '#speza8': '{"achitat":false,"data-achitării":""}',
