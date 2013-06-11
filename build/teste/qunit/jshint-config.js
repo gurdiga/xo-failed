@@ -2,7 +2,7 @@
   'use strict';
 
   var SCRIPTS = [
-    'jslint-config.js',
+    'jshint-config.js',
     'csslint-config.js',
     'qunit-extensions.js',
     '/js/action.js',

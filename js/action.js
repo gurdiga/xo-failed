@@ -3481,7 +3481,6 @@
     versiuni: {
       'profil': [],
       'procedură': [
-        // TODO
         function(date) {
           var itemi = [];
 
