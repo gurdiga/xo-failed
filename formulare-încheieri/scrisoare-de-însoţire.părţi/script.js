@@ -1,5 +1,5 @@
 window.init = function (context) {
-  /*jshint maxcomplexity:8 maxdepth:5*/
+  /*jshint maxcomplexity:9 maxdepth:5*/
   'use strict';
 
   var destinatari = context.buton.attr('destinatari').split(' '),
@@ -37,5 +37,13 @@ window.init = function (context) {
         );
       }
     }
+  }
+
+  if (pentru['organele-de-poliţie']) {
+    var organeleDePoliţie = context.app.Destinatari.$.find('.organele-de-poliţie').map(function() {
+      return this.innerHTML;
+    }).get();
+
+    context.alţiDestinatari = context.alţiDestinatari.concat(organeleDePoliţie);
   }
 };

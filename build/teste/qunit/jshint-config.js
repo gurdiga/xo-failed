@@ -52,6 +52,7 @@
     'integrare/formulare-încheieri/scrisoare-de-însoţire.js',
     'integrare/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.js',
     'integrare/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.js',
+    'integrare/formulare-încheieri/încheiere-de-dare-în-căutare-a-mijlocului-de-transport.js',
 
     'integrare/căutare-procedură.js',
 
@@ -75,7 +76,8 @@
     '/formulare-încheieri/scrisoare-de-însoţire.părţi/script.js',
     '/formulare-încheieri/scrisoare-de-însoţire-borderou.părţi/script.js',
     '/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.părţi/script.js',
-    '/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.părţi/script.js'
+    '/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.părţi/script.js',
+    '/formulare-încheieri/încheiere-de-dare-în-căutare-a-mijlocului-de-transport.părţi/script.js'
   ];
 
   var JSHINT_OPTIONS = {

@@ -1,10 +1,10 @@
-<? $titlu = 'Somaţie cu privire la ieşirea la faţa locului' ?>
+<? $titlu = 'Încheiere de dare în căutare a mijlocului de transport' ?>
 <? $dir = dirname(__FILE__); set_include_path("$dir:$dir/../părţi-comune") ?>
 <? require 'partea-de-sus.html' ?>
 
         <hgroup>
-          <h1>Somaţie</h1>
-          <h2>cu privire la ieşirea la faţa locului</h2>
+          <h1>Încheiere</h1>
+          <h2>de dare în căutare a mijlocului de transport</h2>
         </hgroup>
 
 <? require 'procedura.html' ?>
@@ -13,8 +13,7 @@
         <section>
           <header>Chestiunea</header>
           <div class="conţinut editabil" spellcheck="false">
-            <p>La data de <%= procedură['data-intentării'] %> a fost intentată procedura
-            de executare a documentului executoriu
+            <p>În procedura de executare se află documentului executoriu
             <%= procedură['document-executoriu']['numărul-de'] %> din
             <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
             judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
@@ -41,8 +40,11 @@
           <header>Motivele</header>
           <div class="conţinut editabil" spellcheck="false">
 
-            <p>În baza celor expuse şi în conformitate cu art. 8, 10, 22, 66, 88 al
-            Codului de executare RM,</p>
+            <p>În procesul executării s-a stabilit că DEBITORUL deţine cu drept de
+            proprietate mijlocul de transport <%= mijloculDeTranspport %>.</p>
+
+            <p>În baza celor expuse şi în conformitate cu art. 22 (1) lit.w), 66, 72 (5)
+            al Codului de executare RM, dispun:</p>
           </div>
         </section>
 
@@ -51,32 +53,24 @@
           <div class="conţinut editabil" spellcheck="false">
             <ol>
               <li>
-                <p>Se stabileşte deplasarea pentru data de <%= dataŞiOraDeplasării %>
-                pe adresa <%= text('DEBITORULUI sau DEBITORILOR', procedură.debitori) %>
-                din <%= adresă(procedură.debitori[0]) %> pentru efectuarea actelor de
-                procedură menţionate.</p>
+                <p>A anunţa în căutare mijlocul de transport <%= mijloculDeTranspport %></p>
               </li>
 
               <li>
-                <p>La data şi ora stabilită <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
-                şi CREDITORUL sunt obligaţi să se afle pe adresa în cauză.</p>
+                <p>A pune în sarcina organelor afacerilor interne şi a Poliţiei de Frontieră
+                de a reţine mijlocul de transport care corespunde caracteristicilor menţionate
+                în p. 1 şi dacă este cazul să înlăture posesorul de la conducerea acestuia,
+                pînă la predarea lui către executorul judecătoresc.</p>
               </li>
 
               <li>
-                <p>Dacă pînă la aeastă dată <%= text('DEBITORUL sau DEBITORII', procedură.debitori) %>
-                nu va achita datoria, CREDITORULUI i se comunică să achite cheltuielile pentru
-                efectuarea acestor acte de procedură conform borderoului de calcul anexat,
-                sau să asigure deplasarea executorului judecătoresc şi prezenţa a doi martori
-                asistenţi.</p>
-              </li>
-
-              <li>
-                <p>A anunţa organele de poliţie să asigure prezenţa colaboratorilor
-                săi la data şi adresa indicată mai sus, pentru a participa şi a
-                menţine ordinea publică în timpul executării forţate.</p>
+                <p>În caz de reţinere, a contacta imediat executorul judecătoresc
+                <%= executor.nume %> la tel: <%= executor.telefon %></p>
               </li>
 
             </ol>
+
+<? require 'despre-contestare.html' ?>
 
           </div>
         </section>

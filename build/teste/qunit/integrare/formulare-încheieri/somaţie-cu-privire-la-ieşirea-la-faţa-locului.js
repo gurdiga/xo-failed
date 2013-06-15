@@ -6,6 +6,7 @@ asyncTest('Somaţie cu privire la ieşirea la faţa locului', function() {
       $formular = app.FormularProcedură.$,
       $buton, formular, dataŞiOraDeplasării;
 
+  app.$.fx.off = true;
 
   // ----------------------------------------
   function deschideŞiVerificăFormularulDeProcedură() {

@@ -28,7 +28,7 @@ asyncTest('Scrisoarea de însoţire', function() {
         equal($butonaşe.filter('[destinatari]').length, $butonaşe.length,
             'tote butonaşele au destinatari desemnaţi');
 
-        var destinatariValizi = ['alţi-destinatari', 'creditor', 'debitori', 'persoane-terţe'],
+        var destinatariValizi = ['alţi-destinatari', 'creditor', 'debitori', 'organele-de-poliţie', 'persoane-terţe'],
             destinatariGăsiţi = {};
 
         $butonaşe.each(function() {

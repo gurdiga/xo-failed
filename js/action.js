@@ -3624,6 +3624,7 @@
     Cheltuieli: Cheltuieli,
     FORMATUL_DATEI: FORMATUL_DATEI,
     UC: UC,
+    Destinatari: Destinatari,
     Bănci: Bănci
   });
 
@@ -3637,7 +3638,6 @@
       TextareaElastice: TextareaElastice,
       SelecturiFoarteLate: SelecturiFoarteLate,
       SubsecţiuniDinamice: SubsecţiuniDinamice,
-      Destinatari: Destinatari,
       AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate
     });

@@ -1415,7 +1415,6 @@ label.checkbox input {
 .listă>.titlu::before {
   content: '+';
   margin-left: -1em;
-  padding-right: .3em;
   display: inline-block;
 }
 
