@@ -17,6 +17,8 @@
     'unit/storage-buffer.js',
     'unit/action-formular-procedură.js',
     'unit/action-schimbări-structuri-date.js',
+    'unit/acţiuni-procedurale.js',
+    'unit/formular-procedură.js',
 
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',

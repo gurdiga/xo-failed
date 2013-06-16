@@ -3521,95 +3521,110 @@
 
       return date;
     }
+  },
+
+  // --------------------------------------------------
+
+  AcţiuniProcedurale = {
+    init: function() {
+      // TODO
+    }
   };
 
   // --------------------------------------------------
 
-  $.expr[':'].focused = function(element) {
-    return element === element.ownerDocument.activeElement;
-  };
+  $.extend($.expr[':'], {
 
-  // --------------------------------------------------
-
-  $.fn.există = function() {
-    return this.length > 0;
-  };
-
-  // --------------------------------------------------
-
-  $.fn.ascunde = function() {
-    return this.stop(true, true).fadeOut(function() {
-      $(this).trigger('ascundere');
-    });
-  };
-
-  // --------------------------------------------------
-
-  $.fn.afişează = function() {
-    return this.delay(200).fadeIn(function() {
-      $(this).trigger('afişare');
-    });
-  };
-
-  // --------------------------------------------------
-
-  $.fn.val1 = function(value) {
-    if (typeof value !== 'undefined') {
-      if (this.is(':checkbox')) {
-        return this.prop('checked', value === true);
-      } else {
-        return this.val(value);
-      }
+    'focused': function(element) {
+      return element === element.ownerDocument.activeElement;
     }
 
-    return this.is(':checkbox') ? this.is(':checked') : this.val();
-  };
+  });
 
   // --------------------------------------------------
 
-  $.reEscape = function(re) {
-    return re.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
-  };
+  $.extend($.fn, {
 
-  // --------------------------------------------------
-
-  $.put = function(url, data) {
-    return $.ajax({
-      type: 'PUT',
-      url: url,
-      data: data
-    });
-  };
-
-  // --------------------------------------------------
-
-  $.fn.suma = function() {
-    var suma = 0;
-
-    this.filter('input').each(function() {
-      /*jshint maxcomplexity:5*/
-      var cîmp = $(this),
-          existăValoare = $.trim(cîmp.val()) !== '';
+    'există': function() {
+      return this.length > 0;
+    },
 
 
-      if ($.isNumeric(cîmp.val()) && cîmp.val() >= 0) {
-        if (cîmp.is('.invalid')) cîmp.removeClass('invalid');
+    'ascunde': function() {
+      return this.stop(true, true).fadeOut(function() {
+        $(this).trigger('ascundere');
+      });
+    },
 
-        if (cîmp.next().is('.valuta') && cîmp.next('.valuta').val() !== 'MDL') {
-          var valuta = cîmp.next('.valuta').val(),
-              rataBNM = RateBNM[valuta];
 
-          suma += this.value * rataBNM.value / rataBNM.nominal;
+    'afişează': function() {
+      return this.delay(200).fadeIn(function() {
+        $(this).trigger('afişare');
+      });
+    },
+
+
+    'val1': function(value) {
+      if (typeof value !== 'undefined') {
+        if (this.is(':checkbox')) {
+          return this.prop('checked', value === true);
         } else {
-          suma += parseFloat(this.value);
+          return this.val(value);
         }
-      } else {
-        if (existăValoare) cîmp.addClass('invalid');
       }
-    });
 
-    return parseFloat(suma.toFixed(2));
-  };
+      return this.is(':checkbox') ? this.is(':checked') : this.val();
+    },
+
+
+    'suma': function() {
+      var suma = 0;
+
+      this.filter('input').each(function() {
+        /*jshint maxcomplexity:5*/
+        var cîmp = $(this),
+            existăValoare = $.trim(cîmp.val()) !== '';
+
+
+        if ($.isNumeric(cîmp.val()) && cîmp.val() >= 0) {
+          if (cîmp.is('.invalid')) cîmp.removeClass('invalid');
+
+          if (cîmp.next().is('.valuta') && cîmp.next('.valuta').val() !== 'MDL') {
+            var valuta = cîmp.next('.valuta').val(),
+                rataBNM = RateBNM[valuta];
+
+            suma += this.value * rataBNM.value / rataBNM.nominal;
+          } else {
+            suma += parseFloat(this.value);
+          }
+        } else {
+          if (existăValoare) cîmp.addClass('invalid');
+        }
+      });
+
+      return parseFloat(suma.toFixed(2));
+    }
+
+  });
+
+  // --------------------------------------------------
+
+  $.extend($, {
+
+    'reEscape': function(re) {
+      return re.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+    },
+
+
+    'put': function(url, data) {
+      return $.ajax({
+        type: 'PUT',
+        url: url,
+        data: data
+      });
+    }
+
+  });
 
   // --------------------------------------------------
 
@@ -3639,7 +3654,8 @@
       SelecturiFoarteLate: SelecturiFoarteLate,
       SubsecţiuniDinamice: SubsecţiuniDinamice,
       AjaxBuffer: AjaxBuffer,
-      StructuriDate: StructuriDate
+      StructuriDate: StructuriDate,
+      AcţiuniProcedurale: AcţiuniProcedurale
     });
   }
 
