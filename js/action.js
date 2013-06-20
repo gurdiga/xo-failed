@@ -3526,8 +3526,16 @@
   // --------------------------------------------------
 
   AcţiuniProcedurale = {
+    $: $('#acţiuni-procedurale .itemi'),
+
+    algoritm: {},
+
     init: function() {
       // TODO
+    },
+
+    ceaMaiRecentă: function() {
+      return this.$.find('li:last').attr('identificator');
     }
   };
 

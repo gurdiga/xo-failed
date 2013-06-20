@@ -1,3 +1,6 @@
+- la salvare de verificat dacă între timp altcineva nu a modificat datele
+  De folosit Last-Modified + HTTP 409
+
 - Încheieri
 
 - de adaptat salvarea pentru criptare?

@@ -3,15 +3,19 @@
 
   var app = window.frames['app'];
 
-  module('Unit: Structură formular procedură: secţiune “Acţiuni procedurale”');
+  module('Structură formular procedură');
 
-  test('Există', function() {
+
+  test('Secţiune “Acţiuni procedurale”', function() {
     var $formular = app.FormularProcedură.$,
-        $secţiune = $formular.find('fieldset#acţiuni-procedurale');
+        $secţiune = $formular.find('fieldset#acţiuni-procedurale'),
+        $conţinut = $secţiune.find('div.conţinut');
 
     ok($formular.există(), 'găsit formularul');
     ok($secţiune.există(), 'găsit secţiunea');
     ok($secţiune.find('legend:contains("Acţiuni procedurale")').există(), '…cu titlul corespunzător');
-    ok($secţiune.find('div.conţinut').există(), '…cu div pentru conţinut');
+    ok($conţinut.există(), '…cu div pentru conţinut');
+    ok($conţinut.find('ul.itemi').există(), '……cu listă de itemi');
   });
+
 })();
