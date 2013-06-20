@@ -3527,16 +3527,23 @@
 
   AcţiuniProcedurale = {
     $: $('#acţiuni-procedurale .itemi'),
+    $şabloane: $('#şabloane-acţiuni-procedurale'),
 
-    algoritm: {},
-
-    init: function() {
+    lista: {
       // TODO
+      undefined: ['ceva']
     },
 
     ceaMaiRecentă: function() {
       return this.$.find('li:last').attr('identificator');
+    },
+
+    adaugă: function(identificator) {
+      var $şablon = this.$şabloane.find('[identificator="' + identificator + '"]').clone();
+
+      this.$.append($şablon);
     }
+
   };
 
   // --------------------------------------------------
