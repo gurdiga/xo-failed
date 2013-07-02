@@ -692,6 +692,7 @@
         $li.find('input.autofocus').focus();
       });
 
+      AcţiuniProcedurale.init();
       this.secţiuni.init();
     },
 
@@ -3529,19 +3530,47 @@
     $: $('#acţiuni-procedurale .itemi'),
     $şabloane: $('#şabloane-acţiuni-procedurale'),
 
-    lista: {
+    opţiuni: {
       // TODO
-      undefined: ['ceva']
+      '': ['intentare', 'intentare-cu-asigurare'],
+      'intentare': ['continuare', 'încetare'],
+      'intentare-cu-asigurare': ['continuare', 'încetare'],
+      'continuare': ['încasare', ''],
+      'încetare': [''],
+      'încasare': ['']
+    },
+
+    init: function() {
+      this.$.on('click', '[acţiune] .intro', this.adaugă);
+
+      this.propuneOpţiuneaCorespunzătoare();
+    },
+
+    propuneOpţiuneaCorespunzătoare: function() {
+      this.propune(this.opţiuni[this.ceaMaiRecentă()]);
+    },
+
+    propune: function(identificatori) {
+      var $şablon;
+
+      identificatori.forEach(function(identificator) {
+        $şablon = AcţiuniProcedurale.$şabloane.children('[acţiune="' + identificator + '"]').clone();
+        AcţiuniProcedurale.$.append($şablon);
+      });
+
+    },
+
+    adaugă: function() {
+      $(this).parent('[acţiune]').attr('adăugată', '');
+      AcţiuniProcedurale.eliminăCelelalteOpţiuni();
+    },
+
+    eliminăCelelalteOpţiuni: function() {
+      AcţiuniProcedurale.$.find('[acţiune]:not([adăugată])').remove();
     },
 
     ceaMaiRecentă: function() {
-      return this.$.find('li:last').attr('identificator');
-    },
-
-    adaugă: function(identificator) {
-      var $şablon = this.$şabloane.find('[identificator="' + identificator + '"]').clone();
-
-      this.$.append($şablon);
+      return this.$.children('[acţiune]:last').attr('acţiune') || '';
     }
 
   };

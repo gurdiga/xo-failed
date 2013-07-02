@@ -1508,6 +1508,7 @@ ul.încheieri.contextuale.borderou-de-calcul {
   margin-left: 13em;
 }
 
+#acţiuni-procedurale .itemi a,
 ul.încheieri li a {
   text-decoration: none;
   color: inherit;
@@ -1517,6 +1518,7 @@ ul.încheieri li a.scrisoare-de-însoţire {
   color: #999;
 }
 
+#acţiuni-procedurale .itemi a:before,
 ul.încheieri li a:before {
   padding-right: 3px;
   vertical-align: 1px;
@@ -1526,12 +1528,15 @@ ul.încheieri li:hover::before {
   text-decoration: none;
 }
 
+#acţiuni-procedurale .itemi a:hover,
+#acţiuni-procedurale .itemi a:hover::before,
 ul.încheieri li:hover::before,
 ul.încheieri li a:hover {
   color: blue;
   text-shadow: 0 0 1px silver;
 }
 
+#acţiuni-procedurale .itemi a:hover,
 ul.încheieri li a:hover {
   text-decoration: underline;
 }
@@ -1590,6 +1595,31 @@ fieldset label,
 .subformular label,
 #cheltuieli .adăugate p,
 #cheltuieli .adăugate .subformular .şoaptă,
+#acţiuni-procedurale .itemi .conţinut p,
 #încheieri li {
   color: #555;
+}
+
+#acţiuni-procedurale .itemi {
+  margin-left: 6px;
+}
+
+#acţiuni-procedurale .itemi .conţinut p {
+  margin: 3px 0;
+}
+
+#acţiuni-procedurale .itemi .conţinut .document {
+  font-size: small;
+}
+
+[acţiune] .conţinut {
+  display: none;
+}
+
+[acţiune][adăugată] .intro {
+  display: none;
+}
+
+[acţiune][adăugată] .conţinut {
+  display: block;
 }
