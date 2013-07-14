@@ -31,30 +31,36 @@
   });
 
 
-  test('#extrageDescriere()', function() {
-    ok('extrageDescriere' in this.acţiune, 'definit');
-    ok($.isFunction(this.acţiune.extrageDescriere), '…funcţie');
-    equal(this.acţiune.extrageDescriere.length, 0, '…fără parametri');
+  test('#propunere()', function() {
+    ok('propunere' in this.acţiune, 'definit');
+    ok($.isFunction(this.acţiune.propunere), '…funcţie');
+    equal(this.acţiune.propunere.length, 0, '…fără parametri');
 
-    equal(this.acţiune.extrageDescriere(), 'intentarea procedurii de executare',
-      '…extrage descrierea din fragment');
+    var $propunere = app.$(this.acţiune.propunere());
+
+    ok($propunere.is('.propunere'), '$rezultatul e .propunere');
+    ok($propunere.is(':contains("intentarea procedurii de executare")'), '…şi conţine descrierea acţiunii');
+    equal($propunere.data('identificator'), 'identificator-acţiune', '…şi data-identificator corespunde');
   });
 
 
-  test('#adaugă()', function() {
-    ok('adaugă' in this.acţiune, 'definit');
-    ok($.isFunction(this.acţiune.adaugă), '…funcţie');
-    equal(this.acţiune.adaugă.length, 0, '…fără parametri');
+  test('#adaugăLa()', function() {
+    ok('adaugăLa' in this.acţiune, 'definit');
+    ok($.isFunction(this.acţiune.adaugăLa), '…funcţie');
+    equal(this.acţiune.adaugăLa.length, 1, '…cu un parametru');
 
-    var $Original = app.AcţiuniProcedurale.$;
+    var $container = app.$('<div/>');
 
-    app.AcţiuniProcedurale.$ = app.$('<table/>');
+    var $script = app.$('<script type="text/x-fragment" id="acţiune-procedurală-identificator">' +
+      '<div id="identificator"/>' +
+    '</script>').appendTo(app.document.body);
 
-    this.acţiune.adaugă();
-    ok(app.AcţiuniProcedurale.$.find('[acţiune="intentare"]').există(),
-      'adaugă acţiunea în lista');
+    var acţiune = new app.AcţiuneProcedurală('identificator');
 
-    app.AcţiuniProcedurale.$ = $Original;
+    acţiune.adaugăLa($container);
+    ok($container.find('div#identificator').există(), '…adaugă HTML-ul acţiunii la containerul parametru');
+
+    $script.remove();
   });
 
 

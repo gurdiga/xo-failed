@@ -3656,24 +3656,30 @@
   // --------------------------------------------------
 
   AcţiuneProcedurală = (function() {
-    var PREFIX_FRAGMENTE = 'acţiune-procedurală-';
+    var PREFIX_FRAGMENTE = 'acţiune-procedurală-',
+        FRAGMENT_PROPUNERE = new Fragment('propunere-acţiune-procedurală');
 
     var AcţiuneProcedurală = function(identificator) {
       var fragment = new Fragment(PREFIX_FRAGMENTE + identificator),
           html = fragment.compilează();
 
       // --------------------
-      this.extrageDescriere = function() {
-        return $(html).find('.descriere').text();
+      this.propunere = function() {
+        var descriere = $(html).find('.descriere').text();
+
+        return FRAGMENT_PROPUNERE.compilează({
+          descriere: descriere,
+          identificator: identificator
+        });
       };
 
-
-      this.adaugă = function() {
-        AcţiuniProcedurale.$.append(html);
+      // --------------------
+      this.adaugăLa = function($container) {
+        $container.append(html);
       };
     };
 
-
+    // --------------------
     AcţiuneProcedurală.există = function(identificator) {
       return Fragment.există(PREFIX_FRAGMENTE + identificator);
     };
@@ -3685,8 +3691,6 @@
   // --------------------------------------------------
 
   AcţiuniProcedurale = (function() {
-    var FRAGMENT_OPŢIUNE = new Fragment('opţiune-acţiune-procedurală');
-
     var AcţiuniProcedurale = {
       $: $('#acţiuni-procedurale .itemi'),
       $opţiuni: $('#acţiuni-procedurale .opţiuni'),
@@ -3703,7 +3707,7 @@
 
       // --------------------
       init: function() {
-        this.$opţiuni.on('click', '.opţiune', this.adaugă);
+        this.$opţiuni.on('click', '.propunere', this.adaugă);
 
         this.propuneCorespunzătorAcţiunileUrmătoare();
       },
@@ -3715,20 +3719,26 @@
         identificatori.forEach(function(identificatorAcţiune) {
           var acţiune = new AcţiuneProcedurală(identificatorAcţiune);
 
-          AcţiuniProcedurale.$opţiuni.append(
-            FRAGMENT_OPŢIUNE.compilează({descriere: acţiune.extrageDescriere()})
-          );
+          AcţiuniProcedurale.$opţiuni.append(acţiune.propunere());
         });
       },
 
       // --------------------
       eliminăOpţiuni: function() {
-        AcţiuniProcedurale.$opţiuni.find('.opţiune').remove();
+        AcţiuniProcedurale.$opţiuni.find('.propunere').remove();
       },
 
       // --------------------
       ceaMaiRecentă: function() {
         return this.$.find('[acţiune]:last').attr('acţiune') || '';
+      },
+
+      // --------------------
+      adaugă: function() {
+        var identificator = $(this).data('identificator'),
+            acţiune = new AcţiuneProcedurală(identificator);
+
+        acţiune.adaugăLa(AcţiuniProcedurale.$);
       }
     };
 

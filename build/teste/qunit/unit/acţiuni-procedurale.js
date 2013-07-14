@@ -17,7 +17,7 @@
       on: function(eveniment, selector, callback) {
         ataşatLaEveniment =
           eveniment === 'click' &&
-          selector === '.opţiune' &&
+          selector === '.propunere' &&
           callback === AcţiuniProcedurale.adaugă;
       },
       append: function() {}
@@ -56,9 +56,9 @@
 
     // TODO: aici
     app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare();
-    ok(app.AcţiuniProcedurale.$opţiuni.find('.opţiune:contains("Încheiere de continuare")').există(),
+    ok(app.AcţiuniProcedurale.$opţiuni.find('.propunere:contains("Încheiere de continuare")').există(),
       'propus încheierea de continuare');
-    ok(app.AcţiuniProcedurale.$opţiuni.find('.opţiune:contains("Încheiere de încetare")').există(),
+    ok(app.AcţiuniProcedurale.$opţiuni.find('.propunere:contains("Încheiere de încetare")').există(),
       'propus încheierea de încetare');
 
     // unstub
@@ -119,12 +119,12 @@
     var $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni;
 
     app.AcţiuniProcedurale.$opţiuni = app.$('<div>' +
-      '<p class="opţiune">…</p>' +
-      '<p class="opţiune">…</p>' +
+      '<p class="propunere">…</p>' +
+      '<p class="propunere">…</p>' +
     '</div>');
 
     app.AcţiuniProcedurale.eliminăOpţiuni();
-    ok(!app.AcţiuniProcedurale.$opţiuni.find('.opţiune').există(), 'eliminat opţiunile');
+    ok(!app.AcţiuniProcedurale.$opţiuni.find('.propunere').există(), 'eliminat opţiunile');
 
     app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
   });
@@ -134,6 +134,29 @@
     ok('$opţiuni' in app.AcţiuniProcedurale, 'definit');
     ok('jquery' in app.AcţiuniProcedurale.$opţiuni, '…obiect jQuery');
     equal(app.AcţiuniProcedurale.$opţiuni.length, 1, '…cu un item');
+  });
+
+
+  test('.adaugă()', function() {
+    ok('adaugă' in app.AcţiuniProcedurale, 'definit');
+    ok($.isFunction(app.AcţiuniProcedurale.adaugă), '…funcţie');
+    equal(app.AcţiuniProcedurale.adaugă.length, 0, '…fără parametri');
+
+    var $Original = app.AcţiuniProcedurale.$;
+
+    app.AcţiuniProcedurale.$ = app.$('<div/>');
+
+    var $script = app.$('<script type="text/x-fragment" id="acţiune-procedurală-identificator">' +
+      '<div id="identificator"/>' +
+    '</script>').appendTo(app.document.body);
+
+    var acţiune = new app.AcţiuneProcedurală('identificator');
+
+    app.AcţiuniProcedurale.adaugă.call($(acţiune.propunere()).get(0));
+    ok(app.AcţiuniProcedurale.$.find('div#identificator').există(), 'adaugă acţiunea în lista');
+
+    app.AcţiuniProcedurale.$ = $Original;
+    $script.remove();
   });
 
 })();
