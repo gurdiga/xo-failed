@@ -58,26 +58,6 @@
   });
 
 
-  test('.fragmentOpţiune', function() {
-    ok('fragmentOpţiune' in app.AcţiuneProcedurală, 'definit');
-    ok(app.AcţiuneProcedurală.fragmentOpţiune instanceof app.Fragment, '…instanţă de Fragment');
-
-    var date = {descriere: 'opţiune'},
-        mesaj = 'se compilează cu: ' + JSON.stringify(date),
-        $compilat;
-
-    try {
-      $compilat = $(app.AcţiuneProcedurală.fragmentOpţiune.compilează(date));
-      ok(true, mesaj);
-    } catch(e) {
-      ok(false, mesaj);
-    }
-
-    ok($compilat.is('.opţiune'), 'rezultatul compilării are clasa “opţiune”');
-    ok($compilat.is(':contains("' + date.descriere + '")'), '…conţine textul descrierii transmise');
-  });
-
-
   test('.există', function() {
     ok('există' in app.AcţiuneProcedurală, 'definit');
     ok($.isFunction(app.AcţiuneProcedurală.există), '…funcţie');

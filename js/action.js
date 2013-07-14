@@ -3673,9 +3673,6 @@
       };
     };
 
-    // --------------------
-    AcţiuneProcedurală.fragmentOpţiune = new Fragment('opţiune-acţiune-procedurală');
-
 
     AcţiuneProcedurală.există = function(identificator) {
       return Fragment.există(PREFIX_FRAGMENTE + identificator);
@@ -3713,10 +3710,11 @@
       var identificatori = this.opţiuni[this.ceaMaiRecentă()];
 
       identificatori.forEach(function(identificatorAcţiune) {
-        var acţiune = new AcţiuneProcedurală(identificatorAcţiune);
+        var acţiune = new AcţiuneProcedurală(identificatorAcţiune),
+            fragmentOpţiune = new Fragment('opţiune-acţiune-procedurală');
 
         AcţiuniProcedurale.$opţiuni.append(
-          AcţiuneProcedurală.fragmentOpţiune.compilează({descriere: acţiune.extrageDescriere()})
+          fragmentOpţiune.compilează({descriere: acţiune.extrageDescriere()})
         );
       });
     },
