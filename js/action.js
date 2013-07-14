@@ -3,6 +3,103 @@
 (function(window, document, moment) {
   'use strict';
 
+  // --------------------------------------------------
+
+  $.extend($.expr[':'], {
+
+    'focused': function(element) {
+      return element === element.ownerDocument.activeElement;
+    }
+
+  });
+
+  // --------------------------------------------------
+
+  $.extend($.fn, {
+
+    'există': function() {
+      return this.length > 0;
+    },
+
+
+    'ascunde': function() {
+      return this.stop(true, true).fadeOut(function() {
+        $(this).trigger('ascundere');
+      });
+    },
+
+
+    'afişează': function() {
+      return this.delay(200).fadeIn(function() {
+        $(this).trigger('afişare');
+      });
+    },
+
+
+    'val1': function(value) {
+      if (typeof value !== 'undefined') {
+        if (this.is(':checkbox')) {
+          return this.prop('checked', value === true);
+        } else {
+          return this.val(value);
+        }
+      }
+
+      return this.is(':checkbox') ? this.is(':checked') : this.val();
+    },
+
+
+    'suma': function() {
+      var suma = 0;
+
+      this.filter('input').each(function() {
+        /*jshint maxcomplexity:5*/
+        var cîmp = $(this),
+            existăValoare = $.trim(cîmp.val()) !== '';
+
+
+        if ($.isNumeric(cîmp.val()) && cîmp.val() >= 0) {
+          if (cîmp.is('.invalid')) cîmp.removeClass('invalid');
+
+          if (cîmp.next().is('.valuta') && cîmp.next('.valuta').val() !== 'MDL') {
+            var valuta = cîmp.next('.valuta').val(),
+                rataBNM = RateBNM[valuta];
+
+            suma += this.value * rataBNM.value / rataBNM.nominal;
+          } else {
+            suma += parseFloat(this.value);
+          }
+        } else {
+          if (existăValoare) cîmp.addClass('invalid');
+        }
+      });
+
+      return parseFloat(suma.toFixed(2));
+    }
+
+  });
+
+  // --------------------------------------------------
+
+  $.extend($, {
+
+    'reEscape': function(re) {
+      return re.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+    },
+
+
+    'put': function(url, data) {
+      return $.ajax({
+        type: 'PUT',
+        url: url,
+        data: data
+      });
+    }
+
+  });
+
+  // --------------------------------------------------
+
   window.$şabloane = $('#şabloane');
 
   var UC = 20, // valoarea unităţii convenţionale în MDL
@@ -3526,149 +3623,122 @@
 
   // --------------------------------------------------
 
+  Fragment = (function() {
+    function găseşte$Fragment(identificator) {
+      return $('script[type="text/x-fragment"]#' + identificator);
+    }
+
+    var Fragment = function(identificator) {
+      if (!identificator) throw new Error('Fragment: constructorul necesită un identificator');
+
+      var $script = găseşte$Fragment(identificator);
+
+      if (!$script.există()) throw new Error('Fragment: nu există framgment cu ID-ul ' + identificator);
+
+      // --------------------
+      this.html = $script.html();
+
+      // --------------------
+      this.compilează = function(date) {
+        return window.Handlebars.compile(this.html)(date);
+      };
+    };
+
+    // --------------------
+    Fragment.există = function(identificator) {
+      return găseşte$Fragment(identificator).există();
+    };
+
+    // --------------------
+    return Fragment;
+  })(),
+
+  // --------------------------------------------------
+
+  AcţiuneProcedurală = (function() {
+    var PREFIX_FRAGMENTE = 'acţiune-procedurală-';
+
+    var AcţiuneProcedurală = function(identificator) {
+      var fragment = new Fragment(PREFIX_FRAGMENTE + identificator),
+          html = fragment.compilează();
+
+      // --------------------
+      this.extrageDescriere = function() {
+        return $(html).find('.descriere').text();
+      };
+
+      // --------------------
+      this.propune = function() {
+        var descriere = this.extrageDescriere();
+
+        AcţiuniProcedurale.$opţiuni.append(
+          AcţiuneProcedurală.fragmentOpţiune.compilează({descriere: descriere})
+        );
+      };
+
+      // --------------------
+      this.adaugă = function() {
+        AcţiuniProcedurale.$.append(html);
+      };
+    };
+
+    // --------------------
+    AcţiuneProcedurală.fragmentOpţiune = new Fragment('opţiune-acţiune-procedurală');
+
+    // --------------------
+    AcţiuneProcedurală.există = function(identificator) {
+      return Fragment.există(PREFIX_FRAGMENTE + identificator);
+    };
+
+    // --------------------
+    return AcţiuneProcedurală;
+  })(),
+
+  // --------------------------------------------------
+
   AcţiuniProcedurale = {
     $: $('#acţiuni-procedurale .itemi'),
-    $şabloane: $('#şabloane-acţiuni-procedurale'),
+    $opţiuni: $('#acţiuni-procedurale .opţiuni'),
 
     opţiuni: {
-      // TODO
       '': ['intentare', 'intentare-cu-asigurare'],
       'intentare': ['continuare', 'încetare'],
       'intentare-cu-asigurare': ['continuare', 'încetare'],
       'continuare': ['încasare', ''],
+      // TODO
       'încetare': [''],
       'încasare': ['']
     },
 
+    // --------------------
     init: function() {
-      this.$.on('click', '[acţiune] .intro', this.adaugă);
+      this.$opţiuni.on('click', '.opţiune', this.adaugă);
 
-      this.propuneOpţiuneaCorespunzătoare();
+      this.propuneCorespunzătorAcţiunileUrmătoare();
     },
 
-    propuneOpţiuneaCorespunzătoare: function() {
-      this.propune(this.opţiuni[this.ceaMaiRecentă()]);
-    },
+    // --------------------
+    propuneCorespunzătorAcţiunileUrmătoare: function() {
+      var identificatori = this.opţiuni[this.ceaMaiRecentă()];
 
-    propune: function(identificatori) {
-      var $şablon;
+      identificatori.forEach(function(identificatorAcţiune) {
+        var acţiune = new AcţiuneProcedurală(identificatorAcţiune);
 
-      identificatori.forEach(function(identificator) {
-        $şablon = AcţiuniProcedurale.$şabloane.children('[acţiune="' + identificator + '"]').clone();
-        AcţiuniProcedurale.$.append($şablon);
+        acţiune.propune();
       });
-
     },
 
-    adaugă: function() {
-      $(this).parent('[acţiune]').attr('adăugată', '');
-      AcţiuniProcedurale.eliminăCelelalteOpţiuni();
+    // --------------------
+    eliminăOpţiuni: function() {
+      AcţiuniProcedurale.$opţiuni.find('.opţiune').remove();
     },
 
-    eliminăCelelalteOpţiuni: function() {
-      AcţiuniProcedurale.$.find('[acţiune]:not([adăugată])').remove();
-    },
-
+    // --------------------
     ceaMaiRecentă: function() {
-      return this.$.children('[acţiune]:last').attr('acţiune') || '';
+      return this.$.find('[acţiune]:last').attr('acţiune') || '';
     }
 
   };
-
-  // --------------------------------------------------
-
-  $.extend($.expr[':'], {
-
-    'focused': function(element) {
-      return element === element.ownerDocument.activeElement;
-    }
-
-  });
-
-  // --------------------------------------------------
-
-  $.extend($.fn, {
-
-    'există': function() {
-      return this.length > 0;
-    },
-
-
-    'ascunde': function() {
-      return this.stop(true, true).fadeOut(function() {
-        $(this).trigger('ascundere');
-      });
-    },
-
-
-    'afişează': function() {
-      return this.delay(200).fadeIn(function() {
-        $(this).trigger('afişare');
-      });
-    },
-
-
-    'val1': function(value) {
-      if (typeof value !== 'undefined') {
-        if (this.is(':checkbox')) {
-          return this.prop('checked', value === true);
-        } else {
-          return this.val(value);
-        }
-      }
-
-      return this.is(':checkbox') ? this.is(':checked') : this.val();
-    },
-
-
-    'suma': function() {
-      var suma = 0;
-
-      this.filter('input').each(function() {
-        /*jshint maxcomplexity:5*/
-        var cîmp = $(this),
-            existăValoare = $.trim(cîmp.val()) !== '';
-
-
-        if ($.isNumeric(cîmp.val()) && cîmp.val() >= 0) {
-          if (cîmp.is('.invalid')) cîmp.removeClass('invalid');
-
-          if (cîmp.next().is('.valuta') && cîmp.next('.valuta').val() !== 'MDL') {
-            var valuta = cîmp.next('.valuta').val(),
-                rataBNM = RateBNM[valuta];
-
-            suma += this.value * rataBNM.value / rataBNM.nominal;
-          } else {
-            suma += parseFloat(this.value);
-          }
-        } else {
-          if (existăValoare) cîmp.addClass('invalid');
-        }
-      });
-
-      return parseFloat(suma.toFixed(2));
-    }
-
-  });
-
-  // --------------------------------------------------
-
-  $.extend($, {
-
-    'reEscape': function(re) {
-      return re.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
-    },
-
-
-    'put': function(url, data) {
-      return $.ajax({
-        type: 'PUT',
-        url: url,
-        data: data
-      });
-    }
-
-  });
 
   // --------------------------------------------------
 
@@ -3699,7 +3769,9 @@
       SubsecţiuniDinamice: SubsecţiuniDinamice,
       AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate,
-      AcţiuniProcedurale: AcţiuniProcedurale
+      AcţiuniProcedurale: AcţiuniProcedurale,
+      AcţiuneProcedurală: AcţiuneProcedurală,
+      Fragment: Fragment
     });
   }
 

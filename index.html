@@ -451,7 +451,8 @@
             <legend>Acţiuni procedurale</legend>
 
             <div class="conţinut">
-              <ul class="itemi"></ul>
+              <table class="itemi"></table>
+              <div class="opţiuni"></div>
             </div>
           </fieldset>
 
@@ -2107,37 +2108,51 @@
         <button class="ico imprimă" title="Imprimă"></button>
       </div>
 
-      <ul id="şabloane-acţiuni-procedurale">
-        <li acţiune="">null object</li>
-
-        <li acţiune="intentare">
-          <div class="intro">intentare?</div>
-          <div class="conţinut">
-            <p>Intentarea şi formarea procedurii de executare</p>
-
-            <a class="ico document semiascuns" href="#">încheierea</a>
-            <a class="ico document semiascuns" href="#">fişa de însoţire</a>
-          </div>
-        </li>
-
-        <li acţiune="intentare-cu-asigurare">
-          <div class="intro">intentare cu asigurare</div>
-        </li>
-
-        <li acţiune="continuare">
-          <div class="intro">continuare?</div>
-        </li>
-
-        <li acţiune="încetare">
-          <div class="intro">încetare?</div>
-        </li>
-
-        <li acţiune="încasare">
-          <div class="intro"></div>
-        </li>
-      </ul>
-
     </div>
+
+
+    <script id="acţiune-procedurală-intentare" type="text/x-fragment">
+      <li acţiune="intentare">
+        <div class="conţinut">
+          <p class="descriere">Intentarea şi formarea procedurii de executare</p>
+
+          <a class="ico document semiascuns" href="#">încheierea</a>
+          <a class="ico document semiascuns" href="#">fişa de însoţire</a>
+        </div>
+      </li>
+    </script>
+
+    <script id="acţiune-procedurală-intentare-cu-asigurare" type="text/x-fragment">
+      <li acţiune="intentare-cu-asigurare">
+        <p class="descriere">Intentarea şi formarea procedurii de executare, plus asigurarea executării</p>
+      </li>
+    </script>
+
+    <script id="acţiune-procedurală-continuare" type="text/x-fragment">
+      <tr acţiune="continuare">
+        <td>
+          <p class="descriere">Încheiere de continuare a procedurii de executare</p>
+        </td>
+      </tr>
+    </script>
+
+    <script id="acţiune-procedurală-încetare" type="text/x-fragment">
+      <tr acţiune="încetare">
+        <td>
+          <p class="descriere">Încheiere de încetare a procedurii de executare</p>
+        </td>
+      </tr>
+    </script>
+
+    <script id="acţiune-procedurală-încasare" type="text/x-fragment">
+      <li acţiune="încasare">
+        <div class="intro"></div>
+      </li>
+    </script>
+
+    <script id="opţiune-acţiune-procedurală" type="text/x-fragment">
+      <p class="opţiune">{{descriere}}</p>
+    </script>
 
 
     <script defer src="/js/lib/jquery-2.0.2.min.js"></script>

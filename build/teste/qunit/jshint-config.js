@@ -18,6 +18,8 @@
     'unit/action-formular-procedură.js',
     'unit/action-schimbări-structuri-date.js',
     'unit/acţiuni-procedurale.js',
+    'unit/acţiune-procedurală.js',
+    'unit/fragment.js',
     'unit/formular-procedură.js',
 
     'integrare/calculator-dobînzi.js',

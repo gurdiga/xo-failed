@@ -1,8 +1,11 @@
+- lista de acţiuni procedurale
+  - de trecut de la ul la table
+  - de adăugat data în prima coloniţă
+
 - la salvare de verificat dacă între timp altcineva nu a modificat datele
   De folosit Last-Modified + HTTP 409
 
-- Încheieri
-
+- încheieri
 - de adaptat salvarea pentru criptare?
 
 - de migrat spre icon font
