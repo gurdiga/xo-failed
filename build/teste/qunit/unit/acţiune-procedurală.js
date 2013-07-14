@@ -24,14 +24,14 @@
   });
 
 
-  test('#constructor', function() {
+  test('#constructor()', function() {
     ok('AcţiuneProcedurală' in app, 'definit');
     ok($.isFunction(app.AcţiuneProcedurală), '…funcţie');
     equal(app.AcţiuneProcedurală.length, 1, '…necesită un parametru');
   });
 
 
-  test('#extrageDescriere', function() {
+  test('#extrageDescriere()', function() {
     ok('extrageDescriere' in this.acţiune, 'definit');
     ok($.isFunction(this.acţiune.extrageDescriere), '…funcţie');
     equal(this.acţiune.extrageDescriere.length, 0, '…fără parametri');
@@ -41,7 +41,7 @@
   });
 
 
-  test('#adaugă', function() {
+  test('#adaugă()', function() {
     ok('adaugă' in this.acţiune, 'definit');
     ok($.isFunction(this.acţiune.adaugă), '…funcţie');
     equal(this.acţiune.adaugă.length, 0, '…fără parametri');
@@ -58,7 +58,7 @@
   });
 
 
-  test('.există', function() {
+  test('.există()', function() {
     ok('există' in app.AcţiuneProcedurală, 'definit');
     ok($.isFunction(app.AcţiuneProcedurală.există), '…funcţie');
     equal(app.AcţiuneProcedurală.există.length, 1, '…necesită 1 parametru');
