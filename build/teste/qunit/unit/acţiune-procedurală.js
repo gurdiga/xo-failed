@@ -41,23 +41,6 @@
   });
 
 
-  test('#propune', function() {
-    ok('propune' in this.acţiune, 'definit');
-    ok($.isFunction(this.acţiune.propune), '…funcţie');
-    equal(this.acţiune.propune.length, 0, '…fără parametri');
-
-    var $opţiuniOriginal = app.AcţiuniProcedurale.$opţiuni;
-
-    app.AcţiuniProcedurale.$opţiuni = app.$('<div/>');
-
-    this.acţiune.propune();
-    ok(app.AcţiuniProcedurale.$opţiuni.find('.opţiune:contains("intentarea procedurii de executare")').există(),
-      'adaugă descrierea la opţiuni');
-
-    app.AcţiuniProcedurale.$opţiuni = $opţiuniOriginal;
-  });
-
-
   test('#adaugă', function() {
     ok('adaugă' in this.acţiune, 'definit');
     ok($.isFunction(this.acţiune.adaugă), '…funcţie');

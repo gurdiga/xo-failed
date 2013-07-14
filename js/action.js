@@ -3667,16 +3667,7 @@
         return $(html).find('.descriere').text();
       };
 
-      // --------------------
-      this.propune = function() {
-        var descriere = this.extrageDescriere();
 
-        AcţiuniProcedurale.$opţiuni.append(
-          AcţiuneProcedurală.fragmentOpţiune.compilează({descriere: descriere})
-        );
-      };
-
-      // --------------------
       this.adaugă = function() {
         AcţiuniProcedurale.$.append(html);
       };
@@ -3685,7 +3676,7 @@
     // --------------------
     AcţiuneProcedurală.fragmentOpţiune = new Fragment('opţiune-acţiune-procedurală');
 
-    // --------------------
+
     AcţiuneProcedurală.există = function(identificator) {
       return Fragment.există(PREFIX_FRAGMENTE + identificator);
     };
@@ -3724,7 +3715,9 @@
       identificatori.forEach(function(identificatorAcţiune) {
         var acţiune = new AcţiuneProcedurală(identificatorAcţiune);
 
-        acţiune.propune();
+        AcţiuniProcedurale.$opţiuni.append(
+          AcţiuneProcedurală.fragmentOpţiune.compilează({descriere: acţiune.extrageDescriere()})
+        );
       });
     },
 
