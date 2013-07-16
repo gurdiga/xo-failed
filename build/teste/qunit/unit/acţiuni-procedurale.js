@@ -8,35 +8,13 @@
   // TODO de testat structura fragmentele acţiunilor?
 
   test('.init()', function() {
-    // stub
-    var AcţiuniProcedurale = app.AcţiuniProcedurale,
-        $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni,
-        ataşatLaEveniment = false;
+    this.spy(app.AcţiuniProcedurale.$opţiuni, 'on');
+    this.spy(app.AcţiuniProcedurale, 'propuneCorespunzătorAcţiunileUrmătoare');
 
-    AcţiuniProcedurale.$opţiuni = {
-      on: function(eveniment, selector, callback) {
-        ataşatLaEveniment =
-          eveniment === 'click' &&
-          selector === '.propunere' &&
-          callback === AcţiuniProcedurale.adaugă;
-      },
-      append: function() {}
-    };
-
-    var propuneCorespunzătorAcţiunileUrmătoareOriginal = AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare,
-        propusOpţiuneaCorespunzătoare = false;
-
-    AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = function() {
-      propusOpţiuneaCorespunzătoare = true;
-    };
-
-    AcţiuniProcedurale.init();
-    ok(ataşatLaEveniment, 'ataşat la evenimentele corespunzătoare');
-    ok(propusOpţiuneaCorespunzătoare, 'propus opţiunea corespunzătoare');
-
-    // unstub
-    AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = propuneCorespunzătorAcţiunileUrmătoareOriginal;
-    AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
+    app.AcţiuniProcedurale.init();
+    ok(app.AcţiuniProcedurale.$opţiuni.on.calledWith('click', '.propunere', app.AcţiuniProcedurale.adaugă),
+      'ataşat la evenimentele corespunzătoare');
+    ok(app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare.called, 'propus opţiunea corespunzătoare');
   });
 
 
@@ -47,12 +25,11 @@
 
     // stub
     var opţiuniOriginal = app.AcţiuniProcedurale.opţiuni,
-        $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni,
-        ceaMaiRecentăOriginal = app.AcţiuniProcedurale.ceaMaiRecentă;
+        $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni;
 
     app.AcţiuniProcedurale.opţiuni = {'intentare': ['continuare', 'încetare']};
     app.AcţiuniProcedurale.$opţiuni = app.$('<div/>');
-    app.AcţiuniProcedurale.ceaMaiRecentă = function() { return 'intentare'; };
+    this.stub(app.AcţiuniProcedurale, 'ceaMaiRecentă').returns('intentare');
 
     // TODO: aici
     app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare();
@@ -64,7 +41,6 @@
     // unstub
     app.AcţiuniProcedurale.opţiuni = opţiuniOriginal;
     app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
-    app.AcţiuniProcedurale.ceaMaiRecentă = ceaMaiRecentăOriginal;
   });
 
 
@@ -145,6 +121,7 @@
     var $Original = app.AcţiuniProcedurale.$;
 
     app.AcţiuniProcedurale.$ = app.$('<div/>');
+    this.spy(app.AcţiuniProcedurale, 'actualizeazăOpţiunile');
 
     var $script = app.$('<script type="text/x-fragment" id="acţiune-procedurală-identificator">' +
       '<div id="identificator"/>' +
@@ -154,9 +131,42 @@
 
     app.AcţiuniProcedurale.adaugă.call($(acţiune.propunere()).get(0));
     ok(app.AcţiuniProcedurale.$.find('div#identificator').există(), 'adaugă acţiunea în lista');
+    ok(app.AcţiuniProcedurale.actualizeazăOpţiunile.called, 'actualizat opţiunile');
 
     app.AcţiuniProcedurale.$ = $Original;
     $script.remove();
+  });
+
+
+  test('.actualizeazăOpţiunile', function() {
+    ok('actualizeazăOpţiunile' in app.AcţiuniProcedurale, 'definit');
+    ok($.isFunction(app.AcţiuniProcedurale.actualizeazăOpţiunile), '…funcţie');
+    equal(app.AcţiuniProcedurale.actualizeazăOpţiunile.length, 0, '…fără parametri');
+
+    this.spy(app.AcţiuniProcedurale, 'eliminăOpţiunileCurente');
+    this.spy(app.AcţiuniProcedurale, 'propuneCorespunzătorAcţiunileUrmătoare');
+
+    app.AcţiuniProcedurale.actualizeazăOpţiunile();
+    ok(app.AcţiuniProcedurale.eliminăOpţiunileCurente.called, 'eliminat opţiunile curente');
+    ok(app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare.called, 'propus opţiunile următoare');
+  });
+
+
+  test('.eliminăOpţiunileCurente', function() {
+    ok('eliminăOpţiunileCurente' in app.AcţiuniProcedurale, 'definit');
+    ok($.isFunction(app.AcţiuniProcedurale.eliminăOpţiunileCurente), '…funcţie');
+    equal(app.AcţiuniProcedurale.eliminăOpţiunileCurente.length, 0, '…fără parametri');
+
+    var $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni;
+
+    app.AcţiuniProcedurale.$opţiuni = app.$('<div>' +
+      '<p class="propunere">prima propunere</p>' +
+      '<p class="propunere">a doua propunere</p>' +
+    '</div>');
+    app.AcţiuniProcedurale.eliminăOpţiunileCurente();
+    ok(!app.AcţiuniProcedurale.$opţiuni.find('.propunere').există(), 'eliminat');
+
+    app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
   });
 
 })();

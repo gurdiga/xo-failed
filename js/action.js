@@ -3739,7 +3739,18 @@
             acţiune = new AcţiuneProcedurală(identificator);
 
         acţiune.adaugăLa(AcţiuniProcedurale.$);
+        AcţiuniProcedurale.actualizeazăOpţiunile();
+      },
+
+      actualizeazăOpţiunile: function() {
+        this.eliminăOpţiunileCurente();
+        this.propuneCorespunzătorAcţiunileUrmătoare();
+      },
+
+      eliminăOpţiunileCurente: function() {
+        this.$opţiuni.find('.propunere').remove();
       }
+
     };
 
     return AcţiuniProcedurale;
