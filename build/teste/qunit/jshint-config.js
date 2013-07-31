@@ -127,13 +127,13 @@
     history: false
   };
 
-  var script, i, l;
-
   module('JSHint');
+  asyncTest('JSHint', function() {
+    stop(SCRIPTS.length - 1);
 
-  for (i = 0, l = SCRIPTS.length; i < l; i ++) {
-    script = SCRIPTS[i];
-    jsHintTest(script, script + '?' + (new Date()).getTime(), JSHINT_OPTIONS, JSHINT_GLOBALS);
-  }
+    SCRIPTS.forEach(function(script) {
+      jsHintTest(script, script + '?' + Date.now(), JSHINT_OPTIONS, JSHINT_GLOBALS);
+    });
+  });
 
 })();
