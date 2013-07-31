@@ -46,24 +46,24 @@
   };
 
   module('CSSLint');
+  asyncTest('CSSLint', function() {
+    stop(STYLESHEETS.length - 1);
 
-  $.each(STYLESHEETS, function(_, stylesheet) {
-    asyncTest(stylesheet, function() {
+    STYLESHEETS.forEach(function(stylesheet) {
       $.get(stylesheet + '?' + (new Date()).getTime(), function(code) {
         var results = CSSLint.verify(code, RULES);
 
         if (results.messages.length === 0) {
-          ok(true);
+          ok(true, stylesheet);
         } else {
           $.each(results.messages, function(_, item) {
             var message = item.type + ': ' + item.message;
 
             if (item.line) message += ' (line ' + item.line + ', col ' + item.col + ')';
 
-            ok(false, message);
+            ok(false, stylesheet + ': ' + message);
           });
         }
-
         start();
       });
     });
