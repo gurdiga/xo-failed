@@ -3793,12 +3793,7 @@
 
   Action.init();
 
-  if ('QUnit' in top) $(function() {
-    // aşteptăm o leacă să se încarce profilul&friends
-    setTimeout(function() {
-      top.QUnit.start();
-    }, 500);
-  });
+  if ('QUnit' in top) $(top.runQUnit);
 
 
 })(window, document, moment);

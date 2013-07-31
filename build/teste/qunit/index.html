@@ -36,6 +36,19 @@
     QUnit.config.autostart = false;
     QUnit.config.reorder = false;
     QUnit.config.testTimeout = 5000;
+
+    function runQUnit() {
+      if (/manual/.test(top.location.search)) {
+        $(top.document.body).on('click', '#qunit-header', function() {
+          top.QUnit.start();
+        });
+      } else {
+        // aşteptăm o leacă să se încarce profilul&friends
+        setTimeout(function() {
+          top.QUnit.start();
+        }, 500);
+      }
+    }
   </script>
 
   <iframe name="app" id="app" src="/"></iframe>
