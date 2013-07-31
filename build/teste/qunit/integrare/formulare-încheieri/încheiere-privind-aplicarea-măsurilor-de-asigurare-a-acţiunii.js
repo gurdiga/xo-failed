@@ -116,8 +116,23 @@
     var app = this.app,
         $formular = app.FormularProcedură.$,
         $secţiune = app.FormularProcedură.$obiectulUrmăririi,
-        $butonDeAdăugareValoareaAcţiunii = $secţiune.find('.adaugă-cîmp-personalizat.valoarea-acţiunii');
+        obiect = 'aplicarea măsurilor de asigurare a acţiunii';
 
+    app.$.fx.off = true;
+    ok(app.FormularProcedură.$.is(':visible'), 'formularul de procedură e deschis');
+
+    if (app.FormularProcedură.$.is(':not(:visible)')) {
+      start();
+      return;
+    }
+
+    $secţiune.find('#caracter').val('nonpecuniar').change();
+    $secţiune.find('#obiect').val(obiect).change();
+    equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
+
+    var $butonDeAdăugareValoareaAcţiunii = $secţiune.find('.adaugă-cîmp-personalizat.valoarea-acţiunii');
+
+    ok($butonDeAdăugareValoareaAcţiunii.există(), 'găsit buton de adăugare a cîmpului pentru valoarea acţiunii');
     $butonDeAdăugareValoareaAcţiunii.click();
 
     var $valoareaAcţiunii = $secţiune.find('.personalizat.valoarea-acţiunii'),
@@ -125,7 +140,7 @@
         $suma = $valoareaAcţiunii.find('input'), suma = 1000,
         $valuta = $valoareaAcţiunii.find('.valuta'), valuta = 'MDL';
 
-    ok($valoareaAcţiunii.există(), 'la click pe “+valoarea acţiunii” se adaugă cîmpul');
+    ok($valoareaAcţiunii.există(), 'găsit cîmp personalizat valoarea acţiunii');
     equal($eticheta.val(), eticheta, '…are eticheta corespunzătoare');
     equal($suma.val(), '', '…suma lipseşte iniţial');
     equal($valuta.val(), 'MDL', '…valuta e MDL');
@@ -198,6 +213,8 @@
 
             $încheiere.find('.închide').click();
 
+            var $valoareaAcţiunii = app.FormularProcedură.$obiectulUrmăririi.find('.personalizat.valoarea-acţiunii');
+
             $valoareaAcţiunii
               .trigger('mousemove')
               .find('.elimină').focus().click();
@@ -205,6 +222,7 @@
             setTimeout(function() { // slideUp?
               ok(!$secţiune.find('.personalizat.valoarea-acţiunii').există(), 'eliminat cîmp valoarea acţiunii');
 
+              app.$.fx.off = false;
               start();
             }, 550);
           }); // one iniţializat
