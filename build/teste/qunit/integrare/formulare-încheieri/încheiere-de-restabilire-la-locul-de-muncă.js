@@ -9,6 +9,12 @@ asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function(
       obiect = 'restabilirea la locul de muncă';
 
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
+
+  if ($formular.is(':not(:visible)')) {
+    start();
+    return;
+  }
+
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
   equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
@@ -46,7 +52,7 @@ asyncTest('Somaţie de restabilire a salariatului la locul de muncă', function(
 
         var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
 
-        ok($butonPentruÎncheiere.există(), 'găsit butonaşul pentru încheiere');
+        ok($butonPentruÎncheiere.există(), 'regăsit butonaşul pentru încheiere');
         $butonPentruÎncheiere.click();
 
         var formular = app.Încheieri.formular($butonPentruÎncheiere),

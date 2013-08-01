@@ -9,6 +9,12 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
       obiect = 'efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile';
 
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
+
+  if ($formular.is(':not(:visible)')) {
+    start();
+    return;
+  }
+
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
   equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');
@@ -134,6 +140,9 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
               ok($cîmpPentruAmînare.există(), '…care adaugă un cîmp pentru amînare, personalizabil');
               $cîmpPentruAmînare.find('.dată').val(dataŞiOraAmînării);
 
+              var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
+
+              ok($butonPentruÎncheiere.există(), 'regăsit butonaşul pentru încheiere');
               $butonPentruÎncheiere.click();
               meta = app.Încheieri.deschise[formular];
 

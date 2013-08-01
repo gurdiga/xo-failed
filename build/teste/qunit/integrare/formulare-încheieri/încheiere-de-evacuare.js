@@ -9,6 +9,12 @@ asyncTest('Încheiere de evacuare', function() {
       obiect = 'evacuarea';
 
   ok($formular.is(':visible'), 'formularul de procedură e deschis');
+
+  if ($formular.is(':not(:visible)')) {
+    start();
+    return;
+  }
+
   $secţiune.find('#caracter').val('nonpecuniar').change();
   $secţiune.find('#obiect').val(obiect).change();
   equal($secţiune.find('#obiect').val(), obiect, 'setat obiectul corespunzător');

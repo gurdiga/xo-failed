@@ -135,6 +135,9 @@ asyncTest('Încheiere de numire a datei nimicirii bunurilor', function() {
               ok($cîmpPentruAmînare.există(), '…care adaugă un cîmp pentru amînare, personalizabil');
               $cîmpPentruAmînare.find('.dată').val(dataŞiOraAmînării);
 
+              var $butonPentruÎncheiere = $secţiune.find('#obiect~.buton[data-formular]');
+
+              ok($butonPentruÎncheiere.există(), 'regăsit butonaşul pentru încheiere');
               $butonPentruÎncheiere.click();
               meta = app.Încheieri.deschise[formular];
 
