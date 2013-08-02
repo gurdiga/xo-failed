@@ -3677,6 +3677,19 @@
       this.adaugăLa = function($container) {
         $container.append(html);
       };
+
+      // --------------------
+      this.areStructuraCorespunzătoare = function() {
+        //console.log(html);
+        var $html = $(html),
+            lipsuri = [];
+
+        if (!$html.is('[acţiune]')) lipsuri.push('nu are atributul “acţiune”');
+        if (!$html.find('.descriere').există()) lipsuri.push('nu are .descriere');
+        // TODO: de determinat ce componente trebuie să existe pentru fiecare acţiune
+
+        return lipsuri.length > 0 ? lipsuri : true;
+      };
     };
 
     // --------------------

@@ -5,8 +5,6 @@
 
   module('Unit: AcţiuniProcedurale');
 
-  // TODO de testat structura fragmentele acţiunilor?
-
   test('.init()', function() {
     // stub
     var AcţiuniProcedurale = app.AcţiuniProcedurale,
@@ -52,7 +50,6 @@
     app.AcţiuniProcedurale.$opţiuni = app.$('<div/>');
     app.AcţiuniProcedurale.ceaMaiRecentă = function() { return 'intentare'; };
 
-    // TODO: aici
     app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare();
     ok(app.AcţiuniProcedurale.$opţiuni.find('.propunere:contains("Încheiere de continuare")').există(),
       'propus încheierea de continuare');
@@ -99,12 +96,17 @@
       ok(opţiune in app.AcţiuniProcedurale.opţiuni, 'opţiunea “' + opţiune  + '” pentru “' + item + '” este în listă');
     }
 
-    for (var item in app.AcţiuniProcedurale.opţiuni) {
+    var item, acţiune;
+
+    for (item in app.AcţiuniProcedurale.opţiuni) {
       ok($.isArray(app.AcţiuniProcedurale.opţiuni[item]), 'opţiunile pentru “' + item + '” este un array');
       ok(app.AcţiuniProcedurale.opţiuni[item].length > 0, '…nevid');
 
       if (item) {
         ok(app.AcţiuneProcedurală.există(item), '…găsit şablon corespunzător');
+
+        acţiune = new app.AcţiuneProcedurală(item);
+        equal(acţiune.areStructuraCorespunzătoare(), true, '…are structura corespunzătoare');
       }
 
       app.AcţiuniProcedurale.opţiuni[item].forEach(valideazăOpţiune);
