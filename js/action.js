@@ -2330,6 +2330,7 @@
     reseteazăDialog: function() {
       function cîmp(selector, valoare) { Profil.$.find(selector).val(valoare); }
 
+      // TODO: uneori, la refresh, aici Profil.date e undefined
       cîmp('#nume', Profil.date['nume']);
       cîmp('#adresă', Profil.date['adresă']);
       cîmp('#telefon', Profil.date['telefon']);
@@ -3659,9 +3660,15 @@
     var PREFIX_FRAGMENTE = 'acţiune-procedurală-',
         FRAGMENT_PROPUNERE = new Fragment('propunere-acţiune-procedurală');
 
-    var AcţiuneProcedurală = function(identificator) {
+    var AcţiuneProcedurală = function(identificator, date) {
+      date = date || {};
+
+      var dataCurentă = moment(Date.now()).format(FORMATUL_DATEI);
+
+      date['data'] = date['data'] || dataCurentă;
+
       var fragment = new Fragment(PREFIX_FRAGMENTE + identificator),
-          html = fragment.compilează();
+          html = fragment.compilează(date);
 
       // --------------------
       this.propunere = function() {
@@ -3687,6 +3694,8 @@
         if (!$html.is('[acţiune]')) lipsuri.push('nu are atributul “acţiune”');
         if (!$html.find('.descriere').există()) lipsuri.push('nu are .descriere');
         // TODO: de determinat ce componente trebuie să existe pentru fiecare acţiune
+        // şi de verificat prezenţa lor:
+        // - data
 
         return lipsuri.length > 0 ? lipsuri : true;
       };

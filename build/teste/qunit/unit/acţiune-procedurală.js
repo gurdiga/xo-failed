@@ -27,7 +27,32 @@
   test('#constructor()', function() {
     ok('AcţiuneProcedurală' in app, 'definit');
     ok($.isFunction(app.AcţiuneProcedurală), '…funcţie');
-    equal(app.AcţiuneProcedurală.length, 1, '…necesită un parametru');
+    equal(app.AcţiuneProcedurală.length, 2, '…necesită doi parametri');
+
+    // verificăm data
+    var $script = app.$('<script type="text/x-fragment" id="acţiune-procedurală-identificator">' +
+      '<tr acţiune="intentare">' +
+        '<td class="data">{{data}}</td>' +
+      '</td>' +
+    '</script>').appendTo(app.document.body);
+
+    var $container = app.$('<div/>');
+
+    var date = {data: '01.01.2001'},
+        dataCurentă = app.moment(Date.now()).format(app.FORMATUL_DATEI),
+        acţiune;
+
+    acţiune = new app.AcţiuneProcedurală('identificator', date);
+    acţiune.adaugăLa($container);
+    ok($container.find('.data:contains("' + date.data + '")').există(), 'date.data se inserează în .data');
+
+    $container.empty();
+    delete date['data'];
+    acţiune = new app.AcţiuneProcedurală('identificator', date);
+    acţiune.adaugăLa($container);
+    ok($container.find('.data:contains("' + dataCurentă + '")').există(), 'date.data se pune data curentă dacă lipseşte');
+
+    $script.remove();
   });
 
 
