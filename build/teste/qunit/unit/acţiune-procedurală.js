@@ -77,13 +77,17 @@
     var $container = app.$('<div/>');
 
     var $script = app.$('<script type="text/x-fragment" id="acţiune-procedurală-identificator">' +
-      '<div id="identificator"/>' +
+      '<div>' +
+        '<div id="identificator"/>' +
+        '<input class="dată"/>' +
+      '</div>' +
     '</script>').appendTo(app.document.body);
 
     var acţiune = new app.AcţiuneProcedurală('identificator');
 
     acţiune.adaugăLa($container);
     ok($container.find('div#identificator').există(), '…adaugă HTML-ul acţiunii la containerul parametru');
+    ok($container.find('input.dată').există(), '…adăugat butonaşe pentru calendar la cîmpurile dată');
 
     $script.remove();
   });

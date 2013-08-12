@@ -2113,18 +2113,17 @@
 
     <script id="acţiune-procedurală-intentare" type="text/x-fragment">
       <tr acţiune="intentare">
-        <td class="data">{{data}}</td>
-
         <td>
+          <input type="text" class="dată" value="{{data}}"/>
           <p class="descriere">Intentarea şi formarea procedurii de executare</p>
 
           <a class="ico document semiascuns" href="#">încheierea</a>
           <a class="ico document semiascuns" href="#">fişa de însoţire</a>
-        </td>
 
-        <td class="cheltuieli">
-          <p>taxa de intentare şi formare a procedurii de executare<span class="uc"> — 1 u.c.</span></p>
-          <input type="hidden" class="cost" value="1"/>
+          <div class="cheltuieli">
+            <p>taxa<span class="uc"> — 1 u.c.</span></p>
+            <input type="hidden" class="cost" value="1"/>
+          </div>
         </td>
       </tr>
     </script>

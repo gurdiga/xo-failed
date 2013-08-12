@@ -711,7 +711,8 @@ fieldset.secţiune.lată {
   margin: 0;
 }
 
-#cheltuieli .item .la .dată {
+#cheltuieli .item .la .dată,
+#acţiuni-procedurale .dată {
   width: 6em;
   margin: 0;
   vertical-align: -1px;
@@ -1596,35 +1597,14 @@ fieldset label,
 #cheltuieli .adăugate p,
 #cheltuieli .adăugate .subformular .şoaptă,
 #acţiuni-procedurale .itemi .conţinut p,
-#încheieri li,
-[acţiune] .data {
+#încheieri li {
   color: #555;
 }
 
-#acţiuni-procedurale .itemi {
-  margin-left: 6px;
-}
-
-#acţiuni-procedurale .itemi p {
-  margin: 0 0 .5em;
-}
-
-#acţiuni-procedurale .itemi .document {
+[acţiune] .document {
   font-size: small;
-}
-
-[acţiune] .data {
-  padding-right: 5px;
 }
 
 [acţiune] .descriere {
   color: black;
-}
-
-td {
-  vertical-align: top;
-  border-width: 0; 
-  border-spacing: 0;
-  border-collapse: collapse;
-  padding: 0;
 }

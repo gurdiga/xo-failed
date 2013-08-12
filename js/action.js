@@ -2557,11 +2557,14 @@
         .on('click', '.dată+.ui-icon-calendar', this.afişează);
     },
 
-    insereazăButon: function() {
-      $('<span>')
+    insereazăButon: function(container) {
+      container = container || document.body;
+
+      var buton = $('<span>')
         .addClass('ui-icon ui-icon-calendar semiascuns')
-        .attr('title', 'Calendar')
-        .insertAfter('.dată');
+        .attr('title', 'Calendar');
+
+      $('.dată', container).after(buton);
     },
 
     afişează: function() {
@@ -3682,7 +3685,10 @@
 
       // --------------------
       this.adaugăLa = function($container) {
-        $container.append(html);
+        var $acţiune = $(html);
+
+        Calendar.insereazăButon($acţiune);
+        $container.append($acţiune);
       };
 
       // --------------------
