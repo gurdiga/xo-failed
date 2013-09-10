@@ -2530,6 +2530,13 @@
       beforeShow: function() { Calendar.veziDacăMaiECeva(this); }
     },
 
+    init: function() {
+      this.insereazăButon();
+
+      $(document)
+        .on('click', 'input.dată+.ui-icon-calendar', this.afişează);
+    },
+
     închide: function(el) {
       el = $(el);
 
@@ -2550,13 +2557,6 @@
       $(input).attr('data-ceva', valoarea.substr(10));
     },
 
-    init: function() {
-      this.insereazăButon();
-
-      $(document)
-        .on('click', '.dată+.ui-icon-calendar', this.afişează);
-    },
-
     insereazăButon: function(container) {
       container = container || document.body;
 
@@ -2564,7 +2564,7 @@
         .addClass('ui-icon ui-icon-calendar semiascuns')
         .attr('title', 'Calendar');
 
-      $('.dată', container).after(buton);
+      $('input.dată', container).after(buton);
     },
 
     afişează: function() {

@@ -711,8 +711,8 @@ fieldset.secţiune.lată {
   margin: 0;
 }
 
-#cheltuieli .item .la .dată,
-#acţiuni-procedurale .dată {
+#cheltuieli .item .la input.dată,
+#acţiuni-procedurale input.dată {
   width: 6em;
   margin: 0;
   vertical-align: -1px;
@@ -1336,8 +1336,8 @@ fieldset .conţinut .subsecţiune {
   top: 3px;
 }
 
-.dată.intentării,
-.dată.perioadă {
+input.dată.intentării,
+input.dată.perioadă {
   width: 5.8em;
 }
 
