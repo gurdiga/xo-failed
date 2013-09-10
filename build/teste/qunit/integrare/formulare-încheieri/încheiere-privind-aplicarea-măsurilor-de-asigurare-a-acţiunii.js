@@ -336,6 +336,7 @@
             var butonDeEliminare = $cîmpBun.find('.elimină');
 
             ok(butonDeEliminare.există(), 'avem butonaş pentru eliminare bun');
+            ok(app.FormularProcedură.$[0].contains($cîmpBun[0]), 'cîmpBun e în DOM');
             butonDeEliminare.focus().click();
 
             setTimeout(function() { // slideUp?
@@ -451,6 +452,7 @@
             var butonDeEliminare = $cîmpSumă.find('.elimină');
 
             ok(butonDeEliminare.există(), 'avem butonaş de eliminare sumă');
+            ok(app.FormularProcedură.$[0].contains($cîmpSumă[0]), 'cîmpSumă e în DOM');
             butonDeEliminare.focus().click();
 
             setTimeout(function() { // slideUp?
