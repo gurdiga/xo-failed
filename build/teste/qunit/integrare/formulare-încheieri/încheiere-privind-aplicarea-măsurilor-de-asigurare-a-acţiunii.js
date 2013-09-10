@@ -331,9 +331,12 @@
 
             $încheiere.find('.închide').click();
 
-            $cîmpBun
-              .trigger('mousemove')
-              .find('.elimină').focus().click();
+            $cîmpBun.trigger('mousemove');
+
+            var butonDeEliminare = $cîmpBun.find('.elimină');
+
+            ok(butonDeEliminare.există(), 'avem butonaş pentru eliminare bun');
+            butonDeEliminare.focus().click();
 
             setTimeout(function() { // slideUp?
               ok(!$secţiune.find('.personalizat.bunuri-sechestrate').există(), 'eliminat cîmp pentru bunul sechestrat');
@@ -443,9 +446,12 @@
 
             $încheiere.find('.închide').click();
 
-            $cîmpSumă
-              .trigger('mousemove')
-              .find('.elimină').focus().click();
+            $cîmpSumă.trigger('mousemove');
+
+            var butonDeEliminare = $cîmpSumă.find('.elimină');
+
+            ok(butonDeEliminare.există(), 'avem butonaş de eliminare sumă');
+            butonDeEliminare.focus().click();
 
             setTimeout(function() { // slideUp?
               ok(!$secţiune.find('.personalizat.sume-sechestrate').există(), 'eliminat cîmp pentru suma sechestrată');
