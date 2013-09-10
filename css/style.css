@@ -1601,6 +1601,20 @@ fieldset label,
   color: #555;
 }
 
+[acţiune] {
+  clear: left;
+
+}
+
+[acţiune]>[secţiune] {
+  float: left;
+  margin-left: 6px;
+}
+
+[acţiune]>[secţiune="conţinut"] {
+  margin-left: 16px;
+}
+
 [acţiune] .document {
   font-size: small;
 }
@@ -1608,9 +1622,17 @@ fieldset label,
 [acţiune] .descriere {
   font-weight: bold;
   color: black;
-  margin: 4px 0 2px;
+  margin: 4px 0 2px -5px;
 }
 
 [acţiune] .achitare {
-  margin: 3px 0;
+  margin: 0;
+}
+
+[acţiune] .achitare label.la {
+  padding: 0;
+}
+
+#acţiuni-procedurale .opţiuni {
+  clear: left;
 }

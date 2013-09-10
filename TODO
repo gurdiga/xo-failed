@@ -1,5 +1,5 @@
 - lista de acţiuni procedurale
-  - de aranjat contentul pentru [acţiune="intentare"]
+  - de adăugat contentul pentru restul acţiunilor
 
 - la salvare de verificat dacă între timp altcineva nu a modificat datele
   De folosit Last-Modified + HTTP 409

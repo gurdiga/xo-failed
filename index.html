@@ -2113,19 +2113,24 @@
 
     <script id="acţiune-procedurală-intentare" type="text/x-fragment">
       <li acţiune="intentare">
-        <input type="text" class="dată" value="{{data}}"/>
-        <p class="descriere">Intentarea şi formarea procedurii de executare</p>
+        <div secţiune="dată">
+          <input type="text" class="dată" value="{{data}}"/>
+        </div>
 
-        <a class="ico document semiascuns" href="#">încheierea</a>
-        <a class="ico document semiascuns" href="#">fişa de însoţire</a>
+        <div secţiune="conţinut">
+          <p class="descriere">Intentarea şi formarea procedurii de executare</p>
 
-        <p class="achitare">
-          taxa<span class="uc">: 1 u.c.</span> —
-          <input type="hidden" class="cost" value="1"/>
+          <a class="ico document semiascuns" href="#">încheierea</a>
+          <a class="ico document semiascuns" href="#">fişa de însoţire</a>
 
-          <input type="checkbox" class="achitat"/>
-          <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
-        </p>
+          <p class="achitare">
+            taxa<span class="uc">: 1 u.c.</span> —
+            <input type="hidden" class="cost" value="1"/>
+
+            <input type="checkbox" class="achitat"/>
+            <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
+          </p>
+        </div>
       </li>
     </script>
 
@@ -2136,27 +2141,21 @@
     </script>
 
     <script id="acţiune-procedurală-continuare" type="text/x-fragment">
-      <tr acţiune="continuare">
-        <td>
-          <p class="descriere">Încheiere de continuare a procedurii de executare</p>
-        </td>
-      </tr>
+      <li acţiune="continuare">
+        <p class="descriere">Încheiere de continuare a procedurii de executare</p>
+      </li>
     </script>
 
     <script id="acţiune-procedurală-încetare" type="text/x-fragment">
-      <tr acţiune="încetare">
-        <td>
-          <p class="descriere">Încheiere de încetare a procedurii de executare</p>
-        </td>
-      </tr>
+      <li acţiune="încetare">
+        <p class="descriere">Încheiere de încetare a procedurii de executare</p>
+      </li>
     </script>
 
     <script id="acţiune-procedurală-încasare" type="text/x-fragment">
-      <tr acţiune="încasare">
-        <td>
-          <p class="descriere">Încheiere de încasare TODO: de verificat.</p>
-        </td>
-      </tr>
+      <li acţiune="încasare">
+        <p class="descriere">Încheiere de încasare TODO: de verificat.</p>
+      </li>
     </script>
 
     <script id="propunere-acţiune-procedurală" type="text/x-fragment">
