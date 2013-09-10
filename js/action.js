@@ -530,7 +530,7 @@
 
     achitare: {
       init: function() {
-        Cheltuieli.$adăugate.on('click', '.subformular.achitare :checkbox', this.setează);
+        FormularProcedură.$.on('click', '.achitare :checkbox', this.setează);
       },
 
       setează: function() {
