@@ -15,7 +15,7 @@
     ok($secţiune.există(), 'găsit secţiunea');
     ok($secţiune.find('legend:contains("Acţiuni procedurale")').există(), '…cu titlul corespunzător');
     ok($conţinut.există(), '…cu div pentru conţinut');
-    ok($conţinut.find('table.itemi').există(), '……listă pentru itemi');
+    ok($conţinut.find('.itemi').există(), '……listă pentru itemi');
   });
 
 })();

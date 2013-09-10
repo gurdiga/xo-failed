@@ -1606,5 +1606,11 @@ fieldset label,
 }
 
 [acţiune] .descriere {
+  font-weight: bold;
   color: black;
+  margin: 4px 0 2px;
+}
+
+[acţiune] .achitare {
+  margin: 3px 0;
 }
