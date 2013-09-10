@@ -2531,7 +2531,7 @@
     },
 
     init: function() {
-      this.insereazăButon();
+      this.insereazăButoane();
 
       $(document)
         .on('click', 'input.dată+.ui-icon-calendar', this.afişează);
@@ -2557,7 +2557,7 @@
       $(input).attr('data-ceva', valoarea.substr(10));
     },
 
-    insereazăButon: function(container) {
+    insereazăButoane: function(container) {
       container = container || document.body;
 
       var buton = $('<span>')
@@ -3687,7 +3687,7 @@
       this.adaugăLa = function($container) {
         var $acţiune = $(html);
 
-        Calendar.insereazăButon($acţiune);
+        Calendar.insereazăButoane($acţiune);
         $container.append($acţiune);
       };
 
