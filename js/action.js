@@ -3685,10 +3685,10 @@
 
       // --------------------
       this.adaugăLa = function($container) {
-        var $acţiune = $(html);
+        var $html = $(html);
 
-        Calendar.insereazăButoane($acţiune);
-        $container.append($acţiune);
+        Calendar.insereazăButoane($html);
+        $container.append($html);
       };
 
       // --------------------
