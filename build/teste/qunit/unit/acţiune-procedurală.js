@@ -85,6 +85,12 @@
 
     var acţiune = new app.AcţiuneProcedurală('identificator');
 
+    $container.on('adăugare', function(e, element) {
+      ok(true, 'pe container se generează evenimentul “adăugare” şi setransmite elementul aăugat');
+      ok(element.jquery, 'elementul este obiect jQuery');
+      ok(element.find('#identificator').există(), '…este de fapt contentul pentru acţiunea adăugată');
+    });
+
     acţiune.adaugăLa($container);
     ok($container.find('div#identificator').există(), '…adaugă HTML-ul acţiunii la containerul parametru');
     ok($container.find('input.dată').există(), '…adăugat butonaşe pentru calendar la cîmpurile dată');
