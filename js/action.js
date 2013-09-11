@@ -3689,8 +3689,9 @@
 
         Calendar.insereazăButoane($html);
         $container
+          .trigger('înainte-de-adăugare', [$html])
           .append($html)
-          .trigger('adăugare', [$html]);
+          .trigger('după-adăugare', [$html]);
       };
 
       // --------------------

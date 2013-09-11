@@ -85,9 +85,15 @@
 
     var acţiune = new app.AcţiuneProcedurală('identificator');
 
-    $container.on('adăugare', function(e, element) {
-      ok(true, 'pe container se generează evenimentul “adăugare” şi setransmite elementul aăugat');
-      ok(element.jquery, 'elementul este obiect jQuery');
+    $container.on('înainte-de-adăugare', function(e, element) {
+      ok(true, 'pe container se generează evenimentul “înainte-de-adăugare” şi setransmite elementul aăugat');
+      ok(element.jquery, '…este obiect jQuery');
+      ok(element.find('#identificator').există(), '…este de fapt contentul pentru acţiunea adăugată');
+    });
+
+    $container.on('după-adăugare', function(e, element) {
+      ok(true, 'pe container se generează evenimentul “după-adăugare” şi setransmite elementul aăugat');
+      ok(element.jquery, '…care este obiect jQuery');
       ok(element.find('#identificator').există(), '…este de fapt contentul pentru acţiunea adăugată');
     });
 
