@@ -3689,9 +3689,9 @@
 
         Calendar.insereazăButoane($html);
         $container
-          .trigger('înainte-de-adăugare', [$html])
+          .trigger('înainte-de.adăugare-acţiune', [$html])
           .append($html)
-          .trigger('după-adăugare', [$html]);
+          .trigger('după.adăugare-acţiune', [$html]);
       };
 
       // --------------------
@@ -3739,8 +3739,27 @@
       // --------------------
       init: function() {
         this.$opţiuni.on('click', '.propunere', this.adaugă);
+        this.efecte.init();
 
         this.propuneCorespunzătorAcţiunileUrmătoare();
+      },
+
+      efecte: {
+        init: function() {
+          AcţiuniProcedurale.$
+            .on('înainte-de.adăugare-acţiune', this.ascunde)
+            .on('după.adăugare-acţiune', this.afişează);
+        },
+
+        // --------------------
+        ascunde: function(e, $element) {
+          $element.hide();
+        },
+
+        // --------------------
+        afişează: function(e, $element) {
+          $element.slideDown();
+        }
       },
 
       // --------------------

@@ -22,17 +22,84 @@
     };
 
     var propuneCorespunzătorAcţiunileUrmătoareOriginal = AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare,
-        propusOpţiuneaCorespunzătoare = false;
+        efecteOriginal = AcţiuniProcedurale.efecte,
+        propusOpţiuneaCorespunzătoare = false,
+        iniţializatAnimaţie = false;
 
-        AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = function() { propusOpţiuneaCorespunzătoare = true; };
+    AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = function() { propusOpţiuneaCorespunzătoare = true; };
+    AcţiuniProcedurale.efecte = { init: function() { iniţializatAnimaţie = true ; } };
 
     AcţiuniProcedurale.init();
     ok(ataşatLaEveniment, 'ataşat la evenimentele corespunzătoare');
     ok(propusOpţiuneaCorespunzătoare, 'propus opţiunea corespunzătoare');
+    ok(iniţializatAnimaţie, 'iniţializat efecte');
 
     // unstub
+    AcţiuniProcedurale.efecte = efecteOriginal;
     AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = propuneCorespunzătorAcţiunileUrmătoareOriginal;
     AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
+  });
+
+
+  test('.efecte', function() {
+    ok('efecte' in app.AcţiuniProcedurale, 'defini');
+    ok($.isPlainObject(app.AcţiuniProcedurale.efecte), '…obiect');
+  });
+
+
+  test('.efecte.init', function() {
+    ok('init' in app.AcţiuniProcedurale.efecte, 'defini');
+    ok($.isFunction(app.AcţiuniProcedurale.efecte.init), '…funcţie');
+
+    var $original = app.AcţiuniProcedurale.$,
+        ascuns = false,
+        ascundeOriginal = app.AcţiuniProcedurale.efecte.ascunde,
+        afişat = false,
+        afişeazăOriginal = app.AcţiuniProcedurale.efecte.afişează;
+
+    app.AcţiuniProcedurale.$ = $('<div/>');
+    app.AcţiuniProcedurale.efecte.afişează = function() { afişat = true; };
+    app.AcţiuniProcedurale.efecte.ascunde = function() { ascuns = true; };
+
+    app.AcţiuniProcedurale.efecte.init();
+
+    app.AcţiuniProcedurale.$.trigger('înainte-de.adăugare-acţiune');
+    ok(ascuns, 'ascunde înainte de adăugare');
+
+    app.AcţiuniProcedurale.$.trigger('după.adăugare-acţiune');
+    ok(afişat, 'afişat după adăugare');
+
+    app.AcţiuniProcedurale.$ = $original;
+    app.AcţiuniProcedurale.efecte.ascunde = ascundeOriginal;
+    app.AcţiuniProcedurale.efecte.afişează = afişeazăOriginal;
+  });
+
+
+  test('.efecte.ascunde', function() {
+    ok('ascunde' in app.AcţiuniProcedurale.efecte, 'defini');
+    ok($.isFunction(app.AcţiuniProcedurale.efecte.ascunde), '…funcţie');
+    equal(app.AcţiuniProcedurale.efecte.ascunde.length, 2, '…acceptă doi parametri');
+
+    var $el = $('<div/>').appendTo(document.body);
+
+    app.AcţiuniProcedurale.efecte.ascunde(null, $el);
+    ok($el.is(':not(:visible)'), 'ascunde elementul');
+
+    $el.remove();
+  });
+
+
+  test('.efecte.afişează', function() {
+    ok('afişează' in app.AcţiuniProcedurale.efecte, 'defini');
+    ok($.isFunction(app.AcţiuniProcedurale.efecte.afişează), '…funcţie');
+
+    var $el = $('<div/>').appendTo(document.body);
+
+    app.AcţiuniProcedurale.efecte.ascunde(null, $el);
+    app.AcţiuniProcedurale.efecte.afişează(null, $el);
+    ok($el.is(':visible'), 'afişează elementul');
+
+    $el.remove();
   });
 
 
