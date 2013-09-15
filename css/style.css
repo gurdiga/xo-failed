@@ -1587,6 +1587,7 @@ ul.încheieri a.salvat::after {
   top: -3px;
 }
 
+.ico.document,
 .listă .itemi li,
 #container-data-intentării label,
 .etichetă,
@@ -1596,7 +1597,8 @@ fieldset label,
 .subformular label,
 #cheltuieli .adăugate p,
 #cheltuieli .adăugate .subformular .şoaptă,
-#acţiuni-procedurale .itemi .conţinut p,
+#acţiuni-procedurale .itemi p,
+#acţiuni-procedurale .itemi,
 #încheieri li {
   color: #555;
 }
@@ -1609,10 +1611,32 @@ fieldset label,
 [acţiune]>[secţiune] {
   float: left;
   margin-left: 6px;
+  margin-bottom: 10px;
 }
 
 [acţiune]>[secţiune="conţinut"] {
   margin-left: 16px;
+  width: 70%;
+}
+
+[acţiune] p {
+  margin: 0;
+}
+
+[acţiune] .taxe p {
+  margin-bottom: -2px;
+}
+
+[acţiune] .taxe input[type="checkbox"] {
+  margin: 0;
+}
+
+[acţiune] fieldset.subsecţiune {
+  margin: 5px 0 0 -8px;
+}
+
+[acţiune] .taxe {
+  margin-left: 6px;
 }
 
 [acţiune] .document {
@@ -1621,12 +1645,12 @@ fieldset label,
 
 [acţiune] .descriere {
   font-weight: bold;
-  color: black;
+  color: black !important;
   margin: 4px 0 2px -5px;
 }
 
 [acţiune] .achitare {
-  margin: 0;
+  margin: 2px 0 0 0;
 }
 
 [acţiune] .achitare label.la {
@@ -1635,4 +1659,8 @@ fieldset label,
 
 #acţiuni-procedurale .opţiuni {
   clear: left;
+}
+
+.ico.document {
+  margin-right: .4em;
 }

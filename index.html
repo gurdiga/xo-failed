@@ -210,7 +210,7 @@
 
               <li>
                 <ul class="încheieri contextuale">
-                  <li><a class="ico document semiascuns" dinamică
+                  <li><a class="ico document" dinamică
                         href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
                         formular="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
                         >anexă detalii calculele</a>
@@ -484,7 +484,7 @@
 
                 <li>
                   <ul class="încheieri contextuale borderou-de-calcul">
-                    <li><a class="ico document semiascuns" dinamică
+                    <li><a class="ico document" dinamică
                         href="/formulare-încheieri/borderou-de-calcul.html"
                         formular="/formulare-încheieri/borderou-de-calcul.html"
                         >formează borderoul de calcul</a></li>
@@ -2036,15 +2036,15 @@
           <li>
             <ul class="încheieri contextuale">
 
-              <li><a class="ico document semiascuns"
+              <li><a class="ico document"
                   href="/formulare-încheieri/încheiere-dobîndă-de-întîrziere.html"
                   formular="/formulare-încheieri/încheiere-dobîndă-de-întîrziere.html"
-                  >formează încheiere</a></li>
+                  >încheiere</a>
 
-              <li><a class="ico document semiascuns" anexă dinamică
+              <a class="ico document" anexă dinamică
                   href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html"
                   formular="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html"
-                  >formează anexă</a></li>
+                  >anexă</a></li>
 
             </ul>
           </li>
@@ -2085,7 +2085,7 @@
           <li>
             <ul class="încheieri contextuale">
               <!-- TODO: de corectat href aici -->
-              <li><a class="ico document semiascuns"
+              <li><a class="ico document"
                   href=""
                   formular=""
                   >formează încheiere</a></li>
@@ -2124,16 +2124,30 @@
         <div secţiune="conţinut">
           <p class="descriere">Intentarea şi formarea procedurii de executare</p>
 
-          <a class="ico document semiascuns" href="#">încheierea</a>
-          <a class="ico document semiascuns" href="#">fişa de însoţire</a>
+          <a class="ico document" href="#">încheierea</a>
+          <a class="ico document" href="#">fişa de însoţire</a>
 
-          <p class="achitare">
-            taxa<span class="uc">: 1 u.c.</span> —
-            <input type="hidden" class="cost" value="1"/>
+          <fieldset class="subsecţiune">
+            <legend>taxe şi speze</legend>
 
-            <input type="checkbox" class="achitat"/>
-            <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
-          </p>
+            <ul class="taxe">
+              <li class="achitare">
+                <p>taxa de intentare şi formare a procedurii de executare<span class="uc"> — 1 u.c.</span></p>
+
+                <input type="hidden" class="cost" value="1"/>
+                <input type="checkbox" class="achitat"/>
+                <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
+              </li>
+
+              <li class="achitare">
+                taxa de arhivare a procedurii de executare<span class="uc"> — 3 u.c.</span><br/>
+
+                <input type="hidden" class="cost" value="1"/>
+                <input type="checkbox" class="achitat"/>
+                <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
+              </li>
+            </ul>
+          </fieldset>
         </div>
       </li>
     </script>
