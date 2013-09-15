@@ -2111,11 +2111,15 @@
     </div>
 
 
+    <script id="data-acţiunii" type="text/x-fragment-parţial">
+      <div secţiune="dată">
+        <input type="text" class="dată" value="{{data}}"/>
+      </div>
+    </script>
+
     <script id="acţiune-procedurală-intentare" type="text/x-fragment">
       <li acţiune="intentare">
-        <div secţiune="dată">
-          <input type="text" class="dată" value="{{data}}"/>
-        </div>
+        {{> data-acţiunii}}
 
         <div secţiune="conţinut">
           <p class="descriere">Intentarea şi formarea procedurii de executare</p>
@@ -2136,25 +2140,41 @@
 
     <script id="acţiune-procedurală-intentare-cu-asigurare" type="text/x-fragment">
       <li acţiune="intentare-cu-asigurare">
-        <p class="descriere">Intentarea şi formarea procedurii de executare, plus asigurarea executării</p>
+        {{> data-acţiunii}}
+
+        <div secţiune="conţinut">
+          <p class="descriere">Intentarea şi formarea procedurii de executare, plus asigurarea executării</p>
+        </div>
       </li>
     </script>
 
     <script id="acţiune-procedurală-continuare" type="text/x-fragment">
       <li acţiune="continuare">
-        <p class="descriere">Încheiere de continuare a procedurii de executare</p>
+        {{> data-acţiunii}}
+
+        <div secţiune="conţinut">
+          <p class="descriere">Încheiere de continuare a procedurii de executare</p>
+        </div>
       </li>
     </script>
 
     <script id="acţiune-procedurală-încetare" type="text/x-fragment">
       <li acţiune="încetare">
-        <p class="descriere">Încheiere de încetare a procedurii de executare</p>
+        {{> data-acţiunii}}
+
+        <div secţiune="conţinut">
+          <p class="descriere">Încheiere de încetare a procedurii de executare</p>
+        </div>
       </li>
     </script>
 
     <script id="acţiune-procedurală-încasare" type="text/x-fragment">
       <li acţiune="încasare">
-        <p class="descriere">Încheiere de încasare TODO: de verificat.</p>
+        {{> data-acţiunii}}
+
+        <div secţiune="conţinut">
+          <p class="descriere">Încheiere de încasare TODO: de verificat.</p>
+        </div>
       </li>
     </script>
 

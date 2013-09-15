@@ -1,4 +1,4 @@
-/*global top:false moment:false RateDeBază:false RateBNM:false*/
+/*global top:false moment:false RateDeBază:false RateBNM:false Handlebars:false*/
 
 (function(window, document, moment) {
   'use strict';
@@ -3696,11 +3696,13 @@
 
       // --------------------
       this.areStructuraCorespunzătoare = function() {
-        //console.log(html);
+        /*jshint maxcomplexity:5*/
         var $html = $(html),
             lipsuri = [];
 
-        if (!$html.is('[acţiune]')) lipsuri.push('nu are atributul “acţiune”');
+        if (!$html.is('[acţiune="' + identificator + '"]')) lipsuri.push('nu are atributul “acţiune”');
+        if (!$html.find('[secţiune="dată"]').există()) lipsuri.push('nu are secţiune dată');
+        if (!$html.find('[secţiune="conţinut"]').există()) lipsuri.push('nu are secţiune conţinut');
         if (!$html.find('.descriere').există()) lipsuri.push('nu are .descriere');
         // TODO: de determinat ce componente trebuie să existe pentru fiecare acţiune
         // şi de verificat prezenţa lor:
@@ -3738,10 +3740,17 @@
 
       // --------------------
       init: function() {
+        this.înregistreazăFragmenteParţiale();
         this.$opţiuni.on('click', '.propunere', this.adaugă);
         this.efecte.init();
 
         this.propuneCorespunzătorAcţiunileUrmătoare();
+      },
+
+      înregistreazăFragmenteParţiale: function() {
+        $('script[type="text/x-fragment-parţial"]').each(function() {
+          Handlebars.registerPartial(this.id, this.innerText);
+        });
       },
 
       efecte: {

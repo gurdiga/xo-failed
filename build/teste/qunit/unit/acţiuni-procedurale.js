@@ -23,18 +23,23 @@
 
     var propuneCorespunzătorAcţiunileUrmătoareOriginal = AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare,
         efecteOriginal = AcţiuniProcedurale.efecte,
+        înregistreazăFragmenteParţialeOriginal = AcţiuniProcedurale.înregistreazăFragmenteParţiale,
         propusOpţiuneaCorespunzătoare = false,
-        iniţializatAnimaţie = false;
+        iniţializatAnimaţie = false,
+        înregistratFragmenteParţiale = false;
 
     AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = function() { propusOpţiuneaCorespunzătoare = true; };
     AcţiuniProcedurale.efecte = { init: function() { iniţializatAnimaţie = true ; } };
+    AcţiuniProcedurale.înregistreazăFragmenteParţiale = function() { înregistratFragmenteParţiale = true; };
 
     AcţiuniProcedurale.init();
+    ok(înregistratFragmenteParţiale, 'înregistrat fragmente parţiale');
     ok(ataşatLaEveniment, 'ataşat la evenimentele corespunzătoare');
     ok(propusOpţiuneaCorespunzătoare, 'propus opţiunea corespunzătoare');
     ok(iniţializatAnimaţie, 'iniţializat efecte');
 
     // unstub
+    AcţiuniProcedurale.înregistreazăFragmenteParţiale = înregistreazăFragmenteParţialeOriginal;
     AcţiuniProcedurale.efecte = efecteOriginal;
     AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = propuneCorespunzătorAcţiunileUrmătoareOriginal;
     AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
@@ -269,6 +274,17 @@
     ok(!app.AcţiuniProcedurale.$opţiuni.find('.propunere').există(), 'eliminat');
 
     app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
+  });
+
+
+  test('Şabloane acţiuni', function() {
+    for (var identificator in app.AcţiuniProcedurale.opţiuni) {
+      if (identificator === '') continue;
+
+      var acţiune = new app.AcţiuneProcedurală(identificator);
+
+      equal(acţiune.areStructuraCorespunzătoare(), true, identificator + ': are structura corespunzătoare');
+    }
   });
 
 })();
