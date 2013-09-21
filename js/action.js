@@ -3649,8 +3649,7 @@
   // --------------------------------------------------
 
   AcţiuneProcedurală = (function() {
-    var PREFIX_FRAGMENTE = 'acţiune-procedurală-',
-        FRAGMENT_PROPUNERE = new Fragment('propunere-acţiune-procedurală');
+    var PREFIX_FRAGMENTE = 'acţiune-procedurală-';
 
     var AcţiuneProcedurală = function(identificator, date) {
       date = date || {};
@@ -3666,10 +3665,10 @@
       this.propunere = function() {
         var descriere = $(html).find('.descriere').text();
 
-        return FRAGMENT_PROPUNERE.compilează({
+        return {
           descriere: descriere,
           identificator: identificator
-        });
+        };
       };
 
       // --------------------
@@ -3690,12 +3689,21 @@
             lipsuri = [];
 
         if (!$html.is('[acţiune="' + identificator + '"]')) lipsuri.push('nu are atributul “acţiune”');
-        if (!$html.find('[secţiune="dată"]').există()) lipsuri.push('nu are secţiune dată');
-        if (!$html.find('[secţiune="conţinut"]').există()) lipsuri.push('nu are secţiune conţinut');
-        if (!$html.find('.descriere').există()) lipsuri.push('nu are .descriere');
-        // TODO: de determinat ce componente trebuie să existe pentru fiecare acţiune
-        // şi de verificat prezenţa lor:
-        // - data
+
+        var componente = {
+          '[secţiune="dată"]': 'secţiunea cu dată',
+          '[secţiune="conţinut"]': 'secţiunea cu conţinut',
+          '.descriere': 'descrierea',
+          '.document.ico': 'butonaşele pentru încheiere'
+          // TODO: de determinat ce componente trebuie să existe pentru fiecare acţiune
+          // şi de verificat prezenţa lor:
+        }, selector, descriere;
+
+        for (selector in componente) {
+          descriere = componente[selector];
+
+          if (!$html.find(selector).există()) lipsuri.push('lipseşte ' + descriere);
+        }
 
         return lipsuri.length > 0 ? lipsuri : true;
       };
@@ -3713,6 +3721,8 @@
   // --------------------------------------------------
 
   AcţiuniProcedurale = (function() {
+    var FRAGMENT_PROPUNERE = new Fragment('opţiuni-acţiune-procedurală');
+
     var AcţiuniProcedurale = {
       $: $('#acţiuni-procedurale .itemi'),
       $opţiuni: $('#acţiuni-procedurale .opţiuni'),
@@ -3721,10 +3731,8 @@
         '': ['intentare', 'intentare-cu-asigurare'],
         'intentare': ['continuare', 'încetare'],
         'intentare-cu-asigurare': ['continuare', 'încetare'],
-        'continuare': ['încasare', ''],
-        // TODO
-        'încetare': [''],
-        'încasare': ['']
+        'continuare': [],
+        'încetare': []
       },
 
       // --------------------
@@ -3764,11 +3772,15 @@
       propuneCorespunzătorAcţiunileUrmătoare: function() {
         var identificatori = this.opţiuni[this.ceaMaiRecentă()];
 
-        identificatori.forEach(function(identificatorAcţiune) {
+        var opţiuni = identificatori.map(function(identificatorAcţiune) {
           var acţiune = new AcţiuneProcedurală(identificatorAcţiune);
 
-          AcţiuniProcedurale.$opţiuni.append(acţiune.propunere());
+          return acţiune.propunere();
         });
+
+        AcţiuniProcedurale.$opţiuni.html(
+          FRAGMENT_PROPUNERE.compilează({ opţiuni: opţiuni })
+        );
       },
 
       // --------------------

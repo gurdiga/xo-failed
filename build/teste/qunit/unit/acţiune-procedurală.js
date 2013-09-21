@@ -61,11 +61,11 @@
     ok($.isFunction(this.acţiune.propunere), '…funcţie');
     equal(this.acţiune.propunere.length, 0, '…fără parametri');
 
-    var $propunere = app.$(this.acţiune.propunere());
+    var rezultat = this.acţiune.propunere();
 
-    ok($propunere.is('.propunere'), '$rezultatul e .propunere');
-    ok($propunere.is(':contains("intentarea procedurii de executare")'), '…şi conţine descrierea acţiunii');
-    equal($propunere.attr('identificator'), 'identificator-acţiune', '…şi atributul “identificator” corespunde');
+    ok($.isPlainObject(rezultat), 'întoarce obiect');
+    ok('descriere' in rezultat, '…care conţine “descriere”');
+    ok('identificator' in rezultat, '…care conţine “descriere”');
   });
 
 

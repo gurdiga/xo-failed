@@ -1598,6 +1598,8 @@ fieldset label,
 #cheltuieli .adăugate .subformular .şoaptă,
 #acţiuni-procedurale .itemi p,
 #acţiuni-procedurale .itemi,
+#acţiuni-procedurale .propunere,
+#acţiuni-procedurale .opţiuni .întrebare,
 #încheieri li {
   color: #555;
 }
@@ -1614,11 +1616,10 @@ fieldset label,
 }
 
 [acţiune]>[secţiune="dată"] {
-  width: 100px;
+  width: 110px;
 }
 
 [acţiune]>[secţiune="conţinut"] {
-  margin-left: 16px;
   width: 700px;
 }
 
@@ -1649,7 +1650,7 @@ fieldset label,
 [acţiune] .descriere {
   font-weight: bold;
   color: black !important;
-  margin: 4px 0 2px -5px;
+  margin: 4px 0 0 -5px;
 }
 
 [acţiune] .achitare {
@@ -1661,7 +1662,40 @@ fieldset label,
 }
 
 #acţiuni-procedurale .opţiuni {
+  padding-top: 10px;
   clear: left;
+  margin: 0 0 0 20px;
+}
+
+#acţiuni-procedurale .itemi:empty+.opţiuni {
+  padding-top: 0;
+}
+
+#acţiuni-procedurale .propunere {
+  margin: 0 30px;
+  width: 200px;
+  float: left;
+  cursor: pointer;
+  counter-increment: propuneri;
+}
+
+#acţiuni-procedurale .propunere:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+#acţiuni-procedurale .opţiuni .întrebare {
+  font-weight: bold;
+}
+
+#acţiuni-procedurale .propunere:before {
+  content: counter(propuneri, decimal);
+  font: bold 250% serif;
+  position: absolute;
+  width: 40px;
+  margin-left: -45px;
+  text-align: right;
+  color: #ddd;
 }
 
 .ico.document {

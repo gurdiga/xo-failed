@@ -172,7 +172,6 @@
 
     for (item in app.AcţiuniProcedurale.opţiuni) {
       ok($.isArray(app.AcţiuniProcedurale.opţiuni[item]), 'opţiunile pentru “' + item + '” este un array');
-      ok(app.AcţiuniProcedurale.opţiuni[item].length > 0, '…nevid');
 
       if (item) {
         ok(app.AcţiuneProcedurală.există(item), '…găsit şablon corespunzător');
