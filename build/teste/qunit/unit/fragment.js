@@ -61,6 +61,22 @@
     equal(this.fragment.compilează.length, 1, '…cu un parametru: datele');
     equal(this.fragment.compilează({descriere: 'testare fragment'}), '<div>testare fragment</div>',
       'completează datele în fragment şi întoarce HTML-ul');
+
+
+    var identificator = 'test-fragment-date-adăugătoare';
+
+    var tag = app.$(
+      '<script type="text/x-fragment" id="' + identificator + '">' +
+        '<div data-adăugător="ceva date adăugătoare">{{adăugător}}</div>' +
+      '</script>'
+    ).appendTo(app.document.body);
+
+    var fragment = new app.Fragment(identificator);
+
+    equal(fragment.compilează({descriere: 'testare fragment'}), '<div data-adăugător="ceva date adăugătoare">ceva date adăugătoare</div>',
+      '…ţine cont de datele adăugătoare de pe element');
+
+    tag.remove();
   });
 
 
