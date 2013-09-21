@@ -3616,7 +3616,7 @@
 
   Fragment = (function() {
     function găseşte$Fragment(identificator) {
-      return $('script[type="text/x-fragment"]#' + identificator);
+      return $('script[type^="text/x-fragment"]#' + identificator);
     }
 
     var Fragment = function(identificator) {
@@ -3737,7 +3737,7 @@
       },
 
       înregistreazăFragmenteParţiale: function() {
-        $('script[type="text/x-fragment-parţial"]').each(function() {
+        $('script[type="text/x-fragment"]').each(function() {
           Handlebars.registerPartial(this.id, this.innerText);
         });
       },
@@ -3807,6 +3807,7 @@
   // --------------------------------------------------
 
   $.extend(window, {
+    Fragment: Fragment,
     Profil: Profil,
     FormularProcedură: FormularProcedură,
     ProceduriRecente: ProceduriRecente,
@@ -3834,8 +3835,7 @@
       AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate,
       AcţiuniProcedurale: AcţiuniProcedurale,
-      AcţiuneProcedurală: AcţiuneProcedurală,
-      Fragment: Fragment
+      AcţiuneProcedurală: AcţiuneProcedurală
     });
   }
 

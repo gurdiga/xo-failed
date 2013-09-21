@@ -5,11 +5,13 @@
     'jshint-config.js',
     'csslint-config.js',
     'qunit-extensions.js',
+    '/js/handlebars-helpers.js',
     '/js/action.js',
     '/js/încheiere.js',
     '/js/indexer.js',
 
     'unit/încheiere.js',
+    'unit/handlebars-helpers.js',
     'unit/action-persoane.js',
     'unit/action-hash-controller.js',
     'unit/action-textarea-elastice.js',
