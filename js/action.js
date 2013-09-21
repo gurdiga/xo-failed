@@ -694,25 +694,12 @@
 
       ButonDeEliminare.ascunde();
 
-      if (eliminabil.is('.eliminabil.de.tot') || eliminabil.siblings('.eliminabil').există()) {
-        eliminabil
-          .trigger('eliminare')
-          .slideUp(function() {
-            eliminabil.remove();
-            TotalCheltuieli.calculează(); // TODO de mutat asta în locul corespunzător
-          });
-      } else {
-        eliminabil
-          .find('.eliminabil.de.tot').slideUp(function() {
-            eliminabil
-              .find('.valoare, .sumă').val(0).trigger('change').end()
-              .find('textarea').val('').trigger('change').end()
-              .trigger('eliminare');
-
-            $(this).remove();
-            TotalCheltuieli.calculează(); // TODO de mutat asta în locul corespunzător
-          });
-      }
+      eliminabil
+        .trigger('eliminare')
+        .slideUp(function() {
+          eliminabil.remove();
+          TotalCheltuieli.calculează(); // TODO de mutat asta în locul corespunzător
+        });
     }
   },
 
