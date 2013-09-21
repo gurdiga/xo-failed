@@ -699,7 +699,7 @@
           .trigger('eliminare')
           .slideUp(function() {
             eliminabil.remove();
-            TotalCheltuieli.calculează(); // de mutat asta în locul corespunzător
+            TotalCheltuieli.calculează(); // TODO de mutat asta în locul corespunzător
           });
       } else {
         eliminabil
@@ -710,7 +710,7 @@
               .trigger('eliminare');
 
             $(this).remove();
-            TotalCheltuieli.calculează(); // de mutat asta în locul corespunzător
+            TotalCheltuieli.calculează(); // TODO de mutat asta în locul corespunzător
           });
       }
     }
