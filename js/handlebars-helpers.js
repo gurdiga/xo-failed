@@ -4,7 +4,10 @@
 
   var HandlebarsHelpers = {
     'include': function(numeFragmentParţial, opţiuni) {
-      var date = opţiuni.hash;
+      var date = opţiuni.hash,
+          contextCurent = this;
+
+      date = $.extend(date, contextCurent);
 
       if ('fn' in opţiuni) date['yield'] = opţiuni.fn(date);
 
