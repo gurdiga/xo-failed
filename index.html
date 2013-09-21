@@ -2111,64 +2111,104 @@
     </div>
 
 
-    <script id="data-acţiunii" type="text/x-fragment-parţial">
+    <script id="data-acţiunii" type="text/x-fragment">
       <div secţiune="dată">
         <input type="text" class="dată" value="{{data}}"/>
       </div>
     </script>
 
+    <script id="descrierea-acţiunii" type="text/x-fragment">
+      <p class="descriere">{{descrierea}}</p>
+    </script>
+
+    <script id="buton-încheiere" type="text/x-fragment">
+      <a class="ico document" href="#">{{eticheta}}</a>
+    </script>
+
+    <script id="butoane-încheiere" type="text/x-fragment">
+      {{include 'buton-încheiere' eticheta='încheierea' }}
+      {{include 'buton-încheiere' eticheta='fişa de însoţire' }}
+    </script>
+
+    <script id="item-taxe-şi-speze-ale-acţiunii" type="text/x-fragment">
+      <li class="achitare">
+        <p>{{descriere}}<span class="uc">&nbsp;—&nbsp;{{cost}}&nbsp;u.c.</span></p>
+
+        <input type="hidden" class="cost" value="{{cost}}"/>
+        <input type="checkbox" class="achitat"/>
+        <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
+      </li>
+    </script>
+
+    <script id="taxe-şi-speze-ale-acţiunii" type="text/x-fragment">
+      <fieldset class="subsecţiune">
+        <legend>taxe şi speze</legend>
+
+        <ul class="taxe">{{{ yield }}}</ul>
+      </fieldset>
+    </script>
+
+    <script id="conţinutul-acţiunii" type="text/x-fragment">
+      <div secţiune="conţinut">
+        {{{ yield }}}
+      </div>
+    </script>
+
     <script id="acţiune-procedurală-intentare" type="text/x-fragment">
       <li acţiune="intentare">
-        {{> data-acţiunii}}
+        {{> data-acţiunii }}
 
-        <div secţiune="conţinut">
-          <p class="descriere">Intentarea şi formarea procedurii de executare</p>
+        {{#include 'conţinutul-acţiunii' }}
+          {{include 'descrierea-acţiunii' descrierea='Intentarea şi formarea procedurii de executare' }}
+          {{include 'butoane-încheiere' }}
 
-          <a class="ico document" href="#">încheierea</a>
-          <a class="ico document" href="#">fişa de însoţire</a>
+          {{#include 'taxe-şi-speze-ale-acţiunii' }}
+            {{include 'item-taxe-şi-speze-ale-acţiunii'
+              descriere='taxa de intentare şi formare a procedurii de executare'
+              cost=1
+            }}
 
-          <fieldset class="subsecţiune">
-            <legend>taxe şi speze</legend>
+            {{include 'item-taxe-şi-speze-ale-acţiunii'
+              descriere='taxa de arhivare a procedurii de executare'
+              cost=3
+            }}
+          {{/include}}
 
-            <ul class="taxe">
-              <li class="achitare">
-                <p>taxa de intentare şi formare a procedurii de executare<span class="uc"> — 1 u.c.</span></p>
-
-                <input type="hidden" class="cost" value="1"/>
-                <input type="checkbox" class="achitat"/>
-                <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
-              </li>
-
-              <li class="achitare">
-                taxa de arhivare a procedurii de executare<span class="uc"> — 3 u.c.</span><br/>
-
-                <input type="hidden" class="cost" value="1"/>
-                <input type="checkbox" class="achitat"/>
-                <label>achitat</label><label class="la">la <input type="text" class="dată"/></label>
-              </li>
-            </ul>
-          </fieldset>
-        </div>
+        {{/include}}
       </li>
     </script>
 
     <script id="acţiune-procedurală-intentare-cu-asigurare" type="text/x-fragment">
       <li acţiune="intentare-cu-asigurare">
-        {{> data-acţiunii}}
+        {{> data-acţiunii }}
 
-        <div secţiune="conţinut">
-          <p class="descriere">Intentarea şi formarea procedurii de executare, plus asigurarea executării</p>
-        </div>
+        {{#include 'conţinutul-acţiunii' }}
+          {{include 'descrierea-acţiunii' descrierea='Intentarea şi formarea procedurii de executare, plus asigurarea executării' }}
+          {{include 'butoane-încheiere' }}
+
+          {{#include 'taxe-şi-speze-ale-acţiunii' }}
+            {{include 'item-taxe-şi-speze-ale-acţiunii'
+              descriere='taxa de intentare şi formare a procedurii de executare'
+              cost=1
+            }}
+
+            {{include 'item-taxe-şi-speze-ale-acţiunii'
+              descriere='taxa de arhivare a procedurii de executare'
+              cost=3
+            }}
+          {{/include}}
+
+        {{/include}}
       </li>
     </script>
 
     <script id="acţiune-procedurală-continuare" type="text/x-fragment">
       <li acţiune="continuare">
-        {{> data-acţiunii}}
+        {{> data-acţiunii }}
 
-        <div secţiune="conţinut">
-          <p class="descriere">Încheiere de continuare a procedurii de executare</p>
-        </div>
+        {{#include 'conţinutul-acţiunii' }}
+          {{include 'descrierea-acţiunii' descrierea='Încheiere de continuare a procedurii de executare' }}
+        {{/include}}
       </li>
     </script>
 
@@ -2176,9 +2216,9 @@
       <li acţiune="încetare">
         {{> data-acţiunii}}
 
-        <div secţiune="conţinut">
-          <p class="descriere">Încheiere de încetare a procedurii de executare</p>
-        </div>
+        {{#include 'conţinutul-acţiunii' }}
+          {{include 'descrierea-acţiunii' descrierea='Încheiere de încetare a procedurii de executare' }}
+        {{/include}}
       </li>
     </script>
 
@@ -2186,9 +2226,9 @@
       <li acţiune="încasare">
         {{> data-acţiunii}}
 
-        <div secţiune="conţinut">
-          <p class="descriere">Încheiere de încasare TODO: de verificat.</p>
-        </div>
+        {{#include 'conţinutul-acţiunii' }}
+          {{include 'descrierea-acţiunii' descrierea='Încheiere de încasare TODO: de verificat' }}
+        {{/include}}
       </li>
     </script>
 
