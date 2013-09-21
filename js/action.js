@@ -3796,7 +3796,7 @@
 
       // --------------------
       adaugă: function() {
-        var identificator = $(this).data('identificator'),
+        var identificator = $(this).attr('identificator'),
             acţiune = new AcţiuneProcedurală(identificator);
 
         acţiune.adaugăLa(AcţiuniProcedurale.$);

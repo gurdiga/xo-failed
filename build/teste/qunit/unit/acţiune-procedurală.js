@@ -65,7 +65,7 @@
 
     ok($propunere.is('.propunere'), '$rezultatul e .propunere');
     ok($propunere.is(':contains("intentarea procedurii de executare")'), '…şi conţine descrierea acţiunii');
-    equal($propunere.data('identificator'), 'identificator-acţiune', '…şi data-identificator corespunde');
+    equal($propunere.attr('identificator'), 'identificator-acţiune', '…şi atributul “identificator” corespunde');
   });
 
 
