@@ -331,19 +331,16 @@
 
             $încheiere.find('.închide').click();
 
-            $cîmpBun.trigger('mousemove');
+            $cîmpBun
+              .trigger('mousemove')
+              .on('eliminat', function() {
+                start();
+              });
 
             var butonDeEliminare = $cîmpBun.find('.elimină');
 
             ok(butonDeEliminare.există(), 'avem butonaş pentru eliminare bun');
-            ok(app.FormularProcedură.$[0].contains($cîmpBun[0]), 'cîmpBun e în DOM');
             butonDeEliminare.focus().click();
-
-            setTimeout(function() { // slideUp?
-              ok(!$secţiune.find('.personalizat.bunuri-sechestrate').există(), 'eliminat cîmp pentru bunul sechestrat');
-
-              start();
-            }, 550);
           }); // one iniţializat
         }); // one populat
       }); // one închis
@@ -447,19 +444,16 @@
 
             $încheiere.find('.închide').click();
 
-            $cîmpSumă.trigger('mousemove');
+            $cîmpSumă
+              .trigger('mousemove')
+              .on('eliminat', function() {
+                start();
+              });
 
             var butonDeEliminare = $cîmpSumă.find('.elimină');
 
             ok(butonDeEliminare.există(), 'avem butonaş de eliminare sumă');
-            ok(app.FormularProcedură.$[0].contains($cîmpSumă[0]), 'cîmpSumă e în DOM');
             butonDeEliminare.focus().click();
-
-            setTimeout(function() { // slideUp?
-              ok(!$secţiune.find('.personalizat.sume-sechestrate').există(), 'eliminat cîmp pentru suma sechestrată');
-
-              start();
-            }, 550);
           }); // one iniţializat
         });
       });
