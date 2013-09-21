@@ -3631,7 +3631,7 @@
 
       // --------------------
       this.compilează = function(date) {
-        $.extend(date, $($.parseHTML(this.html)).data());
+        $.extend(date, $(this.html, {}).data());
 
         return Handlebars.compile(this.html)(date);
       };

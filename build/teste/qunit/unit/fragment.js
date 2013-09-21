@@ -80,6 +80,23 @@
   });
 
 
+  test('#compilează cod Handlebars', function() {
+    var identificator = 'test-fragment-date-adăugătoare-handlebars';
+
+    var tag = app.$(
+      '<script type="text/x-fragment" id="' + identificator + '">' +
+        '{{descriere}}' +
+      '</script>'
+    ).appendTo(app.document.body);
+
+    var fragment = new app.Fragment(identificator);
+
+    equal(fragment.compilează({descriere: 'testare cod Handlebars'}), 'testare cod Handlebars', '…lucrează cu cod Handlebars');
+
+    tag.remove();
+  });
+
+
   test('.există', function() {
     ok('există' in app.Fragment, 'definit');
     ok($.isFunction(app.Fragment.există), '…funcţie');
