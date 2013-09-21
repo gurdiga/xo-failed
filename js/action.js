@@ -697,7 +697,7 @@
       eliminabil
         .trigger('eliminare')
         .slideUp(function() {
-          eliminabil.remove();
+          eliminabil.trigger('eliminat').remove();
           TotalCheltuieli.calculează(); // TODO de mutat asta în locul corespunzător
         });
     }
