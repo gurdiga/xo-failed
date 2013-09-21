@@ -1614,9 +1614,13 @@ fieldset label,
   margin-bottom: 10px;
 }
 
+[acţiune]>[secţiune="dată"] {
+  width: 100px;
+}
+
 [acţiune]>[secţiune="conţinut"] {
   margin-left: 16px;
-  width: 70%;
+  width: 700px;
 }
 
 [acţiune] p {
