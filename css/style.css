@@ -1534,7 +1534,6 @@ ul.încheieri li:hover::before {
 ul.încheieri li:hover::before,
 ul.încheieri li a:hover {
   color: blue;
-  text-shadow: 0 0 1px silver;
 }
 
 #acţiuni-procedurale .itemi a:hover,
