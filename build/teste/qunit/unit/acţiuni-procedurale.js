@@ -5,44 +5,76 @@
 
   module('Unit: AcţiuniProcedurale');
 
-  test('.init()', function() {
-    // stub
-    var AcţiuniProcedurale = app.AcţiuniProcedurale,
-        $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni,
-        ataşatLaEveniment = false;
+  test('.init() animaţie', function() {
+    var original = app.AcţiuniProcedurale.efecte,
+        iniţializat = false;
 
-    AcţiuniProcedurale.$opţiuni = {
-      on: function(eveniment, selector, callback) {
-        ataşatLaEveniment =
-          eveniment === 'click' &&
-          selector === '.propunere' &&
-          callback === AcţiuniProcedurale.adaugă;
-      },
-      append: function() {}
+    app.AcţiuniProcedurale.efecte = { init: function() { iniţializat = true ; } };
+
+    app.AcţiuniProcedurale.init();
+    ok(iniţializat, 'iniţializat');
+
+    app.AcţiuniProcedurale.efecte = original;
+  });
+
+
+  test('.init(): înregistrează fragmente parţiale', function() {
+    var original = app.AcţiuniProcedurale.înregistreazăFragmenteParţiale,
+        înregistrat = false;
+
+    app.AcţiuniProcedurale.înregistreazăFragmenteParţiale = function() { înregistrat = true; };
+
+    app.AcţiuniProcedurale.init();
+    ok(înregistrat, 'înregistrat fragmente parţiale');
+
+    app.AcţiuniProcedurale.înregistreazăFragmenteParţiale = original;
+  });
+
+
+  test('.init(): propune corespunzător acţiunile următoare', function() {
+    var original = app.AcţiuniProcedurale.propuneAcţiunileUrmătoare,
+        propus = false;
+
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = function() { propus = true; };
+
+    app.AcţiuniProcedurale.init();
+    ok(propus, 'propus opţiunea corespunzătoare');
+
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = original;
+  });
+
+
+  test('.init(): adăugare opţiune', function() {
+    var adăugat = false;
+
+    var original = {
+      adaugă: app.AcţiuniProcedurale.adaugă,
+      $opţiuni: app.AcţiuniProcedurale.$opţiuni
     };
 
-    var propuneCorespunzătorAcţiunileUrmătoareOriginal = AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare,
-        efecteOriginal = AcţiuniProcedurale.efecte,
-        înregistreazăFragmenteParţialeOriginal = AcţiuniProcedurale.înregistreazăFragmenteParţiale,
-        propusOpţiuneaCorespunzătoare = false,
-        iniţializatAnimaţie = false,
-        înregistratFragmenteParţiale = false;
+    app.AcţiuniProcedurale.adaugă = function() { adăugat = true; };
+    app.AcţiuniProcedurale.$opţiuni.html('<a class="propunere">text</a>');
 
-    AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = function() { propusOpţiuneaCorespunzătoare = true; };
-    AcţiuniProcedurale.efecte = { init: function() { iniţializatAnimaţie = true ; } };
-    AcţiuniProcedurale.înregistreazăFragmenteParţiale = function() { înregistratFragmenteParţiale = true; };
+    app.AcţiuniProcedurale.init();
+    app.AcţiuniProcedurale.$opţiuni.find('.propunere').trigger('click');
+    ok(adăugat, 'la click pe una din opţiuni, ea se adaugă în listă');
 
-    AcţiuniProcedurale.init();
-    ok(înregistratFragmenteParţiale, 'înregistrat fragmente parţiale');
-    ok(ataşatLaEveniment, 'ataşat la evenimentele corespunzătoare');
-    ok(propusOpţiuneaCorespunzătoare, 'propus opţiunea corespunzătoare');
-    ok(iniţializatAnimaţie, 'iniţializat efecte');
+    app.AcţiuniProcedurale.adaugă = original.adaugă;
+    app.AcţiuniProcedurale.$opţiuni = original.$opţiuni;
+  });
 
-    // unstub
-    AcţiuniProcedurale.înregistreazăFragmenteParţiale = înregistreazăFragmenteParţialeOriginal;
-    AcţiuniProcedurale.efecte = efecteOriginal;
-    AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = propuneCorespunzătorAcţiunileUrmătoareOriginal;
-    AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
+
+  test('.init(): eliminare-item', function() {
+    var original = app.AcţiuniProcedurale.propuneAcţiunileUrmătoare,
+        propus = false;
+
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = function() { propus = true; };
+
+    app.AcţiuniProcedurale.init();
+    app.AcţiuniProcedurale.$.parent().trigger('eliminat-item');
+    ok(propus, 'la eliminarea unei acţiuni se reafişează opţiunile');
+
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = original;
   });
 
 
@@ -56,11 +88,14 @@
     ok('init' in app.AcţiuniProcedurale.efecte, 'defini');
     ok($.isFunction(app.AcţiuniProcedurale.efecte.init), '…funcţie');
 
-    var $original = app.AcţiuniProcedurale.$,
-        ascuns = false,
-        ascundeOriginal = app.AcţiuniProcedurale.efecte.ascunde,
-        afişat = false,
-        afişeazăOriginal = app.AcţiuniProcedurale.efecte.afişează;
+    var ascuns = false,
+        afişat = false;
+
+    var original = {
+      $: app.AcţiuniProcedurale.$,
+      ascunde: app.AcţiuniProcedurale.efecte.ascunde,
+      afişează: app.AcţiuniProcedurale.efecte.afişează
+    };
 
     app.AcţiuniProcedurale.$ = $('<div/>');
     app.AcţiuniProcedurale.efecte.afişează = function() { afişat = true; };
@@ -74,9 +109,9 @@
     app.AcţiuniProcedurale.$.trigger('după.adăugare-acţiune');
     ok(afişat, 'afişat după adăugare');
 
-    app.AcţiuniProcedurale.$ = $original;
-    app.AcţiuniProcedurale.efecte.ascunde = ascundeOriginal;
-    app.AcţiuniProcedurale.efecte.afişează = afişeazăOriginal;
+    app.AcţiuniProcedurale.$ = original.$;
+    app.AcţiuniProcedurale.efecte.ascunde = original.ascunde;
+    app.AcţiuniProcedurale.efecte.afişează = original.afişează;
   });
 
 
@@ -108,30 +143,32 @@
   });
 
 
-  test('.propuneCorespunzătorAcţiunileUrmătoare()', function() {
-    ok('propuneCorespunzătorAcţiunileUrmătoare' in app.AcţiuniProcedurale, 'definit');
-    ok($.isFunction(app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare), '…funcţie');
-    equal(app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare.length, 0, '…fără parametri');
+  test('.propuneAcţiunileUrmătoare()', function() {
+    ok('propuneAcţiunileUrmătoare' in app.AcţiuniProcedurale, 'definit');
+    ok($.isFunction(app.AcţiuniProcedurale.propuneAcţiunileUrmătoare), '…funcţie');
+    equal(app.AcţiuniProcedurale.propuneAcţiunileUrmătoare.length, 0, '…fără parametri');
 
     // stub
-    var opţiuniOriginal = app.AcţiuniProcedurale.opţiuni,
-        $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni,
-        ceaMaiRecentăOriginal = app.AcţiuniProcedurale.ceaMaiRecentă;
+    var original = {
+      opţiuni: app.AcţiuniProcedurale.opţiuni,
+      $opţiuni: app.AcţiuniProcedurale.$opţiuni,
+      ceaMaiRecentă: app.AcţiuniProcedurale.ceaMaiRecentă
+    };
 
     app.AcţiuniProcedurale.opţiuni = {'intentare': ['continuare', 'încetare']};
     app.AcţiuniProcedurale.$opţiuni = app.$('<div/>');
     app.AcţiuniProcedurale.ceaMaiRecentă = function() { return 'intentare'; };
 
-    app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare();
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare();
     ok(app.AcţiuniProcedurale.$opţiuni.find('.propunere:contains("Încheiere de continuare")').există(),
       'propus încheierea de continuare');
     ok(app.AcţiuniProcedurale.$opţiuni.find('.propunere:contains("Încheiere de încetare")').există(),
       'propus încheierea de încetare');
 
     // unstub
-    app.AcţiuniProcedurale.opţiuni = opţiuniOriginal;
-    app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
-    app.AcţiuniProcedurale.ceaMaiRecentă = ceaMaiRecentăOriginal;
+    app.AcţiuniProcedurale.opţiuni = original.opţiuni;
+    app.AcţiuniProcedurale.$opţiuni = original.$opţiuni;
+    app.AcţiuniProcedurale.ceaMaiRecentă = original.ceaMaiRecentă;
   });
 
 
@@ -142,7 +179,10 @@
     ok($.isFunction(AcţiuniProcedurale.ceaMaiRecentă), '…funcţie');
     equal(AcţiuniProcedurale.ceaMaiRecentă.length, 0, '…fără parametri');
 
-    var $Original = AcţiuniProcedurale.$;
+    var original = {
+      $: AcţiuniProcedurale.$
+    };
+
     var ceaMaiRecentă = 'a treia';
 
     AcţiuniProcedurale.$ = $('<table>' +
@@ -156,7 +196,7 @@
     AcţiuniProcedurale.$ = $('<table></table>');
     equal(AcţiuniProcedurale.ceaMaiRecentă(), '', 'cînd nu sunt itemi întoarce “”');
 
-    AcţiuniProcedurale.$ = $Original;
+    AcţiuniProcedurale.$ = original.$;
   });
 
 
@@ -187,7 +227,9 @@
 
 
   test('.eliminăOpţiuni()', function() {
-    var $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni;
+    var original = {
+      $opţiuni: app.AcţiuniProcedurale.$opţiuni
+    };
 
     app.AcţiuniProcedurale.$opţiuni = app.$('<div>' +
       '<p class="propunere">…</p>' +
@@ -197,7 +239,7 @@
     app.AcţiuniProcedurale.eliminăOpţiuni();
     ok(!app.AcţiuniProcedurale.$opţiuni.find('.propunere').există(), 'eliminat opţiunile');
 
-    app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
+    app.AcţiuniProcedurale.$opţiuni = original.$opţiuni;
   });
 
 
@@ -213,12 +255,18 @@
     ok($.isFunction(app.AcţiuniProcedurale.adaugă), '…funcţie');
     equal(app.AcţiuniProcedurale.adaugă.length, 0, '…fără parametri');
 
-    var $Original = app.AcţiuniProcedurale.$,
-        actualizeazăOpţiunileOriginal = app.AcţiuniProcedurale.actualizeazăOpţiunile,
-        actualizatOpţiunile = false;
+    var actualizatOpţiunile = false,
+        ajustatEliminabilitatea = false;
+
+    var original = {
+      $: app.AcţiuniProcedurale.$,
+      actualizeazăOpţiunile: app.AcţiuniProcedurale.actualizeazăOpţiunile,
+      ajusteazăEliminabilitate: app.AcţiuniProcedurale.ajusteazăEliminabilitate
+    };
 
     app.AcţiuniProcedurale.$ = app.$('<div/>');
     app.AcţiuniProcedurale.actualizeazăOpţiunile = function() { actualizatOpţiunile = true; };
+    app.AcţiuniProcedurale.ajusteazăEliminabilitate = function() { ajustatEliminabilitatea = true; };
 
     var $script = app.$('<script type="text/x-fragment" id="acţiune-procedurală-identificator">' +
       '<div id="identificator"/>' +
@@ -229,41 +277,98 @@
     app.AcţiuniProcedurale.adaugă.call($(acţiune.propunere()).get(0));
     ok(app.AcţiuniProcedurale.$.find('div#identificator').există(), 'adaugă acţiunea în lista');
     ok(actualizatOpţiunile, 'actualizat opţiunile');
+    ok(ajustatEliminabilitatea, 'ajustat eliminabilitatea');
 
-    app.AcţiuniProcedurale.$ = $Original;
-    app.AcţiuniProcedurale.actualizeazăOpţiunile = actualizeazăOpţiunileOriginal;
+    app.AcţiuniProcedurale.$ = original.$;
+    app.AcţiuniProcedurale.actualizeazăOpţiunile = original.actualizeazăOpţiunile;
+    app.AcţiuniProcedurale.ajusteazăEliminabilitate = original.ajusteazăEliminabilitate;
+
     $script.remove();
   });
 
 
-  test('.actualizeazăOpţiunile', function() {
+  test('.elimină()', function() {
+    ok('elimină' in app.AcţiuniProcedurale, 'definit');
+    ok($.isFunction(app.AcţiuniProcedurale.elimină), '…funcţie');
+    equal(app.AcţiuniProcedurale.elimină.length, 0, '…fără parametri');
+
+    var ajustat = false,
+        propus = false;
+
+    var original = {
+      ajusteazăEliminabilitate: app.AcţiuniProcedurale.ajusteazăEliminabilitate,
+      propuneAcţiunileUrmătoare: app.AcţiuniProcedurale.propuneAcţiunileUrmătoare
+    };
+
+    app.AcţiuniProcedurale.ajusteazăEliminabilitate = function() { ajustat = true; };
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = function() { propus = true; };
+
+    app.AcţiuniProcedurale.elimină();
+    ok(ajustat, 'ajustat eliminabilitatea');
+    ok(propus, 'propus acţiunile următoare');
+
+    app.AcţiuniProcedurale.ajusteazăEliminabilitate = original.ajusteazăEliminabilitate;
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = original.propuneAcţiunileUrmătoare;
+  });
+
+
+  test('.ajusteazăEliminabilitate()', function() {
+    ok('ajusteazăEliminabilitate' in app.AcţiuniProcedurale, 'definit');
+    ok($.isFunction(app.AcţiuniProcedurale.ajusteazăEliminabilitate), '…funcţie');
+    equal(app.AcţiuniProcedurale.ajusteazăEliminabilitate.length, 0, 'fără arametri');
+
+    var original = {
+      $: app.AcţiuniProcedurale.$
+    };
+
+    app.AcţiuniProcedurale.$.html(
+      '<div acţiune>prima</div>' +
+      '<div acţiune>a doua</div>' +
+      '<div acţiune>a treia</div>'
+    );
+    app.AcţiuniProcedurale.ajusteazăEliminabilitate();
+
+    var itemi = app.AcţiuniProcedurale.$.find('[acţiune]');
+
+    ok(itemi.eq(0).is(':not(.eliminabil)'), 'itemii alţii decît ultimul nu sunt eliminabil');
+    ok(itemi.eq(1).is(':not(.eliminabil)'), 'itemii alţii decît ultimul nu sunt eliminabil');
+    ok(itemi.eq(2).is('.eliminabil.de.tot'), 'ultimul item este eliminabil');
+
+    app.AcţiuniProcedurale.$ = original.$;
+  });
+
+
+  test('.actualizeazăOpţiunile()', function() {
     ok('actualizeazăOpţiunile' in app.AcţiuniProcedurale, 'definit');
     ok($.isFunction(app.AcţiuniProcedurale.actualizeazăOpţiunile), '…funcţie');
     equal(app.AcţiuniProcedurale.actualizeazăOpţiunile.length, 0, '…fără parametri');
 
-    var eliminăOpţiunileCurenteOiriginal = app.AcţiuniProcedurale.eliminăOpţiunileCurente,
-        eliminatOpţiunileCurente = false,
-        propuneCorespunzătorAcţiunileUrmătoareOriginal = app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare,
+    var eliminatOpţiunileCurente = false,
         propusCorespunzătorAcţiunileUrmătoare = false;
 
+    var original = {
+      eliminăOpţiunileCurente: app.AcţiuniProcedurale.eliminăOpţiunileCurente,
+      propuneAcţiunileUrmătoare: app.AcţiuniProcedurale.propuneAcţiunileUrmătoare
+    };
+
     app.AcţiuniProcedurale.eliminăOpţiunileCurente = function() { eliminatOpţiunileCurente = true; };
-    app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = function() { propusCorespunzătorAcţiunileUrmătoare = true; };
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = function() { propusCorespunzătorAcţiunileUrmătoare = true; };
 
     app.AcţiuniProcedurale.actualizeazăOpţiunile();
     ok(eliminatOpţiunileCurente, 'eliminat opţiunile curente');
     ok(propusCorespunzătorAcţiunileUrmătoare, 'propus opţiunile următoare');
 
-    app.AcţiuniProcedurale.eliminăOpţiunileCurente = eliminăOpţiunileCurenteOiriginal;
-    app.AcţiuniProcedurale.propuneCorespunzătorAcţiunileUrmătoare = propuneCorespunzătorAcţiunileUrmătoareOriginal;
+    app.AcţiuniProcedurale.eliminăOpţiunileCurente = original.eliminăOpţiunileCurente;
+    app.AcţiuniProcedurale.propuneAcţiunileUrmătoare = original.propuneAcţiunileUrmătoare;
   });
 
 
-  test('.eliminăOpţiunileCurente', function() {
+  test('.eliminăOpţiunileCurente()', function() {
     ok('eliminăOpţiunileCurente' in app.AcţiuniProcedurale, 'definit');
     ok($.isFunction(app.AcţiuniProcedurale.eliminăOpţiunileCurente), '…funcţie');
     equal(app.AcţiuniProcedurale.eliminăOpţiunileCurente.length, 0, '…fără parametri');
 
-    var $OpţiuniOriginal = app.AcţiuniProcedurale.$opţiuni;
+    var original = { $opţiuni: app.AcţiuniProcedurale.$opţiuni };
 
     app.AcţiuniProcedurale.$opţiuni = app.$('<div>' +
       '<p class="propunere">prima propunere</p>' +
@@ -272,11 +377,11 @@
     app.AcţiuniProcedurale.eliminăOpţiunileCurente();
     ok(!app.AcţiuniProcedurale.$opţiuni.find('.propunere').există(), 'eliminat');
 
-    app.AcţiuniProcedurale.$opţiuni = $OpţiuniOriginal;
+    app.AcţiuniProcedurale.$opţiuni = original.$opţiuni;
   });
 
 
-  test('Şabloane acţiuni', function() {
+  test('structura şabloanelor de acţiuni', function() {
     for (var identificator in app.AcţiuniProcedurale.opţiuni) {
       if (identificator === '') continue;
 

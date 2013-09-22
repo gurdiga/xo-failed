@@ -1661,6 +1661,11 @@ fieldset label,
   padding: 0;
 }
 
+[acţiune] .elimină {
+  left: -9px;
+  top: 1px;
+}
+
 #acţiuni-procedurale .opţiuni {
   padding-top: 15px;
   margin: 0 0 0 20px;
@@ -1709,7 +1714,7 @@ fieldset label,
 }
 
 #acţiuni-procedurale .propunere:before {
-  content: counter(propuneri, decimal);
+  content: counter(propuneri, lower-latin);
   font: bold 35px 'Times New Roman', serif;
   position: absolute;
   width: 40px;

@@ -3742,10 +3742,12 @@
       // --------------------
       init: function() {
         this.înregistreazăFragmenteParţiale();
-        this.$opţiuni.on('click', '.propunere', this.adaugă);
         this.efecte.init();
 
-        this.propuneCorespunzătorAcţiunileUrmătoare();
+        this.$opţiuni.on('click', '.propunere', this.adaugă);
+        this.$.parent().on('eliminat-item', this.elimină);
+
+        this.propuneAcţiunileUrmătoare();
       },
 
       înregistreazăFragmenteParţiale: function() {
@@ -3773,8 +3775,8 @@
       },
 
       // --------------------
-      propuneCorespunzătorAcţiunileUrmătoare: function() {
-        var identificatori = this.opţiuni[this.ceaMaiRecentă()];
+      propuneAcţiunileUrmătoare: function() {
+        var identificatori = AcţiuniProcedurale.opţiuni[AcţiuniProcedurale.ceaMaiRecentă()];
 
         var opţiuni = identificatori.map(function(identificatorAcţiune) {
           var acţiune = new AcţiuneProcedurală(identificatorAcţiune);
@@ -3803,13 +3805,31 @@
             acţiune = new AcţiuneProcedurală(identificator);
 
         acţiune.adaugăLa(AcţiuniProcedurale.$);
+        AcţiuniProcedurale.ajusteazăEliminabilitate();
         AcţiuniProcedurale.actualizeazăOpţiunile();
       },
 
+      // --------------------
+      elimină: function() {
+        AcţiuniProcedurale.ajusteazăEliminabilitate();
+        AcţiuniProcedurale.propuneAcţiunileUrmătoare();
+      },
+
+      // --------------------
+      ajusteazăEliminabilitate: function() {
+        var itemi = AcţiuniProcedurale.$.find('[acţiune]');
+
+        itemi.not(':last').removeClass('eliminabil de tot');
+        itemi.last().addClass('eliminabil de tot');
+      },
+
+      // --------------------
+
       actualizeazăOpţiunile: function() {
         this.eliminăOpţiunileCurente();
-        this.propuneCorespunzătorAcţiunileUrmătoare();
+        this.propuneAcţiunileUrmătoare();
       },
+      // --------------------
 
       eliminăOpţiunileCurente: function() {
         this.$opţiuni.find('.propunere').remove();

@@ -2127,13 +2127,9 @@
       <p class="descriere">{{descrierea}}</p>
     </script>
 
-    <script id="buton-încheiere" type="text/x-fragment">
-      <a class="ico document" href="#">{{eticheta}}</a>
-    </script>
-
     <script id="butoane-încheiere" type="text/x-fragment">
-      {{include 'buton-încheiere' eticheta='încheierea' }}
-      {{include 'buton-încheiere' eticheta='fişa de însoţire' }}
+      <a class="ico document" formular="/formulare-încheieri/{{încheierea}}.html" href="#">încherea</a>
+      <a class="ico document" formular="/formulare-încheieri/scrisoare-de-însoţire.html" href="#">scrisoarea de însoţire</a>
     </script>
 
     <script id="item-taxe-şi-speze-ale-acţiunii" type="text/x-fragment">
@@ -2162,13 +2158,19 @@
       </div>
     </script>
 
+    <script id="acţiune-procedurală" type="text/x-fragment">
+      <li acţiune="{{acţiunea}}">
+        {{{ yield }}}
+      </li>
+    </script>
+
     <script id="acţiune-procedurală-intentare" type="text/x-fragment">
-      <li acţiune="intentare">
+      {{#include 'acţiune-procedurală' acţiunea='intentare' }}
         {{include 'data-acţiunii' }}
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Intentarea şi formarea procedurii de executare' }}
-          {{include 'butoane-încheiere' }}
+          {{include 'butoane-încheiere' încheierea='încheiere-de-intentare' }}
 
           {{#include 'taxe-şi-speze-ale-acţiunii' }}
             {{include 'item-taxe-şi-speze-ale-acţiunii'
@@ -2183,16 +2185,16 @@
           {{/include}}
 
         {{/include}}
-      </li>
+      {{/include}}
     </script>
 
     <script id="acţiune-procedurală-intentare-cu-asigurare" type="text/x-fragment">
-      <li acţiune="intentare-cu-asigurare">
+      {{#include 'acţiune-procedurală' acţiunea='intentare-cu-asigurare' }}
         {{include 'data-acţiunii' }}
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Intentarea şi formarea procedurii de executare, plus asigurarea executării' }}
-          {{include 'butoane-încheiere' }}
+          {{include 'butoane-încheiere' încheierea='încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii' }}
 
           {{#include 'taxe-şi-speze-ale-acţiunii' }}
             {{include 'item-taxe-şi-speze-ale-acţiunii'
@@ -2207,40 +2209,40 @@
           {{/include}}
 
         {{/include}}
-      </li>
+      {{/include}}
     </script>
 
     <script id="acţiune-procedurală-continuare" type="text/x-fragment">
-      <li acţiune="continuare">
+      {{#include 'acţiune-procedurală' acţiunea='continuare' }}
         {{include 'data-acţiunii' }}
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Încheiere de continuare a procedurii de executare' }}
           {{include 'butoane-încheiere' }}
         {{/include}}
-      </li>
+      {{/include}}
     </script>
 
     <script id="acţiune-procedurală-încetare" type="text/x-fragment">
-      <li acţiune="încetare">
+      {{#include 'acţiune-procedurală' acţiunea='încetare' }}
         {{include 'data-acţiunii' }}
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Încheiere de încetare a procedurii de executare' }}
           {{include 'butoane-încheiere' }}
         {{/include}}
-      </li>
+      {{/include}}
     </script>
 
     <script id="acţiune-procedurală-încasare" type="text/x-fragment">
-      <li acţiune="încasare">
+      {{#include 'acţiune-procedurală' acţiunea='încasare' }}
         {{include 'data-acţiunii' }}
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Încheiere de încasare TODO: de verificat' }}
           {{include 'butoane-încheiere' }}
         {{/include}}
-      </li>
+      {{/include}}
     </script>
 
     <script id="opţiuni-acţiune-procedurală" type="text/x-fragment">
