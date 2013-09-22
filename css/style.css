@@ -1612,7 +1612,7 @@ fieldset label,
 [acţiune]>[secţiune] {
   float: left;
   margin-left: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 [acţiune]>[secţiune="dată"] {
@@ -1636,7 +1636,7 @@ fieldset label,
 }
 
 [acţiune] fieldset.subsecţiune {
-  margin: 5px 0 0 -8px;
+  margin: 5px 0 5px -8px;
 }
 
 [acţiune] .taxe {
@@ -1662,12 +1662,32 @@ fieldset label,
 }
 
 #acţiuni-procedurale .opţiuni {
-  padding-top: 10px;
-  clear: left;
+  padding-top: 15px;
   margin: 0 0 0 20px;
 }
 
-#acţiuni-procedurale .itemi:empty+.opţiuni {
+#acţiuni-procedurale .opţiuni,
+#acţiuni-procedurale .total {
+  clear: left;
+  margin: 0 0 0 11px;
+}
+
+#acţiuni-procedurale .total {
+  padding: 10px 0;
+}
+
+#acţiuni-procedurale .total label {
+  padding-left: 0;
+  width: auto;
+  font-weight: bold;
+}
+
+#acţiuni-procedurale .itemi:empty+.total {
+  padding: 10px 0;
+  display: none;
+}
+
+#acţiuni-procedurale .itemi:empty+.total+.opţiuni {
   padding-top: 0;
 }
 
