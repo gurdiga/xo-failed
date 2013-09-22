@@ -3784,9 +3784,12 @@
           return acţiune.propunere();
         });
 
-        AcţiuniProcedurale.$opţiuni.html(
-          FRAGMENT_PROPUNERE.compilează({ opţiuni: opţiuni })
-        );
+        AcţiuniProcedurale.$opţiuni
+          .html(
+            FRAGMENT_PROPUNERE.compilează({ opţiuni: opţiuni })
+          )
+          .hide()
+          .slideDown();
       },
 
       // --------------------
