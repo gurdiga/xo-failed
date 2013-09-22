@@ -1693,7 +1693,7 @@ fieldset label,
   font: bold 250% serif;
   position: absolute;
   width: 40px;
-  margin-left: -45px;
+  margin: -3px 0 0 -45px;
   text-align: right;
   color: #ddd;
 }
