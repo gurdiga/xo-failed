@@ -9,6 +9,7 @@
     '/js/action.js',
     '/js/încheiere.js',
     '/js/indexer.js',
+    '/js/lib/sinon-config.js',
 
     'unit/încheiere.js',
     'unit/handlebars-helpers.js',
@@ -109,6 +110,7 @@
   };
 
   var JSHINT_GLOBALS = {
+    sinon: false,
     QUnit: false,
     module: false,
     start: false,
