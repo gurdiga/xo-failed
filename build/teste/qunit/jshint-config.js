@@ -10,6 +10,7 @@
     '/js/încheiere.js',
     '/js/indexer.js',
     '/js/lib/sinon-config.js',
+    '/js/processors/encrypter.js',
 
     'unit/încheiere.js',
     'unit/handlebars-helpers.js',
@@ -24,6 +25,11 @@
     'unit/acţiune-procedurală.js',
     'unit/fragment.js',
     'unit/formular-procedură.js',
+    'unit/encrypter.js',
+    'unit/persistence.js',
+
+    '/js/processors/encrypter.js',
+    'unit/processors/encrypter.js',
 
     'integrare/calculator-dobînzi.js',
     'integrare/profil.js',
@@ -110,6 +116,7 @@
   };
 
   var JSHINT_GLOBALS = {
+    self: false,
     sinon: false,
     QUnit: false,
     module: false,

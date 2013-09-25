@@ -1,4 +1,4 @@
-/*global top:false moment:false RateDeBază:false RateBNM:false Handlebars:false*/
+/*global top:false moment:false RateDeBază:false RateBNM:false Handlebars:false Worker:false*/
 
 (function(window, document, moment) {
   'use strict';
@@ -3841,7 +3841,67 @@
     };
 
     return AcţiuniProcedurale;
-  })();
+  })(),
+
+  // --------------------------------------------------
+
+  Processor = (function() {
+    var Processor = function(url) {
+      var worker = new Processor.factory(url);
+
+      this.postMessage = function(message, callback) {
+        worker.onmessage = function(e) {
+          callback(e.data);
+          worker.terminate();
+        };
+
+        worker.postMessage(message);
+      };
+    };
+
+    Processor.factory = Worker;
+
+    return Processor;
+  })(),
+
+  // --------------------------------------------------
+
+  Encrypter = (function() {
+    var URL = '/js/processors/encrypter.js';
+
+    function postMessage(command, text, callback) {
+      var message = {
+        command: command,
+        text: text,
+        passphrase: 'Utilizator.cheieDeCriptare'
+      };
+
+      new Processor(URL).postMessage(message, callback);
+    }
+
+    return {
+      encrypt: function(text, callback) {
+        postMessage('encrypt', text, callback);
+      },
+
+      decrypt: function(text, callback) {
+        postMessage('decrypt', text, callback);
+      }
+    };
+  })(),
+
+  // --------------------------------------------------
+
+  Persistence = {
+    get: function(url, callback) {
+      return [url, callback];
+      //$.get(url, callback);
+    },
+
+    set: function(url, data) {
+      return [url, data];
+    }
+  };
 
   // --------------------------------------------------
 
@@ -3874,7 +3934,10 @@
       AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate,
       AcţiuniProcedurale: AcţiuniProcedurale,
-      AcţiuneProcedurală: AcţiuneProcedurală
+      AcţiuneProcedurală: AcţiuneProcedurală,
+      Processor: Processor,
+      Encrypter: Encrypter,
+      Persistence: Persistence
     });
   }
 
