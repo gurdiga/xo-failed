@@ -3402,6 +3402,7 @@
         // TODO: aici de eliminat Încheieri.deschide în favoarea la Încheieri.deschide2?
         $(document)
           .on('click', '.încheieri a', Încheieri.deschide2)
+          .on('click', '#acţiuni-procedurale a.document', Încheieri.deschide2)
           .on('click', '.buton[data-formular]', Încheieri.deschide)
           .on('mouseenter', '.buton[data-formular]', this.seteazăŞoaptă);
 
