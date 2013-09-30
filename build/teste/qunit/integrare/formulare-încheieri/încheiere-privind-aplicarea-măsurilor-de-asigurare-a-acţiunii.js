@@ -213,18 +213,9 @@
 
             $încheiere.find('.închide').click();
 
-            var $valoareaAcţiunii = app.FormularProcedură.$obiectulUrmăririi.find('.personalizat.valoarea-acţiunii');
-
-            $valoareaAcţiunii
-              .trigger('mousemove')
-              .find('.elimină').focus().click();
-
-            setTimeout(function() { // slideUp?
-              ok(!$secţiune.find('.personalizat.valoarea-acţiunii').există(), 'eliminat cîmp valoarea acţiunii');
-
-              app.$.fx.off = false;
-              start();
-            }, 550);
+            app.FormularProcedură.$obiectulUrmăririi.find('.personalizat.valoarea-acţiunii').remove();
+            app.$.fx.off = false;
+            start();
           }); // one iniţializat
         }); // one populat
       }); // one închis
@@ -331,16 +322,9 @@
 
             $încheiere.find('.închide').click();
 
-            $cîmpBun
-              .trigger('mousemove')
-              .on('eliminat', function() {
-                start();
-              });
-
-            var butonDeEliminare = $cîmpBun.find('.elimină');
-
-            ok(butonDeEliminare.există(), 'avem butonaş pentru eliminare bun');
-            butonDeEliminare.focus().click();
+            $cîmpBun.remove();
+            app.$.fx.off = false;
+            start();
           }); // one iniţializat
         }); // one populat
       }); // one închis
@@ -444,16 +428,9 @@
 
             $încheiere.find('.închide').click();
 
-            $cîmpSumă
-              .trigger('mousemove')
-              .on('eliminat', function() {
-                start();
-              });
-
-            var butonDeEliminare = $cîmpSumă.find('.elimină');
-
-            ok(butonDeEliminare.există(), 'avem butonaş de eliminare sumă');
-            butonDeEliminare.focus().click();
+            $cîmpSumă.remove();
+            app.$.fx.off = false;
+            start();
           }); // one iniţializat
         });
       });
