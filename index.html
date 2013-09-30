@@ -453,7 +453,7 @@
             <div class="conţinut">
               <ul class="itemi"></ul>
               <div class="total">
-                <label>Total cheltuieli:</label>
+                <label>Total cheltuieli pe toate acţiunile:</label>
                 <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
                 <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
                 <b>MDL</b>
@@ -2127,9 +2127,8 @@
       <p class="descriere">{{descrierea}}</p>
     </script>
 
-    <script id="butoane-încheiere" type="text/x-fragment">
-      <a class="ico document" formular="/formulare-încheieri/{{încheierea}}.html" href="#">încherea</a>
-      <a class="ico document" formular="/formulare-încheieri/scrisoare-de-însoţire.html" href="#">scrisoarea de însoţire</a>
+    <script id="buton-document" type="text/x-fragment">
+      <a class="ico document" formular="{{formularul}}" href="{{formularul}}">{{eticheta}}</a>
     </script>
 
     <script id="item-taxe-şi-speze-ale-acţiunii" type="text/x-fragment">
@@ -2170,7 +2169,21 @@
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Intentarea şi formarea procedurii de executare' }}
-          {{include 'butoane-încheiere' încheierea='încheiere-de-intentare' }}
+
+          {{include 'buton-document'
+            eticheta='încherea'
+            formularul='/formulare-încheieri/încheiere-de-intentare.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='scrisoarea de însoţire'
+            formularul='/formulare-încheieri/scrisoare-de-însoţire.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='borderoul de calcul'
+            formularul='/formulare-încheieri/borderou-de-calcul.html'
+          }}
 
           {{#include 'taxe-şi-speze-ale-acţiunii' }}
             {{include 'item-taxe-şi-speze-ale-acţiunii'
@@ -2181,6 +2194,14 @@
             {{include 'item-taxe-şi-speze-ale-acţiunii'
               descriere='taxa de arhivare a procedurii de executare'
               cost=3
+            }}
+
+            {{include 'item-taxe-şi-speze-ale-acţiunii'
+              descriere=
+                'taxa pentru întocmirea borderoului de calcul al taxelor
+                pentru efectuarea actelor executorului judecătoresc şi a spezelor
+                procedurii de executare'
+              cost=1
             }}
           {{/include}}
 
@@ -2194,7 +2215,21 @@
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Intentarea şi formarea procedurii de executare, plus asigurarea executării' }}
-          {{include 'butoane-încheiere' încheierea='încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii' }}
+
+          {{include 'buton-document'
+            eticheta='încherea'
+            formularul='/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='scrisoarea de însoţire'
+            formularul='/formulare-încheieri/scrisoare-de-însoţire.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='borderoul de calcul'
+            formularul='/formulare-încheieri/borderou-de-calcul.html'
+          }}
 
           {{#include 'taxe-şi-speze-ale-acţiunii' }}
             {{include 'item-taxe-şi-speze-ale-acţiunii'
@@ -2218,7 +2253,16 @@
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Încheiere de continuare a procedurii de executare' }}
-          {{include 'butoane-încheiere' }}
+
+          {{include 'buton-document'
+            eticheta='încherea'
+            formularul='/formulare-încheieri/încheiere-de-continuare.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='scrisoarea de însoţire'
+            formularul='/formulare-încheieri/scrisoare-de-însoţire.html'
+          }}
         {{/include}}
       {{/include}}
     </script>
@@ -2229,7 +2273,16 @@
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Încheiere de încetare a procedurii de executare' }}
-          {{include 'butoane-încheiere' }}
+
+          {{include 'buton-document'
+            eticheta='încherea'
+            formularul='/formulare-încheieri/încheiere-de-încetare.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='scrisoarea de însoţire'
+            formularul='/formulare-încheieri/scrisoare-de-însoţire.html'
+          }}
         {{/include}}
       {{/include}}
     </script>
@@ -2240,7 +2293,16 @@
 
         {{#include 'conţinutul-acţiunii' }}
           {{include 'descrierea-acţiunii' descrierea='Încheiere de încasare TODO: de verificat' }}
-          {{include 'butoane-încheiere' }}
+
+          {{include 'buton-document'
+            eticheta='încherea'
+            formularul='/formulare-încheieri/încheiere-de-încasare.html'
+          }}
+
+          {{include 'buton-document'
+            eticheta='scrisoarea de însoţire'
+            formularul='/formulare-încheieri/scrisoare-de-însoţire.html'
+          }}
         {{/include}}
       {{/include}}
     </script>
