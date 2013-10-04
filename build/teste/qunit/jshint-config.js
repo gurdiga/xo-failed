@@ -33,6 +33,7 @@
     '/js/app/calendar.js',
     '/js/app/acţiune-procedurală.js',
     '/js/app/acţiuni-procedurale.js',
+    '/js/app/processor.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
