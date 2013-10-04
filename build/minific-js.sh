@@ -42,6 +42,7 @@ cat \
   lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js \
   js/lib.js \
   js/handlebars-helpers.js \
+  `find js/app/ -name *.js` \
   js/action.js \
   > js/one.js
 mv js/one.js js/action-$TIMESTAMP.js
@@ -51,6 +52,7 @@ grep --fixed-strings --invert-match \
   -e '<script defer src="/js/lib/jquery-migrate-1.2.1.min.js"></script>' \
   -e '<script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>' \
   -e '<script defer src="/js/lib.js"></script>' \
+  -e '<script defer src="/js/app/' \
   -e '<script defer src="/js/handlebars-helpers.js"></script>' \
   index.html > index.html.1
 
