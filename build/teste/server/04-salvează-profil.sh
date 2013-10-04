@@ -9,7 +9,7 @@ curl \
   --insecure \
   --data @$SURSA \
   --user $LOGIN:$PASSWORD \
-  https://$SERVER_NAME/$DESTINATIA
+  https://$SERVER_NAME/$DESTINATIA > /dev/null
 
 verifică 'trimis datele'
 

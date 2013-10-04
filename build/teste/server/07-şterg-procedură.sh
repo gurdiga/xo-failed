@@ -4,7 +4,7 @@ DESTINATIA="date/$LOGIN/proceduri/1/"
 
 curl $CURL_DEFAULT_ARGS \
   --request DELETE \
-  https://$SERVER_NAME/$DESTINATIA
+  https://$SERVER_NAME/$DESTINATIA > /dev/null
 verifică 'trimis request'
 
 test ! -d $DOCUMENT_ROOT/$DESTINATIA
