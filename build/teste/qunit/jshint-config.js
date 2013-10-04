@@ -28,6 +28,9 @@
     'unit/encrypter.js',
     'unit/persistence.js',
 
+    '/js/app/x-jquery.js',
+    '/js/app/fragment.js',
+
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
 
