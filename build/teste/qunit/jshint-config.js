@@ -39,6 +39,7 @@
     '/js/app/persistence.js',
     '/js/app/structuri-date.js',
     '/js/app/subsecţiuni-dinamice.js',
+    '/js/app/selecturi-foarte-late.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
