@@ -36,6 +36,7 @@
     '/js/app/processor.js',
     '/js/app/encrypter.js',
     '/js/app/ajax-buffer.js',
+    '/js/app/persistence.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
