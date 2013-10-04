@@ -5,7 +5,6 @@
     'jshint-config.js',
     'csslint-config.js',
     'qunit-extensions.js',
-    '/js/handlebars-helpers.js',
     '/js/action.js',
     '/js/încheiere.js',
     '/js/indexer.js',
@@ -28,6 +27,7 @@
     'unit/encrypter.js',
     'unit/persistence.js',
 
+    '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',
     '/js/app/fragment.js',
     '/js/app/calendar.js',
