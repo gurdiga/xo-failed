@@ -38,6 +38,7 @@
     '/js/app/ajax-buffer.js',
     '/js/app/persistence.js',
     '/js/app/structuri-date.js',
+    '/js/app/subsecţiuni-dinamice.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
