@@ -1,4 +1,4 @@
-/*global top moment RateDeBază Calendar Processor AcţiuniProcedurale*/
+/*global top moment RateDeBază Calendar AcţiuniProcedurale*/
 (function(window, document, moment) {
   'use strict';
 
@@ -3430,32 +3430,6 @@
 
   // --------------------------------------------------
 
-  Encrypter = (function() {
-    var URL = '/js/processors/encrypter.js';
-
-    function postMessage(command, text, callback) {
-      var message = {
-        command: command,
-        text: text,
-        passphrase: 'Utilizator.cheieDeCriptare'
-      };
-
-      new Processor(URL).postMessage(message, callback);
-    }
-
-    return {
-      encrypt: function(text, callback) {
-        postMessage('encrypt', text, callback);
-      },
-
-      decrypt: function(text, callback) {
-        postMessage('decrypt', text, callback);
-      }
-    };
-  })(),
-
-  // --------------------------------------------------
-
   Persistence = {
     get: function(url, callback) {
       return [url, callback];
@@ -3496,7 +3470,6 @@
       SubsecţiuniDinamice: SubsecţiuniDinamice,
       AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate,
-      Encrypter: Encrypter,
       Persistence: Persistence
     });
   }

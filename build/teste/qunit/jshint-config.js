@@ -34,6 +34,7 @@
     '/js/app/acţiune-procedurală.js',
     '/js/app/acţiuni-procedurale.js',
     '/js/app/processor.js',
+    '/js/app/encrypter.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
