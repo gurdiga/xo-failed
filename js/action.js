@@ -1,4 +1,4 @@
-/*global top moment RateDeBază Handlebars Worker Fragment*/
+/*global top moment RateDeBază Handlebars Worker Fragment Calendar AcţiuneProcedurală*/
 
 (function(window, document, moment) {
   'use strict';
@@ -2407,99 +2407,6 @@
 
   // --------------------------------------------------
 
-  Calendar = {
-    opţiuni: {
-      dateFormat: 'dd.mm.yy',
-      dayNamesMin: 'Du Lu Ma Mi Jo Vi Sî Du'.split(' '),
-      monthNames: 'Ianuarie Februarie Martie Aprilie Mai Iunie' +
-        'Iulie August Septembrie Octombrie Noiembrie Decembrie'.split(' '),
-      monthNamesShort: 'Ian Feb Mar Apr Mai Iun Iul Aug Sep Oct Noi Dec'.split(' '),
-      firstDay: 1,
-      showAnim: 'fadeIn',
-      prevText: 'Luna precedentă',
-      nextText: 'Luna viitoare',
-      showOn: 'none',
-      changeMonth: true,
-      changeYear: true,
-      yearRange: 'c-60:c+10',
-      onSelect: function() { Calendar.închide(this); },
-      beforeShow: function() { Calendar.veziDacăMaiECeva(this); }
-    },
-
-    init: function() {
-      this.insereazăButoane();
-
-      $(document)
-        .on('click', 'input.dată+.ui-icon-calendar', this.afişează);
-    },
-
-    închide: function(el) {
-      el = $(el);
-
-      if (el.attr('data-id')) el.attr('id', el.attr('data-id'));
-
-      el.datepicker('destroy').focus().trigger('input');
-
-      if (el.attr('data-ceva')) el.val(el.val() + el.attr('data-ceva'));
-    },
-
-    // dacă în cîmpul pentru dată mai este ceva, de exemplu ora, memorizează
-    // pentru a repopula după ce se selectează ceva din calendar
-    veziDacăMaiECeva: function(input) {
-      var valoarea = input.value;
-
-      if (valoarea.length === 10) return; // este introdusă doar data
-
-      $(input).attr('data-ceva', valoarea.substr(10));
-    },
-
-    insereazăButoane: function(container) {
-      container = container || document.body;
-
-      var buton = $('<span>')
-        .addClass('ui-icon ui-icon-calendar semiascuns')
-        .attr('title', 'Calendar');
-
-      $('input.dată', container).after(buton);
-    },
-
-    afişează: function() {
-      /*jshint maxcomplexity:6*/
-      var cîmp = $(this).prev(),
-          calendar = cîmp.datepicker('widget');
-
-      if (calendar.is(':visible')) {
-        cîmp.datepicker('destroy');
-      } else {
-        if (!cîmp.attr('data-datepicker')) {
-          if (cîmp.attr('id')) {
-            cîmp
-              .attr('data-id', cîmp.attr('id'))
-              .removeAttr('id');
-          }
-
-          cîmp.datepicker(Calendar.opţiuni);
-
-          if (cîmp.is('.dată.sfîrşit.perioadă')) {
-            var începutPerioadă = cîmp.siblings('.început.perioadă');
-
-            începutPerioadă = $.trim(începutPerioadă.val());
-
-            if (RE_FORMATUL_DATEI.test(începutPerioadă)) {
-              var minDate = moment(începutPerioadă, FORMATUL_DATEI).add('days', 1).toDate();
-
-              cîmp.datepicker('option', 'minDate', minDate);
-            }
-          }
-        }
-
-        cîmp.datepicker('show');
-      }
-    }
-  },
-
-  // --------------------------------------------------
-
   // TODO:
   //  - de asigurat o valoare (cea default?) pentru etichete personalizate
   //  - de incrementat cînd mai este altul cu acelaşi nume? sau de stocat în array vs. hash?
@@ -3524,78 +3431,6 @@
 
   // --------------------------------------------------
 
-  AcţiuneProcedurală = (function() {
-    var PREFIX_FRAGMENTE = 'acţiune-procedurală-';
-
-    var AcţiuneProcedurală = function(identificator, date) {
-      date = date || {};
-
-      var dataCurentă = moment(Date.now()).format(FORMATUL_DATEI);
-
-      date['data'] = date['data'] || dataCurentă;
-
-      var fragment = new Fragment(PREFIX_FRAGMENTE + identificator),
-          html = fragment.compilează(date);
-
-      // --------------------
-      this.propunere = function() {
-        var descriere = $(html).find('.descriere').text();
-
-        return {
-          descriere: descriere,
-          identificator: identificator
-        };
-      };
-
-      // --------------------
-      this.adaugăLa = function($container) {
-        var $html = $(html);
-
-        Calendar.insereazăButoane($html);
-        $container
-          .trigger('înainte-de.adăugare-acţiune', [$html])
-          .append($html)
-          .trigger('după.adăugare-acţiune', [$html]);
-      };
-
-      // --------------------
-      this.areStructuraCorespunzătoare = function() {
-        /*jshint maxcomplexity:5*/
-        var $html = $(html),
-            lipsuri = [];
-
-        if (!$html.is('[acţiune="' + identificator + '"]')) lipsuri.push('nu are atributul “acţiune”');
-
-        var componente = {
-          '[secţiune="dată"]': 'secţiunea cu dată',
-          '[secţiune="conţinut"]': 'secţiunea cu conţinut',
-          '.descriere': 'descrierea',
-          '.document.ico': 'butonaşele pentru încheiere'
-          // TODO: de determinat ce componente trebuie să existe pentru fiecare acţiune
-          // şi de verificat prezenţa lor:
-        }, selector, descriere;
-
-        for (selector in componente) {
-          descriere = componente[selector];
-
-          if (!$html.find(selector).există()) lipsuri.push('lipseşte ' + descriere);
-        }
-
-        return lipsuri.length > 0 ? lipsuri : true;
-      };
-    };
-
-    // --------------------
-    AcţiuneProcedurală.există = function(identificator) {
-      return Fragment.există(PREFIX_FRAGMENTE + identificator);
-    };
-
-    // --------------------
-    return AcţiuneProcedurală;
-  })(),
-
-  // --------------------------------------------------
-
   AcţiuniProcedurale = (function() {
     var FRAGMENT_PROPUNERE = new Fragment('opţiuni-acţiune-procedurală');
 
@@ -3805,7 +3640,6 @@
       AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate,
       AcţiuniProcedurale: AcţiuniProcedurale,
-      AcţiuneProcedurală: AcţiuneProcedurală,
       Processor: Processor,
       Encrypter: Encrypter,
       Persistence: Persistence
