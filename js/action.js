@@ -1,4 +1,4 @@
-/*global top moment RateDeBază Calendar SelecturiFoarteLate SubsecţiuniDinamice StructuriDate AcţiuniProcedurale*/
+/*global top moment TextareaElastice RateDeBază Calendar SelecturiFoarteLate SubsecţiuniDinamice StructuriDate AcţiuniProcedurale*/
 (function(window, document, moment) {
   'use strict';
 
@@ -182,38 +182,6 @@
 
     date: function() {
       return this.hash().split('?')[1] || '';
-    }
-  },
-
-  // --------------------------------------------------
-
-  TextareaElastice = {
-    evenimente: 'keydown keyup input focus mouseup',
-
-    init: function() {
-      FormularProcedură.$
-        .attr('spellcheck', 'false')
-        .on(this.evenimente, 'textarea', this.autodimensionează);
-    },
-
-    autodimensionează: function() {
-      var textarea = $(this);
-
-      if (textarea.is(':not(:visible)')) return;
-
-      var clone = textarea.clone()
-        .css({
-          'padding': 0,
-          'border-width': 0,
-          'visibility': 'hidden',
-          'position': 'absolute',
-          'height': textarea.css('min-height')
-        })
-        .val(textarea.val())
-        .insertBefore(textarea);
-
-      textarea.css('height', clone[0].scrollHeight);
-      clone.remove();
     }
   },
 
@@ -3319,8 +3287,7 @@
       Căutare: Căutare,
       Onorariu: Onorariu,
       Persoane: Persoane,
-      HashController: HashController,
-      TextareaElastice: TextareaElastice
+      HashController: HashController
     });
   }
 

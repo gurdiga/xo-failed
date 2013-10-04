@@ -40,6 +40,7 @@
     '/js/app/structuri-date.js',
     '/js/app/subsecţiuni-dinamice.js',
     '/js/app/selecturi-foarte-late.js',
+    '/js/app/textarea-elastice.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
