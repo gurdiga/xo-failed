@@ -3369,19 +3369,6 @@
 
   // --------------------------------------------------
 
-  // TODO?
-  AjaxBuffer = {
-    put: function(url, data) {
-      window.localStorage.setItem(url, JSON.stringify(data));
-    },
-
-    get: function(url) {
-      return JSON.parse(window.localStorage.getItem(url));
-    }
-  },
-
-  // --------------------------------------------------
-
   StructuriDate = {
     versiuni: {
       'profil': [],
@@ -3468,7 +3455,6 @@
       TextareaElastice: TextareaElastice,
       SelecturiFoarteLate: SelecturiFoarteLate,
       SubsecţiuniDinamice: SubsecţiuniDinamice,
-      AjaxBuffer: AjaxBuffer,
       StructuriDate: StructuriDate,
       Persistence: Persistence
     });

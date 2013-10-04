@@ -35,6 +35,7 @@
     '/js/app/acţiuni-procedurale.js',
     '/js/app/processor.js',
     '/js/app/encrypter.js',
+    '/js/app/ajax-buffer.js',
 
     '/js/processors/encrypter.js',
     'unit/processors/encrypter.js',
