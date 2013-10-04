@@ -32,6 +32,14 @@ function minifică() {
   fi
 }
 
+cat \
+  js/handlebars-helpers.js \
+  `find js/app/ -name *.js` \
+  js/action.js \
+  > js/temp.js
+rm -rf js/app/
+mv js/temp.js js/action.js
+
 minifică "js/action.js"
 minifică "js/încheiere.js"
 
@@ -41,8 +49,6 @@ cat \
   js/lib/jquery-2.0.3.min.js \
   lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js \
   js/lib.js \
-  js/handlebars-helpers.js \
-  `find js/app/ -name *.js` \
   js/action.js \
   > js/one.js
 mv js/one.js js/action-$TIMESTAMP.js
