@@ -261,7 +261,7 @@
         </ul>
       </div>
 
-      <div id="formular">
+      <div id="formular" ng-app="App" ng-controller="Procedura">
         <div class="conţinut">
           <h1>
             <span id="descriere"></span>
@@ -270,7 +270,7 @@
 
           <p id="container-data-intentării">
             <label>Data intentării</label>
-            <input type="text" id="data-intentării" class="dată intentării"/>
+            <input type="text" id="data-intentării" class="dată intentării" ng-model="date['data-intentării']"/>
           </p>
 
           <div class="coloană stînga">
@@ -2320,10 +2320,15 @@
     </script>
 
 
+    <script defer src="/js/lib/angular.min.js"></script>
     <script defer src="/js/lib/jquery-2.0.3.min.js"></script>
     <script defer src="/js/lib/jquery-migrate-1.2.1.min.js"></script>
     <script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
     <script defer src="/js/lib.js"></script>
+
+    <script defer src="/js/app/init.js"></script>
+    <script defer src="/js/app/procedura.js"></script>
+
     <script defer src="/js/app/handlebars-helpers.js"></script>
     <script defer src="/js/app/x-jquery.js"></script>
     <script defer src="/js/app/fragment.js"></script>
