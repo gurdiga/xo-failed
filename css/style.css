@@ -1728,3 +1728,15 @@ fieldset label,
 .ico.document {
   margin-right: .4em;
 }
+
+#formular.înainte-de-afişare {
+  display: block;
+  -webkit-transition: top .75s;
+  -moz-transition: top .75s;
+  transition: top .75s;
+}
+
+#formular.afişat {
+  display: block;
+  top: 40px !important;
+}

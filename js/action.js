@@ -1638,7 +1638,10 @@
       FormularProcedură.secţiuni['cheltuieli'].resetează();
     },
 
-    închide: function(xhr, status) {
+    închide: function() {
+    //închide: function(xhr, status) {
+      App.Procedura.închide();
+      /*
       FormularProcedură.$.trigger('înainte-de-închidere');
 
       if (status) window.console.error('Eroare la încărcare:', arguments);
@@ -1652,6 +1655,7 @@
           $(this).hide().trigger('închis');
         })
         .trigger('închidere');
+      */
     },
 
     deschide: function() {
@@ -3260,7 +3264,10 @@
     },
 
     deschide: function() {
-      location.hash = $(this).attr('data-href');
+      var hash = $(this).attr('data-href'),
+          număr = hash.match(/\d+/)[0];
+
+      App.Procedura.deschide(număr);
     }
   };
 
