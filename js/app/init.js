@@ -3,31 +3,33 @@
   'use strict';
 
   var App = {
-    init: function() {
-      var app = angular.module('App', ['ngRoute']);
+    dependencies: ['ngRoute'],
 
+    init: function() {
+      var app = angular.module('App', App.dependencies);
+
+      App.Controllers.init(app);
+      App.Directives.init(app);
+      App.initRouting(app);
+      App.initTemplateCache(app);
+    },
+
+    initRouting: function(app) {
       app.config(['$routeProvider', function($routeProvider) {
         $routeProvider
           .when('/', {
-            template: ' ',
-            controller: function($scope, $routeParams) {
-              console.log('/ controller', arguments);
-            }
+            template: ' '
           })
 
           .when('/procedura/:numar', {
             template: ' ',
-            controller: function($scope, $routeParams) {
-              console.log('/procedura/:număr controller', $routeParams.numar);
-            }
+            controller: ['$scope', '$routeParams', function($scope, $routeParams) {
+              App.Controllers.Procedura.deschide($routeParams.numar);
+            }]
           })
 
-          .otherwise({redirectTo: '/'})
+          .otherwise({redirectTo: '/'});
       }]);
-
-      App.Controllers.init(app);
-      App.Directives.init(app);
-      App.initTemplateCache(app);
     },
 
     initTemplateCache: function(app) {

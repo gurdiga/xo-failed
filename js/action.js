@@ -52,7 +52,12 @@
 
     seteazăOpţiuniAjax: function() {
       $.ajaxSetup({
-        beforeSend: function() {
+        beforeSend: function(request) {
+          if (!Utilizator.login) {
+            request.abort();
+            return;
+          }
+
           var salvareProcedură = /\.json$/.test(this.url),
               creareProcedură = /\/proceduri\/$/.test(this.url);
 
@@ -537,6 +542,7 @@
     },
 
     logout: function() {
+      // TODO: use PUT only; update router;
       $.get('/bin/logout_pas1.php', function(data) {
         $.cookie('login', null);
         $.ajax({
@@ -1637,7 +1643,6 @@
 
     închide: function() {
     //închide: function(xhr, status) {
-      App.Controllers.Procedura.închide();
       /*
       FormularProcedură.$.trigger('înainte-de-închidere');
 
@@ -3254,7 +3259,7 @@
       var hash = $(this).attr('data-href'),
           număr = hash.match(/\d+/)[0];
 
-      App.Controllers.Procedura.deschide(număr);
+      location.hash = '/procedura/' + număr;
     }
   };
 

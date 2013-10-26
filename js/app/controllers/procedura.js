@@ -1,4 +1,4 @@
-/*global FormularProcedură*/
+/*global FormularProcedură, Utilizator*/
 (function() {
   'use strict';
 
@@ -21,11 +21,12 @@
     },
 
     închide: function() {
+      location.hash = '';
       Efecte.ascundeLin();
     },
 
     incarca: function(numărul) {
-      $.get('/date/007/proceduri/' + numărul + '/date.json', function(date) {
+      $.get('/date/' + Utilizator.login + '/proceduri/' + numărul + '/date.json', function(date) {
         $.extend(Procedura.procedura, date, {numărul: numărul});
         window.console.log(Procedura.procedura);
         Procedura.sync();
@@ -53,6 +54,7 @@
     afişeazăLin: function(callback) {
       FormularProcedură.$
         .css('top', $(window).height())
+        .show()
         .addClass('înainte-de-afişare');
 
       setTimeout(function() {
@@ -74,6 +76,10 @@
         .addClass('înainte-de-afişare')
         .css('top', $(window).height())
         .removeClass('afişat');
+
+      setTimeout(function() {
+        FormularProcedură.$.hide();
+      }, Efecte.milisecunde());
     }
   };
 
