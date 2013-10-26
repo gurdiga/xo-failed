@@ -19,13 +19,32 @@
     'unit/action-selecturi-foarte-late.js',
     'unit/storage-buffer.js',
     'unit/action-formular-procedură.js',
-    'unit/action-schimbări-structuri-date.js',
     'unit/acţiuni-procedurale.js',
     'unit/acţiune-procedurală.js',
     'unit/fragment.js',
     'unit/formular-procedură.js',
     'unit/encrypter.js',
     'unit/persistence.js',
+
+    'app/structuri-date.js',
+
+    'app/controllers/init.js',
+    'app/controllers/procedura.js',
+
+    'app/directives/init.js',
+    'app/directives/ajustează-textarea-elastic.js',
+
+    '/js/app/init.js',
+
+    '/js/app/controllers/init.js',
+    '/js/app/controllers/utilizatorul.js',
+    '/js/app/controllers/procedura.js',
+
+    '/js/app/directives/init.js',
+    '/js/app/directives/secţiune.js',
+    '/js/app/directives/persoană.js',
+    '/js/app/directives/valute.js',
+    '/js/app/directives/ajustează-textarea-elastic.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',
@@ -146,6 +165,8 @@
     window: false,
     location: true,
     $: false,
+    _: false,
+    S: false,
     setTimeout: false,
     clearTimeout: false,
     setInterval: false,

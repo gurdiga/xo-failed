@@ -25,7 +25,7 @@
   </head>
 
   <body>
-    <div id="conţinut">
+    <div id="conţinut" ng-app="App" ng-controller="Utilizatorul">
       <div id="bara-de-sus">
         <h1>executori.org</h1>
 
@@ -62,68 +62,7 @@
 
               <li>
                 <label>Instanţa teritorială</label>
-                <select id="instanţă-teritorială">
-                  <optgroup label="Prima verigă a sistemului judecătoresc">
-                    <option>Anenii Noi</option>
-                    <option>Basarabeasca</option>
-                    <option>Bender</option>
-                    <option>Botanica</option>
-                    <option>Briceni</option>
-                    <option>Buiucani</option>
-                    <option>Bălţi</option>
-                    <option>Cahul</option>
-                    <option>Cantemir</option>
-                    <option>Ceadîr-Lunga</option>
-                    <option>Centru</option>
-                    <option>Cimişlia</option>
-                    <option>Ciocana</option>
-                    <option>Comrat</option>
-                    <option>Criuleni</option>
-                    <option>Călăraşi</option>
-                    <option>Căuşeni</option>
-                    <option>Donduşeni</option>
-                    <option>Drochia</option>
-                    <option>Dubăsari</option>
-                    <option>Edineţ</option>
-                    <option>Floreşti</option>
-                    <option>Făleşti</option>
-                    <option>Glodeni</option>
-                    <option>Grigoriopol</option>
-                    <option>Hînceşti</option>
-                    <option>Ialoveni</option>
-                    <option>Leova</option>
-                    <option>Nisporeni</option>
-                    <option>Ocniţa</option>
-                    <option>Orhei</option>
-                    <option>Rezina</option>
-                    <option>Rîbniţa</option>
-                    <option>Rîşcani</option>
-                    <option>Rîşcani</option>
-                    <option>Slobozia</option>
-                    <option>Soroca</option>
-                    <option>Străşeni</option>
-                    <option>Sîngerei</option>
-                    <option>Şoldăneşti</option>
-                    <option>Ştefan Vodă</option>
-                    <option>Taraclia</option>
-                    <option>Teleneşti</option>
-                    <option>Ungheni</option>
-                    <option>Vulcăneşti</option>
-                    <option>Judecătoria Comercială de Circumscripţie</option>
-                  </optgroup>
-
-                  <optgroup label="A doua verigă a sistemului judecătoresc">
-                    <option>Curtea de Apel Chişinău</option>
-                    <option>Curtea de Apel Cahul</option>
-                    <option>Curtea de Apel Comrat</option>
-                    <option>Curtea de Apel Tighina</option>
-                    <option>Curtea de Apel Bălţi</option>
-                  </optgroup>
-
-                  <optgroup label="A treia verigă a sistemului judecătoresc">
-                    <option>Curtea Supremă de Justiţie</option>
-                  </optgroup>
-
+                <select id="instanţă-teritorială" ng-include=" 'template-instanţe-de-judecată' ">
                 </select>
               </li>
 
@@ -234,7 +173,7 @@
         <p>Trebuie să vă <a href="/login">autentificaţi</a>.</p>
       </div>
 
-      <div id="căutare" class="coloană">
+      <div id="căutare" class="coloană"> 
         <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
 
         <input/>
@@ -261,34 +200,22 @@
         </ul>
       </div>
 
-      <div id="formular" ng-app="App" ng-controller="Procedura">
+      <div id="formular" ng-controller="Procedura">
         <div class="conţinut">
           <h1>
-            <span id="descriere"></span>
-            <span id="prefix"></span><span id="tip"></span><span id="tireu">-</span><span id="număr"></span>
+            <span id="descriere">Procedura de executare</span>
+            <span id="prefix">{{utilizatorul['login']}}</span><span id="tip">{{procedura['tip']}}</span><span id="tireu">-</span><span id="număr">{{procedura['numărul']}}</span>
           </h1>
 
           <p id="container-data-intentării">
             <label>Data intentării</label>
-            <input type="text" id="data-intentării" class="dată intentării" ng-model="date['data-intentării']"/>
+            <input type="text" id="data-intentării" class="dată intentării" ng-model="procedura['data-intentării']"/>
           </p>
 
           <div class="coloană stînga">
-            <fieldset id="creditor" class="secţiune desfăşurată">
-              <legend>Creditor</legend>
-
-              <div class="conţinut">
-                <ul>
-                  <li>
-                    <label>Gen persoană</label>
-                    <select id="gen-persoană" class="care schimbă formularul">
-                      <option selected>juridică</option>
-                      <option>fizică</option>
-                    </select>
-                  </li>
-                </ul>
-              </div>
-            </fieldset>
+            <secţiune titlu="Creditor">
+              <persoană date="procedura['creditor']"></persoană>
+            </secţiune>
 
             <button class="adaugă persoană terţă semiascuns">
               +persoană terţă<span class="legend label">Persoană terță</span>
@@ -296,174 +223,92 @@
           </div>
 
           <div class="coloană">
-            <fieldset class="debitor secţiune desfăşurată">
-              <legend>Debitor</legend>
-
-              <div class="conţinut">
-                <ul>
-                  <li>
-                    <label>Gen persoană</label>
-                    <select id="gen-persoană" class="care schimbă formularul">
-                      <option>juridică</option>
-                      <option selected>fizică</option>
-                    </select>
-                  </li>
-                </ul>
-              </div>
-            </fieldset>
+            <secţiune ng-repeat="debitor in procedura['debitori']" titlu="Debitor">
+              <persoană date="debitor"></persoană>
+            </secţiune>
 
             <button class="adaugă persoană semiascuns">+debitor</button>
           </div>
 
           <div class="coloană stînga">
-            <fieldset id="document-executoriu" class="secţiune desfăşurată">
-              <legend>Documentul executoriu</legend>
+            <secţiune titlu="Documentul executoriu">
+              <var ng-bind=" date = procedura['document-executoriu']; '' "></var>
+              <ul>
+                <li>
+                  <label>Instanţa de judecată</label>
+                  <select nd-model="date['instanţa-de-judecată']" ng-include=" 'template-instanţe-de-judecată' ">
+                  </select>
+                </li>
 
-              <div class="conţinut">
-                <ul>
-                  <li>
-                    <label>Instanţa de judecată</label>
-                    <select id="instanţa-de-judecată">
-                      <optgroup label="Prima verigă a sistemului judecătoresc">
-                        <option>Anenii Noi</option>
-                        <option>Basarabeasca</option>
-                        <option>Bender</option>
-                        <option>Botanica</option>
-                        <option>Briceni</option>
-                        <option>Buiucani</option>
-                        <option>Bălţi</option>
-                        <option>Cahul</option>
-                        <option>Cantemir</option>
-                        <option>Ceadîr-Lunga</option>
-                        <option>Centru</option>
-                        <option>Cimişlia</option>
-                        <option>Ciocana</option>
-                        <option>Comrat</option>
-                        <option>Criuleni</option>
-                        <option>Călăraşi</option>
-                        <option>Căuşeni</option>
-                        <option>Donduşeni</option>
-                        <option>Drochia</option>
-                        <option>Dubăsari</option>
-                        <option>Edineţ</option>
-                        <option>Floreşti</option>
-                        <option>Făleşti</option>
-                        <option>Glodeni</option>
-                        <option>Grigoriopol</option>
-                        <option>Hînceşti</option>
-                        <option>Ialoveni</option>
-                        <option>Leova</option>
-                        <option>Nisporeni</option>
-                        <option>Ocniţa</option>
-                        <option>Orhei</option>
-                        <option>Rezina</option>
-                        <option>Rîbniţa</option>
-                        <option>Rîşcani</option>
-                        <option>Rîşcani</option>
-                        <option>Slobozia</option>
-                        <option>Soroca</option>
-                        <option>Străşeni</option>
-                        <option>Sîngerei</option>
-                        <option>Şoldăneşti</option>
-                        <option>Ştefan Vodă</option>
-                        <option>Taraclia</option>
-                        <option>Teleneşti</option>
-                        <option>Ungheni</option>
-                        <option>Vulcăneşti</option>
-                        <option>Judecătoria Comercială de Circumscripţie</option>
-                      </optgroup>
+                <li>
+                  <label>Numărul documentului</label>
+                  <input type="text" ng-model="date['numărul-de']"/>
+                </li>
 
-                      <optgroup label="A doua verigă a sistemului judecătoresc">
-                        <option>Curtea de Apel Chişinău</option>
-                        <option>Curtea de Apel Cahul</option>
-                        <option>Curtea de Apel Comrat</option>
-                        <option>Curtea de Apel Tighina</option>
-                        <option>Curtea de Apel Bălţi</option>
-                      </optgroup>
+                <li>
+                  <label>Data hotărîrii</label>
+                  <input type="text" ng-model="date['data-hotărîrii']" class="dată"/>
+                </li>
 
-                      <optgroup label="A treia verigă a sistemului judecătoresc">
-                        <option>Curtea Supremă de Justiţie</option>
-                      </optgroup>
+                <li>
+                  <label>Dispozitivul</label>
+                  <textarea ng-model="date['dispozitivul']" class="lat"></textarea>
+                </li>
 
-                    </select>
-                  </li>
+                <li>
+                  <label>Data rămînerii definitive</label>
+                  <input type="text" ng-model="date['data-rămînerii-definitive']" class="dată"/>
+                </li>
 
-                  <li>
-                    <label>Numărul documentului</label>
-                    <input type="text" id="numărul-de"/>
-                  </li>
-
-                  <li>
-                    <label>Data hotărîrii</label>
-                    <input type="text" id="data-hotărîrii" class="dată"/>
-                  </li>
-
-                  <li>
-                    <label>Dispozitivul</label>
-                    <textarea id="dispozitivul" class="lat"></textarea>
-                  </li>
-
-                  <li>
-                    <label>Data rămînerii definitive</label>
-                    <input type="text" id="data-rămînerii-definitive" class="dată"/>
-                  </li>
-
-                  <li>
-                    <label>Data eliberării</label>
-                    <input type="text" id="data-eliberării" class="dată"/>
-                  </li>
-                </ul>
-              </div>
-            </fieldset>
+                <li>
+                  <label>Data eliberării</label>
+                  <input type="text" ng-model="date['data-eliberării']" class="dată"/>
+                </li>
+              </ul>
+            </secţiune>
           </div>
 
           <div class="coloană">
-            <fieldset id="obiectul-urmăririi" class="secţiune desfăşurată">
-              <legend>Obiectul urmăririi</legend>
+            <secţiune titlu="Obiectul urmăririi">
+              <var ng-bind=" date = procedura['obiectul-urmăririi']; '' "></var>
+              <ul>
+                <li>
+                  <label>Caracter</label>
+                  <select ng-model="date['caracter']">
+                    <option>pecuniar</option>
+                    <option>nonpecuniar</option>
+                  </select>
+                </li>
 
-              <div class="conţinut">
-                <ul>
-                  <li>
-                    <label>Caracter</label>
-                    <select id="caracter" class="care schimbă formularul">
-                      <option>pecuniar</option>
-                      <option selected>nonpecuniar</option>
-                    </select>
-                  </li>
+                <ng-include src=" 'template-caracter-' + date['caracter'] "/>
+              </ul>
+
+              <div id="adaugă-subsecţiune" class="listă îngustă semiascuns">
+                <span class="titlu">subsecţiune</span>
+
+                <ul class="itemi cu umbră">
+                  <li class="încasare">încasare</li>
+                  <li class="întîrziere">întîrziere</li>
+                  <li class="sechestrare-bunuri">sechestrare bunuri</li>
                 </ul>
-
-                <div id="adaugă-subsecţiune" class="listă îngustă semiascuns">
-                  <span class="titlu">subsecţiune</span>
-
-                  <ul class="itemi cu umbră">
-                    <li class="încasare">încasare</li>
-                    <li class="întîrziere">întîrziere</li>
-                    <li class="sechestrare-bunuri">sechestrare bunuri</li>
-                  </ul>
-                </div>
-
               </div>
-            </fieldset>
+            </secţiune>
           </div>
 
 
-          <fieldset id="acţiuni-procedurale" class="secţiune desfăşurată lată">
-            <legend>Acţiuni procedurale</legend>
-
-            <div class="conţinut">
-              <ul class="itemi"></ul>
-              <div class="total">
-                <label>Total cheltuieli pe toate acţiunile:</label>
-                <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
-                <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-                <b>MDL</b>
-              </div>
-              <div class="opţiuni"></div>
+          <secţiune titlu="Acţiuni procedurale" lată="da">
+            <ul class="itemi"></ul>
+            <div class="total">
+              <label>Total cheltuieli pe toate acţiunile:</label>
+              <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
+              <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+              <b>MDL</b>
             </div>
-          </fieldset>
+            <div class="opţiuni"></div>
+          </secţiune>
 
 
-          <fieldset id="cheltuieli" class="secţiune desfăşurată lată">
+          <!--fieldset id="cheltuieli" class="secţiune desfăşurată lată">
             <legend>Cheltuieli</legend>
 
             <div class="conţinut">
@@ -997,7 +842,7 @@
 
               </ul>
             </div>
-          </fieldset>
+          </fieldset -->
 
 
           <div class="bara-de-instrumente">
@@ -1012,6 +857,9 @@
           <button class="închide semiascuns" title="Închide">×</button>
         </div>
       </div>
+
+      <div ng-view style="display: none"></div>
+
     </div>
 
 
@@ -2320,30 +2168,558 @@
     </script>
 
 
-    <script defer src="/js/lib/angular.min.js"></script>
-    <script defer src="/js/lib/jquery-2.0.3.min.js"></script>
-    <script defer src="/js/lib/jquery-migrate-1.2.1.min.js"></script>
-    <script defer src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script defer src="/js/lib.js"></script>
+    <script type="text/ng-template" id="directive-secţiune">
+      <fieldset class="secţiune desfăşurată {{ lată ? 'lată' : '' ">
+        <legend>{{ titlu }}</legend>
 
-    <script defer src="/js/app/init.js"></script>
-    <script defer src="/js/app/procedura.js"></script>
+        <div class="conţinut" ng-transclude>
+        </div>
+      </fieldset>
+    </script>
 
-    <script defer src="/js/app/handlebars-helpers.js"></script>
-    <script defer src="/js/app/x-jquery.js"></script>
-    <script defer src="/js/app/fragment.js"></script>
-    <script defer src="/js/app/calendar.js"></script>
-    <script defer src="/js/app/acţiune-procedurală.js"></script>
-    <script defer src="/js/app/acţiuni-procedurale.js"></script>
-    <script defer src="/js/app/processor.js"></script>
-    <script defer src="/js/app/encrypter.js"></script>
-    <script defer src="/js/app/ajax-buffer.js"></script>
-    <script defer src="/js/app/persistence.js"></script>
-    <script defer src="/js/app/structuri-date.js"></script>
-    <script defer src="/js/app/subsecţiuni-dinamice.js"></script>
-    <script defer src="/js/app/selecturi-foarte-late.js"></script>
-    <script defer src="/js/app/textarea-elastice.js"></script>
-    <script defer src="/js/action.js"></script>
+
+    <script type="text/ng-template" id="directive-persoană">
+      <ul>
+        <li>
+          <label>Gen persoană</label>
+          <select id="gen-persoană" class="care schimbă formularul" ng-model="date['gen-persoană']">
+            <option>juridică</option>
+            <option selected>fizică</option>
+          </select>
+        </li>
+
+        <ng-include src=" 'template-persoană-' + date['gen-persoană'] "/>
+      </ul>
+    </script>
+
+    <script type="text/ng-template" id="template-persoană-juridică">
+      <li>
+        <label>Denumire</label>
+        <input type="text" ng-model="date['denumire']"/>
+      </li>
+
+      <li>
+        <label>IDNO</label>
+        <input type="text" ng-model="date['idno']"/>
+      </li>
+
+      <li>
+        <label class="textarea">Sediu</label>
+        <textarea ng-model="date['sediu']" spellcheck="false" class="lat"></textarea>
+      </li>
+
+      <li>
+        <label>Persoană de contact</label>
+        <input type="text" ng-model="data['persoană-de-contact']"/>
+      </li>
+
+      <li>
+        <label class="textarea">Note</label>
+        <textarea ng-model="date['note-pj']" spellcheck="false" class="note lat"></textarea>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="template-persoană-fizică">
+      <li>
+        <label>Nume</label>
+        <input type="text" ng-model="date['nume']"/>
+      </li>
+
+      <li>
+        <label>IDNP</label>
+        <input type="text" ng-model="date['idnp']"/>
+      </li>
+
+      <li>
+        <label>Data naşterii</label>
+        <input type="text" ng-model="date['data-naşterii']" class="dată"/>
+      </li>
+
+      <li>
+        <label class="textarea">Domiciliu</label>
+        <textarea ng-model="date['domiciliu']" spellcheck="false" class="lat"></textarea>
+      </li>
+
+      <li>
+        <label class="textarea">Note</label>
+        <textarea ng-model="date['note-pf']" spellcheck="false" class="note lat"></textarea>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="template-instanţe-de-judecată">
+      <optgroup label="Prima verigă a sistemului judecătoresc">
+        <option>Anenii Noi</option>
+        <option>Basarabeasca</option>
+        <option>Bender</option>
+        <option>Botanica</option>
+        <option>Briceni</option>
+        <option>Buiucani</option>
+        <option>Bălţi</option>
+        <option>Cahul</option>
+        <option>Cantemir</option>
+        <option>Ceadîr-Lunga</option>
+        <option>Centru</option>
+        <option>Cimişlia</option>
+        <option>Ciocana</option>
+        <option>Comrat</option>
+        <option>Criuleni</option>
+        <option>Călăraşi</option>
+        <option>Căuşeni</option>
+        <option>Donduşeni</option>
+        <option>Drochia</option>
+        <option>Dubăsari</option>
+        <option>Edineţ</option>
+        <option>Floreşti</option>
+        <option>Făleşti</option>
+        <option>Glodeni</option>
+        <option>Grigoriopol</option>
+        <option>Hînceşti</option>
+        <option>Ialoveni</option>
+        <option>Leova</option>
+        <option>Nisporeni</option>
+        <option>Ocniţa</option>
+        <option>Orhei</option>
+        <option>Rezina</option>
+        <option>Rîbniţa</option>
+        <option>Rîşcani</option>
+        <option>Rîşcani</option>
+        <option>Slobozia</option>
+        <option>Soroca</option>
+        <option>Străşeni</option>
+        <option>Sîngerei</option>
+        <option>Şoldăneşti</option>
+        <option>Ştefan Vodă</option>
+        <option>Taraclia</option>
+        <option>Teleneşti</option>
+        <option>Ungheni</option>
+        <option>Vulcăneşti</option>
+        <option>Judecătoria Comercială de Circumscripţie</option>
+      </optgroup>
+
+      <optgroup label="A doua verigă a sistemului judecătoresc">
+        <option>Curtea de Apel Chişinău</option>
+        <option>Curtea de Apel Cahul</option>
+        <option>Curtea de Apel Comrat</option>
+        <option>Curtea de Apel Tighina</option>
+        <option>Curtea de Apel Bălţi</option>
+      </optgroup>
+
+      <optgroup label="A treia verigă a sistemului judecătoresc">
+        <option>Curtea Supremă de Justiţie</option>
+      </optgroup>
+    </script>
+
+
+    <script type="text/ng-template" id="template-caracter-pecuniar">
+      <li>
+        <label>Amendă</label>
+        <input ng-model="date['amendă']" type="checkbox"/>
+      </li>
+
+      <li ng-repeat=" suma in date['sume'] " ajustează-textarea-elastic class="sumă personalizat eliminabil de tot">
+        <textarea class="etichetă" title="Etichetă editabilă" placeholder="descrierea" ng-model="suma.eticheta"></textarea>
+        <input type="text" placeholder="suma" class="sumă" ng-model="suma.suma"/>
+        <valute suma="suma"></valute>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat sumă semiascuns"
+          data-şablon="cîmpul-personalizat">+sumă</button>
+      </li>
+
+      <li>
+        <label>Total</label>
+        <input type="text" id="total" class="sumă calculat" readonly="readonly" value="{{totalSume(date['sume'])}}" />
+        <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+        <b>MDL</b>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="template-caracter-nonpecuniar">
+      <li>
+        <label>Obiectul urmăririi</label>
+        <select ng-model="date['obiect']">
+          <option class="scurtă"
+            data-formular-încheiere="încheiere-de-evacuare"
+            data-şoaptă-buton="Formează Încheiere de numire a datei evacuării forţate"
+            >evacuarea</option>
+          <option class="scurtă"
+            data-formular-încheiere="încheiere-de-instalare"
+            data-şoaptă-buton="Formează Încheiere cu privire la instalarea în spaţiul locativ"
+            >instalarea</option>
+          <option class="scurtă"
+            data-formular-încheiere="încheiere-de-schimb-forţat"
+            data-şoaptă-buton="Formează Încheiere cu privire la schimbul forţat al locuinţelor"
+            >schimbul forţat</option>
+          <option
+            data-formular-încheiere="încheiere-de-stabilire-a-domiciliului-copilului"
+            data-şoaptă-buton="Formează Somaţie cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor"
+            >stabilirea domiciliului copilului</option>
+          <option
+            data-formular-încheiere="încheiere-de-efectuare-a-unor-acţiuni-nelegate-de-bunuri"
+            data-şoaptă-buton="Formează Somaţie cu privire la executarea de către debitor a unor acţiuni nelegate de remiterea unor sume sau bunuri"
+            >efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri</option>
+          <option
+            data-formular-încheiere="încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-mobile"
+            data-şoaptă-buton="Formează Încheiere de numire a datei ridicării a unor sume sau bunuri"
+            >efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile</option>
+          <option
+            data-formular-încheiere="încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-imobile"
+            data-şoaptă-buton="Formează Încheiere de numire a datei transmiterii bunurilor imobile"
+            >efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile</option>
+          <option class="scurtă"
+            data-formular-încheiere="încheiere-de-confiscare-a-bunurilor"
+            data-şoaptă-buton="Formează Încheiere de numire a datei confiscării bunurilor"
+            >confiscarea bunurilor</option>
+          <option class="scurtă"
+            data-formular-încheiere="încheiere-de-nimicire-a-bunurilor"
+            data-şoaptă-buton="Formează Încheiere de numire a datei nimicirii bunurilor"
+            >nimicirea bunurilor</option>
+          <option class="scurtă"
+            data-formular-încheiere="încheiere-de-restabilire-la-locul-de-muncă"
+            data-şoaptă-buton="Formează Somaţie de restabilire a salariatului la locul de muncă"
+            >restabilirea la locul de muncă</option>
+          <option
+            data-formular-încheiere="încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii"
+            data-şoaptă-buton="Formează Încheiere de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii"
+            >aplicarea măsurilor de asigurare a acţiunii</option>
+        </select>
+        <span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Formare document"></span>
+      </li>
+
+      <ng-include src=" 'cîmpuri pentru obiectul urmăririi: ' + date['obiect'] "/>
+
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: ">
+      <!-- cîmpuri pentru obiectul urmăririi: -->
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: evacuarea">
+      <li>
+        <label class="textarea">Din încăperea</label>
+        <textarea ng-model="date['din-încăperea']" class="lat"></textarea>
+      </li>
+
+      <li>
+        <label>Se acordă alt spaţiu</label>
+        <input ng-model="date['se-acordă-alt-spaţiu']" type="checkbox"/>
+      </li>
+
+      <li>
+        <label>Data şi ora evacuării</label>
+        <input type="text" ng-model="date['data-şi-ora-evacuării']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: instalarea">
+      <li>
+        <label class="textarea">În încăperea</label>
+        <textarea ng-model="date['în-încăperea']" class="lat"></textarea>
+      </li>
+
+      <li>
+        <label>Data şi ora instalării</label>
+        <input type="text" ng-model="date['data-şi-ora-instalării']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: schimbul forţat">
+      <li>
+        <label class="textarea">Încăperea pentru creditor</label>
+        <textarea ng-model="date['încăperea-pentru-creditor']" class="lat"></textarea>
+      </li>
+
+      <li>
+        <label class="textarea">Încăperea pentru debitor</label>
+        <textarea ng-model="date['încăperea-pentru-debitor']" class="lat"></textarea>
+      </li>
+
+      <li>
+        <label>Data şi ora schimbului</label>
+        <input type="text" ng-model="date['data-şi-ora-schimbului']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: stabilirea domiciliului copilului">
+      <li>
+        <label>Numele copilului</label>
+        <input type="text" ng-model="date['numele-copilului']"/>
+      </li>
+
+      <li>
+        <label>Data naşterii copilului</label>
+        <input type="text" ng-model="date['data-naşterii-copilului']" class="dată"/>
+      </li>
+
+      <li>
+        <label>Data prezentării în oficiu</label>
+        <input type="text" ng-model="date['data-prezentării-debitorului']" class="dată"/>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri">
+      <li>
+        <label class="textarea">Acţiuni</label>
+        <textarea ng-model="date['acţiuni']" class="lat"></textarea>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile">
+      <li>
+        <label>Data şi ora ridicării</label>
+        <input type="text" ng-model="date['data-şi-ora-ridicării']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-bunuri-ridicate semiascuns"
+          data-şablon="cîmpul-personalizat-pentru-bunuri-ridicate"
+          data-etichetă="Descriere bun">+bun</button>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile">
+      <li>
+        <label>Data şi ora ridicării</label>
+        <input type="text" ng-model="date['data-şi-ora-ridicării']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-bunuri-transmise semiascuns"
+          data-şablon="cîmpul-personalizat-pentru-bunuri-transmise"
+          data-etichetă="Descriere bun">+bun</button>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: confiscarea bunurilor">
+      <li>
+        <label>Data şi ora confiscării</label>
+        <input type="text" ng-model="date['data-şi-ora-confiscării']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-bunuri-confiscate semiascuns"
+          data-şablon="cîmpul-pentru-bunuri-confiscate"
+          data-etichetă="Descriere bun">+bun confiscat</button>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: nimicirea bunurilor">
+      <li>
+        <label>Data şi ora nimicirii</label>
+        <input type="text" ng-model="date['data-şi-ora-nimicirii']" class="dată"/>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-bunuri-nimicite semiascuns"
+          data-şablon="cîmpul-pentru-bunuri-nimicite"
+          data-etichetă="Descriere bun">+bun</button>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat amînare semiascuns"
+          data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+          data-etichetă="Amînat pînă la">+amînare</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: restabilirea la locul de muncă">
+      <li>
+        <label>Funcţie</label>
+        <input type="text" ng-model="date['funcţie']"/>
+      </li>
+
+      <li>
+        <label>Salariu recuperat</label>
+        <input type="text" ng-model="date['salariu-recuperat']" placeholder="suma" class="sumă"/>
+        <b>MDL</b>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru obiectul urmăririi: aplicarea măsurilor de asigurare a acţiunii">
+      <li>
+        <label>Măsura de asigurare</label>
+
+        <select class="foarte lat care schimbă formularul" ng-model="date['măsura-de-asigurare']">
+          <option>aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
+          <option>interzicerea debitorului de a săvîrşi anumite acţiuni</option>
+          <option>interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
+        </select>
+      </li>
+
+      <ng-include src=" 'cîmpuri pentru măsura de asigurare: ' + date['măsura-de-asigurare'] "/>
+
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru măsura de asigurare: ">
+      <!-- cîmpuri pentru măsura de asigurare:  -->
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru măsura de asigurare: aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane">
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat valoarea-acţiunii semiascuns"
+          data-şablon="cîmpul-pentru-valoarea-acţiunii"
+          data-etichetă="Valoarea acţiunii">+valoarea acţiunii</button>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-bunuri-sechestrate semiascuns"
+          data-şablon="cîmpul-pentru-bunuri-sechestrate"
+          data-etichetă="Descriere bun">+bun sechestrat</button>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-sume-sechestrate semiascuns"
+          data-şablon="cîmpul-pentru-sume-sechestrate"
+          data-etichetă="Descriere sumă">+sumă sechestrată</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru măsura de asigurare: interzicerea debitorului de a săvîrşi anumite acţiuni">
+      <li>
+        <label class="textarea">Acţiuni</label>
+        <textarea ng-model="date['acţiuni']" class="lat"></textarea>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="cîmpuri pentru măsura de asigurare: interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el">
+      <li>
+        <label class="textarea">Acţiuni</label>
+        <textarea ng-model="date['acţiuni']" class="lat"></textarea>
+      </li>
+
+      <li class="container-buton">
+        <button
+          class="adaugă-cîmp-personalizat pentru-bunuri-în-litigiu semiascuns"
+          data-şablon="cîmpul-pentru-bunuri-în-litigiu"
+          data-etichetă="Descriere bun">+bun</button>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="template-caracter-">
+      <!-- template-caracter- -->
+    </script>
+
+
+    <script type="text/ng-template" id="template-persoană-">
+      <!-- template-persoană- -->
+    </script>
+
+
+    <script type="text/ng-template" id="directive-valute">
+      <select class="valuta" ng-model="suma.valuta" ng-options="item for item in valute">
+      </select>
+    </script>
+
+
+    <script type="text/ng-template" id="template-test">
+      template-test
+    </script>
+
+
+    <script src="/js/lib/angular.min.js"></script>
+    <script src="/js/lib/angular-route.min.js"></script>
+    <script src="/js/lib/jquery-2.0.3.min.js"></script>
+    <script src="/js/lib/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="/js/lib.js"></script>
+
+    <script src="/js/app/init.js"></script>
+    <script src="/js/app/controllers/init.js"></script>
+    <script src="/js/app/controllers/utilizatorul.js"></script>
+    <script src="/js/app/controllers/procedura.js"></script>
+    <script src="/js/app/directives/init.js"></script>
+    <script src="/js/app/directives/secţiune.js"></script>
+    <script src="/js/app/directives/persoană.js"></script>
+    <script src="/js/app/directives/valute.js"></script>
+    <script src="/js/app/directives/ajustează-textarea-elastic.js"></script>
+
+    <script src="/js/app/handlebars-helpers.js"></script>
+    <script src="/js/app/x-jquery.js"></script>
+    <script src="/js/app/fragment.js"></script>
+    <script src="/js/app/calendar.js"></script>
+    <script src="/js/app/acţiune-procedurală.js"></script>
+    <script src="/js/app/acţiuni-procedurale.js"></script>
+    <script src="/js/app/processor.js"></script>
+    <script src="/js/app/encrypter.js"></script>
+    <script src="/js/app/ajax-buffer.js"></script>
+    <script src="/js/app/persistence.js"></script>
+    <script src="/js/app/structuri-date.js"></script>
+    <script src="/js/app/subsecţiuni-dinamice.js"></script>
+    <script src="/js/app/selecturi-foarte-late.js"></script>
+    <script src="/js/app/textarea-elastice.js"></script>
+    <script src="/js/action.js"></script>
 
   </body>
 </html>

@@ -4,48 +4,45 @@
 
   var App = {
     init: function() {
-      var app = angular.module('App', []);
+      var app = angular.module('App', ['ngRoute']);
 
-      App.init.controllers(app);
+      app.config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+          .when('/', {
+            template: ' ',
+            controller: function($scope, $routeParams) {
+              console.log('/ controller', arguments);
+            }
+          })
+
+          .when('/procedura/:numar', {
+            template: ' ',
+            controller: function($scope, $routeParams) {
+              console.log('/procedura/:număr controller', $routeParams.numar);
+            }
+          })
+
+          .otherwise({redirectTo: '/'})
+      }]);
+
+      App.Controllers.init(app);
+      App.Directives.init(app);
+      App.initTemplateCache(app);
+    },
+
+    initTemplateCache: function(app) {
+      var templates = document.querySelectorAll('script[type="text/ng-template"]');
+
+      templates = Array.prototype.slice.call(templates);
+
+      function registerTemplate(template) {
+        app.run(['$templateCache', function($templateCache) {
+          $templateCache.put(template.id, template.innerHTML);
+        }]);
+      }
+
+      templates.forEach(registerTemplate);
     }
-  };
-
-
-  App.init.controllers = function(app) {
-    function Controller($scope, module) {
-      if ($.isFunction(module.init)) module.init();
-
-      this.publishToScope = function() {
-        $.extend($scope, module);
-      };
-
-      this.makeSynchronizable = function() {
-        module.sync = function() {
-          $scope.$apply();
-        };
-      };
-    }
-
-    Controller.factory = function(name, module) {
-      return ['$scope', function($scope) {
-        var controller = new Controller($scope, module);
-
-        controller.publishToScope();
-        controller.makeSynchronizable();
-      }];
-    };
-
-    for (var name in App) {
-      if (name === 'init') continue;
-
-      app.controller(name, Controller.factory(name, App[name]));
-    }
-
-  };
-
-
-  App.init.router = function(app) {
-    App.Router.init(app);
   };
 
 

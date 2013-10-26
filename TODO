@@ -1,6 +1,5 @@
+- de setat rutarea?
 - lista de acţiuni procedurale
-  - de încercat popularea formularului cu Angular?
-
   - borderoul de calcul?
     - de făcut cumva modular şi testabil?
 
@@ -28,6 +27,8 @@
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?
     în ordinea descrescătoare timpului ultimei deschideri + încărcare treptată onscroll
+  - lazy.js?
+  - async.js?
 
 - Admin
   - înregistrare utilizator

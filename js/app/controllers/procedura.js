@@ -1,9 +1,18 @@
+/*global FormularProcedură*/
 (function() {
   'use strict';
 
   var Procedura = {
-    date: {
-      'data-intentării': '12'
+    procedura: {},
+
+    totalSume: function(sume) {
+      return _.reduce(sume, function(total, item) {
+        var suma = parseFloat(item.suma);
+
+        if (_.isNaN(suma)) suma = 0;
+
+        return total + suma;
+      }, 0);
     },
 
     deschide: function(număr) {
@@ -15,9 +24,10 @@
       Efecte.ascundeLin();
     },
 
-    incarca: function(număr) {
-      $.get('/date/007/proceduri/' + număr + '/date.json', function(data) {
-        $.extend(Procedura.date, data);
+    incarca: function(numărul) {
+      $.get('/date/007/proceduri/' + numărul + '/date.json', function(date) {
+        $.extend(Procedura.procedura, date, {numărul: numărul});
+        window.console.log(Procedura.procedura);
         Procedura.sync();
       });
     }
@@ -68,6 +78,6 @@
   };
 
 
-  window.App.Procedura = Procedura;
+  window.App.Controllers.Procedura = Procedura;
 
 })();

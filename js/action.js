@@ -21,7 +21,7 @@
       if (!Utilizator.autentificat) return;
 
       BNM.init();
-      HashController.init();
+      //HashController.init();
       Valute.init();
       SubsecţiuniDinamice.init();
       TextareaElastice.init();
@@ -68,8 +68,10 @@
           }
         },
 
-        dataFilter: function(data, type) {
-          if (type === 'json') {
+        dataFilter: function(data) {
+          var extensia = this.url.substr(-5);
+
+          if (extensia === '.json') {
             var tip = StructuriDate.tipPerUrl(this.url);
 
             if (tip) {
@@ -569,11 +571,6 @@
         .on('salvat', this.actualizeazăDataUltimeiModificări);
 
       this.baraDeInstrumente.init();
-
-      $(window).on('hashchange', function() {
-        if (/^#formular/.test(location.hash)) FormularProcedură.deschide();
-        else if (FormularProcedură.$.is(':visible')) FormularProcedură.închide();
-      });
 
       this.$obiectulUrmăririi.on('adăugat-cîmp-personalizabil', function(e, $li) {
         if (FormularProcedură.seIniţializează) return;
@@ -1640,7 +1637,7 @@
 
     închide: function() {
     //închide: function(xhr, status) {
-      App.Procedura.închide();
+      App.Controllers.Procedura.închide();
       /*
       FormularProcedură.$.trigger('înainte-de-închidere');
 
@@ -2624,16 +2621,7 @@
 
     init: function() {
       var schimbareDate = 'change input';
-      var cîmpuriRelevante = [
-        '.sumă:not(.irelevant-pentru-onorariu, .calculat)',
-        '.valuta',
-        SubsecţiuniDinamice.selector,
-        'input:checkbox',
-        '#caracter',
-        '#obiect'
-      ].join(',');
 
-      FormularProcedură.$obiectulUrmăririi.on(schimbareDate, cîmpuriRelevante, this.calculează);
       FormularProcedură.$.on(schimbareDate, '.debitor #gen-persoană, #părţile-au-ajuns-la-conciliere', this.calculează);
     },
 
@@ -3122,7 +3110,6 @@
           .on('închidere', Încheieri.închide)
           .on('salvat', Încheieri.butonaşe.activează);
 
-        FormularProcedură.$.on('change', '#obiect', Încheieri.butonaşe.ajustează);
         MăsuriDeAsigurare.init();
       },
 
@@ -3267,7 +3254,7 @@
       var hash = $(this).attr('data-href'),
           număr = hash.match(/\d+/)[0];
 
-      App.Procedura.deschide(număr);
+      App.Controllers.Procedura.deschide(număr);
     }
   };
 

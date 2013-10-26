@@ -3,7 +3,10 @@
 
   var app = window.frames['app'];
 
-  test('StructuriDate.aplicăSchimbări', function() {
+
+  module('StructuriDate');
+
+  test('.aplicăSchimbări', function() {
     var dateIniţiale = {
       nume: 'Joe Doe',
       data: '01.01.1970',
@@ -25,7 +28,7 @@
 
     var tipDate = 'profil';
 
-    app.StructuriDate.versiuni[tipDate] = [function(date) {
+    app.StructuriDate.transformări[tipDate] = [function(date) {
       // schimă valori itemi din number în array
       for (var item in date.itemi) {
         date.itemi[item] = [date.itemi[item]];
@@ -42,14 +45,14 @@
   });
 
 
-  test('StructuriDate.tipPerUrl', function() {
+  test('.tipPerUrl', function() {
     equal(app.StructuriDate.tipPerUrl('/date/007/profil.json'), 'profil', 'detectat “profil”');
     equal(app.StructuriDate.tipPerUrl('/date/007/proceduri/'), 'procedură', 'detectat “procedură”');
     equal(app.StructuriDate.tipPerUrl('/date/007/proceduri/5/date.json'), 'procedură', 'detectat “procedură”');
   });
 
 
-  test('StructuriDate.versiuni.procedură[0]', function() {
+  test('.transformări.procedură[0]', function() {
     var dateIniţiale = {
       'data-intentării':'31.05.2013',
       'document-executoriu':{'date':'irelevante-DE'},
@@ -74,7 +77,8 @@
 
     var dateTransformate = app.StructuriDate.aplicăSchimbări('procedură', dateIniţiale);
 
-    equal(dateTransformate.versiune, 1, 'setat versiunea corespunzător');
+    equal(dateTransformate.versiune, app.StructuriDate.transformări.procedură.length,
+      'setat versiunea în funcţie de numărul de transformări aplicate');
 
     for (var k in dateIniţiale) {
       if (k === 'cheltuieli') {
