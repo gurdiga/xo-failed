@@ -648,10 +648,6 @@ button.adaugă {
   font-size: 13px;
 }
 
-button.adaugă-cîmp-personalizat {
-  line-height: .7em;
-}
-
 .listă .titlu.semiascuns:hover,
 button.adaugă-cîmp-personalizat:hover,
 button.adaugă:hover,
@@ -663,6 +659,7 @@ button.adaugă:focus {
 }
 
 button.adaugă-cîmp-personalizat {
+  line-height: .7em;
   padding: 0 .2em .1em .3em;
   top: -.5em;
 }
