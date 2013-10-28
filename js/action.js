@@ -2311,7 +2311,8 @@
 
   // TODO:
   //  - de asigurat o valoare (cea default?) pentru etichete personalizate
-  //  - de incrementat cînd mai este altul cu acelaşi nume? sau de stocat în array vs. hash?
+  //  - de stocat în array vs. hash
+  //  - rename to button.adaugă-cîmp-cu-etichetă-editabilă?
 
   EticheteEditabile = {
     init: function() {
