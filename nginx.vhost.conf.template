@@ -94,7 +94,7 @@ server {
 
     add_header Cache-Control private;
 
-    location ~ /date/\d+/.* {
+    location ~ /date/\d+/.+\.json$ {
       more_set_headers 'Content-Type: application/json; charset=utf-8';
 
 <? require 'fastcgi.conf' ?>
