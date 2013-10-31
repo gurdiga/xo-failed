@@ -2318,16 +2318,14 @@
         <input ng-model="date['amendă']" type="checkbox"/>
       </li>
 
-      <li ng-repeat=" suma in date['sume'] " ajustează-textarea-elastic class="sumă personalizat eliminabil de tot">
+      <li ng-repeat=" suma in date['sume'] " ajustează-textarea-elastic focusează-la-adăugare class="sumă personalizat eliminabil de tot">
         <textarea class="etichetă" title="Etichetă editabilă" placeholder="descrierea" ng-model="suma.eticheta"></textarea>
         <input type="text" placeholder="suma" class="sumă" ng-model="suma.suma"/>
         <valute suma="suma"></valute>
       </li>
 
       <li class="container-buton">
-        <button
-          class="adaugă-cîmp-personalizat sumă semiascuns"
-          data-şablon="cîmpul-personalizat">+sumă</button>
+        <button adaugă-sumă lista="date['sume']" class="adaugă-cîmp-personalizat sumă semiascuns">+sumă</button>
       </li>
 
       <li>
@@ -2704,6 +2702,8 @@
     <script src="/js/app/directives/persoană.js"></script>
     <script src="/js/app/directives/valute.js"></script>
     <script src="/js/app/directives/ajustează-textarea-elastic.js"></script>
+    <script src="/js/app/directives/focusează-la-adăugare.js"></script>
+    <script src="/js/app/directives/adaugă-sumă.js"></script>
 
     <script src="/js/app/handlebars-helpers.js"></script>
     <script src="/js/app/x-jquery.js"></script>

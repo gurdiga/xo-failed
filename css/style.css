@@ -19,6 +19,9 @@ a:focus,
 input:focus,
 button:focus,
 textarea:focus {
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
   box-shadow: 0 0 3px 2px #b5d5ff;
   border-radius: 2px;
   position: relative; /* pentru a preveni tăierea parţială a box-shadow de către cîmpurile succesive */
@@ -1465,7 +1468,7 @@ input::-ms-clear {
   display: none;
 }
 
-label,
+/*label,
 #categorii-taxe-şi-speze,
 #adaugă-subsecţiune,
 .subsecţiune legend,
@@ -1481,7 +1484,7 @@ label,
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-}
+}*/
 
 ul.încheieri {
   font-size: small;

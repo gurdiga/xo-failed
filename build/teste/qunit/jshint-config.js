@@ -33,6 +33,8 @@
 
     'app/directives/init.js',
     'app/directives/ajustează-textarea-elastic.js',
+    'app/directives/focusează-la-adăugare.js',
+    'app/directives/adaugă-sumă.js',
 
     '/js/app/init.js',
 
@@ -45,6 +47,8 @@
     '/js/app/directives/persoană.js',
     '/js/app/directives/valute.js',
     '/js/app/directives/ajustează-textarea-elastic.js',
+    '/js/app/directives/focusează-la-adăugare.js',
+    '/js/app/directives/adaugă-sumă.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',

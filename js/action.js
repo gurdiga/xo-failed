@@ -32,7 +32,7 @@
       Subsecţiuni.init();
       FormularProcedură.init();
       Calendar.init();
-      EticheteEditabile.init();
+      //EticheteEditabile.init();
       ProceduriRecente.init();
       Sume.init();
       ÎncasarePensie.init();
@@ -2314,6 +2314,7 @@
   //  - de stocat în array vs. hash
   //  - rename to button.adaugă-cîmp-cu-etichetă-editabilă?
 
+  /*
   EticheteEditabile = {
     init: function() {
       FormularProcedură.$
@@ -2366,6 +2367,7 @@
           });
     }
   },
+  */
 
   // --------------------------------------------------
 
