@@ -1,10 +1,16 @@
 (function() {
   'use strict';
 
-  var AjusteazăTextareaElastic = {
-    restrict: 'A',
+  function AjusteazaTextareaElastic() {
+    return {
+      restrict: 'A',
 
-    link: function (scope, element) {
+      link: AjusteazaTextareaElastic.module.link
+    };
+  }
+
+  AjusteazaTextareaElastic.module = {
+    link: function(scope, element) {
       if (scope.$last === true) {
         setTimeout(function() {
           var repeatExpression = element[0].getAttribute('ng-repeat');
@@ -17,6 +23,7 @@
     }
   };
 
-  window.App.Directives.AjusteazăTextareaElastic = AjusteazăTextareaElastic;
+  window.App.module.D.AjusteazaTextareaElastic = AjusteazaTextareaElastic;
+  window.App.directive('ajusteazaTextareaElastic', AjusteazaTextareaElastic);
 
 })();

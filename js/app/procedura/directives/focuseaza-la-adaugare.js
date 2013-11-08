@@ -1,13 +1,18 @@
 (function() {
   'use strict';
 
-  var FocuseazăLaAdăugare = {
-    restrict: 'A',
+  function FocuseazaLaAdaugare() {
+    return {
+      restrict: 'A',
+      link: FocuseazaLaAdaugare.module.link
+    };
+  }
 
+  FocuseazaLaAdaugare.module = {
     link: function (scope, element) {
       if (scope.$last) {
-        if (scope.suma.adăugare) {
-          delete scope.suma.adăugare;
+        if (scope.suma.adaugare) {
+          delete scope.suma.adaugare;
 
           var input = $(element).find(':input:first');
 
@@ -22,7 +27,8 @@
     }
   };
 
-  window.App.Directives.FocuseazăLaAdăugare = FocuseazăLaAdăugare;
+  window.App.module.D.FocuseazaLaAdaugare = FocuseazaLaAdaugare;
+  window.App.directive('focuseazaLaAdaugare', FocuseazaLaAdaugare);
 
 })();
 

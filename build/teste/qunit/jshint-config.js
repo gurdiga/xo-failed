@@ -28,27 +28,29 @@
 
     'app/structuri-date.js',
 
+    'app/procedura/controllers/procedura.js',
+    'app/procedura/directives/adauga-suma.js',
+    'app/procedura/directives/ajusteaza-textarea-elastic.js',
+    'app/procedura/directives/focuseaza-la-adaugare.js',
+
     'app/controllers/init.js',
-    'app/controllers/procedura.js',
 
     'app/directives/init.js',
-    'app/directives/ajustează-textarea-elastic.js',
-    'app/directives/focusează-la-adăugare.js',
-    'app/directives/adaugă-sumă.js',
 
     '/js/app/init.js',
+    '/js/app/init.js',
+    '/js/app/utilizator/services/utilizator.js',
 
-    '/js/app/controllers/init.js',
-    '/js/app/controllers/utilizatorul.js',
-    '/js/app/controllers/procedura.js',
-
-    '/js/app/directives/init.js',
-    '/js/app/directives/secţiune.js',
-    '/js/app/directives/persoană.js',
-    '/js/app/directives/valute.js',
-    '/js/app/directives/ajustează-textarea-elastic.js',
-    '/js/app/directives/focusează-la-adăugare.js',
-    '/js/app/directives/adaugă-sumă.js',
+    '/js/app/procedura/routing.js',
+    '/js/app/procedura/services/procedura.js',
+    '/js/app/procedura/services/actiuni-procedurale.js',
+    '/js/app/procedura/controllers/procedura.js',
+    '/js/app/procedura/directives/adauga-suma.js',
+    '/js/app/procedura/directives/ajusteaza-textarea-elastic.js',
+    '/js/app/procedura/directives/focuseaza-la-adaugare.js',
+    '/js/app/procedura/directives/persoana.js',
+    '/js/app/procedura/directives/sectiune.js',
+    '/js/app/procedura/directives/valute.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',

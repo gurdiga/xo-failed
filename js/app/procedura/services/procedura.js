@@ -1,38 +1,34 @@
-/*global FormularProcedură, Utilizator*/
+/*global FormularProcedură*/
 (function() {
   'use strict';
 
-  var Procedura = {
-    procedura: {},
+  function ServiceProcedura(Utilizator, Persistence) {
+    var date = {};
 
-    totalSume: function(sume) {
-      return _.reduce(sume, function(total, item) {
-        var suma = parseFloat(item.suma);
+    return {
+      date: date,
 
-        if (_.isNaN(suma)) suma = 0;
+      deschide: function(numărul, callback) {
+        Persistence.get('/date/' + Utilizator.login + '/proceduri/' + numărul + '/date.json', function(dateÎncărcate) {
+          $.extend(date, dateÎncărcate, {numărul: numărul});
+          window.console.log(date);
+          callback();
+        });
 
-        return total + suma;
-      }, 0);
-    },
+        Efecte.afişeazăLin();
+      },
 
-    deschide: function(număr) {
-      Procedura.incarca(număr);
-      Efecte.afişeazăLin();
-    },
 
-    închide: function() {
-      location.hash = '';
-      Efecte.ascundeLin();
-    },
+      închide: function() {
+        location.hash = '';
+        Efecte.ascundeLin();
+      }
+    };
+  }
 
-    incarca: function(numărul) {
-      $.get('/date/' + Utilizator.login + '/proceduri/' + numărul + '/date.json', function(date) {
-        $.extend(Procedura.procedura, date, {numărul: numărul});
-        window.console.log(Procedura.procedura);
-        Procedura.sync();
-      });
-    }
-  };
+  ServiceProcedura.$inject = ['Utilizator', 'Persistence'];
+
+  window.App.service('ServiceProcedura', ServiceProcedura);
 
 
   var Efecte = {
@@ -50,6 +46,7 @@
       }
     },
 
+    // --------------------------------------------------
 
     afişeazăLin: function(callback) {
       FormularProcedură.$
@@ -70,6 +67,7 @@
       }, 0);
     },
 
+    // --------------------------------------------------
 
     ascundeLin: function() {
       FormularProcedură.$
@@ -82,8 +80,5 @@
       }, Efecte.milisecunde());
     }
   };
-
-
-  window.App.Controllers.Procedura = Procedura;
 
 })();

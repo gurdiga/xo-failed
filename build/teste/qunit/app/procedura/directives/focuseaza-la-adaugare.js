@@ -3,19 +3,23 @@
 
   var app = window.frames['app'];
 
+  module('FocuseazaLaAdaugare');
 
-  test('FocuseazăLaAdăugare', function() {
-    var directiva = app.App.Directives.FocuseazăLaAdăugare;
+
+  test('meta', function() {
+    var directiva = app.App.module.D.FocuseazaLaAdaugare();
 
     equal(directiva.restrict, 'A', 'se limitează la atribute');
   });
 
 
-  test('FocuseazăLaAdăugare.link', function() {
+  test('link', function() {
+    var link = app.App.module.D.FocuseazaLaAdaugare.module.link;
+
     var scope = {
       $last: true,
       suma: {
-        adăugare: true,
+        adaugare: true,
         alte: 'date'
       }
     };
@@ -27,7 +31,7 @@
       '</li>'
     );
 
-    app.App.Directives.FocuseazăLaAdăugare.link(scope, element);
+    link(scope, element);
     ok(element.find(':input:first').is('.test-focusat'), 'focusat primul :input');
   });
 

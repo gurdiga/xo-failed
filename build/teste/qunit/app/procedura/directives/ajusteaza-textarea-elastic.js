@@ -4,15 +4,17 @@
   var app = window.frames['app'];
 
 
-  test('AjusteazăTextareaElastic', function() {
-    var directiva = app.App.Directives.AjusteazăTextareaElastic;
+  module('AjusteazaTextareaElastic');
+
+  test('meta', function() {
+    var directiva = app.App.module.D.AjusteazaTextareaElastic();
 
     equal(directiva.restrict, 'A', 'se limitează la atribute');
   });
 
 
-  asyncTest('AjusteazăTextareaElastic.link', function() {
-    var directiva = app.App.Directives.AjusteazăTextareaElastic,
+  asyncTest('link', function() {
+    var link = app.App.module.D.AjusteazaTextareaElastic.module.link,
         scope = {$last: true},
         evenimenteAşteptate = 3,
         evenimenteVenite = 0;
@@ -35,7 +37,7 @@
       evenimenteVenite += 1;
     });
 
-    directiva.link(scope, app.angular.element(fragment.find('li:last')[0]));
+    link(scope, app.angular.element(fragment.find('li:last')[0]));
 
     setTimeout(function() {
       equal(evenimenteVenite, evenimenteAşteptate, 'emite un eveniment input pe fiecare textarea.etichetă');

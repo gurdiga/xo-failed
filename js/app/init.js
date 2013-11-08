@@ -2,51 +2,42 @@
 (function() {
   'use strict';
 
-  var App = {
-    dependencies: ['ngRoute'],
+  var App = angular.module('App', ['ngRoute']);
 
-    init: function() {
-      var app = angular.module('App', App.dependencies);
+  App.run(['Utilizator', function(Utilizator) {
+    Utilizator.login = $.cookie('login');
+  }]);
 
-      App.Controllers.init(app);
-      App.Directives.init(app);
-      App.initRouting(app);
-      App.initTemplateCache(app);
-    },
+  // When the templates are outside of the ng-app element they are not
+  // automatically loaded.
+  (function() {
+    var templates = document.querySelectorAll('script[type="text/ng-template"]');
 
-    initRouting: function(app) {
-      app.config(['$routeProvider', function($routeProvider) {
-        $routeProvider
-          .when('/', {
-            template: ' '
-          })
+    templates = Array.prototype.slice.call(templates);
 
-          .when('/procedura/:numar', {
-            template: ' ',
-            controller: ['$scope', '$routeParams', function($scope, $routeParams) {
-              App.Controllers.Procedura.deschide($routeParams.numar);
-            }]
-          })
-
-          .otherwise({redirectTo: '/'});
+    function registerTemplate(template) {
+      App.run(['$templateCache', function($templateCache) {
+        $templateCache.put(template.id, template.innerHTML);
       }]);
-    },
-
-    initTemplateCache: function(app) {
-      var templates = document.querySelectorAll('script[type="text/ng-template"]');
-
-      templates = Array.prototype.slice.call(templates);
-
-      function registerTemplate(template) {
-        app.run(['$templateCache', function($templateCache) {
-          $templateCache.put(template.id, template.innerHTML);
-        }]);
-      }
-
-      templates.forEach(registerTemplate);
     }
-  };
 
+    templates.forEach(registerTemplate);
+  })();
+
+
+  App.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/', { template: ' ' })
+      .otherwise({ redirectTo: '/' });
+  }]);
+
+
+  // expose things for testging
+  App.module = {
+    C: {},
+    D: {},
+    S: {}
+  };
 
   window.App = App;
 

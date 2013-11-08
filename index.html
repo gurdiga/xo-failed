@@ -25,7 +25,7 @@
   </head>
 
   <body>
-    <div id="conţinut" ng-app="App" ng-controller="Utilizatorul">
+    <div id="conţinut" ng-app="App">
       <div id="bara-de-sus">
         <h1>executori.org</h1>
 
@@ -200,11 +200,11 @@
         </ul>
       </div>
 
-      <div id="formular" ng-controller="Procedura">
+      <div id="formular" ng-controller="ControllerProcedura">
         <div class="conţinut">
           <h1>
             <span id="descriere">Procedura de executare</span>
-            <span id="prefix">{{utilizatorul['login']}}</span><span id="tip">{{procedura['tip']}}</span><span id="tireu">-</span><span id="număr">{{procedura['numărul']}}</span>
+            <span id="prefix">{{procedura['login']}}</span><span id="tip">{{procedura['tip']}}</span><span id="tireu">-</span><span id="număr">{{procedura['numărul']}}</span>
           </h1>
 
           <p id="container-data-intentării">
@@ -213,9 +213,9 @@
           </p>
 
           <div class="coloană stînga">
-            <secţiune titlu="Creditor">
-              <persoană date="procedura['creditor']"></persoană>
-            </secţiune>
+            <sectiune titlu="Creditor">
+              <persoana date="procedura['creditor']"></persoana>
+            </sectiune>
 
             <button class="adaugă persoană terţă semiascuns">
               +persoană terţă<span class="legend label">Persoană terță</span>
@@ -223,15 +223,15 @@
           </div>
 
           <div class="coloană">
-            <secţiune ng-repeat="debitor in procedura['debitori']" titlu="Debitor">
-              <persoană date="debitor"></persoană>
-            </secţiune>
+            <sectiune ng-repeat="debitor in procedura['debitori']" titlu="Debitor">
+              <persoana date="debitor"></persoana>
+            </sectiune>
 
             <button class="adaugă persoană semiascuns">+debitor</button>
           </div>
 
           <div class="coloană stînga">
-            <secţiune titlu="Documentul executoriu">
+            <sectiune titlu="Documentul executoriu">
               <var ng-bind=" date = procedura['document-executoriu']; '' "></var>
               <ul>
                 <li>
@@ -265,11 +265,11 @@
                   <input type="text" ng-model="date['data-eliberării']" class="dată"/>
                 </li>
               </ul>
-            </secţiune>
+            </sectiune>
           </div>
 
           <div class="coloană">
-            <secţiune titlu="Obiectul urmăririi">
+            <sectiune titlu="Obiectul urmăririi">
               <var ng-bind=" date = procedura['obiectul-urmăririi']; '' "></var>
               <ul>
                 <li>
@@ -292,20 +292,30 @@
                   <li class="sechestrare-bunuri">sechestrare bunuri</li>
                 </ul>
               </div>
-            </secţiune>
+            </sectiune>
           </div>
 
 
-          <secţiune titlu="Acţiuni procedurale" lată="da">
-            <ul class="itemi"></ul>
+          <sectiune lata titlu="Acţiuni procedurale">
+            <ul class="itemi">
+              <li ng-repeat=" actiune in procedura['acţiuni-procedurale'] ">
+                TODO {{ actiune.denumire }}
+              </li>
+            </ul>
+
             <div class="total">
               <label>Total cheltuieli pe toate acţiunile:</label>
               <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
               <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
               <b>MDL</b>
             </div>
-            <div class="opţiuni"></div>
-          </secţiune>
+            <div class="opţiuni" TODO="deprecate"></div>
+
+            <div>
+              <var ng-bind=" actiuni = dependencies.ActiuniProcedurale; '' "></var>
+              TODO: {{ actiuni | json }}
+            </div>
+          </sectiune>
 
 
           <!--fieldset id="cheltuieli" class="secţiune desfăşurată lată">
@@ -854,7 +864,7 @@
 
           <p id="data-ultimei-modificări">Ultima modificare: {{ procedura['data-ultimei-modificări'] }}</p>
 
-          <button class="închide semiascuns" title="Închide" ng-click="închide()">×</button>
+          <button class="închide semiascuns" title="Închide" ng-click="inchide()">×</button>
         </div>
       </div>
 
@@ -2011,6 +2021,7 @@
       </li>
     </script>
 
+    <!-- TODO: de schiţat HTML-ul Angular pentru acţiune procedurală -->
     <script id="acţiune-procedurală-intentare" type="text/x-fragment">
       {{#include 'acţiune-procedurală' acţiunea='intentare' }}
         {{include 'data-acţiunii' }}
@@ -2168,8 +2179,8 @@
     </script>
 
 
-    <script type="text/ng-template" id="directive-secţiune">
-      <fieldset class="secţiune desfăşurată {{ lată ? 'lată' : '' ">
+    <script type="text/ng-template" id="directive-sectiune">
+      <fieldset class="secţiune desfăşurată {{ lata === undefined ? '' : ' lată' }}">
         <legend>{{ titlu }}</legend>
 
         <div class="conţinut" ng-transclude>
@@ -2178,7 +2189,7 @@
     </script>
 
 
-    <script type="text/ng-template" id="directive-persoană">
+    <script type="text/ng-template" id="directive-persoana">
       <ul>
         <li>
           <label>Gen persoană</label>
@@ -2318,14 +2329,14 @@
         <input ng-model="date['amendă']" type="checkbox"/>
       </li>
 
-      <li ng-repeat=" suma in date['sume'] " ajustează-textarea-elastic focusează-la-adăugare class="sumă personalizat eliminabil de tot">
+      <li ng-repeat=" suma in date['sume'] " ajusteaza-textarea-elastic focuseaza-la-adaugare class="sumă personalizat eliminabil de tot">
         <textarea class="etichetă" title="Etichetă editabilă" placeholder="descrierea" ng-model="suma.eticheta"></textarea>
         <input type="text" placeholder="suma" class="sumă" ng-model="suma.suma"/>
         <valute suma="suma"></valute>
       </li>
 
       <li class="container-buton">
-        <button adaugă-sumă lista="date['sume']" class="adaugă-cîmp-personalizat sumă semiascuns">+sumă</button>
+        <button adauga-suma lista="date['sume']" class="adaugă-cîmp-personalizat sumă semiascuns">+sumă</button>
       </li>
 
       <li>
@@ -2694,16 +2705,19 @@
     <script src="/js/lib.js"></script>
 
     <script src="/js/app/init.js"></script>
-    <script src="/js/app/controllers/init.js"></script>
-    <script src="/js/app/controllers/utilizatorul.js"></script>
-    <script src="/js/app/controllers/procedura.js"></script>
-    <script src="/js/app/directives/init.js"></script>
-    <script src="/js/app/directives/secţiune.js"></script>
-    <script src="/js/app/directives/persoană.js"></script>
-    <script src="/js/app/directives/valute.js"></script>
-    <script src="/js/app/directives/ajustează-textarea-elastic.js"></script>
-    <script src="/js/app/directives/focusează-la-adăugare.js"></script>
-    <script src="/js/app/directives/adaugă-sumă.js"></script>
+    <script src="/js/app/util/persistence.js"></script>
+    <script src="/js/app/utilizator/services/utilizator.js"></script>
+
+    <script src="/js/app/procedura/routing.js"></script>
+    <script src="/js/app/procedura/services/procedura.js"></script>
+    <script src="/js/app/procedura/services/actiuni-procedurale.js"></script>
+    <script src="/js/app/procedura/controllers/procedura.js"></script>
+    <script src="/js/app/procedura/directives/adauga-suma.js"></script>
+    <script src="/js/app/procedura/directives/ajusteaza-textarea-elastic.js"></script>
+    <script src="/js/app/procedura/directives/focuseaza-la-adaugare.js"></script>
+    <script src="/js/app/procedura/directives/persoana.js"></script>
+    <script src="/js/app/procedura/directives/sectiune.js"></script>
+    <script src="/js/app/procedura/directives/valute.js"></script>
 
     <script src="/js/app/handlebars-helpers.js"></script>
     <script src="/js/app/x-jquery.js"></script>

@@ -1,4 +1,4 @@
-/*global top moment App TextareaElastice RateDeBază Calendar SelecturiFoarteLate SubsecţiuniDinamice StructuriDate AcţiuniProcedurale*/
+/*global top moment TextareaElastice RateDeBază Calendar SelecturiFoarteLate SubsecţiuniDinamice StructuriDate AcţiuniProcedurale*/
 (function(window, document, moment) {
   'use strict';
 
@@ -3294,7 +3294,6 @@
   }
 
   Action.init();
-  App.init();
 
   if ('QUnit' in top) $(top.runQUnit);
 
