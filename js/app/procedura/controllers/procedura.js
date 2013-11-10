@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  function ControllerProcedura($scope, ServiceProcedura) {
-    $scope.procedura = ServiceProcedura.date;
-    $scope.inchide = ServiceProcedura.închide;
+  function ControllerProcedura($scope, Procedura) {
+    $scope.procedura = Procedura.date;
+    $scope.inchide = Procedura.inchide;
     $scope.totalSume = ControllerProcedura.module.totalSume;
   }
 
-  ControllerProcedura.$inject = ['$scope', 'ServiceProcedura'];
+  ControllerProcedura.$inject = ['$scope', 'Procedura'];
 
   ControllerProcedura.module = {
     totalSume: function(sume) {

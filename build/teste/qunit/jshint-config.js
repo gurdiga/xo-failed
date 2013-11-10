@@ -33,11 +33,6 @@
     'app/procedura/directives/ajusteaza-textarea-elastic.js',
     'app/procedura/directives/focuseaza-la-adaugare.js',
 
-    'app/controllers/init.js',
-
-    'app/directives/init.js',
-
-    '/js/app/init.js',
     '/js/app/init.js',
     '/js/app/utilizator/services/utilizator.js',
 

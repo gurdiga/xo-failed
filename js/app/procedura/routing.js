@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  function RoutingControllerProcedura($scope, $routeParams, ServiceProcedura) {
-    ServiceProcedura.deschide($routeParams.numar, function() {
+  function RoutingControllerProcedura($scope, $routeParams, Procedura) {
+    Procedura.deschide($routeParams.numar, function() {
       $scope.$apply();
     });
   }
 
-  RoutingControllerProcedura.$inject = ['$scope', '$routeParams', 'ServiceProcedura'];
+  RoutingControllerProcedura.$inject = ['$scope', '$routeParams', 'Procedura'];
 
 
   window.App.config(['$routeProvider', function($routeProvider) {

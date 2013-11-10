@@ -2,33 +2,35 @@
 (function() {
   'use strict';
 
-  function ServiceProcedura(Utilizator, Persistence) {
-    var date = {};
+  function Procedura(Utilizator, Persistence, ActiuniProcedurale) {
+    var date = {
+      'actiuni': ActiuniProcedurale
+    };
 
     return {
       date: date,
 
-      deschide: function(numărul, callback) {
-        Persistence.get('/date/' + Utilizator.login + '/proceduri/' + numărul + '/date.json', function(dateÎncărcate) {
-          $.extend(date, dateÎncărcate, {numărul: numărul});
+      deschide: function(numarul, callback) {
+        Persistence.get('/date/' + Utilizator.login + '/proceduri/' + numarul + '/date.json', function(dateIncarcate) {
+          $.extend(date, dateIncarcate, {'numărul': numarul});
           window.console.log(date);
           callback();
         });
 
-        Efecte.afişeazăLin();
+        Efecte.afiseazaLin();
       },
 
 
-      închide: function() {
+      inchide: function() {
         location.hash = '';
         Efecte.ascundeLin();
       }
     };
   }
 
-  ServiceProcedura.$inject = ['Utilizator', 'Persistence'];
+  Procedura.$inject = ['Utilizator', 'Persistence', 'ActiuniProcedurale'];
 
-  window.App.service('ServiceProcedura', ServiceProcedura);
+  window.App.service('Procedura', Procedura);
 
 
   var Efecte = {
@@ -48,7 +50,7 @@
 
     // --------------------------------------------------
 
-    afişeazăLin: function(callback) {
+    afiseazaLin: function(callback) {
       FormularProcedură.$
         .css('top', $(window).height())
         .show()
