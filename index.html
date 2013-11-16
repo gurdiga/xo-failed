@@ -2350,53 +2350,12 @@
     <script type="text/ng-template" id="template-caracter-nonpecuniar">
       <li>
         <label>Obiectul urmăririi</label>
-        <select ng-model="date['obiect']">
-          <option class="scurtă"
-            data-formular-încheiere="încheiere-de-evacuare"
-            data-şoaptă-buton="Formează Încheiere de numire a datei evacuării forţate"
-            >evacuarea</option>
-          <option class="scurtă"
-            data-formular-încheiere="încheiere-de-instalare"
-            data-şoaptă-buton="Formează Încheiere cu privire la instalarea în spaţiul locativ"
-            >instalarea</option>
-          <option class="scurtă"
-            data-formular-încheiere="încheiere-de-schimb-forţat"
-            data-şoaptă-buton="Formează Încheiere cu privire la schimbul forţat al locuinţelor"
-            >schimbul forţat</option>
-          <option
-            data-formular-încheiere="încheiere-de-stabilire-a-domiciliului-copilului"
-            data-şoaptă-buton="Formează Somaţie cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor"
-            >stabilirea domiciliului copilului</option>
-          <option
-            data-formular-încheiere="încheiere-de-efectuare-a-unor-acţiuni-nelegate-de-bunuri"
-            data-şoaptă-buton="Formează Somaţie cu privire la executarea de către debitor a unor acţiuni nelegate de remiterea unor sume sau bunuri"
-            >efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri</option>
-          <option
-            data-formular-încheiere="încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-mobile"
-            data-şoaptă-buton="Formează Încheiere de numire a datei ridicării a unor sume sau bunuri"
-            >efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile</option>
-          <option
-            data-formular-încheiere="încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-imobile"
-            data-şoaptă-buton="Formează Încheiere de numire a datei transmiterii bunurilor imobile"
-            >efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile</option>
-          <option class="scurtă"
-            data-formular-încheiere="încheiere-de-confiscare-a-bunurilor"
-            data-şoaptă-buton="Formează Încheiere de numire a datei confiscării bunurilor"
-            >confiscarea bunurilor</option>
-          <option class="scurtă"
-            data-formular-încheiere="încheiere-de-nimicire-a-bunurilor"
-            data-şoaptă-buton="Formează Încheiere de numire a datei nimicirii bunurilor"
-            >nimicirea bunurilor</option>
-          <option class="scurtă"
-            data-formular-încheiere="încheiere-de-restabilire-la-locul-de-muncă"
-            data-şoaptă-buton="Formează Somaţie de restabilire a salariatului la locul de muncă"
-            >restabilirea la locul de muncă</option>
-          <option
-            data-formular-încheiere="încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii"
-            data-şoaptă-buton="Formează Încheiere de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii"
-            >aplicarea măsurilor de asigurare a acţiunii</option>
-        </select>
-        <!--span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Formare document"></span-->
+        <select
+          ng-model=" date['obiect'] "
+          ng-init=" date['obiect'] = date['obiect'] || procedura['optiuni-obiectul-urmaririi'][0].eticheta "
+          ng-options=" obiect.eticheta as obiect.eticheta for obiect in procedura['optiuni-obiectul-urmaririi'] track by obiect.eticheta "
+        ></select>
+        <!-- TODO? span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Formare document"></span-->
       </li>
 
       <ng-include src=" 'cîmpuri pentru obiectul urmăririi: ' + date['obiect'] "/>
@@ -2710,6 +2669,7 @@
     <script src="/js/app/procedura/routing.js"></script>
     <script src="/js/app/procedura/services/procedura.js"></script>
     <script src="/js/app/procedura/services/actiuni-procedurale.js"></script>
+    <script src="/js/app/procedura/services/obiectul-urmaririi.js"></script>
     <script src="/js/app/procedura/controllers/procedura.js"></script>
     <script src="/js/app/procedura/directives/adauga-suma.js"></script>
     <script src="/js/app/procedura/directives/ajusteaza-textarea-elastic.js"></script>

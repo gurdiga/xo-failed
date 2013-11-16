@@ -1,10 +1,14 @@
 /*global FormularProcedură*/
 (function() {
   'use strict';
+  /*jshint maxparams:4*/
 
-  function Procedura(Utilizator, Persistence, ActiuniProcedurale) {
+  // Too many parameters per function (4). -- is this a sign that this thing is doing too much?
+  function Procedura(Utilizator, Persistence, ActiuniProcedurale, ObiectulUrmaririi) {
     var date = {
-      'actiuni': ActiuniProcedurale
+      'login': Utilizator.login,
+      'actiuni': ActiuniProcedurale,
+      'optiuni-obiectul-urmaririi': ObiectulUrmaririi.optiuni
     };
 
     return {
@@ -28,7 +32,7 @@
     };
   }
 
-  Procedura.$inject = ['Utilizator', 'Persistence', 'ActiuniProcedurale'];
+  Procedura.$inject = ['Utilizator', 'Persistence', 'ActiuniProcedurale', 'ObiectulUrmaririi'];
 
   window.App.service('Procedura', Procedura);
 
