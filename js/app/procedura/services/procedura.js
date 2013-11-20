@@ -1,38 +1,39 @@
-/*global FormularProcedură*/
+/*global FormularProcedură*/ // TODO: get rid if this?
 (function() {
   'use strict';
-  /*jshint maxparams:4*/
 
-  // Too many parameters per function (4). -- is this a sign that this thing is doing too much?
-  function Procedura(Utilizator, Persistence, ActiuniProcedurale, ObiectulUrmaririi) {
+  function Procedura(Persistence, ActiuniProcedurale, ObiectulUrmaririi) {
     var date = {
-      'login': Utilizator.login,
       'actiuni': ActiuniProcedurale,
       'optiuni-obiectul-urmaririi': ObiectulUrmaririi.optiuni
     };
 
+
+    function deschide(numarul, callback) {
+      Persistence.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
+        $.extend(date, dateIncarcate, {'numărul': numarul});
+        window.console.log(date);
+        callback();
+      });
+
+      Efecte.afiseazaLin();
+    }
+
+
+    function inchide() {
+      location.hash = '';
+      Efecte.ascundeLin();
+    }
+
+
     return {
       date: date,
-
-      deschide: function(numarul, callback) {
-        Persistence.get('/date/' + Utilizator.login + '/proceduri/' + numarul + '/date.json', function(dateIncarcate) {
-          $.extend(date, dateIncarcate, {'numărul': numarul});
-          window.console.log(date);
-          callback();
-        });
-
-        Efecte.afiseazaLin();
-      },
-
-
-      inchide: function() {
-        location.hash = '';
-        Efecte.ascundeLin();
-      }
+      deschide: deschide,
+      inchide: inchide
     };
   }
 
-  Procedura.$inject = ['Utilizator', 'Persistence', 'ActiuniProcedurale', 'ObiectulUrmaririi'];
+  Procedura.$inject = ['Persistence', 'ActiuniProcedurale', 'ObiectulUrmaririi'];
 
   window.App.service('Procedura', Procedura);
 

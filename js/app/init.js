@@ -4,9 +4,7 @@
 
   var App = angular.module('App', ['ngRoute']);
 
-  App.run(['Utilizator', function(Utilizator) {
-    Utilizator.login = $.cookie('login');
-  }]);
+  App.constant('USER_LOGIN', $.cookie('login'));
 
   // When the templates are outside of the ng-app element they are not
   // automatically loaded.

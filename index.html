@@ -25,7 +25,7 @@
   </head>
 
   <body>
-    <div id="conţinut" ng-app="App">
+    <div id="conţinut" ng-app="App" ng-controller="ControllerUtilizator">
       <div id="bara-de-sus">
         <h1>executori.org</h1>
 
@@ -204,7 +204,7 @@
         <div class="conţinut">
           <h1>
             <span id="descriere">Procedura de executare</span>
-            <span id="prefix">{{procedura['login']}}</span><span id="tip">{{procedura['tip']}}</span><span id="tireu">-</span><span id="număr">{{procedura['numărul']}}</span>
+            <span id="prefix">{{utilizator['login']}}</span><span id="tip">{{procedura['tip']}}</span><span id="tireu">-</span><span id="număr">{{procedura['numărul']}}</span>
           </h1>
 
           <p id="container-data-intentării">
@@ -2663,8 +2663,10 @@
     <script src="/js/lib.js"></script>
 
     <script src="/js/app/init.js"></script>
-    <script src="/js/app/util/persistence.js"></script>
+    <script src="/js/app/util/services/persistence.js"></script>
+
     <script src="/js/app/utilizator/services/utilizator.js"></script>
+    <script src="/js/app/utilizator/controllers/utilizator.js"></script>
 
     <script src="/js/app/procedura/routing.js"></script>
     <script src="/js/app/procedura/services/procedura.js"></script>

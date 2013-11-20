@@ -1,24 +1,26 @@
 (function() {
   'use strict';
 
-  function Utilizator() {
-    var profil = {};
+  function Utilizator(USER_LOGIN, Persistence) {
+    var date = {
+      login: USER_LOGIN,
+      profil: {}
+    };
 
-    function încarcăProfil() {
-        $.get('/date/007/profil.json', function(profilÎncarcat) {
-          $.extend(profil, profilÎncarcat, {login: $.cookie('login')});
-        });
+
+    function incarcaProfil() {
+      Persistence.get('profil.json', function(profilÎncarcat) {
+        $.extend(date.profil, profilÎncarcat, {login: $.cookie('login')});
+      });
     }
 
     return {
-      login: '',
-
-      profil: profil,
-
-      încarcăProfil: încarcăProfil
+      date: date,
+      incarcaProfil: incarcaProfil
     };
   }
 
+  Utilizator.$inject = ['USER_LOGIN', 'Persistence'];
 
   window.App.service('Utilizator', Utilizator);
 

@@ -34,7 +34,11 @@
     'app/procedura/directives/focuseaza-la-adaugare.js',
 
     '/js/app/init.js',
+
+    '/js/app/util/services/persistence.js',
+
     '/js/app/utilizator/services/utilizator.js',
+    '/js/app/utilizator/controllers/utilizator.js',
 
     '/js/app/procedura/routing.js',
     '/js/app/procedura/services/procedura.js',
