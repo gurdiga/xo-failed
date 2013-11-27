@@ -42,7 +42,6 @@
 
     '/js/app/procedura/routing.js',
     '/js/app/procedura/services/procedura.js',
-    '/js/app/procedura/services/actiuni-procedurale.js',
     '/js/app/procedura/controllers/procedura.js',
     '/js/app/procedura/directives/adauga-suma.js',
     '/js/app/procedura/directives/ajusteaza-textarea-elastic.js',
@@ -50,6 +49,8 @@
     '/js/app/procedura/directives/persoana.js',
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
+
+    '/js/app/procedura/actiuni-procedurale/services/actiuni-procedurale.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',

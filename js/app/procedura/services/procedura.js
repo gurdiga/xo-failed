@@ -2,9 +2,8 @@
 (function() {
   'use strict';
 
-  function Procedura(Persistence, ActiuniProcedurale, ObiectulUrmaririi) {
+  function Procedura(Persistence, ObiectulUrmaririi) {
     var date = {
-      'actiuni': ActiuniProcedurale,
       'optiuni-obiectul-urmaririi': ObiectulUrmaririi.optiuni
     };
 
@@ -33,7 +32,7 @@
     };
   }
 
-  Procedura.$inject = ['Persistence', 'ActiuniProcedurale', 'ObiectulUrmaririi'];
+  Procedura.$inject = ['Persistence', 'ObiectulUrmaririi'];
 
   window.App.service('Procedura', Procedura);
 

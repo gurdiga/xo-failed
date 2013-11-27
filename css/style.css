@@ -1598,8 +1598,8 @@ fieldset label,
 #cheltuieli .adăugate .subformular .şoaptă,
 #acţiuni-procedurale .itemi p,
 #acţiuni-procedurale .itemi,
-#acţiuni-procedurale .propunere,
-#acţiuni-procedurale .opţiuni .întrebare,
+.potentiale-urmatoare-actiuni,
+.întrebare-potentiale-urmatoare-actiuni,
 #încheieri li {
   color: #555;
 }
@@ -1696,7 +1696,7 @@ fieldset label,
   padding-top: 0;
 }
 
-#acţiuni-procedurale .propunere {
+.potentiale-urmatoare-actiuni {
   margin: 0 30px;
   width: 200px;
   float: left;
@@ -1704,7 +1704,7 @@ fieldset label,
   counter-increment: propuneri;
 }
 
-#acţiuni-procedurale .propunere:hover {
+.potentiale-urmatoare-actiuni:hover {
   color: blue;
   text-decoration: underline;
 }
@@ -1713,7 +1713,7 @@ fieldset label,
   font-weight: bold;
 }
 
-#acţiuni-procedurale .propunere:before {
+.potentiale-urmatoare-actiuni:before {
   content: counter(propuneri, lower-latin);
   font: bold 35px 'Times New Roman', serif;
   position: absolute;

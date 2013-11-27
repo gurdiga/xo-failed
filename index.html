@@ -299,7 +299,8 @@
           <sectiune lata titlu="Acţiuni procedurale">
             <ul class="itemi">
               <li ng-repeat=" actiune in procedura['acţiuni-procedurale'] ">
-                TODO {{ actiune.denumire }}
+                <!-- TODO: de desenat conţinutul acţiunii cu o directivă -->
+                {{ actiune.denumire }}
               </li>
             </ul>
 
@@ -311,9 +312,13 @@
             </div>
             <div class="opţiuni" TODO="deprecate"></div>
 
-            <div>
-              TODO: {{ procedura.actiuni | json }}
-            </div>
+            <p  ng-if=" optiuniPentruUrmatoareaActiune.length "
+                class="întrebare-potentiale-urmatoare-actiuni">Care e următorul pas?</p>
+
+            <a  ng-repeat=" item in optiuniPentruUrmatoareaActiune "
+                identificator="{{ item.identificator }}"
+                class="potentiale-urmatoare-actiuni">{{ item.descriere }}</a>
+
           </sectiune>
 
 
@@ -2202,6 +2207,7 @@
       </ul>
     </script>
 
+
     <script type="text/ng-template" id="template-persoană-juridică">
       <li>
         <label>Denumire</label>
@@ -2670,7 +2676,6 @@
 
     <script src="/js/app/procedura/routing.js"></script>
     <script src="/js/app/procedura/services/procedura.js"></script>
-    <script src="/js/app/procedura/services/actiuni-procedurale.js"></script>
     <script src="/js/app/procedura/services/obiectul-urmaririi.js"></script>
     <script src="/js/app/procedura/controllers/procedura.js"></script>
     <script src="/js/app/procedura/directives/adauga-suma.js"></script>
@@ -2679,6 +2684,9 @@
     <script src="/js/app/procedura/directives/persoana.js"></script>
     <script src="/js/app/procedura/directives/sectiune.js"></script>
     <script src="/js/app/procedura/directives/valute.js"></script>
+
+    <script src="/js/app/procedura/actiuni-procedurale/services/actiuni-procedurale.js"></script>
+    <script src="/js/app/procedura/actiuni-procedurale/directives/actiune-procedurala.js"></script>
 
     <script src="/js/app/handlebars-helpers.js"></script>
     <script src="/js/app/x-jquery.js"></script>
