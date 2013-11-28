@@ -11,7 +11,7 @@
     };
 
     // test that it’s in sync with succesiune
-    var descrieri = {
+    var denumiri = {
       'intentare': 'Intentarea şi formarea procedurii de executare',
       'intentare-cu-asigurare': 'Intentarea şi formarea procedurii de executare, plus asigurarea executării',
       'continuare': 'continuare',
@@ -27,15 +27,26 @@
       return identificatori.map(function(identificator) {
         return {
           identificator: identificator,
-          descriere: descrieri[identificator]
+          denumire: denumiri[identificator]
         };
       });
     }
 
 
+    function adauga(identificator, procedura) {
+      var actiune = {
+        identificator: identificator,
+        denumire: denumiri[identificator]
+      };
+
+      procedura['acţiuni-procedurale'].push(actiune);
+    }
+
+
     return {
       date: {},
-      optiuniPentruUrmatoareaActiune: optiuniPentruUrmatoareaActiune
+      optiuniPentruUrmatoareaActiune: optiuniPentruUrmatoareaActiune,
+      adauga: adauga
     };
   }
 

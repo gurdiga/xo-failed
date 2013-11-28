@@ -314,7 +314,7 @@
 
             <!-- TODO: de reacţionat la click -->
 
-            <propunere-actiune-procedurala ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item">
+            <propunere-actiune-procedurala ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item" procedura="procedura">
             </propunere-actiune-procedurala>
 
           </sectiune>
@@ -2229,7 +2229,9 @@
 
 
     <script type="text/ng-template" id="directive-propunere-actiune-procedurala">
-      <a identificator="{{ date.identificator }}" class="potentiale-urmatoare-actiuni">{{ date.descriere }}</a>
+      <a ng-click=" adaugaActiuneProcedurala(date.identificator, procedura) " class="potentiale-urmatoare-actiuni">
+        {{ date.denumire }}
+      </a>
     </script>
 
 

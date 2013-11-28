@@ -6,9 +6,13 @@
       restrict: 'E',
       replace: true,
       scope: {
-        date: '='
+        date: '=',
+        procedura: '='
       },
-      templateUrl: 'directive-propunere-actiune-procedurala'
+      templateUrl: 'directive-propunere-actiune-procedurala',
+      controller: ['$scope', 'ActiuniProcedurale', function($scope, ActiuniProcedurale) {
+        $scope.adaugaActiuneProcedurala = ActiuniProcedurale.adauga;
+      }]
     };
   }
 
