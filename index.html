@@ -297,27 +297,25 @@
 
 
           <sectiune lata titlu="Acţiuni procedurale">
-            <ul class="itemi">
-              <li ng-repeat=" actiune in procedura['acţiuni-procedurale'] ">
-                <!-- TODO: de desenat conţinutul acţiunii cu o directivă -->
-                {{ actiune.denumire }}
-              </li>
+            <ul id="actiuni-procedurale" ng-if=" procedura['acţiuni-procedurale'].length > 0 ">
+              <actiune-procedurala date="actiune" ng-repeat=" actiune in procedura['acţiuni-procedurale'] ">
+              </actiune-procedurala>
             </ul>
 
-            <div class="total">
+            <div id="total-pe-actiunile-procedurale" ng-if=" procedura['acţiuni-procedurale'].length > 0 ">
               <label>Total cheltuieli pe toate acţiunile:</label>
               <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
               <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
               <b>MDL</b>
             </div>
-            <div class="opţiuni" TODO="deprecate"></div>
 
-            <p  ng-if=" optiuniPentruUrmatoareaActiune.length "
-                class="întrebare-potentiale-urmatoare-actiuni">Care e următorul pas?</p>
+            <p  ng-if=" optiuniPentruUrmatoareaActiune.length > 0 "
+                id="întrebare-potentiale-urmatoare-actiuni">Care e următorul pas?</p>
 
-            <a  ng-repeat=" item in optiuniPentruUrmatoareaActiune "
-                identificator="{{ item.identificator }}"
-                class="potentiale-urmatoare-actiuni">{{ item.descriere }}</a>
+            <!-- TODO: de reacţionat la click -->
+
+            <propunere-actiune-procedurala ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item">
+            </propunere-actiune-procedurala>
 
           </sectiune>
 
@@ -2208,6 +2206,39 @@
     </script>
 
 
+    <script type="text/ng-template" id="directive-actiune-procedurala">
+      <li actiune="{{ date['identificator'] }}" class="eliminabil de tot">
+        <div sectiune="dată">
+          <!-- TODO: de setat data default in directiva? -->
+          <!-- TODO: de initializat calendarul -->
+          <input type="text" class="dată" value="{{ '11.11.2011' }}"/>
+        </div>
+
+        <div sectiune="conţinut">
+          <p class="denumire">{{ date['denumire'] }}</p>
+
+          <!-- TODO: de inventat un format care să nu separe documentul de
+            taxa plătită pentru el -->
+
+          <a class="ico document" formular="" href="">încheierea</a>
+          <a class="ico document" formular="" href="">scrisoarea de încoţire</a>
+          <a class="ico document" formular="" href="">borderoul de calcul</a>
+        </div>
+      </li>
+    </script>
+
+
+    <script type="text/ng-template" id="directive-propunere-actiune-procedurala">
+      <a identificator="{{ date.identificator }}" class="potentiale-urmatoare-actiuni">{{ date.descriere }}</a>
+    </script>
+
+
+    <script type="text/ng-template" id="conţinutul pentru acţiunea procedurală: intentare">
+      <i>conţinutul pentru acţiunea procedurală: {{ date['identificator'] }}</i>
+      <ng-include src=" 'denumirea pentru acţiunea procedurală: ' + date['identificator'] "/>
+    </script>
+
+
     <script type="text/ng-template" id="template-persoană-juridică">
       <li>
         <label>Denumire</label>
@@ -2687,6 +2718,7 @@
 
     <script src="/js/app/procedura/actiuni-procedurale/services/actiuni-procedurale.js"></script>
     <script src="/js/app/procedura/actiuni-procedurale/directives/actiune-procedurala.js"></script>
+    <script src="/js/app/procedura/actiuni-procedurale/directives/propunere-actiune-procedurala.js"></script>
 
     <script src="/js/app/handlebars-helpers.js"></script>
     <script src="/js/app/x-jquery.js"></script>

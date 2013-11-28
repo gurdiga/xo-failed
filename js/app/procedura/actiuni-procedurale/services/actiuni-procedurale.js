@@ -14,14 +14,14 @@
     var descrieri = {
       'intentare': 'Intentarea şi formarea procedurii de executare',
       'intentare-cu-asigurare': 'Intentarea şi formarea procedurii de executare, plus asigurarea executării',
+      'continuare': 'continuare',
+      'încetare': 'încetare',
       'TODO': 'TODO'
     };
 
 
     function optiuniPentruUrmatoareaActiune(actiuni) {
-      if (_.isEmpty(actiuni)) return [];
-
-      var ultima = _.last(actiuni),
+      var ultima = _.last(actiuni) || { identificator: '' },
           identificatori = succesiune[ultima.identificator];
 
       return identificatori.map(function(identificator) {

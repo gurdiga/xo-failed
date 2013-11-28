@@ -712,7 +712,7 @@ fieldset.secţiune.lată {
 }
 
 #cheltuieli .item .la input.dată,
-#acţiuni-procedurale input.dată {
+[actiune] input.dată {
   width: 6em;
   margin: 0;
   vertical-align: -1px;
@@ -1509,7 +1509,7 @@ ul.încheieri.contextuale.borderou-de-calcul {
   margin-left: 13em;
 }
 
-#acţiuni-procedurale .itemi a,
+[actiune] a.document,
 ul.încheieri li a {
   text-decoration: none;
   color: inherit;
@@ -1519,7 +1519,7 @@ ul.încheieri li a.scrisoare-de-însoţire {
   color: #999;
 }
 
-#acţiuni-procedurale .itemi a:before,
+[actiune] a.document:before,
 ul.încheieri li a:before {
   padding-right: 3px;
   vertical-align: 1px;
@@ -1529,14 +1529,14 @@ ul.încheieri li:hover::before {
   text-decoration: none;
 }
 
-#acţiuni-procedurale .itemi a:hover,
-#acţiuni-procedurale .itemi a:hover::before,
+#acţiuni-procedurale a:hover,
+#acţiuni-procedurale a:hover::before,
 ul.încheieri li:hover::before,
 ul.încheieri li a:hover {
   color: blue;
 }
 
-#acţiuni-procedurale .itemi a:hover,
+#acţiuni-procedurale a:hover,
 ul.încheieri li a:hover {
   text-decoration: underline;
 }
@@ -1596,104 +1596,98 @@ fieldset label,
 .subformular label,
 #cheltuieli .adăugate p,
 #cheltuieli .adăugate .subformular .şoaptă,
-#acţiuni-procedurale .itemi p,
-#acţiuni-procedurale .itemi,
+[actiune] p,
+#acţiuni-procedurale,
 .potentiale-urmatoare-actiuni,
-.întrebare-potentiale-urmatoare-actiuni,
+#întrebare-potentiale-urmatoare-actiuni,
 #încheieri li {
   color: #555;
 }
 
-[acţiune] {
+[actiune] {
   clear: left;
-
 }
 
-[acţiune]>[secţiune] {
+[actiune]>[sectiune] {
   float: left;
   margin-left: 6px;
   margin-bottom: 8px;
 }
 
-[acţiune]>[secţiune="dată"] {
+[actiune]>[sectiune="dată"] {
   width: 110px;
 }
 
-[acţiune]>[secţiune="conţinut"] {
+[actiune]>[sectiune="conţinut"] {
   width: 700px;
 }
 
-[acţiune] p {
+[actiune] p {
   margin: 0;
 }
 
-[acţiune] .taxe p {
+[actiune] .taxe p {
   margin-bottom: -2px;
 }
 
-[acţiune] .taxe input[type="checkbox"] {
+[actiune] .taxe input[type="checkbox"] {
   margin: 0;
 }
 
-[acţiune] fieldset.subsecţiune {
+[actiune] fieldset.subsecţiune {
   margin: 5px 0 5px -8px;
 }
 
-[acţiune] .taxe {
+[actiune] .taxe {
   margin-left: 6px;
 }
 
-[acţiune] .document {
+[actiune] .document {
   font-size: small;
 }
 
-[acţiune] .descriere {
+[actiune] .denumire {
   font-weight: bold;
   color: black !important;
   margin: 4px 0 0 -5px;
 }
 
-[acţiune] .achitare {
+[actiune] .achitare {
   margin: 2px 0 0 0;
 }
 
-[acţiune] .achitare label.la {
+[actiune] .achitare label.la {
   padding: 0;
 }
 
-[acţiune] .elimină {
+[actiune] .elimină {
   left: -9px;
   top: 1px;
 }
 
-#acţiuni-procedurale .opţiuni {
+#întrebare-potentiale-urmatoare-actiuni {
+  font-weight: bold;
+  margin: 14px 0 14px 20px;
+}
+
+#total-pe-actiunile-procedurale+#întrebare-potentiale-urmatoare-actiuni {
   padding-top: 15px;
-  margin: 0 0 0 20px;
 }
 
-#acţiuni-procedurale .opţiuni,
-#acţiuni-procedurale .total {
+#întrebare-potentiale-urmatoare-actiuni,
+#total-pe-actiunile-procedurale {
   clear: left;
-  margin: 0 0 0 11px;
+  margin-left: 11px;
 }
 
-#acţiuni-procedurale .total {
+#total-pe-actiunile-procedurale {
   padding: 10px 0;
 }
 
-#acţiuni-procedurale .total label {
+#total-pe-actiunile-procedurale label {
   padding-left: 0;
   width: auto;
   font-weight: bold;
-}
-
-#acţiuni-procedurale .itemi:empty+.total {
-  padding: 10px 0;
-  display: none;
-}
-
-#acţiuni-procedurale .itemi:empty+.total+.opţiuni {
-  padding-top: 0;
 }
 
 .potentiale-urmatoare-actiuni {
@@ -1707,10 +1701,6 @@ fieldset label,
 .potentiale-urmatoare-actiuni:hover {
   color: blue;
   text-decoration: underline;
-}
-
-#acţiuni-procedurale .opţiuni .întrebare {
-  font-weight: bold;
 }
 
 .potentiale-urmatoare-actiuni:before {

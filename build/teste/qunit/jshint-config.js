@@ -51,6 +51,8 @@
     '/js/app/procedura/directives/valute.js',
 
     '/js/app/procedura/actiuni-procedurale/services/actiuni-procedurale.js',
+    '/js/app/procedura/actiuni-procedurale/directives/actiune-procedurala.js',
+    '/js/app/procedura/actiuni-procedurale/directives/propunere-actiune-procedurala.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',
@@ -173,6 +175,7 @@
     $: false,
     _: false,
     S: false,
+    angular: false,
     setTimeout: false,
     clearTimeout: false,
     setInterval: false,

@@ -6,9 +6,7 @@
     $scope.inchide = Procedura.inchide;
     $scope.totalSume = ControllerProcedura.module.totalSume;
 
-    $scope.$watch('procedura["acţiuni-procedurale"]', function(newV, oldV) {
-      if (angular.equals(newV, oldV)) return;
-
+    $scope.$watch('procedura["acţiuni-procedurale"]', function() {
       $scope.optiuniPentruUrmatoareaActiune = ActiuniProcedurale.optiuniPentruUrmatoareaActiune($scope.procedura['acţiuni-procedurale']);
     }, true);
   }
