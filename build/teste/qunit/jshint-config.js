@@ -50,9 +50,9 @@
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
 
-    '/js/app/procedura/actiuni-procedurale/services/actiuni-procedurale.js',
-    '/js/app/procedura/actiuni-procedurale/directives/actiune-procedurala.js',
-    '/js/app/procedura/actiuni-procedurale/directives/propunere-actiune-procedurala.js',
+    '/js/app/procedura/actiuni/services/actiuni.js',
+    '/js/app/procedura/actiuni/directives/actiune.js',
+    '/js/app/procedura/actiuni/directives/propunere-actiune.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',

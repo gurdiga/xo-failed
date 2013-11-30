@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function ActiuniProcedurale() {
+  function Actiuni() {
     var succesiune = {
       '': ['intentare', 'intentare-cu-asigurare'],
       'intentare': ['continuare', 'încetare'],
@@ -39,7 +39,7 @@
         denumire: denumiri[identificator]
       };
 
-      procedura['acţiuni-procedurale'].push(actiune);
+      procedura['acţiuni'].push(actiune);
     }
 
 
@@ -51,6 +51,6 @@
   }
 
 
-  window.App.service('ActiuniProcedurale', ActiuniProcedurale);
+  window.App.service('Actiuni', Actiuni);
 
 })();

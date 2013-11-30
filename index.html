@@ -297,12 +297,12 @@
 
 
           <sectiune lata titlu="Acţiuni procedurale">
-            <ul id="actiuni-procedurale" ng-if=" procedura['acţiuni-procedurale'].length > 0 ">
-                <actiune-procedurala ng-repeat=" actiune in procedura['acţiuni-procedurale'] " date="actiune">
-                </actiune-procedurala>
+            <ul id="actiuni" ng-if=" procedura['acţiuni'].length > 0 ">
+                <actiune ng-repeat=" actiune in procedura['acţiuni'] " date="actiune">
+                </actiune>
               </ul>
 
-              <div id="total-pe-actiunile-procedurale" ng-if=" procedura['acţiuni-procedurale'].length > 0 ">
+              <div id="total-pe-actiunile" ng-if=" procedura['acţiuni'].length > 0 ">
                 <label>Total cheltuieli pe toate acţiunile:</label>
                 <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
                 <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
@@ -314,8 +314,8 @@
 
               <!-- TODO: de reacţionat la click -->
 
-              <propunere-actiune-procedurala ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item" procedura="procedura">
-              </propunere-actiune-procedurala>
+              <propunere-actiune ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item" procedura="procedura">
+              </propunere-actiune>
 
             </sectiune>
 
@@ -2206,7 +2206,7 @@
       </script>
 
 
-      <script type="text/ng-template" id="directive-actiune-procedurala">
+      <script type="text/ng-template" id="directive-actiune">
         <li actiune class="eliminabil de tot">
           <div sectiune="dată">
             <!-- TODO: de setat data default in directiva? -->
@@ -2237,16 +2237,16 @@
       </script>
 
 
-    <script type="text/ng-template" id="directive-propunere-actiune-procedurala">
-      <a ng-click=" adaugaActiuneProcedurala(date.identificator, procedura) " class="potentiale-urmatoare-actiuni">
+    <script type="text/ng-template" id="directive-propunere-actiune">
+      <a ng-click=" adaugaActiune(date.identificator, procedura) " class="potentiale-urmatoare-actiuni">
         {{ date.denumire }}
       </a>
     </script>
 
 
-    <script type="text/ng-template" id="conţinutul pentru acţiunea procedurală: intentare">
+    <script type="text/ng-template" id="conţinutul pentru acţiunea: intentare">
       <i>conţinutul pentru acţiunea procedurală: {{ date['identificator'] }}</i>
-      <ng-include src=" 'denumirea pentru acţiunea procedurală: ' + date['identificator'] "/>
+      <ng-include src=" 'denumirea pentru acţiunea: ' + date['identificator'] "/>
     </script>
 
 
@@ -2728,9 +2728,9 @@
     <script src="/js/app/procedura/directives/valute.js"></script>
     <script src="/js/app/procedura/directives/document.js"></script>
 
-    <script src="/js/app/procedura/actiuni-procedurale/services/actiuni-procedurale.js"></script>
-    <script src="/js/app/procedura/actiuni-procedurale/directives/actiune-procedurala.js"></script>
-    <script src="/js/app/procedura/actiuni-procedurale/directives/propunere-actiune-procedurala.js"></script>
+    <script src="/js/app/procedura/actiuni/services/actiuni.js"></script>
+    <script src="/js/app/procedura/actiuni/directives/actiune.js"></script>
+    <script src="/js/app/procedura/actiuni/directives/propunere-actiune.js"></script>
 
     <script src="/js/app/handlebars-helpers.js"></script>
     <script src="/js/app/x-jquery.js"></script>

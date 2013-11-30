@@ -1,17 +1,17 @@
 (function() {
   'use strict';
 
-  function ControllerProcedura($scope, Procedura, ActiuniProcedurale) {
+  function ControllerProcedura($scope, Procedura, Actiuni) {
     $scope.procedura = Procedura.date;
     $scope.inchide = Procedura.inchide;
     $scope.totalSume = ControllerProcedura.module.totalSume;
 
-    $scope.$watch('procedura["acţiuni-procedurale"]', function() {
-      $scope.optiuniPentruUrmatoareaActiune = ActiuniProcedurale.optiuniPentruUrmatoareaActiune($scope.procedura['acţiuni-procedurale']);
+    $scope.$watch('procedura["acţiuni"]', function() {
+      $scope.optiuniPentruUrmatoareaActiune = Actiuni.optiuniPentruUrmatoareaActiune($scope.procedura['acţiuni']);
     }, true);
   }
 
-  ControllerProcedura.$inject = ['$scope', 'Procedura', 'ActiuniProcedurale'];
+  ControllerProcedura.$inject = ['$scope', 'Procedura', 'Actiuni'];
 
   ControllerProcedura.module = {
     totalSume: function(sume) {

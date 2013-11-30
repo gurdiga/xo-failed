@@ -1529,14 +1529,14 @@ ul.încheieri li:hover::before {
   text-decoration: none;
 }
 
-#acţiuni-procedurale a:hover,
-#acţiuni-procedurale a:hover::before,
+#acţiuni a:hover,
+#acţiuni a:hover::before,
 ul.încheieri li:hover::before,
 ul.încheieri li a:hover {
   color: blue;
 }
 
-#acţiuni-procedurale a:hover,
+#acţiuni a:hover,
 ul.încheieri li a:hover {
   text-decoration: underline;
 }
@@ -1597,7 +1597,7 @@ fieldset label,
 #cheltuieli .adăugate p,
 #cheltuieli .adăugate .subformular .şoaptă,
 [actiune] p,
-#acţiuni-procedurale,
+#acţiuni,
 [actiune] a.document,
 .potentiale-urmatoare-actiuni,
 #întrebare-potentiale-urmatoare-actiuni,
@@ -1667,21 +1667,21 @@ fieldset label,
   margin: 14px 0 14px 20px;
 }
 
-#total-pe-actiunile-procedurale+#întrebare-potentiale-urmatoare-actiuni {
+#total-pe-actiunile+#întrebare-potentiale-urmatoare-actiuni {
   padding-top: 15px;
 }
 
 #întrebare-potentiale-urmatoare-actiuni,
-#total-pe-actiunile-procedurale {
+#total-pe-actiunile {
   clear: left;
   margin-left: 11px;
 }
 
-#total-pe-actiunile-procedurale {
+#total-pe-actiunile {
   padding: 10px 0;
 }
 
-#total-pe-actiunile-procedurale label {
+#total-pe-actiunile label {
   padding-left: 0;
   width: auto;
   font-weight: bold;
