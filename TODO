@@ -6,8 +6,8 @@
   - borderoul de calcul?
 
   - concilierea înainte de pasul 7
-  - de adăugat contentul pentru restul acţiunilor
 
+- de trecut de la a[href] pentru documente
 - la salvare de verificat dacă între timp altcineva nu a modificat datele
   De folosit Last-Modified + HTTP 409
 

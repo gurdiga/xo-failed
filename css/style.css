@@ -1598,6 +1598,7 @@ fieldset label,
 #cheltuieli .adăugate .subformular .şoaptă,
 [actiune] p,
 #acţiuni-procedurale,
+[actiune] a.document,
 .potentiale-urmatoare-actiuni,
 #întrebare-potentiale-urmatoare-actiuni,
 #încheieri li {
@@ -1640,10 +1641,6 @@ fieldset label,
 
 [actiune] .taxe {
   margin-left: 6px;
-}
-
-[actiune] .document {
-  font-size: small;
 }
 
 [actiune] .denumire {

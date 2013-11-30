@@ -2,14 +2,14 @@
 (function() {
   'use strict';
 
-  function Procedura(Persistence, ObiectulUrmaririi) {
+  function Procedura(Storage, ObiectulUrmaririi) {
     var date = {
       'optiuni-obiectul-urmaririi': ObiectulUrmaririi.optiuni
     };
 
 
     function deschide(numarul, callback) {
-      Persistence.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
+      Storage.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
         $.extend(date, dateIncarcate, {'numărul': numarul});
         window.console.log(date);
         callback();
@@ -32,7 +32,7 @@
     };
   }
 
-  Procedura.$inject = ['Persistence', 'ObiectulUrmaririi'];
+  Procedura.$inject = ['Storage', 'ObiectulUrmaririi'];
 
   window.App.service('Procedura', Procedura);
 

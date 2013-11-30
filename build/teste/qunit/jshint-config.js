@@ -24,7 +24,7 @@
     'unit/fragment.js',
     'unit/formular-procedură.js',
     'unit/encrypter.js',
-    'unit/persistence.js',
+    'unit/storage.js',
 
     'app/structuri-date.js',
 
@@ -35,7 +35,7 @@
 
     '/js/app/init.js',
 
-    '/js/app/util/services/persistence.js',
+    '/js/app/util/services/storage.js',
 
     '/js/app/utilizator/services/utilizator.js',
     '/js/app/utilizator/controllers/utilizator.js',
@@ -63,7 +63,7 @@
     '/js/app/processor.js',
     '/js/app/encrypter.js',
     '/js/app/ajax-buffer.js',
-    '/js/app/persistence.js',
+    '/js/app/storage.js',
     '/js/app/structuri-date.js',
     '/js/app/subsecţiuni-dinamice.js',
     '/js/app/selecturi-foarte-late.js',

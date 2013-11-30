@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function Utilizator(USER_LOGIN, Persistence) {
+  function Utilizator(USER_LOGIN, Storage) {
     var date = {
       login: USER_LOGIN,
       profil: {}
@@ -9,7 +9,7 @@
 
 
     function incarcaProfil() {
-      Persistence.get('profil.json', function(profilÎncarcat) {
+      Storage.get('profil.json', function(profilÎncarcat) {
         $.extend(date.profil, profilÎncarcat, {login: $.cookie('login')});
       });
     }
@@ -20,7 +20,7 @@
     };
   }
 
-  Utilizator.$inject = ['USER_LOGIN', 'Persistence'];
+  Utilizator.$inject = ['USER_LOGIN', 'Storage'];
 
   window.App.service('Utilizator', Utilizator);
 

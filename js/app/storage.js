@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var Persistence = {
+  var Storage = {
     get: function(url, callback) {
       return [url, callback];
       //$.get(url, callback);
@@ -12,6 +12,6 @@
     }
   };
 
-  window.Persistence = Persistence;
+  window.Storage = Storage;
 
 })();

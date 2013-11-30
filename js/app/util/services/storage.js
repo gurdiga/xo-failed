@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function Persistence(USER_LOGIN) {
+  function Storage(USER_LOGIN) {
     var PREFIX = '/date/' + USER_LOGIN + '/';
     // TODO: should we also have SUFFIX here?
 
@@ -27,12 +27,13 @@
 
     return {
       get: get,
-      set: set
+      set: set,
+      PREFIX: PREFIX
     };
   }
 
-  Persistence.$inject = ['USER_LOGIN'];
+  Storage.$inject = ['USER_LOGIN'];
 
-  window.App.service('Persistence', Persistence);
+  window.App.service('Storage', Storage);
 
 })();
