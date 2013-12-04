@@ -1,3 +1,4 @@
+/*global moment, FORMATUL_DATEI*/
 (function() {
   'use strict';
 
@@ -10,10 +11,17 @@
         procedura: '=',
         actiune: '='
       },
-      controller: ['$scope', 'Storage', function($scope, Storage) {
-        // actiune - trebuie să conţină şi taxa
+      controller: ['$scope', '$element', 'Storage', function($scope, $element, Storage) {
         $scope.date.href = Storage.PREFIX + 'proceduri/' + $scope.procedura['numărul'] +
             '/actiuni/' + $scope.actiune.identificator + '.html';
+
+        $scope.$watch('date.achitat', function(isChecked, wasChecked) {
+          if (isChecked) {
+            var dataCurenta = moment().format(FORMATUL_DATEI);
+
+            $($element).find('.dată').val(dataCurenta);
+          }
+        });
       }],
       templateUrl: 'directive-document'
     };

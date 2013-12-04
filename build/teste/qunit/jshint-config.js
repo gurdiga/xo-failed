@@ -36,7 +36,7 @@
     '/js/app/init.js',
 
     '/js/app/util/services/storage.js',
-    '/js/app/util/directives/on-check-focus.js',
+    '/js/app/util/directives/focus-on-check.js',
 
     '/js/app/utilizator/services/utilizator.js',
     '/js/app/utilizator/controllers/utilizator.js',

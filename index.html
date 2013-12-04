@@ -2237,8 +2237,8 @@
 
           <a class="ico document" formular="{{ date.formular }}" href="{{ date.href }}">{{ date.denumire }}</a>
           — taxa: 1 U.C.
-          <input type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " on-check-focus=".dată"/>achitat
-          <span ng-if=" date.achitat ">la <input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
+          <input type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat
+          <span ng-show=" date.achitat ">la<input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
         </li>
       </script>
 
@@ -2718,7 +2718,7 @@
 
     <script src="/js/app/init.js"></script>
     <script src="/js/app/util/services/storage.js"></script>
-    <script src="/js/app/util/directives/on-check-focus.js"></script>
+    <script src="/js/app/util/directives/focus-on-check.js"></script>
 
     <script src="/js/app/utilizator/services/utilizator.js"></script>
     <script src="/js/app/utilizator/controllers/utilizator.js"></script>

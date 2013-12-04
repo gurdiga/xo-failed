@@ -1,3 +1,4 @@
+/*global Calendar*/
 (function() {
   'use strict';
 
@@ -9,7 +10,13 @@
         date: '=',
         procedura: '='
       },
-      templateUrl: 'directive-actiune'
+      templateUrl: 'directive-actiune',
+
+      link: function(scope, el) {
+        setTimeout(function() {
+          Calendar.insereazăButoane(el);
+        }, 200);
+      }
     };
   }
 

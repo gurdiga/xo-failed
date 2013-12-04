@@ -1658,7 +1658,7 @@ fieldset label,
 
 [actiune] .elimină {
   left: -9px;
-  top: 1px;
+  top: -1px;
 }
 
 [actiune] .documente {
@@ -1671,12 +1671,13 @@ fieldset label,
   border-bottom: 1px dotted silver;
 }
 
-[actiune] .documente input[type="text"] {
-  position: relative;
-  margin: -1px 0 0;
-  background-position: 0 18px;
+[actiune] input.dată {
   color: inherit;
   font-weight: bold;
+  background-position: 0 16px;
+  position: relative;
+  top: -1px;
+  margin: 0 0 0 2px;
   padding: 0 3px;
 }
 
