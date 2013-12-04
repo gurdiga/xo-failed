@@ -6,7 +6,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        date: '='
+        date: '=',
+        procedura: '='
       },
       templateUrl: 'directive-actiune'
     };

@@ -109,7 +109,8 @@ fieldset>.conţinut {
 }
 
 textarea,
-input,
+label+input,
+textarea.etichetă+input,
 fieldset select {
   margin: 0;
   vertical-align: top;
@@ -497,11 +498,11 @@ fieldset.secţiune.comprimată>legend::after {
   margin: .7em .7em 0 0;
 }
 
-fieldset .conţinut>ul {
+fieldset>.conţinut>ul {
   margin: .4em 0;
 }
 
-fieldset .conţinut>ul li {
+fieldset>.conţinut>ul>li {
   margin-bottom: 2px;
   position: relative; /* pentru poziţionarea butoanelor penutru încheieri */
 }
@@ -1284,8 +1285,8 @@ select#obiect~.buton[data-formular] {
 }
 
 .dialog .subsecţiune,
-fieldset .conţinut .ui-effects-wrapper .subsecţiune,
-fieldset .conţinut .subsecţiune {
+fieldset>.conţinut .ui-effects-wrapper .subsecţiune,
+fieldset>.conţinut .subsecţiune {
   border: 1px solid #eee;
   border-width: 1px 0 0 1px;
   position: relative;
@@ -1509,7 +1510,6 @@ ul.încheieri.contextuale.borderou-de-calcul {
   margin-left: 13em;
 }
 
-[actiune] a.document,
 ul.încheieri li a {
   text-decoration: none;
   color: inherit;
@@ -1598,7 +1598,7 @@ fieldset label,
 #cheltuieli .adăugate .subformular .şoaptă,
 [actiune] p,
 #acţiuni,
-[actiune] a.document,
+[actiune] .documente,
 .potentiale-urmatoare-actiuni,
 #întrebare-potentiale-urmatoare-actiuni,
 #încheieri li {
@@ -1645,8 +1645,7 @@ fieldset label,
 
 [actiune] .denumire {
   font-weight: bold;
-  color: black !important;
-  margin: 4px 0 0 -5px;
+  color: black;
 }
 
 [actiune] .achitare {
@@ -1660,6 +1659,25 @@ fieldset label,
 [actiune] .elimină {
   left: -9px;
   top: 1px;
+}
+
+[actiune] .documente {
+  margin: .2em;
+  line-height: 1em;
+}
+
+[actiune] .document {
+  text-decoration: none;
+  border-bottom: 1px dotted silver;
+}
+
+[actiune] .documente input[type="text"] {
+  position: relative;
+  margin: -1px 0 0;
+  background-position: 0 18px;
+  color: inherit;
+  font-weight: bold;
+  padding: 0 3px;
 }
 
 #întrebare-potentiale-urmatoare-actiuni {
@@ -1710,10 +1728,6 @@ fieldset label,
   margin: -3px 0 0 -43px;
   text-align: right;
   color: #ddd;
-}
-
-.ico.document {
-  margin-right: .4em;
 }
 
 #formular.înainte-de-afişare {

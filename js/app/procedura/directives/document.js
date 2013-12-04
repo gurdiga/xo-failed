@@ -6,13 +6,14 @@
       restrict: 'E',
       replace: true,
       scope: {
-        date: '='
+        date: '=',
+        procedura: '=',
+        actiune: '='
       },
       controller: ['$scope', 'Storage', function($scope, Storage) {
-        var actiune   = $scope.$parent.$parent.date,
-            procedura = $scope.$parent.$parent.$parent.$parent.$parent.$parent.procedura;
-
-        $scope.date.href = Storage.PREFIX + 'proceduri/' + procedura['numărul'] + '/actiuni/' + actiune.identificator + '.html';
+        // actiune - trebuie să conţină şi taxa
+        $scope.date.href = Storage.PREFIX + 'proceduri/' + $scope.procedura['numărul'] +
+            '/actiuni/' + $scope.actiune.identificator + '.html';
       }],
       templateUrl: 'directive-document'
     };

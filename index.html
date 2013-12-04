@@ -298,7 +298,7 @@
 
           <sectiune lata titlu="Acţiuni procedurale">
             <ul id="actiuni" ng-if=" procedura['acţiuni'].length > 0 ">
-                <actiune ng-repeat=" actiune in procedura['acţiuni'] " date="actiune">
+                <actiune ng-repeat=" actiune in procedura['acţiuni'] " date="actiune" procedura="procedura">
                 </actiune>
               </ul>
 
@@ -2217,7 +2217,9 @@
           <div sectiune="conţinut">
             <p class="denumire">{{ date.denumire }}</p>
 
-            <document ng-repeat=" document in date.documente " date="document"></document>
+            <ul class="documente" ng-if=" date.documente.length > 0 ">
+              <document ng-repeat=" document in date.documente " date="document" actiune="date" procedura="procedura"></document>
+            </ul>
 
             <!-- pentru includerea partialelor după identificator: http://plnkr.co/edit/3UHmFTFqd64mspHopWrE?p=preview -->
           </div>
@@ -2225,15 +2227,19 @@
       </script>
 
 
-      <!-- TODO:
-          1. pentru documente de inventat un format care să nu separe butonul de deschidere
-          de informaţia despre taxa pentru el
-
-          2. Cum stocăm datele despre documentele ataşate?
-          Poate în date.documente ca un array de hash-uri?
-       -->
       <script type="text/ng-template" id="directive-document">
-        <a class="ico document" formular="{{ date.formular }}" href="{{ date.href }}">{{ date.denumire }}</a>
+        <li>
+
+          <!-- TODO:
+              pentru documente de inventat un format care să nu separe butonul de deschidere
+              de informaţia despre taxa pentru el
+           -->
+
+          <a class="ico document" formular="{{ date.formular }}" href="{{ date.href }}">{{ date.denumire }}</a>
+          — taxa: 1 U.C.
+          <input type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " on-check-focus=".dată"/>achitat
+          <span ng-if=" date.achitat ">la <input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
+        </li>
       </script>
 
 
@@ -2712,6 +2718,7 @@
 
     <script src="/js/app/init.js"></script>
     <script src="/js/app/util/services/storage.js"></script>
+    <script src="/js/app/util/directives/on-check-focus.js"></script>
 
     <script src="/js/app/utilizator/services/utilizator.js"></script>
     <script src="/js/app/utilizator/controllers/utilizator.js"></script>
