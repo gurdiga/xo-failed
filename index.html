@@ -2209,19 +2209,19 @@
       <script type="text/ng-template" id="directive-actiune">
         <li actiune class="eliminabil de tot">
           <div sectiune="dată">
-            <!-- TODO: de setat data default in directiva? -->
-            <!-- TODO: de initializat calendarul -->
-            <input type="text" class="dată" value="{{ '11.11.2011' }}"/>
+            <input type="text" class="dată" value="{{ date.data }}"/>
           </div>
 
           <div sectiune="conţinut">
             <p class="denumire">{{ date.denumire }}</p>
 
             <ul class="documente" ng-if=" date.documente.length > 0 ">
-              <document ng-repeat=" document in date.documente " date="document" actiune="date" procedura="procedura"></document>
+              <document ng-repeat=" document in date.documente "
+                  date="document"
+                  actiune="date"
+                  procedura="procedura">
+              </document>
             </ul>
-
-            <!-- pentru includerea partialelor după identificator: http://plnkr.co/edit/3UHmFTFqd64mspHopWrE?p=preview -->
           </div>
         </li>
       </script>
@@ -2229,12 +2229,6 @@
 
       <script type="text/ng-template" id="directive-document">
         <li>
-
-          <!-- TODO:
-              pentru documente de inventat un format care să nu separe butonul de deschidere
-              de informaţia despre taxa pentru el
-           -->
-
           <a class="ico document" formular="{{ date.formular }}" href="{{ date.href }}">{{ date.denumire }}</a>
           — taxa: 1 U.C.
           <input type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat

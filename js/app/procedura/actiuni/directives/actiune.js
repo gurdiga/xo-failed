@@ -1,4 +1,4 @@
-/*global Calendar*/
+/*global Calendar, FORMATUL_DATEI, moment */
 (function() {
   'use strict';
 
@@ -14,13 +14,28 @@
 
       link: function(scope, el) {
         setTimeout(function() {
-          Calendar.insereazăButoane(el);
+          Actiune.module.setuptCalendar(el);
         }, 200);
-      }
+      },
+
+      controller: ['$scope', function($scope) {
+        Actiune.module.setModelDefaults($scope.date);
+      }]
     };
   }
 
+  Actiune.module = {
+    setModelDefaults: function(actiune) {
+      if (!actiune.data) actiune.data = moment().format(FORMATUL_DATEI);
+    },
 
+    setuptCalendar: function(el) {
+      Calendar.insereazăButoane(el);
+    }
+  };
+
+
+  window.App.module.D.Actiune = Actiune;
   window.App.directive('actiune', Actiune);
 
 })();

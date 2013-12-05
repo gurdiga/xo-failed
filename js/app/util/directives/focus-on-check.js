@@ -24,6 +24,3 @@
   window.App.directive('focusOnCheck', FocusOnCheck);
 
 })();
-
-
-
