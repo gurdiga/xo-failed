@@ -7,6 +7,7 @@
 
   - concilierea înainte de pasul 7
 
+- script loader
 - de trecut de la a[href] pentru documente
 - la salvare de verificat dacă între timp altcineva nu a modificat datele
   De folosit Last-Modified + HTTP 409

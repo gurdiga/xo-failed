@@ -50,6 +50,8 @@
     '/js/app/procedura/directives/persoana.js',
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
+    '/js/app/procedura/directives/document.js',
+    '/js/app/procedura/directives/borderou.js',
 
     '/js/app/procedura/actiuni/services/actiuni.js',
     '/js/app/procedura/actiuni/directives/actiune.js',

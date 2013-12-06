@@ -1,4 +1,5 @@
 /*global Handlebars*/
+
 (function() {
   'use strict';
 
@@ -34,3 +35,4 @@
   window.Fragment = Fragment;
 
 })();
+
