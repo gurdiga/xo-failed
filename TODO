@@ -12,6 +12,7 @@
 - la salvare de verificat dacă între timp altcineva nu a modificat datele
   De folosit Last-Modified + HTTP 409
 
+
 - încheieri
 - de adaptat salvarea pentru criptare?
 
@@ -23,9 +24,11 @@
     - iconiţă read-only lock
     - iconiţă document pentru butonaşele de încheieri
 
-- de mutat aplicaţia în alt fişier HTML
+- debug messages + console.group()
+- assert things to fail early, like: assert(_.isObject())
 - <noscript>, unsupported browsers?
 - blank slate video/screenshot/help?
+- conceive the app personality
 
 - Căutare
   - in loc de proceduri recente, afişează toate procedurile?

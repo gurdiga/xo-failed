@@ -145,7 +145,7 @@ button {
 }
 
 #căutare .şoaptă,
-#crează-procedură .şoaptă {
+#proceduri-noi .şoaptă {
   color: #aaa;
   margin: .5em 0;
 }
@@ -330,22 +330,21 @@ button {
   margin-top: 2em;
 }
 
-#crează-procedură {
+#proceduri-noi {
   float: right;
   margin-right: 55px;
   width: 280px;
   height: 390px;
 }
 
-#crează-procedură ul {
+#proceduri-noi div {
   margin: 0;
-  list-style-type: none;
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-#crează-procedură li {
+#proceduri-noi .item {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -362,17 +361,17 @@ button {
   transition: color .5s;
 }
 
-#crează-procedură li:hover,
-#crează-procedură li:focus {
+#proceduri-noi .item:hover,
+#proceduri-noi .item:focus {
   color: black;
 }
 
-#crează-procedură li.s {
+#proceduri-noi .item.s {
   top: 3em;
   left: 5px;
 }
 
-#crează-procedură li.g {
+#proceduri-noi .item.g {
   top: 6em;
   left: 10px;
 }
@@ -1519,7 +1518,7 @@ ul.încheieri li a.scrisoare-de-însoţire {
   color: #999;
 }
 
-[actiune] a.document:before,
+[actiune] .document:before,
 ul.încheieri li a:before {
   padding-right: 3px;
   vertical-align: 1px;
@@ -1616,7 +1615,7 @@ fieldset label,
 }
 
 [actiune]>[sectiune="dată"] {
-  width: 110px;
+  width: 100px;
 }
 
 [actiune]>[sectiune="conţinut"] {
@@ -1663,12 +1662,26 @@ fieldset label,
 
 [actiune] .documente {
   margin: .2em;
-  line-height: 1em;
+  line-height: 1.3em;
+}
+
+[actiune] .documente input[type="checkbox"] {
+  vertical-align: 1px;
 }
 
 [actiune] .document {
   text-decoration: none;
   border-bottom: 1px dotted silver;
+  cursor: pointer;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+  outline: 2px solid #fff;
+}
+
+[actiune] .document:hover {
+  background-color: #eee;
+  outline: 2px solid #eee;
 }
 
 [actiune] input.dată {

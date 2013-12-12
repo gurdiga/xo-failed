@@ -192,12 +192,12 @@
         <p>Pentru a crea proceduri noi, alegeţi un formular. →</p>
       </div>
 
-      <div id="crează-procedură" class="coloană">
-        <ul>
-          <li data-href="#formular?P">Procedură pensie de întreținere</li>
-          <li class="s" data-href="#formular?S">Procedură în beneficiul statului</li>
-          <li class="g" data-href="#formular?">Procedură de ordin general</li>
-        </ul>
+      <div id="proceduri-noi" class="coloană">
+        <div>
+          <a class="item" href="#/procedura/pensie-de-intretinere">Procedură pensie de întreținere</a>
+          <a class="item s" href="#/procedura/in-beneficiul-satului">Procedură în beneficiul statului</a>
+          <a class="item g" href="#/procedura/de-ordin-general">Procedură de ordin general</a>
+        </div>
       </div>
 
       <div id="formular" ng-controller="ControllerProcedura">
@@ -2217,13 +2217,21 @@
         <div sectiune="conţinut">
           <p class="denumire">{{ date.denumire }}</p>
 
-          <ul class="documente" ng-if=" date.documente.length > 0 ">
-            <document ng-repeat=" document in date.documente "
-                date="document"
-                actiune="date"
-                procedura="procedura">
-            </document>
-          </ul>
+          <div class="documente">
+            <!--
+
+              TODO
+               - de finisat directiva pentru încheiere
+               - de aranjat scope-urile ca să extinda scopul procedurii:
+                 angular.element($('#formular')[0]).scope().procedura['acţiuni'][0]
+
+            -->
+
+            <incheiere procedura="procedura" actiune="date" date="date.incheiere"></incheiere>
+
+            <!-- TODO directivă pentur scrisoare de însoţire -->
+
+          </div>
 
           <!-- TODO de inclus contentul specific actiunii -->
         </div>
@@ -2238,13 +2246,13 @@
     </script>
 
 
-    <script type="text/ng-template" id="directive-document">
-      <li>
-        <a class="ico document" formular="{{ date.formular }}" href="{{ date.href }}">{{ date.denumire }}</a>
-        — taxa: 1 U.C.
+    <script type="text/ng-template" id="directive-incheiere">
+      <p>
+        <span class="ico document" formular="{{ date.formular() }}" href="{{ date.href }}">încheierea</span>
+        — taxa: {{ date.taxa }} U.C.
         <input type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat
         <span ng-show=" date.achitat ">la<input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
-      </li>
+      </p>
     </script>
 
 
@@ -2738,7 +2746,7 @@
     <script src="/js/app/procedura/directives/persoana.js"></script>
     <script src="/js/app/procedura/directives/sectiune.js"></script>
     <script src="/js/app/procedura/directives/valute.js"></script>
-    <script src="/js/app/procedura/directives/document.js"></script>
+    <script src="/js/app/procedura/directives/incheiere.js"></script>
     <script src="/js/app/procedura/directives/borderou.js"></script>
 
     <script src="/js/app/procedura/actiuni/services/actiuni.js"></script>
@@ -2759,6 +2767,7 @@
     <script src="/js/app/subsecţiuni-dinamice.js"></script>
     <script src="/js/app/selecturi-foarte-late.js"></script>
     <script src="/js/app/textarea-elastice.js"></script>
+    <script src="/js/app/js.js"></script>
     <script src="/js/action.js"></script>
 
   </body>

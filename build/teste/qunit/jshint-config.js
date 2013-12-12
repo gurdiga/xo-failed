@@ -27,11 +27,13 @@
     'unit/storage.js',
 
     'app/structuri-date.js',
+    'app/js.js',
 
     'app/procedura/controllers/procedura.js',
     'app/procedura/directives/adauga-suma.js',
     'app/procedura/directives/ajusteaza-textarea-elastic.js',
     'app/procedura/directives/focuseaza-la-adaugare.js',
+    'app/procedura/services/procedura.js',
 
     '/js/app/init.js',
 
@@ -50,7 +52,7 @@
     '/js/app/procedura/directives/persoana.js',
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
-    '/js/app/procedura/directives/document.js',
+    '/js/app/procedura/directives/incheiere.js',
     '/js/app/procedura/directives/borderou.js',
 
     '/js/app/procedura/actiuni/services/actiuni.js',
@@ -68,6 +70,7 @@
     '/js/app/ajax-buffer.js',
     '/js/app/storage.js',
     '/js/app/structuri-date.js',
+    '/js/app/js.js',
     '/js/app/subsecţiuni-dinamice.js',
     '/js/app/selecturi-foarte-late.js',
     '/js/app/textarea-elastice.js',
@@ -115,7 +118,7 @@
 
     '/formulare-încheieri/borderou-de-calcul.părţi/script.js',
     '/formulare-încheieri/încheiere-dobîndă-de-întîrziere.părţi/script.js',
-    '/formulare-încheieri/încheiere-de-intentare.părţi/script.js',
+    '/formulare-încheieri/intentare.părţi/script.js',
     '/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.părţi/script.js',
     '/formulare-încheieri/anexă-dobîndă-de-întîrziere.părţi/script.js',
     '/formulare-încheieri/încheiere-de-evacuare.părţi/script.js',
@@ -160,6 +163,7 @@
   };
 
   var JSHINT_GLOBALS = {
+    js: false,
     self: false,
     sinon: false,
     QUnit: false,
