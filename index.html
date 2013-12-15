@@ -2217,10 +2217,7 @@
           <div class="documente">
             <!--
 
-              TODO
-               - de finisat directiva pentru încheiere
-               - de aranjat scope-urile ca să extinda scopul procedurii:
-                 angular.element($('#formular')[0]).scope().procedura['acţiuni'][0]
+              TODO de finisat directiva pentru încheiere
 
             -->
 
@@ -2245,9 +2242,9 @@
 
     <script type="text/ng-template" id="directive-incheiere">
       <p>
-        <span class="ico document" formular="{{ date.formular() }}" href="{{ date.href }}">încheierea</span>
+        <span class="ico document neselectabil clickabil" formular="{{ date.formular() }}" href="{{ date.href }}">încheierea</span>
         — taxa: {{ date.taxa }} U.C.
-        <input type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat
+        <input class="clickabil" type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat
         <span ng-show=" date.achitat ">la<input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
       </p>
     </script>

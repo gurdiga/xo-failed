@@ -1476,11 +1476,6 @@ input::-ms-clear {
   display: none;
 }
 
-/*label,
-#categorii-taxe-şi-speze,
-#adaugă-subsecţiune,
-.subsecţiune legend,
-.destinatari-adăugaţi,
 .neselectabilă,
 .neselectabile,
 .neselectabil,
@@ -1492,7 +1487,7 @@ input::-ms-clear {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-}*/
+}
 
 ul.încheieri {
   font-size: small;
@@ -1681,15 +1676,6 @@ fieldset label,
   text-decoration: none;
   border-bottom: 1px dotted silver;
   cursor: pointer;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transition: all .5s;
-  outline: 2px solid #fff;
-}
-
-[actiune] .document:hover {
-  background-color: #eee;
-  outline: 2px solid #eee;
 }
 
 [actiune] input.dată {
@@ -1762,4 +1748,18 @@ fieldset label,
 #formular.afişat {
   display: block;
   top: 40px !important;
+}
+
+.clickabil {
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+}
+
+.clickabil:hover {
+  color: black;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 2px 2px #eee;
+  -moz-box-shadow:    0 0 2px 2px #eee;
+  box-shadow:         0 0 2px 2px #eee;
 }
