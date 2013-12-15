@@ -15,8 +15,18 @@
   };
 
 
-  js.extend = function() {
-    return _.extend.apply(_, arguments);
+  js.extend = function(destination, source) {
+    // thanks to Andrew Dupont @ http://andrewdupont.net/2009/08/28/deep-extending-objects-in-javascript/
+    for (var property in source) {
+      if (js.isPlainObject(source[property])) {
+        destination[property] = destination[property] || {};
+        js.extend(destination[property], source[property]);
+      } else {
+        destination[property] = source[property];
+      }
+    }
+
+    return destination;
   };
 
 
@@ -34,6 +44,10 @@
 
   js.isPlainObject = function(o) {
     return _.isPlainObject(o);
+  };
+
+  js.isArray = function(o) {
+    return _.isArray(o);
   };
 
 

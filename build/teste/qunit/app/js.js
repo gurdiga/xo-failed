@@ -55,4 +55,33 @@
     ok(!isNumber('aa'), 'aa');
   });
 
+
+  test('.extend', function() {
+    var extend = app.js.extend;
+
+    deepEqual(
+      extend({}, {a: 1}),
+      {a: 1},
+      'adaugă proprietăţile care nu există'
+    );
+
+    deepEqual(
+      extend({a: 0}, {a: 1}),
+      {a: 1},
+      'înlocuieşte proprietăţile care există'
+    );
+
+    deepEqual(
+      extend({a: {b: 1}}, {a: {c: 1}}),
+      {a: {b: 1, c: 1}},
+      'merge-uieşte proprietăţile PlainObject care există'
+    );
+
+    deepEqual(
+      extend({a: {b: [0]}}, {a: {b: [1]}}),
+      {a: {b: [1]}},
+      'înlocuieşte proprietăţile non-PlainObject care există'
+    );
+  });
+
 })();
