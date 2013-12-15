@@ -11,11 +11,21 @@
   });
 
   test('.assert', function() {
-    var assert = app.js.assert;
+    var assert = app.js.assert, message;
 
     equal(assert.length, 2, 'accepta doi parametri: cerinţa şi mesajul');
 
-    var message = 'descrierea cerinţei';
+    message = 'generează o eroare dacă nu se transmite şi mesajul';
+
+    try {
+      assert(true);
+      ok(false, message);
+    } catch(e) {
+      ok(true, message);
+      ok(app._.contains(e.message, 'js.assert'), 'eroarea generată conţine numele funcţiei');
+    }
+
+    message = 'descrierea cerinţei';
 
     try {
       app.js.assert(false, message);
@@ -57,7 +67,27 @@
 
 
   test('.extend', function() {
-    var extend = app.js.extend;
+    var extend = app.js.extend, message;
+
+    message = 'fără parametri generează un AssertionError';
+
+    try {
+      extend();
+      ok(false, message);
+    } catch(e) {
+      equal(e.name, 'AssertionError', 'eroarea e AssertionError');
+      ok(true, message);
+    }
+
+    message = 'fără surce generează un AssertionError';
+
+    try {
+      extend({});
+      ok(false, message);
+    } catch(e) {
+      equal(e.name, 'AssertionError', 'eroarea e AssertionError');
+      ok(true, message);
+    }
 
     deepEqual(
       extend({}, {a: 1}),
@@ -81,6 +111,12 @@
       extend({a: {b: [0]}}, {a: {b: [1]}}),
       {a: {b: [1]}},
       'înlocuieşte proprietăţile non-PlainObject care există'
+    );
+
+    deepEqual(
+      extend({a: 1}, {b: 2}, {c: 3}, {d: 4}),
+      {a: 1, b: 2, c: 3, d: 4},
+      'funcţionează cu mai multe surse'
     );
   });
 
