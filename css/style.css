@@ -464,6 +464,10 @@ fieldset.secţiune {
   position: relative;
 }
 
+fieldset.secţiune>.elimină {
+  margin-top: 7px;
+}
+
 fieldset.secţiune>legend {
   cursor: pointer;
   font: bold 1.4em/1.5em DisplayType, sans-serif;
@@ -575,6 +579,10 @@ input.sumă {
   -moz-transition: opacity 1.5s;
   -o-transition: opacity 1.5s;
   transition: opacity 1.5s;
+}
+
+.elimină:hover {
+  color: red;
 }
 
 .spre-eliminare .elimină {

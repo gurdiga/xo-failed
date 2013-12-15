@@ -5,10 +5,10 @@
   var js = {};
 
 
-  function AssertionError(message) {
+  var AssertionError = window.AssertionError = function(message) {
     this.name = 'AssertionError';
     this.message = message;
-  }
+  };
 
   js.assert = function(requirement, message) {
     if (!message) throw new Error('js.assert: assertion requires a message');

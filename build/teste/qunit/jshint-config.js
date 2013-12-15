@@ -175,6 +175,7 @@
     equal: false,
     deepEqual: false,
     ok: false,
+    throws: false,
     jsHintTest: false,
     document: false,
     window: false,

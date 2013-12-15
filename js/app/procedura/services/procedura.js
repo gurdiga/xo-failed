@@ -2,9 +2,29 @@
 (function() {
   'use strict';
 
-  function Procedura(Storage, ObiectulUrmaririi) {
-    Procedura.date = {
-      'optiuni-obiectul-urmaririi': ObiectulUrmaririi.optiuni // TODO: de transformat în funcţie ca să nu se colecteze?
+  function Procedura(Storage, ObiectulUrmaririi, Utilizator) {
+    Procedura.date = {};
+
+    Procedura.defaults = {
+      'obiectul-urmăririi': {
+        optiuni: function() {
+          return ObiectulUrmaririi.optiuni;
+        }
+      },
+
+      noua: function() {
+        return !this['numărul'];
+      },
+
+      titlu: function() {
+        var titlu = $('a[href="#/procedura/' + this.gen + '"]').text();
+
+        if (!this.noua()) {
+          titlu += Utilizator.login + this.tip + '-' + this.numărul;
+        }
+
+        return titlu;
+      }
     };
 
 
@@ -15,34 +35,35 @@
           'Procedura.initializeaza: gen trebuie să fie unul dintre: ' + Procedura.GENURI_ACCEPTATE.join(', ') + '. ' +
           '[' + gen + ']');
 
-      js.extend(Procedura.date, {
+      js.extend(Procedura.date, Procedura.defaults, {
+        'gen': gen,
         'data-intentării': moment().format(FORMATUL_DATEI),
         'creditor': {
           'gen-persoană': 'juridică'
         },
         'debitori': [{
           'gen-persoană': 'fizică'
-        }]
+        }],
+        'obiectul-urmăririi': {
+          'caracter': 'pecuniar',
+          'sume': []
+        },
+        'acţiuni': []
       });
 
-      //
-      // TODO
-      //
-
       Efecte.afiseazaLin();
-
-      return [gen];
     };
 
 
     Procedura.deschide = function(numarul, callback) {
-      js.assert(js.isNumber(numarul), 'Procedura.deschide: numărul trebuie să fie număr [' + numarul + ']');
+      js.assert(js.isNumber(numarul) && numarul > 0,
+          'Procedura.deschide: numărul trebuie să fie număr pozitiv [' + numarul + ']');
       js.assert(js.isFunction(callback), 'Procedura.deschide: callback trebuie să fie funcţie [' + numarul + ']');
 
       Storage.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
-        js.debug('Încărcat procedura', Procedura.date);
+        js.debug('Încărcat procedura', numarul, dateIncarcate);
 
-        $.extend(Procedura.date, dateIncarcate, {'numărul': numarul});
+        js.extend(Procedura.date, dateIncarcate, {'numărul': numarul});
         callback();
       });
 
@@ -58,7 +79,7 @@
     return Procedura;
   }
 
-  Procedura.$inject = ['Storage', 'ObiectulUrmaririi'];
+  Procedura.$inject = ['Storage', 'ObiectulUrmaririi', 'Utilizator'];
 
   window.App.service('Procedura', Procedura);
   window.App.module.S.Procedura = Procedura;

@@ -6,48 +6,67 @@
   module('Procedura');
 
   (function() {
-    var Procedura, initializeaza, GENURI_ACCEPTATE;
+    var Procedura;
 
-    test('.initializeaza(gen): parametrii', function() {
+    test('.initializeaza(gen): verificarea parametrilor', function() {
       Procedura = app.App.module.S.Procedura;
-      initializeaza = Procedura.initializeaza;
-      GENURI_ACCEPTATE = Procedura.GENURI_ACCEPTATE;
 
-      equal(initializeaza.length, 1, 'acceptă doi parametri');
+      equal(Procedura.initializeaza.length, 1, 'acceptă doi parametri');
 
-      var procedura = {},
-          mesajDeEroare;
+      var procedura = {};
 
-      mesajDeEroare = 'gen: generează o eroare dacă nu este unul dintre cele acceptate';
+      throws(function() {
+        Procedura.initializeaza('sdbfhjsbdfjhs', procedura);
+      }, app.AssertionError, 'gen: generează un AssertionError dacă nu este unul dintre cele acceptate');
 
-      try {
-        initializeaza('sdbfhjsbdfjhs', procedura);
-        ok(false, mesajDeEroare);
-      } catch(e) {
-        ok(true, mesajDeEroare);
-        ok(app._.contains(e.message, GENURI_ACCEPTATE.join(', ')),
-            'gen: mesajul erorrii generate conţine lista celor acceptate');
-      }
-
-      initializeaza(GENURI_ACCEPTATE[0], procedura);
-      ok(true, 'nu generează erori dacă genul este unul dintre cele aceptate');
+      Procedura.initializeaza(Procedura.GENURI_ACCEPTATE[0], procedura);
+      ok(true, 'gen: nu generează erori dacă genul este unul dintre cele aceptate');
     });
 
 
     test('.initializeaza(gen)', function() {
-      initializeaza('de-ordin-general');
+      Procedura.initializeaza('de-ordin-general');
+
+      equal(Procedura.date.titlu(), 'Procedură de ordin general', 'titlul e corespunde cu tipul procedurii');
+      ok(Procedura.date.noua(), 'procedura e .noua()');
 
       ok(Procedura.date['data-intentării'], 'setează data intentării');
       equal(Procedura.date['creditor']['gen-persoană'], 'juridică', 'creditorul este persoană juridică');
       equal(Procedura.date['debitori'][0]['gen-persoană'], 'fizică', 'debitorul este persoană fizică');
-
-      //
-      // TODO:
-      // - tip
-      // - creditor
-      // - debitori
-      //
+      equal(Procedura.date['obiectul-urmăririi']['caracter'], 'pecuniar', 'caracterul obiectului urmăririi este pecuniar');
+      ok(app.js.isArray(Procedura.date['obiectul-urmăririi']['sume']), 'obiectului urmăririi are sume');
+      ok(app.js.isArray(Procedura.date['obiectul-urmăririi'].optiuni()), 'obiectului urmăririi are .optiuni()');
+      ok(app.js.isArray(Procedura.date['acţiuni']), 'avem listă de acţiuni');
     });
+
+
+    test('.deschide(numarul, callback): verificarea parametrilor', function() {
+      throws(function() {
+        Procedura.deschide();
+      }, app.AssertionError, 'fără argumente generează un AssertionError');
+
+      throws(function() {
+        Procedura.deschide('sdkbfkjsk');
+      }, app.AssertionError, 'dacă numărul nu este număr de fapt generează un AssertionError');
+
+      throws(function() {
+        Procedura.deschide(-9, function() {});
+      }, app.AssertionError, 'dacă numărul nu este > 0 generează un AssertionError');
+
+      throws(function() {
+        Procedura.deschide(1);
+      }, app.AssertionError, 'fără callback generează un AssertionError');
+
+      throws(function() {
+        Procedura.deschide(1, 'dsfnsdjfksj');
+      }, app.AssertionError, 'dacă callback-ul nu e bun generează un AssertionError');
+    });
+
+
+    test('.deschide(numarul, callback)', function() {
+      ok(true, 'TODO');
+    });
+
   })();
 
 })();

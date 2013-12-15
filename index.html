@@ -202,10 +202,7 @@
 
       <div id="formular" ng-controller="ControllerProcedura">
         <div class="conţinut">
-          <h1>
-            <span id="descriere">Procedura de executare</span>
-            <span id="prefix">{{ utilizator['login'] }}</span><span id="tip">{{ procedura['tip'] }}</span><span id="tireu">-</span><span id="număr">{{ procedura['numărul'] }}</span>
-          </h1>
+          <h1>{{ procedura.titlu() }}</h1>
 
           <p id="container-data-intentării">
             <label>Data intentării</label>
@@ -2419,8 +2416,8 @@
         <label>Obiectul urmăririi</label>
         <select
           ng-model=" date['obiect'] "
-          ng-init=" date['obiect'] = date['obiect'] || procedura['optiuni-obiectul-urmaririi'][0].eticheta "
-          ng-options=" obiect.eticheta as obiect.eticheta for obiect in procedura['optiuni-obiectul-urmaririi'] track by obiect.eticheta "
+          ng-init=" optiuni = procedura['obiectul-urmăririi'].optiuni(); date['obiect'] = date['obiect'] || optiuni[0].eticheta "
+          ng-options=" obiect.eticheta as obiect.eticheta for obiect in optiuni track by obiect.eticheta "
         ></select>
         <!-- TODO? span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Formare document"></span-->
       </li>

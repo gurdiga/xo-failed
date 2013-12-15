@@ -15,27 +15,15 @@
 
     equal(assert.length, 2, 'accepta doi parametri: cerinţa şi mesajul');
 
-    message = 'generează o eroare dacă nu se transmite şi mesajul';
-
-    try {
+    throws(function() {
       assert(true);
-      ok(false, message);
-    } catch(e) {
-      ok(true, message);
-      ok(app._.contains(e.message, 'js.assert'), 'eroarea generată conţine numele funcţiei');
-    }
+    }, app.Error, 'generează o eroare dacă nu se transmite al doilea parametru (mesajul)');
 
-    message = 'descrierea cerinţei';
+    throws(function() {
+      assert(false, message);
+    }, app.Error, 'genereaza eroare dacă cerinţa nu este îndeplinită');
 
-    try {
-      app.js.assert(false, message);
-      ok(false, 'genereaza eroare dacă cerinţa nu este îndeplinită');
-    } catch(e) {
-      ok(true, 'genereaza eroare dacă cerinţa nu este îndeplinită');
-      equal(e.message, message, 'mesajul erorii corespunde cu mesajul cerinţei');
-    }
-
-    app.js.assert(true, message);
+    assert(true, 'descrierea condiţiei');
     ok(true, 'nu genereaza eroare dacă cerinţa este îndeplinită');
   });
 
@@ -67,27 +55,15 @@
 
 
   test('.extend', function() {
-    var extend = app.js.extend, message;
+    var extend = app.js.extend;
 
-    message = 'fără parametri generează un AssertionError';
-
-    try {
+    throws(function() {
       extend();
-      ok(false, message);
-    } catch(e) {
-      equal(e.name, 'AssertionError', 'eroarea e AssertionError');
-      ok(true, message);
-    }
+    }, app.AssertionError, 'fără parametri generează un AssertionError');
 
-    message = 'fără surce generează un AssertionError';
-
-    try {
+    throws(function() {
       extend({});
-      ok(false, message);
-    } catch(e) {
-      equal(e.name, 'AssertionError', 'eroarea e AssertionError');
-      ok(true, message);
-    }
+    }, app.AssertionError, 'fără surce generează un AssertionError');
 
     deepEqual(
       extend({}, {a: 1}),
