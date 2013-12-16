@@ -163,6 +163,7 @@
   };
 
   var JSHINT_GLOBALS = {
+    console: false,
     js: false,
     self: false,
     sinon: false,

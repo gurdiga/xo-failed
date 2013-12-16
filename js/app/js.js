@@ -16,12 +16,6 @@
   };
 
 
-  js.debug = function() {
-    /*global console*/
-    console.log.apply(console, arguments);
-  };
-
-
   js.extend = function(destination) {
     js.assert(js.isPlainObject(destination), 'js.extend: destination has to be a plain object [' + destination + ']');
 
