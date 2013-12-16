@@ -35,12 +35,21 @@
           'Procedura.initializeaza: gen trebuie să fie unul dintre: ' + Procedura.GENURI_ACCEPTATE.join(', ') + '. ' +
           '[' + gen + ']');
 
+      console.debug('Procedura.initializeaza(' + gen + ')');
+
+      delete Procedura.date['creditor'];
+      delete Procedura.date['debitori'];
+      delete Procedura.date['document-executoriu'];
+      delete Procedura.date['obiectul-urmăririi'];
+      delete Procedura.date['acţiuni'];
+
       js.extend(Procedura.date, Procedura.defaults, {
         'gen': gen,
         'data-intentării': moment().format(FORMATUL_DATEI),
         'creditor': {
           'gen-persoană': 'juridică'
         },
+        'document-executoriu': {},
         'debitori': [{
           'gen-persoană': 'fizică'
         }],
@@ -50,6 +59,8 @@
         },
         'acţiuni': []
       });
+
+      console.debug('initializat:', Procedura.date);
 
       Efecte.afiseazaLin();
     };
@@ -61,7 +72,7 @@
       js.assert(js.isFunction(callback), 'Procedura.deschide: callback trebuie să fie funcţie [' + numarul + ']');
 
       Storage.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
-        js.debug('Încărcat procedura', numarul, dateIncarcate);
+        console.debug('Încărcat procedura', numarul, dateIncarcate);
 
         js.extend(Procedura.date, dateIncarcate, {'numărul': numarul});
         callback();
