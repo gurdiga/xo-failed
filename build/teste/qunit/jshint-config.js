@@ -35,6 +35,9 @@
     'app/procedura/directives/focuseaza-la-adaugare.js',
     'app/procedura/services/procedura.js',
 
+    'app/incheiere/services/incheiere.js',
+    'app/incheiere/directives/incheiere.js',
+
     '/js/app/init.js',
 
     '/js/app/util/services/storage.js',
@@ -52,8 +55,10 @@
     '/js/app/procedura/directives/persoana.js',
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
-    '/js/app/procedura/directives/incheiere.js',
     '/js/app/procedura/directives/borderou.js',
+
+    '/js/app/incheiere/services/incheiere.js',
+    '/js/app/incheiere/directives/incheiere.js',
 
     '/js/app/procedura/actiuni/services/actiuni.js',
     '/js/app/procedura/actiuni/directives/actiune.js',

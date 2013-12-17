@@ -2242,7 +2242,7 @@
 
     <script type="text/ng-template" id="directive-incheiere">
       <p>
-        <span class="ico document neselectabil clickabil" formular="{{ date.formular() }}" href="{{ date.href }}">încheierea</span>
+        <span class="ico document neselectabil clickabil" formular="{{ date.formular() }}" href="{{ date.href() }}">încheierea</span>
         — taxa: {{ date.taxa }} U.C.
         <input class="clickabil" type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat
         <span ng-show=" date.achitat ">la<input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
@@ -2740,8 +2740,10 @@
     <script src="/js/app/procedura/directives/persoana.js"></script>
     <script src="/js/app/procedura/directives/sectiune.js"></script>
     <script src="/js/app/procedura/directives/valute.js"></script>
-    <script src="/js/app/procedura/directives/incheiere.js"></script>
     <script src="/js/app/procedura/directives/borderou.js"></script>
+
+    <script src="/js/app/incheiere/services/incheiere.js"></script>
+    <script src="/js/app/incheiere/directives/incheiere.js"></script>
 
     <script src="/js/app/procedura/actiuni/services/actiuni.js"></script>
     <script src="/js/app/procedura/actiuni/directives/actiune.js"></script>

@@ -10,12 +10,27 @@
       'încetare': []
     };
 
-    var DENUMIRI = {
-      'intentare': 'Intentarea şi formarea procedurii de executare',
-      'intentare-cu-asigurare': 'Intentarea şi formarea procedurii de executare, plus asigurarea executării',
-      'continuare': 'continuare',
-      'încetare': 'încetare',
-      'TODO': 'TODO'
+    var DATE = {
+      'intentare': {
+        denumire: 'Intentarea şi formarea procedurii de executare',
+        incheiere: {}
+      },
+      'intentare-cu-asigurare': {
+        denumire: 'Intentarea şi formarea procedurii de executare, plus asigurarea executării',
+        incheiere: {}
+      },
+      'continuare': {
+        denumire: 'continuare',
+        incheiere: {}
+      },
+      'încetare': {
+        denumire: 'încetare',
+        incheiere: {}
+      },
+      'TODO': {
+        denumire: 'TODO',
+        incheiere: {}
+      }
     };
 
 
@@ -26,7 +41,7 @@
       return identificatori.map(function(identificator) {
         return {
           identificator: identificator,
-          denumire: DENUMIRI[identificator]
+          denumire: DATE[identificator].denumire
         };
       });
     }
@@ -34,9 +49,10 @@
 
     function adauga(identificator, procedura) {
       var actiune = {
-        identificator: identificator,
-        denumire: DENUMIRI[identificator]
+        identificator: identificator
       };
+
+      js.extend(actiune, DATE[identificator]);
 
       procedura['acţiuni'].push(actiune);
     }
