@@ -13,11 +13,17 @@
     var DATE = {
       'intentare': {
         denumire: 'Intentarea şi formarea procedurii de executare',
-        incheiere: {}
+        incheiere: {
+          titlu: 'Încheiere',
+          subtitlu: 'cu privire la intentarea procedurii de executare',
+          taxa: 1
+        }
       },
       'intentare-cu-asigurare': {
         denumire: 'Intentarea şi formarea procedurii de executare, plus asigurarea executării',
-        incheiere: {}
+        incheiere: {
+          taxa: 1
+        }
       },
       'continuare': {
         denumire: 'continuare',

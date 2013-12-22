@@ -160,7 +160,6 @@
     unused: true,
     strict: true,
     trailing: true,
-    maxparams: 3,
     maxdepth: 4,
     maxcomplexity: 4,
     white: false,

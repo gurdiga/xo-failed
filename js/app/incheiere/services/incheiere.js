@@ -3,12 +3,29 @@
 
   window.App.service('Incheiere', [function() {
     return {
+      defaults: module.defaults,
       deschide: module.deschide
     };
   }]);
 
 
   var module = {
+    defaults: function(actiune) {
+      js.assert(js.isPlainObject(actiune), 'D.Incheiere.defaults: primul parametru trebuie să fie acţiunea');
+
+      //
+      // TODO: de schiţat defaulturi pentru
+      //  - titlu
+      //  - descriere
+      //  - etc?
+      //
+
+      return {
+        identificator: actiune.identificator
+      };
+    },
+
+
     deschide: function(date) {
       js.assert(js.isPlainObject(date), 'D.Incheiere.deschide: primul parametru trebuie să fie PlainObject');
 
@@ -16,6 +33,8 @@
       var popup = window.open(href, href, 'left=100,width=1000,height=1000');
 
       $(popup).on('load', function() {
+        popup.onunload = popup.close; // do not allow reload
+
         var numeModul = 'Incheiere',
             numeController = 'ControllerIncheiere';
 

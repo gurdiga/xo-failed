@@ -51,13 +51,9 @@
     return _.contains(collection, subject);
   };
 
-  js.isPlainObject = function(o) {
-    return _.isPlainObject(o);
-  };
-
-  js.isArray = function(o) {
-    return _.isArray(o);
-  };
+  js.isPlainObject = _.isPlainObject;
+  js.isArray = _.isArray;
+  js.isEmpty = _.isEmpty;
 
 
   window.js = js;

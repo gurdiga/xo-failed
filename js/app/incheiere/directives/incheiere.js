@@ -9,10 +9,11 @@
       templateUrl: 'directive-incheiere',
       scope: {
         procedura: '=',
-        actiune: '='
+        actiune: '=',
+        date: '='
       },
 
-      controller: ['$scope', '$element', 'Storage', module.controller],
+      controller: ['$scope', '$element', 'Storage', 'Incheiere', module.controller],
 
       link: function($scope, $element) {
         module.link($scope, $element, Incheiere);
@@ -21,13 +22,12 @@
   }]);
 
 
-  var TAXE = {
-    'intentare': 1
-  };
-
   var module = {
-    controller: function($scope, $element, Storage) {
-      $scope.date = $scope.date || module.defaults($scope.actiune);
+    controller: function($scope, $element, Storage, Incheiere) {
+      if (js.isEmpty($scope.date)) {
+        js.extend($scope.date, Incheiere.defaults($scope.actiune));
+      }
+
       $scope.date.href = module.href(Storage, $scope.procedura, $scope.actiune, $scope.date);
       $scope.date.formular = module.formular($scope.actiune);
 
@@ -44,15 +44,6 @@
     },
 
 
-    defaults: function(actiune) {
-      js.assert(js.isPlainObject(actiune), 'D.Incheiere.defaults: primul parametru trebuie să fie acţiunea');
-
-      return {
-        taxa: TAXE[actiune.identificator]
-      };
-    },
-
-
     formular: function(actiune) {
       js.assert(js.isPlainObject(actiune), 'D.Incheiere.formular: primul parametru trebuie să fie acţiunea');
 
@@ -63,7 +54,6 @@
     },
 
 
-    /*jshint maxparams:4*/
     href: function(Storage, procedura, actiune, document) {
       js.assert(js.isPlainObject(Storage), 'D.Incheiere.href: primul parametru trebuie să fie S.Storage');
       js.assert(js.isPlainObject(procedura), 'D.Incheiere.href: al doilea parametru trebuie să fie procedura');

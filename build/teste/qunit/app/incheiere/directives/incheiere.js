@@ -13,6 +13,7 @@
   test('.controller', function() {
     var controller = app.App.module.D.Incheiere.controller,
         Storage = this.$injector.get('Storage'),
+        Incheiere = this.$injector.get('Incheiere'),
         $element = app.angular.element();
 
     var $scope = {
@@ -22,7 +23,7 @@
       $watch: sinon.spy()
     };
 
-    controller($scope, $element, Storage);
+    controller($scope, $element, Storage, Incheiere);
     ok(app.js.isFunction($scope.date.href), 'defineşte href()');
     ok(app.js.isFunction($scope.date.formular), 'defineşte href()');
 
@@ -85,23 +86,6 @@
     ok(app.js.isFunction(formular), 'e funcţie ca să nu se persiste');
     //ok(app._.contains(formular(), actiune.identificator), 'include identificatorul actiunii');
     ok(app._.contains(formular(), '/incheiere.html'), 'include identificatorul actiunii');
-  });
-
-
-  test('.defaults(actiune): verificarea parametrilor', function() {
-    var defaults = app.App.module.D.Incheiere.defaults;
-
-    throws(function() {
-      defaults();
-    }, /primul parametru trebuie să fie acţiunea/, 'acţiunea');
-  });
-
-
-  test('.defaults(actiune)', function() {
-    var returnValue = app.App.module.D.Incheiere.defaults({});
-
-    ok(app.js.isPlainObject(returnValue), 'întoarce PlainObject');
-    ok('taxa' in returnValue, 'rezultatul conţine taxa');
   });
 
 })();
