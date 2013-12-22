@@ -56,13 +56,11 @@
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
     '/js/app/procedura/directives/borderou.js',
-
-    '/js/app/incheiere/services/incheiere.js',
-    '/js/app/incheiere/directives/incheiere.js',
-
     '/js/app/procedura/actiuni/services/actiuni.js',
     '/js/app/procedura/actiuni/directives/actiune.js',
     '/js/app/procedura/actiuni/directives/propunere-actiune.js',
+    '/js/app/procedura/actiuni/incheiere/services/incheiere.js',
+    '/js/app/procedura/actiuni/incheiere/directives/incheiere.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',
