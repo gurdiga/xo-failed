@@ -1,0 +1,23 @@
+<section>
+  <header>Creditorul</header>
+  <div class="conţinut" ng-init=" creditor = procedura.creditor ">
+    <span ng-if=" creditor['gen-persoană'] === 'juridică' ">
+      {{ creditor.denumire }} ({{ creditor.idno }})
+    </span>
+    <span ng-if=" creditor['gen-persoană'] === 'fizică' ">
+      {{ creditor.nume }} ({{ creditor.idnp }})
+    </span>
+  </div>
+</section>
+
+<section>
+  <header>
+    <span ng-if=" procedura.debitori.length === 1 ">Debitorii</span>
+    <span ng-if=" procedura.debitori.length > 1 ">Debitorul</span>
+  </header>
+  <div class="conţinut">
+    <ul ng-repeat=" debitor in procedura.debitori ">
+      <li>{{ debitor.nume }}</li>
+    </ul>
+  </div>
+</section>

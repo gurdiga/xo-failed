@@ -8,12 +8,99 @@
 
   <body spellcheck="false">
     <article>
+      <pre>{{ date | json }}</pre>
+
       <hgroup>
         <h1>Încheiere</h1>
         <h2>cu privire la intentarea procedurii de executare</h2>
       </hgroup>
 
-      Content <pre>{{ date | json }}</pre>
+      <ng-include src=" '/formulare/fragmente/comune/procedura.html' "></ng-include>
+      <ng-include src=" '/formulare/fragmente/comune/partile.html' "></ng-include>
+
+      <ul class="opţiuni mod-iniţiere">
+        <li>cererea CREDITORULUI cu privire la intentarea procedurii de executare în baza documentului executoriu</li>
+        <li>din oficiu documentul executoriu</li>
+      </ul>
+
+        <section>
+          <header>Chestiunea</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <p>Examinînd <span class="cu-opţiuni" data-opţiuni="mod-iniţiere">cererea CREDITORULUI
+            cu privire la intentarea procedurii de executare în baza documentului executoriu</span>
+            <%= procedură['document-executoriu']['numărul-de'] %> din
+            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
+            judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
+            prin care s-a dispus încasarea în beneficiul CREDITORULUI de la <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
+            a datoriei în mărime totală de <span class="sumă"><%= totalDatorie %></span> MDL formată din:</p>
+
+            <ol>
+            <% for (var descriere in procedură['obiectul-urmăririi']['sume']) {
+                var sumă = procedură['obiectul-urmăririi']['sume'][descriere]; %>
+              <li><%= descriere %> — <%= sumă.suma %> <%= sumă.valuta %></li>
+            <% } %>
+            </ol>
+
+            <p>am stabilit:</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Motivele</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <p>Documentul executoriu a fost înaintat spre executare în termen
+            conform legii, respectîndu-se competenţa teritorială şi cuprinsul
+            acestuia corespunde cerinţelor legislaţiei în vigoare. Acesta nu are termen de
+            executare benevolă stabilit prin lege, şi nici nu este stabilit în documentul
+            executoriu.</p>
+
+            <p>În conformitate cu art. 10, 11, 14-16, 22, 60, 62, 66 al Codului de executare
+            RM, dispun:</p>
+          </div>
+        </section>
+
+        <section>
+          <header>Dispoziţia</header>
+          <div class="conţinut editabil" spellcheck="false">
+            <ol>
+              <li>
+                <p>A primi spre executare documentul executoriu numărul
+                <%= procedură['document-executoriu']['numărul-de'] %> din
+                <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
+                judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>.</p>
+              </li>
+
+              <li>
+                <p>A intenta procedura de executare
+                <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
+                din <%= procedură['data-intentării'] %>.</p>
+              </li>
+
+              <% if (conciliere) { %>
+              <li>
+                <p>A stabili concilierea părţilor la data de <%= conciliere.data %> ora
+                <%= conciliere.ora %>.</p>
+              </li>
+              <% } %>
+
+              <li>
+                <p>A propune <%= debitori %> de a executa benevol documentul
+                executoriu în termen de 15 zile.</p>
+              </li>
+
+              <li>
+                <p>A expedia prezenta încheiere părţilor pentru informare.</p>
+              </li>
+            </ol>
+
+            <p>Încheierea este executorie din momentul emiterii şi poate fi contestată doar de
+            debitor în temeiul prevăzut de art. 61 lit. a) şi e) al Codului de executare RM.</p>
+          </div>
+        </section>
+
+<? require 'nume-adresă-şi-semnătură.html' ?>
+<? require 'partea-de-jos.html' ?>
+
     </article>
   </body>
 </html>
