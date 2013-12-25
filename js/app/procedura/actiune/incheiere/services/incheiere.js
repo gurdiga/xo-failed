@@ -25,7 +25,20 @@
       var href = directiveScopeData.date.href || directiveScopeData.date.formular;
       var popup = window.open(href, href, 'left=100,width=1000,height=1000');
 
-      $(popup).on('load', function() {
+      // For some reason, upon angular.bootstrap() call below the
+      // opener scrolls to the top. This is a workaround.
+      function holdScrollPosition(fn) {
+        return function() {
+          var scrollPosition = document.body.scrollTop,
+              fnReturnValue = fn();
+
+          document.body.scrollTop = scrollPosition;
+          return fnReturnValue;
+        };
+      }
+
+
+      $(popup).on('load', holdScrollPosition(function() {
         popup.onunload = popup.close; // do not allow reload
 
         var numeModul = 'Incheiere',
@@ -42,7 +55,7 @@
 
         rootEl.setAttribute('ng-controller', numeController);
         angular.bootstrap(rootEl, [numeModul]);
-      });
+      }));
     };
 
 
