@@ -34,13 +34,13 @@
     'app/procedura/directives/ajusteaza-textarea-elastic.js',
     'app/procedura/directives/focuseaza-la-adaugare.js',
     'app/procedura/services/procedura.js',
-
-    'app/incheiere/services/incheiere.js',
-    'app/incheiere/directives/incheiere.js',
+    'app/procedura/actiune/incheiere/services/incheiere.js',
+    'app/procedura/actiune/incheiere/directives/incheiere.js',
 
     '/js/app/init.js',
 
     '/js/app/util/services/storage.js',
+    '/js/app/util/services/scope-utils.js',
     '/js/app/util/directives/focus-on-check.js',
 
     '/js/app/utilizator/services/utilizator.js',
@@ -56,11 +56,12 @@
     '/js/app/procedura/directives/sectiune.js',
     '/js/app/procedura/directives/valute.js',
     '/js/app/procedura/directives/borderou.js',
-    '/js/app/procedura/actiuni/services/actiuni.js',
-    '/js/app/procedura/actiuni/directives/actiune.js',
-    '/js/app/procedura/actiuni/directives/propunere-actiune.js',
-    '/js/app/procedura/actiuni/incheiere/services/incheiere.js',
-    '/js/app/procedura/actiuni/incheiere/directives/incheiere.js',
+    '/js/app/procedura/actiune/services/actiune.js',
+    '/js/app/procedura/actiune/directives/actiune.js',
+    '/js/app/procedura/actiune/directives/propunere-actiune.js',
+    '/js/app/procedura/actiune/incheiere/services/incheiere.js',
+    '/js/app/procedura/actiune/incheiere/directives/incheiere.js',
+    '/js/app/procedura/actiune/incheiere/controllers/incheiere.js',
 
     '/js/app/handlebars-helpers.js',
     '/js/app/x-jquery.js',
@@ -190,7 +191,8 @@
     setTimeout: false,
     clearTimeout: false,
     setInterval: false,
-    history: false
+    history: false,
+    App: false
   };
 
   module('JSHint');

@@ -23,22 +23,22 @@
         <li>din oficiu documentul executoriu</li>
       </ul>
 
-        <section>
+        <!--section>
           <header>Chestiunea</header>
           <div class="conţinut editabil" spellcheck="false">
             <p>Examinînd <span class="cu-opţiuni" data-opţiuni="mod-iniţiere">cererea CREDITORULUI
             cu privire la intentarea procedurii de executare în baza documentului executoriu</span>
-            <%= procedură['document-executoriu']['numărul-de'] %> din
-            <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
-            judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>
-            prin care s-a dispus încasarea în beneficiul CREDITORULUI de la <%= text('DEBITOR sau DEBITORI', procedură.debitori) %>
-            a datoriei în mărime totală de <span class="sumă"><%= totalDatorie %></span> MDL formată din:</p>
+            {{ procedura['document-executoriu']['numărul-de'] }} din
+            {{ procedura['document-executoriu']['data-hotărîrii'] }} emis de
+            judecătoria {{ procedura['document-executoriu']['instanţa-de-judecată'] }}
+            prin care s-a dispus încasarea în beneficiul CREDITORULUI de la {{ text('DEBITOR sau DEBITORI', procedura.debitori) }}
+            a datoriei în mărime totală de <span class="sumă">{{ totalDatorie }}</span> MDL formată din:</p>
 
             <ol>
-            <% for (var descriere in procedură['obiectul-urmăririi']['sume']) {
-                var sumă = procedură['obiectul-urmăririi']['sume'][descriere]; %>
-              <li><%= descriere %> — <%= sumă.suma %> <%= sumă.valuta %></li>
-            <% } %>
+            <% for (var descriere in procedura['obiectul-urmăririi']['sume']) {
+                var sumă = procedura['obiectul-urmăririi']['sume'][descriere]; }}
+              <li>{{ descriere }} — {{ sumă.suma }} {{ sumă.valuta }}</li>
+            <% } }}
             </ol>
 
             <p>am stabilit:</p>
@@ -65,26 +65,26 @@
             <ol>
               <li>
                 <p>A primi spre executare documentul executoriu numărul
-                <%= procedură['document-executoriu']['numărul-de'] %> din
-                <%= procedură['document-executoriu']['data-hotărîrii'] %> emis de
-                judecătoria <%= procedură['document-executoriu']['instanţa-de-judecată'] %>.</p>
+                {{ procedura['document-executoriu']['numărul-de'] }} din
+                {{ procedura['document-executoriu']['data-hotărîrii'] }} emis de
+                judecătoria {{ procedura['document-executoriu']['instanţa-de-judecată'] }}.</p>
               </li>
 
               <li>
                 <p>A intenta procedura de executare
-                <%= login %><%= procedură['tip'] %>-<%= app.FormularProcedură.număr() %>
-                din <%= procedură['data-intentării'] %>.</p>
+                {{ login }}{{ procedura['tip'] }}-{{ app.FormularProcedură.număr() }}
+                din {{ procedura['data-intentării'] }}.</p>
               </li>
 
-              <% if (conciliere) { %>
+              <% if (conciliere) { }}
               <li>
-                <p>A stabili concilierea părţilor la data de <%= conciliere.data %> ora
-                <%= conciliere.ora %>.</p>
+                <p>A stabili concilierea părţilor la data de {{ conciliere.data }} ora
+                {{ conciliere.ora }}.</p>
               </li>
-              <% } %>
+              <% } }}
 
               <li>
-                <p>A propune <%= debitori %> de a executa benevol documentul
+                <p>A propune {{ debitori }} de a executa benevol documentul
                 executoriu în termen de 15 zile.</p>
               </li>
 
@@ -96,7 +96,7 @@
             <p>Încheierea este executorie din momentul emiterii şi poate fi contestată doar de
             debitor în temeiul prevăzut de art. 61 lit. a) şi e) al Codului de executare RM.</p>
           </div>
-        </section>
+        </section -->
 
 <? require 'nume-adresă-şi-semnătură.html' ?>
 <? require 'partea-de-jos.html' ?>
