@@ -17,7 +17,7 @@
 
 
   js.extend = function(destination) {
-    js.assert(js.isPlainObject(destination), 'js.extend: destination has to be a plain object [' + destination + ']');
+    js.assert(js.isObject(destination), 'js.extend: destination has to be an object [' + destination + ']');
 
     var sources = Array.prototype.slice.call(arguments, 1);
 
@@ -52,9 +52,38 @@
   };
 
   js.isPlainObject = _.isPlainObject;
+  js.isObject = _.isObject;
   js.isArray = _.isArray;
   js.isEmpty = _.isEmpty;
 
 
   window.js = js;
+
+
+  var stringifyOriginal = window.JSON.stringify;
+
+  window.JSON.stringify = function(object, replacer, space) {
+    // thanks to Rob W, http://stackoverflow.com/a/11616993/227167
+    var cache = [],
+        string;
+
+    function preventCircularReferences(key, value) {
+      if (typeof value === 'object' && value !== null) {
+        if (cache.indexOf(value) !== -1) {
+          // Circular reference found, discard key
+          return;
+        }
+
+        // Store value in our collection
+        cache.push(value);
+      }
+
+      return value;
+    }
+
+    string = stringifyOriginal.call(JSON, object, preventCircularReferences, space);
+    cache = null; // Enable garbage collection
+
+    return string;
+  };
 })();

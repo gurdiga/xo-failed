@@ -96,4 +96,32 @@
     );
   });
 
+
+  test('JSON.stringify discards circular references', function() {
+    var o = {
+      a: 1,
+      b: 2,
+      f: function() {},
+      d: new Date(),
+      o: {
+        x: 'x',
+        y: 'y'
+      }
+    };
+
+    equal(JSON.stringify(o), app.JSON.stringify(o), 'works usual for objects w/o circular references');
+
+    o.circular = o;
+    o = JSON.parse(app.JSON.stringify(o));
+    ok(!('circular' in o), 'discards circular references');
+
+    var h1 = {a: 1},
+        h2 = {b: 2};
+
+    h1.h2 = h2;
+    h2.h1 = h1;
+    h1 = JSON.parse(app.JSON.stringify(h1));
+    ok(!('h1' in h1.h2), 'discards indirect circular references');
+  });
+
 })();
