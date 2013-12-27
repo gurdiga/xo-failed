@@ -44,7 +44,7 @@
     '/js/app/util/directives/focus-on-check.js',
 
     '/js/app/utilizator/services/utilizator.js',
-    '/js/app/utilizator/controllers/utilizator.js',
+    '/js/app/controller.js',
 
     '/js/app/procedura/routing.js',
     '/js/app/procedura/services/procedura.js',
