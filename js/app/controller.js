@@ -5,7 +5,6 @@
          ['$scope', 'Utilizator',
   function($scope,   Utilizator) {
     $scope.utilizator = Utilizator.date;
-    console.log($scope.utilizator);
   }]);
 
 })();

@@ -2,7 +2,7 @@
 (function() {
   'use strict';
 
-  var App = angular.module('App', ['ngRoute']);
+  var App = angular.module('App', ['ngRoute', 'firebase']);
 
   App.constant('USER_LOGIN', $.cookie('login'));
 
