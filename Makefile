@@ -2,10 +2,15 @@
 
 default: test
 
-lint: lint-js lint-bash lint-html lint-nginx lint-php formulare
+lint: lint-js lint-css lint-bash lint-html lint-nginx lint-php formulare
 
 lint-js:
+	echo "JS lint."
 	jshint `find js/ build/teste/qunit/ -type f -name '*.js' -newer .jshintrc` && touch .jshintrc
+
+lint-css:
+	echo "CSS lint."
+	csslint --exclude-list=css/jquery-ui-1.9.2.custom.min.css css/*.css
 
 lint-html:
 	echo "HTML lint."

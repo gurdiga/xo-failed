@@ -1,0 +1,2 @@
+--quiet
+--errors=box-sizing,duplicate-background-images,duplicate-properties,empty-rules,errors,fallback-colors,floats,font-faces,gradients,known-properties,regex-selectors,rules-count,selector-max-approaching,selector-max,shorthand,star-property-hack,text-indent,underscore-property-hack,universal-selector,vendor-prefix,zero-units
