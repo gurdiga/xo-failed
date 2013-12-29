@@ -517,7 +517,7 @@
               $încheiere.find('.închide').click();
 
               start();
-            }, app.PAUZĂ_DE_OBSERVABILITATE);
+            }, app.PAUZA_DE_OBSERVABILITATE);
           });
         });
       });
@@ -686,7 +686,7 @@
                 start();
               });
               $formular.find('button.închide').click();
-            }, app.PAUZĂ_DE_OBSERVABILITATE);
+            }, app.PAUZA_DE_OBSERVABILITATE);
           });
         });
       });

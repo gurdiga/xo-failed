@@ -62,7 +62,7 @@ asyncTest('Încheiere de dare în căutare a mijlocului de transport', function(
         setTimeout(function() {
           D.resolve();
           $încheiere.find('.închide').click();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }

@@ -22,7 +22,7 @@ asyncTest('Calculator dobînzi de întîrziere', function() {
 
     setTimeout(function() { // aşteptăm o leacă să fie urmăribil testul
       verificăRaportul($dialog);
-    }, app.PAUZĂ_DE_OBSERVABILITATE);
+    }, app.PAUZA_DE_OBSERVABILITATE);
   });
 
   // ------------------------

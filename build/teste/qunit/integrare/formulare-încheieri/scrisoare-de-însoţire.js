@@ -93,7 +93,7 @@ asyncTest('Scrisoarea de însoţire', function() {
         setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }
@@ -137,7 +137,7 @@ asyncTest('Scrisoarea de însoţire', function() {
         setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }
@@ -185,7 +185,7 @@ asyncTest('Scrisoarea de însoţire', function() {
         setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }
@@ -246,7 +246,7 @@ asyncTest('Scrisoarea de însoţire', function() {
         setTimeout(function() {
           $scrisori.find('.închide').click();
           D.resolve();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }

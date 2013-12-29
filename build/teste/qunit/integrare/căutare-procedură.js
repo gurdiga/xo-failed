@@ -24,7 +24,7 @@ asyncTest('Procedură: căutare', function() {
 
       ştergeProceduraCreată();
     });
-  }, app.Căutare.pauză + app.PAUZĂ_DE_OBSERVABILITATE);
+  }, app.Căutare.pauză + app.PAUZA_DE_OBSERVABILITATE);
 
   // ------------------------
   function ştergeProceduraCreată() {

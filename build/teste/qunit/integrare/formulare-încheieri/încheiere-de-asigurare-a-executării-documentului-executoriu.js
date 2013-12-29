@@ -50,7 +50,7 @@ asyncTest('Încheiere de asigurare a executării documentului executoriu', funct
         setTimeout(function() {
           D.resolve();
           $încheiere.find('.închide').click();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }

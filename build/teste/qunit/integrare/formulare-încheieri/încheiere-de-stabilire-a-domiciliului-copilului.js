@@ -84,7 +84,7 @@ asyncTest('Somaţie de stabilire a domiciliului copilului', function() {
             $încheiere.find('.închide').click();
 
             start();
-          }, app.PAUZĂ_DE_OBSERVABILITATE);
+          }, app.PAUZA_DE_OBSERVABILITATE);
         });
       }); // one populat
     }); // one închis

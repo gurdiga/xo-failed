@@ -1,6 +1,6 @@
 // formularul de procedură trebuie se fi rămas deschis de la încheierile-referitoare-la-obiectul-urmăririi.js
 asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', function() {
-  /*global UtilitareÎncheiere:false */
+  /*global UtilitareÎncheiere */
   'use strict';
 
   var app = this.app,
@@ -163,8 +163,8 @@ asyncTest('Încheiere de numire a datei transmiterii bunurilor imobile', functio
                 $încheiere.find('.închide').click();
                 start();
               });
-            }, app.PAUZĂ_DE_OBSERVABILITATE);
-          }, app.PAUZĂ_DE_OBSERVABILITATE);
+            }, app.PAUZA_DE_OBSERVABILITATE);
+          }, app.PAUZA_DE_OBSERVABILITATE);
         });
       }); // one populat
     }); // one închis

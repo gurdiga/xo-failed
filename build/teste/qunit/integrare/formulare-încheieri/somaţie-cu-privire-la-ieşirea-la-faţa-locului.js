@@ -61,7 +61,7 @@ asyncTest('Somaţie cu privire la ieşirea la faţa locului', function() {
         setTimeout(function() {
           D.resolve();
           $încheiere.find('.închide').click();
-        }, app.PAUZĂ_DE_OBSERVABILITATE);
+        }, app.PAUZA_DE_OBSERVABILITATE);
       });
     }).promise();
   }

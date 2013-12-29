@@ -59,7 +59,7 @@ asyncTest('Precedură: salvare', function() {
 
           setTimeout(function() {
             start();
-          }, app.PAUZĂ_DE_OBSERVABILITATE);
+          }, app.PAUZA_DE_OBSERVABILITATE);
         });
       });
     });

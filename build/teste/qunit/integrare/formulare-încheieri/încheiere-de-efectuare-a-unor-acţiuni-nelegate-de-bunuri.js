@@ -60,7 +60,7 @@ asyncTest('Somaţie cu privire la efectuarea unor acţiuni nelegate de remiterea
             $încheiere.find('.închide').click();
 
             start();
-          }, app.PAUZĂ_DE_OBSERVABILITATE);
+          }, app.PAUZA_DE_OBSERVABILITATE);
         });
       }); // one populat
     }); // one închis
