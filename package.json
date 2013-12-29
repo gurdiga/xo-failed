@@ -1,0 +1,19 @@
+{
+  "name": "executori.org",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "jshint": "~2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@bitbucket.org/gurdiga/executori.git"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -2,7 +2,10 @@
 
 default: test
 
-lint: lint-bash lint-html lint-nginx lint-php formulare
+lint: lint-js lint-bash lint-html lint-nginx lint-php formulare
+
+lint-js:
+	jshint `find js/ build/teste/qunit/ -type f -name '*.js' -newer .jshintrc` && touch .jshintrc
 
 lint-html:
 	echo "HTML lint."

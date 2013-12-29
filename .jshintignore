@@ -1,0 +1,7 @@
+build/teste/qunit/jshint.js
+build/teste/qunit/qunit.js
+build/teste/qunit/qhint.js
+build/teste/qunit/csslint.js
+js/lib.js
+js/lib/**
+js/processors/aes.js

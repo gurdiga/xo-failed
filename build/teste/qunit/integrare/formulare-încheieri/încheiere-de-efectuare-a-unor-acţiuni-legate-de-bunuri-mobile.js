@@ -37,7 +37,7 @@ asyncTest('Încheiere de numire a datei ridicării a unor sume sau bunuri mobile
   }, numărDeBunuri = Object.keys(bunuri).length;
 
   (function adaugăBunuri() {
-    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-ridicate'),
+    $butonDeAdăugareBun = $secţiune.find('.adaugă-cîmp-personalizat.pentru-bunuri-ridicate');
 
     ok($butonDeAdăugareBun.există(), 'avem buton pentru adăugare bunuri');
     equal($butonDeAdăugareBun.text(), '+bun', '…cu textul “+bun”');

@@ -1,4 +1,4 @@
-/*global top:false jQuery:false Handlebars:false Fragment:false */
+/*global top, jQuery, Handlebars, Fragment */
 (function($) {
   'use strict';
 

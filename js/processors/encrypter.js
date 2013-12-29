@@ -1,5 +1,5 @@
 (function() {
-  /*global CryptoJS:false */
+  /*global CryptoJS, self */
   'use strict';
 
   var Encrypter = {

@@ -1,4 +1,4 @@
-/*global self:false XMLHttpRequest:false */
+/*global self, XMLHttpRequest */
 
 /*
       Căutare.indexer.postMessage({'găseşte': text});

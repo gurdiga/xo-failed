@@ -1,4 +1,4 @@
-/*global moment FORMATUL_DATEI Fragment Calendar*/
+/*global moment, FORMATUL_DATEI, Fragment, Calendar */
 (function() {
   'use strict';
 

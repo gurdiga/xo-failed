@@ -1,8 +1,11 @@
-/*global angular*/
 (function() {
   'use strict';
 
   var App = angular.module('App', ['ngRoute', 'firebase']);
+
+  App.constant('config', {
+    firebaseUrl: 'https://xo-dev.firebaseio.com/date'
+  });
 
   App.constant('USER_LOGIN', $.cookie('login'));
 

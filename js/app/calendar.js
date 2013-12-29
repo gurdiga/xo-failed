@@ -1,4 +1,4 @@
-/*global RE_FORMATUL_DATEI FORMATUL_DATEI moment*/
+/*global RE_FORMATUL_DATEI, FORMATUL_DATEI, moment */
 (function() {
   'use strict';
 

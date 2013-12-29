@@ -1,4 +1,5 @@
 (function(window, document, app) {
+  /* global history */
   'use strict';
 
   var $, FormularProcedură, Încheieri, Utilizator, Profil;

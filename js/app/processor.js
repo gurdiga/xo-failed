@@ -1,5 +1,5 @@
-/*global Worker Worker*/
 (function() {
+  /*global Worker */
   'use strict';
 
   var Processor = function(url) {

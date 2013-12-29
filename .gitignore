@@ -4,3 +4,4 @@ build/teste/server/log
 build/env.sh
 nginx.vhost.conf
 formulare-încheieri/*.html
+node_modules

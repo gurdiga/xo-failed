@@ -39,6 +39,7 @@
 
     '/js/app/init.js',
 
+    '/js/app/util/services/accounts.js',
     '/js/app/util/services/storage.js',
     '/js/app/util/services/scope-utils.js',
     '/js/app/util/directives/focus-on-check.js',

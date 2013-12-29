@@ -1,4 +1,4 @@
-/*global Fragment Handlebars AcţiuneProcedurală*/
+/*global Fragment, Handlebars, AcţiuneProcedurală */
 (function() {
   'use strict';
 

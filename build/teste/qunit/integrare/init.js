@@ -42,10 +42,10 @@
       this.dateProcedură = dateProcedură;
       this.app.PAUZA_DE_OBSERVABILITATE = 500;
 
-      this.$dataIntentării = app.FormularProcedură.$.find('#data-intentării'),
-      this.$creditor = app.FormularProcedură.$.find('#creditor'),
-      this.$debitor = app.FormularProcedură.$.find('.debitor'),
-      this.$de = app.FormularProcedură.$.find('#document-executoriu'),
+      this.$dataIntentării = app.FormularProcedură.$.find('#data-intentării');
+      this.$creditor = app.FormularProcedură.$.find('#creditor');
+      this.$debitor = app.FormularProcedură.$.find('.debitor');
+      this.$de = app.FormularProcedură.$.find('#document-executoriu');
       this.$obiectulUrmăririi = app.FormularProcedură.$obiectulUrmăririi;
     }
   });

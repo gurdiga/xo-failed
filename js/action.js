@@ -1,5 +1,6 @@
-/*global top moment TextareaElastice RateDeBază Calendar SelecturiFoarteLate SubsecţiuniDinamice StructuriDate AcţiuniProcedurale*/
+/*global history, top, moment, TextareaElastice, RateDeBază, Calendar, SelecturiFoarteLate, SubsecţiuniDinamice, StructuriDate, AcţiuniProcedurale */
 (function(window, document, moment) {
+  /*jshint maxcomplexity:false */
   'use strict';
 
   // --------------------------------------------------
@@ -989,7 +990,6 @@
         },
 
         populează: function(amînări) {
-          /*jshint maxcomplexity:5*/
           if (!amînări || amînări.length === 0) return;
 
           var $butonDeAdăugare = this.$.find('button.adaugă-cîmp-personalizat.amînare');
@@ -1195,7 +1195,7 @@
             $butonDeAdăugare.click();
 
             sechestrare = sechestrări[i];
-            $sechestrare = $secţiune.find('.subsecţiune.sechestrare-bunuri:last'),
+            $sechestrare = $secţiune.find('.subsecţiune.sechestrare-bunuri:last');
 
             $sechestrare.find('.dată').val(sechestrare.data);
             primul = true;
@@ -2166,7 +2166,6 @@
     },
 
     listeazăDupăSufix: function() {
-      /*jshint maxcomplexity:5*/
       // ----
       function evidenţiazăItem(e) {
         var tasta = e.data,
@@ -2532,8 +2531,6 @@
   DobîndaDeÎntîrziere = {
     // test: '04.09.2009', '14.06.2012', 9, 363761.50 === 162227.68
     calculează: function(întîrziere) {
-      /*jshint maxcomplexity:11*/
-
       // ----
       function zileÎntre(data1, data2) {
         if (typeof data1 === 'string') data1 = moment(data1, 'YYYY-MM-DD').toDate();

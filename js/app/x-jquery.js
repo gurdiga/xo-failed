@@ -1,4 +1,4 @@
-/*global $ RateBNM*/
+/*global $, RateBNM */
 (function() {
   'use strict';
 
