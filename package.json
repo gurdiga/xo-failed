@@ -1,13 +1,22 @@
 {
-  "name": "executori.org",
-  "version": "0.0.0",
+  "name": "XO",
+  "version": "0.0.1",
   "description": ".",
   "main": "index.js",
   "dependencies": {
     "jshint": "~2.4",
     "csslint": "~0.10"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-cli": "~0.1",
+    "grunt-contrib-jshint": "~0.8",
+    "grunt-contrib-uglify": "~0.2",
+    "grunt-contrib-concat": "~0.3",
+    "grunt-contrib-watch": "~0.5",
+    "grunt-gorilla": "~0.1",
+    "gorillascript": "~0.9"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
