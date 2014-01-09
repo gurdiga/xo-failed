@@ -4,7 +4,7 @@
   var App = angular.module('App', ['ngRoute', 'firebase']);
 
   App.constant('config', {
-    firebaseUrl: 'https://xo-dev.firebaseio.com/date'
+    firebaseUrl: 'https://xo-dev.firebaseio.com'
   });
 
   App.constant('USER_LOGIN', $.cookie('login'));
