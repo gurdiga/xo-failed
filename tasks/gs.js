@@ -18,5 +18,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-gorilla');
+  grunt.registerTask('gs', ['gorilla']);
 
 };
