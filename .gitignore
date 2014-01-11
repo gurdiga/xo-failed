@@ -5,3 +5,4 @@ build/env.sh
 nginx.vhost.conf
 formulare-încheieri/*.html
 node_modules
+index.html

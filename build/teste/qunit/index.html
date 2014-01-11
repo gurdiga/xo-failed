@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
   <title>QUnit</title>
-  <link rel="stylesheet" href="qunit.css">
+  <link rel="stylesheet" href="qunit.css"/>
   <style>
     iframe#app {
       position: fixed;
@@ -36,6 +36,8 @@
   <script src="/js/lib/sinon.js"></script>
   <script src="/js/lib/sinon-config.js"></script>
   <script>
+    // <!CDATA
+
     QUnit.config.autostart = false;
     QUnit.config.reorder = false;
     QUnit.config.testTimeout = 5000;
@@ -46,12 +48,14 @@
           top.QUnit.start();
         });
       } else {
-        // aşteptăm o leacă să se încarce profilul&friends
+        // aşteptăm o leacă să se încarce profilul & friends
         setTimeout(function() {
           top.QUnit.start();
         }, 500);
       }
     }
+
+    // -->
   </script>
 
   <iframe name="app" id="app" src="/"></iframe>
