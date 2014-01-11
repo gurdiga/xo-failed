@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     src: ['app/**/*.js'],
     gs: ['app/**/*.gs'],
     config: ['Gruntfile.js', 'tasks/**/*.js', 'package.json'],
-    tests: ['build/teste/qunit/**/*.js'],
+    tests: ['test/**/*.js'],
   });
 
   grunt.loadTasks('./tasks');

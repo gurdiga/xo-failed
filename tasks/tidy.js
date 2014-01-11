@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       src: '<%= htmlbuild.index.dest %>'
     },
     qunit: {
-      src: 'build/teste/qunit/index.html'
+      src: 'test/index.html'
     },
     html: {
       src: [
