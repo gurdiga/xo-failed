@@ -1,2 +1,0 @@
-15  2 * * * /usr/bin/env php /var/www/executori.org/bnm/download.php
-15  2 * * * /usr/bin/env php /var/www/executori.org/bnm/rata_de_bază.php
