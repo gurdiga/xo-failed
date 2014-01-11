@@ -13,8 +13,8 @@ module.exports = function(grunt) {
             '</script>\n';
         }
       },
-      src: 'js/app/**/*-directive.html',
-      dest: 'js/app/templates.html'
+      src: 'app/**/*-directive.html',
+      dest: 'app/templates.html'
     }
   });
 

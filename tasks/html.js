@@ -19,9 +19,9 @@ module.exports = function(grunt) {
             'js/lib/angular*.js'
           ],
           app: [
-            'js/app/init.js',
-            'js/app/**/*.js',
-            'js/action.js'
+            'app/init.js',
+            'app/**/*.js',
+            'action.js'
           ],
         },
         sections: {

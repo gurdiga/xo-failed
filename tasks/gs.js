@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
     compile: {
       expand: true,
-      cwd: 'js/app',
+      cwd: 'app',
       src: ['*.gs'],
       dest: '<%= gorilla.compile.cwd %>',
       ext: '.compiled.js' // enable sourcemaps based on extension?

@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         livereload: true,
         event: ['added', 'deleted']
       },
-      files: ['js/app/**/*.html'],
+      files: ['app/**/*.html'],
       tasks: ['htmlbuild']
     }
   });
