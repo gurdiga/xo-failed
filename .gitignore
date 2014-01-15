@@ -1,8 +1,4 @@
-date
-.git.log
-build/teste/server/log
-build/env.sh
-nginx.vhost.conf
+build
 formulare-încheieri/*.html
 node_modules
 index.html

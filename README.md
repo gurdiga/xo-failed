@@ -1,5 +1,3 @@
-- grunt? B-)
-
 - FireLog?
   - decorate $log
 
@@ -9,17 +7,10 @@
 
 - lista de acţiuni procedurale
   - borderoul de calcul?
-
   - concilierea înainte de pasul 7
 
-- script loader
+- script loader?
 - de trecut de la a[href] pentru documente
-- la salvare de verificat dacă între timp altcineva nu a modificat datele
-  De folosit Last-Modified + HTTP 409
-
-
-- încheieri
-- de adaptat salvarea pentru criptare?
 
 - de migrat spre icon font
   - butoane mari
@@ -29,8 +20,6 @@
     - iconiţă read-only lock
     - iconiţă document pentru butonaşele de încheieri
 
-- debug messages + console.group()
-- assert things to fail early, like: assert(_.isObject())
 - <noscript>, unsupported browsers?
 - blank slate video/screenshot/help?
 - conceive the app personality

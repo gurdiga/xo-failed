@@ -1,5 +1,32 @@
 {
   "strict": true,
+
   "globals": {
+    "window": false,
+    "document": false,
+    "location": false,
+    "setInterval": false,
+    "setTimeout": false,
+    "clearTimeout": false,
+    "console": false,
+
+    "angular": false,
+    "$": false,
+    "_": false,
+    "App": false,
+    "js": false,
+    "sinon": false,
+
+    "QUnit": false,
+    "module": false,
+    "test": false,
+    "asyncTest": false,
+    "start": false,
+    "stop": false,
+    "ok": false,
+    "equal": false,
+    "deepEqual": false,
+    "throws": false,
+    "jsHintTest": false
   }
 }

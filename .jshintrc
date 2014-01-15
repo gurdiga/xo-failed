@@ -6,7 +6,6 @@
   "indent": 2,
   "noarg": true,
   "noempty": true,
-  "nonew": true,
   "quotmark": true,
   "undef": true,
   "unused": true,
@@ -15,33 +14,8 @@
   "maxcomplexity": 4,
   "white": false,
   "sub": true,
+  "evil": true,
 
   "globals": {
-    "window": false,
-    "document": false,
-    "location": false,
-    "setTimeout": false,
-    "clearTimeout": false,
-    "setInterval": false,
-    "console": false,
-
-    "angular": false,
-    "$": false,
-    "_": false,
-    "App": false,
-    "js": false,
-    "sinon": false,
-
-    "QUnit": false,
-    "module": false,
-    "test": false,
-    "asyncTest": false,
-    "start": false,
-    "stop": false,
-    "ok": false,
-    "equal": false,
-    "deepEqual": false,
-    "throws": false,
-    "jsHintTest": false
   }
 }
