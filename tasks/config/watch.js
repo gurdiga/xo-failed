@@ -3,7 +3,6 @@
 
 module.exports = {
   options: {
-    livereload: true,
     atBegin: true
   },
 
