@@ -1,7 +1,6 @@
 (function() {
   'use strict';
 
-
   angular.module('App').service('Utilizator', function(config, $firebase, $firebaseAuth, $log, $q, $window) {
 
     var PASSWORD_LENGTH = 12;

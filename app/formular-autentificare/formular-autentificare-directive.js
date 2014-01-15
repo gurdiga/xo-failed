@@ -1,11 +1,10 @@
 (function () {
   'use strict';
 
-
   angular.module('App').directive('formularAutentificare', function () {
     return {
       restrict: 'E',
-      scope: {},
+      scope: false,
       templateUrl: 'formular-autentificare-directive',
       controller: 'FormularAutentificare'
     };
