@@ -1,0 +1,9 @@
+<p>
+  <span class="ico document neselectabil clickabil"
+      formular="{{ date.formular }}"
+      href="{{ date.href }}"
+  >încheierea</span>
+  — taxa: {{ date.taxa }} U.C.
+  <input class="clickabil" type="checkbox" ng-model=" date.achitat " ng-checked=" date.achitat " focus-on-check=".dată"/>achitat
+  <span ng-show=" date.achitat ">la<input type="text" ng-model=" date['data-achitării'] " class="dată"/></span>
+</p>

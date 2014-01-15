@@ -1,0 +1,21 @@
+<li>
+  <label>Amendă</label>
+  <input ng-model="date['amendă']" type="checkbox"/>
+</li>
+
+<li ng-repeat=" suma in date['sume'] " ajusteaza-textarea-elastic focuseaza-la-adaugare class="sumă personalizat eliminabil de tot">
+  <textarea class="etichetă" title="Etichetă editabilă" placeholder="descrierea" ng-model="suma.eticheta"></textarea>
+  <input type="text" placeholder="suma" class="sumă" ng-model="suma.suma"/>
+  <valute suma="suma"></valute>
+</li>
+
+<li class="container-buton">
+  <button adauga-suma lista="date['sume']" class="adaugă-cîmp-personalizat sumă semiascuns">+sumă</button>
+</li>
+
+<li>
+  <label>Total</label>
+  <input type="text" id="total" class="sumă calculat" readonly="readonly" value="{{totalSume(date['sume'])}}" />
+  <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+  <b>MDL</b>
+</li>

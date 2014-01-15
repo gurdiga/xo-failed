@@ -1,0 +1,11 @@
+<li>
+  <label>Măsura de asigurare</label>
+
+  <select class="foarte lat care schimbă formularul" ng-model="date['măsura-de-asigurare']">
+    <option value="aplicarea-sechestrului">aplicarea sechestrului pe bunurile sau pe sumele de bani ale debitorului, inclusiv pe cele care se află la alte persoane</option>
+    <option value="interzicerea-debitorului">interzicerea debitorului de a săvîrşi anumite acţiuni</option>
+    <option value="interzicerea-altor-persoane">interzicerea altor persoane de a săvîrşi anumite acţiuni în privinţa obiectului în litigiu, inclusiv transmiterea de bunuri către debitor sau îndeplinirea unor alte obligaţii faţă de el</option>
+  </select>
+</li>
+
+<ng-include src=" 'masura-de-asigurare-' + date['măsura-de-asigurare'] "/>

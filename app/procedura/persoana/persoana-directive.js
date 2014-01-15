@@ -1,18 +1,15 @@
 (function() {
   'use strict';
 
-  function Persoana() {
+  angular.module('App').directive('Persoana', function() {
     return {
       restrict: 'E',
       replace: true,
       scope: {
         date: '='
       },
-      templateUrl: 'directive-persoana'
+      templateUrl: 'persoana-directive'
     };
-  }
-
-
-  window.App.directive('persoana', Persoana);
+  });
 
 })();

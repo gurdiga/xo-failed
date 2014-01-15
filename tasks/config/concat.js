@@ -15,9 +15,8 @@ module.exports = {
       }
     },
     src: [
-      'app/**/*-directive.html',
-      'app/**/*-partial.html'
+      'app/**/*.html'
     ],
-    dest: 'app/templates.html'
+    dest: 'build/templates.html'
   }
 };

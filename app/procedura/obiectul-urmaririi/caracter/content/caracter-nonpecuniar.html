@@ -1,0 +1,11 @@
+<li>
+  <label>Obiectul urmăririi</label>
+  <select
+    ng-model=" date['obiect'] "
+    ng-init=" optiuni = procedura['obiectul-urmăririi'].optiuni(); date['obiect'] = date['obiect'] || optiuni[0].eticheta "
+    ng-options=" obiect.slug as obiect.eticheta for obiect in optiuni track by obiect.eticheta "
+  ></select>
+  <!-- TODO? span class="ui-icon ui-icon-document buton semiascuns" data-formular="" title="Formare document"></span-->
+</li>
+
+<ng-include src=" 'obiectul-urmaririi-' + date['obiect'] "/>

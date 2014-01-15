@@ -2,7 +2,7 @@
 (function() {
   'use strict';
 
-  window.App.service('Incheiere', ['Utilizator', 'Storage', function(Utilizator, Storage) {
+  angular.module('App').service('Incheiere', function(Utilizator) {
     this.defaults = function(actiune) {
       js.assert(js.isPlainObject(actiune), 'S.Incheiere.defaults: primul parametru trebuie să fie acţiunea');
 
@@ -68,7 +68,6 @@
 
 
     this.href = function(procedura, actiune, document) {
-      js.assert(js.isPlainObject(Storage), 'D.Incheiere.href: primul parametru trebuie să fie S.Storage');
       js.assert(js.isPlainObject(procedura), 'D.Incheiere.href: al doilea parametru trebuie să fie procedura');
       js.assert(js.isPlainObject(actiune), 'D.Incheiere.href: al treilea parametru trebuie să fie acţiunea');
       js.assert(js.isPlainObject(document), 'D.Incheiere.href: al patrulea parametru trebuie să fie documentul');
@@ -77,7 +76,7 @@
 
       if (proceduraNoua) return '';
 
-      return Storage.PREFIX + 'proceduri/' + procedura['numărul'] +
+      return 'proceduri/' + procedura['numărul'] +
           '/actiuni/' + actiune.identificator + '/' + document.denumire + '.html';
     };
 
@@ -90,6 +89,6 @@
       }
     };
 
-  }]);
+  });
 
 })();

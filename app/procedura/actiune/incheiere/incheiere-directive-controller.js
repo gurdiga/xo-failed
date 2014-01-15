@@ -1,9 +1,7 @@
 (function() {
   'use strict';
 
-  App.controller('Incheiere',
-         ['$scope', '$element', 'Storage', 'Incheiere',
-  function($scope,   $element,   Storage,   Incheiere) {
+  angular.module('App').controller('IncheiereDirectiveController', function($scope, $element, Incheiere) {
     if (js.isEmpty($scope.date)) {
       js.extend($scope.date, Incheiere.defaults($scope.actiune));
     }
@@ -14,6 +12,6 @@
     $scope.$watch('date.achitat', function(newVal) {
       Incheiere.sincronizeazaCimpulPentruData($scope.date, newVal);
     });
-  }]);
+  });
 
 })();

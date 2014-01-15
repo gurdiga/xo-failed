@@ -1,0 +1,21 @@
+<li>
+  <label class="textarea">Din încăperea</label>
+  <textarea ng-model="date['din-încăperea']" class="lat"></textarea>
+</li>
+
+<li>
+  <label>Se acordă alt spaţiu</label>
+  <input ng-model="date['se-acordă-alt-spaţiu']" type="checkbox"/>
+</li>
+
+<li>
+  <label>Data şi ora evacuării</label>
+  <input type="text" ng-model="date['data-şi-ora-evacuării']" class="dată"/>
+</li>
+
+<li class="container-buton">
+  <button
+    class="adaugă-cîmp-personalizat amînare semiascuns"
+    data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+    data-etichetă="Amînat pînă la">+amînare</button>
+</li>

@@ -1,0 +1,11 @@
+<ul>
+  <li>
+    <label>Gen persoană</label>
+    <select id="gen-persoană" class="care schimbă formularul" ng-model="date['gen-persoană']">
+      <option value="juridica">juridică</option>
+      <option value="fizica" selected>fizică</option>
+    </select>
+  </li>
+
+  <ng-include src=" 'persoana-' + date['gen-persoană'] "/>
+</ul>

@@ -2,7 +2,9 @@
 (function() {
   'use strict';
 
-  function Procedura(Storage, ObiectulUrmaririi, Utilizator) {
+  angular.module('App').service('Procedura', function(ObiectulUrmaririi, Utilizator) {
+    var Procedura = {};
+
     Procedura.date = {};
 
     Procedura.defaults = {
@@ -71,12 +73,15 @@
           'Procedura.deschide: numărul trebuie să fie număr pozitiv [' + numarul + ']');
       js.assert(js.isFunction(callback), 'Procedura.deschide: callback trebuie să fie funcţie [' + numarul + ']');
 
-      Storage.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
+      callback();
+      /*
+      S-torage.get('proceduri/' + numarul + '/date.json', function(dateIncarcate) {
         console.debug('Încărcat procedura', numarul, dateIncarcate);
 
         js.extend(Procedura.date, dateIncarcate, {'numărul': numarul});
         callback();
       });
+      */
 
       Efecte.afiseazaLin();
     };
@@ -88,12 +93,7 @@
     };
 
     return Procedura;
-  }
-
-  Procedura.$inject = ['Storage', 'ObiectulUrmaririi', 'Utilizator'];
-
-  window.App.service('Procedura', Procedura);
-  window.App.module.S.Procedura = Procedura;
+  });
 
 
   var Efecte = {

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function Sectiune() {
+  angular.module('App').directive('sectiune', function() {
     return {
       restrict: 'E',
       transclude: true,
@@ -10,11 +10,8 @@
         titlu: '@',
         lata: '@'
       },
-      templateUrl: 'directive-sectiune'
+      templateUrl: 'sectiune-directive'
     };
-  }
-
-
-  window.App.directive('sectiune', Sectiune);
+  });
 
 })();

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function Actiuni() {
+  angular.module('App').service('Actiuni', function() {
     var SUCCESIUNE = {
       '': ['intentare', 'intentare-cu-asigurare'],
       'intentare': ['continuare', 'încetare'],
@@ -69,9 +69,6 @@
       optiuniPentruUrmatoareaActiune: optiuniPentruUrmatoareaActiune,
       adauga: adauga
     };
-  }
-
-
-  window.App.service('Actiuni', Actiuni);
+  });
 
 })();

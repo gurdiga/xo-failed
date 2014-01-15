@@ -1,4 +1,4 @@
-/*global Calendar, FORMATUL_DATEI, moment */
+/*global Calendar */
 (function() {
   'use strict';
 
@@ -10,7 +10,7 @@
         date: '=',
         procedura: '='
       },
-      templateUrl: 'directive-actiune',
+      templateUrl: 'actiune-directive',
 
       link: function(scope, el) {
         setTimeout(function() {
@@ -20,12 +20,6 @@
 
       controller: 'Actiune'
     };
-  });
-
-  angular.module('App').controller('Actiune', function($scope) {
-    var actiune = $scope.date;
-
-    if (!actiune.data) actiune.data = moment().format(FORMATUL_DATEI);
   });
 
 })();

@@ -1,5 +1,4 @@
-- FireLog?
-  - decorate $log
+- FireLog
 
 - Angular:
   - de încadrat subsecţiunile din “Obiectul urmăririi”

@@ -1,17 +1,17 @@
 (function() {
   'use strict';
 
-  window.App.directive('incheiere', ['Incheiere', 'ScopeUtils', function(Incheiere, ScopeUtils) {
+  angular.module('App').directive('incheiere', function(Incheiere, ScopeUtils) {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'directive-incheiere',
       scope: {
         procedura: '=',
         actiune: '=',
         date: '='
       },
-      controller: 'Incheiere',
+      templateUrl: 'incheiere-directive',
+      controller: 'IncheiereDirectiveController',
 
 
       link: function($scope, $element) {
@@ -21,6 +21,6 @@
       }
 
     };
-  }]);
+  });
 
 })();

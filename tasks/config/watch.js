@@ -18,6 +18,6 @@ module.exports = {
 
   js: {
     files: ['<%= src %>', '<%= config %>', '<%= tests %>'],
-    tasks: ['html', 'jshint']
+    tasks: ['html', 'lint']
   }
 };

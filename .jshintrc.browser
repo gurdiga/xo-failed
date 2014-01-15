@@ -13,7 +13,6 @@
     "angular": false,
     "$": false,
     "_": false,
-    "App": false,
     "js": false,
     "sinon": false,
 

@@ -1,0 +1,24 @@
+<li actiune class="eliminabil de tot">
+  <div sectiune="dată">
+    <input type="text" class="dată" value="{{ date.data }}"/>
+  </div>
+
+  <div sectiune="conţinut">
+    <p class="denumire">{{ date.denumire }}</p>
+
+    <div class="documente">
+      <!--
+
+        TODO de finisat directiva pentru încheiere
+
+      -->
+
+      <incheiere procedura="procedura" actiune="date" date="date.incheiere"></incheiere>
+
+      <!-- TODO directivă pentur scrisoare de însoţire -->
+
+    </div>
+
+    <!-- TODO de inclus contentul specific actiunii -->
+  </div>
+</li>

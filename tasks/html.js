@@ -6,8 +6,8 @@ module.exports = function(grunt) {
     'concat:templates',
     'tidy:templates',
     'htmlbuild',
-    'tidy:html',
-    'clean:templates'
+    'tidy:html'/*,
+    'clean:templates'*/
   ]);
 
 };

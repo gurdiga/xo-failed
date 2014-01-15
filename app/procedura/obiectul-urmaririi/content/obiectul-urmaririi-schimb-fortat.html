@@ -1,0 +1,21 @@
+<li>
+  <label class="textarea">Încăperea pentru creditor</label>
+  <textarea ng-model="date['încăperea-pentru-creditor']" class="lat"></textarea>
+</li>
+
+<li>
+  <label class="textarea">Încăperea pentru debitor</label>
+  <textarea ng-model="date['încăperea-pentru-debitor']" class="lat"></textarea>
+</li>
+
+<li>
+  <label>Data şi ora schimbului</label>
+  <input type="text" ng-model="date['data-şi-ora-schimbului']" class="dată"/>
+</li>
+
+<li class="container-buton">
+  <button
+    class="adaugă-cîmp-personalizat amînare semiascuns"
+    data-şablon="cîmpul-pentru-data-şi-ora-amînării"
+    data-etichetă="Amînat pînă la">+amînare</button>
+</li>
