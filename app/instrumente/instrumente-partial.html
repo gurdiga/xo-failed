@@ -1,0 +1,132 @@
+<fieldset id="profil" class="dialog cu umbră">
+  <h2>Profil</h2>
+
+  <ul>
+    <li>
+      <label>Numele</label>
+      <input id="nume" type="text"/>
+    </li>
+
+    <li>
+      <label class="textarea">Adresa juridică</label>
+      <textarea id="adresă" spellcheck="false"></textarea>
+    </li>
+
+    <li>
+      <label>Numărul de telefon</label>
+      <input id="telefon" type="text"/>
+    </li>
+
+    <li>
+      <label>Numărul licenţei</label>
+      <input id="număr-licenţă" type="text" readonly="readonly"/>
+      <span class="ui-icon ui-icon-locked" title="Acest cîmp nu este editabil"></span>
+    </li>
+
+    <li>
+      <label>Codul fiscal</label>
+      <input id="cod-fiscal" type="text"/>
+    </li>
+
+    <li>
+      <label>Instanţa teritorială</label>
+      <select id="instanţă-teritorială" ng-include=" 'template-instanţe-de-judecată' ">
+      </select>
+    </li>
+
+    <li>
+      <label>Email</label>
+      <input type="text" id="email"/>
+    </li>
+  </ul>
+
+  <fieldset class="subsecţiune">
+    <legend>cont pentru cauţiuni, taxe şi speze</legend>
+
+    <ul>
+      <li>
+        <label>Numărul contului</label>
+        <input id="cont-taxe-speze" type="text"/>
+      </li>
+
+      <li>
+        <label>Banca</label>
+        <span class="şoaptă-cod-bancă">XXXXMD2X</span>
+        <input type="text" id="bancă-taxe-speze" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
+        <p class="denumirea-băncii"></p>
+      </li>
+    </ul>
+
+  </fieldset>
+
+  <fieldset class="subsecţiune">
+    <legend>cont pentru onorarii</legend>
+
+    <ul>
+      <li>
+        <label>Numărul contului</label>
+        <input id="cont-onorarii" type="text"/>
+      </li>
+
+      <li>
+        <label>Banca</label>
+        <span class="şoaptă-cod-bancă">XXXXMD2X</span>
+        <input type="text" id="bancă-onorarii" class="sufix-cod-bancă"/><span class="şoaptă">(ultimile 3 cifre)</span>
+        <p class="denumirea-băncii"></p>
+      </li>
+    </ul>
+
+  </fieldset>
+
+  <div class="bara-de-instrumente">
+    <button class="ico salvează" title="Salvează"></button>
+  </div>
+
+  <button class="închide semiascuns" title="Închide">×</button>
+</fieldset>
+<button class="profil">Profil</button>
+
+<fieldset id="calculator" class="dialog cu umbră">
+  <h2>Calculator dobînzi de întîrziere</h2>
+
+  <ul class="întîrziere">
+    <li>
+      <label>Perioada de întîrziere</label>
+      <input type="text" class="dată început perioadă"/> &ndash; <input type="text" class="dată sfîrşit perioadă"/>
+    </li>
+
+    <li>
+      <label>Rata aplicată</label>
+
+      <label class="checkbox"><input name="rată-calculator" type="radio" value="5"/>5%</label>
+      <label class="checkbox"><input name="rată-calculator" type="radio" value="9" checked="checked"/>9%</label>
+    </li>
+
+    <li>
+      <label>Suma întîrziată</label>
+      <input type="text" class="sumă întîrziată"/>
+      <b>MDL</b>
+    </li>
+
+    <li class="total">
+      <label>Dobînda calculată</label>
+      <input type="text" class="sumă dobîndă" readonly="readonly"/>
+      <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+      <b>MDL</b>
+    </li>
+
+    <li>
+      <ul class="încheieri contextuale">
+        <li><a class="ico document" dinamică
+              href="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
+              formular="/formulare-încheieri/anexă-dobîndă-de-întîrziere.html#din-calculator"
+              >anexă detalii calculele</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <button class="închide semiascuns" title="Închide">×</button>
+</fieldset>
+
+<button class="calculator">Calculator dobînzi întîrziere</button>

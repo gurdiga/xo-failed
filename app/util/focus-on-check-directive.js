@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function FocusOnCheck() {
+  angular.module('App').directive('focusOnCheck', function() {
     return {
       restrict: 'A',
 
@@ -19,8 +19,7 @@
         });
       }
     };
-  }
+  });
 
-  window.App.directive('focusOnCheck', FocusOnCheck);
 
 })();

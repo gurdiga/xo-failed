@@ -155,11 +155,6 @@ button {
   padding-bottom: 100px;
 }
 
-.autentificat #conţinut>.coloană,
-.autentificat #bara-de-sus .instrumente {
-  display: block;
-}
-
 #bara-de-sus {
   margin-bottom: 2em;
 }
@@ -177,14 +172,13 @@ button {
   color: #333;
 }
 
-#bara-de-sus .instrumente {
-  display: none;
+#bara-de-sus #instrumente {
   position: absolute;
   right: 0;
   top: 17px;
 }
 
-#bara-de-sus .instrumente>button {
+#bara-de-sus #instrumente>button {
   -webkit-transition: opacity .5s;
   -moz-transition: opacity .5s;
   transition: opacity .5s;
@@ -196,7 +190,7 @@ button {
   padding: .2em .3em .2em 0;
 }
 
-#bara-de-sus .instrumente>button::before {
+#bara-de-sus #instrumente>button::before {
   vertical-align: -3px;
   display: inline-block;
   width: 16px;
@@ -205,18 +199,18 @@ button {
   content: ' ';
 }
 
-#bara-de-sus .instrumente>button.profil::before {
+#bara-de-sus #instrumente>button.profil::before {
   background-position: -144px -96px;
 }
 
-#bara-de-sus .instrumente>button.convertor::before,
-#bara-de-sus .instrumente>button.calculator::before {
+#bara-de-sus #instrumente>button.convertor::before,
+#bara-de-sus #instrumente>button.calculator::before {
   background-position: -112px -112px;
 }
 
-#bara-de-sus .instrumente>button.selectat,
-#bara-de-sus .instrumente>button:focus,
-#bara-de-sus .instrumente>button:hover {
+#bara-de-sus #instrumente>button.selectat,
+#bara-de-sus #instrumente>button:focus,
+#bara-de-sus #instrumente>button:hover {
   opacity: 1;
 }
 

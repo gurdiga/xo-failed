@@ -2,9 +2,7 @@
   'use strict';
 
 
-  App.service('Utilizator',
-         ['config', '$firebase', '$firebaseAuth', '$log', '$q', '$window',
-  function(config,   $firebase,   $firebaseAuth,   $log,   $q,   $window) {
+  angular.module('App').service('Utilizator', function(config, $firebase, $firebaseAuth, $log, $q, $window) {
 
     var PASSWORD_LENGTH = 12;
 
@@ -205,7 +203,7 @@
       return email.replace(/\./g, ':');
     }
 
-  }]);
+  });
 
 
 })();
