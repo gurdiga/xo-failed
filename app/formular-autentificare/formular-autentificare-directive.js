@@ -6,7 +6,7 @@
       restrict: 'E',
       scope: false,
       templateUrl: 'formular-autentificare-directive',
-      controller: 'FormularAutentificare'
+      controller: 'FormularAutentificareDirectiveController'
     };
   });
 

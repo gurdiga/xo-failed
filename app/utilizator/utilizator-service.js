@@ -1,10 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('App').service('Utilizator', function(config, $firebase, $firebaseAuth, $log, $q, $window) {
+  var PASSWORD_LENGTH = 12;
 
-    var PASSWORD_LENGTH = 12;
-
+  angular.module('App').service('Utilizator', function($rootScope, config, $firebase, $firebaseAuth, $log, $q, $window) {
     var firebase = new $window.Firebase(config.firebaseUrl);
     var auth = $firebaseAuth(firebase);
 
@@ -154,6 +153,7 @@
         function success(results) {
           $log.debug('Autentificat', results.user.email);
           results.user.$date = $firebase(firebase.child('/date/' + results.aid));
+          $rootScope.$emit('log-storage-ready', firebase.child('/logs'), email);
 
           deferred.resolve(results.user);
         },

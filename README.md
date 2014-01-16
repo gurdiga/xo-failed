@@ -1,4 +1,4 @@
-- FireLog
+- check goOffline
 
 - Angular:
   - de încadrat subsecţiunile din “Obiectul urmăririi”
