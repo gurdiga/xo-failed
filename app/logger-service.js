@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('App').service('Logger', function() {
+  angular.module('App').service('Firelogger', function() {
     var $storage;
     var email;
 
@@ -21,7 +21,7 @@
 
 
   angular.module('App').config(function($provide) {
-    $provide.decorator('$log', function($delegate, Logger) {
+    $provide.decorator('$log', function($delegate, Firelogger) {
       var augmentedMethods = ['error', 'warn'];
 
       augmentedMethods.forEach(function(name) {
@@ -30,7 +30,7 @@
         $delegate[original] = $delegate[name];
 
         $delegate[name] = function(arg) {
-          Logger.store(name, arg);
+          Firelogger.store(name, arg);
           $delegate[original].call($delegate, arg);
         };
       });
