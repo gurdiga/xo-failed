@@ -146,12 +146,13 @@
 
     this.autentifica = function(email, password) {
       var deferred = $q.defer();
+      var start = +new Date();
 
       login(email, password)
       .then(obtineAid)
       .then(
         function success(results) {
-          $log.debug('Autentificat', results.user.email);
+          $log.debug('Autentificat', results.user.email, +new Date() - start);
           results.user.$date = $firebase(firebase.child('/date/' + results.aid));
           $rootScope.$emit('log-storage-ready', firebase.child('/logs'), email);
 
