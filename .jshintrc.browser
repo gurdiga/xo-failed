@@ -14,8 +14,9 @@
     "$": false,
     "_": false,
     "js": false,
-    "sinon": false,
+    "Firebase": false,
 
+    "sinon": false,
     "QUnit": false,
     "module": false,
     "test": false,

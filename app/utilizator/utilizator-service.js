@@ -4,7 +4,7 @@
   var PASSWORD_LENGTH = 12;
 
   angular.module('App').service('Utilizator', function($rootScope, config, $firebase, $firebaseAuth, $log, $q, $window) {
-    var firebase = new $window.Firebase(config.firebaseUrl);
+    var firebase = new Firebase(config.firebaseUrl);
     var auth = $firebaseAuth(firebase);
 
 
@@ -196,6 +196,15 @@
 
 
       return deferred.promise;
+    };
+
+
+    this.deconecteaza = function() {
+      Firebase.goOffline();
+    };
+
+    this.conecteaza = function() {
+      Firebase.goOnline();
     };
 
 
