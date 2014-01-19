@@ -1,5 +1,3 @@
-- check goOffline
-
 - Angular:
   - de încadrat subsecţiunile din “Obiectul urmăririi”
     în “Acţiunile procedurale” corespunzătoare.

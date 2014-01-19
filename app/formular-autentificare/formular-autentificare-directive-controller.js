@@ -15,8 +15,7 @@
         utilizator.$date.$on('loaded', function() {
           $timeout(function() {
             utilizator.date = $scope.date;
-            utilizator.autentificat = true;
-            $scope.utilizator = utilizator;
+            $scope.utilizator.autentificat = true;
           });
         });
 
