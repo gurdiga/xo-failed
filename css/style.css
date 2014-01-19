@@ -28,10 +28,6 @@ textarea:focus {
   z-index: 1;
 }
 
-#conţinut .coloană#căutare {
-  display: none;
-}
-
 #căutare input:focus {
   border-color: white;
 }
@@ -151,7 +147,6 @@ button {
 }
 
 #conţinut>.coloană {
-  display: none;
   padding-bottom: 100px;
 }
 

@@ -5,7 +5,7 @@
     $scope.utilizator = Utilizator;
     $scope.date = {};
 
-    Firelogger.listenFor('log-storage-ready', $rootScope);
+    Firelogger.initOn('log-storage-ready', $rootScope);
   });
 
 })();

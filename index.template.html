@@ -35,704 +35,705 @@
 
       <formular-autentificare id="autentificare" ng-if="!utilizator.autentificat"></formular-autentificare>
 
-      <div id="căutare" class="coloană">
-        <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
+      <div ng-if="utilizator.autentificat">
+        <div id="căutare" class="coloană" ng-if="date.proceduri.length > 0">
+          <p class="şoaptă">Caută procedură după număr, nume, IDNP, denumire, sau IDNO.</p>
 
-        <input/>
-        <p class="şoaptă" id="găsite">Proceduri găsite:</p>
-        <ul class="listă-proceduri" id="rezultate"></ul>
-        <p class="şoaptă" id="nimic">Nu am găsit nimic.</p>
+          <input/>
+          <p class="şoaptă" id="găsite">Proceduri găsite:</p>
+          <ul class="listă-proceduri" id="rezultate"></ul>
+          <p class="şoaptă" id="nimic">Nu am găsit nimic.</p>
 
-        <div id="proceduri-recente">
-          <p class="şoaptă">Proceduri recente</p>
-          <ul class="listă-proceduri"><p>Se încarcă…</p></ul>
+          <div id="proceduri-recente">
+            <p class="şoaptă">Proceduri recente</p>
+            <ul class="listă-proceduri"><p>Se încarcă…</p></ul>
+          </div>
         </div>
-      </div>
 
-      <div id="ghid-început" class="coloană">
-        <p>Bună ziua.</p>
-        <p>Pentru a crea proceduri noi, alegeţi un formular. →</p>
-      </div>
-
-      <div id="proceduri-noi" class="coloană">
-        <div>
-          <a class="item" href="#/procedura/pensie-de-intretinere">Procedură pensie de întreținere</a>
-          <a class="item s" href="#/procedura/in-beneficiul-satului">Procedură în beneficiul statului</a>
-          <a class="item g" href="#/procedura/de-ordin-general">Procedură de ordin general</a>
+        <div id="ghid-început" class="coloană">
+          <p>Bună ziua.</p>
+          <p>Pentru a crea proceduri noi, alegeţi un formular. →</p>
         </div>
-      </div>
 
-      <div id="formular" ng-controller="ControllerProcedura">
-        <div class="conţinut">
-          <h1>{{ procedura.titlu() }}</h1>
-
-          <p id="container-data-intentării">
-            <label>Data intentării</label>
-            <input type="text" id="data-intentării" class="dată intentării" ng-model="procedura['data-intentării']"/>
-          </p>
-
-          <div class="coloană stînga">
-            <sectiune titlu="Creditor">
-              <persoana date="procedura['creditor']"></persoana>
-            </sectiune>
-
-            <button class="adaugă persoană terţă semiascuns">
-              +persoană terţă<span class="legend label">Persoană terță</span>
-            </button>
+        <div id="proceduri-noi" class="coloană">
+          <div>
+            <a class="item" href="#/procedura/pensie-de-intretinere">Procedură pensie de întreținere</a>
+            <a class="item s" href="#/procedura/in-beneficiul-satului">Procedură în beneficiul statului</a>
+            <a class="item g" href="#/procedura/de-ordin-general">Procedură de ordin general</a>
           </div>
+        </div>
 
-          <div class="coloană">
-            <sectiune ng-repeat="debitor in procedura['debitori']" titlu="Debitor">
-              <persoana date="debitor"></persoana>
-            </sectiune>
+        <div id="formular" ng-controller="ControllerProcedura">
+          <div class="conţinut">
+            <h1>{{ procedura.titlu() }}</h1>
 
-            <button class="adaugă persoană semiascuns">+debitor</button>
-          </div>
+            <p id="container-data-intentării">
+              <label>Data intentării</label>
+              <input type="text" id="data-intentării" class="dată intentării" ng-model="procedura['data-intentării']"/>
+            </p>
 
-          <div class="coloană stînga">
-            <sectiune titlu="Documentul executoriu">
-              <var ng-bind=" date = procedura['document-executoriu']; '' "></var>
-              <ul>
-                <li>
-                  <label>Instanţa de judecată</label>
-                  <select nd-model="date['instanţa-de-judecată']" ng-include=" 'instante-de-judecata' ">
-                  </select>
-                </li>
+            <div class="coloană stînga">
+              <sectiune titlu="Creditor">
+                <persoana date="procedura['creditor']"></persoana>
+              </sectiune>
 
-                <li>
-                  <label>Numărul documentului</label>
-                  <input type="text" ng-model="date['numărul-de']"/>
-                </li>
-
-                <li>
-                  <label>Data hotărîrii</label>
-                  <input type="text" ng-model="date['data-hotărîrii']" class="dată"/>
-                </li>
-
-                <li>
-                  <label>Dispozitivul</label>
-                  <textarea ng-model="date['dispozitivul']" class="lat"></textarea>
-                </li>
-
-                <li>
-                  <label>Data rămînerii definitive</label>
-                  <input type="text" ng-model="date['data-rămînerii-definitive']" class="dată"/>
-                </li>
-
-                <li>
-                  <label>Data eliberării</label>
-                  <input type="text" ng-model="date['data-eliberării']" class="dată"/>
-                </li>
-              </ul>
-            </sectiune>
-          </div>
-
-          <div class="coloană">
-            <sectiune titlu="Obiectul urmăririi">
-              <var ng-bind=" date = procedura['obiectul-urmăririi']; '' "></var>
-              <ul>
-                <li>
-                  <label>Caracter</label>
-                  <select ng-model="date['caracter']">
-                    <option>pecuniar</option>
-                    <option>nonpecuniar</option>
-                  </select>
-                </li>
-
-                <ng-include src=" 'caracter-' + date['caracter'] "/>
-              </ul>
-
-              <div id="adaugă-subsecţiune" class="listă îngustă semiascuns">
-                <span class="titlu">subsecţiune</span>
-
-                <ul class="itemi cu umbră">
-                  <li class="încasare">încasare</li>
-                  <li class="întîrziere">întîrziere</li>
-                  <li class="sechestrare-bunuri">sechestrare bunuri</li>
-                </ul>
-              </div>
-            </sectiune>
-          </div>
-
-
-          <sectiune lata titlu="Acţiuni procedurale">
-            <ul id="actiuni" ng-if=" procedura['acţiuni'].length > 0 ">
-              <actiune ng-repeat=" actiune in procedura['acţiuni'] " date="actiune" procedura="procedura">
-              </actiune>
-            </ul>
-
-            <div id="total-pe-actiunile" ng-if=" procedura['acţiuni'].length > 0 ">
-              <label>Total cheltuieli pe toate acţiunile:</label>
-              <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
-              <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-              <b>MDL</b>
-
-              <borderou actiuni=" procedura['acţiuni'] "></borderou>
+              <button class="adaugă persoană terţă semiascuns">
+                +persoană terţă<span class="legend label">Persoană terță</span>
+              </button>
             </div>
 
-            <p  ng-if=" optiuniPentruUrmatoareaActiune.length > 0 "
-                id="întrebare-potentiale-urmatoare-actiuni">Care e următorul pas?</p>
+            <div class="coloană">
+              <sectiune ng-repeat="debitor in procedura['debitori']" titlu="Debitor">
+                <persoana date="debitor"></persoana>
+              </sectiune>
 
-            <!-- TODO: de reacţionat la click -->
+              <button class="adaugă persoană semiascuns">+debitor</button>
+            </div>
 
-            <propunere-actiune ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item" procedura="procedura">
-            </propunere-actiune>
+            <div class="coloană stînga">
+              <sectiune titlu="Documentul executoriu">
+                <var ng-bind=" date = procedura['document-executoriu']; '' "></var>
+                <ul>
+                  <li>
+                    <label>Instanţa de judecată</label>
+                    <select nd-model="date['instanţa-de-judecată']" ng-include=" 'instante-de-judecata' ">
+                    </select>
+                  </li>
 
-          </sectiune>
+                  <li>
+                    <label>Numărul documentului</label>
+                    <input type="text" ng-model="date['numărul-de']"/>
+                  </li>
+
+                  <li>
+                    <label>Data hotărîrii</label>
+                    <input type="text" ng-model="date['data-hotărîrii']" class="dată"/>
+                  </li>
+
+                  <li>
+                    <label>Dispozitivul</label>
+                    <textarea ng-model="date['dispozitivul']" class="lat"></textarea>
+                  </li>
+
+                  <li>
+                    <label>Data rămînerii definitive</label>
+                    <input type="text" ng-model="date['data-rămînerii-definitive']" class="dată"/>
+                  </li>
+
+                  <li>
+                    <label>Data eliberării</label>
+                    <input type="text" ng-model="date['data-eliberării']" class="dată"/>
+                  </li>
+                </ul>
+              </sectiune>
+            </div>
+
+            <div class="coloană">
+              <sectiune titlu="Obiectul urmăririi">
+                <var ng-bind=" date = procedura['obiectul-urmăririi']; '' "></var>
+                <ul>
+                  <li>
+                    <label>Caracter</label>
+                    <select ng-model="date['caracter']">
+                      <option>pecuniar</option>
+                      <option>nonpecuniar</option>
+                    </select>
+                  </li>
+
+                  <ng-include src=" 'caracter-' + date['caracter'] "/>
+                </ul>
+
+                <div id="adaugă-subsecţiune" class="listă îngustă semiascuns">
+                  <span class="titlu">subsecţiune</span>
+
+                  <ul class="itemi cu umbră">
+                    <li class="încasare">încasare</li>
+                    <li class="întîrziere">întîrziere</li>
+                    <li class="sechestrare-bunuri">sechestrare bunuri</li>
+                  </ul>
+                </div>
+              </sectiune>
+            </div>
 
 
-          <!--fieldset id="cheltuieli" class="secţiune desfăşurată lată">
-            <legend>Cheltuieli</legend>
+            <sectiune lata titlu="Acţiuni procedurale">
+              <ul id="actiuni" ng-if=" procedura['acţiuni'].length > 0 ">
+                <actiune ng-repeat=" actiune in procedura['acţiuni'] " date="actiune" procedura="procedura">
+                </actiune>
+              </ul>
 
-            <div class="conţinut">
-              <ul>
-                <li>
-                  <label>Onorariul</label>
-                  <input type="text" id="onorariu" class="sumă" readonly="readonly"/>
-                  <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-                  <b>MDL</b>
-                </li>
+              <div id="total-pe-actiunile" ng-if=" procedura['acţiuni'].length > 0 ">
+                <label>Total cheltuieli pe toate acţiunile:</label>
+                <input type="text" id="total" readonly="readonly" class="sumă" value="12345"/>
+                <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+                <b>MDL</b>
 
-                <li>
-                  <label>Părţile s-au împăcat</label>
-                  <input id="părţile-au-ajuns-la-conciliere" type="checkbox"/>
-                  <p class="şoaptă">se aplică coeficientul de 0.7 la onorariu</p>
-                </li>
+                <borderou actiuni=" procedura['acţiuni'] "></borderou>
+              </div>
 
-                <li>
-                  <label>Total taxe şi speze</label>
-                  <input type="text" id="total-taxe-şi-speze" class="sumă calculat" readonly="readonly"/>
-                  <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
-                  <b>MDL</b>
-                </li>
+              <p  ng-if=" optiuniPentruUrmatoareaActiune.length > 0 "
+                  id="întrebare-potentiale-urmatoare-actiuni">Care e următorul pas?</p>
 
-                <li>
-                  <ul class="încheieri contextuale borderou-de-calcul">
-                    <li><a class="ico document" dinamică
+              <!-- TODO: de reacţionat la click -->
+
+              <propunere-actiune ng-repeat=" item in optiuniPentruUrmatoareaActiune " date="item" procedura="procedura">
+              </propunere-actiune>
+
+            </sectiune>
+
+
+            <!--fieldset id="cheltuieli" class="secţiune desfăşurată lată">
+              <legend>Cheltuieli</legend>
+
+              <div class="conţinut">
+                <ul>
+                  <li>
+                    <label>Onorariul</label>
+                    <input type="text" id="onorariu" class="sumă" readonly="readonly"/>
+                    <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+                    <b>MDL</b>
+                  </li>
+
+                  <li>
+                    <label>Părţile s-au împăcat</label>
+                    <input id="părţile-au-ajuns-la-conciliere" type="checkbox"/>
+                    <p class="şoaptă">se aplică coeficientul de 0.7 la onorariu</p>
+                  </li>
+
+                  <li>
+                    <label>Total taxe şi speze</label>
+                    <input type="text" id="total-taxe-şi-speze" class="sumă calculat" readonly="readonly"/>
+                    <span class="ui-icon ui-icon-locked" title="Acest cîmp este calculat şi nu este editabil"></span>
+                    <b>MDL</b>
+                  </li>
+
+                  <li>
+                    <ul class="încheieri contextuale borderou-de-calcul">
+                      <li><a class="ico document" dinamică
+                          href="/formulare-încheieri/borderou-de-calcul.html"
+                          formular="/formulare-încheieri/borderou-de-calcul.html"
+                          >formează borderoul de calcul</a></li>
+                    </ul>
+
+                    <ul class="adăugate"></ul>
+                  </li>
+                </ul>
+
+                <ul id="categorii-taxe-şi-speze">
+                  <li class="listă">
+                    <span class="titlu semiascuns">taxă de gestiune a procedurilor
+                    de executare şi administrare a documentelor</span>
+
+                    <ul class="itemi cu umbră">
+                      <li id="taxaA1" class="item unic">
+                        <p>taxa de intentare şi formare a procedurii de executare<span class="uc"> — 1 u.c.</span></p>
+                        <input type="hidden" class="cost" value="1"/>
+                      </li>
+
+                      <li id="taxaA2" class="item unic">
+                        <p>taxa de arhivare a procedurii de executare<span class="uc"> — 3 u.c.</span></p>
+                        <input type="hidden" class="cost" value="3"/>
+                      </li>
+
+                      <li id="taxaA3" class="item" gen-date="listă" data-şablon-subformular="documente">
+                        <p>taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
+                        a certificatelor, confirmărilor, a informaţiei scrise despre
+                        acţiunile de executare silită întreprinse de către executorul judecătoresc
+                        <span class="uc">— 1 u.c. per document</span></p>
+                      </li>
+
+                      <li id="taxaA4" class="item unic">
+                        <p>taxa pentru întocmirea borderoului de calcul al taxelor pentru efectuarea
+                        actelor executorului judecătoresc şi a spezelor procedurii de executare
+                        <span class="uc">— 1 u.c.</span></p>
+                        <input type="hidden" class="cost" value="1"/>
+                      </li>
+
+                      <li id="taxaA5" class="item unic">
+                        <p>taxa pentru întocmirea încheierii de distribuire a sumelor
+                        realizate în faza executării silite<span class="uc"> — 10 u.c.</span></p>
+                        <input type="hidden" class="cost" value="10"/>
+                      </li>
+
+                      <li id="taxaA6" class="item" data-şablon-subformular="bifă “din arhivă”">
+                        <p>taxa pentru eliberarea copiei autentificate a procedurii de executare
+                        <span class="uc"> — 1 u.c.</span></p>
+                        <input type="hidden" class="cost" value="1"/>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="listă">
+                    <span class="titlu semiascuns">taxă pentru acţiunile procedurale întreprinse
+                    de executorul judecătoresc</span>
+
+                    <ul class="itemi cu umbră">
+                      <li id="taxaB1" class="item" gen-date="documente-adresabile" data-şablon-subformular="documente adresabile">
+                        <p>taxa pentru întocmirea şi eliberarea sau expedierea pe suport de
+                        hîrtie sau în versiune electronică a demersurilor, încheierilor,
+                        dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
+                        instituţiile financiare, angajatorul debitorului, terţele persoane,
+                        sau alte organe, inclusiv în procesul vînzării bunurilor mobile
+                        <span class="uc"> — 0.25 u.c. per exemplar document</span></p>
+                      </li>
+
+                      <li id="taxaB2" class="item">
+                        <p>taxa pentru întocmirea procesului-verbal de sechestru<span class="uc"> — 0.5 u.c.</span></p>
+                        <input type="hidden" class="cost" value="0.5"/>
+                      </li>
+
+                      <li id="taxaB2-1" class="item" data-şablon-subformular="ore lucrate">
+                        <p>taxa pentru pregătirea şi efectuarea inventarierii patrimoniului debitorului
+                        ce urmează a fi sechestrat<span class="uc"> — 0.5 u.c. per oră</span></p>
+                      </li>
+
+                      <li id="taxaB3" class="item">
+                        <p>taxa pentru desemnarea (schimbarea, în cazul existenţei temeiurilor
+                        legale) administratorului bunurilor sau a persoanei căreia i se transmit
+                        la păstrare bunurile<span class="uc"> — 2 u.c.</span></p>
+                        <input type="hidden" class="cost" value="2"/>
+                      </li>
+
+                      <li id="taxaB4" class="item">
+                        <p>taxa pentru transmiterea bunurilor spre vînzare, în baza contractului
+                        de comision, inclusiv întocmirea contractului de comision <span class="uc">— 15 u.c.</span></p>
+                        <input type="hidden" class="cost" value="15"/>
+                      </li>
+
+                      <li id="taxaB5" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
+                        <p>taxa pentru emiterea încheierii de stabilire a datei desfăşurării
+                        licitaţiei şi întocmirea textului anunţului <span class="uc">— 1 u.c.</span></p>
+                        <input type="hidden" class="cost" value="1"/>
+                      </li>
+
+                      <li id="taxaB6" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
+                        <p>taxa pentru desfăşurarea licitaţiei, indiferent de rezultatele licitaţiei <span class="uc">— 20 u.c.</span></p>
+                        <input type="hidden" class="cost" value="20"/>
+                      </li>
+
+                      <li id="taxaB7" class="item" gen-date="listă" data-şablon-subformular="participanţi la licitaţie">
+                        <p>taxa de participare la licitaţie (cu eliberarea biletului de participant)
+                        <span class="uc">— 3 u.c.</span> per participant</p>
+                      </li>
+
+                      <li id="taxaB8" class="item">
+                        <p>taxa pentru transmiterea spre vînzare a valorilor mobiliare (hîrtiilor de valoare)
+                        <span class="uc">— 10 u.c.</span></p>
+                        <input type="hidden" class="cost" value="10"/>
+                      </li>
+
+                      <li id="taxaB9" class="item" gen-date="listă" data-şablon-subformular="documente">
+                        <p>taxa pentru pregătirea demersului în instanţa de judecată privind
+                        schimbarea modului şi ordinii de executare, explicarea modului de executare,
+                        eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
+                        în căutare a debitorului, corectarea erorilor sau omisiunilor din titlul
+                        executoriu, eliberarea duplicatului documentului executoriu
+                        <span class="uc">— 5 u.c.</span> per demers</p>
+                      </li>
+
+                      <li id="taxaB10" class="item">
+                        <p>taxa pentru întocmirea procesului-verbal şi transmiterea bunului în
+                        contul stingerii datoriei <span class="uc">— 10 u.c.</span></p>
+                        <input type="hidden" class="cost" value="10"/>
+                      </li>
+
+                      <li id="taxaB11" class="item unic" data-şablon-subformular="data şi ora concilierii">
+                        <p>taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
+                        de executare, indiferent de rezultatele ei <span class="uc">— 15 u.c.</span></p>
+                        <input type="hidden" class="cost" value="15"/>
+                      </li>
+
+                      <li id="taxaB12" class="item">
+                        <p>taxa pentru ridicarea şi transmiterea la păstrare a bunurilor
+                        sechestrate şi întocmirea procesului-verbal de transmitere a bunurilor
+                        <span class="uc">— 5 u.c.</span></p>
+                        <input type="hidden" class="cost" value="5"/>
+                      </li>
+
+                      <li id="taxaB13" class="item" data-şablon-subformular="ore lucrate">
+                        <p>taxa pentru efectuarea acţiunilor în procedura de executare a
+                        documentelor executorii privind stabilirea domiciliului copilului,
+                        evacuarea, instalarea, restabilirea la locul de muncă, obligarea
+                        debitorului să întreprindă (să nu întreprindă) anumite acţiuni,
+                        aplicarea măsurilor de asigurare a acţiunii
+                        <span class="uc">— 5 u.c.</span> per oră</p>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="listă">
+                    <span class="titlu semiascuns">taxă pentru serviciile prestate
+                    de executorii judecătoreşti</span>
+
+                    <ul class="itemi cu umbră">
+                      <li id="taxaC1" class="item" gen-date="listă" data-şablon-subformular="documente">
+                        <p>taxa pentru înmînarea, comunicarea personală a actelor
+                        procedurale sau a altor documente
+                        <span class="uc">— 5 u.c.</span> per document</p>
+                      </li>
+
+                      <li id="taxaC2" class="item" gen-date="listă" data-şablon-subformular="contracte">
+                        <p>taxa pentru întocmirea actului de constatare a faptului,
+                        stării de fapt se achită conform contractului</p>
+                      </li>
+
+                      <li id="taxaC3" class="item" gen-date="listă" data-şablon-subformular="contracte">
+                        <p>taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
+                        în procesul de executare, precum şi a celor gajate, conform contractului,
+                        dar nu mai mult de 75 u.c. lunar</p>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="listă">
+                    <span class="titlu semiascuns">speză</span>
+
+                    <ol class="itemi cu umbră">
+                      <li id="speza1" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
+                        <p>transportul, păstrarea şi vînzarea bunurilor debitorului</p>
+                      </li>
+
+                      <li id="speza2" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
+                        <p>deschiderea forţată şi închiderea încăperilor, strămutarea
+                        sau înlăturarea îngrădirilor</p>
+                      </li>
+
+                      <li id="speza3" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
+                        <p>remunerarea specialiştilor, experţilor, martorilor asistenţi şi
+                        altor persoane antrenate în procesul de executare</p>
+                      </li>
+
+                      <li id="speza4" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
+                        <p>Lucrări de evaluare şi/sau expertiză</p>
+                      </li>
+
+                      <li id="speza5" class="item" data-şablon-subformular="listă cheltuieli cu data deplasării">
+                        <p>deplasările executorului judecătoresc efectuate în cadrul procedurii
+                        de executare</p>
+                        <input type="hidden" class="cost-per-procedură" value="15"/>
+                      </li>
+
+                      <li id="speza6" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>căutarea debitorului şi a bunurilor lui</p>
+                      </li>
+
+                      <li id="speza7" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>transferul (expedierea) sumelor încasate</p>
+                      </li>
+
+                      <li id="speza8" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>transmiterea sau înmînarea  încheierilor, înştiinţărilor, telegramelor etc.</p>
+                      </li>
+
+                      <li id="speza9" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>asigurarea aducerii forţate a debitorului</p>
+                      </li>
+
+                      <li id="speza10" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>organizarea şi desfăşurarea licitaţiei</p>
+                      </li>
+
+                      <li id="speza11" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>plăţile bancare pentru transferul şi convertirea mijloacelor băneşti</p>
+                      </li>
+
+                      <li id="speza12" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>eliberarea copiilor şi duplicatelor de pe actele procedurale</p>
+                      </li>
+
+                      <li id="speza13" class="item" data-şablon-subformular="listă cheltuieli">
+                        <p>comunicarea actelor executorului judecătoresc</p>
+                      </li>
+                    </ol>
+                  </li>
+                </ul>
+
+              </div>
+            </fieldset>
+
+
+            <fieldset id="încheieri" class="secţiune desfăşurată">
+              <legend>Încheieri</legend>
+
+              <div class="conţinut">
+                <ul class="încheieri">
+
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-intentare.html"
+                        formular="/formulare-încheieri/încheiere-de-intentare.html"
+                        >Încheierea cu privire la intentarea procedurii de executare</a><br/>
+
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
+
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
+                        formular="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
+                        >Încheierea cu privire la intentarea procedurii de executare şi asigurarea executării documentului executoriu</a><br/>
+
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe alţi-destinatari"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
+
+                  <li>
+                    <a class="ico document" dinamică
                         href="/formulare-încheieri/borderou-de-calcul.html"
                         formular="/formulare-încheieri/borderou-de-calcul.html"
-                        >formează borderoul de calcul</a></li>
-                  </ul>
+                        >Borderoul de calcul</a><br/>
 
-                  <ul class="adăugate"></ul>
-                </li>
-              </ul>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori"
+                        href="/formulare-încheieri/scrisoare-de-însoţire-borderou.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire-borderou.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-              <ul id="categorii-taxe-şi-speze">
-                <li class="listă">
-                  <span class="titlu semiascuns">taxă de gestiune a procedurilor
-                  de executare şi administrare a documentelor</span>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-evacuare.html"
+                        formular="/formulare-încheieri/încheiere-de-evacuare.html"
+                        caracter="nonpecuniar"
+                        obiect="evacuarea"
+                        >Încheiere de numire a datei evacuării forţate</a><br/>
 
-                  <ul class="itemi cu umbră">
-                    <li id="taxaA1" class="item unic">
-                      <p>taxa de intentare şi formare a procedurii de executare<span class="uc"> — 1 u.c.</span></p>
-                      <input type="hidden" class="cost" value="1"/>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaA2" class="item unic">
-                      <p>taxa de arhivare a procedurii de executare<span class="uc"> — 3 u.c.</span></p>
-                      <input type="hidden" class="cost" value="3"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-instalare.html"
+                        formular="/formulare-încheieri/încheiere-de-instalare.html"
+                        caracter="nonpecuniar"
+                        obiect="instalarea"
+                        >Încheiere cu privire la instalarea în spaţiul locativ</a><br/>
 
-                    <li id="taxaA3" class="item" gen-date="listă" data-şablon-subformular="documente">
-                      <p>taxa pentru eliberarea, în termen de cel mult 3 zile lucrătoare,
-                      a certificatelor, confirmărilor, a informaţiei scrise despre
-                      acţiunile de executare silită întreprinse de către executorul judecătoresc
-                      <span class="uc">— 1 u.c. per document</span></p>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                   </li>
 
-                    <li id="taxaA4" class="item unic">
-                      <p>taxa pentru întocmirea borderoului de calcul al taxelor pentru efectuarea
-                      actelor executorului judecătoresc şi a spezelor procedurii de executare
-                      <span class="uc">— 1 u.c.</span></p>
-                      <input type="hidden" class="cost" value="1"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-schimb-forţat.html"
+                        formular="/formulare-încheieri/încheiere-de-schimb-forţat.html"
+                        caracter="nonpecuniar"
+                        obiect="schimbul forţat"
+                        >Încheiere cu privire la schimbul forţat al locuinţelor</a><br/>
 
-                    <li id="taxaA5" class="item unic">
-                      <p>taxa pentru întocmirea încheierii de distribuire a sumelor
-                      realizate în faza executării silite<span class="uc"> — 10 u.c.</span></p>
-                      <input type="hidden" class="cost" value="10"/>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaA6" class="item" data-şablon-subformular="bifă “din arhivă”">
-                      <p>taxa pentru eliberarea copiei autentificate a procedurii de executare
-                      <span class="uc"> — 1 u.c.</span></p>
-                      <input type="hidden" class="cost" value="1"/>
-                    </li>
-                  </ul>
-                </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.html"
+                        formular="/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.html"
+                        caracter="nonpecuniar"
+                        obiect="stabilirea domiciliului copilului"
+                        >Somaţie cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor</a><br/>
 
-                <li class="listă">
-                  <span class="titlu semiascuns">taxă pentru acţiunile procedurale întreprinse
-                  de executorul judecătoresc</span>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                  <ul class="itemi cu umbră">
-                    <li id="taxaB1" class="item" gen-date="documente-adresabile" data-şablon-subformular="documente adresabile">
-                      <p>taxa pentru întocmirea şi eliberarea sau expedierea pe suport de
-                      hîrtie sau în versiune electronică a demersurilor, încheierilor,
-                      dispoziţiilor sau informaţiilor către deţinătorii registrelor de stat,
-                      instituţiile financiare, angajatorul debitorului, terţele persoane,
-                      sau alte organe, inclusiv în procesul vînzării bunurilor mobile
-                      <span class="uc"> — 0.25 u.c. per exemplar document</span></p>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-nelegate-de-bunuri.html"
+                        formular="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-nelegate-de-bunuri.html"
+                        caracter="nonpecuniar"
+                        obiect="efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri"
+                        >Somaţie cu privire la executarea de către debitor a unor acţiuni nelegate de remiterea unor sume sau bunuri</a><br/>
 
-                    <li id="taxaB2" class="item">
-                      <p>taxa pentru întocmirea procesului-verbal de sechestru<span class="uc"> — 0.5 u.c.</span></p>
-                      <input type="hidden" class="cost" value="0.5"/>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaB2-1" class="item" data-şablon-subformular="ore lucrate">
-                      <p>taxa pentru pregătirea şi efectuarea inventarierii patrimoniului debitorului
-                      ce urmează a fi sechestrat<span class="uc"> — 0.5 u.c. per oră</span></p>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-mobile.html"
+                        formular="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-mobile.html"
+                        caracter="nonpecuniar"
+                        obiect="efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile"
+                        >Încheiere de numire a datei ridicării a unor sume sau bunuri</a><br/>
 
-                    <li id="taxaB3" class="item">
-                      <p>taxa pentru desemnarea (schimbarea, în cazul existenţei temeiurilor
-                      legale) administratorului bunurilor sau a persoanei căreia i se transmit
-                      la păstrare bunurile<span class="uc"> — 2 u.c.</span></p>
-                      <input type="hidden" class="cost" value="2"/>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaB4" class="item">
-                      <p>taxa pentru transmiterea bunurilor spre vînzare, în baza contractului
-                      de comision, inclusiv întocmirea contractului de comision <span class="uc">— 15 u.c.</span></p>
-                      <input type="hidden" class="cost" value="15"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-imobile.html"
+                        formular="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-imobile.html"
+                        caracter="nonpecuniar"
+                        obiect="efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile"
+                        >Încheiere de numire a datei transmiterii bunurilor imobile</a><br/>
 
-                    <li id="taxaB5" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
-                      <p>taxa pentru emiterea încheierii de stabilire a datei desfăşurării
-                      licitaţiei şi întocmirea textului anunţului <span class="uc">— 1 u.c.</span></p>
-                      <input type="hidden" class="cost" value="1"/>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaB6" class="item" data-şablon-subformular="bifă “licitaţie repetată”">
-                      <p>taxa pentru desfăşurarea licitaţiei, indiferent de rezultatele licitaţiei <span class="uc">— 20 u.c.</span></p>
-                      <input type="hidden" class="cost" value="20"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.html"
+                        formular="/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.html"
+                        caracter="nonpecuniar"
+                        obiect="confiscarea bunurilor"
+                        >Încheiere de numire a datei confiscării bunurilor</a><br/>
 
-                    <li id="taxaB7" class="item" gen-date="listă" data-şablon-subformular="participanţi la licitaţie">
-                      <p>taxa de participare la licitaţie (cu eliberarea biletului de participant)
-                      <span class="uc">— 3 u.c.</span> per participant</p>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaB8" class="item">
-                      <p>taxa pentru transmiterea spre vînzare a valorilor mobiliare (hîrtiilor de valoare)
-                      <span class="uc">— 10 u.c.</span></p>
-                      <input type="hidden" class="cost" value="10"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.html"
+                        formular="/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.html"
+                        caracter="nonpecuniar"
+                        obiect="nimicirea bunurilor"
+                        >Încheiere de numire a datei nimicirii bunurilor</a><br/>
 
-                    <li id="taxaB9" class="item" gen-date="listă" data-şablon-subformular="documente">
-                      <p>taxa pentru pregătirea demersului în instanţa de judecată privind
-                      schimbarea modului şi ordinii de executare, explicarea modului de executare,
-                      eşalonarea executării, aplicarea interdicţiei de ieşire din ţară, anunţarea
-                      în căutare a debitorului, corectarea erorilor sau omisiunilor din titlul
-                      executoriu, eliberarea duplicatului documentului executoriu
-                      <span class="uc">— 5 u.c.</span> per demers</p>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaB10" class="item">
-                      <p>taxa pentru întocmirea procesului-verbal şi transmiterea bunului în
-                      contul stingerii datoriei <span class="uc">— 10 u.c.</span></p>
-                      <input type="hidden" class="cost" value="10"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.html"
+                        formular="/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.html"
+                        caracter="nonpecuniar"
+                        obiect="restabilirea la locul de muncă"
+                        >Somaţie de restabilire a salariatului la locul de muncă</a><br/>
 
-                    <li id="taxaB11" class="item unic" data-şablon-subformular="data şi ora concilierii">
-                      <p>taxa pentru efectuarea procedurii de conciliere a părţilor procedurii
-                      de executare, indiferent de rezultatele ei <span class="uc">— 15 u.c.</span></p>
-                      <input type="hidden" class="cost" value="15"/>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaB12" class="item">
-                      <p>taxa pentru ridicarea şi transmiterea la păstrare a bunurilor
-                      sechestrate şi întocmirea procesului-verbal de transmitere a bunurilor
-                      <span class="uc">— 5 u.c.</span></p>
-                      <input type="hidden" class="cost" value="5"/>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
+                        formular="/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
+                        caracter="nonpecuniar"
+                        obiect="aplicarea măsurilor de asigurare a acţiunii"
+                        >Încheiere de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii</a><br/>
 
-                    <li id="taxaB13" class="item" data-şablon-subformular="ore lucrate">
-                      <p>taxa pentru efectuarea acţiunilor în procedura de executare a
-                      documentelor executorii privind stabilirea domiciliului copilului,
-                      evacuarea, instalarea, restabilirea la locul de muncă, obligarea
-                      debitorului să întreprindă (să nu întreprindă) anumite acţiuni,
-                      aplicarea măsurilor de asigurare a acţiunii
-                      <span class="uc">— 5 u.c.</span> per oră</p>
-                    </li>
-                  </ul>
-                </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe alţi-destinatari"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                <li class="listă">
-                  <span class="titlu semiascuns">taxă pentru serviciile prestate
-                  de executorii judecătoreşti</span>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-continuare.html"
+                        formular="/formulare-încheieri/încheiere-de-continuare.html"
+                        >Încheierea de continuare a procedurii de executare</a><br/>
 
-                  <ul class="itemi cu umbră">
-                    <li id="taxaC1" class="item" gen-date="listă" data-şablon-subformular="documente">
-                      <p>taxa pentru înmînarea, comunicarea personală a actelor
-                      procedurale sau a altor documente
-                      <span class="uc">— 5 u.c.</span> per document</p>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="taxaC2" class="item" gen-date="listă" data-şablon-subformular="contracte">
-                      <p>taxa pentru întocmirea actului de constatare a faptului,
-                      stării de fapt se achită conform contractului</p>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.html"
+                        formular="/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.html"
+                        >Încheiere de asigurare a executării documentului executoriu</a><br/>
 
-                    <li id="taxaC3" class="item" gen-date="listă" data-şablon-subformular="contracte">
-                      <p>taxa pentru depozitarea, administrarea silită a bunurilor sechestrate
-                      în procesul de executare, precum şi a celor gajate, conform contractului,
-                      dar nu mai mult de 75 u.c. lunar</p>
-                    </li>
-                  </ul>
-                </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe alţi-destinatari"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                <li class="listă">
-                  <span class="titlu semiascuns">speză</span>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html"
+                        formular="/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html"
+                        >Somaţie cu privire la ieşirea la faţa locului</a><br/>
 
-                  <ol class="itemi cu umbră">
-                    <li id="speza1" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
-                      <p>transportul, păstrarea şi vînzarea bunurilor debitorului</p>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori persoane-terţe"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="speza2" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
-                      <p>deschiderea forţată şi închiderea încăperilor, strămutarea
-                      sau înlăturarea îngrădirilor</p>
-                    </li>
+                  <li>
+                    <a class="ico document"
+                        href="/formulare-încheieri/încheiere-de-dare-în-căutare-a-mijlocului-de-transport.html"
+                        formular="/formulare-încheieri/încheiere-de-dare-în-căutare-a-mijlocului-de-transport.html"
+                        >Încheiere de dare în căutare a mijlocului de transport</a><br/>
 
-                    <li id="speza3" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
-                      <p>remunerarea specialiştilor, experţilor, martorilor asistenţi şi
-                      altor persoane antrenate în procesul de executare</p>
-                    </li>
+                    <a class="scrisoare-de-însoţire" dinamică
+                        destinatari="creditor debitori alţi-destinatari organele-de-poliţie"
+                        href="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        formular="/formulare-încheieri/scrisoare-de-însoţire.html"
+                        >scrisoarea de însoţire</a>
+                  </li>
 
-                    <li id="speza4" class="item" gen-date="listă" data-şablon-subformular="listă cheltuieli">
-                      <p>Lucrări de evaluare şi/sau expertiză</p>
-                    </li>
+                </ul>
+              </div>
+            </fieldset -->
 
-                    <li id="speza5" class="item" data-şablon-subformular="listă cheltuieli cu data deplasării">
-                      <p>deplasările executorului judecătoresc efectuate în cadrul procedurii
-                      de executare</p>
-                      <input type="hidden" class="cost-per-procedură" value="15"/>
-                    </li>
 
-                    <li id="speza6" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>căutarea debitorului şi a bunurilor lui</p>
-                    </li>
-
-                    <li id="speza7" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>transferul (expedierea) sumelor încasate</p>
-                    </li>
-
-                    <li id="speza8" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>transmiterea sau înmînarea  încheierilor, înştiinţărilor, telegramelor etc.</p>
-                    </li>
-
-                    <li id="speza9" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>asigurarea aducerii forţate a debitorului</p>
-                    </li>
-
-                    <li id="speza10" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>organizarea şi desfăşurarea licitaţiei</p>
-                    </li>
-
-                    <li id="speza11" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>plăţile bancare pentru transferul şi convertirea mijloacelor băneşti</p>
-                    </li>
-
-                    <li id="speza12" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>eliberarea copiilor şi duplicatelor de pe actele procedurale</p>
-                    </li>
-
-                    <li id="speza13" class="item" data-şablon-subformular="listă cheltuieli">
-                      <p>comunicarea actelor executorului judecătoresc</p>
-                    </li>
-                  </ol>
-                </li>
-              </ul>
-
+            <div class="bara-de-instrumente">
+              <button class="ico salvează" title="Salvează"></button>
+              <p class="mesaj salvat">Salvat</p>
+              <p class="mesaj salvat-deja">Nu sunt schimbări</p>
             </div>
-          </fieldset>
 
 
-          <fieldset id="încheieri" class="secţiune desfăşurată">
-            <legend>Încheieri</legend>
+            <p id="data-ultimei-modificări">Ultima modificare: {{ procedura['data-ultimei-modificări'] }}</p>
 
-            <div class="conţinut">
-              <ul class="încheieri">
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-intentare.html"
-                      formular="/formulare-încheieri/încheiere-de-intentare.html"
-                      >Încheierea cu privire la intentarea procedurii de executare</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
-                      formular="/formulare-încheieri/încheiere-de-intentare-şi-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
-                      >Încheierea cu privire la intentarea procedurii de executare şi asigurarea executării documentului executoriu</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe alţi-destinatari"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document" dinamică
-                      href="/formulare-încheieri/borderou-de-calcul.html"
-                      formular="/formulare-încheieri/borderou-de-calcul.html"
-                      >Borderoul de calcul</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori"
-                      href="/formulare-încheieri/scrisoare-de-însoţire-borderou.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire-borderou.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-evacuare.html"
-                      formular="/formulare-încheieri/încheiere-de-evacuare.html"
-                      caracter="nonpecuniar"
-                      obiect="evacuarea"
-                      >Încheiere de numire a datei evacuării forţate</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-instalare.html"
-                      formular="/formulare-încheieri/încheiere-de-instalare.html"
-                      caracter="nonpecuniar"
-                      obiect="instalarea"
-                      >Încheiere cu privire la instalarea în spaţiul locativ</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                 </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-schimb-forţat.html"
-                      formular="/formulare-încheieri/încheiere-de-schimb-forţat.html"
-                      caracter="nonpecuniar"
-                      obiect="schimbul forţat"
-                      >Încheiere cu privire la schimbul forţat al locuinţelor</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.html"
-                      formular="/formulare-încheieri/încheiere-de-stabilire-a-domiciliului-copilului.html"
-                      caracter="nonpecuniar"
-                      obiect="stabilirea domiciliului copilului"
-                      >Somaţie cu privire la executarea documentului executoriu de stabilire a domiciliului copilului minor</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-nelegate-de-bunuri.html"
-                      formular="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-nelegate-de-bunuri.html"
-                      caracter="nonpecuniar"
-                      obiect="efectuarea de către debitor a unor acţiuni obligatorii, nelegate de remiterea unor sume sau bunuri"
-                      >Somaţie cu privire la executarea de către debitor a unor acţiuni nelegate de remiterea unor sume sau bunuri</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-mobile.html"
-                      formular="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-mobile.html"
-                      caracter="nonpecuniar"
-                      obiect="efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri mobile"
-                      >Încheiere de numire a datei ridicării a unor sume sau bunuri</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-imobile.html"
-                      formular="/formulare-încheieri/încheiere-de-efectuare-a-unor-acţiuni-legate-de-bunuri-imobile.html"
-                      caracter="nonpecuniar"
-                      obiect="efectuarea de către debitor a unor acţiuni obligatorii, legate de remiterea unor bunuri imobile"
-                      >Încheiere de numire a datei transmiterii bunurilor imobile</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.html"
-                      formular="/formulare-încheieri/încheiere-de-confiscare-a-bunurilor.html"
-                      caracter="nonpecuniar"
-                      obiect="confiscarea bunurilor"
-                      >Încheiere de numire a datei confiscării bunurilor</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.html"
-                      formular="/formulare-încheieri/încheiere-de-nimicire-a-bunurilor.html"
-                      caracter="nonpecuniar"
-                      obiect="nimicirea bunurilor"
-                      >Încheiere de numire a datei nimicirii bunurilor</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.html"
-                      formular="/formulare-încheieri/încheiere-de-restabilire-la-locul-de-muncă.html"
-                      caracter="nonpecuniar"
-                      obiect="restabilirea la locul de muncă"
-                      >Somaţie de restabilire a salariatului la locul de muncă</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
-                      formular="/formulare-încheieri/încheiere-privind-aplicarea-măsurilor-de-asigurare-a-acţiunii.html"
-                      caracter="nonpecuniar"
-                      obiect="aplicarea măsurilor de asigurare a acţiunii"
-                      >Încheiere de intentare a procedurii de executare privind aplicarea măsurilor de asigurare a acţiunii</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe alţi-destinatari"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-continuare.html"
-                      formular="/formulare-încheieri/încheiere-de-continuare.html"
-                      >Încheierea de continuare a procedurii de executare</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.html"
-                      formular="/formulare-încheieri/încheiere-de-asigurare-a-executării-documentului-executoriu.html"
-                      >Încheiere de asigurare a executării documentului executoriu</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe alţi-destinatari"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html"
-                      formular="/formulare-încheieri/somaţie-cu-privire-la-ieşirea-la-faţa-locului.html"
-                      >Somaţie cu privire la ieşirea la faţa locului</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori persoane-terţe"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-                <li>
-                  <a class="ico document"
-                      href="/formulare-încheieri/încheiere-de-dare-în-căutare-a-mijlocului-de-transport.html"
-                      formular="/formulare-încheieri/încheiere-de-dare-în-căutare-a-mijlocului-de-transport.html"
-                      >Încheiere de dare în căutare a mijlocului de transport</a><br/>
-
-                  <a class="scrisoare-de-însoţire" dinamică
-                      destinatari="creditor debitori alţi-destinatari organele-de-poliţie"
-                      href="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      formular="/formulare-încheieri/scrisoare-de-însoţire.html"
-                      >scrisoarea de însoţire</a>
-                </li>
-
-              </ul>
-            </div>
-          </fieldset -->
-
-
-          <div class="bara-de-instrumente">
-            <button class="ico salvează" title="Salvează"></button>
-            <p class="mesaj salvat">Salvat</p>
-            <p class="mesaj salvat-deja">Nu sunt schimbări</p>
+            <button class="închide semiascuns" title="Închide" ng-click="inchide()">×</button>
           </div>
-
-
-          <p id="data-ultimei-modificări">Ultima modificare: {{ procedura['data-ultimei-modificări'] }}</p>
-
-          <button class="închide semiascuns" title="Închide" ng-click="inchide()">×</button>
         </div>
       </div>
 
       <div ng-view style="display: none"></div>
-
     </div>
 
 

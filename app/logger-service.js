@@ -7,15 +7,16 @@
     var $storage;
     var email;
 
-    this.listenFor = function(eventName, $rootScope) {
+    this.initOn = function(eventName, $rootScope) {
       $rootScope.$on(eventName, function(e, $ref, email) {
-        Firelogger.setStorage($ref, email);
+        Firelogger.init($ref, email);
       });
     };
 
-    this.setStorage = function($ref, email_) {
+    this.init = function($ref, email_) {
       $storage = $ref;
       email = email_;
+      console.debug('Firelogger iniţializat');
     };
 
     this.store = function(type, err) {
