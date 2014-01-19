@@ -3,7 +3,8 @@
 
 module.exports = {
   options: {
-    atBegin: true
+    atBegin: true,
+    cwd: process.cwd()
   },
 
   gs: {
