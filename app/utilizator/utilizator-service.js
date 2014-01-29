@@ -3,53 +3,49 @@
 
   var PASSWORD_LENGTH = 12;
 
-  angular.module('App').service('Utilizator', function($rootScope, config, $firebase, $firebaseAuth, $log, $q, $window) {
-    var firebase = new Firebase(config.firebaseUrl);
-    var auth = $firebaseAuth(firebase);
+  angular.module('App').service('Utilizator', function(config, $firebaseSimpleLogin, $log, $q, $window) {
+    var Utilizator = this;
+
+    var dataRef = new Firebase(config.firebaseUrl);
+    var auth = $firebaseSimpleLogin(dataRef);
 
 
     this.creaza = function(email) {
-      js.assert(email.indexOf('@') > -1, 'Utilizator.creaza: email-ul trebuie să conţină “@”');
-
       var deferred = $q.defer();
       var password = randomPassword(PASSWORD_LENGTH);
 
-      creazaCont(email, password)
-      .then(creazaStructuraDate)
-      .then(inregistreazaAid)
-      .then(function success(results) {
+      createAccount(email, password)
+      .then(prepareDataStructure)
+      .then(registerAid)
+      .then(function successCallback(results) {
         deferred.resolve(results.user);
         $window.alert('Parola: ' + password);
       });
 
       // ----
 
-      function creazaCont(email, password) {
-        js.assert(!!email, 'Utilizator.creaza!creazaCont: avem nevoie de email');
-        js.assert(!!password, 'Utilizator.creaza!creazaCont: avem nevoie de password');
-
+      function createAccount(email, password) {
         var deferred = $q.defer();
 
-        auth.$createUser(email, password, function $createUserCallback(err, user) {
-          if (err) {
+        auth.$createUser(email, password)
+        .then(
+          function $createUserSuccessCallback(user) {
+            deferred.resolve({
+              user: user
+            });
+          },
+
+          function $createUserErrorCallback(err) {
             $log.error(err);
             deferred.reject(err);
-            return;
           }
-
-          deferred.resolve({
-            user: user
-          });
-        });
+        );
 
         return deferred.promise;
       }
 
 
-      function creazaStructuraDate(results) {
-        js.assert(js.isPlainObject(results.user), 'Utilizator.creaza!creazaStructuraDate: avem nevoie de results.user');
-        js.assert(!!results.user.email, 'Utilizator.creaza!creazaStructuraDate: avem nevoie de results.user.email');
-
+      function prepareDataStructure(results) {
         var deferred = $q.defer();
         var date = {
           email: results.user.email,
@@ -57,7 +53,7 @@
           proceduri: 1
         };
 
-        var ref = firebase.child('/date')
+        var ref = dataRef.child('/date')
         .push(date, function pushCallback(err) {
           if (err) {
             $log.error(err);
@@ -73,12 +69,10 @@
       }
 
 
-      function inregistreazaAid(results) {
-        js.assert(!!results.aid, 'Utilizator.creaza!inregistreazaAid: avem nevoie de results.aid');
-
+      function registerAid(results) {
         var deferred = $q.defer();
 
-        firebase.child('/aid/' + eid(results.user.email))
+        dataRef.child('/aid/' + eid(results.user.email))
         .set(results.aid, function setCallback(err) {
           if (err) {
             $log.error(err);
@@ -148,26 +142,28 @@
       var deferred = $q.defer();
       var start = +new Date();
 
-      login(email, password)
-      .then(obtineAid)
+      loginWith(email, password)
+      .then(getAid)
       .then(
-        function success(results) {
-          $log.debug('Autentificat', results.user.email, +new Date() - start);
-          results.user.$date = $firebase(firebase.child('/date/' + results.aid));
-          $rootScope.$emit('log-storage-ready', firebase.child('/logs'), email);
+        function successCallback(results) {
+          Utilizator.autentificat = true;
 
+          //results.user.$date = $firebase(dataRef.child('/date/' + results.aid));
           deferred.resolve(results.user);
+
+          $log.debug('Autentificat', results.user.email, +new Date() - start);
         },
 
-        function failure(err) {
+        function failureCallback(err) {
           deferred.reject(err);
+
           $log.error(err);
         }
       );
 
       // ----
 
-      function login(email, password) {
+      function loginWith(email, password) {
         return auth.$login('password', {
           email: email,
           password: password
@@ -175,21 +171,24 @@
       }
 
 
-      function obtineAid(user) {
-        js.assert(js.isPlainObject(user), 'Utilizator.autentifica!obtineAid: user trebuie sa fie obict');
-        js.assert(user.email, 'Utilizator.autentifica!obtineAid: user trebuie sa aiba email');
-
+      function getAid(user) {
         var deferred = $q.defer();
 
-        firebase.child('/aid/' + eid(user.email))
-        .once('value', function onceValueCallback(snapshot) {
-          var results = {
-            user: user,
-            aid: snapshot.val()
-          };
+        dataRef.child('/aid/' + eid(user.email))
+        .once('value',
+          function onceValueCallback(snapshot) {
+            var results = {
+              user: user,
+              aid: snapshot.val()
+            };
 
-          deferred.resolve(results);
-        });
+            deferred.resolve(results);
+          },
+
+          function onceFailureCallback(err) {
+            deferred.reject(err);
+          }
+        );
 
         return deferred.promise;
       }

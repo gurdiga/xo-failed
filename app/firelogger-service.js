@@ -14,6 +14,13 @@
     };
 
     this.init = function($ref, email_) {
+    //
+    // TODO: use events to init
+    //
+    // $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+    //  console.log("User " + user.id + " successfully logged in!");
+    // });
+    //
       $storage = $ref;
       email = email_;
       console.debug('Firelogger iniţializat');
