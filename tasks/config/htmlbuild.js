@@ -18,7 +18,7 @@ module.exports = {
         ],
         app: [
           'app/init.js',
-          'app/**/*.js',
+          '<%= src %>',
           '!app/ac*iun*.js',
           'action.js'
         ],
@@ -29,7 +29,17 @@ module.exports = {
     }
   },
 
-  qunit: {
-    // TODO
+  'test-runner': {
+    src: 'test/index.template.html',
+    dest: 'test/index.html',
+    options: {
+      relative: false,
+      prefix: '../',
+      scripts: {
+        lib: 'js/lib/sinon.js',
+        tests: '<%= tests %>',
+        src: '<%= htmlbuild.index.options.scripts %>'
+      }
+    }
   }
 };

@@ -1,7 +1,6 @@
-- Angular:
-  - de încadrat subsecţiunile din “Obiectul urmăririi”
-    în “Acţiunile procedurale” corespunzătoare.
-
+- cum deschid procedura the Angular way? ngAnimate?
+- de încarcat datele procedurii
+- de încadrat subsecţiunile din “Obiectul urmăririi” în “Acţiunile procedurale” corespunzătoare.
 - lista de acţiuni procedurale
   - borderoul de calcul?
   - concilierea înainte de pasul 7

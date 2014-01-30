@@ -16,6 +16,14 @@
     "js": false,
     "Firebase": false,
 
+    "describe": false,
+    "it": false,
+    "expect": false,
+    "beforeEach": false,
+    "before": false,
+    "injector": false,
+    "App": false,
+
     "sinon": false,
     "QUnit": false,
     "module": false,

@@ -3,9 +3,10 @@
 module.exports = {
   server: {
     options: {
+      port: 9000,
       keepalive: true,
-      protocol: 'https',
-      hostname: '*'
+      protocol: 'http',
+      hostname: 'localhost'
     }
   }
 };

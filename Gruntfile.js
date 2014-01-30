@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('default', ['jshint']);
-  grunt.registerTask('pre-commit', ['jshint']);
+  grunt.registerTask('default', ['test']);
+  grunt.registerTask('pre-commit', ['test']);
 
 };

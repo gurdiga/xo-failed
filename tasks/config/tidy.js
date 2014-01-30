@@ -4,14 +4,14 @@ module.exports = {
   index: {
     src: '<%= htmlbuild.index.dest %>'
   },
-  qunit: {
+  'test-runner-template': {
+    src: 'test/index.template.html'
+  },
+  'test-runner-compiled': {
     src: 'test/index.html'
   },
   html: {
-    src: [
-      '<%= tidy.index.src %>',
-      '<%= tidy.qunit.src %>'
-    ]
+    src: '<%= tidy.index.src %>'
   },
   templates: {
     src: '<%= concat.templates.dest %>'

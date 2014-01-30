@@ -4,6 +4,7 @@
 module.exports = {
   options: {
     atBegin: true,
+    interval: 1000,
     cwd: process.cwd()
   },
 
@@ -18,6 +19,9 @@ module.exports = {
   },
 
   js: {
+    options: {
+      livereload: true
+    },
     files: ['<%= src %>', '<%= config %>', '<%= tests %>'],
     tasks: ['html', 'lint']
   }
