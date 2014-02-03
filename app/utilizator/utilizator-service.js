@@ -3,7 +3,7 @@
 
   var PASSWORD_LENGTH = 12;
 
-  angular.module('App').service('Utilizator', function(config, $firebaseSimpleLogin, $log, $q, $window) {
+  angular.module('App').service('Utilizator', function(config, Firebase, $firebaseSimpleLogin, $log, $q, $window) {
     var Utilizator = this;
 
     var dataRef = new Firebase(config.firebaseUrl);

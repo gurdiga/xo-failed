@@ -17,7 +17,8 @@ module.exports = {
           'js/lib/angular*.js'
         ],
         app: [
-          'app/init.js',
+          'app/config.js',
+          'app/bind-to-angular.js',
           '<%= src %>',
           '!app/ac*iun*.js',
           'action.js'
@@ -36,8 +37,16 @@ module.exports = {
       relative: false,
       prefix: '../',
       scripts: {
-        lib: 'js/lib/sinon.js',
-        tests: '<%= tests %>',
+        lib: [
+          'node_modules/grunt-mocha-phantomjs/node_modules/mocha-phantomjs/node_modules/mocha/mocha.js',
+          'node_modules/chai/chai.js',
+          'node_modules/sinon-chai/lib/sinon-chai.js',
+          'node_modules/sinon/pkg/sinon.js',
+        ],
+        tests: [
+          'test/lib/*.js',
+          '<%= tests %>'
+        ],
         src: '<%= htmlbuild.index.options.scripts %>'
       }
     }

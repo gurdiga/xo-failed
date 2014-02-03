@@ -3,23 +3,36 @@
     <title>Tests</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="../node_modules/grunt-mocha-phantomjs/node_modules/mocha-phantomjs/node_modules/mocha/mocha.css" />
+    <script src="http://localhost:35729/livereload.js"></script>
   </head>
 
   <body>
     <div id="mocha"></div>
 
-    <script src="../node_modules/grunt-mocha-phantomjs/node_modules/mocha-phantomjs/node_modules/mocha/mocha.js"></script>
-    <script src="../node_modules/chai/chai.js"></script>
-    <script src="http://localhost:35729/livereload.js"></script>
+    <!-- build:script lib -->
+    <!-- /build -->
 
     <script>
       mocha.ui('bdd');
       mocha.reporter('html');
       expect = chai.expect;
+
+      beforeEach(function() {
+        this.sinon = sinon.sandbox.create();
+      });
+
+      afterEach(function(){
+        this.sinon.restore();
+      });
+
     </script>
 
     <!-- build:script src -->
     <!-- /build -->
+
+    <script>
+      window.injector = angular.injector(['App']);
+    </script>
 
     <!-- build:script tests -->
     <!-- /build -->

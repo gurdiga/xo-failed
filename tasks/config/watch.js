@@ -23,6 +23,6 @@ module.exports = {
       livereload: true
     },
     files: ['<%= src %>', '<%= config %>', '<%= tests %>'],
-    tasks: ['html', 'lint']
+    tasks: ['test']
   }
 };

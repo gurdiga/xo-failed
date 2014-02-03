@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       src: ['app/**/*.js'],
       gs: ['app/**/*.gs'],
       config: ['Gruntfile.js', 'tasks/**/*.js', 'package.json'],
-      tests: ['test/**/*.js']
+      tests: ['test/**/*.js', '!test/lib/*']
     }
   });
 

@@ -1,6 +1,6 @@
 'use strict';
 
 module.exports = function(grunt) {
-  grunt.registerTask('test', ['jshint', 'html', 'lint', 'mocha_phantomjs']);
+  grunt.registerTask('test', ['html', 'lint', 'mocha_phantomjs']);
 };
 
