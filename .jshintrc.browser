@@ -1,7 +1,10 @@
 {
   "strict": true,
+  "-W030": true,
 
   "globals": {
+    "XO": true,
+
     "window": false,
     "document": false,
     "location": false,
@@ -11,18 +14,16 @@
     "console": false,
 
     "angular": false,
+    "injector": false,
     "$": false,
     "_": false,
     "js": false,
-    "Firebase": false,
 
     "describe": false,
     "it": false,
     "expect": false,
     "beforeEach": false,
-    "before": false,
-    "injector": false,
-    "App": false,
+    "afterEach": false,
 
     "sinon": false,
     "QUnit": false,
