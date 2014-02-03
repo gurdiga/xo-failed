@@ -3,3 +3,4 @@ formulare-încheieri/*.html
 node_modules
 index.html
 .viminfo
+.idea
