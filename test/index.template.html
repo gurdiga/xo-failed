@@ -38,8 +38,20 @@
     <!-- /build -->
 
     <script>
-      if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
-      else { mocha.run(); }
+      var runner;
+      var failed = false;
+      var initialTitle = document.title;
+
+      if (window.mochaPhantomJS) mochaPhantomJS.run();
+      else runner = mocha.run();
+
+      runner.on('fail', function() {
+        failed = true;
+      });
+
+      runner.on('end', function() {
+        document.title = initialTitle + ' ' + (failed ? 'fail… 8-|' : 'pass! :)');
+      });
     </script>
 
   </body>
