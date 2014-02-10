@@ -21,7 +21,7 @@ module.exports = {
           'app/bind-to-angular.js',
           '<%= src %>',
           '!app/ac*iun*.js',
-          'action.js'
+          'js/action.js'
         ],
       },
       sections: {
