@@ -19,6 +19,18 @@
 
       beforeEach(function() {
         this.sinon = sinon.sandbox.create();
+
+        this.fakeResolvedPromise = function() {
+          return {
+            then: this.sinon.stub().yields()
+          };
+        };
+
+        this.fakeRejectedPromise = function() {
+          return {
+            catch: this.sinon.stub().yields()
+          };
+        };
       });
 
       afterEach(function(){
