@@ -12,6 +12,9 @@
     <!-- build:script lib -->
     <!-- /build -->
 
+    <!-- build:script src -->
+    <!-- /build -->
+
     <script>
       mocha.ui('bdd');
       mocha.reporter('html');
@@ -19,32 +22,21 @@
 
       beforeEach(function() {
         this.sinon = sinon.sandbox.create();
-
-        this.fakeResolvedPromise = function() {
-          return {
-            then: this.sinon.stub().yields()
-          };
-        };
-
-        this.fakeRejectedPromise = function() {
-          return {
-            catch: this.sinon.stub().yields()
-          };
-        };
       });
 
       afterEach(function(){
         this.sinon.restore();
       });
 
-    </script>
 
-    <!-- build:script src -->
-    <!-- /build -->
+    </script>
 
     <script>
       window.injector = angular.injector(['App']);
     </script>
+
+    <!-- build:script helpers -->
+    <!-- /build -->
 
     <!-- build:script tests -->
     <!-- /build -->

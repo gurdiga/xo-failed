@@ -25,6 +25,7 @@
     "before": false,
     "beforeEach": false,
     "afterEach": false,
+    "TestHelpers": false,
 
     "sinon": false,
     "QUnit": false,

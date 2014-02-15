@@ -43,8 +43,10 @@ module.exports = {
           'node_modules/sinon-chai/lib/sinon-chai.js',
           'node_modules/sinon/pkg/sinon.js',
         ],
+        helpers: [
+          'test/helpers/*.js',
+        ],
         tests: [
-          'test/lib/*.js',
           '<%= tests %>'
         ],
         src: '<%= htmlbuild.index.options.scripts %>'
