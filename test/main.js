@@ -3,11 +3,17 @@
 
   describe('XO.main()', function() {
     beforeEach(function() {
+      this.sinon.stub(XO.Firebase, 'main');
+
       XO.main();
     });
 
+    it('calls XO.Firebase.main', function() {
+      expect(XO.Firebase.main).to.have.been.called;
+    });
+
     it('initializes XO.AuthenticationService', function() {
-      expect(XO).to.have.property('AuthenticationService').that.is.an.object;
+      expect(XO.AuthenticationService).to.have.property('authenticateUser').that.is.a('function');
     });
 
     it('initializes XO.DataStorageService', function() {

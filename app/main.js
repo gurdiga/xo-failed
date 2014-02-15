@@ -2,7 +2,9 @@
   'use strict';
 
   XO.main = function() {
-    XO.AuthenticationService = {};
+    XO.Firebase.main();
+
+    XO.AuthenticationService = XO.FirebaseAuthenticationService(XO.Firebase.SimpleLogin);
     XO.DataStorageService = {};
   };
 }());
