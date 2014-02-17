@@ -15,6 +15,14 @@
       it('sets XO.Firebase.SimpleLogin', function() {
         expect(XO.Firebase.SimpleLogin).to.have.property('$changePassword').to.be.a('function');
       });
+
+      it('sets XO.Firebase.$firebase', function() {
+        expect(XO.Firebase.$firebase).to.be.a('function');
+      });
+
+      it('sets XO.Firebase.angularScope', function() {
+        expect(XO.Firebase.angularScope).to.be.an('object');
+      });
     });
   });
 
