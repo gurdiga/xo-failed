@@ -5,6 +5,11 @@
     XO.Firebase.main();
 
     XO.AuthenticationService = XO.FirebaseAuthenticationService(XO.Firebase.SimpleLogin);
-    XO.DataStorageService = {};
+
+    XO.DataService = XO.FirebaseDataService(
+      XO.Firebase.ref,
+      XO.Firebase.$firebase,
+      XO.Firebase.angularScope
+    );
   };
 }());
