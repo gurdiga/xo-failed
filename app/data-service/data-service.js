@@ -3,7 +3,7 @@
 
   /*jshint unused:false*/
   XO.DataService = {
-    getReference: function(entityType, id) {}
+    getProfile: function(email) {}
   };
 
 }());
