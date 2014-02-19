@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Main partition: Angular app module', function() {
+  describe('Angular.main()', function() {
     var XO;
 
     beforeEach(function() {
