@@ -44,7 +44,7 @@ module.exports = {
           'node_modules/sinon/pkg/sinon.js',
         ],
         helpers: [
-          'test/helpers/*.js',
+          'test/test-helpers/*.js',
         ],
         tests: [
           '<%= tests %>'
