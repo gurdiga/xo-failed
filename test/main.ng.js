@@ -21,6 +21,14 @@
       }).not.to.throw();
     });
 
+    it('includes firebase', function() {
+      expect(function() {
+        XO.run(function($firebase) {
+          /*jshint unused:false */
+        });
+      }).not.to.throw();
+    });
+
   });
 
 }());
