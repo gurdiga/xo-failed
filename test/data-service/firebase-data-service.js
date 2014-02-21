@@ -169,6 +169,7 @@
     });
 
 
+    // This will usually be .skip()-ped, and only run on library updates
     describe.skip('real work', function() {
       var email, password;
 

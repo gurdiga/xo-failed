@@ -29,18 +29,12 @@
         password = generatePassword();
       });
 
-      it('returns a promise', function() {
-        var returnValue = Executor.inregistreaza(email);
-
-        expect(returnValue).to.have.property('then').that.is.a('function');
-      });
-
-      it('generates a randome password with the injected randome password generator', function() {
+      it('generates a random password', function() {
         Executor.inregistreaza(email);
         expect(generatePassword).to.have.been.calledWith(12, 4);
       });
 
-      it('creates an account with the injected authentication service', function() {
+      it('creates an account', function() {
         Executor.inregistreaza(email);
         expect(authenticationService.createUser).to.have.been.calledWith(email, password);
       });
