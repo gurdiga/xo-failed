@@ -2,144 +2,65 @@
   'use strict';
 
   describe('Executor', function() {
-    var executor, deps, firebaseSimpleLoginReference;
+    var Executor, authenticationService, generatePassword, dataService;
 
     beforeEach(function() {
-      this.sinon = sinon.sandbox.create();
+      authenticationService = XO.AuthenticationService;
+      this.sinon.stub(authenticationService, 'createUser', TestHelpers.fakeDeferrable());
 
-      deps = {
-        config               : injector.get('config'),
-        $q                   : injector.get('$q'),
-        $log                 : injector.get('$log'),
-        Firebase             : injector.get('Firebase'),
-        $firebaseSimpleLogin : injector.get('$firebaseSimpleLogin')
-      };
+      dataService = XO.DataService;
+      this.sinon.stub(dataService, 'getProfile', TestHelpers.fakeDeferrable());
 
-      sinon.stub(deps.$log, 'error');
-      sinon.stub(deps.$log, 'debug');
+      generatePassword = this.sinon.stub(XO, 'generatePassword').returns('a randome password');
 
-      deps.Firebase.goOffline();
-      sinon.spy(deps, 'Firebase');
-
-      firebaseSimpleLoginReference = deps.$firebaseSimpleLogin(new deps.Firebase(deps.config.firebaseUrl));
-      sinon.stub(deps, '$firebaseSimpleLogin').returns(firebaseSimpleLoginReference);
+      Executor = XO.Executor(authenticationService, generatePassword, dataService);
     });
 
-
-    afterEach(function() {
-      deps.$log.error.restore();
-      deps.$log.debug.restore();
-      deps.Firebase.restore();
-      deps.$firebaseSimpleLogin.restore();
+    it('is a function that returns the actual module', function() {
+      expect(XO.Executor).to.be.a('function');
+      expect(XO.Executor.length).to.equal(3);
     });
 
-
-    beforeEach(function() {
-      executor = new XO.Executor(
-        deps.config,
-        deps.$q,
-        deps.$log,
-        deps.Firebase,
-        deps.$firebaseSimpleLogin
-      );
-    });
-
-
-    describe('constructor', function() {
-      it('instantiates Firebase with config.firebaseUrl', function() {
-        expect(deps.Firebase).to.have.been.calledWithNew;
-        expect(deps.Firebase).to.have.been.calledWith(deps.config.firebaseUrl);
-      });
-
-      it('initialises $firebaseSimpleLogin with the firebase instance', function() {
-        var argument = deps.$firebaseSimpleLogin.firstCall.args[0].toString();
-
-        expect(deps.$firebaseSimpleLogin).to.have.been.calledOnce;
-        expect(argument).to.equal(deps.config.firebaseUrl);
-      });
-    });
-
-
-    describe('.inregistreaza(email, password)', function() {
-      var mainPromise, email, password, thenLogin, createUserDeferred, createUserPromise;
+    describe('.inregistreaza', function() {
+      var password, email;
 
       beforeEach(function() {
-        createUserDeferred = deps.$q.defer();
-        createUserPromise = createUserDeferred.promise;
-        sinon.stub(firebaseSimpleLoginReference, '$createUser').returns(createUserPromise);
+        email = 'test@executori.org';
+        password = generatePassword();
       });
 
-      beforeEach(function() {
-        email     = '001@executori.org';
-        password  = 'p455w0rd';
-        thenLogin = false;
+      it('returns a promise', function() {
+        var returnValue = Executor.inregistreaza(email);
 
-        mainPromise = executor.inregistreaza(email, password);
-        expect(deps.$log.debug).to.have.been.calledOnce;
+        expect(returnValue).to.have.property('then').that.is.a('function');
       });
 
-      describe('every time', function() {
-        it('logs the call', function() {
-          expect(deps.$log.debug).to.have.been.calledWith('Creating user', email);
-        });
-
-        it('calls $createUser(email, password, thenLogin)', function() {
-          expect(firebaseSimpleLoginReference.$createUser).to.have.been.calledWith(email, password, thenLogin);
-        });
+      it('generates a randome password with the injected randome password generator', function() {
+        Executor.inregistreaza(email);
+        expect(generatePassword).to.have.been.calledWith(12, 4);
       });
 
-
-      describe('when $createUser’s promise is fulfilled', function() {
-        var createdUser;
-
-        beforeEach(function() {
-          createdUser = 'createdUser object';
-        });
-
-        it('also fulfills the main promise', function(done) {
-          mainPromise.then(function(_createdUser) {
-/*
- * TODO
- * - only return needed data from the promise
- */
-
-            expect(createdUser).to.equal(_createdUser);
-            expect(deps.$log.debug).to.have.been.calledWith('Created user', email);
-            done();
-          });
-
-          createUserDeferred.resolve(createdUser);
-        });
+      it('creates an account with the injected authentication service', function() {
+        Executor.inregistreaza(email);
+        expect(authenticationService.createUser).to.have.been.calledWith(email, password);
       });
 
+      it('initialises the user data structures and resolves with the password', function(done) {
+        var profileDataStructure = {};
 
-      describe('when $createUser’s promise is rejected', function() {
-        var err;
+        Executor.inregistreaza(email)
+        .then(function(resolutionValue) {
+          expect(dataService.getProfile).to.have.been.calledWith(email);
+          expect(profileDataStructure.email).to.equal(email);
+          expect(resolutionValue).to.equal(password);
 
-        beforeEach(function() {
-          err = new Error('Something bad happened');
+          done();
         });
 
-        it('logs the error but do not reject the mani promise', function(done) {
-          createUserPromise.finally(function() {
-            expect(deps.$log.error).to.have.been.calledOnce;
-            done();
-          });
-
-          createUserDeferred.reject(err);
-        });
+        authenticationService.createUser.deferrable.resolve();
+        dataService.getProfile.deferrable.resolve(profileDataStructure);
       });
-
-    });
-
-
-    describe('.autentifica()', function() {
-      
-    });
-
-
-    describe('.asiguraAutentificat()', function() {
-      
     });
   });
+
 }());

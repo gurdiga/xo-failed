@@ -1,28 +1,24 @@
 (function() {
   'use strict';
 
-  XO.Executor = function(config, $q, $log, Firebase, $firebaseSimpleLogin) {
-    var firebaseReference = new Firebase(config.firebaseUrl);
-    var firebaseSimpleLoginReference = $firebaseSimpleLogin(firebaseReference);
+  XO.Executor = function(authenticationService, generatePassword, dataService) {
+    var Executor = {
+      inregistreaza: function(email) {
+        var password = generatePassword(12, 4);
 
+        return authenticationService.createUser(email, password)
+        .then(dataService.getProfile.bind(this, email))
+        .then(function(profil) {
+          profil.email = email;
 
-    this.inregistreaza = function(email, password) {
-      var deferred = $q.defer();
-      var thenLogin = false;
-
-      $log.debug('Creating user', email);
-
-      firebaseSimpleLoginReference
-      .$createUser(email, password, thenLogin)
-      .then(function successCallback(user) {
-        $log.debug('Created user', email);
-
-        deferred.resolve(user);
-      }, function errorCallback(err) {
-        $log.error(err);
-      });
-
-      return deferred.promise;
+          var deferrable = XO.Deferrable.create();
+          deferrable.resolve(password);
+          return deferrable.promise;
+        });
+      }
     };
+
+    return Executor;
   };
+
 }());
