@@ -4,21 +4,8 @@
   XO.FirebaseDataService = function(firebaseReference, $firebase, angularScope) {
     var FirebaseDataService = {
       getProfile: function(email) {
-        var NG_SCOPE_MODEL = 'profil';
-        var deferrable = XO.Deferrable.create();
-
-        FirebaseDataService.getAid(email)
-        .then(function(aid) {
-          var path = '/date/' + aid + '/profil';
-          var angularFireReference = $firebase(firebaseReference.child(path));
-
-          angularFireReference.$bind(angularScope, NG_SCOPE_MODEL)
-          .then(function() {
-            deferrable.resolve(angularScope[NG_SCOPE_MODEL]);
-          });
-        });
-
-        return email, deferrable.promise;
+        return FirebaseDataService.getAid(email)
+        .then(bindToAngularScopeModel.bind(this, 'profil'));
       },
 
       getAid: function(email) {
@@ -37,10 +24,31 @@
         function cancelCallback(err) {
           deferrable.reject(err);
         }
+      },
+
+
+      getRoot: function(email) {
+        return FirebaseDataService.getAid(email)
+        .then(bindToAngularScopeModel.bind(this, 'root'));
       }
     };
 
     return FirebaseDataService;
+
+
+    function bindToAngularScopeModel(scopeModelName, aid) {
+      var path = '/date/' + aid;
+      var angularFireReference = $firebase(firebaseReference.child(path));
+
+      return angularFireReference.$bind(angularScope, scopeModelName)
+      .then(function() {
+        var deferrable = XO.Deferrable.create();
+
+        deferrable.resolve(angularScope[scopeModelName]);
+
+        return deferrable.promise;
+      });
+    }
   };
 
 }());

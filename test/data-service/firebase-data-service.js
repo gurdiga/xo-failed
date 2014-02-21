@@ -170,6 +170,8 @@
 
 
     describe.skip('real work', function() {
+      var email, password;
+
       beforeEach(function() {
         XO.main();
 
@@ -178,19 +180,34 @@
           XO.Firebase.$firebase,
           XO.Firebase.angularScope
         );
+
+        email = 'test@executori.org';
+        password = email;
       });
 
       describe('.getProfile()', function() {
-        var email = 'test@executori.org';
-
         it('works for real', function(done) {
           this.timeout(5000);
 
-          XO.AuthenticationService.authenticateUser(email, email)
+          XO.AuthenticationService.authenticateUser(email, password)
           .then(FirebaseDataService.getProfile.bind(this, email))
           .then(function(profil) {
-            console.log('profil', profil);
             done();
+            return profil;
+          });
+        });
+      });
+
+
+      describe('.getRoot()', function() {
+        it('works for real', function(done) {
+          this.timeout(5000);
+
+          XO.AuthenticationService.authenticateUser(email, password)
+          .then(FirebaseDataService.getRoot.bind(this, email))
+          .then(function(root) {
+            done();
+            return root;
           });
         });
       });
