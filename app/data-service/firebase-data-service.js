@@ -36,13 +36,12 @@
       },
 
 
-      // TODO: get rid of this?
       getAid: function(email) {
         var deferrable = XO.Deferrable.create();
         var eid = email.replace(/\./g, ':');
         var aidReference = firebaseReference.child('/aid/' + eid);
 
-        aidReference.on('value', successCallback, cancelCallback);
+        aidReference.once('value', successCallback, cancelCallback);
 
         return deferrable.promise;
 
@@ -53,12 +52,6 @@
         function cancelCallback(err) {
           deferrable.reject(err);
         }
-      },
-
-
-      getRoot: function(email) {
-        return FirebaseDataService.getAid(email)
-        .then(bindToAngularScopeModel.bind(this, 'root'));
       }
     };
 
@@ -66,7 +59,7 @@
 
 
     function bindToAngularScopeModel(scopeModelName, aid) {
-      var path = '/date/' + aid;
+      var path = '/date/' + aid + '/' + scopeModelName;
       var angularFireReference = $firebase(firebaseReference.child(path));
 
       return angularFireReference.$bind(angularScope, scopeModelName)

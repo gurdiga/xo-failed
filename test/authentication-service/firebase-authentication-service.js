@@ -79,7 +79,6 @@
     });
 
 
-    // This will usually be .skip()-ped, and only run on library updates
     describe.skip('real work', function() {
       beforeEach(function() {
         var firebase = new Firebase(XO.Firebase.Config.url);
