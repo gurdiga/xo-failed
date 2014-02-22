@@ -170,7 +170,7 @@
 
 
     // This will usually be .skip()-ped, and only run on library updates
-    describe.skip('real work', function() {
+    describe('real work', function() {
       var email, password;
 
       beforeEach(function() {
@@ -186,7 +186,49 @@
         password = email;
       });
 
-      describe('.getProfile()', function() {
+
+      describe('.initAccount', function() {
+        it('registers the AID for the given email', function(done) {
+          this.timeout(5000);
+
+          XO.AuthenticationService.authenticateUser(email, password)
+          .then(FirebaseDataService.initAccount.bind(this, email))
+          .then(function(aid) {
+            var eid = email.replace(/\./g, ':');
+
+            var aidReference = XO.Firebase.ref.child('/aid/' + eid);
+            var dataReference = XO.Firebase.ref.child('/date/' + aid);
+
+            var aidDeferrable = XO.Deferrable.create();
+            var dataDeferrable = XO.Deferrable.create();
+
+            aidReference.once('value', function(aidDataSnapshot) {
+              aidDeferrable.resolve(aidDataSnapshot.val());
+            });
+
+            dataReference.once('value', function(dataDataSnapshot) {
+              dataDeferrable.resolve(dataDataSnapshot.val());
+            });
+
+            XO.Deferrable.all([aidDeferrable.promise, dataDeferrable.promise])
+            .then(function(results) {
+              var aidResult = results[0];
+              var dataResult = results[1];
+
+              expect(aidResult).to.equal(aid);
+              expect(dataResult).to.be.an('object');
+
+              aidReference.remove();
+              dataReference.remove();
+
+              done();
+            });
+          });
+        });
+      });
+
+
+      describe.skip('.getProfile()', function() {
         it('works for real', function(done) {
           this.timeout(5000);
 
@@ -200,7 +242,7 @@
       });
 
 
-      describe('.getRoot()', function() {
+      describe.skip('.getRoot()', function() {
         it('works for real', function(done) {
           this.timeout(5000);
 
