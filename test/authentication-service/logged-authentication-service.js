@@ -22,21 +22,11 @@
     });
 
     it('implements AuthenticationService interface', function() {
-      Object.keys(XO.AuthenticationService).forEach(function(functionName) {
-        expect(LoggedAuthenticationService).to.have.property(functionName).that.is.a('function');
-        expect(LoggedAuthenticationService[functionName].length).to.equal(XO.AuthenticationService[functionName].length,
-          functionName + '’s argument count corresponds');
-      });
+      expect(LoggedAuthenticationService).to.implement(XO.AuthenticationService);
     });
 
 
     describe('.createUser()', function() {
-      it('returns a promise', function() {
-        var resultValue = LoggedAuthenticationService.createUser(email, password);
-
-        expect(resultValue).to.have.property('then').that.is.a('function');
-      });
-
       it('logs before and after calling authenticationService.createUser()', function(done) {
         LoggedAuthenticationService.createUser(email, password)
         .then(function() {
@@ -67,12 +57,6 @@
 
 
     describe('.authenticateUser()', function() {
-      it('returns a promise', function() {
-        var resultValue = LoggedAuthenticationService.authenticateUser(email, password);
-
-        expect(resultValue).to.have.property('then').that.is.a('function');
-      });
-
       it('logs before and after calling authenticationService.authenticateUser()', function(done) {
         LoggedAuthenticationService.authenticateUser(email, password)
         .then(function() {

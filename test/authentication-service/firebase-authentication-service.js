@@ -24,22 +24,11 @@
 
 
       it('implements XO.AuthenticationService', function() {
-        Object.keys(XO.AuthenticationService).forEach(function(functionName) {
-          expect(FirebaseAuthenticationService).to.have.property(functionName).that.is.a('function');
-          expect(FirebaseAuthenticationService[functionName].length).to.equal(XO.AuthenticationService[functionName].length,
-            functionName + '’s argument count corresponds');
-        });
+        expect(FirebaseAuthenticationService).to.implement(XO.AuthenticationService);
       });
 
 
       describe('.createUser()', function() {
-        it('returns a promise', function() {
-          var returnValue = FirebaseAuthenticationService.createUser(email, password);
-
-          expect(returnValue).to.have.property('then').that.is.a('function');
-        });
-
-
         it('passes the email and password to $firebaseSimpleLoginObject.$createUser()', function(done) {
           FirebaseAuthenticationService.createUser(email, password)
           .then(function() {
@@ -55,13 +44,6 @@
 
 
       describe('.authenticateUser()', function() {
-        it('returns a promise', function() {
-          var returnValue = FirebaseAuthenticationService.authenticateUser(email, password);
-
-          expect(returnValue).to.have.property('then').that.is.a('function');
-        });
-
-
         it('passes the email and password to the $login method on $firebaseSimpleLoginObject', function(done) {
           FirebaseAuthenticationService.authenticateUser(email, password)
           .then(function() {

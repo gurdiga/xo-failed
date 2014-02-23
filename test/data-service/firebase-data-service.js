@@ -9,17 +9,8 @@
         FirebaseDataService = XO.FirebaseDataService();
       });
 
-      it('is a function that returns the module', function() {
-        expect(XO.FirebaseDataService).to.be.a('function');
-        expect(XO.FirebaseDataService.length).to.equal(3);
-      });
-
       it('implements XO.DataService', function() {
-        Object.keys(XO.DataService).forEach(function(functionName) {
-          expect(FirebaseDataService).to.have.property(functionName).that.is.a('function');
-          expect(FirebaseDataService[functionName].length).to.equal(XO.DataService[functionName].length,
-            functionName + '’s argument count corresponds');
-        });
+        expect(FirebaseDataService).to.implement(XO.DataService);
       });
     });
 
@@ -43,7 +34,7 @@
 
 
       describe('.initAccount', function() {
-        it('registers the AID for the given email', function(done) {
+        it('registers the AID for the given email nad creates the user’s root data structure', function(done) {
           this.timeout(5000);
 
           XO.AuthenticationService.authenticateUser(email, password)
@@ -81,7 +72,7 @@
 
 
       describe('.getProfile()', function() {
-        it('works for real', function(done) {
+        it('returns the profile for the given email', function(done) {
           this.timeout(5000);
 
           XO.AuthenticationService.authenticateUser(email, password)
