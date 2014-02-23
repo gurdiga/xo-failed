@@ -3,10 +3,12 @@
 
   describe('Executor', function() {
     var Executor, authenticationService, generatePassword, dataService;
+    var email = 'test@executori.org';
 
     beforeEach(function() {
       authenticationService = XO.AuthenticationService;
       this.sinon.stub(authenticationService, 'createUser', TestHelpers.fakeDeferrable());
+      this.sinon.stub(authenticationService, 'authenticateUser', TestHelpers.fakeDeferrable());
 
       dataService = XO.DataService;
       this.sinon.stub(dataService, 'getProfile', TestHelpers.fakeDeferrable());
@@ -22,10 +24,9 @@
     });
 
     describe('.inregistreaza', function() {
-      var password, email;
+      var password;
 
       beforeEach(function() {
-        email = 'test@executori.org';
         password = generatePassword();
       });
 
@@ -55,6 +56,22 @@
         dataService.getProfile.deferrable.resolve(profileDataStructure);
       });
     });
+
+
+    describe('.autentifica', function() {
+      var password;
+
+      it('authenticates with an existing Firebase account', function(done) {
+        Executor.autentifica(email, password)
+        .then(function() {
+          expect(authenticationService.authenticateUser).to.have.been.calledWith(email, password);
+          done();
+        });
+
+        authenticationService.authenticateUser.deferrable.resolve();
+      });
+    });
+
   });
 
 }());

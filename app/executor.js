@@ -15,6 +15,11 @@
           deferrable.resolve(password);
           return deferrable.promise;
         });
+      },
+
+
+      autentifica: function(email, password) {
+        return authenticationService.authenticateUser(email, password);
       }
     };
 
