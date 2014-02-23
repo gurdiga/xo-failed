@@ -15,7 +15,7 @@
     });
 
 
-    describe('real work', function() {
+    describe.skip('real work', function() {
       var email, password, eid;
 
       beforeEach(function() {
