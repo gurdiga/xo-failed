@@ -4,7 +4,8 @@
   XO.LoggedAuthenticationService = function(authenticationService) {
     var LoggedAuthenticationService = {
       createUser       : addDebugMessages('createUser'),
-      authenticateUser : addDebugMessages('authenticateUser')
+      authenticateUser : addDebugMessages('authenticateUser'),
+      deleteUser       : addDebugMessages('deleteUser')
     };
 
     return LoggedAuthenticationService;

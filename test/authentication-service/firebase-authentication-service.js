@@ -9,16 +9,18 @@
     describe('unit tests (mocked $firebaseSimpleLoginObject)', function() {
       beforeEach(function() {
         $firebaseSimpleLoginObject = {
-          $createUser: TestHelpers.fakeDeferrable(),
-          $login: TestHelpers.fakeDeferrable()
+          $createUser : TestHelpers.fakeDeferrable(),
+          $login      : TestHelpers.fakeDeferrable(),
+          $removeUser : TestHelpers.fakeDeferrable()
         };
 
         this.sinon.spy($firebaseSimpleLoginObject, '$createUser');
         this.sinon.spy($firebaseSimpleLoginObject, '$login');
+        this.sinon.spy($firebaseSimpleLoginObject, '$removeUser');
 
         FirebaseAuthenticationService = XO.FirebaseAuthenticationService($firebaseSimpleLoginObject);
 
-        email = 'FirebaseAuthenticationService@test.com';
+        email = 'firebase-authentication-service-test@executori.com';
         password = 'the password';
       });
 
@@ -58,6 +60,20 @@
           $firebaseSimpleLoginObject.$login.deferrable.resolve(email, password);
         });
       });
+
+
+      describe('.deleteUser()', function() {
+        it('deletes the Firebase account with the given email and password', function(done) {
+          FirebaseAuthenticationService.deleteUser(email, password)
+          .then(function() {
+            expect($firebaseSimpleLoginObject.$removeUser).to.have.been.calledWith(email, password);
+
+            done();
+          });
+
+          $firebaseSimpleLoginObject.$removeUser.deferrable.resolve(email, password);
+        });
+      });
     });
 
 
@@ -68,15 +84,15 @@
         $firebaseSimpleLoginObject = angular.injector(['XO']).get('$firebaseSimpleLogin')(firebase);
         /*jshint -W064:false*/ // prevent “Missing 'new' prefix when invoking a constructor.”
         FirebaseAuthenticationService = XO.FirebaseAuthenticationService($firebaseSimpleLoginObject);
-        FirebaseAuthenticationService = XO.LoggedAuthenticationService(FirebaseAuthenticationService);
+        //FirebaseAuthenticationService = XO.LoggedAuthenticationService(FirebaseAuthenticationService);
       });
 
-      it('creates a new account, authenticates with it, then deletes it', function(done) {
+      it('creates a new user account, authenticates with it, then deletes it', function(done) {
         this.timeout(5000);
 
         FirebaseAuthenticationService.createUser(email, password)
         .then(FirebaseAuthenticationService.authenticateUser.bind(this, email, password))
-        .then($firebaseSimpleLoginObject.$removeUser.bind($firebaseSimpleLoginObject, email, password))
+        .then(FirebaseAuthenticationService.deleteUser.bind(this, email, password))
         .finally(done);
       });
     });

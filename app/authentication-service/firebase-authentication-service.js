@@ -16,6 +16,11 @@
           email: email,
           password: password
         });
+      },
+
+
+      deleteUser: function(email, password) {
+        return $firebaseSimpleLoginObject.$removeUser(email, password);
       }
     };
 

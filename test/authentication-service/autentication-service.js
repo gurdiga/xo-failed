@@ -9,6 +9,10 @@
     it('defines the authenticateUser function', function() {
       expect(XO.AuthenticationService).to.have.property('authenticateUser').that.is.a('function');
     });
+
+    it('defines the deleteUser function', function() {
+      expect(XO.AuthenticationService).to.have.property('deleteUser').that.is.a('function');
+    });
   });
 
 }());
