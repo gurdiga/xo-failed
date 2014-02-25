@@ -98,6 +98,9 @@
 
   var Efecte = {
     milisecunde: function() {
+      return 500;
+
+      /*
       if (FormularProcedură.$.is('[duration-milliseconds]')) {
         return parseFloat(FormularProcedură.$.attr('duration-milliseconds'));
       } else {
@@ -109,6 +112,7 @@
 
         return transitionMilliseconds;
       }
+      */
     },
 
     // --------------------------------------------------
